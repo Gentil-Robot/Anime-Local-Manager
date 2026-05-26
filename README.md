@@ -5,6 +5,7 @@ Anime Local Manager est une application Windows locale open source pour gérer u
 ## Liens officiels
 
 - GitHub : https://github.com/Gentil-Robot/Anime-Local-Manager
+- Releases : https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0
 - Forum bêta test : https://forum.nextinpact.com/topic/199369-anime-local-manager-recherche-b%C3%A9ta-testeur/
 
 ## Fonctionnalités
