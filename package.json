@@ -1,0 +1,50 @@
+{
+  "name": "anime-local-manager",
+  "version": "1.0.0",
+  "description": "Anime Local Manager V1",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "app": "electron .",
+    "build": "electron-builder --win portable",
+    "build-installer": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "express": "^4.18.3",
+    "multer": "^1.4.5-lts.1"
+  },
+  "license": "MIT",
+  "author": "Gentil Robot <jesuisungentilrobot@gmail.com>",
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "fr.gentilrobot.animelocalmanager",
+    "productName": "Anime Local Manager",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "server.js",
+      "package.json",
+      "public/**/*",
+      "data/**/*",
+      "README.md",
+      "LICENSE"
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "icon": "public/assets/anime-local-manager.ico"
+    },
+    "asar": false,
+    "extraResources": [],
+    "icon": "public/assets/anime-local-manager.ico",
+    "executableName": "Anime Local Manager"
+  }
+}

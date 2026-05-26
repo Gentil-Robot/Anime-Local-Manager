@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Anime Local Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/assets/anime-local-manager.ico">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="side-brand">
+        <img src="/assets/anime-local-manager-logo.png" alt="Anime Local Manager">
+        <div>
+          <strong>Anime</strong>
+          <span>Local Manager</span>
+          <small>V1</small>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <button class="nav-item" data-filter="">▦ Animés</button>
+        <button class="nav-item" data-filter="Plan to Watch">◇ À voir</button>
+        <button class="nav-item" id="navNews">▣ Saisons</button>
+        <button class="nav-item" id="navImages">▤ Images</button>
+        <button class="nav-item" id="navSettings">⚙ Réglages</button>
+        <button class="nav-item" id="navAbout">ⓘ À propos</button>
+        <button class="nav-item" id="navDonations">♡ Dons</button>
+      </nav>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="top-title">
+          <a id="homeLink" href="/">
+            <img src="/assets/anime-local-manager-logo.png" alt="">
+            <span>Anime Local Manager</span>
+          </a>
+          <p>Bibliothèque locale avec images, import XML, sauvegarde JSON et nouvelles saisons</p>
+        </div>
+
+        <div class="header-actions">
+          <button id="exportBtn">Exporter JSON</button>
+          <button id="importXmlBtn">Importer XML</button>
+          <button id="bulkInfo">Compléter les infos</button>
+          <button id="downloadAllImages">Télécharger les images</button>
+          <button id="seasonNewsBtn">News saisons</button>
+          <button id="settingsBtn">Réglages</button>
+          <button class="primary" id="openAdd">+ Ajouter</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="stat-card"><span id="totalCount">0</span><small>Total</small></div>
+        <div class="stat-card"><span id="completedCount">0</span><small>Terminés</small></div>
+        <div class="stat-card"><span id="watchingCount">0</span><small>En cours</small></div>
+        <div class="stat-card"><span id="planCount">0</span><small>À voir</small>
+        </div>
+      </section>
+
+      <section id="progressPanel" class="progress-panel hidden">
+        <div class="progress-label" id="progressLabel">Traitement en cours...</div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </section>
+
+      <section id="newsPanel" class="news-panel hidden">
+        <div class="news-header">
+          <h2>▣ Nouvelles saisons détectées</h2>
+          <div class="news-tools">
+            <button id="loadNewsInfoBtn">Charger les informations</button>
+            <button id="forceNewsSearchBtn">Lancer une nouvelle recherche</button>
+            <button id="closeNews">Fermer</button>
+          </div>
+        </div>
+        <div id="newsList"></div>
+      </section>
+
+      <section class="filters">
+        <input id="search" placeholder="Rechercher titre, genre, tag...">
+
+        <select id="statusFilter">
+          <option value="">Tous les statuts</option>
+          <option>Watching</option>
+          <option>Completed</option>
+          <option>On-Hold</option>
+          <option>Dropped</option>
+          <option>Plan to Watch</option>
+        </select>
+
+        <select id="typeFilter">
+          <option value="">Tous les types</option>
+        </select>
+
+        <select id="genreFilter">
+          <option value="">Tous les genres</option>
+        </select>
+
+        <select id="viewMode">
+          <option value="cards">Vue mosaïque</option>
+          <option value="compact">Vue compacte</option>
+          <option value="list">Vue liste</option>
+        </select>
+
+        <select id="sort">
+          <option value="title">Tri : titre</option>
+          <option value="startDateDesc">Tri : plus récent</option>
+          <option value="startDateAsc">Tri : plus ancien</option>
+          <option value="scoreDesc">Tri : ma note</option>
+          <option value="publicScoreDesc">Tri : note publique</option>
+          <option value="rankAsc">Tri : classement</option>
+          <option value="progressDesc">Tri : progression</option>
+        </select>
+
+        <button id="resetFilters">Réinitialiser</button>
+      </section>
+
+      <div id="stats" class="stats"></div>
+      <main id="animeGrid" class="grid view-cards"></main>
+
+
+      <section id="aboutPage" class="about-page hidden">
+        <div class="about-hero">
+          <img src="/assets/anime-local-manager-logo.png" alt="Logo Anime Local Manager">
+          <div>
+            <h2>À propos d’Anime Local Manager</h2>
+            <p>Application locale open source pour organiser sa bibliothèque d’animés, gérer ses images, suivre ses statuts et détecter les nouvelles saisons.</p>
+          </div>
+        </div>
+
+        <div class="about-logo-card">
+          <img src="/assets/gentil-robot-logo.png" alt="Logo Gentil Robot">
+          <div>
+            <h3>Gentil Robot</h3>
+            <p>Logo officiel du projet et de l’auteur. Tu pourras ajouter ici le lien GitHub, PayPal, site web ou forum quand ils seront disponibles.</p>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <article>
+            <h3>Projet</h3>
+            <p><strong>Nom :</strong> Anime Local Manager</p>
+            <p><strong>Version :</strong> V1</p>
+            <p><strong>Auteur :</strong> Gentil Robot</p>
+            <p><strong>Contact :</strong> jesuisungentilrobot [at] gmail [dot] com</p>
+            <p><strong>Licence :</strong> MIT</p>
+            <p><strong>Date de création :</strong> 2026</p>
+          </article>
+
+          <article>
+            <h3>Liens</h3>
+            <p><strong>GitHub :</strong> <a href="https://github.com/Gentil-Robot/Anime-Local-Manager" target="_blank" rel="noopener">https://github.com/Gentil-Robot/Anime-Local-Manager</a></p>
+            <p><strong>Forum bêta test :</strong> <a href="https://forum.nextinpact.com/topic/199369-anime-local-manager-recherche-b%C3%A9ta-testeur/" target="_blank" rel="noopener">Sujet Next INpact</a></p>
+            <p><strong>Site web :</strong> à compléter</p>
+            <p><strong>PayPal / dons :</strong> voir la page Dons</p>
+          </article>
+
+          <article>
+            <h3>APIs et sources de données</h3>
+            <p>L’application peut interroger des services publics liés aux animés, notamment Jikan/MyAnimeList et AniList, afin de récupérer des métadonnées comme titres, dates, genres, scores publics, classements, descriptions et affiches.</p>
+            <p>Les données récupérées appartiennent à leurs ayants droit et/ou aux plateformes d’origine. L’application sert uniquement d’outil local d’organisation personnelle.</p>
+          </article>
+
+          <article>
+            <h3>Images et propriété intellectuelle</h3>
+            <p>Les affiches, logos, jaquettes, images promotionnelles et descriptions d’animés restent la propriété de leurs détenteurs respectifs : studios, éditeurs, plateformes, auteurs et ayants droit.</p>
+            <p>Anime Local Manager ne revendique aucun droit sur les œuvres listées ni sur les images récupérées automatiquement.</p>
+            <p>Les images sont sauvegardées localement sur l’ordinateur de l’utilisateur pour un usage personnel de bibliothèque.</p>
+          </article>
+
+          <article>
+            <h3>Responsabilité</h3>
+            <p>Le logiciel est fourni “tel quel”, sans garantie. Les informations récupérées automatiquement peuvent être incomplètes, incorrectes ou modifiées par les services tiers.</p>
+            <p>L’utilisateur reste responsable de l’usage qu’il fait des données, images et sauvegardes.</p>
+          </article>
+
+          <article>
+            <h3>Open source</h3>
+            <p>Le projet est publié sous licence MIT. Tu peux modifier, partager et adapter le code sous réserve de conserver les mentions de licence.</p>
+            <p>Les dépendances utilisées peuvent avoir leurs propres licences.</p>
+          </article>
+        </div>
+      </section>
+
+      
+      <section id="donationsPage" class="donations-page hidden">
+        <div class="about-hero">
+          <img src="/assets/anime-local-manager-logo.png" alt="Logo Anime Local Manager">
+          <div>
+            <h2>Soutenir Anime Local Manager</h2>
+            <p>Anime Local Manager est un projet open source développé bénévolement par Gentil Robot. Les dons permettent de soutenir le développement futur du logiciel.</p>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <article class="donation-card">
+            <h3>Don PayPal</h3>
+            <p>Scanne le QR code avec ton téléphone pour ouvrir PayPal.</p>
+            <img src="/assets/paypal-donation-qr.png" alt="QR code PayPal">
+          </article>
+
+          <article>
+            <h3>Liens officiels</h3>
+            <p><strong>GitHub :</strong> <a href="https://github.com/Gentil-Robot/Anime-Local-Manager" target="_blank" rel="noopener">https://github.com/Gentil-Robot/Anime-Local-Manager</a></p>
+            <p><strong>Forum bêta test :</strong> <a href="https://forum.nextinpact.com/topic/199369-anime-local-manager-recherche-b%C3%A9ta-testeur/" target="_blank" rel="noopener">Sujet Next INpact</a></p>
+            <img class="gentil-donation-logo" src="/assets/gentil-robot-logo.png" alt="Logo Gentil Robot"></article>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div><strong>Anime Local Manager</strong> — V1</div>
+        <div>Licence MIT • Date de création : 2026 • Auteur : Gentil Robot</div>
+        <div>Contact : <span data-user="jesuisungentilrobot" data-domain="gmail.com" id="contactMail">jesuisungentilrobot [at] gmail [dot] com</span></div>
+        <div>Données locales : dossier utilisateur Windows de l’application + sauvegarde JSON local optionnelle</div>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="formDialog">
+    <form id="animeForm" method="dialog">
+      <h2 id="dialogTitle">Ajouter un animé</h2>
+      <input type="hidden" id="animeId">
+
+      <label>Titre
+        <input id="title" required placeholder="Ex: One Punch Man">
+      </label>
+
+      <div class="two">
+        <label>Statut
+          <select id="status">
+            <option>Watching</option>
+            <option>Completed</option>
+            <option>On-Hold</option>
+            <option>Dropped</option>
+            <option>Plan to Watch</option>
+          </select>
+        </label>
+
+        <label>Type
+          <select id="type">
+            <option>TV</option>
+            <option>Movie</option>
+            <option>ONA</option>
+            <option>OVA</option>
+            <option>Special</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="three">
+        <label>Ma note
+          <input id="score" type="number" min="0" max="10" placeholder="0-10">
+        </label>
+        <label>Épisodes vus
+          <input id="episodesSeen" type="number" min="0">
+        </label>
+        <label>Total
+          <input id="episodesTotal" type="number" min="0">
+        </label>
+      </div>
+
+      <div class="two">
+        <label>Date début
+          <input id="startDate" type="date">
+        </label>
+        <label>Date fin
+          <input id="endDate" type="date">
+        </label>
+      </div>
+
+      <label>Genres, séparés par des virgules
+        <input id="genres" placeholder="Action, Fantasy, Adventure">
+      </label>
+
+      <label>Tags personnels, séparés par des virgules
+        <input id="tags" placeholder="favori, isekai, à revoir">
+      </label>
+
+      <label>Notes
+        <textarea id="notes" rows="3"></textarea>
+      </label>
+
+      <label class="check">
+        <input id="autoInfo" type="checkbox" checked>
+        Récupérer automatiquement affiche, dates, épisodes, note publique, classement et genres
+      </label>
+
+      <menu>
+        <button type="button" id="cancel">Annuler</button>
+        <button type="submit" class="primary">Enregistrer</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="importDialog">
+    <form id="importForm" method="dialog">
+      <h2>Importer une liste XML</h2>
+      <p class="muted">Compatible avec l’export XML MyAnimeList.</p>
+
+      <label>Fichier XML
+        <input id="xmlFile" type="file" accept=".xml,text/xml" required>
+      </label>
+
+      <label class="check">
+        <input id="overwriteImport" type="checkbox">
+        Écraser les informations similaires déjà présentes
+      </label>
+
+      <menu>
+        <button type="button" id="cancelImport">Annuler</button>
+        <button type="submit" class="primary">Importer</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="settings-dialog">
+    <form id="settingsForm" method="dialog">
+      <h2>Réglages</h2>
+
+      <section class="settings-grid">
+        <div class="settings-main">
+
+          <section class="settings-section">
+            <h3>Sauvegarde / restauration JSON</h3>
+            <p class="json-backup-note">Conseil : pour plus de sécurité, place tes sauvegardes JSON dans un dossier synchronisé JSON local comme OneDrive, Google Drive, Dropbox ou Synology Drive.</p>
+            <button type="button" id="exportBackup">Créer une sauvegarde complète JSON</button>
+
+            <label>Restaurer une sauvegarde JSON
+              <input id="restoreBackupFile" type="file" accept=".json,application/json">
+            </label>
+
+            <button type="button" id="restoreBackup">Restaurer les données</button>
+          </section>
+
+          <section class="settings-section">
+            <h3>Maintenance</h3>
+            <button type="button" id="clearNewsCache">Vider cache news</button>
+          </section>
+        </div>
+
+        <aside class="settings-help">
+          <h3>À propos des chemins</h3>
+          <p>Dans la version application Windows, le bouton <strong>Parcourir</strong> ouvre un vrai sélecteur de dossier.</p>
+          <p>Choisis un dossier synchronisé comme OneDrive, Google Drive ou Dropbox pour tes sauvegardes.</p>
+          <p>Le chemin sera mémorisé pour les prochaines sauvegardes.</p>
+        </aside>
+      </section>
+
+      <menu>
+        <button type="button" id="cancelSettings">Fermer</button>
+        <button type="submit" class="primary">Enregistrer</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+  <script src="/settings.js"></script>
+</body>
+</html>

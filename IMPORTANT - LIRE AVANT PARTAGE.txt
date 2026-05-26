@@ -1,0 +1,4 @@
+Anime Local Manager — V1
+
+Archive prête à partager.
+Sauvegarde recommandée : export JSON dans un dossier sûr.
