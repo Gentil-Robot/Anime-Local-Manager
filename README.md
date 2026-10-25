@@ -1,33 +1,46 @@
-# Anime Local Manager — V1
+# Anime Local Manager
 
-Anime Local Manager est une application Windows locale open source pour gérer une bibliothèque d’animés.
+**Une bibliothèque d'animés locale, avec des fonctions communautaires facultatives.**
 
-## Liens officiels
+[Site officiel](https://animelocalmanager.com/) · [Téléchargements GitHub](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [Discord](https://discord.gg/9KJ8MqhKh7)
 
-- GitHub : https://github.com/Gentil-Robot/Anime-Local-Manager
-- Releases : https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0
-- Forum bêta test : https://forum.nextinpact.com/topic/199369-anime-local-manager-recherche-b%C3%A9ta-testeur/
+## Actualité — V2.0.0 Bêta stable (25 octobre 2026)
 
-## Fonctionnalités
+**Statut : version candidate validée en tests automatisés, publication publique en préparation.**
 
-- Import XML MyAnimeList
-- Ajout manuel d’animés
-- Téléchargement automatique des images
-- Récupération automatique des informations
-- Détection des nouvelles saisons
-- Sauvegarde complète JSON
-- Restauration JSON
-- Vues multiples : mosaïque, compacte, liste
-- Application Windows locale
+La V2.0.0 Bêta stable a réussi **151 suites de tests sur Windows**, un build **NSIS x64** et deux démarrages de l'application empaquetée. Le catalogue local embarqué comporte **30 430 fiches**. Le canal de mise à jour de cette version est **`beta`**, et non `stable`.
 
-## Sauvegarde recommandée
+**Important : l'installateur V2.0.0 n'est pas encore publié sur GitHub.** Le build de recette est non signé ; la vérification finale de l'installation NSIS sur une VM neuve, l'actualisation des composants de sécurité embarqués et les derniers contrôles de publication restent à terminer. Ne pas confondre la validation des tests avec une sortie publique définitive.
 
-La sauvegarde se fait avec un fichier JSON.
+La branche `main` de ce dépôt contient encore les **sources historiques V1**, et la release `v1.0` reste disponible ci-dessous. Les sources V2 seront synchronisées séparément après la revue de publication ; ne pas compiler `main` en pensant obtenir déjà la V2.
 
-Pour plus de sécurité, place tes sauvegardes JSON dans un dossier synchronisé cloud, par exemple OneDrive, Google Drive, Dropbox ou Synology Drive.
+## Fonctionnalités prévues en V2.0.0 Bêta stable
 
-L’application ne gère pas directement de synchronisation cloud. Cela permet de garder le logiciel simple, local et fiable.
+- Bibliothèque personnelle locale et import de listes (dont XML et CSV BetaSeries), notes, épisodes et statuts.
+- Catalogue local utilisable hors ligne ; détection des suites et regroupement des saisons.
+- Recherche, classement, calendrier, actualités, recommandations et Anime DNA.
+- Page **Mes souvenirs**, filtres, sauvegarde et restauration.
+- Communauté facultative : comptes, amis, bibliothèques partagées selon les autorisations, recommandations entre amis.
+- Contrôles d'âge, confidentialité, suppression du compte et limitation des partages.
+- Interface en **français, anglais, espagnol, allemand, japonais, portugais brésilien et chinois simplifié**.
+- Publication Windows : installateur **NSIS x64 uniquement**.
+
+## Version publique actuellement téléchargeable
+
+La dernière release publiée sur ce dépôt demeure **[Anime Local Manager V1](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0)**. Elle ne contient pas les fonctions de V2.0.0 décrites plus haut.
+
+## Données personnelles
+
+La bibliothèque principale est locale. L'utilisation de la communauté est facultative et soumise aux préférences de partage. Il est recommandé de conserver régulièrement une sauvegarde de sa bibliothèque.
+
+## Suivi de la V2
+
+Consulter le [journal des changements](CHANGELOG.md) pour les étapes de validation restantes et les évolutions prévues.
 
 ## Licence
 
-MIT — Gentil Robot — 2026.
+Voir [LICENSE](LICENSE) pour les sources effectivement disponibles dans ce dépôt. Les métadonnées, jaquettes et autres contenus tiers peuvent relever de leurs propres conditions d'utilisation.
+
+---
+
+Projet **Anime Local Manager** par **Gentil Robot**.
