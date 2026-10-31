@@ -22,6 +22,8 @@ Pull request : https://github.com/Gentil-Robot/Anime-Local-Manager/pull/2
 - `public/THIRD-PARTY-NOTICES.txt` et `community/site/THIRD-PARTY-NOTICES.txt` : notices MIT/0BSD des bibliothèques incluses.
 - Ces notices **n'accordent aucun droit automatique** sur les données des fournisseurs, jaquettes, images, paroles, vidéos et enregistrements.
 
+**Voir l'[audit approfondi des conditions AniList et des droits sur le catalogue/jaquettes](https://github.com/Gentil-Robot/Anime-Local-Manager/blob/main/docs/AUDIT-SOURCES-ANILIST-CATALOGUE-2026-10-31.md) : la branche V2 publique contient déjà les deux archives de métadonnées ; ne pas confondre absence de jaquettes pré-embarquées et droits de cache/affichage.**
+
 ### 2. AniList — autorisation spécifique à documenter
 
 Conditions officielles : https://docs.anilist.co/guide/terms-of-use
