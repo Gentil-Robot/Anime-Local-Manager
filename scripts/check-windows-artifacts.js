@@ -25,11 +25,26 @@ function inspectPe(file) {
     return {file:path.basename(file),bytes:size,sha256:hash.digest('hex')};
   } finally { fs.closeSync(fd); }
 }
-function signatures(files) {
-  if (process.platform !== 'win32') return files.map(()=>({status:'NotChecked',reason:'Authenticode requires Windows'}));
-  // Paths are data in an environment variable, never interpolated into PowerShell code.
-  const command = "$ErrorActionPreference='Stop'; $paths=ConvertFrom-Json $env:ALM_RELEASE_FILES; $result=@(foreach($p in $paths){$s=Get-AuthenticodeSignature -LiteralPath $p; @{status=[string]$s.Status; signer=if($s.SignerCertificate){$s.SignerCertificate.Subject}else{$null}}}); ConvertTo-Json -Compress -InputObject $result";
-  const output = execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-Command',command],{encoding:'utf8',timeout:45000,windowsHide:true,env:{...process.env,ALM_RELEASE_FILES:JSON.stringify(files)}});
+function signatures(files, {platform=process.platform, run=execFileSync} = {}) {
+  if (platform !== 'win32') return files.map(()=>({status:'NotChecked',reason:'Authenticode requires Windows'}));
+  // File paths stay JSON data; they are never embedded into executable PowerShell code.
+  // GitHub's Windows runners use PowerShell 7. Calling Windows PowerShell 5.1 from
+  // a pwsh parent can inherit an incompatible PSModulePath and prevent Security
+  // module autoload. Prefer pwsh, falling back to powershell.exe when unavailable.
+  const command = [
+    "$ErrorActionPreference='Stop'",
+    '$paths=@(ConvertFrom-Json -InputObject $env:ALM_RELEASE_FILES)',
+    '$result=@(foreach($p in $paths){$s=Get-AuthenticodeSignature -LiteralPath $p; $signer=$null; if($s.SignerCertificate){$signer=[string]$s.SignerCertificate.Subject}; [pscustomobject]@{status=[string]$s.Status; signer=$signer}})',
+    'ConvertTo-Json -Compress -InputObject $result'
+  ].join('; ');
+  const args=['-NoProfile','-NonInteractive','-Command',command];
+  const options={encoding:'utf8',timeout:45000,windowsHide:true,env:{...process.env,ALM_RELEASE_FILES:JSON.stringify(files)}};
+  let output;
+  try { output=run('pwsh.exe',args,options); }
+  catch(error) {
+    if(error.code!=='ENOENT') throw error;
+    output=run('powershell.exe',args,options);
+  }
   const result = JSON.parse(output.replace(/^\uFEFF/,''));
   if (!Array.isArray(result) || result.length !== files.length) throw Error('Rapport de signature incomplet.');
   if (result.some(s=>!['Valid','NotSigned'].includes(s.status))) throw Error('Signature Windows invalide ou non vérifiable. Consulter le certificat de signature.');
@@ -47,5 +62,5 @@ function checkArtifacts(root, targets = ['nsis'], {checkSignatures=signatures,wr
   if (report.artifacts.some(r=>r.signature.status==='NotSigned')) console.log('[release] Installateur non signe : aucune signature Authenticode detectee.');
   return report;
 }
-module.exports = {artifactPaths,inspectPe,checkArtifacts};
+module.exports = {artifactPaths,inspectPe,checkArtifacts,signatures};
 if (require.main === module) {try {checkArtifacts(path.resolve(__dirname,'..'),process.argv.length>2?process.argv.slice(2):undefined);} catch(error) {console.error('[release] '+error.message);process.exitCode=1;}}

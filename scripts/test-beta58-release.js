@@ -35,7 +35,33 @@ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'alm58-release-'));
  };
  const verify=async({reportFile})=>{counts.verify++;const report={status:'passed',checks:[{status:'passed'}]};U.atomicJson(reportFile,report);return report;};
  const smoke=async()=>{counts.smoke++;return {application:{status:'passed'},installer:{status:'passed'}};};
- const options={root,workspaceOptions:{platform:'fixture'},platform:'win32',run,verify,smoke,consoleOutput:()=>{}};
+ // Synthetic MZ/PE fixtures only: never invoke OS Authenticode on a fake EXE.
+ // Real NSIS builds use checkArtifacts without injection and MUST verify signatures.
+ const {checkArtifacts,signatures}=require('./check-windows-artifacts');
+ const inspectFixture=(stage,targets)=>checkArtifacts(stage,targets,{
+  checkSignatures:files=>files.map(()=>({status:'NotSigned',signer:null}))
+ });
+ const samplePath='C:\\build & test\\installer.exe';
+ const observed=[];
+ const unsigned=signatures([samplePath],{platform:'win32',run:(shell,args,options)=>{
+  observed.push(shell);
+  assert.equal(shell,'pwsh.exe');
+  assert.equal(JSON.parse(options.env.ALM_RELEASE_FILES)[0],samplePath);
+  assert(!args[3].includes(samplePath),'Executable code must never interpolate a file path');
+  assert(args[3].includes('Get-AuthenticodeSignature'));
+  return JSON.stringify([{status:'NotSigned',signer:null}]);
+ }});
+ assert.deepEqual(unsigned,[{status:'NotSigned',signer:null}]);assert.deepEqual(observed,['pwsh.exe']);
+ const shellCalls=[];
+ const fallback=signatures([samplePath],{platform:'win32',run:shell=>{
+  shellCalls.push(shell);
+  if(shell==='pwsh.exe'){const error=Error('pwsh not installed');error.code='ENOENT';throw error;}
+  return JSON.stringify([{status:'Valid',signer:'CN=Fixture'}]);
+ }});
+ assert.deepEqual(fallback,[{status:'Valid',signer:'CN=Fixture'}]);assert.deepEqual(shellCalls,['pwsh.exe','powershell.exe']);
+ assert.throws(()=>signatures([samplePath],{platform:'win32',run:()=>JSON.stringify([{status:'UnknownError'}])}),/Signature Windows invalide/);
+ assert.throws(()=>signatures([samplePath],{platform:'win32',run:()=>JSON.stringify([])}),/incomplet/);
+ const options={root,workspaceOptions:{platform:'fixture'},platform:'win32',run,verify,smoke,inspect:inspectFixture,consoleOutput:()=>{}};
  const first=await R.releaseWindows(options);assert.equal(first.status,'passed');assert.equal(counts.dir,1);assert.equal(counts.nsis,1);assert.equal(counts.verify,1);assert.equal(counts.install,1);
  const target=path.join(root,'dist','ALM-'+pkg.version+'-Setup-x64.exe'),original=U.fileHash(target);
  await R.releaseWindows({...options,resume:true});assert.equal(counts.dir,1);assert.equal(counts.nsis,1);assert.equal(counts.verify,1);assert.equal(counts.install,1);assert.equal(counts.smoke,2,'Native checks are never silently skipped on resume');

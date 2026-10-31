@@ -2397,8 +2397,8 @@
     },
     {
       "path": "scripts/check-windows-artifacts.js",
-      "bytes": 4303,
-      "sha256": "0aa171cb44fa90fa40218fbde9db3de23eb1d7e30e1cb1fa5b4c0cdd4e6b7f73"
+      "bytes": 4861,
+      "sha256": "1977dea29e1d61d47b27ace94910bc4a99d1f86f9d7c688de5144e822f82edfe"
     },
     {
       "path": "scripts/diagnose-news-live.js",
@@ -3057,8 +3057,8 @@
     },
     {
       "path": "scripts/test-beta58-release.js",
-      "bytes": 10767,
-      "sha256": "d18a9d449936efcb247e939f904cd156f5723938149830831ed3ce8f535f368d"
+      "bytes": 12454,
+      "sha256": "aa460daa34508ceab917b16c4b22ba9f5dc642cd8c59d4e5a41f01ed7a267ad2"
     },
     {
       "path": "scripts/test-beta58-smoke.js",
