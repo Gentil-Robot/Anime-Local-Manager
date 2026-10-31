@@ -1,46 +1,54 @@
 # Anime Local Manager
 
-**Une bibliothèque d'animés locale, avec des fonctions communautaires facultatives.**
+**Votre bibliothèque d'animés, vos saisons et vos souvenirs, au même endroit.**
 
-[Site officiel](https://animelocalmanager.com/) · [Téléchargements GitHub](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [Discord](https://discord.gg/9KJ8MqhKh7)
+Anime Local Manager (ALM) est une application **gratuite, locale et open source (licence MIT)** pour organiser sa collection d'animés sous Windows et Linux. Votre bibliothèque reste sur votre ordinateur par défaut ; les fonctions communautaires sont facultatives.
 
-## Actualité — V2.0.0 Bêta stable (25 octobre 2026)
+[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Sources de la V2**](https://github.com/Gentil-Robot/Anime-Local-Manager/tree/publication/v2.0.0-beta-stable) · [**Notes de version V2**](https://github.com/Gentil-Robot/Anime-Local-Manager/blob/publication/v2.0.0-beta-stable/docs/RELEASE-NOTES-V2.0.0-BETA.md)
 
-**Statut : version candidate validée en tests automatisés, publication publique en préparation.**
+## V2.0.0 Bêta stable
 
-La V2.0.0 Bêta stable a réussi **151 suites de tests sur Windows**, un build **NSIS x64** et deux démarrages de l'application empaquetée. Le catalogue local embarqué comporte **30 430 fiches**. Le canal de mise à jour de cette version est **`beta`**, et non `stable`.
+**État au 31 octobre 2026 : version candidate validée en intégration Windows, publication officielle en préparation.**
 
-**Important : l'installateur V2.0.0 n'est pas encore publié sur GitHub.** Le build de recette est non signé ; la vérification finale de l'installation NSIS sur une VM neuve, l'actualisation des composants de sécurité embarqués et les derniers contrôles de publication restent à terminer. Ne pas confondre la validation des tests avec une sortie publique définitive.
+- **153 suites de tests réussies** sur GitHub Actions pour la révision `6c2c350`.
+- **Installateur Windows NSIS x64 compilé**, avec tests de démarrage et de persistance sur le runner de validation. Cela ne remplace pas tous les essais d'installation sur un PC neuf.
+- **Electron 45.2.1** ; **Node.js 22.23.4** recommandé pour compiler les sources.
+- **Audit des dépendances de production : aucune alerte** lors de la validation citée ; **15 alertes modérées** recensées dans l'outillage de compilation.
+- **Linux : sources disponibles** ; paquets AppImage et DEB encore soumis à une validation de distribution distincte.
 
-La branche `main` de ce dépôt contient encore les **sources historiques V1**, et la release `v1.0` reste disponible ci-dessous. Les sources V2 seront synchronisées séparément après la revue de publication ; ne pas compiler `main` en pensant obtenir déjà la V2.
+La branche [`publication/v2.0.0-beta-stable`](https://github.com/Gentil-Robot/Anime-Local-Manager/tree/publication/v2.0.0-beta-stable) contient les **sources V2**. La branche `main` conserve **les sources V1**, en attendant la revue et la fusion de la [pull request de publication](https://github.com/Gentil-Robot/Anime-Local-Manager/pull/2).
 
-## Fonctionnalités prévues en V2.0.0 Bêta stable
+## Fonctionnalités de la V2
 
-- Bibliothèque personnelle locale et import de listes (dont XML et CSV BetaSeries), notes, épisodes et statuts.
-- Catalogue local utilisable hors ligne ; détection des suites et regroupement des saisons.
-- Recherche, classement, calendrier, actualités, recommandations et Anime DNA.
-- Page **Mes souvenirs**, filtres, sauvegarde et restauration.
-- Communauté facultative : comptes, amis, bibliothèques partagées selon les autorisations, recommandations entre amis.
-- Contrôles d'âge, confidentialité, suppression du compte et limitation des partages.
-- Interface en **français, anglais, espagnol, allemand, japonais, portugais brésilien et chinois simplifié**.
-- Publication Windows : installateur **NSIS x64 uniquement**.
+- **Bibliothèque personnelle :** fiches, progression, épisodes, statuts, favoris, notes, filtres, sauvegarde et restauration.
+- **Imports et catalogue hors ligne :** listes BetaSeries (CSV) et XML ; **30 430 fiches** embarquées.
+- **Découverte :** recherche, recommandations, saisons et suites, classement, calendrier et actualités.
+- **Anime DNA, Mes souvenirs et dictionnaire :** profils d'animés, historique personnel et **161 termes** illustrés.
+- **Communauté facultative :** amis, bibliothèques partagées, animés en commun, recommandations et réglages de confidentialité.
+- **Protection des utilisateurs :** contrôles d'âge, préférences de partage et procédures de suppression de compte.
+- **Sept langues :** français, anglais, espagnol, allemand, japonais, portugais brésilien et chinois simplifié.
 
-## Version publique actuellement téléchargeable
+## Télécharger Anime Local Manager
 
-La dernière release publiée sur ce dépôt demeure **[Anime Local Manager V1](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0)**. Elle ne contient pas les fonctions de V2.0.0 décrites plus haut.
+**Disponible actuellement :** [Anime Local Manager V1](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0).
 
-## Données personnelles
+**À venir :** [Anime Local Manager V2.0.0 Bêta stable](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0), publiée comme **préversion GitHub**. **Le lien V2 n'est pas encore actif et aucun installateur V2 n'est disponible dans les releases à ce jour.**
 
-La bibliothèque principale est locale. L'utilisation de la communauté est facultative et soumise aux préférences de partage. Il est recommandé de conserver régulièrement une sauvegarde de sa bibliothèque.
+Le futur installateur Windows x64 sera non signé numériquement : SmartScreen pourra afficher un avertissement. Téléchargez uniquement depuis la release GitHub officielle et comparez l'empreinte SHA-256 à celle indiquée sur la release.
 
-## Suivi de la V2
+Pour tester ou compiler la V2 avant publication, consultez les [instructions de la branche V2](https://github.com/Gentil-Robot/Anime-Local-Manager/blob/publication/v2.0.0-beta-stable/README.md). **Compiler `main` construit encore la V1, pas la V2.**
 
-Consulter le [journal des changements](CHANGELOG.md) pour les étapes de validation restantes et les évolutions prévues.
+## Confidentialité, sécurité et contributions
 
-## Licence
+La bibliothèque principale est locale. La communauté nécessite une activation volontaire et respecte les paramètres de partage. Pensez à sauvegarder régulièrement vos données.
 
-Voir [LICENSE](LICENSE) pour les sources effectivement disponibles dans ce dépôt. Les métadonnées, jaquettes et autres contenus tiers peuvent relever de leurs propres conditions d'utilisation.
+Le dépôt V2 inclut les schémas SQL, migrations, fonctions et modèles de courriels Supabase nécessaires au développement open source. **Les secrets serveur doivent rester dans les variables d'environnement et ne doivent jamais être intégrés au dépôt.** Les migrations historiques doivent conserver leurs identifiants d'origine.
+
+- [Contribuer au projet](https://github.com/Gentil-Robot/Anime-Local-Manager/blob/publication/v2.0.0-beta-stable/CONTRIBUTING.md)
+- [Signaler une vulnérabilité](https://github.com/Gentil-Robot/Anime-Local-Manager/blob/publication/v2.0.0-beta-stable/SECURITY.md)
+- [Historique des versions](CHANGELOG.md) · [Documentation technique de la V2](https://github.com/Gentil-Robot/Anime-Local-Manager/tree/publication/v2.0.0-beta-stable/docs)
+- [Licence MIT](LICENSE) — les images, métadonnées et autres contenus tiers restent soumis à leurs licences respectives.
 
 ---
 
-Projet **Anime Local Manager** par **Gentil Robot**.
+**Gentil Robot** · [animelocalmanager.com](https://animelocalmanager.com/) · *物語が息づく場所* — Là où les histoires prennent vie.
