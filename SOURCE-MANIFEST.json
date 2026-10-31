@@ -17,8 +17,8 @@
     },
     {
       "path": ".github/workflows/windows-installer.yml",
-      "bytes": 2620,
-      "sha256": "d7f936f899e1ad72354db2395db9a065a0af0a8b5af334db92d1746b168841d8"
+      "bytes": 2619,
+      "sha256": "60a4fc10f0386f4091001d3ff7d3155d85038ea4f519f9d5bedfdf4702a3bab6"
     },
     {
       "path": ".gitignore",
