@@ -2342,8 +2342,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 48487,
-      "sha256": "719b57e9ba7e35ae42ac49d4f5a63ad9071e944dfe44c802c7fe42bfacff4bfc"
+      "bytes": 5816,
+      "sha256": "9f39a1c0590380a2d798323212cea5985edc20c2d9f9fdd9348d550f306bd5fe"
     },
     {
       "path": "release-version.json",
