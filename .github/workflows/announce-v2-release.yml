@@ -1,0 +1,57 @@
+name: ALM - activer les liens de telechargement V2
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alm-release-v2-docs
+  cancel-in-progress: false
+
+jobs:
+  synchroniser:
+    if: ${{ github.repository == 'Gentil-Robot/Anime-Local-Manager' && github.event.release.tag_name == 'v2.0.0' && github.event.release.prerelease && !github.event.release.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Recuperer la documentation de main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: S'assurer que la release publique est complete
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          r="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/v2.0.0")"
+          jq -e '.draft == false and .prerelease == true' <<< "$r" > /dev/null
+          for name in Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.exe SHA256SUMS.txt release-check.json; do
+            jq -e --arg item "$name" '[.assets[] | select(.name == $item and .size > 0)] | length == 1' <<< "$r" > /dev/null
+          done
+
+      - name: Activer la documentation publique
+        run: node .github/scripts/activate-v2-release.cjs
+
+      - name: Mettre a jour README et CHANGELOG sur GitHub
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for file in README.md CHANGELOG.md; do
+            oldsha="$(gh api "repos/$GITHUB_REPOSITORY/contents/$file?ref=main" --jq '.sha')"
+            payload="$(jq -n \
+              --arg message "docs: activer le telechargement public ALM v2.0.0" \
+              --arg content "$(base64 -w 0 "$file")" \
+              --arg sha "$oldsha" \
+              --arg branch main \
+              '{message:$message,content:$content,sha:$sha,branch:$branch}')"
+            gh api --method PUT "repos/$GITHUB_REPOSITORY/contents/$file" --input - <<< "$payload" > /dev/null
+          done
+          echo 'Les liens de la release V2 sont maintenant visibles dans README et CHANGELOG.' >> "$GITHUB_STEP_SUMMARY"
