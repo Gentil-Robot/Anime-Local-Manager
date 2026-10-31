@@ -4,7 +4,7 @@
 
 Anime Local Manager (ALM) est une application **locale, gratuite et open source (MIT)** pour organiser sa collection d'animés sous Windows et Linux. La bibliothèque reste locale par défaut ; la communauté est facultative.
 
-[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2**](docs/RELEASE-NOTES-V2.0.0-BETA.md)
+[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2**](docs/RELEASE-NOTES-V2.0.0-BETA.md) · [**Historique technique**](docs/)
 
 ## V2.0.0 Bêta stable
 
@@ -77,17 +77,14 @@ Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour contribuer, [SECURITY.md](SECU
 
 Les données principales restent sur l'ordinateur de l'utilisateur. Faites une sauvegarde avant toute migration importante. Les fonctionnalités de communauté demandent une activation volontaire et appliquent les restrictions de partage et d'âge.
 
-### Historique et dossiers techniques
+### Documentation et historique technique
 
-Le projet conserve ses notes de conception et de recette dans `docs/`, notamment :
+Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.0.0 Bêta stable** est la version présentée publiquement. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
 
+- [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
 - [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)
-- [Recette Electron 45.2.1](docs/ELECTRON-45.2.1-RECETTE-ET-PUBLICATION.md)
-- [Harmonisation des affichages](docs/HARMONISATION-AFFICHAGE-PUBLICATION-V200-2026-10-25.md)
-- [Profilage et sécurité Beta82](docs/BETA82-PROFILAGE-SECURITE-2026-10-24.md)
-- [Recette historique Beta82](docs/BETA82-RECETTE-PREPUBLICATION.md)
-- [Correctifs UX](docs/CORRECTIF-UX-2026-10-24.md)
-- [Revue prépublication](docs/RELEASE-CHECKUP-2026-10-25.md)
+- [Recette technique et publication Electron](docs/ELECTRON-45.2.1-RECETTE-ET-PUBLICATION.md)
+- [Documentation et archives de développement](docs/)
 
 ---
 
