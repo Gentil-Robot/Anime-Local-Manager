@@ -12,7 +12,7 @@ Pull request : https://github.com/Gentil-Robot/Anime-Local-Manager/pull/2
 - Workflow de préparation de la release : [41235623558](https://github.com/Gentil-Robot/Anime-Local-Manager/actions/runs/41235623558), **réussi**. Il contrôle la concordance du SHA-256, du rapport `release-check.json` et de la réussite du test NSIS avant de créer la release.
 - La **release `v2.0.0` reste en brouillon** avec EXE, `release-check.json` et `SHA256SUMS.txt`. Elle doit conserver `prerelease=true`. Le tag **n'est pas** `v2.0.0-beta` : les métadonnées techniques et les tests de mise à jour ALM attendent `v2.0.0`.
 - Retour fonctionnel du mainteneur, le 31 octobre 2026 : « je confirme tout marche ». Ce retour inclut le contexte des tests Windows, vidéo et karaoké ; il n'est pas une preuve indépendante de chaque scénario sur tous les postes.
-- Le **build le plus récent** a échoué lors d'une vérification documentaire exigeant les anciens noms Beta82 dans le README (GitHub Actions [41234752423](https://github.com/Gentil-Robot/Anime-Local-Manager/actions/runs/41234752423)). Le test de documentation a été corrigé **sans retirer les archives historiques ni supprimer les contrôles de contenu**, et le manifeste source a été synchronisé. **Attendre le résultat d'un nouveau workflow sur le dernier commit**, avant de considérer la branche courante comme de nouveau validée.
+- **Nouvelle validation réussie sur le dernier commit** : GitHub Actions [41237837805](https://github.com/Gentil-Robot/Anime-Local-Manager/actions/runs/41237837805), commit `bc3028343d27b96efeaf63c97aa994612eee0569`, tous les contrôles Windows, audit, tests documentaires et recette NSIS terminés **avec succès**. Le changement corrige un test exigeant à tort les anciens liens Beta82 dans le README, sans supprimer les archives de développement. Un **nouvel artefact Windows** est disponible dans cette exécution ; il ne faut pas supposer que son empreinte est identique à celle de l'EXE plus ancien déjà attaché au brouillon.
 
 ## Revue des licences et des médias — réserves ouvertes
 
@@ -59,7 +59,7 @@ Plusieurs logos, fonds, GIF, affiches et photos sont distribués dans `public/as
 
 ## Décision conseillée
 
-**Technique :** la release en brouillon possède un installateur Windows dont la cohérence SHA-256 et l'installation en CI ont été démontrées ; la branche courante doit encore retrouver un workflow vert après correction documentaire.
+**Technique :** la release en brouillon possède un installateur Windows dont la cohérence SHA-256 et l'installation en CI ont été démontrées. **La branche V2 est désormais de nouveau validée par le workflow Windows** (31 octobre 2026). Avant publication, vérifier si l'on conserve l'EXE validé `6c2c350` ou si l'on remplace l'asset par celui du dernier build `bc302834` ; dans ce dernier cas, revalider et publier le SHA-256 correspondant dans `SHA256SUMS.txt` et le rapport de recette associé.
 
 **Droits :** la revue n'est **pas clôturée** en l'absence de preuve sur AniList, le catalogue et les médias. Ce document n'atteste pas leur licéité. Conserver la release en **brouillon** tant que ces points n'ont pas été traités par le responsable du projet.
 
@@ -67,7 +67,7 @@ Plusieurs logos, fonds, GIF, affiches et photos sont distribués dans `public/as
 
 ## Preuves à ajouter avant clôture
 
-- [ ] Dernier GitHub Actions Windows et contrôle de sources : succès sur le commit final.
+- [x] Dernier GitHub Actions Windows : **succès sur `bc302834`**, build 41237837805 (source, tests et NSIS). Le contrôle autonome `source-review.yml` le plus récent concerne un commit antérieur ; l'intégrité des fichiers source a aussi été contrôlée pendant le dernier build Windows.
 - [x] EXE `6c2c350` comparé aux preuves CI et au digest GitHub ; SHA-256 concordant.
 - [x] Retour positif de recette Windows communiqué par le mainteneur.
 - [ ] Conditions et autorisation AniList pour le cas d'utilisation ALM.
