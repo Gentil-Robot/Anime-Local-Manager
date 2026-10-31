@@ -2,7 +2,9 @@
 
 ## V2.0.0 Bêta stable — candidate en prépublication (31 octobre 2026)
 
-**Statut :** sources de la V2 disponibles sur la [branche de publication](https://github.com/Gentil-Robot/Anime-Local-Manager/tree/publication/v2.0.0-beta-stable). La release V2 n'est **pas encore téléchargeable** sur GitHub. La branche `main` contient toujours les sources V1.
+<!-- ALM-V2:CHANGELOG-STATUS:START -->
+**Statut :** la V2 a été testée et son installateur Windows est préparé dans une **release GitHub en brouillon**. Son téléchargement public sera activé lors de la publication de la préversion. Les [sources V2](https://github.com/Gentil-Robot/Anime-Local-Manager/tree/publication/v2.0.0-beta-stable) sont disponibles ; la branche `main` contient encore les sources V1.
+<!-- ALM-V2:CHANGELOG-STATUS:END -->
 
 Version technique : `2.0.0` ; canal de mise à jour : `beta`.
 
