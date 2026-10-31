@@ -1,0 +1,22 @@
+{
+  "browser": "134.0.6998.35",
+  "baselineAssets": true,
+  "status": "failed",
+  "checks": [],
+  "measurements": [
+    {
+      "name": "Library bottom Next returns to page top",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 776.34375,
+      "viewport": 1000
+    }
+  ],
+  "errors": [],
+  "failure": {
+    "message": "Library bottom Next returns to page top did not reach the top: {\"y\":752,\"windowY\":752,\"firstTop\":22.40625,\"firstBottom\":776.34375,\"viewport\":1000}",
+    "stack": "AssertionError [ERR_ASSERTION]: Library bottom Next returns to page top did not reach the top: {\"y\":752,\"windowY\":752,\"firstTop\":22.40625,\"firstBottom\":776.34375,\"viewport\":1000}\n    at atTop (/workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-pagination-browser.cjs:53:389)\n    at async jump (/workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-pagination-browser.cjs:54:370)\n    at async /workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-pagination-browser.cjs:59:2"
+  },
+  "scope": "Real local app and production CSS; ephemeral library/catalogue/notebook; fictional community/ranking/import-review fixtures; external traffic blocked; no real account, import, deletion or native Windows installer"
+}

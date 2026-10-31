@@ -1,0 +1,33 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict'),{Worker}=require('node:worker_threads');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm55-worker-')),keepAlive=setInterval(()=>{},1000);let host;
+process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');process.env.ALM_BETASERIES_IMPORT_NETWORK_BUDGET_MS='250';fs.mkdirSync(process.env.ALM_IMAGES_DIR);
+fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({preloadMetadataOnStart:false,metadataAutonomousUpdateOnStart:false,metadataUpdateOnStart:false}));
+const nativeFetch=global.fetch;global.fetch=(url,options)=>String(url).startsWith('http://127.0.0.1:')?nativeFetch(url,options):Promise.reject(Error('Offline CSV fixture'));
+(async()=>{try{
+ const server=require('../server'),db=require('../db');await db.whenReady();
+ fs.mkdirSync(path.join(dir,'cache'),{recursive:true});fs.writeFileSync(path.join(dir,'cache/tvmaze-import-cache.json'),JSON.stringify({spriggan:{name:'SPRIGGAN',type:'Animation',language:'Japanese',source:'TVMaze',matchingScore:100},dexter:{name:'Dexter',type:'Scripted',language:'English',source:'TVMaze',matchingScore:100}}));
+ const rows=[{id:'29538',title:'SPRIGGAN',episode:'S01E06',remaining:'0',status:'100'},{id:'conan',title:'Detective Conan',episode:'S26E34',remaining:'1092',status:'9,68'},{id:'tv',title:'Dexter',episode:'S08E12',remaining:'0',status:'100'},{id:'toaru',title:'Toaru Ossan no VRMMO Katsudouki',episode:'S01E12',remaining:'0',status:'100'}];
+ const cache={spriggan:{title:'SPRIGGAN',officialTitle:'Spriggan',malId:'420',type:'Movie',episodesTotal:'1',source:'LocalMetadata',matchingScore:100},'toaru ossan no vrmmo katsudouki':{title:rows[3].title,officialTitle:rows[3].title,malId:'54431',type:'TV',episodesTotal:'12',source:'LocalMetadata',matchingScore:100,synopsis:'A richer cached synopsis from a verified source.',genres:[]}};
+ const result=await new Promise((resolve,reject)=>{
+  const worker=new Worker(path.join(__dirname,'../csv-worker.js'),{workerData:{rows,matchingCache:cache,betaFastCache:{},config:{},dataDir:dir,deadlineAt:Date.now()-1}});
+  const timer=setTimeout(()=>{worker.terminate();reject(Error('Worker timed out'));},15000);
+  worker.on('error',e=>{clearTimeout(timer);reject(e);});worker.on('message',m=>{if(m.type==='result'){clearTimeout(timer);resolve(m.results);}if(m.type==='error'){clearTimeout(timer);reject(Error(m.message));}});
+ });
+ assert.equal(Number(result[0].found.malId),39489);assert.equal(result[0].found.type,'ONA');assert(result[0].found.synopsis);assert.equal(result[0].found.endDate,db.getMetadataByMalId(39489).endDate||'');
+ assert.equal(result[3].found.endDate,'2023-12-19');assert.equal(result[3].anime.endDate,result[3].found.endDate);assert.equal(result[3].anime.synopsis,result[3].found.synopsis);
+ assert.equal(result[3].found.synopsis,cache['toaru ossan no vrmmo katsudouki'].synopsis);assert(result[3].found.genres.length);
+ assert.equal(result[0].anime.episodesSeen,'6');assert.equal(result[0].anime.episodesTotal,'6');
+ assert.equal(Number(result[1].found.malId),235);assert.equal(result[1].anime.betaseriesProgressScope,'season-marker');assert.equal(result[1].anime.betaseriesEpisode,'S26E34');
+ assert.equal(result[2].classification,'non_anime');
+ host=await new Promise(resolve=>{const listener=server.app.listen(0,'127.0.0.1',()=>resolve(listener));});
+ const post=async(items,overwrite)=>{const response=await nativeFetch('http://127.0.0.1:'+host.address().port+'/api/import/csv',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,overwrite})});assert.equal(response.status,200);return response.json();};
+ await post(result.filter(item=>item.classification==='anime'),false);
+ const count=db.getAllAnimes().length,first=db.getAllAnimes().find(a=>Number(a.malId)===39489);assert(first);assert(!db.getAllAnimes().some(a=>Number(a.malId)===420));
+ db.updateAnime(first.id,{...first,customTitle:'My Spriggan title',title:'My Spriggan title',notes:'A personal import note',score:'9'});
+ await post(result.filter(item=>item.classification==='anime'),true);
+ assert.equal(db.getAllAnimes().length,count);const retained=db.getAnimeById(first.id);assert.equal(retained.title,'My Spriggan title');assert.equal(retained.score,'9');assert(retained.notes.includes('A personal import note'));assert.equal(retained.episodesSeen,'6');
+ const conan=db.getAllAnimes().find(a=>Number(a.malId)===235);assert.equal(conan.betaseriesEpisode,'S26E34');assert(!db.getAllAnimes().some(a=>Number(a.manualSeasonNumber)>1&&!a.malId));
+ console.log('OK Beta55 HTTP CSV: repeat import stays idempotent, keeps personal title/notes/score and preserves continuous season markers without phantom cards.');
+ console.log('OK Beta55 worker: wrong cached film is replaced with the six-episode version, synopsis/end date survive CSV analysis, continuous source position is retained and TV remains excluded.');
+}finally{await require('./runtime-cleanup').cleanupRuntime(dir,host);clearInterval(keepAlive);}})().catch(e=>{console.error(e);process.exitCode=1;});

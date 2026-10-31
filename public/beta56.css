@@ -1,0 +1,10 @@
+.automation-history {margin-top:1rem;}
+.automation-history summary {cursor:pointer;font-weight:700;}
+.automation-history-row {display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0;border-top:1px solid var(--line,rgba(255,255,255,.12));}
+.automation-history-row span {min-width:0;overflow-wrap:anywhere;}
+.automation-history-row button {flex-shrink:0;}
+.import-gap-result {padding:1rem;border:1px solid #f5b943;border-radius:.8rem;background:rgba(245,185,67,.1);}
+@media(max-width:600px){.automation-history-row{align-items:flex-start;flex-direction:column;}}
+
+#csvImportBackground[hidden]{display:none!important;}
+.completion-progress-results{grid-template-columns:repeat(auto-fit,minmax(95px,1fr));}

@@ -1,0 +1,15 @@
+[package-profile] {"test":"beta71","phase":"dependency-fixtures","durationMs":1.923}
+[package-profile] {"test":"beta71","phase":"stage-physical-dependencies","durationMs":10519.549}
+[package-profile] {"test":"beta71","phase":"negative-builder","durationMs":29065.52}
+OK Beta71: actual electron-builder rejects the old linked dependency tree.
+[package-profile] {"test":"beta71","phase":"npm-production-tree","durationMs":4460.294}
+[package-profile] {"test":"beta71","phase":"positive-builder","durationMs":11839.914}
+[package-profile] {"test":"beta71","phase":"verify-asar-dependencies","durationMs":586.026}
+ALM_PACKAGE_ENGINE_OK {"phase":"seed","electron":"45.0.0","catalogue":30430,"imported":1,"backup":true,"persistence":false,"nativeStorage":"not-available"}
+[package-profile] {"test":"beta71","phase":"electron-seed","durationMs":9589.189}
+ALM_PACKAGE_ENGINE_OK {"phase":"verify","electron":"45.0.0","catalogue":30430,"imported":1,"backup":true,"persistence":true,"nativeStorage":"not-exercised"}
+[package-profile] {"test":"beta71","phase":"electron-verify","durationMs":2027.25}
+[package-profile] {"test":"beta71","phase":"cleanup","durationMs":268.079}
+OK Beta71: real electron-builder package, 82 production packages, dependency copy integrity and resume validation; real Electron utility process, catalogue/import/backup/persistence. The native Windows EXE gate remains required.
+[package-profile] summary {"test":"beta71","totalMs":68358.336,"phases":[{"name":"dependency-fixtures","durationMs":1.923},{"name":"stage-physical-dependencies","durationMs":10519.549},{"name":"negative-builder","durationMs":29065.52},{"name":"npm-production-tree","durationMs":4460.294},{"name":"positive-builder","durationMs":11839.914},{"name":"verify-asar-dependencies","durationMs":586.026},{"name":"electron-seed","durationMs":9589.189},{"name":"electron-verify","durationMs":2027.25},{"name":"cleanup","durationMs":268.079}]}
+OK nettoyage du dossier temporaire et fermeture des processus de test.

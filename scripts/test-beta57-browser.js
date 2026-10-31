@@ -1,0 +1,32 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
+const {chromium}=require(process.env.ALM_PLAYWRIGHT_MODULE||'playwright');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm57-browser-')),keepAlive=setInterval(()=>{},1000);let host,browser;
+process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');process.env.ALM_AUTOMATION_STARTUP='0';
+fs.mkdirSync(process.env.ALM_IMAGES_DIR);fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({preloadMetadataOnStart:false,metadataAutonomousUpdateOnStart:false,metadataUpdateOnStart:false}));
+const nativeFetch=global.fetch;global.fetch=(u,o)=>String(u).startsWith('http://127.0.0.1:')?nativeFetch(u,o):Promise.reject(Error('Offline browser fixture'));
+(async()=>{
+ const server=require('../server'),db=require('../db');await db.whenReady();await db.prepareMetadataTitleIndex();
+ const metadata=db.getMetadataByMalId(11757),base={id:1,title:metadata.title,canonicalTitle:metadata.title,malId:'11757',betaseriesSeriesId:'sao',betaseriesSeason:1,type:'TV',status:'Completed',episodesSeen:'25',episodesTotal:'25',notes:'Keep this note'};
+ const unresolved={id:2,title:'Sword Art Online — Saison 4',betaseriesSeriesId:'sao',betaseriesSeason:4,manualSeasonNumber:4,betaseriesEpisode:'S04E23',episodesSeen:'23',status:'Watching',tags:['BetaSeries','saison à identifier']};server.__test.writeAnimes([base,unresolved]);host=await server.startServer(0);const origin='http://127.0.0.1:'+host.almPort;
+ browser=await chromium.launch({headless:true,...(process.env.ALM_CHROMIUM_PATH?{executablePath:process.env.ALM_CHROMIUM_PATH}:{}),args:JSON.parse(process.env.ALM_CHROMIUM_ARGS||'[]')});
+ const page=await browser.newPage({viewport:{width:1280,height:800}}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(origin);
+ await page.waitForFunction(()=>window._almAnimes?.length===2&&window.ALM_PENDING_REFERENCES&&window.ALM_RECORD_SEARCH);
+ await page.evaluate(async()=>{await window.ALM_I18N.setLanguage('fr');document.querySelector('[data-alm-language-confirm]')?.click();document.getElementById('almLanguageFirstRun')?.close();});
+ await page.evaluate(()=>window.ALM_RECORD_SEARCH.open(window._almAnimes.find(a=>a.id===2)));
+ assert.equal(await page.locator('#recordSearchQuery').inputValue(),'Sword Art Online');assert((await page.locator('#recordSearchCurrent').textContent()).includes('S04E23'));
+ await page.waitForSelector('#recordSearchResults .record-search-result');assert((await page.locator('#recordSearchStatus option').allTextContents()).some(s=>s.toLowerCase().includes('termin')));
+ assert.equal(await page.locator('#recordSearchStatus').inputValue(),'Watching');assert.equal(server.__test.readAnimes().find(a=>a.id===2).malId,undefined,'Search never associates automatically');
+ await page.locator('#recordSearchDialog [data-search-close]').first().click();
+ // Exercise actual DOM rendering with more references than the initial page.
+ await page.evaluate(()=>{const host=document.createElement('section');host.id='referencesFixture';document.body.append(host);const items=[...Array.from({length:55},(_,i)=>({id:1000+i,title:'Season '+i,kind:'season-source-wait'})),...Array.from({length:42},(_,i)=>({id:2000+i,title:'Source '+i,kind:'source-gap',unallocated:1,sourcePosition:'S01E13'}))];window.ALM_PENDING_REFERENCES.render(host,items,{completionAwaitingSources:true,completionAwaiting:true});});
+ assert.equal(await page.locator('#referencesFixture #completionAwaitingSources .completion-awaiting-open').count(),40);assert.equal(await page.locator('#referencesFixture #completionAwaiting .completion-awaiting-open').count(),40);
+ await page.locator('#referencesFixture #completionAwaitingSources .completion-references-more').click();await page.locator('#referencesFixture #completionAwaiting .completion-references-more').click();
+ assert.equal(await page.locator('#referencesFixture .completion-awaiting-open').count(),97);assert.equal(await page.locator('#referencesFixture .completion-references-more').count(),0);
+ const ids=await page.locator('#referencesFixture .completion-awaiting-open').evaluateAll(rows=>rows.map(a=>a.dataset.animeId));assert.equal(new Set(ids).size,97);
+ await page.evaluate(async()=>{await window.ALM_I18N.setLanguage('en');const host=document.getElementById('referencesFixture');host.replaceChildren();window.ALM_PENDING_REFERENCES.render(host,[{id:3,title:'Example',kind:'season-source-wait'}],{completionAwaiting:true});});
+ assert.equal(await page.locator('#referencesFixture summary').textContent(),await page.evaluate(()=>window.ALM_DESIGN.t('completionAwaitingTitle',{count:1})));assert.equal(await page.evaluate(()=>window.ALM_I18N.getLanguage()),'en');assert(await page.locator('#referencesFixture details').evaluate(a=>a.open));
+ await page.setViewportSize({width:600,height:560});await page.evaluate(()=>window.ALM_RECORD_SEARCH.open(window._almAnimes.find(a=>a.id===2)));await page.waitForSelector('#recordSearchResults .record-search-result');const box=await page.locator('#recordSearchDialog').boundingBox();assert(box.x>=0&&box.y>=0&&box.x+box.width<=601&&box.y+box.height<=561);
+ assert.deepEqual(errors,[]);
+ console.log('OK Beta57 browser: stripped season search, original CSV position, all status choices, no implicit association, separate reference groups, all 97 references accessible, English copy, retained open state and compact popup.');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{await browser?.close();await require('./runtime-cleanup').cleanupRuntime(dir,host);clearInterval(keepAlive);});

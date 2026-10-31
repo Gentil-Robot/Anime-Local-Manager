@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),shape=require('../lib/betaseries-import-shape'),upgrade=require('../lib/betaseries-upgrade'),classifier=require('../lib/media-classifier'),series=require('../public/series-state');
+const film={source:'LocalMetadata',title:'Altered Carbon',officialTitle:'Altered Carbon: Resleeved',type:'ONA',episodesTotal:'1',malId:40485,matchingScore:100};
+assert.equal(classifier.animeEvidence('Altered Carbon',film).strong,false);
+assert.equal(classifier.animeEvidence('Altered Carbon: Resleeved',film).strong,true);
+assert.equal(classifier.animeEvidence('Altered Carbon',{...film,synonyms:['Altered Carbon']}).strong,true);
+assert.equal(classifier.animeEvidence('Altered Carbon',{...film,aliasSource:'manual'}).strong,true);
+const base={id:1,title:'Detective Conan',type:'TV',episodesSeen:'1126',episodesTotal:'1126',betaseriesId:'1377',betaseriesSeason:1,betaseriesEpisode:'S26E34',notes:'My note',score:'9'};
+const active={id:2,title:'Detective Conan — Saison 26',manualSeasonNumber:26,betaseriesSeriesId:'1377',betaseriesEpisode:'S26E34',episodesSeen:'34',episodesTotal:'1126',tags:['saison à identifier'],notes:'My other note'};
+const conan=upgrade.repair([base,active]);assert.equal(conan.items.length,1);assert.equal(conan.items[0].episodesSeen,'');assert.equal(conan.items[0].betaseriesEpisode,'S26E34');assert.equal(conan.items[0].notes,'My note');assert.equal(conan.items[0].score,'9');assert.equal(conan.items[0].importRecoveryRecords[0].notes,'My other note');assert.equal(upgrade.repair(conan.items).changed,false);
+const g=series.groups(conan.items)[0];assert(g.grouped&&g.progressUnknown);assert.equal(g.gaps.length,0);
+const btooom=upgrade.repair([{id:10,title:'Btooom!',betaseriesId:'5757',betaseriesEpisode:'S01E14',episodesSeen:'12',episodesTotal:'12',betaseriesOverflowEpisodes:2},{id:11,title:'Btooom! — Saison 2',manualSeasonNumber:2,betaseriesSeriesId:'5757',betaseriesEpisode:'S01E14',tags:['progression à vérifier'],episodesSeen:'2',notes:'Do not lose this'}]);
+assert.equal(btooom.items.length,1);assert.equal(btooom.items[0].unallocatedEpisodes,2);assert.equal(btooom.items[0].importRecoveryRecords[0].notes,'Do not lose this');assert.equal(upgrade.repair(btooom.items).changed,false);
+const conflict=upgrade.repair([{id:20,title:film.officialTitle,seriesRootTitle:'Altered Carbon',type:'ONA',episodesTotal:'1',malId:40485,betaseriesId:'16149',betaseriesEpisode:'S02E08',notes:'Keep this'}]);assert.equal(conflict.items[0].importIdentityReview,true);assert.equal(conflict.items[0].malId,40485);assert.equal(conflict.items[0].notes,'Keep this');assert.equal(upgrade.repair(conflict.items).changed,false);
+const oldConflict=upgrade.repair([{id:21,title:film.officialTitle,type:'ONA',episodesTotal:'1',malId:40485,betaseriesId:'16149',betaseriesEpisode:'S02E08'},{id:22,title:'Altered Carbon — Saison 2',seriesRootTitle:'Altered Carbon',manualSeasonNumber:2,betaseriesSeriesId:'16149',betaseriesEpisode:'S02E08',tags:['saison à identifier']}]);assert(oldConflict.items.every(a=>a.importIdentityReview));assert.equal(oldConflict.removed.length,0);
+assert.equal(shape.sourceState({...base,title:'A verified long seasonal show'}, {episode:'S02E10',title:'A verified long seasonal show'}).betaseriesProgressScope,undefined,'Episode count alone must not collapse genuine seasons');
+assert.equal(series.groups([{id:30,title:'Show',episodesSeen:'12',episodesTotal:'12',type:'TV',poster:'/images/base.jpg'},{id:31,title:'Show Season 3',episodesSeen:'2',type:'TV',seriesSeasonStatuses:{2:'Plan to Watch'}}])[0].gapStatuses[2],'Plan to Watch');
+console.log('OK Beta50: source identities, reversible/idempotent Conan and overflow upgrades, unknown totals and persisted gap statuses');

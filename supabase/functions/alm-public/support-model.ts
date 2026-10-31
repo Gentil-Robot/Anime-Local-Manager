@@ -1,0 +1,27 @@
+// Strict allow-list shared by the report preview and the email endpoint.
+const codes=new Set(['UNKNOWN','ALM_NETWORK','ALM_DIAGNOSTIC_FAILED','ALM_STORAGE_UNAVAILABLE','ALM_STORAGE_INTEGRITY','ALM_MAINTENANCE_FAILED','ALM_SCHEDULE_FAILED','ALM_SCHEDULE_ACCESS_DENIED','ALM_SCHEDULE_TIMEOUT','ALM_SCHEDULE_POWERSHELL_MISSING','ALM_SCHEDULE_SERVICE_UNAVAILABLE','ALM_SCHEDULE_INVALID','ALM_SCHEDULE_UNVERIFIED','ALM_SCHEDULE_PACKAGED_ONLY','ALM_SCHEDULE_TASK_CONFLICT','ALM_SCHEDULE_LEGACY_CONFLICT','SESSION_EXPIRED','SESSION_UNAVAILABLE','REAUTH_REQUIRED','INVALID_INPUT','RATE_LIMIT','FRIEND_DAILY_LIMIT','RECOMMEND_DAILY_LIMIT','RECOMMEND_DUPLICATE']);
+const choice=(v:any,a:string[],fallback:any=null)=>a.includes(v)?v:fallback;
+const version=(v:any)=>typeof v==='string'&&/^\d{1,3}\.\d{1,3}\.\d{1,3}(?:-[a-z0-9.]{1,24})?$/i.test(v)?v:null;
+const date=(v:any)=>typeof v==='string'&&/^\d{4}-\d\d-\d\dT[\d:.]+Z$/.test(v)&&Number.isFinite(Date.parse(v))?v:null;
+const number=(v:any)=>Number.isSafeInteger(v)&&v>=0&&v<=10000000000?v:null;
+const flag=(v:any)=>typeof v==='boolean'?v:null;
+const error=(v:any)=>codes.has(v)?v:v?'UNKNOWN':null;
+const languages=['fr','en','es','de','ja','pt-BR','zh-CN'];
+const packages=['@supabase/supabase-js','express','multer','sql.js','@electric-sql/pglite','electron','electron-builder','esbuild','jsdom','qrcode'];
+export function normalizeDiagnostic(value:any){
+ const v=value&&typeof value==='object'&&!Array.isArray(value)?value:{},r=v.runtime||{},s=v.storage||{},m=v.maintenance||{},task=v.scheduler||{},current=version(v.version);
+ return {schema:1,sectionsVersion:v.sectionsVersion===2?2:1,application:current?'ALM '+current:'ALM',version:current,generatedAt:date(v.generatedAt),surface:choice(v.surface,['local','web'],'local'),language:choice(v.language,languages,'fr'),
+ runtime:{platform:choice(r.platform,['win32','linux','darwin','web','other']),arch:choice(r.arch,['x64','arm64','ia32','arm']),node:version(r.node),electron:version(r.electron)},
+ storage:{engine:choice(s.engine,['sqlite-disk','sqlite','sql.js','json']),ready:flag(s.ready),mirrorPending:flag(s.mirrorPending),integrity:choice(s.integrity,['not-run','ok','error'],'not-run'),integrityAt:date(s.integrityAt)},counts:{collection:number(v.counts?.collection),catalogue:number(v.counts?.catalogue)},
+ maintenance:{enabled:flag(m.enabled),running:flag(m.running),reason:choice(m.reason,['offline','metered','network-unknown','disabled','idle','running']),tasks:Object.fromEntries(['news','seasons','catalog','application'].map(key=>[key,{phase:choice(m.tasks?.[key]?.phase,['idle','running','error','success','done','skipped']),lastSuccess:date(m.tasks?.[key]?.lastSuccess)}]))},
+ scheduler:{supported:flag(task.supported),verified:flag(task.verified),registered:flag(task.registered),enabled:flag(task.enabled),matches:flag(task.matches),code:error(task.error||task.code),hresult:typeof task.hresult==='string'&&/^0x[0-9a-f]{8}$/i.test(task.hresult)?task.hresult:null},
+ library:{count:number(v.library?.count),provisionalSeasons:number(v.library?.provisionalSeasons),awaitingSeasons:number(v.library?.awaitingSeasons)},
+ snapshot:{rows:number(v.snapshot?.rows),generatedAt:date(v.snapshot?.generatedAt),sha256:typeof v.snapshot?.sha256==='string'&&/^[a-f0-9]{64}$/i.test(v.snapshot.sha256)?v.snapshot.sha256:null},
+ locales:Object.fromEntries(languages.map(lang=>{const l=v.locales?.[lang]||{};return [lang,{translated:number(l.translated),total:number(l.total),percent:typeof l.percent==='number'&&Number.isFinite(l.percent)&&l.percent>=0&&l.percent<=100?Math.round(l.percent*10)/10:null}];})),
+ news:Object.fromEntries(languages.map(lang=>[lang,{configuredSources:number(v.news?.[lang]?.configuredSources)}])),
+ karaoke:{status:choice(v.karaoke?.status,['reviewed','unreviewed','partial','verified','draft','needs-review']),flaggedLines:number(v.karaoke?.flaggedLines),pendingInsertions:number(v.karaoke?.pendingInsertions)},
+ dependencies:{declared:Object.fromEntries(packages.map(key=>[key,version(v.dependencies?.declared?.[key])])),installed:Object.fromEntries(packages.map(key=>[key,version(v.dependencies?.installed?.[key])]))},
+ services:(Array.isArray(v.services)?v.services:[]).slice(0,100).filter((a:any)=>/^(?:jikan|mal|anilist|kitsu|tvmaze|betaseries|wikidata|mymemory|rss-\d{1,3})$/.test(a?.id)).map((a:any)=>({id:a.id,group:choice(a.group,['metadata','translation','news']),lang:choice(a.lang,languages),configured:flag(a.configured),state:choice(a.last?.state,['idle','running','retired','available','unconfigured','limited','denied','invalid','timeout','network','unavailable','redirect'],a.retired?'retired':a.configured?'idle':'unconfigured'),checkedAt:date(a.last?.checkedAt),httpStatus:typeof a.last?.httpStatus==='number'&&a.last.httpStatus>=100&&a.last.httpStatus<=599?a.last.httpStatus:null,latencyMs:number(a.last?.latencyMs)})),
+ ...(v.community?.connected===true?{community:{connected:true,confirmed:flag(v.community.confirmed),visibility:choice(v.community.visibility,['private','friends']),autoShare:flag(v.community.autoShare),dirty:flag(v.community.dirty),pendingRequests:number(v.community.pendingRequests),pendingRecommendations:number(v.community.pendingRecommendations)}}:{}),
+ events:(Array.isArray(v.events)?v.events:[]).slice(-20).map((a:any)=>({at:date(a?.at),source:choice(a?.source,['community','maintenance','storage','support'],'support'),code:error(a?.code),hresult:typeof a?.hresult==='string'&&/^0x[0-9a-f]{8}$/i.test(a.hresult)?a.hresult:null}))};
+}

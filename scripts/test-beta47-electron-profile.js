@@ -1,0 +1,10 @@
+'use strict';
+const {app,utilityProcess}=require('electron'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+app.disableHardwareAcceleration();app.requestSingleInstanceLock=()=>true;
+const profile=process.env.ALM_UI_PROFILE||fs.mkdtempSync(path.join(os.tmpdir(),'alm47-electron-'));
+fs.mkdirSync(path.join(profile,'data'),{recursive:true});app.setPath('userData',profile);
+fs.writeFileSync(path.join(profile,'app-language.txt'),'fr');
+fs.writeFileSync(path.join(profile,'data/config.json'),JSON.stringify({metadataUpdateOnStart:false,metadataAutonomousUpdateOnStart:false}));
+fs.writeFileSync(path.join(profile,'data/animes.json'),JSON.stringify([{id:747,malId:59741,title:'Tsuihou sareta Tensei Juukishi wa Game Chishiki de Musou suru',titleEn:'The Exiled Heavy Knight Knows How to Game the System',canonicalTitle:'Tsuihou sareta Tensei Juukishi wa Game Chishiki de Musou suru',status:'Watching',episodesSeen:'15',episodesTotal:'26',notes:'Progression et notes à conserver',type:'TV',startDate:'2026-07-03',poster:'/assets/design/clip-complet-poster.jpg'}]));
+const fork=utilityProcess.fork.bind(utilityProcess);utilityProcess.fork=(script,args,options)=>fork(path.join(__dirname,'test-beta47-server-fixture.js'),args,options);
+require('../main');

@@ -1,0 +1,14 @@
+{
+  "source": "https://github.com/disposable-email-domains/disposable-email-domains",
+  "commit": "29463cf9d049e800f04147e643ad76c7203def96",
+  "sha256": "5052d5eebd1b8907738dbbf3f1f4cd961593c14f44435674bc6d8a34986009a7",
+  "retrievedAt": "2026-10-15T17:42:11.379158+00:00",
+  "license": "CC0-1.0",
+  "count": 9960,
+  "overrides": 227,
+  "excludedBroadOrPermanent": [
+    "biz.st",
+    "rf.gd",
+    "us.to"
+  ]
+}

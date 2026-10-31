@@ -1,0 +1,663 @@
+/* Beta 32: responsive Nocturne compositions shared across the application. */
+:root{--bg:#080e21;--panel:#101b37;--line:#384376;--muted:#b7c4e3;--accent:#bca6ff;--studio-gutter:20px;}
+html{scrollbar-gutter:auto;}
+*,*::before,*::after{box-sizing:border-box;}
+body{background:#080e21;color:#eff0ff;font-size:14px;}
+html body .app-shell{width:100%;max-width:none;grid-template-columns:258px minmax(0,1fr)!important;}
+html body .main-area{position:relative;isolation:isolate;width:auto;max-width:none!important;padding:0 20px 24px!important;}
+.main-area::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(8,14,32,.91),rgba(8,14,32,.95)),url('/assets/design/night-garden.webp') right bottom/cover;}
+html body .main-area>:is(#dnaPage,#recoPage,#newsV2Page,#seasonNewsPage,#lexiconPage,#auditPage,#aboutPage){width:100%!important;max-width:none!important;margin:0!important;padding:0!important;}
+html body :is(.news-v2-container,.reco-container,.season-news-container,.lexicon-page,.audit-page,.news-reader-layout,#seasonNewsContainer,#recoHeroBlock){max-width:none!important;width:100%;margin-inline:0!important;}
+html body .sidebar{padding:16px 14px 12px!important;background:linear-gradient(180deg,rgba(10,16,37,.99) 0 50%,rgba(12,17,44,.48)),url('/assets/design/night-path.webp') center bottom/100% auto no-repeat;}
+html body .sidebar::after{display:none;}
+html body .side-brand{gap:12px;padding:9px 4px 20px!important;}
+html body .side-brand img{width:48px;height:48px;}
+html body .side-brand>div{display:block!important;}
+html body .side-brand strong{font-size:18px;}
+html body .side-brand span{font-size:13px;}
+html body .side-brand small{font-size:10px;}
+html body .side-nav{gap:5px;margin-top:18px;}
+html body .side-nav .nav-item{min-height:48px!important;justify-content:flex-start!important;gap:12px;padding:11px 12px!important;}
+html body .side-nav .studio-nav-label{overflow-wrap:anywhere;display:block!important;font-size:16px!important;line-height:1.35;letter-spacing:0;color:#d7dff4;}
+html body .side-nav .nav-item .studio-icon{height:22px;width:22px;min-width:22px;}
+html body .side-nav .nav-item.active{background:linear-gradient(100deg,#6650af77,#38478033);border-color:#8b76d5;box-shadow:inset 3px 0 #c1a4ff,0 0 20px #8057dd18;}
+html body .studio-sidebar-footer>span{display:block!important;}
+.studio-sidebar-footer{min-height:145px;align-items:flex-end;text-shadow:0 2px 6px #000;}
+.topbar{margin-bottom:16px;min-height:64px;background:#091127ed;}
+.studio-breadcrumb{font-size:14px;}
+.header-actions>button,.studio-language select,.studio-toolbar-more summary{font-size:13px;}
+button,input,select,textarea{font-size:14px;min-height:40px;border-color:#3b4675;}
+button{border-radius:10px;}
+button.primary,.primary{background:linear-gradient(135deg,#996cf6,#6552cf);border-color:#b396ff;color:white;}
+input[type=checkbox]{width:17px;height:17px;min-height:17px;flex-shrink:0;}
+input[type=file]{width:100%;max-width:100%;padding:18px;border:1px dashed #8c76cd;background:#152244;}
+input[type=file]::file-selector-button{background:#6250a9;color:#fff;border:1px solid #ab95f2;border-radius:8px;padding:9px 12px;margin-right:12px;font:inherit;cursor:pointer;}
+.studio-page-heading,.studio-banner{border:1px solid #51468c!important;box-shadow:inset 0 0 40px #5c3f991c,0 8px 25px #03081735;border-radius:15px!important;}
+.studio-page-heading{background:linear-gradient(90deg,#131e3bf5 15%,#152141de 58%,#1825493b),url('/assets/design/night-garden.webp') right 46%/cover!important;padding:22px 26px!important;min-height:134px;}
+.studio-page-heading h2{font-size:28px;}
+.studio-page-heading p{font-size:14px;}
+.studio-kicker{font-size:11px;color:#c7b9ff;}
+.studio-banner{min-height:178px;padding:26px!important;background:#101b38;}
+.studio-banner p{font-size:14px;}
+.garden-banner::after{inset:0 0 0 30%;opacity:.95;background:linear-gradient(90deg,#111b36 0%,#15204270 45%,#15204210),url('/assets/design/night-garden.webp') right center/cover;}
+.studio-panel,.reco-block,.dna-panel,.audit-card{border-color:#3e477a!important;background:linear-gradient(135deg,#14203ce8,#101831f5)!important;box-shadow:inset 0 1px 0 #b1a0ef09;}
+.studio-panel p{font-size:14px;color:#bdc7e2;line-height:1.6;}
+.studio-panel h3{font-size:18px;}
+.studio-badges>span,.studio-tag{font-size:12px;border-color:#6859a4;background:#33245a66;}
+.hero .stat-card{padding:14px 18px;background:linear-gradient(130deg,#182346,#101b32);border-color:#3a4475;}
+.hero .stat-card small{font-size:13px;}
+.filters{padding:12px;}
+.filters select,.filters button{font-size:13px;}
+.filters #search{font-size:14px;}
+#animeGrid.view-cards{grid-template-columns:repeat(auto-fill,minmax(215px,1fr))!important;gap:14px!important;align-items:stretch;}
+#animeGrid.view-cards .card{height:100%;}
+#animeGrid .card{background:linear-gradient(145deg,#17243e,#111a31);border-color:#3b4771;}
+#animeGrid .title{font-size:15px;}
+#animeGrid .meta{font-size:12px;}
+#animeGrid .tag{font-size:10px;}
+#animeGrid .actions button,#animeGrid .actions a{font-size:12px;min-height:33px;}
+#animeGrid .poster{aspect-ratio:3/4;}
+#stats{font-size:13px;}
+.studio-empty{min-height:300px;background:transparent!important;border:1px solid #57488066;}
+/* About: the four cards, large Aster, illustrated support strip and four pets. */
+html body #aboutPage.studio-about .about-hero{grid-template-columns:112px minmax(0,1fr);min-height:180px;padding:24px!important;}
+html body #aboutPage .about-hero .studio-banner-copy{max-width:min(830px,80%);}
+#aboutPage .about-hero .studio-inline-actions{display:none;}
+html body #aboutPage .about-studio-grid{grid-template-columns:1fr 1.36fr 1.12fr 1fr;gap:12px;}
+html body #aboutPage .about-studio-grid>article{grid-column:auto!important;grid-row:auto;min-width:0;padding:18px;}
+html body #aboutPage .aster-feature{grid-template-columns:minmax(100px,.85fr) minmax(0,1fr);padding:10px!important;gap:14px;align-items:center;background:linear-gradient(130deg,#31225480,#121d3f)!important;}
+html body #aboutPage .aster-feature>img{min-height:0;height:244px;object-fit:cover;object-position:50% 40%;border:1px solid #8170c4;border-radius:11px;}
+html body #aboutPage .aster-feature>div{padding:6px 4px 6px 0;}
+html body #aboutPage .aster-feature h3{font-size:27px;}
+#aboutPage .aster-feature .studio-kicker{display:none;}
+html body #aboutPage .aster-feature p{font-size:13px;line-height:1.65;}
+.creator-heading{gap:10px;}
+.creator-heading img{width:47px;height:47px;}
+.creator-heading h3{font-size:19px;}
+.creator-card p{font-size:13px;}
+.studio-link-button{font-size:13px;}
+.feature-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.feature-links button{display:flex;align-items:center;gap:7px;font-size:12px;min-height:45px;padding:8px;background:linear-gradient(130deg,#352b59,#152644);border:1px solid #7265ad;}
+.feature-links button .studio-icon{min-width:18px;width:18px;height:18px;color:#bfa2ff;}
+html body #aboutPage .about-local-summary{display:flex;flex-direction:column;background:linear-gradient(145deg,#123c4533,#152139)!important;}
+html body #aboutPage .about-local-summary h3{font-size:16px;}
+html body #aboutPage .about-local-summary p{font-size:13px;}
+html body #aboutPage .about-local-summary button{font-size:12px;}
+html body #aboutPage .about-technical{padding:16px 18px;margin-bottom:14px;}
+html body #aboutPage .about-technical .studio-legal-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+html body #aboutPage .about-technical .studio-detail>summary{font-size:13px;}
+html body #aboutPage .studio-support{padding:20px!important;margin:16px 0!important;background:linear-gradient(90deg,#101a37ed 45%,#111d3899),url('/assets/design/night-garden.webp') right bottom/cover;}
+#aboutPage .studio-support::after{display:none;}
+.studio-section-heading h2{font-size:24px;}
+.studio-section-heading p{font-size:13px;}
+html body #aboutPage .studio-support-grid{grid-template-columns:1.25fr .85fr 1fr;align-items:start;gap:14px;margin:0;}
+html body #aboutPage .studio-support-grid>*{grid-column:auto;grid-row:auto;min-height:0;}
+html body #aboutPage .studio-support-grid .donation-card{padding:20px;display:flex;flex-direction:column;align-items:center;gap:16px;min-height:300px;}
+html body #aboutPage .studio-support-grid .donation-card img{width:122px;height:122px;border:6px solid white;border-radius:12px;}
+.studio-support-grid .support-actions{min-height:300px!important;}
+.support-actions a{font-size:14px;padding:12px 0;}
+#localDataSection{padding:18px 22px;}
+#localDataSection p{font-size:13px;}
+html body #aboutPage .about-thanks{grid-template-columns:minmax(250px,1fr) minmax(0,1.85fr);align-items:center;gap:18px;margin-top:14px;padding:18px;background:linear-gradient(130deg,#242149a6,#0e1932)!important;}
+html body #aboutPage .about-thanks h3{font-size:21px;}
+html body #aboutPage .about-thanks p{font-size:13px;}
+html body #aboutPage .about-companions{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+html body #aboutPage .about-companion-card{position:relative;}
+html body #aboutPage .about-companion-card img{aspect-ratio:4/5!important;height:auto;}
+html body #aboutPage .about-companion-card>div{position:absolute;bottom:0;left:0;right:0;padding:28px 8px 9px;background:linear-gradient(transparent,#070d1ae8);min-height:0;text-align:center;}
+html body #aboutPage .about-companion-card strong{font-size:14px;}
+html body #aboutPage .about-companion-card span{font-size:11px;}
+/* Glossary: a compact header, actual thumbnails and an illustrated discovery column. */
+html body #lexiconPage .lexicon-hero{min-height:183px;padding:24px!important;background:linear-gradient(90deg,#101c39fc 17%,#101c39cc 55%,#101c3910),url('/assets/design/moon-library.webp') right 44%/cover!important;}
+html body #lexiconPage .lexicon-hero::after{display:none;}
+html body #lexiconPage .lexicon-hero>div:nth-child(2){max-width:65%;}
+.lexicon-hero-icon{display:grid!important;width:88px;height:88px;border-color:#9475e0;background:linear-gradient(150deg,#57389788,#162547);font-size:40px;}
+.lexicon-hero-badge{display:none;}
+.nocturne-guide-shortcuts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.nocturne-guide-shortcuts button{display:flex;align-items:center;gap:8px;font-size:12px;min-height:33px;padding:6px 12px;border-radius:24px;}
+.lexicon-important-note{display:block;padding:10px 14px;font-size:12px;margin:12px 0;background:#132745a6;border:1px solid #3a5279;border-radius:10px;}
+.lexicon-important-note>span{display:none;}
+.lexicon-important-note p{font-size:12px;display:inline;margin:0 0 0 8px;}
+.lexicon-important-note strong{font-size:12px;}
+html body .studio-lexicon-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0;}
+.studio-lexicon-overview>span,.studio-lexicon-overview>button{display:flex;align-items:center;justify-content:flex-start;gap:10px;min-height:60px;padding:10px 14px;border:1px solid #443e7e;border-radius:12px;background:linear-gradient(110deg,#1d2243,#0e1a33);font-size:14px;}
+.studio-lexicon-overview .studio-icon{color:#ba99ff;}
+.studio-lexicon-overview small{display:block;font-size:11px;color:#acbbdc;}
+html body #lexiconCategoryGallery{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+html body #lexiconCategoryGallery .lexicon-category-tile{display:flex!important;gap:7px;width:auto;min-width:0;min-height:35px;padding:7px 11px;border-radius:22px;font-size:12px;border:1px solid #49447b;background:#12213e;}
+#lexiconCategoryGallery .lexicon-category-tile::after,#lexiconCategoryGallery .lexicon-category-illustration,#lexiconCategoryGallery small,#lexiconCategoryGallery em{display:none!important;}
+#lexiconCategoryGallery .lexicon-category-copy strong{font-size:12px;}
+#lexiconCategoryGallery .lexicon-category-total{font-size:11px;min-width:0;}
+html body .lexicon-controls{padding:12px;grid-template-columns:minmax(0,1fr) 210px auto;position:relative;top:auto;gap:12px;}
+.lexicon-controls label>span{font-size:12px;}
+.lexicon-controls input,.lexicon-controls select,.lexicon-controls button{font-size:14px;}
+.lexicon-toolbar{margin:8px 0;gap:12px;flex-wrap:wrap;}
+.lexicon-alphabet{gap:3px;}
+.lexicon-alphabet button{font-size:12px;min-width:26px;min-height:29px;}
+.studio-lexicon-pagination{margin:8px 0 12px;padding:6px 12px;min-height:38px;}
+html body .studio-lexicon-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:14px;align-items:start;}
+html body #lexiconGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px;align-items:start;}
+html body #lexiconGrid .lexicon-card{display:grid;grid-template-columns:90px minmax(0,1fr);gap:8px 12px;min-height:150px;padding:12px;background:linear-gradient(145deg,#132447,#111a36);border:1px solid #414779;border-radius:12px;}
+.lexicon-card .nocturne-term-art{grid-column:1;grid-row:1/4;width:90px;height:112px;border-radius:9px;border:1px solid #6e619f;align-self:start;overflow:hidden;}
+html body #lexiconGrid .lexicon-card header{grid-column:2;padding-right:26px;display:block;min-height:0;}
+.lexicon-card header h3{font-size:17px;margin:4px 0 0;}
+.lexicon-category-chip{font-size:10px;border:1px solid #7661a9;background:#30254e99;border-radius:14px;padding:3px 8px;}
+html body .lexicon-card .lexicon-definition{grid-column:2;font-size:13px;line-height:1.5;margin:0;}
+html body .lexicon-card .studio-term-detail{grid-column:1/-1;margin:0;padding-top:7px;border-top:1px solid #333f66;font-size:12px;}
+.lexicon-card>.studio-term-favourite{top:8px;right:7px;}
+.nocturne-art{background-image:url('/assets/design/genre-atlas.webp');background-size:300% 200%;background-position:0 0;}
+.nocturne-art[data-art="1"]{background-position:50% 0;}
+.nocturne-art[data-art="2"]{background-position:100% 0;}
+.nocturne-art[data-art="3"]{background-position:0 100%;}
+.nocturne-art[data-art="4"]{background-position:50% 100%;}
+.nocturne-art[data-art="5"]{background-position:100% 100%;}
+html body .studio-lexicon-aside{display:grid;grid-template-columns:1fr;gap:12px;position:sticky;top:82px;}
+html body .studio-lexicon-aside .studio-panel{padding:15px;border-radius:12px;}
+.studio-lexicon-aside h3{font-size:17px;}
+.studio-featured-term .nocturne-featured-copy{display:grid;grid-template-columns:95px minmax(0,1fr);gap:13px;}
+.studio-featured-term .nocturne-art{width:95px;height:130px;border-radius:9px;}
+.studio-featured-term strong{font-size:18px;margin:0 0 7px;}
+.studio-featured-term p{font-size:13px;line-height:1.5;margin:0;}
+.studio-lexicon-aside button{font-size:12px;}
+.nocturne-universe-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.nocturne-universe-grid button{position:relative;border:1px solid #76609d;border-radius:9px;padding:0;margin:0;min-height:76px;overflow:hidden;}
+.nocturne-universe-grid button span{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#071020);padding:20px 3px 5px;font-size:11px;color:#f1efff;}
+.nocturne-useful{padding-left:20px;color:#c1cde7;font-size:13px;line-height:1.6;}
+.nocturne-useful li{margin-bottom:8px;}
+.nocturne-useful li::marker{color:#8ae0c6;}
+/* DNA: useful compact map + dashboard, with equal canvas/CSS dimensions. */
+html body #dnaPage .dna-layout{display:grid!important;grid-template-columns:minmax(0,1fr) 300px!important;gap:14px!important;align-items:start;}
+html body #dnaPage .dna-dashboard{display:flex!important;flex-direction:column;gap:14px;min-width:0;}
+html body #dnaPage .dna-main-col{min-width:0;}
+html body #dnaPage .dna-panel{padding:16px!important;}
+html body #dnaPage .dna-canvas-wrap{height:370px!important;display:grid;grid-template-columns:minmax(100px,.7fr) minmax(310px,1.6fr) minmax(100px,.7fr);gap:0;margin:8px 0!important;background:radial-gradient(ellipse,#26214d44,#071127);border:1px solid #304268;overflow:hidden;}
+html body #dnaPage .dna-canvas-rail{position:relative!important;inset:auto!important;width:100%!important;height:100%;max-width:none;display:block!important;pointer-events:none;align-self:stretch;}
+html body #dnaPage .dna-bubble-viewport{position:relative;min-width:0;height:100%;overflow:hidden;}
+html body #dnaCanvas{display:block;position:static;max-width:none!important;}
+html body #dnaPage .dna-yinyang-cat-card{width:100%;height:100%;padding:0;display:flex;align-items:center;overflow:hidden;}
+html body #dnaPage .dna-yinyang-cat-card img{width:100%;height:100%;min-height:0;object-fit:contain!important;opacity:1;mask-image:linear-gradient(90deg,transparent,#000 9% 91%,transparent);}
+html body #dnaPage .dna-stats-row{gap:9px;}
+html body #dnaPage .dna-stat-card .n{font-size:23px!important;}
+html body #dnaPage .dna-stat-card .l{font-size:12px;}
+.dna-panel-note{font-size:11px;}
+.dna-signature-stage{min-height:245px;}
+.dna-signature-copy{width:210px!important;min-width:0!important;}
+.dna-signature-copy>strong{font-size:19px;}
+/* Seasons and recommendations use the available screen in two useful columns. */
+html body #seasonNewsContainer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+html body .snews-card{display:grid!important;grid-template-columns:90px minmax(0,1fr)!important;gap:12px!important;min-height:0!important;padding:14px!important;border:1px solid #42497b;border-radius:13px;background:linear-gradient(145deg,#182547,#101b34)!important;}
+html body .snews-thumb{width:90px!important;min-width:0!important;height:128px!important;overflow:hidden;border-radius:9px;position:relative;background:url('/assets/design/night-garden.webp') center/cover;}
+.snews-thumb img{width:100%;height:100%;object-fit:cover;}
+html body .snews-card .snews-body{min-width:0;}
+html body .snews-card .snews-title{font-size:17px;line-height:1.4;margin:4px 0;}
+.snews-from,.snews-synopsis{font-size:12px;line-height:1.5;margin:6px 0;}
+.snews-synopsis{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.snews-meta,.snews-details{font-size:11px;gap:6px;}
+html body .snews-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;}
+html body .snews-actions label{display:flex;flex-direction:row;align-items:center;gap:7px;font-size:12px;margin:0;}
+html body .snews-decision-actions{grid-column:1/-1;display:flex!important;flex-wrap:wrap;gap:7px;padding-top:10px;border-top:1px solid #394365;}
+html body .snews-decision{flex:1 1 100px;min-height:36px!important;padding:8px!important;font-size:12px!important;border-radius:9px!important;line-height:1.3;}
+.snews-decision.add{background:#294b48!important;color:#c5f5df!important;border-color:#568d80!important;}
+.snews-decision.neutral{background:#202b46!important;}
+.snews-decision.danger{color:#edaebf!important;background:#3a233730!important;border-color:#78455e!important;}
+.season-news-actions-top button{font-size:12px;min-height:38px;}
+.season-news-actions-top{max-width:100%;}
+html body #recoContainer{display:flex!important;flex-direction:column;gap:14px;}
+.reco-block{padding:20px;min-width:0;}
+.reco-block-title{font-size:20px;}
+.reco-block-sub{font-size:14px;}
+.reco-block:first-child{background:linear-gradient(135deg,#152449ee,#132042ed)!important;}
+.reco-smart-row{grid-template-columns:1fr!important;}
+.reco-search-wrap,.reco-search{min-width:0!important;width:100%!important;}
+.reco-smart-picker{padding:12px;background:#0c1730;}
+.reco-search,.reco-launch{font-size:13px;}
+html body #reco-similar-launch{background:#594d82;border-color:#8374b1;color:#f5f2ff;}
+html body #reco-similar-launch:hover{background:#65578e;filter:none;}
+html body #reco-similar-launch:focus-visible{outline:3px solid #c5b1ef;outline-offset:3px;}
+.reco-smart-hint{font-size:12px;}
+.reco-genre-pill{font-size:13px;min-height:40px;}
+.reco-pick-card span{font-size:12px;}
+.reco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr))!important;gap:10px;}
+.reco-hero-block{background:linear-gradient(110deg,#1b2450e8,#142446b0),url('/assets/design/moon-library.webp') right center/cover!important;}
+.reco-hero-action{background:#141f3ed9;}
+.reco-hero-action strong{font-size:15px;}
+.reco-hero-action span{font-size:13px;}
+.reco-hero-results-grid:empty{display:none;}
+.reco-card-title{font-size:14px;}
+.reco-card-meta,.reco-card-add,.reco-card-hide{font-size:12px;}
+/* News + review share the illustrated heading and use all available width. */
+.news-reader-layout{grid-template-columns:minmax(0,1fr) 310px;gap:14px;}
+.news-reader-side{min-width:0;}
+.news-grid-v3{grid-template-columns:repeat(auto-fill,minmax(225px,1fr))!important;}
+.news-v2-filter,.news-lang-btn,.news-calendar-row input,.news-calendar-row select,.news-history-row select{font-size:13px;}
+.news-hero-title,.news-hero-title button{font-size:24px!important;}
+.news-hero-summary,.news-preview-summary,.news-preview-fulltext{font-size:14px;}
+.news-card-v3-title{font-size:16px;}
+.news-card-v3-summary{font-size:13px;}
+.audit-hero{background-image:linear-gradient(90deg,#10223ff2 40%,#172f4977),url('/assets/design/moon-library.webp')!important;}
+.audit-card{padding:18px;}
+.audit-empty,.season-news-empty,.reco-empty,.news-empty{grid-column:1/-1;min-height:155px;border:1px solid #4b4d8066;border-radius:15px;background:linear-gradient(120deg,#12213c66,#16254022);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;}
+.audit-stats>div{background:linear-gradient(130deg,#1d2449,#101b35);border-color:#414772;}
+/* All dialogs: same nighttime identity, with accessible functional form controls. */
+html body dialog.nocturne-dialog{color:#edf0ff;background:linear-gradient(135deg,#152242f5,#0c1834fa),url('/assets/design/moon-library.webp') center/cover;border:1px solid #7c65b5;border-radius:20px;box-shadow:0 30px 100px #0009,inset 0 1px 0 #b5a3ff33;max-height:92vh;overflow:auto;}
+dialog::backdrop{background:#030719bb;backdrop-filter:blur(7px);}
+html body #settingsDialog{width:min(1150px,94vw);max-width:94vw;padding:0;}
+html body #settingsForm{padding:24px;}
+html body #importDialog{width:min(1280px,94vw)!important;max-width:94vw!important;padding:0;}
+html body #importDialog .dialog-content{padding:24px;}
+.nocturne-dialog-hero{position:relative;overflow:hidden;border:1px solid #7161aa;border-radius:14px;background:linear-gradient(90deg,#202249f2 15%,#12243cc0 56%,#111f3d22),url('/assets/design/moon-library.webp') right center/cover;padding:24px;margin-bottom:18px;min-height:145px;display:flex;align-items:center;}
+.nocturne-dialog-hero>div{max-width:70%;}
+.nocturne-dialog-hero h2{font-size:29px;margin:3px 0 8px;}
+.nocturne-dialog-hero p{font-size:14px;margin:0;color:#d0d8ef;}
+html body .settings-grid{display:grid;grid-template-columns:minmax(0,1fr) 255px!important;gap:18px;}
+html body .settings-help{display:block!important;background:#131e38;border:1px solid #454776;border-radius:14px;padding:12px;}
+.settings-help .settings-aster{width:100%;height:210px;object-fit:cover;object-position:center 35%;border-radius:9px;margin-bottom:14px;}
+.settings-help h3{font-size:17px;}
+.settings-help p{font-size:13px;color:#bec9e1;line-height:1.6;}
+.settings-disclosure{border-color:#4a4775;background:linear-gradient(120deg,#1e2547,#14243a);border-radius:13px;margin-bottom:10px;}
+.settings-disclosure summary{padding:17px 15px;min-height:74px;}
+.settings-disclosure summary strong{font-size:16px;}
+.settings-disclosure summary small{font-size:13px;}
+.settings-disclosure-body label,.settings-disclosure-body p{font-size:14px;}
+.import-tabs{background:#0e1a35;border:1px solid #465080;border-radius:12px;padding:6px;gap:8px;margin-bottom:18px;}
+.import-tabs .import-tab{font-size:15px;padding:10px 20px;}
+.import-tabs .import-tab.active{background:linear-gradient(120deg,#6b50b8,#455e9b);border-color:#b39ae8;}
+.import-panel{background:#101d37c4;padding:20px;border:1px solid #3c4f78;border-radius:14px;}
+.import-panel h3{font-size:22px;}
+.import-panel p,.import-panel label{font-size:14px;}
+.csv-import-controls,.csv-results-panel{background:#12203ac9;border-color:#405580;}
+.csv-results-panel.is-empty{background:linear-gradient(0deg,#11203df2,#11203d88),url('/assets/design/moon-library.webp') 75% center/cover;}
+#formDialog{width:min(760px,94vw);max-width:94vw;}
+html body #formDialog form{padding:24px;}
+html body #formDialog label{font-size:14px;}
+/* The same music player is small at bottom left and can fill the screen. */
+html body #aboutPage .nocturne-player{position:relative;margin:0;padding:12px;border:1px solid #655298;border-radius:14px;background:#101932;min-width:0;container-type:inline-size;}
+.nocturne-player .donation-karaoke-head{display:flex;gap:10px;margin:0 0 10px;}
+.nocturne-player .donation-karaoke-mic{display:none;}
+.nocturne-player .donation-karaoke-head p,.nocturne-player .donation-karaoke-head-actions{display:none;}
+.nocturne-player .donation-karaoke-kicker{font-size:11px;letter-spacing:.02em;text-transform:none;}
+.nocturne-player .donation-karaoke-head h3{font-size:18px;line-height:1.5;}
+.nocturne-player .donation-karaoke-head h3 small{display:block;font-size:12px;color:#afbfe1;font-weight:400;}
+html body .nocturne-player .donation-karaoke-stage{min-height:0!important;height:auto!important;aspect-ratio:16/9;display:block;margin:0;padding:0!important;border-radius:9px;background:#040915;}
+.nocturne-player .donation-karaoke-stage::before,.nocturne-player .donation-karaoke-stage::after{display:none;}
+html body .nocturne-player .karaoke-clip{object-fit:contain;object-position:center;width:100%;height:100%;}
+.nocturne-player .karaoke-clip-shade{background:linear-gradient(135deg,#0a143750,transparent 60%);}
+.nocturne-player .donation-karaoke-context{display:none!important;}
+.nocturne-player .donation-karaoke-section{display:none;}
+html body .nocturne-player .donation-karaoke-active{position:absolute;top:5%;left:3%;width:40%;max-width:40%;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;padding:9px 7px;background:#0b1b37c9;border:1px solid #a0bbd84a;border-radius:8px;color:#f2f5ff;}
+html body .nocturne-player .donation-karaoke-ja-wrap{display:block;position:relative;width:100%;padding-top:13px;}
+html body .nocturne-player .donation-karaoke-original{display:flex;flex-wrap:wrap;gap:.1em .3em;text-align:left;max-width:100%;font-size:clamp(8px,1.8cqw,24px)!important;line-height:1.65!important;margin:0!important;min-height:0;color:#fff;opacity:1;}
+html body .nocturne-player .donation-karaoke-ja{display:flex;flex-wrap:wrap;justify-content:flex-start;text-align:left;font-size:clamp(8px,1.3cqw,19px)!important;line-height:1.5!important;margin:0!important;min-height:0;color:#e7efff;}
+html body .nocturne-player .donation-karaoke-fr{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:.1em .3em;text-align:left;max-width:100%;font-size:clamp(8px,1.25cqw,18px)!important;line-height:1.5!important;min-height:0;margin:0!important;font-weight:600;}
+.nocturne-player .karaoke-fr-unit{background:linear-gradient(90deg,#ffefa7 0 var(--karaoke-progress),#e7edf6 var(--karaoke-progress) 100%);background-clip:text;-webkit-background-clip:text;}
+.nocturne-player .donation-karaoke-ball{width:9px;height:9px;top:0;border-width:1px;}
+.nocturne-player .karaoke-original-unit.original-active{color:#ffe78b;}
+.nocturne-player .karaoke-original-unit.original-past{color:#b6eaff;}
+.nocturne-player .donation-karaoke-note{display:none;}
+.nocturne-player .nocturne-lyrics-review{font-size:11px;padding:7px 0;margin-top:4px;color:#aebedc;}
+.nocturne-player .nocturne-lyrics-review summary{cursor:pointer;}
+.nocturne-player .karaoke-review-notice{font-size:12px;padding:10px;margin:5px 0;}
+.nocturne-player .donation-karaoke-controls{display:grid;grid-template-columns:auto minmax(0,1fr) 34px;gap:8px;background:#070d20;border:0;margin:0;padding:9px 3px 3px;}
+.nocturne-player #donationKaraokeRestart{display:none;}
+.nocturne-player .donation-karaoke-controls button{font-size:12px;padding:6px 9px;min-height:34px;}
+.nocturne-player .donation-karaoke-seek{min-width:0;gap:0;}
+.nocturne-player .donation-karaoke-seek span{font-size:11px;}
+.nocturne-player input[type=range]{padding:0;margin:0;min-height:17px;height:17px;width:100%;}
+.nocturne-player #donationKaraokeMode{font-size:20px;padding:0;border:0;align-self:end;background:transparent;}
+.karaoke-opening-title{position:absolute;top:8%;left:5%;max-width:40%;display:none;flex-direction:column;color:#f0f5ff;text-shadow:0 2px 6px #0a1139;}
+.karaoke-opening-title span{font-size:clamp(9px,1.5cqw,21px);color:#273b6d;font-weight:800;}
+.karaoke-opening-title strong{font-size:clamp(13px,2.7cqw,36px);color:#142850;}
+.karaoke-opening-title small{font-size:clamp(9px,1.5cqw,23px);color:#254177;}
+.karaoke-intro .karaoke-opening-title{display:flex;}
+.karaoke-intro .donation-karaoke-active{visibility:hidden;}
+.nocturne-cinema{overflow:hidden;}
+html body #aboutPage .nocturne-player.karaoke-focus-mode,.nocturne-player:fullscreen{position:fixed!important;inset:0!important;z-index:10000!important;width:100vw!important;height:100dvh!important;max-width:none!important;border:0;border-radius:0;padding:16px!important;background:#030714;display:flex!important;flex-direction:column;container-type:inline-size;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-head{flex:0 0 auto;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-head h3{font-size:18px;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-head h3 small{display:inline;margin-left:12px;}
+html body .nocturne-player.karaoke-focus-mode .donation-karaoke-stage{flex:none!important;width:min(100%,calc((100dvh - 148px)*16/9));aspect-ratio:16/9;align-self:center;height:auto!important;min-height:0!important;}
+.nocturne-player.karaoke-focus-mode .nocturne-lyrics-review{display:none;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-controls{margin-top:auto;}
+.nocturne-player.karaoke-focus-mode #donationKaraokeRestart{display:block;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-controls{grid-template-columns:auto auto minmax(0,1fr) 44px;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-controls button{font-size:14px;min-height:40px;}
+.nocturne-player.karaoke-focus-mode .donation-karaoke-ball{width:13px;height:13px;}
+.site-footer{font-size:11px;opacity:.7;margin-top:24px;}
+.site-footer-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+html body .site-footer-actions :is(button,a){display:inline-flex;align-items:center;justify-content:center;min-height:40px;max-width:100%;padding:8px 14px;border:1px solid #4a4973;border-radius:10px;background:#191d34;color:#e8e5f5;font:inherit;font-size:14px;line-height:1.4;text-decoration:none;overflow-wrap:anywhere;cursor:pointer;}
+html body .site-footer-actions :is(button,a):hover{background:#292744;border-color:#8270aa;text-decoration:none;}
+html body .site-footer-actions :is(button,a):focus-visible{outline:3px solid #c5b1ef;outline-offset:3px;}
+@media(min-width:1900px){html body #dnaPage .dna-layout{grid-template-columns:minmax(0,1fr) 420px!important;}html body #dnaPage .dna-canvas-wrap{height:410px!important;}html body #recoContainer{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:1500px){html body #aboutPage .about-studio-grid{grid-template-columns:1fr 1.35fr 1fr;}html body #aboutPage .about-studio-grid>.about-local-summary{grid-column:1/-1!important;display:grid;grid-template-columns:40px 1fr;gap:16px;}#aboutPage .about-local-summary>div:nth-child(2){display:flex;gap:12px;align-items:center;flex-wrap:wrap;min-width:0;}#aboutPage .about-local-summary h3{flex-basis:100%;margin:0;}#aboutPage .about-local-summary p{flex:1;margin:0;}#aboutPage .about-local-summary button{width:auto;margin:0;}html body #dnaPage .dna-layout{grid-template-columns:minmax(0,1fr)!important;}html body #dnaPage .dna-dashboard{display:grid!important;grid-template-columns:1fr 1.6fr!important;}html body #dnaPage .dna-canvas-wrap{grid-template-columns:minmax(110px,1fr) minmax(330px,1.5fr) minmax(110px,1fr);}html body .studio-lexicon-layout{grid-template-columns:minmax(0,1fr) 280px;}html body #lexiconGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(max-width:1250px){html body #lexiconGrid{grid-template-columns:1fr!important;}}
+@media(max-width:1180px){html body .app-shell{grid-template-columns:235px minmax(0,1fr)!important;}.side-nav .studio-nav-label{font-size:15px!important;}html body #seasonNewsContainer,html body #recoContainer{grid-template-columns:1fr;}html body #aboutPage .about-studio-grid{grid-template-columns:1fr 1.4fr;}html body #aboutPage .about-studio-grid>.feature-hub{grid-column:1/-1!important;}.feature-links{grid-template-columns:repeat(3,minmax(0,1fr));}html body #aboutPage .studio-support-grid{grid-template-columns:1.1fr 1fr;}html body #aboutPage .support-actions{grid-column:1/-1;min-height:0!important;}.news-reader-layout{grid-template-columns:1fr!important;}.news-reader-side{position:static;}.studio-lexicon-overview{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(max-width:950px){html body #aboutPage .about-thanks{grid-template-columns:1fr;}html body .studio-lexicon-layout{grid-template-columns:1fr;}html body #lexiconGrid{grid-template-columns:1fr!important;}html body .studio-lexicon-aside{position:static;grid-template-columns:repeat(2,minmax(0,1fr));}html body .settings-grid{grid-template-columns:1fr!important;}html body .settings-help{display:none!important;}.nocturne-dialog-hero>div{max-width:80%;}.nocturne-dialog-hero{min-height:120px;}html body .lexicon-controls{grid-template-columns:minmax(0,1fr) auto;}html body .lexicon-controls .lexicon-search-label{grid-column:1/-1;}.lexicon-hero-icon{display:none!important;}html body #lexiconPage .lexicon-hero>div:nth-child(2){max-width:84%;}.header-actions #exportBtn{display:none;}html body #dnaPage .dna-canvas-wrap{grid-template-columns:minmax(50px,.5fr) minmax(250px,2fr) minmax(50px,.5fr);height:330px!important;}}
+@media(max-width:760px){html body .app-shell{grid-template-columns:minmax(0,1fr)!important;}html body .sidebar{position:fixed!important;width:258px;z-index:102;transform:translateX(-100%);}html body .studio-nav-open .sidebar{transform:none;}.studio-menu-button{display:block;}.studio-nav-open .studio-nav-scrim{display:block;position:fixed;inset:0;z-index:101;background:#0008;}html body .main-area{padding:0 12px 18px!important;}.topbar{margin-inline:-12px;padding-inline:12px;flex-wrap:wrap;}.header-actions{width:100%;}.studio-banner{min-height:170px;padding:20px!important;}.studio-banner-copy{max-width:100%;}html body #aboutPage .about-hero .studio-banner-copy{max-width:100%;}html body #aboutPage .about-studio-grid{grid-template-columns:1fr;}html body #aboutPage .about-local-summary>div:nth-child(2){display:block;}html body #aboutPage .about-local-summary button{margin-top:9px;}html body #aboutPage .studio-support-grid{grid-template-columns:1fr;}html body #aboutPage .support-actions{grid-column:auto;}html body #aboutPage .about-technical .studio-legal-grid{grid-template-columns:1fr;}html body .studio-lexicon-aside{grid-template-columns:1fr;}html body #dnaPage .dna-dashboard{grid-template-columns:1fr!important;}.dna-signature-stage{min-height:340px;}.dna-signature-copy{width:auto!important;left:10px;right:10px;bottom:10px;top:auto;transform:none;}html body #settingsForm,html body #importDialog .dialog-content{padding:14px;}.nocturne-dialog-hero{padding:18px;}.nocturne-dialog-hero h2{font-size:25px;}html body #formDialog form{padding:15px;}html body .csv-import-workspace{grid-template-columns:1fr!important;}.nocturne-player.karaoke-focus-mode .donation-karaoke-controls{grid-template-columns:auto minmax(0,1fr) 36px!important;}.nocturne-player.karaoke-focus-mode #donationKaraokeRestart{display:none;}.nocturne-player.karaoke-focus-mode .donation-karaoke-head h3 small{display:block;margin:0;}html body .nocturne-player.karaoke-focus-mode .donation-karaoke-active{font-size:12px;}html body #aboutPage .about-companions{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:480px){html body #dnaPage .dna-canvas-wrap{grid-template-columns:1fr;}html body #dnaPage .dna-canvas-rail{display:none!important;}html body #animeGrid.view-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;}#animeGrid .card-body{padding:10px;}#animeGrid .actions button{font-size:11px;}html body #lexiconGrid .lexicon-card{grid-template-columns:70px minmax(0,1fr);}.lexicon-card .nocturne-term-art{width:70px;height:95px;}.feature-links{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+html[data-motion=reduced] *,html[data-motion=reduced] *::before,html[data-motion=reduced] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+html body [hidden],html body .hidden{display:none!important;}
+
+.nocturne-player #donationKaraokeMode svg{display:block;width:21px;height:21px;margin:auto;}
+html body #localDataSection{display:flex;align-items:center;flex-wrap:wrap;gap:15px;}#localDataSection>details{flex:1;min-width:220px;}#localDataSection summary{font-size:16px;font-weight:650;cursor:pointer;}#localDataSection>button{margin:0;}
+@media(max-width:950px) and (min-width:761px){html body #aboutPage .about-studio-grid{grid-template-columns:1fr;}html body #aboutPage .studio-support-grid{grid-template-columns:1fr;}html body #aboutPage .about-local-summary>div:nth-child(2){display:block;}html body #aboutPage .about-local-summary button{margin-top:10px;}html body #aboutPage .feature-links{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+html body #aboutPage .feature-hub{display:block;}#aboutPage .feature-links{margin-top:18px;}html body #aboutPage .about-technical>summary{cursor:pointer;font-size:14px;font-weight:600;}html body #aboutPage .about-technical[open] .studio-legal-grid{margin-top:12px;}
+
+html body #aboutPage .about-studio-grid>#localDataSection{display:flex;align-items:stretch;gap:10px;}
+#aboutPage #localDataSection>details{flex:none;min-width:0;margin:0;}
+#aboutPage #localDataSection summary{font-size:12px;font-weight:500;line-height:1.6;}
+html body #aboutPage #localDataSection>details[open]{grid-column:1/-1;}
+#localDataSection details p{font-size:12px;}
+html body #settingsDialog{overflow:hidden;}
+html body #settingsForm{max-height:92vh;display:flex;flex-direction:column;}
+#settingsForm>.nocturne-dialog-hero{flex-shrink:0;}
+html body #settingsForm>.settings-grid{overflow:auto;min-height:0;padding-right:3px;}
+html body #settingsForm>menu{flex-shrink:0;margin:14px 0 0;padding:12px 0 0;background:transparent;}
+.dna-signature-copy{width:min(38%,270px)!important;padding:13px 15px;max-height:calc(100% - 20px);overflow:auto;}
+.dna-signature-copy>span{font-size:11px;}
+.dna-signature-genres{margin-top:8px;gap:4px;}
+.dna-signature-genres span{padding:4px 7px;}
+@media(max-width:1500px){html body #aboutPage .about-studio-grid>#localDataSection{display:grid;grid-template-columns:40px minmax(0,1fr);}#aboutPage #localDataSection>details{grid-column:2;}}
+@media(max-width:760px){.dna-signature-copy{width:auto!important;max-height:62%;}html body #settingsForm{max-height:92vh;}html body #settingsForm>.nocturne-dialog-hero{min-height:100px;padding:14px;}}
+
+
+html body #lexiconCategoryGallery .lexicon-category-tile{min-height:35px!important;padding:6px 8px!important;border-radius:22px!important;gap:5px!important;background:#14213a!important;border-color:#474779!important;}
+html body #lexiconCategoryGallery .lexicon-category-tile.active{background:#443266!important;border-color:#ab91ee!important;}
+#lexiconCategoryGallery .lexicon-category-copy strong{font-size:11.5px;}
+html body #lexiconPage .lexicon-hero{min-height:160px;padding:20px!important;}
+html body #lexiconPage .lexicon-controls{padding:10px 12px!important;}
+html body #lexiconPage .lexicon-controls label{margin:0;gap:6px;}
+.nocturne-dialog-close{position:absolute;top:12px;right:12px;width:36px;height:36px;min-height:36px;padding:8px;display:grid;place-items:center;background:#0b153ccb;border:1px solid #9786c7;border-radius:10px;}
+.nocturne-dialog-close svg{width:18px;height:18px;}
+html body .csv-import-controls{padding:16px;}
+
+/* Beta 32: one quiet scene for sparse collections, without adding grid cells. */
+.main-area::after{content:"";position:absolute;inset:170px 0 0;z-index:-1;pointer-events:none;opacity:0;background:url('/assets/design/moon-library.webp') right top/cover no-repeat;mask-image:linear-gradient(transparent,#000 18%,#000 75%,transparent);}
+.nocturne-library-view .main-area::after{opacity:var(--collection-art-opacity,0);}
+.nocturne-season-view .main-area:has(.season-news-empty)::after{opacity:.10;}
+#animeGrid{min-height:calc(100vh - 390px);align-content:start;}
+#animeGrid.view-cards .card-body{flex:1;}
+#animeGrid .tags{min-height:20px;}
+.nocturne-reco-explorer{min-width:0;}
+.nocturne-reco-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.nocturne-reco-tabs button{padding:10px 18px;font-size:14px;}
+.nocturne-reco-tabs button[aria-selected=true]{background:linear-gradient(120deg,#615097,#344778);border-color:#aa94e4;}
+html body .nocturne-reco-explorer .reco-block{margin:0;background:linear-gradient(135deg,#152449ee,#132042ed)!important;}
+html body .reco-anime-selector{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:10px;}
+html body .reco-pick-card{width:100%;max-width:none;}
+html body #dnaPage .dna-canvas-wrap{background:radial-gradient(ellipse at 12% 40%,#6689b84d,transparent 53%),radial-gradient(ellipse at 86% 50%,#8b6ccc42,transparent 56%),radial-gradient(ellipse at 50% 85%,#364c6877,transparent 65%),#0e1830;isolation:isolate;}
+html body #dnaPage .dna-canvas-wrap::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background-image:radial-gradient(1px 1px at 15px 30px,#b7cdf888 65%,transparent),radial-gradient(1px 1px at 77px 85px,#c2b3e966 65%,transparent);background-size:137px 113px,181px 167px;}
+html body #dnaPage .dna-yinyang-cat-card{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+html body #dnaPage .dna-yinyang-cat-card img{object-fit:cover!important;mask-image:linear-gradient(90deg,transparent,#000 24% 76%,transparent),linear-gradient(0deg,transparent,#000 14% 86%,transparent);mask-composite:intersect;}
+html body #dnaPage .dna-bubble-viewport{background:transparent!important;}
+html body #dnaPage .dna-main-col{display:flex;flex-direction:column;gap:14px;}
+html body #dnaPage .dna-main-col>.dna-insights{margin:0;grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+html body #lexiconGrid .lexicon-card{grid-template-columns:42px minmax(0,1fr);min-height:145px;}
+html body #lexiconGrid .lexicon-card .nocturne-term-art{width:42px;height:42px;grid-row:1;background:linear-gradient(135deg,#3b365e,#142b45);border:1px solid #635c9477;display:grid;place-items:center;font-family:Georgia,serif;font-size:18px;color:#d6c6f2;}
+html body #lexiconGrid .lexicon-card .lexicon-definition,html body #lexiconGrid .lexicon-card .studio-term-detail{grid-column:1/-1;}
+.about-data-thanks{grid-column:1/-1;border-top:1px solid #5e538d77;padding-top:12px;}
+.about-data-thanks h4{margin:0;font-size:16px;}.about-data-thanks p{margin:8px 0;}
+.about-data-links{display:flex;gap:8px;flex-wrap:wrap;}
+.about-data-links a{border:1px solid #675b9177;background:#201e3e77;border-radius:18px;padding:6px 12px;font-size:12px;}
+.metadata-offline-note{border-left:3px solid #80b9bc;padding:8px 12px;background:#152e3d88;line-height:1.65;}
+@media(max-width:650px){html body #dnaPage .dna-main-col>.dna-insights{grid-template-columns:1fr!important;}.nocturne-reco-tabs button{flex:1 1 130px;}}
+
+.news-refresh-progress{font-size:13px;color:#bbcae5;margin:8px 0;padding:8px 12px;border-left:3px solid #91bbd8;background:#11223a88;}
+
+/* Compact lower DNA cards use the two rows beside the rating distribution. */
+html body #dnaPage .dna-bottom-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important;grid-template-areas:"scores finishing" "scores watching";gap:12px!important;}
+#dnaScoreDistCard{grid-area:scores;}#dnaAlmostDoneCard{grid-area:finishing;}#dnaWatchingCard{grid-area:watching;}
+#animeGrid:not(:has(.card)){min-height:0;}
+@media(max-width:760px){html body #dnaPage .dna-bottom-grid{grid-template-columns:1fr!important;grid-template-areas:"scores" "finishing" "watching";}}
+
+html body #dnaPage .dna-canvas-rail{mask-image:linear-gradient(90deg,transparent,#000 18% 76%,transparent);}
+html body #dnaPage .dna-yinyang-cat-card::after{display:none;}
+
+/* Beta 33: shared scene and illustrated discovery. */
+html body .main-area::after,html body.nocturne-library-view .main-area::after,html body.nocturne-season-view .main-area::after{inset:0!important;opacity:var(--collection-art-opacity,.25)!important;background-image:url('/assets/design/night-garden.webp')!important;background-repeat:no-repeat!important;background-position:right center!important;background-size:auto 100vh!important;background-attachment:fixed!important;mask-image:linear-gradient(90deg,transparent,#000 25%,#000)!important;pointer-events:none;z-index:-1;}
+html body .main-area::before{background:linear-gradient(130deg,#0e1025f0,#10122dde)!important;}
+html body .sidebar .studio-nav-label{font-size:17px!important;line-height:1.3!important;}html body .sidebar .nav-item{min-height:47px;}
+.discovery-page{min-height:75vh;padding-bottom:32px;}.discovery-heading{padding:26px 0 18px;}.discovery-heading h2{font-size:32px;margin:8px 0;}.discovery-heading p{color:#ccd0e9;}.discovery-search{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap;}.discovery-search input{flex:1;min-width:190px;font-size:17px;padding:15px;}.discovery-layout{display:grid;grid-template-columns:minmax(250px,.78fr) minmax(0,2fr);gap:22px;align-items:start;}.discovery-results{display:grid;gap:10px;max-height:72vh;overflow:auto;padding:3px;}.discovery-result{display:flex;text-align:left;gap:14px;align-items:center;min-height:110px;background:#181d38e8;border:1px solid #8c92c53d;border-radius:14px;padding:10px;}.discovery-result img{width:62px;height:90px;object-fit:cover;border-radius:8px;}.discovery-result>span{display:grid;gap:7px;}.discovery-result small{color:#bfc5dd;}.discovery-result b{color:#f9d593;font-size:13px;}.discovery-result.active{border-color:#c9acff;background:#323357e8;}.discovery-detail{padding:26px;border-radius:20px;background:linear-gradient(130deg,#232947ef,#12182de8);border:1px solid #a0a6d34d;box-shadow:0 16px 45px #06091a40;min-height:400px;}.discovery-detail-heading{display:grid;grid-template-columns:180px minmax(0,1fr);gap:25px;}.discovery-poster{width:180px;max-height:280px;object-fit:cover;border-radius:12px;}.discovery-detail h2{font-size:27px;line-height:1.3;margin:10px 0 18px;}.discovery-facts{display:flex;gap:23px;flex-wrap:wrap;}.discovery-facts span{display:grid;gap:8px;color:#c4cbe4;font-size:13px;}.discovery-facts b{font-size:18px;color:#f4deae;}.discovery-synopsis{line-height:1.8;padding-top:20px;}.discovery-synopsis p{white-space:pre-line;}.discovery-synopsis small{color:#b8c2e2;}.discovery-synopsis details{margin-top:14px;}.manual-fields{border:1px solid #a18ccc66;border-radius:14px;padding:16px;background:#24233c;}.manual-fields[hidden]{display:none;}#manualPosterPreview{width:100px;max-height:150px;object-fit:contain;}.manual-switch{padding:12px;border:1px solid #9d8bc64d;border-radius:12px;}
+html body #aboutPage .creator-heading img{width:80px!important;height:80px!important;min-width:80px;}html body #aboutPage .about-thanks-copy .about-data-thanks{margin-top:25px;padding:20px 0 0;border-top:1px solid #aba5d63b;background:none;}
+html body #dnaPage .dna-dashboard{align-self:stretch;}html body #dnaPage .dna-dashboard::after{content:"";display:block;flex:1;min-height:155px;border-radius:18px;background:linear-gradient(180deg,#1e244237,#151b3860),url('/assets/design/moon-library.webp') center 57%/cover;border:1px solid #a1a2d028;opacity:.6;}
+html body .dna-score-dist{overflow-x:auto;}html body .dna-score-histogram{min-height:262px;min-width:400px;padding:18px 12px 12px;gap:7px;background:repeating-linear-gradient(0deg,transparent 0 42px,#c1cbf00a 42px 43px),#161c3299;}
+html body button.dna-score-column{height:226px;grid-template-rows:24px 1fr 22px 18px;}html body .dna-score-column-track{height:158px;width:clamp(26px,65%,62px);border-radius:8px 8px 3px 3px;}html body .dna-score-column-fill{border-radius:7px 7px 2px 2px;}.dna-score-column-count{font-size:12px!important;}.dna-score-column-label,.dna-score-column-percent{font-size:13px!important;}
+html body #lexiconPage .lexicon-hero{background-image:linear-gradient(90deg,#1d254dea,#1e254ca0 42%,#131b3020 75%),url('/assets/design/moon-library.webp')!important;}
+html body #lexiconGrid .lexicon-card{grid-template-columns:95px minmax(0,1fr)!important;grid-template-rows:auto minmax(55px,auto) auto;align-content:start;column-gap:17px!important;padding:17px!important;background:linear-gradient(135deg,#293457ee,#232841ec)!important;border:1px solid #b5acf25e!important;box-shadow:0 8px 26px #080c1f35;}
+html body #lexiconGrid .lexicon-card .nocturne-term-art{width:95px!important;height:110px!important;grid-column:1;grid-row:1/3!important;align-self:start;border-radius:11px!important;opacity:1;filter:none!important;border:1px solid #ddcaff55;}
+html body #lexiconGrid .lexicon-card>header{grid-column:2!important;grid-row:1;}html body #lexiconGrid .lexicon-definition{grid-column:2!important;grid-row:2;}html body #lexiconGrid .studio-term-detail{grid-column:1/-1!important;grid-row:3;}html body #lexiconGrid .lexicon-card h3{font-size:22px;}.lexicon-definition{color:#e4e6f6!important;}
+html body .studio-lexicon-aside .studio-panel{background:linear-gradient(135deg,#293256f0,#24263deb)!important;border-color:#c2a6dc50;}html body .nocturne-featured-copy{display:block!important;}.nocturne-featured-art{float:right;width:118px;height:134px;margin:0 0 12px 15px;border-radius:12px;}.nocturne-featured-copy:after{content:"";display:block;clear:both;}html body .nocturne-universe-grid .nocturne-art{min-height:105px!important;box-shadow:inset 0 -50px 32px -20px #0b1027;filter:none;}html body .nocturne-universe-grid .nocturne-art::before{background:none!important;}
+html body .nocturne-player .donation-karaoke-active,html body .nocturne-player.karaoke-focus-mode .donation-karaoke-active{background:transparent!important;backdrop-filter:none!important;border:0!important;box-shadow:none!important;color:white!important;text-shadow:0 2px 3px #07152b,1px 0 2px #07152b,-1px 0 2px #07152b!important;}
+html body:has(.karaoke-focus-mode) #scrollJumpTop,html body:has(.karaoke-focus-mode) #scrollJumpBottom{display:none!important;}html body .karaoke-focus-mode #donationKaraokeMode{position:fixed!important;top:18px!important;right:20px!important;bottom:auto!important;z-index:100002;}
+html body .news-image-resolving,html body .news-image-error{background:linear-gradient(0deg,#101a35ca,#19284255),url('/assets/design/night-path.webp') center/cover!important;position:relative;}html body .news-image-resolving span{font-size:13px!important;position:absolute;bottom:12px;left:12px;right:12px;text-shadow:0 1px 3px #000;color:#eceefa;}
+@media(max-width:1500px){html body #dnaPage .dna-dashboard::after{grid-column:1/-1;min-height:145px;}}
+@media(max-width:900px){.discovery-layout{grid-template-columns:1fr;}.discovery-results{grid-template-columns:repeat(2,minmax(0,1fr));max-height:320px;}.discovery-detail-heading{grid-template-columns:130px minmax(0,1fr);}.discovery-poster{width:130px;}.discovery-detail{padding:18px;}}
+@media(max-width:540px){.discovery-results{grid-template-columns:1fr;}.discovery-detail-heading{grid-template-columns:90px minmax(0,1fr);gap:12px;}.discovery-poster{width:90px;}.discovery-detail h2{font-size:21px;}.discovery-facts{gap:12px;}html body #lexiconGrid .lexicon-card{grid-template-columns:72px minmax(0,1fr)!important;}html body #lexiconGrid .nocturne-term-art{width:72px!important;height:98px!important;}}
+
+/* Keep the translation gradient readable over the sky without a lyric panel. */
+html body .nocturne-player .karaoke-fr-unit{text-shadow:none!important;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 1px #07152b) drop-shadow(0 0 1px #07152b);}
+html body #formDialog form>menu{position:sticky;bottom:0;z-index:3;background:#171b2e;margin-bottom:0;padding:12px 0;border-top:1px solid #9494be40;}
+html body #formDialog form>menu button{min-height:42px;}
+
+/* Beta 34: use the full score panel, preserve pictures and native option contrast. */
+html body #dnaScoreDistCard{display:flex;flex-direction:column;min-height:0;}
+html body #dnaScoreDist{flex:1;display:flex;min-height:350px;}
+html body #dnaScoreDist .dna-score-histogram{flex:1;width:100%;min-height:350px;align-items:stretch;grid-template-rows:minmax(310px,1fr);gap:clamp(7px,1vw,18px);padding:18px 14px 12px;}
+html body #dnaScoreDist button.dna-score-column{height:100%;min-height:310px;grid-template-rows:28px minmax(238px,1fr) 28px 24px;align-items:stretch;gap:3px;}
+html body #dnaScoreDist .dna-score-column-track{width:85%;min-width:26px;max-width:none;height:100%;min-height:238px;align-self:stretch;}
+html body #dnaScoreDist .dna-score-column-count{justify-self:center;align-self:center;font-size:13px!important;}
+html body #dnaScoreDist .dna-score-column-label,html body #dnaScoreDist .dna-score-column-percent{align-self:center;font-size:14px!important;}
+html body select{color-scheme:dark;}
+html body select option,html body select optgroup{background-color:#171b32!important;color:#eeeaff!important;}
+html body #lexiconPage .lexicon-hero{min-height:clamp(220px,16vw,280px);background:linear-gradient(90deg,#17213de8,#1d254c80 55%,transparent 78%),url('/assets/design/moon-library.webp') right center/auto 100% no-repeat,linear-gradient(120deg,#1d2144,#17213d)!important;}
+html body #lexiconPage .lexicon-hero>div:nth-child(2){max-width:62%;}
+html body .nocturne-universe-grid .nocturne-art{position:relative;overflow:hidden;isolation:isolate;min-height:126px!important;background:#131a31!important;}
+html body .nocturne-universe-grid .universe-picture{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+html body .nocturne-universe-grid .nocturne-art>span{position:relative;z-index:1;align-self:end;width:100%;padding:26px 9px 10px;background:linear-gradient(transparent,#090f25e8);font-size:13px;font-weight:600;}
+html body .nocturne-universe-grid .nocturne-art::before{display:none!important;}
+.discovery-detail-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.discovery-mal-link{display:inline-flex;align-items:center;min-height:42px;border:1px solid #8c9fcc77;border-radius:11px;padding:9px 13px;color:#d5e6ff;background:#18273e;}
+.discovery-metadata{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 22px;padding:22px 0 18px;margin:20px 0 0;border-top:1px solid #a3adce33;}
+.discovery-metadata dt{color:#b6c4e3;font-size:13px;margin-bottom:6px;}.discovery-metadata dd{margin:0;color:#f0edf9;font-size:15px;overflow-wrap:anywhere;}
+.discovery-titles{padding:12px 0;border-top:1px solid #a3adce33;color:#d1d9ed;}.discovery-titles li{padding-block:3px;}
+html body .studio-support-grid{grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr))!important;grid-template-areas:"clip paypal kofi" "clip banner banner" "links links links";gap:16px!important;align-items:start;}
+html body .studio-support-grid>.nocturne-player{grid-area:clip;}
+html body .studio-support-grid>.paypal-card{grid-area:paypal;}
+html body .studio-support-grid>.kofi-card{grid-area:kofi;}
+html body .studio-support-grid>.support-actions{grid-area:links;}
+html body .studio-support-grid>.donation-card{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:14px;text-align:center;height:100%;padding:22px;min-height:270px;}
+html body .studio-support-grid>.donation-card img{width:130px;height:130px;object-fit:contain;background:white;border-radius:10px;padding:6px;}
+.kofi-button{display:inline-flex;justify-content:center;align-items:center;min-height:42px;padding:10px 18px;border-radius:12px;background:#72a4f2;color:#0b1833!important;font-weight:750;box-shadow:0 4px 16px #07152b55;}
+.kofi-button:hover{background:#9ac0ff;}.kofi-button:focus-visible{outline:3px solid #f0dca7;outline-offset:4px;}
+html body .studio-support-grid>.alm-retro-banner{grid-area:banner;display:block;align-self:center;width:100%;padding:0;overflow:hidden;border:1px solid #c2a6ef88;border-radius:8px;background:#10132e;box-shadow:0 6px 24px #05091855;line-height:0;}
+.alm-retro-banner img{width:100%;height:auto;aspect-ratio:728/90;object-fit:contain;display:block;}
+html body .studio-support-grid>.support-actions{padding:18px 22px;}
+html body .studio-support-grid>.support-actions h3{margin:0 0 5px;}
+html body .studio-support-grid>.support-actions a{padding-block:10px;}
+@media(max-width:1150px){html body .studio-support-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-areas:"clip clip" "paypal kofi" "banner banner" "links links";}html body #lexiconPage .lexicon-hero>div:nth-child(2){max-width:70%;}}
+@media(max-width:650px){html body .studio-support-grid{grid-template-columns:1fr!important;grid-template-areas:"clip" "paypal" "kofi" "banner" "links";}.discovery-metadata{grid-template-columns:repeat(2,minmax(0,1fr));}html body #lexiconPage .lexicon-hero>div:nth-child(2){max-width:100%;}html body #lexiconPage .lexicon-hero{background-image:linear-gradient(90deg,#17213df2,#1d254caf),url('/assets/design/moon-library.webp'),linear-gradient(120deg,#1d2144,#17213d)!important;}html body #dnaScoreDist .dna-score-histogram{grid-template-columns:repeat(10,42px);min-width:520px;}}
+/* Beta34: compact settings with a stable navigation rail and independent scrolling. */
+html body #settingsDialog{width:min(1120px,calc(100vw - 24px));padding:0;max-height:94vh;overflow:hidden;}
+html body #settingsForm{height:min(820px,94vh);max-height:94vh;padding:0;gap:0;}
+html body #settingsForm>.nocturne-dialog-hero{border-radius:0;min-height:126px;margin:0;padding:22px 28px;}
+html body #settingsForm>.settings-grid{display:grid!important;grid-template-columns:205px minmax(0,1fr)!important;gap:0;flex:1;overflow:hidden!important;padding:0;min-height:0;margin:0;}
+html body #settingsDialog .settings-nav-rail{min-height:0;overflow:auto;display:flex;flex-direction:column;background:#101626c9;border-right:1px solid #aba1ef30;padding:18px 10px;}
+#settingsSections{display:grid;gap:6px;}
+html body #settingsSections button{display:flex;align-items:center;gap:10px;text-align:left;min-height:48px;padding:11px 13px;font-size:14px;line-height:1.35;background:transparent;border:1px solid transparent;color:#b9c4de;}
+html body #settingsSections button[aria-selected=true]{color:#fff;background:linear-gradient(110deg,#6952ae65,#28335580);border-color:#a99ee17a;box-shadow:inset 3px 0 #b6a4ff;}
+#settingsSections svg{width:19px;height:19px;flex:none;}
+html body #settingsDialog .settings-help{border:0;background:none;padding:18px 10px 0;margin-top:auto;text-align:center;display:grid;justify-items:center;gap:4px;color:#bcc7e4;font-size:12px;}
+html body #settingsDialog .settings-help img{width:125px;height:138px;object-fit:contain;mask-image:linear-gradient(#000 80%,transparent);}
+html body #settingsDialog .settings-main{display:block!important;overflow:auto;overscroll-behavior:contain;min-width:0;min-height:0;padding:24px;}
+html body #settingsDialog .settings-tab-panel[hidden]{display:none!important;}
+.settings-tab-panel>h2{font-size:23px;margin:0 0 17px;color:#f4efff;}
+.settings-tab-panel>.settings-section{margin-bottom:14px;}
+html body #settingsDialog .settings-primary-section{border:0;background:transparent;padding:0;box-shadow:none;}
+html body #settingsDialog .settings-primary-section>summary{display:none;}
+html body #settingsDialog .settings-primary-section>.settings-disclosure-body{padding:0;border:0;}
+html body #settingsForm>menu{margin:0;padding:12px 20px;border-top:1px solid #aaa1d63d;background:#101526;display:flex;align-items:center;gap:16px;}
+#settingsForm>menu>small{margin-right:auto;font-size:12px;color:#bdc9df;}
+.services-diagnostic>p{font-size:14px;line-height:1.65;}
+.services-toolbar{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0;}
+#apiProgress{min-height:22px;font-size:13px;color:#c6b6ff;}
+.service-group>h3{font-size:14px;letter-spacing:.03em;color:#bac9e8;margin:24px 0 8px;}
+.service-row{display:grid;grid-template-columns:minmax(130px,1fr) minmax(145px,1fr) auto;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #7c89b029;}
+.service-row strong{font-size:14px;}
+.service-row small{color:#afbbd5;font-size:11px;line-height:1.6;}
+.service-time,.service-result>small{display:block;}
+.service-badge{font-size:12px;color:#d2dbee;display:inline-block;line-height:1.5;}
+.service-badge::before{content:'●';margin-right:6px;}
+.service-badge[data-state=available]{color:#92e8b5;}
+.service-badge[data-state=limited],.service-badge[data-state=unconfigured],.service-badge[data-state=redirect]{color:#f4d392;}
+.service-badge[data-state=invalid],.service-badge[data-state=timeout],.service-badge[data-state=network],.service-badge[data-state=unavailable],.service-badge[data-state=denied]{color:#ffabab;}
+.service-badge[data-state=running]{color:#c5b7ff;}
+.service-row button{font-size:12px;min-height:36px;padding:6px 12px;}
+@media(max-width:760px){html body #settingsForm>.settings-grid{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr);}.settings-nav-rail{border-right:0!important;border-bottom:1px solid #aba1ef30;padding:6px!important;}#settingsSections{display:flex;overflow-x:auto;gap:4px;}html body #settingsSections button{white-space:nowrap;flex:none;font-size:12px;min-height:40px;padding:8px;}html body #settingsDialog .settings-help{display:none;}html body #settingsDialog .settings-main{padding:16px;}.service-row{grid-template-columns:minmax(100px,1fr) minmax(120px,1fr);gap:7px;}.service-row button{grid-column:2;justify-self:start;}#settingsForm>menu>small{max-width:70%;}.settings-tab-panel>h2{font-size:20px;}}
+html body #rankingPage.hidden{display:none!important;}
+.ranking-banner{background:linear-gradient(90deg,#192143f2,#222447bf 48%,#141c3730),url('/assets/design/night-path.webp') right 48%/cover;min-height:210px;}
+.ranking-banner .studio-banner-copy{max-width:68%;}
+.ranking-status{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:18px 0;color:#bac9df;font-size:13px;}
+.ranking-status p{max-width:85%;line-height:1.6;}
+.ranking-status>span{white-space:nowrap;}
+.ranking-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start;}
+.ranking-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;}
+html body .ranking-card{display:flex;align-items:center;gap:10px;text-align:left;padding:12px;background:linear-gradient(120deg,#222c47d9,#161c31eb);border:1px solid #8192bc42;min-width:0;border-radius:14px;}
+html body .ranking-card:hover,html body .ranking-card.active{border-color:#b6a1ff;background:linear-gradient(120deg,#3d365e,#202d45);}
+.ranking-place{font-size:21px;color:#c9b7ff;font-weight:800;font-variant-numeric:tabular-nums;min-width:30px;}
+.ranking-card[data-podium=true] .ranking-place{color:#f0d596;}
+.ranking-card img{width:58px;height:88px;object-fit:cover;border-radius:7px;flex:none;}
+.ranking-card-copy{display:grid;gap:7px;min-width:0;}
+.ranking-card-copy strong{color:#f1f1ff;font-size:14px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.ranking-card-copy small{font-size:11px;color:#b6c2da;}
+.ranking-card-copy b{color:#f1d695;font-size:13px;}
+.ranking-card-copy .ranking-member{color:#a3e6c5;line-height:1.4;}
+.ranking-pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0;}
+.ranking-pagination span{color:#c1cbe4;font-size:13px;}
+html body .ranking-detail{position:sticky;top:18px;min-width:0;padding:22px;border:1px solid #968dc35c;border-radius:18px;background:linear-gradient(145deg,#252745f5,#121c30f5);}
+.ranking-detail .discovery-poster{width:120px;max-height:180px;object-fit:cover;}
+.ranking-detail .discovery-metadata{grid-template-columns:repeat(2,minmax(0,1fr));}
+.ranking-detail .discovery-detail-heading{gap:16px;}
+@media(max-width:1350px){.ranking-results{grid-template-columns:1fr;}.ranking-layout{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);}}
+@media(max-width:1050px){.ranking-layout{grid-template-columns:1fr;}.ranking-results{grid-template-columns:repeat(2,minmax(0,1fr));}html body .ranking-detail{position:static;}.ranking-banner .studio-banner-copy{max-width:90%;}}
+@media(max-width:600px){.ranking-results{grid-template-columns:1fr;}.ranking-banner .studio-banner-copy{max-width:100%;}.ranking-status{align-items:start;}.ranking-detail .discovery-poster{width:80px;max-height:120px;}html body .ranking-detail{padding:16px;}}
+
+/* Override the older generic placement reset inside About. */
+html body #aboutPage .studio-support-grid>.nocturne-player{grid-area:clip!important;}
+html body #aboutPage .studio-support-grid>.paypal-card{grid-area:paypal!important;}
+html body #aboutPage .studio-support-grid>.kofi-card{grid-area:kofi!important;}
+html body #aboutPage .studio-support-grid>.alm-retro-banner{grid-area:banner!important;}
+html body #aboutPage .studio-support-grid>.support-actions{grid-area:links!important;min-height:0!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 24px;}
+html body #aboutPage .studio-support-grid>.support-actions h3{grid-column:1/-1;}
+html body #aboutPage .studio-support-grid>.donation-card{height:100%;min-height:290px;justify-content:space-between;}
+.ranking-detail .discovery-detail-heading{grid-template-columns:120px minmax(0,1fr);}
+.discovery-poster{aspect-ratio:2/3;}
+.discovery-detail-heading>div:first-child{grid-column:1/-1;}
+html body #lexiconPage .lexicon-hero{--hero-art-width:clamp(654px,47.6vw,833px);background:linear-gradient(90deg,#1d2449,transparent 45%) right center/var(--hero-art-width) 100% no-repeat,url('/assets/design/moon-library.webp') right center/auto 100% no-repeat,#1d2449!important;}
+html body #settingsDialog .settings-help{grid-template-columns:1fr;}
+@media(max-width:650px){html body #aboutPage .studio-support-grid>.support-actions{grid-template-columns:1fr;}.ranking-detail .discovery-detail-heading{grid-template-columns:80px minmax(0,1fr);}html body #lexiconPage .lexicon-hero{background-image:linear-gradient(90deg,#1d2449f5,#1d2449a8),url('/assets/design/moon-library.webp')!important;}}
+
+/* Beta 35 — a common visual language for controls and reading. */
+.alm-select{position:relative;display:inline-grid;vertical-align:middle;min-width:0;max-width:100%;}
+.alm-select:has(select[hidden]){display:none!important;}
+html body select.alm-native-select{position:absolute!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;margin:0!important;padding:0!important;clip-path:inset(50%);overflow:hidden;opacity:0;pointer-events:none;}
+html body .alm-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:42px;padding:10px 14px;border:1px solid #757ba55c;border-radius:11px;background:#171b32;color:#eeeaff;font:inherit;font-size:13px;text-align:left;white-space:nowrap;}
+.alm-select-trigger::after{content:'⌄';color:#b7a5ff;font-size:16px;}
+html body .alm-select-trigger:focus-visible{outline:2px solid #ba9fff;outline-offset:3px;}
+html body .alm-select-trigger[aria-expanded=true]{border-color:#bba2ff;background:#272440;}
+.alm-select-menu{position:fixed;z-index:2147483000;overflow:auto;overscroll-behavior:contain;padding:6px;border:1px solid #9181b6;border-radius:12px;background:#181d34;color:#eeeaff;box-shadow:0 14px 45px #030611c4;scrollbar-color:#6a5b8f #171b32;}
+.alm-select-menu [role=option]{padding:10px 12px;min-height:38px;border-radius:7px;font-size:13px;cursor:pointer;line-height:1.45;}
+.alm-select-menu [role=option][aria-selected=true]{color:#d7c4ff;background:#332b50;}
+.alm-select-menu [role=option]:hover,.alm-select-menu [role=option].highlighted{background:#5b477f;color:#fff;}
+.alm-select-menu [aria-disabled=true]{opacity:.4;cursor:default;}
+.filters>.alm-select{flex:1;min-width:130px;}#settingsDialog label>.alm-select{width:100%;}.topbar .alm-select{min-width:145px;}
+.discovery-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:16px 0;}.discovery-sort{display:flex;align-items:center;gap:10px;font-size:13px;color:#ccd1e8;}.discovery-sort .alm-select{min-width:175px;}
+.catalog-add{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;}.collection-confirmation{color:#a6e3c8;font-size:13px;}
+html body #aboutPage .studio-support-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important;grid-template-areas:'clip methods' 'clip links' 'banner banner';align-items:start;gap:18px;}
+html body #aboutPage .studio-support-grid>.donation-methods{grid-area:methods;display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:20px;}
+html body #aboutPage .donation-methods>.donation-card{min-height:0;border:0;padding:0;background:none;box-shadow:none;display:flex;align-items:center;gap:16px;justify-content:flex-start;text-align:center;}
+.donation-methods .donation-card+ .donation-card{border-left:1px solid #ab96e638!important;padding-left:18px!important;}
+.donation-methods .donation-card img{width:104px!important;height:104px!important;object-fit:contain;background:white;border-radius:12px;padding:6px;}.donation-methods p{font-size:12px!important;}.donation-methods h3{font-size:16px!important;}
+html body #aboutPage .studio-support-grid>.support-actions{grid-area:links!important;display:block!important;padding:20px;}.support-actions a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #a095c52b;}.support-actions a:last-child{border-bottom:0;}
+html body #aboutPage .alm-retro-banner{display:block;width:min(100%,900px);justify-self:center;margin-top:6px;}.alm-retro-banner img{display:block;width:100%;height:auto;aspect-ratio:900/280;}
+/* The artwork occupies the entire banner; a local scrim protects the copy. */
+html body #lexiconPage .lexicon-hero{min-height:260px!important;padding:34px!important;background:linear-gradient(90deg,#19213be8 0%,#1d2344ae 38%,#1d234430 60%,transparent 85%),url('/assets/design/moon-library.webp') right 48%/cover!important;}
+html body .audit-hero{min-height:215px!important;padding:28px!important;background:linear-gradient(90deg,#142537f5,#19283dc7 40%,#12243d15 78%),url('/assets/design/night-garden.webp') right 58%/cover!important;flex-wrap:wrap;align-content:center;}
+html body .ranking-banner{min-height:230px;padding:30px;background:linear-gradient(90deg,#172039ed,#222543b8 40%,#13214110 85%),url('/assets/design/night-garden.webp') right 47%/cover!important;}
+.ranking-banner .studio-banner-copy{max-width:600px;}
+.news-reader-modal-box{isolation:isolate;overflow:hidden;}.news-reader-modal-box::before,.news-reader-modal-box::after{content:'';position:absolute;top:85px;bottom:0;width:18%;z-index:-1;pointer-events:none;background:url('/assets/design/moon-library.webp') left center/auto 100% no-repeat;opacity:.13;mask-image:linear-gradient(90deg,#000,transparent);}.news-reader-modal-box::before{left:0;}.news-reader-modal-box::after{right:0;transform:scaleX(-1);}.news-reader-modal-body{background:transparent!important;}.news-reader-modal-head{background:#121a30;}
+.news-source-notice{padding:12px 16px;border:1px solid #9b8cca42;border-radius:12px;color:#c4cee3;font-size:13px;line-height:1.6;margin:12px 0;}.news-source-notice:empty{display:none;}
+@media(max-width:850px){html body #aboutPage .studio-support-grid{grid-template-columns:1fr!important;grid-template-areas:'clip' 'methods' 'links' 'banner';}.news-reader-modal-box::before,.news-reader-modal-box::after{display:none;}.discovery-toolbar{align-items:start;flex-direction:column;}html body #lexiconPage .lexicon-hero{min-height:210px!important;padding:22px!important;background-position:65% center!important;}.ranking-banner .studio-banner-copy{max-width:90%;}}
+@media(max-width:480px){html body #aboutPage .studio-support-grid>.donation-methods{grid-template-columns:1fr;}.donation-methods .donation-card+.donation-card{border-left:0!important;border-top:1px solid #ab96e638!important;padding:20px 0 0!important;}}
+
+html body #aboutPage .studio-support-grid>.donation-methods,html body #aboutPage .studio-support-grid>.support-actions{align-self:stretch;}
+
+/* Beta 36 — a continuous, quiet atmosphere inside reading panels. */
+html body :is(.discovery-detail,.season-news-item,.ranking-card,#lexiconGrid .lexicon-card,.studio-lexicon-aside .studio-panel,.season-empty){position:relative;isolation:isolate;}
+html body :is(.discovery-detail,.season-news-item,.ranking-card,#lexiconGrid .lexicon-card,.studio-lexicon-aside .studio-panel,.season-empty)::before{
+ content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+ background:url('/assets/design/night-garden.webp') right bottom/auto 440px no-repeat;
+ opacity:var(--panel-art-opacity,.15);filter:saturate(.55);
+ mask-image:radial-gradient(ellipse at 100% 100%,#000 0%,#0009 34%,transparent 74%);
+}
+html body :is(.discovery-detail,.season-empty)::before{background-size:auto 620px;opacity:var(--panel-detail-opacity,.2);}
+html body #lexiconGrid .lexicon-card::before,html body .studio-lexicon-aside .studio-panel::before{background-image:url('/assets/design/moon-library.webp');background-position:left bottom;mask-image:radial-gradient(ellipse at 0% 100%,#000 0%,#0006 38%,transparent 78%);}
+html body .season-news-item:nth-child(even)::before{background-position:left bottom;transform:scaleX(-1);}
+html body .ranking-card::before{background-size:auto 320px;opacity:.1;}
+html body .season-empty{padding:28px;min-height:170px;border:1px solid #9f9bd438;border-radius:16px;background:#161e37;}
+/* Fade the reader ornaments in both directions; no hard edge at the header. */
+html body .news-reader-modal-box::before,html body .news-reader-modal-box::after{opacity:.15;mask-image:radial-gradient(ellipse at 0% 62%,#000 6%,#0008 43%,transparent 76%);}
+
+/* Clip on the left; donations + contribution links, then GIF, on the right. */
+html body #aboutPage .studio-support-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1.1fr) minmax(0,.9fr)!important;grid-template-areas:'clip methods links' 'clip banner banner';align-items:start;gap:16px!important;}
+html body #aboutPage .studio-support-grid>.donation-methods{grid-template-columns:repeat(2,minmax(0,1fr));padding:20px 16px;gap:12px;align-self:stretch;}
+html body #aboutPage .donation-methods>.donation-card{display:flex;flex-direction:column;height:auto;min-height:0;gap:14px;justify-content:space-between;}
+html body #aboutPage .donation-methods .donation-card+.donation-card{padding-left:12px!important;}
+html body #aboutPage .donation-methods h3{font-size:16px!important;line-height:1.4;margin:0 0 8px;}
+html body #aboutPage .donation-methods p{line-height:1.6;margin:0 0 12px;}
+html body #aboutPage .donation-methods img{width:96px!important;height:96px!important;max-width:100%;}
+html body #aboutPage .studio-support-grid>.support-actions{grid-column:auto!important;padding:20px;align-self:stretch;}
+html body #aboutPage .support-actions h3{font-size:18px;line-height:1.35;margin:0 0 12px;}
+html body #aboutPage .support-actions a{min-height:48px;gap:10px;font-size:14px;line-height:1.5;}
+html body #aboutPage .studio-support-grid>.alm-retro-banner{width:100%;max-width:900px;justify-self:stretch;align-self:start;margin:0;}
+
+/* More comfortable settings, with the footer outside the scrolling content. */
+html body #settingsDialog{width:min(1280px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:94dvh;}
+html body #settingsForm{height:min(900px,94dvh);max-height:94dvh;padding:0;}
+html body #settingsForm>.settings-grid{grid-template-columns:230px minmax(0,1fr)!important;}
+html body #settingsDialog #settingsSections button{font-size:16px;min-height:52px;}
+html body #settingsDialog .settings-main{padding:28px;font-size:16px;line-height:1.65;}
+html body #settingsDialog :is(label,button,input,.alm-select-trigger,.settings-disclosure-body p){font-size:15px;}
+html body #settingsDialog :is(input,button,.alm-select-trigger){min-height:42px;}
+html body #settingsDialog :is(.service-row small,.service-badge,.services-diagnostic>p,.settings-disclosure-body small){font-size:13px;line-height:1.6;}
+html body #settingsDialog .service-row strong{font-size:15px;}
+html body #settingsDialog .settings-tab-panel>h2{font-size:26px;}
+html body #settingsForm>menu{flex-shrink:0;padding:14px 24px;}
+html body #settingsForm>menu>small{font-size:13px;}
+
+/* Exact scroll progress, no interval or continuous animation. */
+html body .scroll-jump-controls{display:flex!important;right:18px!important;bottom:18px!important;top:auto!important;transform:none!important;z-index:200;}
+html body .scroll-jump-controls[hidden],html body .scroll-jump-btn[hidden]{display:none!important;}
+html body .scroll-jump-btn{position:relative;width:48px;height:48px;border-radius:50%;padding:0;border:1px solid #9c90d75c;background:#151c32f5;color:#eeeaff;opacity:1;box-shadow:0 4px 16px #05081960;}
+.scroll-progress-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);fill:none;stroke-width:2.4;pointer-events:none;}
+.scroll-progress-ring[hidden]{display:none;}
+.scroll-progress-track{stroke:#5c547342;}.scroll-progress-value{stroke:#a49afa;stroke-dasharray:100;stroke-linecap:round;}
+html body .scroll-jump-btn:hover .scroll-progress-value{stroke:#88d8ef;}
+html body .scroll-jump-btn:focus-visible{outline:2px solid #c0b3ff;outline-offset:4px;}
+html body .reader-scroll-controls{position:absolute;right:22px!important;bottom:24px!important;z-index:5;}
+@media(max-width:1399px){html body #aboutPage .studio-support-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important;grid-template-areas:'clip clip' 'methods links' 'banner banner';}html body #aboutPage .studio-support-grid>.nocturne-player{max-width:850px;width:100%;justify-self:center;}}
+@media(max-width:760px){html body #settingsForm>.settings-grid{grid-template-columns:minmax(0,1fr)!important;}html body #settingsDialog #settingsSections button{font-size:14px;min-height:44px;}html body #settingsDialog .settings-main{padding:18px;}html body #settingsForm>menu{padding:12px 16px;}html body .reader-scroll-controls{right:14px!important;bottom:18px!important;}html body .news-reader-modal-body{padding-bottom:78px;}}
+@media(max-width:650px){html body #aboutPage .studio-support-grid{grid-template-columns:1fr!important;grid-template-areas:'clip' 'methods' 'links' 'banner';}html body #aboutPage .studio-support-grid>.donation-methods{grid-template-columns:1fr 1fr;}html body #aboutPage .donation-methods .donation-card+.donation-card{border-top:0!important;border-left:1px solid #ab96e638!important;padding-top:0!important;}}
+@media(max-width:380px){html body #aboutPage .studio-support-grid>.donation-methods{grid-template-columns:1fr;}html body #aboutPage .donation-methods .donation-card+.donation-card{border-left:0!important;border-top:1px solid #ab96e638!important;padding:16px 0 0!important;}}
+@media(prefers-reduced-motion:reduce){html body .scroll-jump-btn{transition:none!important;}}
+
+/* The anime form scrolls independently; its footer and controls remain fixed. */
+html body #formDialog{max-height:calc(100dvh - 32px);overflow:hidden;}
+html body #formDialog[open]{display:flex;flex-direction:column;}
+html body #formDialog #animeForm{display:flex;flex-direction:column;min-height:0;max-height:calc(100dvh - 34px);width:100%;padding:0;overflow:hidden;box-sizing:border-box;}
+html body #formDialog .anime-form-body{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:24px;}
+html body #formDialog form>menu{position:relative;bottom:auto;flex:0 0 auto;box-sizing:border-box;display:flex;align-items:center;justify-content:flex-end;min-height:112px;margin:0;padding:16px 88px 16px 24px;flex-wrap:wrap;gap:10px;}
+html body #formDialog form>menu button{flex:0 1 auto;min-width:96px;}
+html body #formDialog .dialog-scroll-controls{right:24px!important;bottom:14px!important;}
+@media(max-width:760px){html body #formDialog .anime-form-body{padding:15px;}html body #formDialog form>menu{padding-left:15px;}}
+@media(max-width:420px){html body #formDialog form>menu{justify-content:flex-start;}html body #formDialog form>menu button{min-width:80px;padding-inline:12px;}}

@@ -1,0 +1,21 @@
+{
+  "releaseId": "beta82-correctif-pagination-transparence-20261025",
+  "scope": "UI code frozen before packaging; no executable changes after the successful browser journey",
+  "files": {
+    "community/site/community-workspace.css": "c40abe65a589d866aa8278e0faa066ceb9546d1fa87ad6b92b88a3fbcd90eca8",
+    "community/site/community-workspace.js": "2e977510b617054f5ca1c50cd999bb36aa62ee4189f366196f901a2ad90be522",
+    "community/site/scroll-progress.js": "4fc2cc32d8ed4a7bc26b03efd541ff82386ca59ae25f5cb7ff06c57794673a39",
+    "public/alm-v2.js": "b380e7e33b033168ca8dfb99887179b488ae2712d0d40e115cc45b7007581fdf",
+    "public/app.js": "c6a1b5cd26d55b72f62e960df15fe7d2aabf454fbc26a3d8edc273790fa54f5b",
+    "public/beta41.js": "2b44dda2742b3cb17d42ac4af4d1adb88c41dafe458bf6886984ad404ffe258f",
+    "public/catalog.js": "bd3d2f9d8a576376786cb6197e749c7166f1700466cdce010ff6c0c6aee212a2",
+    "public/community-workspace.css": "c40abe65a589d866aa8278e0faa066ceb9546d1fa87ad6b92b88a3fbcd90eca8",
+    "public/community-workspace.js": "2e977510b617054f5ca1c50cd999bb36aa62ee4189f366196f901a2ad90be522",
+    "public/lexicon.js": "9ea71f5ef438af73f2dcd36978ff200c9f8bca54a6b02dd5044d66ce2fdc91bd",
+    "public/library-paging.js": "c17c7aff74db521e325f261329987cd92c3b7a495ed22daab66bca0042018c42",
+    "public/memories-page.js": "555fc01e1b520f7b3bc2cf33b5571781c84e407b3705471a27d7262b9b1e398c",
+    "public/rankings.js": "ed7166a0a2aac5a0f26acee246506e54c93cefb1dc68af6e6352eaf95f07e8fa",
+    "public/scroll-progress.js": "4fc2cc32d8ed4a7bc26b03efd541ff82386ca59ae25f5cb7ff06c57794673a39",
+    "scripts/test-beta82-pagination-browser.cjs": "7931813cf0637269f4707bd06ede5e7e0247d7c7939f983f075af1c5b173ee9b"
+  }
+}

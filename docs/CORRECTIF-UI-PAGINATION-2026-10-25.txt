@@ -1,0 +1,92 @@
+ANIME LOCAL MANAGER — CORRECTIF PAGINATION ET TRANSPARENCE
+25 octobre 2026 — Europe/Paris
+Version conservée : 2.0.0-beta.82 — V2.0.0 Beta stable
+Identifiant : beta82-correctif-pagination-transparence-20261025
+
+BASE
+Candidate complète livrée précédemment :
+Anime-Local-Manager-Beta82-Candidate-Sortie-2026-10-25-COMPLET.zip
+SHA-256 : 3ec6454a8a9bf56de22aa38088978677cc7dbe808112bc9774ada77c051eef94
+L’archive parente est conservée intacte. Tous ses fichiers restent dans cette livraison.
+
+1. BLOC GENTILROBOT
+Le fond du bloc compte en bas du menu devient légèrement transparent : environ
+78 % d’opacité au repos et 86 % au survol/à l’état actif, avec les mêmes couleurs.
+L’opacité du texte, de l’avatar et des bordures n’est pas diminuée. Le nom reste
+GentilRobot, avec le tag du profil ; aucun préfixe « L’espace » n’est réintroduit.
+La capture de l’interface corrigée a été inspectée pendant la recette.
+
+2. CHANGEMENTS DE PAGE
+La remontée est déclenchée par une commande explicite de pagination, après
+construction des nouveaux résultats. Elle ramène en haut de la vue, avec son
+en-tête et ses filtres. Le helper partagé prend en compte le recalcul de hauteur
+des cartes, annule les retours obsolètes et restaure l’ancrage normal après deux
+frames. Il est livré dans l’application et dans les sources du site communautaire.
+
+Les neuf familles de pagination actives sont raccordées :
+- Bibliothèque, En cours, À voir, avec ou sans regroupement par saisons ;
+- Recherche/catalogue ;
+- Classement, y compris les classements par studio ;
+- Mes souvenirs ;
+- Dictionnaire ;
+- Bibliothèques communautaires, d’un ami et animés en commun, avec leurs variantes ;
+- Aperçu d’import CSV ;
+- Quarantaine de Contrôle anime ;
+- Informations manquantes de Contrôle anime.
+
+Dans l’import CSV, le conteneur réellement défilant est remis au début, y compris
+dans une fenêtre basse. La page derrière le dialogue garde sa position. Le focus
+clavier rejoint les nouveaux résultats au lieu de rester sur la pagination du bas.
+Une réponse tardive du catalogue ne déplace pas une autre vue et ne peut pas
+annuler une remontée plus récente. Les actions « afficher plus » restent distinctes
+de la pagination et ne déclenchent pas ce nouveau retour en haut.
+
+3. PREUVES AVANT/APRÈS
+Le même parcours est exécuté sur les fichiers statiques de la candidate parente
+puis sur les fichiers corrigés, avec le même serveur local et des données fictives.
+Avant : un clic Suivant en bas de la bibliothèque laisse le document à 752 px.
+Après : toutes les paginations de document mesurées aboutissent à 0 px.
+Les résultats et le début de la vue sont réellement visibles dans le navigateur.
+
+Résultats de cette passe :
+- 33/33 contrôles navigateur dédiés à cette correction ;
+- 23/23 contrôles navigateur de navigation existants ;
+- 31/31 contrôles navigateur UX existants ;
+- 12/12 suites ciblées existantes réussies ;
+- aucune erreur JavaScript non interceptée dans les trois parcours navigateur ;
+- notes et carnets fictifs identiques avant/après.
+
+Couverture : première/précédente/suivante/dernière page, commandes basses,
+passage d’une page courte à une page longue, clavier, affichage 390 × 844,
+réponses tardives, vues cachées, dialogues et préservation du fond.
+Le banc utilise Chromium 134.0.6998.35 et Playwright 1.51.1 à part du projet.
+Il exécute l’API locale réelle avec un profil éphémère ; les données communautaires,
+classements et aperçus d’import sont des fixtures. Le trafic externe est bloqué.
+Ce résultat ne prétend pas être une nouvelle recette native Windows.
+
+Les résultats détaillés sont dans docs/verification-pagination-2026-10-25/.
+Le script optionnel est scripts/test-beta82-pagination-browser.cjs ; il accepte
+ALM_PLAYWRIGHT_MODULE, ALM_CHROMIUM et ALM_UI_EVIDENCE pour le banc de recette.
+Aucune dépendance de production n’est ajoutée.
+
+4. LIMITE OBSERVÉE ET PORTÉE DES RAPPORTS
+Un simple render(), sans navigation, peut provoquer un réancrage de Chromium
+(600 → 47 px dans l’observation). Le même comportement a été reproduit dans
+l’archive parente. Le nouveau helper n’est pas appelé dans ce cas ; cette passe
+ne revendique pas une stabilité au pixel de tous les rafraîchissements ordinaires.
+Les assertions des véritables changements de page restent strictes : retour à
+moins de 2 px, début de vue visible, et 0 px effectivement mesuré après correction.
+
+Les rapports et preuves du contrôle complet précédent sont conservés avec leur
+périmètre historique. Les 150 suites de ce précédent contrôle ne sont pas annoncées
+comme réexécutées pour cette passe d’interface ; les validations actuelles sont
+celles chiffrées ci-dessus. Les réserves de sortie du projet restent dans le dossier
+précédent. Aucun déploiement distant n’a été effectué par ce correctif.
+
+5. INTÉGRITÉ
+Les dépendances, package.json, package-lock.json, le serveur, la base locale,
+le processus principal Electron, le preload et les migrations restent identiques
+à la candidate parente. Les fichiers UI partagés du site sont synchronisés.
+SOURCE-MANIFEST.json est recalculé sur les fichiers effectivement livrés ; le
+manifeste du site est également actualisé. Les caches, dépendances installées,
+profils de test et captures internes ne sont pas inclus dans cette archive.

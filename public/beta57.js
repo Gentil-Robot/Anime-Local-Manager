@@ -1,0 +1,38 @@
+(()=>{
+'use strict';
+const copy={
+ fr:{completionPreservedTitle:'Écarts d’import conservés ({count})',completionPreservedHint:'Ces positions proviennent de l’import. Les épisodes des fiches officielles sont comptés séparément ; aucune correction manuelle n’est exigée.',completionAwaitingTitle:'Correspondances et informations attendues ({count})',completionAwaitingHint:'Ces fiches restent utilisables. ALM poursuit leur vérification automatiquement ; tu peux consulter les détails ou choisir une correspondance.',completionEmpty:'Aucune décision à prendre. Ta bibliothèque est utilisable.',completionMoreReferences:'Afficher les {count} références suivantes',seriesImportReference:'Position BetaSeries : {position}',seriesReferencePending:'Fiche importée · correspondance en cours',seriesImportedSeason:'Saison importée {season}',automationNormalizationLabel:'Réparation des références de saisons'},
+ en:{completionPreservedTitle:'Preserved import differences ({count})',completionPreservedHint:'These positions come from the import. Episodes on official records are counted separately; no manual correction is required.',completionAwaitingTitle:'Pending matches and information ({count})',completionAwaitingHint:'These records remain usable. ALM rechecks them automatically; you can inspect details or choose a match.',completionEmpty:'No decision needed. Your library is usable.',completionMoreReferences:'Show the next {count} references',seriesImportReference:'BetaSeries position: {position}',seriesReferencePending:'Imported record · matching in progress',seriesImportedSeason:'Imported season {season}',automationNormalizationLabel:'Season reference repair'},
+ ja:{completionPreservedTitle:'保持したインポート差分（{count}）',completionPreservedHint:'インポート元の位置を保持しています。公式作品の話数とは別に記録し、手動修正は不要です。',completionAwaitingTitle:'対応と情報の確認待ち（{count}）',completionAwaitingHint:'作品は引き続き利用できます。ALMが自動で再確認します。詳細の確認や作品の選択も可能です。',completionEmpty:'選択が必要な項目はありません。ライブラリを利用できます。',completionMoreReferences:'次の{count}件を表示',seriesImportReference:'BetaSeriesの位置：{position}',seriesReferencePending:'インポート済み · 対応を確認中',seriesImportedSeason:'インポート元のシーズン{season}',automationNormalizationLabel:'シーズン参照の修復'},
+ es:{completionPreservedTitle:'Diferencias de importación conservadas ({count})',completionPreservedHint:'Estas posiciones proceden de la importación. Los episodios oficiales se cuentan por separado; no requieren corrección manual.',completionAwaitingTitle:'Correspondencias e información pendientes ({count})',completionAwaitingHint:'Estas fichas siguen disponibles. ALM las revisa automáticamente; puedes consultar los detalles o elegir una correspondencia.',completionEmpty:'No hay decisiones pendientes. Puedes usar tu biblioteca.',completionMoreReferences:'Mostrar las siguientes {count} referencias',seriesImportReference:'Posición de BetaSeries: {position}',seriesReferencePending:'Ficha importada · buscando correspondencia',seriesImportedSeason:'Temporada importada {season}',automationNormalizationLabel:'Reparación de referencias de temporadas'},
+ de:{completionPreservedTitle:'Erhaltene Importabweichungen ({count})',completionPreservedHint:'Diese Positionen stammen aus dem Import. Offizielle Folgen werden getrennt gezählt; eine manuelle Korrektur ist nicht erforderlich.',completionAwaitingTitle:'Ausstehende Zuordnungen und Informationen ({count})',completionAwaitingHint:'Diese Einträge bleiben nutzbar. ALM prüft sie automatisch erneut; du kannst Details ansehen oder eine Zuordnung wählen.',completionEmpty:'Keine Auswahl erforderlich. Deine Bibliothek ist nutzbar.',completionMoreReferences:'Die nächsten {count} Referenzen anzeigen',seriesImportReference:'BetaSeries-Position: {position}',seriesReferencePending:'Importierter Eintrag · Zuordnung läuft',seriesImportedSeason:'Importierte Staffel {season}',automationNormalizationLabel:'Reparatur der Staffelreferenzen'},
+ 'pt-BR':{completionPreservedTitle:'Diferenças de importação preservadas ({count})',completionPreservedHint:'Estas posições vêm da importação. Os episódios oficiais são contados separadamente; nenhuma correção manual é necessária.',completionAwaitingTitle:'Associações e informações pendentes ({count})',completionAwaitingHint:'Estas fichas continuam disponíveis. ALM as verifica automaticamente; você pode consultar os detalhes ou escolher uma associação.',completionEmpty:'Nenhuma decisão necessária. Sua biblioteca está disponível.',completionMoreReferences:'Mostrar as próximas {count} referências',seriesImportReference:'Posição no BetaSeries: {position}',seriesReferencePending:'Ficha importada · associação em andamento',seriesImportedSeason:'Temporada importada {season}',automationNormalizationLabel:'Reparo das referências de temporadas'},
+ 'zh-CN':{completionPreservedTitle:'保留的导入差异（{count}）',completionPreservedHint:'这些位置来自导入文件。官方条目的集数单独统计，无需手动修正。',completionAwaitingTitle:'等待关联与信息（{count}）',completionAwaitingHint:'这些条目仍然可用。ALM会自动复查；你可以查看详情或选择关联。',completionEmpty:'没有需要选择的项目。收藏库可以正常使用。',completionMoreReferences:'显示接下来的{count}项参照',seriesImportReference:'BetaSeries位置：{position}',seriesReferencePending:'已导入条目 · 正在确认关联',seriesImportedSeason:'导入的第{season}季',automationNormalizationLabel:'季度参照修复'}
+};
+const counterLabels={fr:'Compteur calculé à partir du CSV',en:'Count calculated from the CSV',ja:'CSVから計算した視聴数',es:'Recuento calculado a partir del CSV',de:'Aus der CSV berechneter Zähler','pt-BR':'Contagem calculada a partir do CSV','zh-CN':'根据CSV计算的计数'};
+for(const [lang,label]of Object.entries(counterLabels))copy[lang].progressSourceCounter=label;
+for(const [lang,values]of Object.entries(copy))Object.assign(window.ALM_DESIGN_COPY[lang],values);
+const D=window.ALM_DESIGN;
+function render(host,items,openStates={}){
+ const preserved=items.filter(a=>a.kind==='source-gap'),pending=items.filter(a=>a.kind!=='source-gap');
+ for(const [rows,key,id]of [[pending,'completionAwaitingTitle',preserved.length?'completionAwaitingSources':'completionAwaiting'],[preserved,'completionPreservedTitle','completionAwaiting']]){
+  if(!rows.length)continue;
+  const details=document.createElement('details');details.id=id;details.className='completion-reference-group';details.open=openStates[id]===true;
+  const summary=document.createElement('summary');summary.textContent=D.t(key,{count:rows.length});details.append(summary);
+  const hint=document.createElement('p');hint.textContent=D.t(key==='completionPreservedTitle'?'completionPreservedHint':'completionAwaitingHint');details.append(hint);
+  let index=0,more;
+  const append=()=>{
+   more?.remove();const stop=Math.min(rows.length,index+40);
+   for(;index<stop;index++){
+    const item=rows[index],button=document.createElement('button');button.type='button';button.className='completion-awaiting-open';button.dataset.animeId=item.id;
+    const kind=item.kind==='source-gap'?D.t('automationSourceGap',{count:item.unallocated,position:item.sourcePosition}):item.kind==='season-source-wait'?D.t('seriesReferencePending'):D.t('automationWaitingLabel');
+    button.textContent=item.title+' · '+kind;
+    button.onclick=()=>{const anime=(window._almAnimes||[]).find(a=>Number(a.id)===Number(item.id));if(!anime)return;if(item.kind==='source-gap')window.ALM_IMPORT_GAP.open(anime,button);else if(item.kind==='season-source-wait')window.ALM_RECORD_SEARCH.open(anime,button);else window.ALM_CATALOG.openRecords([anime],0,button);};
+    details.append(button);
+   }
+   if(index<rows.length){more=document.createElement('button');more.type='button';more.className='completion-references-more';more.textContent=D.t('completionMoreReferences',{count:Math.min(40,rows.length-index)});more.onclick=append;details.append(more);}
+  };append();host.append(details);
+ }
+}
+window.ALM_PENDING_REFERENCES={render};
+})();

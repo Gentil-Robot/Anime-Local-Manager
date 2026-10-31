@@ -1,0 +1,34 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),crypto=require('node:crypto'),vm=require('node:vm');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-retours-'));let server;let checks=0;
+const ok=message=>{checks++;console.log('OK retours:',message);};
+(async()=>{
+ process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');process.env.ALM_SESSION_TOKEN=crypto.randomBytes(32).toString('hex');
+ fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({metadataAutonomousUpdateOnStart:false,metadataUpdateOnStart:false}));
+ const nativeFetch=global.fetch;global.fetch=(url,...args)=>String(url).startsWith('http://127.0.0.1:')?nativeFetch(url,...args):Promise.reject(Error('Offline fixture'));
+ const api=require('../server'),db=require('../db');await db.whenReady();
+ const metadata=db.getMetadataByMalId(51553);assert(metadata&&/Atelier/i.test(metadata.title));assert.equal(metadata.type,'TV');
+ const previous={id:701,malId:700001,title:'Atelier',canonicalTitle:'Atelier',status:'Watching',episodesSeen:'9',episodesTotal:'12',score:'7',notes:'Personal notes must survive',tags:['favorite'],poster:'/images/wrong-clip.jpg',synopsis:'Wrong music clip',type:'Music',trailer:{youtube_id:'abcdefghijk'},anilistId:777,localizedTitles:{fr:'Atelier'}};
+ db.writeAllAnimes([previous]);server=api.app.listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));const base='http://127.0.0.1:'+server.address().port;
+ const html=await nativeFetch(base),cookie=html.headers.get('set-cookie').split(';')[0],csp=html.headers.get('content-security-policy');
+ assert(csp.includes("frame-src https://www.youtube-nocookie.com"));assert(csp.includes("script-src 'self'"));assert.equal((await nativeFetch(base+'/api/animes/701/reassociate',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'})).status,403);ok('video frames are narrowly allowed and local mutation still requires the app session');
+ const request=async(url,body,method=body===undefined?'GET':'POST')=>{const response=await nativeFetch(base+url,{method,headers:{Cookie:cookie,'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:response.status,data:await response.json()};};
+ const renamed=await request('/api/animes/701',{title:"L'Atelier des sorciers"},'PUT');assert.equal(renamed.status,200);assert.equal(renamed.data.customTitle,"L'Atelier des sorciers");assert.equal(require('../lib/localized-titles').titleFor(renamed.data,'fr'),"L'Atelier des sorciers");ok('manual renaming overrides an old canonical/localized title and persists in real SQLite');
+ const sandbox={window:{ALM_DESIGN:{language:()=>'fr'},dispatchEvent(){}},setTimeout,clearTimeout,URLSearchParams,Event,fetch:async()=>({ok:true,json:async()=>({titles:{700001:{fr:'Atelier'}}})})};
+ vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/title-preference.js'),'utf8'),sandbox);vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/localized-titles.js'),'utf8'),sandbox);
+ assert.equal(sandbox.window.ALM_TITLES.title({...previous,title:"L'Atelier des sorciers"}),"L'Atelier des sorciers");assert.equal(sandbox.window.ALM_TITLES.title(renamed.data),"L'Atelier des sorciers");
+ const fixed=await request('/api/animes/701/reassociate',{malId:51553,expectedMalId:700001});assert.equal(fixed.status,200,JSON.stringify(fixed.data));
+ for(const field of ['status','episodesSeen','score','notes','tags'])assert.deepEqual(fixed.data[field],previous[field]);
+ assert.equal(fixed.data.malId,51553);assert.equal(fixed.data.type,'TV');assert.equal(fixed.data.malUrl,'https://myanimelist.net/anime/51553');assert.equal(fixed.data.customTitle,"L'Atelier des sorciers");assert.notEqual(fixed.data.poster,previous.poster);assert.notEqual(fixed.data.synopsis,previous.synopsis);assert(!fixed.data.anilistId);assert(!fixed.data.trailer?.youtube_id);assert.deepEqual(fixed.data.localizedTitles,undefined);ok('exact Witch Hat Atelier identity replaces the wrong clip while retaining personal data and progress');
+ const stale=await request('/api/animes/701/reassociate',{malId:20,expectedMalId:700001});assert.equal(stale.status,409);assert.equal(stale.data.code,'ALM_ASSOCIATION_CHANGED');
+ db.insertAnime({id:702,malId:20,title:'Naruto'});const duplicate=await request('/api/animes/701/reassociate',{malId:20,expectedMalId:51553});assert.equal(duplicate.status,409);assert.equal(duplicate.data.code,'ALM_ASSOCIATION_DUPLICATE');
+ const invalid=await request('/api/animes/701/reassociate',{malId:-1,expectedMalId:51553});assert.equal(invalid.status,400);assert.equal(db.getAnimeById(701).malId,51553);ok('stale, duplicate and invalid associations are refused without changing saved data');
+ const services=(await request('/api/services')).data.services;assert(!services.some(s=>s.id==='jikan'));assert(services.some(s=>s.id==='mal'));assert.equal((await request('/api/services/jikan/test',{})).data.state,'retired');ok('retired Jikan is absent from settings; official MyAnimeList and old no-network diagnostics remain');
+ const backup=(await request('/api/backup/export')).data;assert.equal(backup.data.animes.find(a=>a.id===701).customTitle,"L'Atelier des sorciers");assert.equal(db.getMetadataCount(),30430);ok('backup keeps title overrides and the original 30,430-record offline catalogue is unchanged');
+ const helperSandbox={window:{ALM_DESIGN:{t:key=>key},ALM_TITLE_PREFERENCE:require('../public/title-preference')}};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/anime-association.js'),'utf8'),{...helperSandbox,URL});
+ const {parse,suggestion}=helperSandbox.window.ALM_ASSOCIATION;assert.equal(parse('https://myanimelist.net/anime/51553/Tongari_Boushi_no_Atelier'),51553);assert.equal(parse('51553'),51553);
+ for(const raw of ['javascript:alert(1)','https://myanimelist.net.attacker.test/anime/51553','https://attacker@myanimelist.net/anime/51553','https://myanimelist.net/manga/51553','https://myanimelist.net/anime/51553abc','0','9007199254740992'])assert.equal(parse(raw),0,raw);
+ assert.equal(suggestion(renamed.data),51553);assert.equal(require('../public/title-preference').custom({id:701,malId:700001,title:"L'Atelier des sorciers"}),"L'Atelier des sorciers");assert.equal(suggestion({title:'Atelier',malId:123}),0);ok('link parsing rejects deceptive URLs and an ambiguous Atelier title never silently changes identity');
+ console.log(checks+' retours runtime checks passed.');
+})().catch(error=>{console.error(error);process.exitCode=1;}).finally(async()=>{await require('./runtime-cleanup').cleanupRuntime(dir,server);});
+

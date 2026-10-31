@@ -1,0 +1,604 @@
+{
+  "status": "passed",
+  "browser": "134.0.6998.35",
+  "checks": [
+    "Adult profile exposes the same active exclusion control as My account",
+    "Cancelling an adult choice leaves the saved exclusion unchanged",
+    "Adult opt-in saves false through the existing age endpoint before profile",
+    "Saved adult choice survives profile reopening",
+    "My account immediately reflects the exclusion changed in profile",
+    "Changing exclusion in My account is reflected by the profile editor",
+    "Saving an unchanged exclusion does not issue a redundant age write",
+    "Adult opt-in survives a full application reload",
+    "Adults can restore exclusion and reopen the checked control",
+    "minor: exclusion stays checked, disabled and explained",
+    "minor: normal profile save never attempts to loosen the age rule",
+    "undeclared age: exclusion stays checked, disabled and explained",
+    "undeclared age: normal profile save never attempts to loosen the age rule",
+    "unavailable age: exclusion stays checked, disabled and explained",
+    "unavailable age: normal profile save never attempts to loosen the age rule",
+    "Age write failure stays visible and prevents a misleading profile save",
+    "An adult can retry a failed save successfully",
+    "An age write committed before an error is reconciled from the server",
+    "My account displays the reconciled committed preference after an error",
+    "If verification fails too, age state stays unavailable without retrying a write",
+    "A fresh successful read restores the true preference after verification failure",
+    "A successful age write is retained if the following profile save fails",
+    "Retry after a partial save does not send the age preference twice",
+    "Pending profile save is disabled and duplicate submit does not write twice",
+    "Single pending save settles with one age write and one profile write",
+    "A completed age write after Close preserves the newly opened profile form",
+    "Reopening after a closed pending save shows the authoritative saved age choice",
+    "A response from the previous account cannot write the new account profile",
+    "After account switch the minor profile is locked with the new identity",
+    "All seven translations use the shared age-rule component",
+    "App and website share identical age/profile runtime files",
+    "All local library entries, notes and journals stay untouched"
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": true
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": true
+      }
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "profile",
+      "method": "PUT",
+      "body": {
+        "display_name": "GentilRobot",
+        "handle": "",
+        "discriminator": 4,
+        "id": "82000000-0000-0000-0000-000000000001",
+        "bio": "",
+        "avatar_image": "",
+        "avatar": "aster",
+        "banner": "garden",
+        "accent": "violet",
+        "visibility": "friends",
+        "allow_requests": true,
+        "share_library": true,
+        "share_favorites": true,
+        "share_watching": true,
+        "share_dna": true,
+        "share_activity": false,
+        "featured": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "age",
+      "method": "POST",
+      "body": {
+        "excludeAdult": false
+      }
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    }
+  ],
+  "blockedExternalOrigins": [
+    "https://cdn.myanimelist.net"
+  ],
+  "scope": "Real ALM Express/SQLite/frontend with fictional community API responses; SQL/RLS separately tested by test-beta72-age.cjs; no production changes or messages."
+}

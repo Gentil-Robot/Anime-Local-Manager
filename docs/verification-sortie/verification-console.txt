@@ -1,0 +1,16 @@
+[vérification] Structure et régressions · 90 suites
+[publication] Structure et régressions · test-beta-stable.js — en cours, 15 s
+[publication] Structure et régressions · test-beta78-storage.cjs — en cours, 15 s
+[vérification] OK · Structure et régressions · 90 suites
+[vérification] Interface et karaoké · 8 suites
+[vérification] OK · Interface et karaoké · 8 suites
+[vérification] Imports et bibliothèque · 27 suites
+[publication] Imports et bibliothèque · test-beta51-http.js — en cours, 15 s
+[publication] Imports et bibliothèque · test-beta53-http.js — en cours, 15 s
+[vérification] OK · Imports et bibliothèque · 27 suites
+[vérification] Données, sauvegardes et sécurité · 14 suites
+[vérification] OK · Données, sauvegardes et sécurité · 14 suites
+[vérification] Publication · 11 suites
+[publication] Publication · test-beta71-package.cjs — en cours, 15 s
+[vérification] OK · Publication · 11 suites
+[vérification] 150 suites réussies. Les avertissements des scénarios simulés sont conservés dans le journal.

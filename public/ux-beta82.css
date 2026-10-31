@@ -1,0 +1,74 @@
+/* Beta82 UX pass: personal memories, compact cards, import artwork, centered page navigation. */
+#memoryPage{max-width:1600px;margin-inline:auto;padding:14px 18px 70px;box-sizing:border-box}
+#memoryPage[hidden],#memoryPage.hidden{display:none!important}
+#memoryPage .memory-page-hero{position:relative;overflow:hidden;min-height:190px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(98deg,#0b1531f5 0%,#24204fba 55%,#120f32a8 100%),url('/assets/design/night-garden.webp') center/cover;border:1px solid #7561a8aa;border-radius:20px;padding:26px 36px}
+#memoryPage .memory-page-hero .studio-banner-copy{position:relative;z-index:1;max-width:70ch}
+#memoryPage .memory-page-hero h1{font-size:clamp(25px,3vw,37px);margin:6px 0 12px;color:#f2ebff}
+#memoryPage .memory-page-hero p{line-height:1.65;color:#d6cfe9;max-width:67ch}
+#memoryPage .memory-page-hero-symbol{font-size:clamp(66px,10vw,144px);color:#dac5ff;opacity:.33;line-height:1}
+.memory-page-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:20px 0}
+.memory-stat{border:1px solid #655b91;border-radius:14px;background:linear-gradient(130deg,#1b2441,#151c31);padding:17px 20px;display:flex;flex-direction:column;gap:5px}
+.memory-stat strong{font-size:clamp(24px,3vw,33px);color:#f6efff}.memory-stat span{font-size:13px;color:#c3cde3}
+.memory-page-panel{background:#131b30dd;border:1px solid #3f4c6e;border-radius:17px;padding:22px;min-width:0}
+.memory-page-toolbar{display:flex;gap:14px;align-items:end;justify-content:space-between;flex-wrap:wrap}
+.memory-page-filters{display:grid;grid-template-columns:minmax(210px,2fr) repeat(2,minmax(160px,1fr));gap:12px;flex:1;min-width:min(100%,470px)}
+.memory-page-filters label{display:grid;gap:7px;font-size:13px;color:#cbd4e7}
+.memory-page-filters input,.memory-page-filters select{width:100%;min-width:0;min-height:42px;background:#0e1629;color:#f1ecff;border:1px solid #546383;border-radius:9px;padding:9px 12px;box-sizing:border-box}
+#memoryPageExport{min-height:42px;border-radius:10px;border:1px solid #7770a7;color:#ebddff;background:#252444;padding:8px 12px}
+.memory-page-summary{margin:20px 0 15px;color:#c5cfeb;scroll-margin-top:80px}
+.memory-page-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:15px}
+.memory-card{border:1px solid #555b81;border-radius:15px;background:linear-gradient(155deg,#1c2340,#171d34);padding:19px;min-width:0;display:flex;flex-direction:column;gap:13px;box-shadow:0 10px 18px #0307141f}
+.memory-card-head{display:flex;align-items:center;gap:12px}
+.memory-card-symbol{width:43px;height:43px;border-radius:13px;border:1px solid #796eb4;color:#e7ccff;background:#383259;display:grid;place-items:center;flex:none;font-size:24px}
+.memory-card h2{font-size:16px;line-height:1.5;margin:0;overflow-wrap:anywhere;color:#f2ecff}
+.memory-card-head small{display:block;color:#bbc7dc;font-size:12px;line-height:1.6;margin-top:3px}
+.memory-card-content{min-height:0;flex:1;overflow-wrap:anywhere}.memory-card-note{white-space:pre-wrap;line-height:1.6;margin:0 0 14px;max-height:13em;overflow:auto}
+.memory-card-episode{border-top:1px solid #505777;padding:12px 0}.memory-card-episode summary{cursor:pointer;color:#e1d7ff}
+.memory-card-award{border-left:3px solid #c5a3ff;padding-left:10px;color:#e2d8f4;line-height:1.55}
+.memory-card>button{align-self:flex-start;margin-top:auto;background:#202b49;border:1px solid #626f98;border-radius:9px;color:#e4edff;padding:8px 14px;min-height:38px}
+.memory-page-empty{grid-column:1/-1;text-align:center;padding:48px 15px;color:#cbd5ec}.memory-page-empty span{font-size:52px;color:#b8a7e9}
+.memory-page-pagination{display:flex;gap:7px;justify-content:center;align-items:center;margin:22px 0 6px}.memory-page-pagination button{min-width:40px;min-height:39px;border-radius:9px;border:1px solid #586181;background:#161c32;color:#f1ecff}.memory-page-pagination span{min-width:90px;text-align:center;color:#d7def2}.memory-page-pagination[hidden]{display:none}
+/* Import art uses the already-bundled GIF, without network requests. */
+#importDialog [data-panel="xmlImportPanel"] .xml-import-showcase{margin:32px auto 16px;width:min(790px,100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#importDialog .xml-import-showcase img{width:100%;max-width:790px;height:auto;aspect-ratio:900/280;object-fit:contain;border-radius:14px;border:1px solid #554c87;box-shadow:0 18px 38px #05091c55}
+/* Three rows of card actions, keeping every action visible and keyboard reachable. */
+html body #animeGrid .card .actions{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;align-items:stretch;min-width:0}
+html body #animeGrid .card .actions>:is(button,a){min-width:0;box-sizing:border-box;margin:0;padding:7px 4px;min-height:34px;border-radius:9px;text-align:center;display:flex;justify-content:center;align-items:center;overflow-wrap:anywhere;white-space:normal;line-height:1.25;font-size:11px}
+html body #animeGrid .card .actions>[data-action="edit"],html body #animeGrid .card .actions>[data-notebook-action="open-notebook"]{grid-column:span 3}
+html body #animeGrid .card .actions>[data-action="refresh"],html body #animeGrid .card .actions>[data-action="image"],html body #animeGrid .card .actions>a{grid-column:span 2}
+html body #animeGrid .card .actions>[data-action="recommend"]{grid-column:span 4}
+html body #animeGrid .card .actions>[data-action="delete"]{grid-column:span 2}
+html body #animeGrid .card .actions>[hidden]{display:none!important}
+html body #animeGrid .card.studio-card-has-series .actions>:is(.series-show,[data-action="edit"],[data-notebook-action="open-notebook"]){grid-column:span 2}
+/* Keep card labels readable and the completion action inside narrow screens. */
+@media(max-width:480px){
+  html body #animeGrid.view-cards{grid-template-columns:minmax(0,1fr)!important}
+  html body .completion-banner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px}
+  html body .completion-banner-text{min-width:0;overflow-wrap:anywhere}
+  html body .completion-banner-btn{grid-column:1 / -1;grid-row:2;max-width:100%;white-space:normal}
+  html body .completion-banner-close{grid-column:3;grid-row:1;align-self:start}
+}
+/* A compact central control group instead of opposite edges of the viewport. */
+.library-pagination{gap:10px!important;justify-content:center!important;position:relative;flex-wrap:wrap}
+.library-page-center,.catalog-page-center{display:flex;align-items:center;gap:6px;justify-content:center;flex-wrap:nowrap;min-width:0}
+.library-page-center{margin-inline:auto}.library-page-center button,.catalog-page-center button{min-width:35px;min-height:36px;padding:5px 9px!important}
+.library-page-center [data-page-label]{text-align:center;min-width:150px;max-width:40vw}
+.library-pagination>[data-page-mode]{margin-left:auto}
+.catalog-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px}
+.catalog-page-center{margin-inline:auto}
+.ranking-pagination,.comm-pagination,.csv-pagination,.studio-lexicon-pagination{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:7px}
+.ranking-pagination button,.comm-pagination button,.csv-pagination button,.studio-lexicon-pagination button{min-width:38px;min-height:36px}
+@media(max-width:760px){.memory-page-stats{gap:8px}.memory-stat{padding:10px}.memory-page-filters{grid-template-columns:1fr}.memory-page-panel{padding:13px}.library-pagination>[data-page-mode]{margin:0 auto}.library-page-center [data-page-label]{min-width:80px;font-size:12px}#memoryPage .memory-page-hero{padding:20px}.memory-page-grid{grid-template-columns:1fr}}
+
+/* Keep the page indicator geometrically centered even with a separate Show all button. */
+html body .library-pagination{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;justify-items:stretch}
+/* Display rules must never reveal controls hidden by the active view or result count. */
+html body .library-pagination[hidden],html body .library-pagination.hidden,
+html body .library-pagination [hidden],html body .catalog-pagination [hidden],
+html body .ranking-pagination[hidden],html body .comm-pagination[hidden],
+html body .csv-pagination[hidden],html body .studio-lexicon-pagination[hidden],
+html body .memory-page-pagination[hidden]{display:none!important}
+html body .library-pagination .library-page-center{grid-column:2;justify-self:center;margin:0}
+html body .library-pagination>[data-page-mode]{grid-column:3;justify-self:end;margin:0}
+html body .catalog-pagination .catalog-page-center{width:100%;flex-basis:100%;margin:0}
+@media(max-width:680px){html body .library-pagination{grid-template-columns:minmax(0,1fr)!important;justify-items:center}html body .library-pagination .library-page-center{grid-column:1;max-width:100%}html body .library-pagination>[data-page-mode]{grid-column:1;justify-self:center}}

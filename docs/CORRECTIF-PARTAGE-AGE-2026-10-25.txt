@@ -1,0 +1,80 @@
+ALM Beta82 — Correctif du partage selon l’âge
+25 octobre 2026 — Version conservée : 2.0.0-beta.82
+
+PÉRIMÈTRE
+Cette livraison reprend intégralement le correctif pagination/transparence du
+25 octobre, dont l’empreinte est e97af43af2058352b3486831856637ad3bbbfa82cb4bf68429db2c66648e337b.
+Elle corrige le choix « Exclure les contenus adultes de mon partage » dans
+Modifier mon profil. Les archives antérieures restent conservées.
+
+RÈGLE APPLIQUÉE
+- Moins de 18 ans : exclusion obligatoire, case cochée et désactivée.
+- À partir de 18 ans, avec attestation enregistrée : exclusion activable ou
+  désactivable. Le formulaire et Mon compte utilisent la même préférence.
+- Âge non renseigné : exclusion obligatoire jusqu’à la déclaration dans Mon compte.
+- Âge indisponible : contrôle verrouillé ; aucune désactivation autorisée par le client.
+- Les contenus adultes ne peuvent être consultés qu’entre amis majeurs ayant tous
+  deux désactivé leur exclusion. Les fiches non classées restent privées.
+- Bibliothèque locale, notes, carnets et date de naissance privée sont préservés.
+
+INTERFACE ET ENREGISTREMENT
+Le texte universellement obligatoire a été remplacé par une aide adaptée au compte,
+dans les sept langues. Un même composant fournit l’état et l’explication dans Mon
+compte et Modifier mon profil. Enregistrer transmet une préférence modifiée par un
+majeur à l’API d’âge existante, puis enregistre le profil. Fermer sans enregistrer
+ne modifie rien. Un choix inchangé ne provoque pas d’écriture d’âge supplémentaire.
+
+Les soumissions répétées sont bloquées. Les retours d’une autre session ou d’un
+ancien formulaire ne déclenchent pas une seconde écriture et ne ferment pas une
+nouvelle fenêtre. Un choix d’âge enregistré reste conservé si la sauvegarde du
+profil échoue ensuite. Un échec de réponse n’est jamais assimilé à une annulation
+de l’écriture : l’état du même compte est relu, sans répétition ni compensation.
+Si cette vérification échoue également, la case est indéterminée et verrouillée,
+avec un message d’enregistrement non confirmé. Une lecture réussie remplace cet
+état local. Le formulaire ne présente alors pas l’ancien choix comme confirmé.
+
+SERVEUR ET BASE
+La règle était déjà implémentée dans l’API locale, le client du site et la migration
+20261018105401_alm_beta72_age_sharing.sql. Aucun changement backend, Edge Function,
+SQL, dépendance ou fichier de verrouillage n’est nécessaire pour ce correctif.
+La protection des mineurs reste imposée par la base, même si un appel direct tente
+de transmettre excludeAdult:false. La date déclarée ne peut être remplacée par
+une modification des métadonnées publiques du compte. Le seuil exact de 18 ans,
+les deux consentements, les retraits de visibilité et les refus anonymes ont été
+vérifiés dans les tests SQL exécutés localement.
+
+VÉRIFICATIONS DE CETTE PASSE
+- Ancienne archive : reproduction du défaut dans le navigateur dès le cas majeur,
+  contrôle dynamique absent et ancienne case statique verrouillée.
+- Nouvelle archive : 32 contrôles navigateur réussis, zéro erreur JavaScript
+  non interceptée, sur Chromium 134.0.6998.35 avec le vrai serveur local,
+  SQLite et les fichiers de l’application. Les réponses des comptes communautaires
+  sont fictives ; le trafic externe est bloqué.
+- 10 suites ciblées existantes réussies. Les tests de règles d’âge et de contenu
+  exécutent les migrations et les contrôles RLS réels dans PGlite local.
+- Les cas couvrent le choix d’un majeur dans les deux sens, l’annulation, le
+  rechargement, Mon compte ↔ profil, mineur/inconnu/indisponible, réponse web sans
+  champ available, échecs partiels et réponses tardives. Les erreurs simulées
+  incluent une écriture validée côté serveur avant une réponse en échec, puis une
+  impossibilité de relire le réglage. Aucune écriture n’est répétée automatiquement.
+- Sept langues contrôlées ; les quatre paires de fichiers application/site sont
+  identiques. Les données locales des profils fictifs restent strictement intactes.
+- Les changements de pagination et de transparence de la livraison précédente,
+  les fichiers du moteur et tous les fichiers Supabase sont conservés.
+
+Les journaux, preuves avant/après et empreintes des fichiers contrôlés se trouvent
+dans docs/verification-partage-age-2026-10-25/. Le nouveau test navigateur facultatif
+est scripts/test-beta82-age-sharing-browser.cjs ; Playwright reste un outil de
+recette externe et n’est pas ajouté aux dépendances du produit.
+
+LIVRAISON ET LIMITES
+Les contrôles ci-dessus concernent précisément ce correctif. Les audits historiques
+et leurs preuves sont conservés ; ils ne sont pas présentés comme une nouvelle
+exécution complète des 150 suites. Aucun installateur Windows n’a été construit
+ou exécuté pendant cette passe. Aucun compte réel, partage réel ou contenu de
+production n’a été modifié et aucun message n’a été envoyé.
+
+Cette archive inclut les fichiers actualisés de l’application et du site. Elle ne
+constitue pas un déploiement du site ni une application des migrations en production.
+Aucune nouvelle migration n’est ajoutée pour le choix d’exclusion ; la migration
+de confirmation de suppression de compte préparée précédemment est conservée.

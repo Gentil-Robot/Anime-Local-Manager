@@ -1,0 +1,32 @@
+ALM BETA 82 - PERFORMANCE AUDIT (OFFLINE / NO PRODUCTION DEPLOY)
+
+Baseline SHA-256 ZIP: d35b505c4301587b8f2fdaf0c7e63dc02c7d8f64cef774fb5aed392e570ff56d
+Base version: 2.0.0-beta.82, full archive with karaoke retained.
+Environment: Linux x64, Node 22.16.0 (project recommended Node 22.23.3 at this older measurement date; GAP & UPGRADE now recommends 22.23.4 for new builds), 5 CPUs, 5.8 GB RAM.
+Dependencies including Electron/Express/jsdom unavailable for native tests.
+Synthetic fixtures: 5000 fictitious anime, 5140 legacy progress rows; no personal data.
+Times are function-only, not app startup, browsing UX, network, or packed executable performance.
+
+| Scenario synthetique (Node 22.16 Linux, 5k fiches) | Avant mediane | Apres mediane | Avant p95 | Apres p95 |
+|---|---:|---:|---:|---:|
+| filter_no_search_5000 | 37.292 ms | 20.523 ms | 48.46 ms | 29.565 ms |
+| filter_search_5000 | 17.16 ms | 27.885 ms | 20.267 ms | 55.711 ms |
+| filter_genre_search_5000 | 16.491 ms | 7.056 ms | 26.479 ms | 12.734 ms |
+| library_groups_cold_5000 | 60.075 ms | 89.157 ms | 109.219 ms | 138.775 ms |
+| library_groups_warm_5000 | 55.945 ms | 5.558 ms | 107.142 ms | 11.641 ms |
+| dna_portal_5000 | 557.771 ms | 55.628 ms | 655.427 ms | 69.209 ms |
+| progress_repair_5140 | 23.019 ms | 8.782 ms | 27.748 ms | 14.799 ms |
+
+Applied changes:
+public/app.js: filter inexpensive predicates before optional text construction; cache grouped seasons per replaced library array; do not group when list mode is active.
+public/alm-v2.js: top-five DNA portal candidate selection without repeated full list sort and image URL reparsing. Legacy invalid non-finite score sorting falls back to the prior behavior.
+lib/progress-reconciliation.js: index candidate legacy seasons by BetaSeries family and use a Set for removed rows.
+scripts/performance/bench-beta82-paths.cjs: reproducible synthetic benchmark.
+scripts/test-beta82-perf.cjs: filter, grouping, DNA and repair exact behavior checks.
+
+Tests: node scripts/test-beta82-perf.cjs PASS; node scripts/test-beta82-build.cjs PASS (34 checks); node --check files PASS.
+Tests with jsdom/Express/Electron cannot run here; Windows cold/hot startup, CPU, memory lifecycle, packaged executable and end-to-end API are UNMEASURED.
+No cloud provider traffic load test or emails sent. No production deployment.
+Remote read-only observations: Vercel Hobby, Resend limits 100/day 3000/month (8 sent this period), Supabase unused index advisory is informational.
+Rollback: restore original ZIP, or replace the three modified source files from baseline; preserve user data.
+NOTE: Concurrent host noise affects high-latency measurements. Isolated before/after pairs and Windows confirmation advised.

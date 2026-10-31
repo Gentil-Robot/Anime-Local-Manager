@@ -1,0 +1,4 @@
+'use strict';
+// Isolated real snapshot; times are measurements, not a PC-independent promise.
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),db=require('../db');
+(async()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-catalog-measure-'));await db.initDb(dir);const results={records:db.getMetadataCount(),queries:[]};for(const sort of ['relevance','score','recent','alphabetical']){const times=[];let ids;for(let n=0;n<5;n++){const start=performance.now(),r=db.browseMetadata({sort});times.push(performance.now()-start);ids=r.items.map(a=>a.malId);}results.queries.push({sort,medianMs:[...times].sort((a,b)=>a-b)[2],timesMs:times,ids});}fs.writeFileSync(process.argv[2],JSON.stringify(results,null,2));fs.rmSync(dir,{recursive:true,force:true});process.exit(0);})().catch(e=>{console.error(e);process.exit(1);});

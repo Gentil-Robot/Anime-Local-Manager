@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><style>*{box-sizing:border-box}body{margin:0;width:900px;height:280px;overflow:hidden;background:#10132a}canvas{width:900px;height:280px;display:block}</style><canvas id="banner" width="900" height="280"></canvas>
+<script>
+const ctx=document.getElementById('banner').getContext('2d');const logo=new Image(),garden=new Image(),library=new Image();
+window.ready=Promise.all([[logo,'__LOGO__'],[garden,'__GARDEN__'],[library,'__LIBRARY__']].map(([image,src])=>new Promise(resolve=>{image.onload=resolve;image.src=src;})));
+function cover(image){const scale=Math.max(884/image.width,260/image.height),w=image.width*scale,h=image.height*scale;ctx.drawImage(image,8+(884-w)/2,8+(260-h)/2,w,h);}
+window.drawBanner=t=>{
+ ctx.fillStyle='#15132c';ctx.fillRect(0,0,900,280);cover(garden);const phase=t%8;ctx.globalAlpha=phase<3?0:phase<4?phase-3:phase<7?1:8-phase;cover(library);ctx.globalAlpha=1;
+ const scrim=ctx.createLinearGradient(0,0,0,245);scrim.addColorStop(0,'#090c20c9');scrim.addColorStop(.5,'#0a0d2440');scrim.addColorStop(1,'#0a0d2410');ctx.fillStyle=scrim;ctx.fillRect(8,8,884,260);
+ // Bevelled frame and a slow constellation: early-web style without flashing.
+ ctx.strokeStyle='#d8c6ff';ctx.lineWidth=2;ctx.strokeRect(3,3,894,274);ctx.strokeStyle='#76599c';ctx.strokeRect(7,7,886,266);ctx.strokeStyle='#fce5ff55';ctx.strokeRect(1,1,898,278);
+ for(let i=0;i<20;i++){const x=160+(i*137)%713,y=123+(i*31)%102,alpha=.15+.35*(.5+.5*Math.sin(t*Math.PI/2+i));ctx.fillStyle=`rgba(244,229,255,${alpha})`;ctx.fillRect(x-3,y,7,1);ctx.fillRect(x,y-3,1,7);}
+ ctx.save();ctx.shadowColor='#b892fc';ctx.shadowBlur=25;ctx.drawImage(logo,30,57,115,115);ctx.restore();
+ ctx.shadowColor='#040615';ctx.shadowOffsetY=3;ctx.shadowBlur=3;ctx.font='900 41px DejaVu Sans, sans-serif';
+ const ink=ctx.createLinearGradient(173,0,855,0);ink.addColorStop(0,'#ffd5dd');ink.addColorStop(.5,'#cebbff');ink.addColorStop(1,'#b9f5f4');ctx.fillStyle=ink;ctx.fillText('ANIME LOCAL MANAGER',170,66,700);
+ ctx.font='600 19px DejaVu Sans, sans-serif';ctx.fillStyle='#f4edff';ctx.fillText('Votre bibliothèque d’animés, en local',172,102);
+ ctx.font='700 16px DejaVu Sans, sans-serif';ctx.fillStyle='#e0d6ff';ctx.fillText('ORGANISE  ·  TRIE  ·  RECHERCHE',172,135);
+ ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.fillStyle='#090d23ed';ctx.fillRect(8,239,884,33);ctx.fillStyle='#bca0eb';ctx.fillRect(8,238,884,1);
+ ctx.font='700 15px DejaVu Sans Mono, monospace';ctx.fillStyle='#e6d5a9';ctx.fillText('✦ OPEN SOURCE',24,261);ctx.fillStyle='#d8d1ef';ctx.fillText('VOTRE COLLECTION, CHEZ VOUS',295,261);ctx.fillStyle='#b9f5f4';ctx.fillText('100% GRATUIT',754,261);
+};
+</script>

@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-10-25T06:04:58Z",
+  "remote_mutations_performed": false,
+  "historical_migrations_unchanged": 11,
+  "baseline_without_new_migration": {
+    "status": "expected_failure",
+    "exit_code": 1,
+    "output": "AssertionError [ERR_ASSERTION]: Missing expected rejection. expected: /INVALID_INPUT/ (NULL confirmation)"
+  },
+  "with_new_migration": {
+    "status": "passed",
+    "exit_code": 0,
+    "coverage": [
+      "NULL and invalid confirmation data preservation",
+      "active confirmed recent session",
+      "anonymous and foreign-session rejection",
+      "only own account deletion",
+      "unchanged EXECUTE ACL and search_path"
+    ]
+  },
+  "files": {
+    "supabase/migrations/20261025060253_alm_beta82_delete_confirmation.sql": "89f42916ebd7b202be4ea44fe8fc877f8103acd6952a57193310482f125c088e",
+    "scripts/test-beta82-delete-confirmation.cjs": "82e43fa364156caa723f98f6ff86d3e7d169aab1421e4fd1f517f1ead03c8eb1"
+  }
+}

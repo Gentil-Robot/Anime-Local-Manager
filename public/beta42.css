@@ -1,0 +1,86 @@
+/* Beta42: bounded catalogue, shared centred reader and comfortable settings. */
+html body .main-area{display:flex;flex-direction:column;min-height:100dvh;box-sizing:border-box}
+html body .site-footer{margin-top:auto!important;padding-top:26px;margin-bottom:0!important;flex-shrink:0;position:static}
+.catalog-filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0}
+.discovery-search .catalog-reset{flex:0 0 auto;min-height:48px;padding:10px 18px;border:1px solid #ad98d579;border-radius:12px;background:#24233f;color:#ece8ff;font-weight:600;transition:background-color .15s,border-color .15s}
+.discovery-search .catalog-reset:hover{background:#36315c;border-color:#c3abf4}
+.discovery-search .catalog-reset:focus-visible{outline:2px solid #c8aaff;outline-offset:3px}
+.catalog-filters>select,.catalog-filters>.alm-select{flex:1 1 145px;min-width:0;max-width:240px}
+.catalog-filters>label,.unrated-filter{display:flex;align-items:center;gap:8px;color:#d8d4eb;font-size:14px}
+.catalog-filters input,.unrated-filter input{accent-color:#ad91ee;width:18px;height:18px}
+html body #discoveryPage .catalog-layout{display:block;min-width:0}
+html body #discoveryResults.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px;max-height:none;overflow:visible;padding:0}
+.catalog-card{position:relative;min-width:0;overflow:hidden;border:1px solid #8c78b74d;border-radius:15px;background:linear-gradient(145deg,#222742e8,#151c31f2);box-shadow:0 8px 24px #04081a28}
+.catalog-cover{display:block;width:100%;padding:0;border:0;border-radius:0;aspect-ratio:2/3;overflow:hidden;background:radial-gradient(circle at 65% 25%,#514677,#182137);color:#c5b0ef}
+.catalog-cover img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .18s}
+.catalog-cover:hover img{transform:scale(1.025)}
+.catalog-cover>span{font-size:48px}
+.catalog-card-copy{padding:13px;display:flex;flex-direction:column;gap:10px}
+.catalog-title{border:0;background:none;padding:0;text-align:left;color:#eeebfa;font-weight:700;line-height:1.45;font-size:14px;min-height:2.9em;overflow-wrap:anywhere}
+.catalog-card-copy small{color:#bfc7df;line-height:1.5}
+.catalog-owned{font-size:12px;color:#bbebdc;border:1px solid #69baa64d;border-radius:7px;padding:5px 7px;align-self:flex-start}
+.catalog-select{position:absolute;right:8px;top:8px;z-index:1;padding:7px;line-height:0;border-radius:8px;background:#161b35db;border:1px solid #c9b5f67a}
+.catalog-select input{width:20px;height:20px;margin:0;accent-color:#a18bde;cursor:pointer}
+.catalog-empty{grid-column:1/-1;padding:32px;color:#d2cde4}
+.catalog-pagination{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:24px 0 12px}
+.catalog-pagination button{min-width:44px;min-height:42px}
+.catalog-pagination small{color:#bdc4db;line-height:1.5;flex:1 1 300px}
+.catalog-batch{position:sticky;bottom:16px;z-index:30;display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:20px 0;padding:18px 20px;border:1px solid #b39cdc99;border-radius:16px;background:#202640f5;box-shadow:0 10px 40px #05091588;backdrop-filter:blur(12px)}
+.catalog-batch[hidden],.catalog-undo[hidden]{display:none!important}
+.catalog-batch label{display:flex;align-items:center;gap:10px}
+.catalog-undo{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 120px);z-index:2600;display:flex;gap:14px;align-items:center;border:1px solid #bea7ee99;border-radius:14px;padding:14px 18px;background:#202640f5;box-shadow:0 10px 35px #05091588;color:#eeeaf8}
+html body .anime-peek-dialog{width:min(1040px,calc(100vw - 36px));max-width:calc(100vw - 36px);max-height:calc(100dvh - 36px);padding:0;border:1px solid #aa93d666;border-radius:22px;background:linear-gradient(145deg,#252944,#131c30);color:#eeebfa;box-shadow:0 30px 100px #020415c0;overflow:hidden}
+html body .anime-peek-dialog[open]{display:flex;flex-direction:column}
+.anime-peek-dialog::backdrop,.backup-preview-dialog::backdrop{background:#060a20a8;backdrop-filter:blur(5px)}
+.anime-peek-header,.anime-peek-navigation{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px 24px;flex-shrink:0}
+.anime-peek-header{border-bottom:1px solid #9a87c733}
+.anime-peek-header h2{font-size:21px;line-height:1.4;margin:0;overflow-wrap:anywhere;min-width:0}
+.anime-peek-header button{flex-shrink:0}
+.anime-peek-body{overflow-y:auto;overscroll-behavior:contain;padding:22px 24px 70px;min-height:0;min-width:0}
+.anime-peek-body .discovery-detail{padding:0;border:0;background:none;min-height:0}
+.anime-peek-body .discovery-detail-hero{grid-template-columns:150px minmax(0,1fr)}
+.anime-peek-body .discovery-detail h2{font-size:23px}
+#animePeekPersonal p{color:#c9c7df;line-height:1.7;margin:0 0 16px}
+#animePeekPersonal .peek-notes{white-space:pre-wrap;overflow-wrap:anywhere}
+.anime-peek-navigation{border-top:1px solid #9a87c733;background:#121b2e}
+.anime-peek-navigation button{min-height:42px}
+.episode-stepper{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px}
+.episode-stepper>button{min-width:34px;min-height:34px;padding:4px 8px;font-size:18px;line-height:1;border:1px solid #a089ca66;background:#30294b}
+.episode-stepper>span{min-width:64px;text-align:center;font-size:14px;color:#e7def5;font-variant-numeric:tabular-nums}
+.episode-stepper>button.episode-finish{flex-basis:100%;font-size:12px;line-height:1.4}
+html body #scrollJumpControls{display:flex!important}
+html body #scrollJumpControls[hidden],html body .dialog-scroll-controls[hidden]{display:none!important}
+.dialog-scroll-controls{position:absolute!important;right:14px!important;bottom:80px!important;z-index:20!important;gap:8px}
+.dialog-scroll-controls .scroll-jump-btn{width:40px;height:40px;background:#282740eb}
+html body #settingsDialog .nocturne-dialog-hero{background-image:linear-gradient(90deg,#181c35fa 0%,#1c2244eb 35%,#20213b55 65%,#131b3030 100%),url('/assets/design/moon-library.webp')!important;background-size:cover!important;background-position:right 20%!important}
+.display-preferences,.backup-overview{padding:18px 20px;border:1px solid #a38ac444;border-radius:14px;background:#1d253ca3;margin:20px 0}
+.display-preference-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0}
+.display-preference-fields label{display:flex;flex-direction:column;gap:9px;min-width:0}
+.display-preference-fields select{max-width:100%;width:100%}
+.display-preferences p,.backup-overview p{color:#cbd1e5;line-height:1.7;overflow-wrap:anywhere}
+#settingsPanel-restoration>label{display:flex;flex-direction:column;gap:12px;margin:22px 0 12px;max-width:100%}
+#settingsPanel-restoration>p{line-height:1.7;color:#d2cce4;overflow-wrap:anywhere}
+html body .backup-preview-dialog{width:min(650px,calc(100vw - 36px));max-height:calc(100dvh - 36px);overflow:auto;padding:26px;background:#202740;color:#edeaf8;border:1px solid #ad93cf77;border-radius:20px}
+.backup-preview-dialog p{line-height:1.7;overflow-wrap:anywhere}
+.backup-preview-dialog menu{padding:0;display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+html body #aboutPage .studio-support-grid{align-items:start!important}
+html body #aboutPage .about-media-aside .alm-wallpapers{flex:0 0 auto!important}
+.alm-partner-banner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;border:1px solid #aa8ad44d;border-radius:16px;background:linear-gradient(110deg,#342a50dc,#17253ddc)}
+.alm-partner-banner h3{font-size:18px;margin:0 0 8px}
+.alm-partner-banner p{font-size:13px;color:#cec5df;line-height:1.6;margin:0}
+.alm-partner-banner a{flex-shrink:0;padding:10px 14px;border-radius:10px;background:#977bca;color:#100f20;text-decoration:none;font-weight:700}
+/* Dress-coloured lyrics with an ivory edge, on the blue sky and dark scenes alike. */
+html body .nocturne-player .donation-karaoke-stage .karaoke-original-unit,html body .nocturne-player .donation-karaoke-stage .karaoke-romaji-unit{background:linear-gradient(90deg,#875093 0 var(--karaoke-progress,0%),#3c1c50 var(--karaoke-progress,0%) 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-stroke:.5px #fff4e6;filter:drop-shadow(0 1px .5px #fff4e6d9) drop-shadow(0 -1px .5px #fff4e6b3)!important;text-shadow:none!important}
+html body .nocturne-player .donation-karaoke-stage .karaoke-fr-unit{color:#402152!important;-webkit-text-fill-color:#402152!important;-webkit-text-stroke:.3px #fff4e6;text-shadow:0 1px 1px #fff4e6,-1px 0 .5px #fff4e6!important}
+html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title,html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title>*,html body .nocturne-player.karaoke-outro .donation-karaoke-stage .karaoke-opening-title>*{color:#402152!important;-webkit-text-fill-color:#402152!important;-webkit-text-stroke:.4px #fff4e6;text-shadow:0 1px 1px #fff4e6,1px 0 .5px #fff4e6,-1px 0 .5px #fff4e6!important}
+@media(max-width:850px){.display-preference-fields{grid-template-columns:1fr}.anime-peek-header,.anime-peek-navigation{padding:14px;gap:10px}.anime-peek-body{padding:16px 14px 70px}.alm-partner-banner{flex-wrap:wrap}.catalog-undo{max-width:calc(100vw - 32px);width:calc(100vw - 70px);flex-wrap:wrap}}
+@media(max-width:480px){html body #discoveryResults.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catalog-card-copy{padding:10px}.anime-peek-body .discovery-detail-hero{grid-template-columns:100px minmax(0,1fr)}.anime-peek-navigation button{font-size:12px}.catalog-batch{padding:14px;gap:10px}}
+@media(prefers-reduced-motion:reduce){.catalog-cover img{transition:none}}
+html body dialog .dialog-scroll-controls{right:12px!important;bottom:94px!important}
+html body dialog .dialog-scroll-controls .scroll-jump-btn{width:40px;height:40px}
+.anime-peek-body .discovery-detail-heading{grid-template-columns:160px minmax(0,1fr);gap:22px}
+.anime-peek-body .discovery-detail-heading>div{grid-column:2}
+.anime-peek-body .discovery-detail-heading:not(:has(img:not([hidden])))>div{grid-column:1/-1}
+.anime-peek-body .discovery-poster{width:160px;max-height:245px}
+.anime-peek-body .discovery-detail-heading h2{display:none}
+@media(max-width:480px){.anime-peek-body .discovery-detail-heading{grid-template-columns:90px minmax(0,1fr);gap:12px}.anime-peek-body .discovery-poster{width:90px}}

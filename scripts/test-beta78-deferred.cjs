@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process'),assert=require('node:assert/strict');
+if(process.argv[2]==='child'){
+ const root=path.resolve(process.env.ALM_TEST_ROOT||path.join(__dirname,'..')),dir=process.argv[3];process.env.ALM_SQLJS_ONLY='1';const db=require(path.join(root,'db'));
+ (async()=>{await db.initDb(dir);db.insertAnime({id:1,title:'Fictional deferred failure',notes:'Original'});const rename=fs.renameSync;fs.renameSync=function(from,to,...args){if(to===path.join(dir,'animes.sqlite'))throw Object.assign(Error('Fictional disk full'),{code:'ENOSPC'});return rename.call(this,from,to,...args);};
+ db.updateAnime(1,{notes:'Latest fictional note'},{save:'deferred',delayMs:500});await new Promise(r=>setTimeout(r,800));assert.equal(db.storageStatus().error,'ENOSPC');assert.equal(db.getAnimeById(1).notes,'Latest fictional note');assert.equal(JSON.parse(fs.readFileSync(path.join(dir,'animes.json')))[0].notes,'Latest fictional note');fs.renameSync=rename;db.flush();assert.equal(db.storageStatus().error,'');db.close();console.log('Deferred failure contained; retry persisted.');
+ })().catch(e=>{console.error(e);process.exitCode=1;});
+}else{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm78-deferred-'));try{const run=cp.spawnSync(process.execPath,[__filename,'child',dir],{env:process.env,encoding:'utf8',timeout:180000});console.log(run.stdout+run.stderr);assert.equal(run.status,0,'Deferred disk failure must not terminate the engine.');const SQL=require('sql.js');(async()=>{const sql=await SQL(),db=new sql.Database(fs.readFileSync(path.join(dir,'animes.sqlite')));try{assert.equal(JSON.parse(db.exec('select data from animes')[0].values[0][0]).notes,'Latest fictional note');console.log('OK Beta78: deferred WASM disk failure is contained, reported, retried and reopened.');}finally{db.close();fs.rmSync(dir,{recursive:true,force:true});}})().catch(e=>{console.error(e);fs.rmSync(dir,{recursive:true,force:true});process.exitCode=1;});}catch(e){fs.rmSync(dir,{recursive:true,force:true});throw e;}
+}

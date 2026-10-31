@@ -1,0 +1,27 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict');
+const {chromium}=require(process.env.ALM_PLAYWRIGHT_MODULE||'playwright');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm55-browser-')),keepAlive=setInterval(()=>{},1000);let host,browser;
+process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');fs.mkdirSync(process.env.ALM_IMAGES_DIR);
+fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({preloadMetadataOnStart:false,metadataAutonomousUpdateOnStart:false,metadataUpdateOnStart:false}));
+const nativeFetch=global.fetch;global.fetch=(u,o)=>String(u).startsWith('http://127.0.0.1:')?nativeFetch(u,o):Promise.reject(Error('Offline UI fixture'));
+(async()=>{
+ const server=require('../server'),db=require('../db');await db.whenReady();
+ db.writeAllAnimes([{id:1,title:'Toaru Ossan no VRMMO Katsudouki',malId:54431,type:'TV',status:'Completed',episodesSeen:'12',episodesTotal:'12',synopsis:'A virtual world.',genres:['Fantasy'],startDate:'2023-10-02',imageUrl:'/assets/design/moon-library.webp',unallocatedEpisodes:1,betaseriesEpisode:'S01E13'},{id:2,title:'Unknown Season — Saison 2',type:'TV',manualSeasonNumber:2,status:'Watching',episodesSeen:'3',tags:['saison à identifier'],imageUrl:'/assets/design/moon-library.webp'},{id:3,title:'Meitantei Conan',malId:235,type:'TV',status:'Watching',synopsis:'A detective story.',genres:['Mystery'],startDate:'1996-01-08',imageUrl:'/assets/design/moon-library.webp',betaseriesProgressScope:'season-marker'}]);
+ host=await server.startServer(0);browser=await chromium.launch({headless:true,...(process.env.ALM_CHROMIUM_PATH?{executablePath:process.env.ALM_CHROMIUM_PATH}:{}),args:JSON.parse(process.env.ALM_CHROMIUM_ARGS||'[]')});
+ const page=await browser.newPage({viewport:{width:1280,height:800}}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:'+host.almPort);
+ await page.waitForFunction(()=>window._almAnimes?.length===3&&window.ALM_COMPLETION_ISSUES);
+ await page.evaluate(async()=>{await window.ALM_I18N.setLanguage('fr');document.querySelector('[data-alm-language-confirm]')?.click();document.getElementById('almLanguageFirstRun')?.close();document.getElementById('navAudit').click();});
+ await page.waitForSelector('.completion-issue-row[data-kind="progress"]');
+ assert((await page.locator('.completion-issue-row[data-kind="progress"]').textContent()).includes('Épisodes importés à rattacher'));
+ assert(!(await page.locator('.completion-issue-row[data-kind="progress"]').textContent()).includes('Fiche officielle à identifier'));
+ await page.locator('.completion-issue-row[data-kind="progress"] .completion-issue-open').click();await page.waitForSelector('#importGapDialog dl');
+ assert((await page.locator('#importGapDialog').textContent()).includes('S01E13'));assert((await page.locator('#importGapDialog').textContent()).includes('12 / 12'));assert(!(await page.evaluate(()=>document.getElementById('recordSearchDialog')?.open)));
+ await page.setViewportSize({width:600,height:560});const box=await page.locator('#importGapDialog').boundingBox();assert(box.x>=0&&box.y>=0&&box.x+box.width<=600&&box.y+box.height<=560);
+ fs.mkdirSync(path.join(__dirname,'../verification/beta55'),{recursive:true});await page.screenshot({path:path.join(__dirname,'../verification/beta55/progress-review.png')});
+ await page.locator('#importGapDialog .import-gap-close').click();await page.locator('#completionKindFilters button').filter({hasText:'Saisons à associer'}).click();assert.equal(await page.locator('.completion-issue-row').count(),1);assert.equal(await page.locator('.completion-issue-row').getAttribute('data-kind'),'season');
+ assert((await page.locator('#completionAwaiting').textContent()).includes('Meitantei Conan'));
+ await page.evaluate(()=>updateCompletionProgress({status:'done',done:1,total:1,failed:1,relationsUnavailable:true}));assert((await page.locator('#completionProgressCurrent').textContent()).includes('Les liens de saisons'));
+ fs.mkdirSync(path.join(__dirname,'../verification/beta55'),{recursive:true});await page.screenshot({path:path.join(__dirname,'../verification/beta55/control-review.png')});
+ assert.deepEqual(errors,[]);console.log('OK Beta55 browser: distinct filters, genuine progress explanation, source position, pending Conan total, compact viewport and no JavaScript errors.');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{await browser?.close();await require('./runtime-cleanup').cleanupRuntime(dir,host);clearInterval(keepAlive);});

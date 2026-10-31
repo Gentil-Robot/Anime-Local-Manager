@@ -1,0 +1,1225 @@
+{
+  "schema": 1,
+  "status": "passed-across-runs",
+  "fullUninterruptedRunPassed": false,
+  "mainRunPassed": 140,
+  "retriedPassed": 1,
+  "remainingPassed": 4,
+  "totalPassed": 145,
+  "testedSourceManifestSha256": "ea561a011b8c145878a4fed3277bcdc43bd371a2ecdbfc692ada8025c3294423",
+  "testedSourcesUnchangedBetweenRuns": true,
+  "checks": [
+    {
+      "test": "scripts/test-source-files.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 227,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta-stable.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 35917,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-karaoke-timeline.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 151,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta15-ui-logic.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 81,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta16-ui-logic.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 91,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta17-final-polish.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 168,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta19-ux.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 67,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-manual-add-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 362,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta21-final.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 60,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta23-multiseason-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 364,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta23-final.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 79,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta24-final.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 81,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta25-final.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 103,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta26-overflow-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 466,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta27-final.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 381,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta28-final.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 475,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-audit-upgrade.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 1002,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-nocturne.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 192,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta36-runtime.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 181,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta37-runtime.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 8074,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta38-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 1529,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta38-http.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 12333,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-release-watch.js",
+      "group": "Publication",
+      "status": "passed",
+      "durationMs": 257,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta39-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 356,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta39-http.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 13994,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta40-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 187,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-packaged-integrity.js",
+      "group": "Publication",
+      "status": "passed",
+      "durationMs": 303,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta41-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 9970,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta42-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 10164,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta43-native.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 251,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta44-providers.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 8833,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta45-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 15388,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta45-enrichment.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 478,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta46-cleanup.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 25354,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-retours-runtime.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 7655,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-retours-window.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 271,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-association-concurrency.js",
+      "group": "Données, sauvegardes et sécurité",
+      "status": "passed",
+      "durationMs": 1648,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta47-calendar.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 274,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta47-karaoke.js",
+      "group": "Interface et karaoké",
+      "status": "passed",
+      "durationMs": 135,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta48-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 509,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-csv-import-progress-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 2739,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-betaseries-progress-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 350,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta48-worker.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 1498,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta48-http.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 9501,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta49-http.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 16899,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta50-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 83,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta50-worker.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 251,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta50-http.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 22350,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta51-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 506,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta51-worker.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 309,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta51-http.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 30581,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta52-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 18210,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta52-worker.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 477,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta53-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 173,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta53-http.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 30826,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta54-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 16136,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta55-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 11147,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta55-worker.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 12139,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta56-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 14917,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta56-restart.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 19749,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta57-runtime.js",
+      "group": "Imports et bibliothèque",
+      "status": "passed",
+      "durationMs": 15604,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta58-release.js",
+      "group": "Publication",
+      "status": "passed",
+      "durationMs": 3473,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta58-smoke.js",
+      "group": "Publication",
+      "status": "passed",
+      "durationMs": 18748,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta58-tooling.js",
+      "group": "Publication",
+      "status": "passed",
+      "durationMs": 532,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta59-community.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 321,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta59-maintenance.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 201,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta59-http.js",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 11395,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta60-runtime.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 124,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta60-sql.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 4445,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta60-public.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 405,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta61-runtime.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 141,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta61-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2305,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta61-flows.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1768,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta61-scheduler.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 96,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta61-sql.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 5061,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta61-public.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 391,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta62-sync.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 145,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta62-sql.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 5913,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta63-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2653,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta63-support.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1617,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta63-sql.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 4751,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta64-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 5214,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta64-favorites.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 209,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta64-diagnostic.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 12153,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta65-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2380,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta65-sync.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 220,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta66-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2755,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta66-policy.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 7043,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta67-notebook.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 15697,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta67-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2414,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta68-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 874,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta68-release.cjs",
+      "group": "Publication",
+      "status": "passed",
+      "durationMs": 112,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "schema": 1,
+      "type": "supplemental-isolated-suite",
+      "test": "scripts/test-beta69-package.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "reportedDurationMs": 22898.136,
+      "sourceSha256": "3814a862e24ef107de6377b4bf03099a562ad82ef7dd62cff548ed7700562f57",
+      "sourceUnchangedFromInput": true,
+      "log": "beta69-isolated.log",
+      "electronPhases": [
+        {
+          "phase": "missing",
+          "electron": "45.0.0",
+          "missingModuleRejected": true
+        },
+        {
+          "phase": "seed",
+          "electron": "45.0.0",
+          "catalogue": 30430,
+          "imported": 1,
+          "backup": true,
+          "persistence": false,
+          "nativeStorage": "not-available"
+        },
+        {
+          "phase": "verify",
+          "electron": "45.0.0",
+          "catalogue": 30430,
+          "imported": 1,
+          "backup": true,
+          "persistence": true,
+          "nativeStorage": "not-exercised"
+        }
+      ],
+      "note": "The unmodified test passed in a separate process after its deliberately incomplete-ASAR case failed to include the expected diagnostic in the main run.",
+      "group": "Publication",
+      "resultSource": "beta69-isolated-report.json",
+      "earlierMainRunStatus": "failed"
+    },
+    {
+      "test": "scripts/test-beta70-windows-paths.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 515,
+      "sourceSha256": "80e3a3c68bf144e24e487df4eb658785b51db1f46803d78ee95d0332f4835a87",
+      "sourceUnchanged": true,
+      "log": "beta70-windows-paths-isolated.log",
+      "group": "Publication",
+      "resultSource": "verification-tail-report.json"
+    },
+    {
+      "test": "scripts/test-beta71-package.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 68503,
+      "sourceSha256": "19b8d5d169f27d734bbc53cc242f9ad76581680eceb02118e89b51ceb116bea8",
+      "sourceUnchanged": true,
+      "log": "beta71-package-isolated.log",
+      "group": "Publication",
+      "resultSource": "verification-tail-report.json"
+    },
+    {
+      "test": "scripts/test-beta72-age.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 4513,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta72-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1583,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta73-charter.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2113,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta73-requests.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 66,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta73-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1863,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta74-import.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 4268,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta76-imports.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 24450,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta76-network.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 286,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta76-maintenance.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 118,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta76-public.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 521,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta77-restoration.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 8867,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta77-news.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 469,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta77-review.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 8726,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta77-review-visual.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 69,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta77-database.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 7306,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-community-inputs.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1198,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-community.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 741,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-deferred.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 9735,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-library-fields.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 8771,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-news.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 7356,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-season-races.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 8597,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-server.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 6559,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-storage.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 47526,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-ui-recovery.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2362,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-ui.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1843,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta78-worker.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 285,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta79-services.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 236,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta80-performance.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 14723,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta80-paging.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2760,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta81-common.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 774,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta81-seasons.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1041,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta81-maintenance.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 873,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-prepublication.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 162,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-build.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 1805,
+      "sourceSha256": "1a41875dfc822c4afebbd0a411ab9b6f66dec4331605d6b78a80d2bad238dc4f",
+      "sourceUnchanged": true,
+      "log": "beta82-build-isolated.log",
+      "group": "Publication",
+      "resultSource": "verification-tail-report.json"
+    },
+    {
+      "test": "scripts/test-beta82-perf.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 554,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-build-security.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 75,
+      "sourceSha256": "b374f93d8fa4c1c031d8717be55840ea619d3e5baf643935a192014dc99573fc",
+      "sourceUnchanged": true,
+      "log": "beta82-build-security-isolated.log",
+      "group": "Publication",
+      "resultSource": "verification-tail-report.json"
+    },
+    {
+      "test": "scripts/test-gap82-local-images.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 128,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-gap82-toolchain.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 55,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-safe-storage.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 88,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-production-copy.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1888,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-common-profile.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 98,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-cover-cache.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 172,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-recommend-catalog.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 94,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-social-cache-hardening.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 146,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-cover-retries.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 302,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-ux6.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 91,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-account-teardown.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 89,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-memories-filters.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1499,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-community-navigation.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 2058,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    },
+    {
+      "test": "scripts/test-beta82-card-actions.cjs",
+      "group": "Structure et régressions",
+      "status": "passed",
+      "durationMs": 1934,
+      "exitCode": 0,
+      "resultSource": "verification-project.json"
+    }
+  ],
+  "groups": {
+    "Structure et régressions": 86,
+    "Interface et karaoké": 8,
+    "Imports et bibliothèque": 26,
+    "Données, sauvegardes et sécurité": 14,
+    "Publication": 11
+  },
+  "note": "The main run stopped when the deliberately incomplete ASAR did not include the expected missing-module diagnostic. The unmodified Electron test then passed separately, as did all four remaining suites. The failed main report is preserved."
+}

@@ -1,0 +1,35 @@
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm82-age-sharing-qaelhI/collection.sqlite
+OK Adult profile exposes the same active exclusion control as My account
+OK Cancelling an adult choice leaves the saved exclusion unchanged
+OK Adult opt-in saves false through the existing age endpoint before profile
+OK Saved adult choice survives profile reopening
+OK My account immediately reflects the exclusion changed in profile
+OK Changing exclusion in My account is reflected by the profile editor
+OK Saving an unchanged exclusion does not issue a redundant age write
+OK Adult opt-in survives a full application reload
+OK Adults can restore exclusion and reopen the checked control
+OK minor: exclusion stays checked, disabled and explained
+OK minor: normal profile save never attempts to loosen the age rule
+OK undeclared age: exclusion stays checked, disabled and explained
+OK undeclared age: normal profile save never attempts to loosen the age rule
+OK unavailable age: exclusion stays checked, disabled and explained
+OK unavailable age: normal profile save never attempts to loosen the age rule
+OK Age write failure stays visible and prevents a misleading profile save
+OK An adult can retry a failed save successfully
+OK An age write committed before an error is reconciled from the server
+OK My account displays the reconciled committed preference after an error
+OK If verification fails too, age state stays unavailable without retrying a write
+OK A fresh successful read restores the true preference after verification failure
+OK A successful age write is retained if the following profile save fails
+OK Retry after a partial save does not send the age preference twice
+OK Pending profile save is disabled and duplicate submit does not write twice
+OK Single pending save settles with one age write and one profile write
+OK A completed age write after Close preserves the newly opened profile form
+OK Reopening after a closed pending save shows the authoritative saved age choice
+OK A response from the previous account cannot write the new account profile
+OK After account switch the minor profile is locked with the new identity
+OK All seven translations use the shared age-rule component
+OK App and website share identical age/profile runtime files
+OK All local library entries, notes and journals stay untouched
+32 age-sharing browser checks passed.

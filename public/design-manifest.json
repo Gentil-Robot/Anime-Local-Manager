@@ -1,0 +1,78 @@
+{
+  "version": "2.0.0",
+  "theme": "Nocturne",
+  "newInterfaceKeysPerLanguage": {
+    "fr": 373,
+    "en": 373,
+    "ja": 373,
+    "es": 373,
+    "de": 373,
+    "pt-BR": 373,
+    "zh-CN": 373
+  },
+  "mainGlossaryDefinitionsPerLanguage": {
+    "fr": 161,
+    "en": 161,
+    "ja": 161,
+    "es": 161,
+    "de": 161,
+    "pt-BR": 161,
+    "zh-CN": 161
+  },
+  "extendedGlossaryNotes": "original French, explicitly labelled when a different interface language is selected",
+  "imageTextPolicy": "decorative assets have no translated text baked into pixels",
+  "video": {
+    "durationSeconds": 225.171,
+    "width": 1920,
+    "height": 1080,
+    "audioTrack": true,
+    "clock": "media.currentTime",
+    "bouncingBall": false,
+    "progressiveText": "Japanese and romaji",
+    "wordTimings": "approximate; archived audio-reviewed Beta38 timeline retained"
+  },
+  "legacyChineseCatalog": "partial; do not equate new-layout coverage with the entire legacy UI",
+  "rankings": {
+    "source": "MyAnimeList via Jikan",
+    "size": 100,
+    "refreshHours": 24,
+    "offlineFallback": "last complete ranking or explicitly labelled local metadata selection"
+  },
+  "serviceDiagnostics": {
+    "apiServices": 6,
+    "rssSources": 16,
+    "automaticOnOpen": false
+  },
+  "beta35": {
+    "controls": "Shared accessible dark listbox, native form state retained",
+    "catalog": "Sort locally; add directly in five statuses; preserve view and duplicate protection",
+    "news": "25-second bounded requests, media cache, full RSS content images, source status; Traditional Chinese source available subject to publisher restrictions",
+    "banner": "900x280 GIF, 64 frames, 8 seconds, two existing ALM scenes"
+  },
+  "beta39": {
+    "calendar": "AniList then Jikan/MAL then local saved dates; estimates labelled, never notified",
+    "wallpapers": {
+      "FHD": [
+        1920,
+        1080
+      ],
+      "QHD": [
+        2560,
+        1440
+      ],
+      "4K": [
+        3840,
+        2160
+      ],
+      "resizedFromOriginal": true
+    },
+    "integratedUpdates": "official GitHub assets with SHA-256 and exact format/version; no native Windows test"
+  },
+  "beta40": {
+    "history": "Collection timeline by release year; batches of 20 posters, personal viewing history kept in Anime DNA",
+    "notifications": "One-time opt-in, preserved preferences, settings toggle and actual native path test; Windows delivery not executed",
+    "backups": "Explicit recovery sheet; separate restoration password dialog",
+    "karaoke": "Root-level modal video, visible close, progressive original/romaji, fixed translated text",
+    "packaging": "Wait for archive output stream finish; verify all packed and unpacked payload hashes before continuing"
+  }
+}

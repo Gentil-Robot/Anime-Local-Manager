@@ -1,0 +1,15 @@
+html body dialog.calendar-dialog{display:none;box-sizing:border-box;overflow:hidden;padding:20px 22px 0;max-height:min(88dvh,1100px);width:min(1000px,94vw)}
+html body dialog.calendar-dialog[open]{display:flex;flex-direction:column}
+html body .calendar-dialog-body{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 64px 18px 0;scrollbar-gutter:stable;flex:1 1 auto}
+html body .calendar-dialog>.calendar-close{flex:0 0 auto;margin-bottom:12px}
+html body .calendar-dialog-footer{flex:0 0 auto;display:flex;justify-content:flex-end;padding:18px 0 22px;border-top:1px solid #b29bdb38;min-height:76px;box-sizing:border-box}
+html body dialog.calendar-dialog .dialog-scroll-controls{position:absolute!important;right:22px!important;bottom:108px!important;z-index:25!important;gap:12px!important}
+html body dialog[open] .dialog-scroll-controls:not([hidden]){display:flex!important}
+html body .calendar-dialog-footer button{min-height:40px;margin:0}
+html body #completionOpenIssues[hidden]{display:none!important}
+html body .completion-issues-header{display:flex;align-items:center;gap:18px;justify-content:space-between;flex-wrap:wrap}
+html body .completion-issues-header h2{margin:0}
+html body #completionIssuesRetry{min-height:42px}
+html body #auditStats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+@media(max-width:650px){html body dialog.calendar-dialog{padding:16px 16px 0}html body .calendar-dialog-body{padding-right:54px}html body dialog.calendar-dialog .dialog-scroll-controls{right:16px!important;bottom:106px!important}}
+

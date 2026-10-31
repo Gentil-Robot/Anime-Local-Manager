@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-25T06:06:39.034298+00:00",
+  "method": "GET",
+  "path": "/rest/v1/account_age?select=user_id&limit=0",
+  "requested_schema": "alm_private",
+  "status": 406,
+  "body": {
+    "code": "PGRST106",
+    "details": null,
+    "hint": "Only the following schemas are exposed: public, graphql_public",
+    "message": "Invalid schema: alm_private"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "browser": "134.0.6998.35",
+  "checks": [
+    "Real app loads 70 local records with bounded library DOM",
+    "Footer uses the connected identity once and has no old version signature",
+    "Recommendation stays before Delete, visible and within three action rows",
+    "Recommendation opens the friend chooser without sending a message",
+    "Library tools do not contain New seasons; its sidebar page remains",
+    "XML import keeps the GIF without its caption",
+    "Memories use real API rows and one bounded page without library leftovers",
+    "Exact automatic annotation is hidden until explicitly requested",
+    "Automatic-only notebook can be restored with one reversible checkbox",
+    "Ambiguous Saison 1 / Saison 2 notes remain personal memories",
+    "Proven sequel-source annotation is filtered without changing the notebook",
+    "Status filter preserves the personal part of a mixed note",
+    "Broadcast year and annual-choice year combine independently",
+    "Text search and active filters combine without showing an irrelevant pager",
+    "Memory cover loads and note markup stays escaped",
+    "Memory cover opens the shared anime detail dialog",
+    "Memory title opens the same shared anime detail",
+    "Open notebook retains the complete original private note",
+    "Reset synchronizes the visible select labels with the cleared values",
+    "Friend profile exposes a keyboard-accessible common counter without a duplicate action",
+    "Common counter changes appearance on hover",
+    "Common counter opens the exact shared list, with no one-page arrows",
+    "Friend library common statistic uses the same three-record scope",
+    "Returning from friend library restores only the library pagination",
+    "Catalogue single result hides only its pager and keeps source information",
+    "Single-result studio ranking has no paging arrows",
+    "Empty dictionary filter hides both synchronized pager positions",
+    "Narrow library has no horizontal page overflow",
+    "Narrow library keeps readable full-width cards and three action rows",
+    "Narrow memories keep filters and cards within the viewport",
+    "Entire UI journey keeps every original note and journal unchanged"
+  ],
+  "errors": [],
+  "communityRequests": [
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "profiles/00000000-0000-0000-0000-000000000002",
+      "method": "GET"
+    },
+    {
+      "name": "profiles/00000000-0000-0000-0000-000000000002",
+      "method": "GET"
+    }
+  ],
+  "blockedExternalOrigins": [
+    "https://cdn.myanimelist.net"
+  ],
+  "scope": "Real local Express/SQLite/notebook API and shipped frontend; only community account responses are mocked; no messages sent; no native Windows installer run"
+}

@@ -1,0 +1,48 @@
+'use strict';
+// Integration against the real server and SQLite. All live providers blocked.
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-discovery-'));
+process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');
+fs.writeFileSync(path.join(dir,'animes.json'),'[]');fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({metadataAutonomousUpdateOnStart:false,metadataUpdateOnStart:false}));
+const localFetch=global.fetch;let externalCalls=0,listener;
+global.fetch=async()=>{externalCalls++;throw Error('Test: offline');};
+const deadline=setTimeout(()=>{console.error('Discovery test timeout');process.exit(1);},30000);
+(async()=>{
+ const {app}=require('../server'),db=require('../db');await db.whenReady();assert.equal(db.storageStatus().mode,'sqlite');assert(db.getMetadataCount()>=30430);
+ const anime={malId:999991,title:'ALM public runtime fixture',synopsis:'Second season of <i>ALM public runtime fixture</i>.',score:8.75,episodes:12,genres:['Adventure','Fantasy'],startDate:'2026-01-01',studios:['Studio Test'],rank:25,popularity:90,members:120000,duration:'24 min per ep'};
+ assert(db.importMetadataRows([anime]).ok);
+ listener=await new Promise(resolve=>{const s=app.listen(0,'127.0.0.1',()=>resolve(s));});const origin='http://127.0.0.1:'+listener.address().port;
+ const get=async url=>{const r=await localFetch(origin+url);assert.equal(r.status,200);return r.json();};
+ let found=await get('/api/discover?q=ALM%20public%20runtime%20fixture&online=0');assert.equal(found.source,'local');assert(found.items.some(i=>i.malId===999991));assert.equal(found.items[0].publicScore,8.75);assert.deepEqual(found.items[0].studios,['Studio Test']);assert.equal(found.items[0].malUrl,'https://myanimelist.net/anime/999991');assert.equal(found.items[0].members,120000);
+ for(const lang of ['fr','en','ja','es','de','pt-BR','zh-CN']){const d=await get('/api/discover/999991/synopsis?lang='+lang);assert.equal(d.language,lang);assert(!d.text.includes('<i>'));if(lang!=='en')assert(d.translated);}
+ assert.equal((await localFetch(origin+'/api/discover/999998/synopsis?lang=fr')).status,404);
+ const privateReply=await localFetch(origin+'/api/season-synopsis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({malId:999998,lang:'fr',text:'Secret personal description'})});assert.equal((await privateReply.json()).text,'');
+ const bytes=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a4WQAAAAASUVORK5CYII=','base64');
+ const upload=async(data,name)=>{const f=new FormData();f.append('file',new Blob([data]),name);return localFetch(origin+'/api/local-images',{method:'POST',body:f});};
+ let response=await upload(bytes,'../../poster.png');assert.equal(response.status,200);const poster=(await response.json()).poster;assert.match(poster,/^\/images\/manual-[a-f0-9]{24}\.png$/);assert.deepEqual(fs.readFileSync(path.join(dir,poster)),bytes);
+ assert.equal((await upload('<svg><script>alert(1)</script></svg>','evil.svg')).status,400);
+ assert.equal((await upload(Buffer.alloc(8*1024*1024+1),'big.png')).status,413);
+ const body={title:'My offline handmade anime',status:'Plan to Watch',poster,synopsis:'A private description',score:'9',publicScore:'8.2',rank:'123',episodesTotal:'12',genres:['Mon genre'],autoInfo:false};
+ response=await localFetch(origin+'/api/animes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});assert.equal(response.status,200);const saved=await response.json();assert(saved.id);assert.equal(saved.poster,poster);assert.equal(saved.synopsis,body.synopsis);assert.equal(saved.publicScore,'8.2');
+ response=await localFetch(origin+'/api/animes/'+saved.id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({synopsis:'Edited private description',publicScore:'8.4',episodesSeen:'3',autoInfo:false})});assert.equal(response.status,200);assert.equal((await response.json()).episodesSeen,'3');
+ db.flush();const SQL=await require('sql.js')();const reopened=new SQL.Database(fs.readFileSync(path.join(dir,db.storageStatus().engine==='sqlite-disk'?'collection.sqlite':'animes.sqlite')));const row=JSON.parse(reopened.exec('SELECT data FROM animes WHERE id='+Number(saved.id))[0].values[0][0]);assert.equal(row.synopsis,'Edited private description');assert.equal(row.publicScore,'8.4');assert.equal(row.poster,poster);reopened.close();
+ const catalogBody={malId:999991,title:'ALM public runtime fixture',status:'Plan to Watch',catalogAdd:true,autoInfo:false};
+ const addCatalog=()=>localFetch(origin+'/api/animes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(catalogBody)}).then(r=>r.json());
+ const added=await Promise.all([addCatalog(),addCatalog()]);assert.equal(added[0].id,added[1].id);assert.equal(added.filter(r=>r._addOutcome.status==='existing').length,1);
+ const again=await localFetch(origin+'/api/news/add-to-plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({malId:999991,title:'Translated display title',source:'recommendation'})});assert((await again.json()).alreadyExists);
+ const before=(await get('/api/animes')).length;
+ const recommend=()=>localFetch(origin+'/api/news/add-to-plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({malId:999992,title:'Simultaneous recommendation',source:'recommendation'})}).then(r=>r.json());
+ const recs=await Promise.all([recommend(),recommend()]);assert.equal(recs.filter(r=>r.alreadyExists).length,1);assert.equal((await get('/api/animes')).length,before+1);
+ const services=await get('/api/services');assert.equal(services.services.length,24);
+ const skip=await localFetch(origin+'/api/services/betaseries/test',{method:'POST'});assert.equal((await skip.json()).state,'unconfigured');
+ assert.equal((await localFetch(origin+'/api/services/unknown/test',{method:'POST'})).status,404);
+ assert.equal(externalCalls,0,'Local/manual operations must not contact providers');
+ found=await get('/api/discover?q=ALM%20public%20runtime%20fixture&online=1');assert(externalCalls>0,'Explicit online search must actually contact a provider even for an exact local match');assert(found.onlineUnavailable);assert(found.items.length);
+ const top=await get('/api/rankings');assert.equal(top.source,'local');assert.equal(top.items.length,100);assert(top.items.every((r,i)=>i===0||Number(r.rank)>=Number(top.items[i-1].rank)));assert.equal((await localFetch(origin+'/api/rankings/refresh',{method:'POST'})).status,200);
+ const {createSynopsisLanguage,utf8Excerpt}=require('../lib/synopsis-language');assert(Buffer.byteLength(utf8Excerpt('日本語'.repeat(1000)))<=450);let calls=0;const translationDir=path.join(dir,'translation-fixture');
+ const translate=createSynopsisLanguage({directory:translationDir,fetchText:async(url)=>{calls++;assert(Buffer.byteLength(new URL(url).searchParams.get('q'))<=450);return {response:{ok:true},text:JSON.stringify({responseStatus:200,responseData:{translatedText:'Résumé de démonstration.'}})};}});
+ const [one,two]=await Promise.all([translate('A public synopsis in English.','fr'),translate('A public synopsis in English.','fr')]);assert.equal(calls,1);assert.equal(one.text,two.text);assert(one.translated);
+ const offline=createSynopsisLanguage({directory:translationDir,fetchText:async()=>{throw Error('offline');}});assert.equal((await offline('A public synopsis in English.','fr')).text,one.text);const fallback=await offline('A different public synopsis.','de');assert(fallback.unavailable);assert.equal(fallback.language,'en');
+ const {extractBestArticleImage}=require('../lib/news-image-utils');const html='<meta property="og:image" content="https://news.example/cover.jpg"><article><img src="https://news.example/story-large.jpg" width="1200" height="800"></article>';const first=extractBestArticleImage(html,'https://news.example/article');assert(first);const second=extractBestArticleImage(html,'https://news.example/article',{exclude:[first]});assert(second&&second!==first);
+ console.log('OK Beta 34 runtime: richer fields, catalog/recommendation duplicate guards including concurrent calls, 24 API sources, local discovery, seven languages, public metadata only, upload/size limit, manual save/edit/SQLite reopen without providers, explicit online search, translation cache/dedup/offline, alternative news image.');
+})().then(async()=>{clearTimeout(deadline);await require('./runtime-cleanup').cleanupRuntime(dir,listener);process.exit(0);}).catch(async error=>{console.error(error.stack);clearTimeout(deadline);await require('./runtime-cleanup').cleanupRuntime(dir,listener);process.exit(1);});

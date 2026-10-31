@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "type": "supplemental-isolated-suites",
+  "root": "<project>",
+  "startedAt": "2026-10-24T18:42:03.424018+00:00",
+  "status": "passed",
+  "checks": [
+    {
+      "test": "scripts/test-beta70-windows-paths.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 515,
+      "sourceSha256": "80e3a3c68bf144e24e487df4eb658785b51db1f46803d78ee95d0332f4835a87",
+      "sourceUnchanged": true,
+      "log": "beta70-windows-paths-isolated.log"
+    },
+    {
+      "test": "scripts/test-beta71-package.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 68503,
+      "sourceSha256": "19b8d5d169f27d734bbc53cc242f9ad76581680eceb02118e89b51ceb116bea8",
+      "sourceUnchanged": true,
+      "log": "beta71-package-isolated.log"
+    },
+    {
+      "test": "scripts/test-beta82-build.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 1805,
+      "sourceSha256": "1a41875dfc822c4afebbd0a411ab9b6f66dec4331605d6b78a80d2bad238dc4f",
+      "sourceUnchanged": true,
+      "log": "beta82-build-isolated.log"
+    },
+    {
+      "test": "scripts/test-beta82-build-security.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 75,
+      "sourceSha256": "b374f93d8fa4c1c031d8717be55840ea619d3e5baf643935a192014dc99573fc",
+      "sourceUnchanged": true,
+      "log": "beta82-build-security-isolated.log"
+    }
+  ],
+  "finishedAt": "2026-10-24T18:43:14.326091+00:00"
+}

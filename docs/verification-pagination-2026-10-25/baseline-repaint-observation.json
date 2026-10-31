@@ -1,0 +1,81 @@
+{
+  "browser": "134.0.6998.35",
+  "baselineAssets": true,
+  "status": "observation-only",
+  "checks": [
+    "Library bottom Next returns to page top",
+    "Library Last reaches the short final page at its top",
+    "Library First after short last page",
+    "Library bottom Next works from the keyboard",
+    "Watching paging reaches the page top",
+    "Plan to Watch paging reaches the page top",
+    "Grouped seasons are actually present",
+    "Grouped-series pagination reaches the page top"
+  ],
+  "measurements": [
+    {
+      "name": "Library bottom Next returns to page top",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 776.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library Last reaches the short final page at its top",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 723.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library First after short last page",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 776.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library bottom Next works from the keyboard",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 776.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Watching paging reaches the page top",
+      "y": 865,
+      "windowY": 865,
+      "firstTop": 22.40625,
+      "firstBottom": 776.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Plan to Watch paging reaches the page top",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 723.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Grouped-series pagination reaches the page top",
+      "y": 752,
+      "windowY": 752,
+      "firstTop": 22.40625,
+      "firstBottom": 829.84375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library repaint",
+      "before": 600,
+      "after": 47
+    }
+  ],
+  "errors": [],
+  "failure": null,
+  "scope": "Real local app and production CSS; ephemeral library/catalogue/notebook; fictional community/ranking/import-review fixtures; external traffic blocked; no real account, import, deletion or native Windows installer"
+}

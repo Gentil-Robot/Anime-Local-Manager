@@ -1,0 +1,2562 @@
+{
+  "schemaVersion": 4,
+  "title": "物語が息づく場所",
+  "subtitle": "Threads of Stories",
+  "artist": "Anime Local Manager",
+  "duration": 210.0,
+  "audio": "/assets/threads-of-stories.wav",
+  "globalOffsetMs": 0,
+  "timingSource": "User-supplied external karaoke phrase anchors + supplied WAV verification; previous intra-line prosody retained only inside the new anchored windows",
+  "timingNote": "Beta 17 : timeline audio-first. Le romaji suit uniquement les paroles réellement retenues dans l’enregistrement ; la ligne théorique non soutenue dans 152.72–156.78 a été retirée. Les sous-titres français restants sont inchangés.",
+  "sections": [
+    {
+      "id": "verse1",
+      "type": "verse",
+      "labelJa": "第1番",
+      "labelFr": "Couplet 1",
+      "lines": [
+        {
+          "ja": "幾千の世界が　画面の中に",
+          "fr": "Des milliers de mondes vivent au cœur de l’écran",
+          "start": 17.27,
+          "end": 21.95,
+          "jaUnits": [
+            {
+              "text": "幾千の",
+              "start": 17.27,
+              "end": 18.682
+            },
+            {
+              "text": "世界が　",
+              "start": 18.682,
+              "end": 19.923
+            },
+            {
+              "text": "画面の",
+              "start": 19.923,
+              "end": 21.164
+            },
+            {
+              "text": "中に",
+              "start": 21.164,
+              "end": 21.95
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Des milliers de",
+              "start": 17.27,
+              "end": 18.682
+            },
+            {
+              "text": "mondes vivent",
+              "start": 18.682,
+              "end": 19.923
+            },
+            {
+              "text": "au cœur de",
+              "start": 19.923,
+              "end": 21.164
+            },
+            {
+              "text": "l’écran",
+              "start": 21.164,
+              "end": 21.95
+            }
+          ],
+          "romaji": "Ikusen no sekai ga gamen no naka ni",
+          "romajiUnits": [
+            {
+              "text": "Ikusen no",
+              "start": 17.27,
+              "end": 18.682
+            },
+            {
+              "text": "sekai ga",
+              "start": 18.682,
+              "end": 19.923
+            },
+            {
+              "text": "gamen no",
+              "start": 19.923,
+              "end": 21.164
+            },
+            {
+              "text": "naka ni",
+              "start": 21.164,
+              "end": 21.95
+            }
+          ]
+        },
+        {
+          "ja": "旅の途中で　忘れた名前",
+          "fr": "Des noms oubliés au fil de mes voyages",
+          "start": 21.95,
+          "end": 25.25,
+          "jaUnits": [
+            {
+              "text": "旅の",
+              "start": 21.95,
+              "end": 22.651
+            },
+            {
+              "text": "途中で　",
+              "start": 22.651,
+              "end": 23.6
+            },
+            {
+              "text": "忘れた",
+              "start": 23.6,
+              "end": 24.292
+            },
+            {
+              "text": "名前",
+              "start": 24.292,
+              "end": 25.25
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Des noms",
+              "start": 21.95,
+              "end": 22.651
+            },
+            {
+              "text": "oubliés",
+              "start": 22.651,
+              "end": 23.472
+            },
+            {
+              "text": "au fil de",
+              "start": 23.472,
+              "end": 24.292
+            },
+            {
+              "text": "mes voyages",
+              "start": 24.292,
+              "end": 25.25
+            }
+          ],
+          "romaji": "Tabi no tochuu de wasureta namae",
+          "romajiUnits": [
+            {
+              "text": "Tabi no",
+              "start": 21.95,
+              "end": 22.651
+            },
+            {
+              "text": "tochuu de",
+              "start": 22.651,
+              "end": 23.6
+            },
+            {
+              "text": "wasureta",
+              "start": 23.6,
+              "end": 24.292
+            },
+            {
+              "text": "namae",
+              "start": 24.292,
+              "end": 25.25
+            }
+          ]
+        },
+        {
+          "ja": "季節はページのように散らばって",
+          "fr": "Les saisons s’éparpillent comme les pages d’un livre",
+          "start": 26.15,
+          "end": 30.2,
+          "jaUnits": [
+            {
+              "text": "季節は",
+              "start": 26.15,
+              "end": 26.924
+            },
+            {
+              "text": "ページのように",
+              "start": 26.924,
+              "end": 28.89
+            },
+            {
+              "text": "散らばって",
+              "start": 28.89,
+              "end": 30.2
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les saisons",
+              "start": 26.15,
+              "end": 26.924
+            },
+            {
+              "text": "s’éparpillent comme",
+              "start": 26.924,
+              "end": 28.509
+            },
+            {
+              "text": "les pages d’un livre",
+              "start": 28.509,
+              "end": 30.2
+            }
+          ],
+          "romaji": "Kisetsu wa peeji no you ni chirabatte",
+          "romajiUnits": [
+            {
+              "text": "Kisetsu wa",
+              "start": 26.15,
+              "end": 26.924
+            },
+            {
+              "text": "peeji no you ni",
+              "start": 26.924,
+              "end": 28.89
+            },
+            {
+              "text": "chirabatte",
+              "start": 28.89,
+              "end": 30.2
+            }
+          ]
+        },
+        {
+          "ja": "「また明日」と　続きを待ってる",
+          "fr": "« À demain » murmurent-elles en attendant la suite",
+          "start": 30.2,
+          "end": 34.29,
+          "jaUnits": [
+            {
+              "text": "「また明日」と　",
+              "start": 30.2,
+              "end": 32.062
+            },
+            {
+              "text": "続きを",
+              "start": 32.062,
+              "end": 32.953
+            },
+            {
+              "text": "待ってる",
+              "start": 32.953,
+              "end": 34.29
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "« À demain »",
+              "start": 30.2,
+              "end": 31.219
+            },
+            {
+              "text": "murmurent-elles",
+              "start": 31.219,
+              "end": 32.539
+            },
+            {
+              "text": "en attendant la suite",
+              "start": 32.539,
+              "end": 34.29
+            }
+          ],
+          "romaji": "“Mata ashita” to tsuzuki o matteru",
+          "romajiUnits": [
+            {
+              "text": "“Mata ashita” to",
+              "start": 30.2,
+              "end": 32.062
+            },
+            {
+              "text": "tsuzuki o",
+              "start": 32.062,
+              "end": 32.953
+            },
+            {
+              "text": "matteru",
+              "start": 32.953,
+              "end": 34.29
+            }
+          ]
+        },
+        {
+          "ja": "静かな記憶の片隅で",
+          "fr": "Dans un coin tranquille de ma mémoire",
+          "start": 34.29,
+          "end": 38.85,
+          "jaUnits": [
+            {
+              "text": "静かな",
+              "start": 34.29,
+              "end": 35.862
+            },
+            {
+              "text": "記憶の",
+              "start": 35.862,
+              "end": 37.077
+            },
+            {
+              "text": "片隅で",
+              "start": 37.077,
+              "end": 38.85
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Dans un coin",
+              "start": 34.29,
+              "end": 35.706
+            },
+            {
+              "text": "tranquille",
+              "start": 35.706,
+              "end": 37.077
+            },
+            {
+              "text": "de ma mémoire",
+              "start": 37.077,
+              "end": 38.85
+            }
+          ],
+          "romaji": "Shizuka na kioku no katasumi de",
+          "romajiUnits": [
+            {
+              "text": "Shizuka na",
+              "start": 34.29,
+              "end": 35.862
+            },
+            {
+              "text": "kioku no",
+              "start": 35.862,
+              "end": 37.077
+            },
+            {
+              "text": "katasumi de",
+              "start": 37.077,
+              "end": 38.85
+            }
+          ]
+        },
+        {
+          "ja": "すべての冒険が　居場所を見つけ",
+          "fr": "Chaque aventure finit par trouver sa place",
+          "start": 38.85,
+          "end": 42.93,
+          "jaUnits": [
+            {
+              "text": "すべての",
+              "start": 38.85,
+              "end": 39.824
+            },
+            {
+              "text": "冒険が　",
+              "start": 39.824,
+              "end": 40.884
+            },
+            {
+              "text": "居場所を",
+              "start": 40.884,
+              "end": 41.883
+            },
+            {
+              "text": "見つけ",
+              "start": 41.883,
+              "end": 42.93
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Chaque aventure",
+              "start": 38.85,
+              "end": 40.385
+            },
+            {
+              "text": "finit par",
+              "start": 40.385,
+              "end": 41.505
+            },
+            {
+              "text": "trouver",
+              "start": 41.505,
+              "end": 41.883
+            },
+            {
+              "text": "sa place",
+              "start": 41.883,
+              "end": 42.93
+            }
+          ],
+          "romaji": "Subete no bouken ga ibasho o mitsuke",
+          "romajiUnits": [
+            {
+              "text": "Subete no",
+              "start": 38.85,
+              "end": 39.824
+            },
+            {
+              "text": "bouken ga",
+              "start": 39.824,
+              "end": 40.884
+            },
+            {
+              "text": "ibasho o",
+              "start": 40.884,
+              "end": 41.883
+            },
+            {
+              "text": "mitsuke",
+              "start": 41.883,
+              "end": 42.93
+            }
+          ]
+        },
+        {
+          "ja": "エピソードが物語を紡ぎ",
+          "fr": "Les épisodes tissent peu à peu leur histoire",
+          "start": 42.93,
+          "end": 45.17,
+          "jaUnits": [
+            {
+              "text": "エピソードが",
+              "start": 42.93,
+              "end": 44.074
+            },
+            {
+              "text": "物語を",
+              "start": 44.074,
+              "end": 44.775
+            },
+            {
+              "text": "紡ぎ",
+              "start": 44.775,
+              "end": 45.17
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les épisodes",
+              "start": 42.93,
+              "end": 43.652
+            },
+            {
+              "text": "tissent peu à peu",
+              "start": 43.652,
+              "end": 44.625
+            },
+            {
+              "text": "leur histoire",
+              "start": 44.625,
+              "end": 45.17
+            }
+          ],
+          "romaji": "Episoodo ga monogatari o tsumugi",
+          "romajiUnits": [
+            {
+              "text": "Episoodo ga",
+              "start": 42.93,
+              "end": 44.074
+            },
+            {
+              "text": "monogatari o",
+              "start": 44.074,
+              "end": 44.775
+            },
+            {
+              "text": "tsumugi",
+              "start": 44.775,
+              "end": 45.17
+            }
+          ]
+        },
+        {
+          "ja": "時さえも　その跡を消せはしない",
+          "fr": "Même le temps ne pourra effacer leurs traces",
+          "start": 45.17,
+          "end": 47.41,
+          "jaUnits": [
+            {
+              "text": "時さえも　",
+              "start": 45.17,
+              "end": 45.645
+            },
+            {
+              "text": "その跡を",
+              "start": 45.645,
+              "end": 46.44
+            },
+            {
+              "text": "消せはしない",
+              "start": 46.44,
+              "end": 47.41
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Même le temps",
+              "start": 45.17,
+              "end": 45.645
+            },
+            {
+              "text": "ne pourra",
+              "start": 45.645,
+              "end": 46.44
+            },
+            {
+              "text": "effacer leurs traces",
+              "start": 46.44,
+              "end": 47.41
+            }
+          ],
+          "romaji": "Toki sae mo sono ato o kese wa shinai",
+          "romajiUnits": [
+            {
+              "text": "Toki sae mo",
+              "start": 45.17,
+              "end": 45.645
+            },
+            {
+              "text": "sono ato o",
+              "start": 45.645,
+              "end": 46.44
+            },
+            {
+              "text": "kese wa shinai",
+              "start": 46.44,
+              "end": 47.41
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pre1",
+      "type": "prechorus",
+      "labelJa": "プレコーラス",
+      "labelFr": "Pré-refrain",
+      "lines": [
+        {
+          "ja": "見てきたもの　これから見る夢",
+          "fr": "Tout ce que j’ai vu tous les rêves qui m’attendent",
+          "start": 47.93,
+          "end": 52.23,
+          "jaUnits": [
+            {
+              "text": "見てきたもの　",
+              "start": 47.93,
+              "end": 49.788
+            },
+            {
+              "text": "これから見る",
+              "start": 49.788,
+              "end": 51.978
+            },
+            {
+              "text": "夢",
+              "start": 51.978,
+              "end": 52.23
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tout ce que j’ai vu",
+              "start": 47.93,
+              "end": 49.627
+            },
+            {
+              "text": "tous les rêves",
+              "start": 49.627,
+              "end": 50.716
+            },
+            {
+              "text": "qui m’attendent",
+              "start": 50.716,
+              "end": 52.23
+            }
+          ],
+          "romaji": "Mite kita mono kore kara miru yume",
+          "romajiUnits": [
+            {
+              "text": "Mite kita mono",
+              "start": 47.93,
+              "end": 49.788
+            },
+            {
+              "text": "kore kara miru",
+              "start": 49.788,
+              "end": 51.978
+            },
+            {
+              "text": "yume",
+              "start": 51.978,
+              "end": 52.23
+            }
+          ]
+        },
+        {
+          "ja": "すべてがここに　ひとつになる",
+          "fr": "Ici, tout se rassemble pour ne faire qu’un",
+          "start": 52.23,
+          "end": 58.23,
+          "jaUnits": [
+            {
+              "text": "すべてがここに　",
+              "start": 52.23,
+              "end": 55.423
+            },
+            {
+              "text": "ひとつに",
+              "start": 55.423,
+              "end": 57.435
+            },
+            {
+              "text": "なる",
+              "start": 57.435,
+              "end": 58.23
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ici, tout",
+              "start": 52.23,
+              "end": 53.61
+            },
+            {
+              "text": "se rassemble",
+              "start": 53.61,
+              "end": 55.423
+            },
+            {
+              "text": "pour ne faire qu’un",
+              "start": 55.423,
+              "end": 58.23
+            }
+          ],
+          "romaji": "Subete ga koko ni hitotsu ni naru",
+          "romajiUnits": [
+            {
+              "text": "Subete ga koko ni",
+              "start": 52.23,
+              "end": 55.423
+            },
+            {
+              "text": "hitotsu ni",
+              "start": 55.423,
+              "end": 57.435
+            },
+            {
+              "text": "naru",
+              "start": 57.435,
+              "end": 58.23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chorus1",
+      "type": "chorus",
+      "labelJa": "サビ",
+      "labelFr": "Refrain",
+      "lines": [
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 60.81,
+          "end": 63.49,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 60.81,
+              "end": 61.572
+            },
+            {
+              "text": "Local ",
+              "start": 61.572,
+              "end": 62.447
+            },
+            {
+              "text": "Manager",
+              "start": 62.447,
+              "end": 63.49
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 60.81,
+              "end": 61.572
+            },
+            {
+              "text": "Local",
+              "start": 61.572,
+              "end": 62.447
+            },
+            {
+              "text": "Manager",
+              "start": 62.447,
+              "end": 63.49
+            }
+          ],
+          "romaji": "Anime Local Manager",
+          "romajiUnits": [
+            {
+              "text": "Anime",
+              "start": 60.81,
+              "end": 61.572
+            },
+            {
+              "text": "Local",
+              "start": 61.572,
+              "end": 62.447
+            },
+            {
+              "text": "Manager",
+              "start": 62.447,
+              "end": 63.49
+            }
+          ]
+        },
+        {
+          "ja": "旅した世界を　そっと守って",
+          "fr": "Garde précieusement les mondes que j’ai parcourus",
+          "start": 63.49,
+          "end": 67.05,
+          "jaUnits": [
+            {
+              "text": "旅した世界を　",
+              "start": 63.49,
+              "end": 65.063
+            },
+            {
+              "text": "そっと",
+              "start": 65.063,
+              "end": 65.957
+            },
+            {
+              "text": "守って",
+              "start": 65.957,
+              "end": 67.05
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Garde précieusement",
+              "start": 63.49,
+              "end": 65.063
+            },
+            {
+              "text": "les mondes",
+              "start": 65.063,
+              "end": 65.51
+            },
+            {
+              "text": "que j’ai parcourus",
+              "start": 65.51,
+              "end": 67.05
+            }
+          ],
+          "romaji": "Tabi shita sekai o sotto mamotte",
+          "romajiUnits": [
+            {
+              "text": "Tabi shita sekai o",
+              "start": 63.49,
+              "end": 65.063
+            },
+            {
+              "text": "sotto",
+              "start": 65.063,
+              "end": 65.957
+            },
+            {
+              "text": "mamotte",
+              "start": 65.957,
+              "end": 67.05
+            }
+          ]
+        },
+        {
+          "ja": "出会いも　季節も　すべて",
+          "fr": "Les rencontres les saisons chacun de ces instants",
+          "start": 67.05,
+          "end": 69.63,
+          "jaUnits": [
+            {
+              "text": "出会いも　",
+              "start": 67.05,
+              "end": 68.055
+            },
+            {
+              "text": "季節も　",
+              "start": 68.055,
+              "end": 68.87
+            },
+            {
+              "text": "すべて",
+              "start": 68.87,
+              "end": 69.63
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les rencontres",
+              "start": 67.05,
+              "end": 67.821
+            },
+            {
+              "text": "les saisons",
+              "start": 67.821,
+              "end": 68.419
+            },
+            {
+              "text": "chacun de ces instants",
+              "start": 68.419,
+              "end": 69.63
+            }
+          ],
+          "romaji": "Deai mo kisetsu mo subete",
+          "romajiUnits": [
+            {
+              "text": "Deai mo",
+              "start": 67.05,
+              "end": 68.055
+            },
+            {
+              "text": "kisetsu mo",
+              "start": 68.055,
+              "end": 68.87
+            },
+            {
+              "text": "subete",
+              "start": 68.87,
+              "end": 69.63
+            }
+          ]
+        },
+        {
+          "ja": "千の面影　僕のコレクション",
+          "fr": "Mille souvenirs composent ma collection",
+          "start": 69.63,
+          "end": 73.38,
+          "jaUnits": [
+            {
+              "text": "千の面影　",
+              "start": 69.63,
+              "end": 70.83
+            },
+            {
+              "text": "僕の",
+              "start": 70.83,
+              "end": 71.553
+            },
+            {
+              "text": "コレクション",
+              "start": 71.553,
+              "end": 73.38
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Mille souvenirs",
+              "start": 69.63,
+              "end": 70.979
+            },
+            {
+              "text": "composent",
+              "start": 70.979,
+              "end": 72.126
+            },
+            {
+              "text": "ma collection",
+              "start": 72.126,
+              "end": 73.38
+            }
+          ],
+          "romaji": "Sen no omokage boku no korekushon",
+          "romajiUnits": [
+            {
+              "text": "Sen no omokage",
+              "start": 69.63,
+              "end": 70.83
+            },
+            {
+              "text": "boku no",
+              "start": 70.83,
+              "end": 71.553
+            },
+            {
+              "text": "korekushon",
+              "start": 71.553,
+              "end": 73.38
+            }
+          ]
+        },
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 73.38,
+          "end": 75.54,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 73.38,
+              "end": 74.024
+            },
+            {
+              "text": "Local ",
+              "start": 74.024,
+              "end": 74.567
+            },
+            {
+              "text": "Manager",
+              "start": 74.567,
+              "end": 75.54
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 73.38,
+              "end": 74.024
+            },
+            {
+              "text": "Local",
+              "start": 74.024,
+              "end": 74.567
+            },
+            {
+              "text": "Manager",
+              "start": 74.567,
+              "end": 75.54
+            }
+          ],
+          "romaji": "Anime Local Manager",
+          "romajiUnits": [
+            {
+              "text": "Anime",
+              "start": 73.38,
+              "end": 74.024
+            },
+            {
+              "text": "Local",
+              "start": 74.024,
+              "end": 74.567
+            },
+            {
+              "text": "Manager",
+              "start": 74.567,
+              "end": 75.54
+            }
+          ]
+        },
+        {
+          "ja": "移ろう世界の中にいても",
+          "fr": "Même au cœur d’un monde qui ne cesse de changer",
+          "start": 75.54,
+          "end": 78.53,
+          "jaUnits": [
+            {
+              "text": "移ろう世界の中に",
+              "start": 75.54,
+              "end": 77.712
+            },
+            {
+              "text": "いても",
+              "start": 77.712,
+              "end": 78.53
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Même au cœur d’un monde",
+              "start": 75.54,
+              "end": 77.184
+            },
+            {
+              "text": "qui ne cesse de changer",
+              "start": 77.184,
+              "end": 78.53
+            }
+          ],
+          "romaji": "Utsurou sekai no naka ni ite mo",
+          "romajiUnits": [
+            {
+              "text": "Utsurou sekai no naka ni",
+              "start": 75.54,
+              "end": 77.712
+            },
+            {
+              "text": "ite mo",
+              "start": 77.712,
+              "end": 78.53
+            }
+          ]
+        },
+        {
+          "ja": "この思い出は　僕とともに",
+          "fr": "Ces souvenirs continuent leur route avec moi",
+          "start": 78.53,
+          "end": 82.86,
+          "jaUnits": [
+            {
+              "text": "この思い出は　",
+              "start": 78.53,
+              "end": 81.08
+            },
+            {
+              "text": "僕と",
+              "start": 81.08,
+              "end": 81.806
+            },
+            {
+              "text": "ともに",
+              "start": 81.806,
+              "end": 82.86
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ces souvenirs",
+              "start": 78.53,
+              "end": 79.931
+            },
+            {
+              "text": "continuent leur route",
+              "start": 79.931,
+              "end": 82.217
+            },
+            {
+              "text": "avec moi",
+              "start": 82.217,
+              "end": 82.86
+            }
+          ],
+          "romaji": "Kono omoide wa boku to tomo ni",
+          "romajiUnits": [
+            {
+              "text": "Kono omoide wa",
+              "start": 78.53,
+              "end": 81.08
+            },
+            {
+              "text": "boku to",
+              "start": 81.08,
+              "end": 81.806
+            },
+            {
+              "text": "tomo ni",
+              "start": 81.806,
+              "end": 82.86
+            }
+          ]
+        },
+        {
+          "ja": "いつでもここに　寄り添ってる",
+          "fr": "Toujours ici tout près de moi",
+          "start": 82.86,
+          "end": 87.19,
+          "jaUnits": [
+            {
+              "text": "いつでもここに　",
+              "start": 82.86,
+              "end": 85.316
+            },
+            {
+              "text": "寄り添ってる",
+              "start": 85.316,
+              "end": 87.19
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Toujours ici",
+              "start": 82.86,
+              "end": 84.786
+            },
+            {
+              "text": "tout près de moi",
+              "start": 84.786,
+              "end": 87.19
+            }
+          ],
+          "romaji": "Itsudemo koko ni yorisotteru",
+          "romajiUnits": [
+            {
+              "text": "Itsudemo koko ni",
+              "start": 82.86,
+              "end": 85.316
+            },
+            {
+              "text": "yorisotteru",
+              "start": 85.316,
+              "end": 87.19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verse2",
+      "type": "verse",
+      "labelJa": "第2番",
+      "labelFr": "Couplet 2",
+      "lines": [
+        {
+          "ja": "新しい季節が　幕を開け",
+          "fr": "Une nouvelle saison lève le rideau",
+          "start": 91.55,
+          "end": 95.35,
+          "jaUnits": [
+            {
+              "text": "新しい季節が　",
+              "start": 91.55,
+              "end": 93.097
+            },
+            {
+              "text": "幕を",
+              "start": 93.097,
+              "end": 94.879
+            },
+            {
+              "text": "開け",
+              "start": 94.879,
+              "end": 95.35
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Une nouvelle saison",
+              "start": 91.55,
+              "end": 93.097
+            },
+            {
+              "text": "lève",
+              "start": 93.097,
+              "end": 94.879
+            },
+            {
+              "text": "le rideau",
+              "start": 94.879,
+              "end": 95.35
+            }
+          ],
+          "romaji": "Atarashii kisetsu ga maku o ake",
+          "romajiUnits": [
+            {
+              "text": "Atarashii kisetsu ga",
+              "start": 91.55,
+              "end": 93.097
+            },
+            {
+              "text": "maku o",
+              "start": 93.097,
+              "end": 94.879
+            },
+            {
+              "text": "ake",
+              "start": 94.879,
+              "end": 95.35
+            }
+          ]
+        },
+        {
+          "ja": "ひとつの知らせが　夜を駆ける",
+          "fr": "Une nouvelle traverse la nuit à toute vitesse",
+          "start": 95.35,
+          "end": 98.55,
+          "jaUnits": [
+            {
+              "text": "ひとつの知らせが　",
+              "start": 95.35,
+              "end": 97.314
+            },
+            {
+              "text": "夜を",
+              "start": 97.314,
+              "end": 97.812
+            },
+            {
+              "text": "駆ける",
+              "start": 97.812,
+              "end": 98.55
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Une nouvelle",
+              "start": 95.35,
+              "end": 96.272
+            },
+            {
+              "text": "traverse la nuit",
+              "start": 96.272,
+              "end": 97.471
+            },
+            {
+              "text": "à toute vitesse",
+              "start": 97.471,
+              "end": 98.55
+            }
+          ],
+          "romaji": "Hitotsu no shirase ga yoru o kakeru",
+          "romajiUnits": [
+            {
+              "text": "Hitotsu no shirase ga",
+              "start": 95.35,
+              "end": 97.314
+            },
+            {
+              "text": "yoru o",
+              "start": 97.314,
+              "end": 97.812
+            },
+            {
+              "text": "kakeru",
+              "start": 97.812,
+              "end": 98.55
+            }
+          ]
+        },
+        {
+          "ja": "恋と冒険　星々の彼方",
+          "fr": "Amour et aventure au-delà des étoiles",
+          "start": 98.55,
+          "end": 101.45,
+          "jaUnits": [
+            {
+              "text": "恋と冒険　",
+              "start": 98.55,
+              "end": 99.551
+            },
+            {
+              "text": "星々の",
+              "start": 99.551,
+              "end": 100.941
+            },
+            {
+              "text": "彼方",
+              "start": 100.941,
+              "end": 101.45
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Amour et aventure",
+              "start": 98.55,
+              "end": 99.551
+            },
+            {
+              "text": "au-delà",
+              "start": 99.551,
+              "end": 100.483
+            },
+            {
+              "text": "des étoiles",
+              "start": 100.483,
+              "end": 101.45
+            }
+          ],
+          "romaji": "Koi to bouken hoshiboshi no kanata",
+          "romajiUnits": [
+            {
+              "text": "Koi to bouken",
+              "start": 98.55,
+              "end": 99.551
+            },
+            {
+              "text": "hoshiboshi no",
+              "start": 99.551,
+              "end": 100.941
+            },
+            {
+              "text": "kanata",
+              "start": 100.941,
+              "end": 101.45
+            }
+          ]
+        },
+        {
+          "ja": "また別の世界が　僕を呼んでる",
+          "fr": "Un autre monde m’appelle encore",
+          "start": 101.45,
+          "end": 104.71,
+          "jaUnits": [
+            {
+              "text": "また別の世界が　",
+              "start": 101.45,
+              "end": 103.265
+            },
+            {
+              "text": "僕を",
+              "start": 103.265,
+              "end": 103.714
+            },
+            {
+              "text": "呼んでる",
+              "start": 103.714,
+              "end": 104.71
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Un autre monde",
+              "start": 101.45,
+              "end": 102.831
+            },
+            {
+              "text": "m’appelle",
+              "start": 102.831,
+              "end": 103.714
+            },
+            {
+              "text": "encore",
+              "start": 103.714,
+              "end": 104.71
+            }
+          ],
+          "romaji": "Mata betsu no sekai ga boku o yonderu",
+          "romajiUnits": [
+            {
+              "text": "Mata betsu no sekai ga",
+              "start": 101.45,
+              "end": 103.265
+            },
+            {
+              "text": "boku o",
+              "start": 103.265,
+              "end": 103.714
+            },
+            {
+              "text": "yonderu",
+              "start": 103.714,
+              "end": 104.71
+            }
+          ]
+        },
+        {
+          "ja": "おすすめは　心を映し",
+          "fr": "Les recommandations reflètent ce qui me touche",
+          "start": 104.71,
+          "end": 108.75,
+          "jaUnits": [
+            {
+              "text": "おすすめは　",
+              "start": 104.71,
+              "end": 106.872
+            },
+            {
+              "text": "心を",
+              "start": 106.872,
+              "end": 107.727
+            },
+            {
+              "text": "映し",
+              "start": 107.727,
+              "end": 108.75
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les recommandations",
+              "start": 104.71,
+              "end": 106.577
+            },
+            {
+              "text": "reflètent",
+              "start": 106.577,
+              "end": 107.431
+            },
+            {
+              "text": "ce qui me touche",
+              "start": 107.431,
+              "end": 108.75
+            }
+          ],
+          "romaji": "Osusume wa kokoro o utsushi",
+          "romajiUnits": [
+            {
+              "text": "Osusume wa",
+              "start": 104.71,
+              "end": 106.872
+            },
+            {
+              "text": "kokoro o",
+              "start": 106.872,
+              "end": 107.727
+            },
+            {
+              "text": "utsushi",
+              "start": 107.727,
+              "end": 108.75
+            }
+          ]
+        },
+        {
+          "ja": "プロフィールに　情熱が浮かぶ",
+          "fr": "Et mon profil révèle toutes mes passions",
+          "start": 108.75,
+          "end": 113.19,
+          "jaUnits": [
+            {
+              "text": "プロフィールに　",
+              "start": 108.75,
+              "end": 111.141
+            },
+            {
+              "text": "情熱が",
+              "start": 111.141,
+              "end": 112.165
+            },
+            {
+              "text": "浮かぶ",
+              "start": 112.165,
+              "end": 113.19
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Et mon profil",
+              "start": 108.75,
+              "end": 110.143
+            },
+            {
+              "text": "révèle",
+              "start": 110.143,
+              "end": 111.038
+            },
+            {
+              "text": "toutes mes passions",
+              "start": 111.038,
+              "end": 113.19
+            }
+          ],
+          "romaji": "Purofiiru ni jounetsu ga ukabu",
+          "romajiUnits": [
+            {
+              "text": "Purofiiru ni",
+              "start": 108.75,
+              "end": 111.141
+            },
+            {
+              "text": "jounetsu ga",
+              "start": 111.141,
+              "end": 112.165
+            },
+            {
+              "text": "ukabu",
+              "start": 112.165,
+              "end": 113.19
+            }
+          ]
+        },
+        {
+          "ja": "集まったすべてのヒーローが",
+          "fr": "Tous les héros réunis dans ma bibliothèque",
+          "start": 113.19,
+          "end": 116.43,
+          "jaUnits": [
+            {
+              "text": "集まった",
+              "start": 113.19,
+              "end": 114.113
+            },
+            {
+              "text": "すべてのヒーローが",
+              "start": 114.113,
+              "end": 116.43
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tous les héros",
+              "start": 113.19,
+              "end": 114.385
+            },
+            {
+              "text": "réunis dans ma bibliothèque",
+              "start": 114.385,
+              "end": 116.43
+            }
+          ],
+          "romaji": "Atsumatta subete no hiiroo ga",
+          "romajiUnits": [
+            {
+              "text": "Atsumatta",
+              "start": 113.19,
+              "end": 114.113
+            },
+            {
+              "text": "subete no hiiroo ga",
+              "start": 114.113,
+              "end": 116.43
+            }
+          ]
+        },
+        {
+          "ja": "想像の地図を　描いてゆく",
+          "fr": "Dessinent peu à peu la carte de mon imaginaire",
+          "start": 116.43,
+          "end": 119.0,
+          "jaUnits": [
+            {
+              "text": "想像の地図を　",
+              "start": 116.43,
+              "end": 117.87
+            },
+            {
+              "text": "描いて",
+              "start": 117.87,
+              "end": 118.582
+            },
+            {
+              "text": "ゆく",
+              "start": 118.582,
+              "end": 119.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Dessinent peu à peu",
+              "start": 116.43,
+              "end": 117.575
+            },
+            {
+              "text": "la carte",
+              "start": 117.575,
+              "end": 118.064
+            },
+            {
+              "text": "de mon imaginaire",
+              "start": 118.064,
+              "end": 119.0
+            }
+          ],
+          "romaji": "Souzou no chizu o egaite yuku",
+          "romajiUnits": [
+            {
+              "text": "Souzou no chizu o",
+              "start": 116.43,
+              "end": 117.87
+            },
+            {
+              "text": "egaite",
+              "start": 117.87,
+              "end": 118.582
+            },
+            {
+              "text": "yuku",
+              "start": 118.582,
+              "end": 119.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pre2",
+      "type": "prechorus",
+      "labelJa": "プレコーラス",
+      "labelFr": "Pré-refrain",
+      "lines": [
+        {
+          "ja": "愛したもの　もう一度見たい夢",
+          "fr": "Ce que j’ai aimé les rêves que je veux revoir",
+          "start": 119.0,
+          "end": 122.01,
+          "jaUnits": [
+            {
+              "text": "愛したもの　",
+              "start": 119.0,
+              "end": 120.059
+            },
+            {
+              "text": "もう一度見たい",
+              "start": 120.059,
+              "end": 121.852
+            },
+            {
+              "text": "夢",
+              "start": 121.852,
+              "end": 122.01
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce que j’ai aimé",
+              "start": 119.0,
+              "end": 120.059
+            },
+            {
+              "text": "les rêves",
+              "start": 120.059,
+              "end": 120.762
+            },
+            {
+              "text": "que je veux revoir",
+              "start": 120.762,
+              "end": 122.01
+            }
+          ],
+          "romaji": "Aishita mono mou ichido mitai yume",
+          "romajiUnits": [
+            {
+              "text": "Aishita mono",
+              "start": 119.0,
+              "end": 120.059
+            },
+            {
+              "text": "mou ichido mitai",
+              "start": 120.059,
+              "end": 121.852
+            },
+            {
+              "text": "yume",
+              "start": 121.852,
+              "end": 122.01
+            }
+          ]
+        },
+        {
+          "ja": "すべてがここに　ひとつになる",
+          "fr": "Ici, tout se rassemble pour ne faire qu’un",
+          "start": 122.01,
+          "end": 127.85,
+          "jaUnits": [
+            {
+              "text": "すべてがここに　",
+              "start": 122.01,
+              "end": 125.289
+            },
+            {
+              "text": "ひとつに",
+              "start": 125.289,
+              "end": 126.899
+            },
+            {
+              "text": "なる",
+              "start": 126.899,
+              "end": 127.85
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ici, tout",
+              "start": 122.01,
+              "end": 123.327
+            },
+            {
+              "text": "se rassemble",
+              "start": 123.327,
+              "end": 125.289
+            },
+            {
+              "text": "pour ne faire qu’un",
+              "start": 125.289,
+              "end": 127.85
+            }
+          ],
+          "romaji": "Subete ga koko ni hitotsu ni naru",
+          "romajiUnits": [
+            {
+              "text": "Subete ga koko ni",
+              "start": 122.01,
+              "end": 125.289
+            },
+            {
+              "text": "hitotsu ni",
+              "start": 125.289,
+              "end": 126.899
+            },
+            {
+              "text": "naru",
+              "start": 126.899,
+              "end": 127.85
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "type": "bridge",
+      "labelJa": "ブリッジ ― 静かに",
+      "labelFr": "Pont — doucement",
+      "lines": [
+        {
+          "ja": "笑顔をくれた　あの物語",
+          "fr": "Cette histoire qui m’a donné le sourire",
+          "start": 129.85,
+          "end": 134.62,
+          "jaUnits": [
+            {
+              "text": "笑顔をくれた　",
+              "start": 129.85,
+              "end": 132.531
+            },
+            {
+              "text": "あの",
+              "start": 132.531,
+              "end": 133.809
+            },
+            {
+              "text": "物語",
+              "start": 133.809,
+              "end": 134.62
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Cette histoire",
+              "start": 129.85,
+              "end": 131.643
+            },
+            {
+              "text": "qui m’a donné",
+              "start": 131.643,
+              "end": 133.36
+            },
+            {
+              "text": "le sourire",
+              "start": 133.36,
+              "end": 134.62
+            }
+          ],
+          "romaji": "Egao o kureta ano monogatari",
+          "romajiUnits": [
+            {
+              "text": "Egao o kureta",
+              "start": 129.85,
+              "end": 132.531
+            },
+            {
+              "text": "ano",
+              "start": 132.531,
+              "end": 133.809
+            },
+            {
+              "text": "monogatari",
+              "start": 133.809,
+              "end": 134.62
+            }
+          ]
+        },
+        {
+          "ja": "成長する意味を　教えた物語",
+          "fr": "Celle qui m’a appris ce que grandir voulait dire",
+          "start": 134.62,
+          "end": 139.46,
+          "jaUnits": [
+            {
+              "text": "成長する意味を　",
+              "start": 134.62,
+              "end": 137.622
+            },
+            {
+              "text": "教えた",
+              "start": 137.622,
+              "end": 138.632
+            },
+            {
+              "text": "物語",
+              "start": 138.632,
+              "end": 139.46
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Celle qui m’a appris",
+              "start": 134.62,
+              "end": 136.535
+            },
+            {
+              "text": "ce que grandir",
+              "start": 136.535,
+              "end": 137.959
+            },
+            {
+              "text": "voulait dire",
+              "start": 137.959,
+              "end": 139.46
+            }
+          ],
+          "romaji": "Seichou suru imi o oshieta monogatari",
+          "romajiUnits": [
+            {
+              "text": "Seichou suru imi o",
+              "start": 134.62,
+              "end": 137.622
+            },
+            {
+              "text": "oshieta",
+              "start": 137.622,
+              "end": 138.632
+            },
+            {
+              "text": "monogatari",
+              "start": 138.632,
+              "end": 139.46
+            }
+          ]
+        },
+        {
+          "ja": "心に残った　あの主題歌",
+          "fr": "Ce générique resté gravé dans mon cœur",
+          "start": 139.46,
+          "end": 143.82,
+          "jaUnits": [
+            {
+              "text": "心に残った　",
+              "start": 139.46,
+              "end": 141.448
+            },
+            {
+              "text": "あの",
+              "start": 141.448,
+              "end": 142.69
+            },
+            {
+              "text": "主題歌",
+              "start": 142.69,
+              "end": 143.82
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce générique",
+              "start": 139.46,
+              "end": 140.815
+            },
+            {
+              "text": "resté gravé",
+              "start": 140.815,
+              "end": 142.058
+            },
+            {
+              "text": "dans mon cœur",
+              "start": 142.058,
+              "end": 143.82
+            }
+          ],
+          "romaji": "Kokoro ni nokotta ano shudaika",
+          "romajiUnits": [
+            {
+              "text": "Kokoro ni nokotta",
+              "start": 139.46,
+              "end": 141.448
+            },
+            {
+              "text": "ano",
+              "start": 141.448,
+              "end": 142.69
+            },
+            {
+              "text": "shudaika",
+              "start": 142.69,
+              "end": 143.82
+            }
+          ]
+        },
+        {
+          "ja": "忘れられない　別れの言葉",
+          "fr": "Ces mots d’adieu que je n’oublierai jamais",
+          "start": 143.82,
+          "end": 148.28,
+          "jaUnits": [
+            {
+              "text": "忘れられない　",
+              "start": 143.82,
+              "end": 146.311
+            },
+            {
+              "text": "別れの",
+              "start": 146.311,
+              "end": 147.498
+            },
+            {
+              "text": "言葉",
+              "start": 147.498,
+              "end": 148.28
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ces mots d’adieu",
+              "start": 143.82,
+              "end": 145.569
+            },
+            {
+              "text": "que je n’oublierai",
+              "start": 145.569,
+              "end": 147.498
+            },
+            {
+              "text": "jamais",
+              "start": 147.498,
+              "end": 148.28
+            }
+          ],
+          "romaji": "Wasurerarenai wakare no kotoba",
+          "romajiUnits": [
+            {
+              "text": "Wasurerarenai",
+              "start": 143.82,
+              "end": 146.311
+            },
+            {
+              "text": "wakare no",
+              "start": 146.311,
+              "end": 147.498
+            },
+            {
+              "text": "kotoba",
+              "start": 147.498,
+              "end": 148.28
+            }
+          ]
+        },
+        {
+          "ja": "いくつもの時を越えても残る",
+          "fr": "Ils demeurent malgré toutes les années traversées",
+          "start": 148.28,
+          "end": 152.72,
+          "jaUnits": [
+            {
+              "text": "いくつもの時を越えても",
+              "start": 148.28,
+              "end": 152.037
+            },
+            {
+              "text": "残る",
+              "start": 152.037,
+              "end": 152.72
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ils demeurent",
+              "start": 148.28,
+              "end": 149.584
+            },
+            {
+              "text": "malgré toutes les années traversées",
+              "start": 149.584,
+              "end": 152.72
+            }
+          ],
+          "romaji": "Ikutsumo no toki o koete mo nokoru",
+          "romajiUnits": [
+            {
+              "text": "Ikutsumo no toki o koete mo",
+              "start": 148.28,
+              "end": 152.037
+            },
+            {
+              "text": "nokoru",
+              "start": 152.037,
+              "end": 152.72
+            }
+          ]
+        },
+        {
+          "ja": "これはただの　コレクションじゃない",
+          "fr": "Ce n’est pas simplement une collection",
+          "start": 152.72,
+          "end": 156.78,
+          "jaUnits": [
+            {
+              "text": "これはただの　",
+              "start": 152.72,
+              "end": 154.031
+            },
+            {
+              "text": "コレクションじゃない",
+              "start": 154.031,
+              "end": 156.78
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce n’est pas",
+              "start": 152.72,
+              "end": 154.031
+            },
+            {
+              "text": "simplement une collection",
+              "start": 154.031,
+              "end": 156.78
+            }
+          ],
+          "romaji": "Kore wa tada no korekushon janai",
+          "romajiUnits": [
+            {
+              "text": "Kore wa tada no",
+              "start": 152.72,
+              "end": 154.031
+            },
+            {
+              "text": "korekushon janai",
+              "start": 154.031,
+              "end": 156.78
+            }
+          ]
+        },
+        {
+          "ja": "僕らの心を映す　かけら",
+          "fr": "Ce sont des fragments qui reflètent nos cœurs",
+          "start": 156.78,
+          "end": 161.16,
+          "jaUnits": [
+            {
+              "text": "僕らの心を映す　",
+              "start": 156.78,
+              "end": 159.846
+            },
+            {
+              "text": "かけら",
+              "start": 159.846,
+              "end": 161.16
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce sont des fragments",
+              "start": 156.78,
+              "end": 158.817
+            },
+            {
+              "text": "qui reflètent nos cœurs",
+              "start": 158.817,
+              "end": 161.16
+            }
+          ],
+          "romaji": "Bokura no kokoro o utsusu kakera",
+          "romajiUnits": [
+            {
+              "text": "Bokura no kokoro o utsusu",
+              "start": 156.78,
+              "end": 159.846
+            },
+            {
+              "text": "kakera",
+              "start": 159.846,
+              "end": 161.16
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "type": "finalchorus",
+      "labelJa": "最後のサビ ― 壮大に",
+      "labelFr": "Refrain final — grandiose",
+      "lines": [
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 163.3,
+          "end": 167.5,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 163.3,
+              "end": 164.578
+            },
+            {
+              "text": "Local ",
+              "start": 164.578,
+              "end": 166.201
+            },
+            {
+              "text": "Manager",
+              "start": 166.201,
+              "end": 167.5
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 163.3,
+              "end": 164.578
+            },
+            {
+              "text": "Local",
+              "start": 164.578,
+              "end": 166.201
+            },
+            {
+              "text": "Manager",
+              "start": 166.201,
+              "end": 167.5
+            }
+          ],
+          "romaji": "Anime Local Manager",
+          "romajiUnits": [
+            {
+              "text": "Anime",
+              "start": 163.3,
+              "end": 164.578
+            },
+            {
+              "text": "Local",
+              "start": 164.578,
+              "end": 166.201
+            },
+            {
+              "text": "Manager",
+              "start": 166.201,
+              "end": 167.5
+            }
+          ]
+        },
+        {
+          "ja": "旅した世界を　今も輝かせ",
+          "fr": "Fais encore briller les mondes que j’ai parcourus",
+          "start": 167.5,
+          "end": 172.3,
+          "jaUnits": [
+            {
+              "text": "旅した世界を　",
+              "start": 167.5,
+              "end": 170.354
+            },
+            {
+              "text": "今も",
+              "start": 170.354,
+              "end": 170.815
+            },
+            {
+              "text": "輝かせ",
+              "start": 170.815,
+              "end": 172.3
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Fais encore briller",
+              "start": 167.5,
+              "end": 169.694
+            },
+            {
+              "text": "les mondes",
+              "start": 169.694,
+              "end": 170.354
+            },
+            {
+              "text": "que j’ai parcourus",
+              "start": 170.354,
+              "end": 172.3
+            }
+          ],
+          "romaji": "Tabi shita sekai o ima mo kagayakase",
+          "romajiUnits": [
+            {
+              "text": "Tabi shita sekai o",
+              "start": 167.5,
+              "end": 170.354
+            },
+            {
+              "text": "ima mo",
+              "start": 170.354,
+              "end": 170.815
+            },
+            {
+              "text": "kagayakase",
+              "start": 170.815,
+              "end": 172.3
+            }
+          ]
+        },
+        {
+          "ja": "すべての話　すべての季節が",
+          "fr": "Chaque histoire chaque saison sans exception",
+          "start": 172.3,
+          "end": 176.76,
+          "jaUnits": [
+            {
+              "text": "すべての話　",
+              "start": 172.3,
+              "end": 174.158
+            },
+            {
+              "text": "すべての",
+              "start": 174.158,
+              "end": 175.638
+            },
+            {
+              "text": "季節が",
+              "start": 175.638,
+              "end": 176.76
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Chaque histoire",
+              "start": 172.3,
+              "end": 173.805
+            },
+            {
+              "text": "chaque saison",
+              "start": 173.805,
+              "end": 175.273
+            },
+            {
+              "text": "sans exception",
+              "start": 175.273,
+              "end": 176.76
+            }
+          ],
+          "romaji": "Subete no hanashi subete no kisetsu ga",
+          "romajiUnits": [
+            {
+              "text": "Subete no hanashi",
+              "start": 172.3,
+              "end": 174.158
+            },
+            {
+              "text": "subete no",
+              "start": 174.158,
+              "end": 175.638
+            },
+            {
+              "text": "kisetsu ga",
+              "start": 175.638,
+              "end": 176.76
+            }
+          ]
+        },
+        {
+          "ja": "僕のコレクションに　帰ってくる",
+          "fr": "Revient retrouver sa place dans ma collection",
+          "start": 176.76,
+          "end": 181.08,
+          "jaUnits": [
+            {
+              "text": "僕のコレクションに　",
+              "start": 176.76,
+              "end": 179.782
+            },
+            {
+              "text": "帰って",
+              "start": 179.782,
+              "end": 180.867
+            },
+            {
+              "text": "くる",
+              "start": 180.867,
+              "end": 181.08
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Revient retrouver",
+              "start": 176.76,
+              "end": 178.59
+            },
+            {
+              "text": "sa place",
+              "start": 178.59,
+              "end": 179.782
+            },
+            {
+              "text": "dans ma collection",
+              "start": 179.782,
+              "end": 181.08
+            }
+          ],
+          "romaji": "Boku no korekushon ni kaette kuru",
+          "romajiUnits": [
+            {
+              "text": "Boku no korekushon ni",
+              "start": 176.76,
+              "end": 179.782
+            },
+            {
+              "text": "kaette",
+              "start": 179.782,
+              "end": 180.867
+            },
+            {
+              "text": "kuru",
+              "start": 180.867,
+              "end": 181.08
+            }
+          ]
+        },
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 181.08,
+          "end": 182.92,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 181.08,
+              "end": 181.621
+            },
+            {
+              "text": "Local ",
+              "start": 181.621,
+              "end": 182.239
+            },
+            {
+              "text": "Manager",
+              "start": 182.239,
+              "end": 182.92
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 181.08,
+              "end": 181.621
+            },
+            {
+              "text": "Local",
+              "start": 181.621,
+              "end": 182.239
+            },
+            {
+              "text": "Manager",
+              "start": 182.239,
+              "end": 182.92
+            }
+          ],
+          "romaji": "Anime Local Manager",
+          "romajiUnits": [
+            {
+              "text": "Anime",
+              "start": 181.08,
+              "end": 181.621
+            },
+            {
+              "text": "Local",
+              "start": 181.621,
+              "end": 182.239
+            },
+            {
+              "text": "Manager",
+              "start": 182.239,
+              "end": 182.92
+            }
+          ]
+        },
+        {
+          "ja": "僕の図書館　心の居場所",
+          "fr": "Ma bibliothèque le refuge de mon cœur",
+          "start": 182.92,
+          "end": 185.34,
+          "jaUnits": [
+            {
+              "text": "僕の図書館　",
+              "start": 182.92,
+              "end": 184.156
+            },
+            {
+              "text": "心の",
+              "start": 184.156,
+              "end": 184.566
+            },
+            {
+              "text": "居場所",
+              "start": 184.566,
+              "end": 185.34
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ma bibliothèque",
+              "start": 182.92,
+              "end": 183.918
+            },
+            {
+              "text": "le refuge",
+              "start": 183.918,
+              "end": 184.566
+            },
+            {
+              "text": "de mon cœur",
+              "start": 184.566,
+              "end": 185.34
+            }
+          ],
+          "romaji": "Boku no toshokan kokoro no ibasho",
+          "romajiUnits": [
+            {
+              "text": "Boku no toshokan",
+              "start": 182.92,
+              "end": 184.156
+            },
+            {
+              "text": "kokoro no",
+              "start": 184.156,
+              "end": 184.566
+            },
+            {
+              "text": "ibasho",
+              "start": 184.566,
+              "end": 185.34
+            }
+          ]
+        },
+        {
+          "ja": "すべての世界が　僕とともに",
+          "fr": "Tous ces mondes avancent désormais avec moi",
+          "start": 185.34,
+          "end": 189.88,
+          "jaUnits": [
+            {
+              "text": "すべての世界が　",
+              "start": 185.34,
+              "end": 187.987
+            },
+            {
+              "text": "僕と",
+              "start": 187.987,
+              "end": 188.693
+            },
+            {
+              "text": "ともに",
+              "start": 188.693,
+              "end": 189.88
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tous ces mondes",
+              "start": 185.34,
+              "end": 186.783
+            },
+            {
+              "text": "avancent désormais",
+              "start": 186.783,
+              "end": 189.345
+            },
+            {
+              "text": "avec moi",
+              "start": 189.345,
+              "end": 189.88
+            }
+          ],
+          "romaji": "Subete no sekai ga boku to tomo ni",
+          "romajiUnits": [
+            {
+              "text": "Subete no sekai ga",
+              "start": 185.34,
+              "end": 187.987
+            },
+            {
+              "text": "boku to",
+              "start": 187.987,
+              "end": 188.693
+            },
+            {
+              "text": "tomo ni",
+              "start": 188.693,
+              "end": 189.88
+            }
+          ]
+        },
+        {
+          "ja": "ここでひとつに　結ばれてゆく",
+          "fr": "Ici, ils se rejoignent pour ne faire qu’un",
+          "start": 189.88,
+          "end": 193.86,
+          "jaUnits": [
+            {
+              "text": "ここでひとつに　",
+              "start": 189.88,
+              "end": 192.023
+            },
+            {
+              "text": "結ばれて",
+              "start": 192.023,
+              "end": 193.248
+            },
+            {
+              "text": "ゆく",
+              "start": 193.248,
+              "end": 193.86
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ici, ils se rejoignent",
+              "start": 189.88,
+              "end": 192.036
+            },
+            {
+              "text": "pour ne faire",
+              "start": 192.036,
+              "end": 193.25
+            },
+            {
+              "text": "qu’un",
+              "start": 193.25,
+              "end": 193.86
+            }
+          ],
+          "romaji": "Koko de hitotsu ni musubarete yuku",
+          "romajiUnits": [
+            {
+              "text": "Koko de hitotsu ni",
+              "start": 189.88,
+              "end": 192.023
+            },
+            {
+              "text": "musubarete",
+              "start": 192.023,
+              "end": 193.248
+            },
+            {
+              "text": "yuku",
+              "start": 193.248,
+              "end": 193.86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "labelJa": "アウトロ ― ささやくように",
+      "labelFr": "Outro — en chuchotant",
+      "lines": [
+        {
+          "ja": "消えないように……",
+          "fr": "Ne disparaisse jamais…",
+          "start": 193.86,
+          "end": 196.24,
+          "jaUnits": [
+            {
+              "text": "消えないように……",
+              "start": 193.86,
+              "end": 196.24
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ne disparaisse jamais…",
+              "start": 193.86,
+              "end": 196.24
+            }
+          ],
+          "romaji": "Kienai you ni…",
+          "romajiUnits": [
+            {
+              "text": "Kienai you ni…",
+              "start": 193.86,
+              "end": 196.24
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "omittedWrittenLines": [
+    {
+      "ja": "ひとつの名前　ひとつの色",
+      "romaji": "Hitotsu no namae hitotsu no iro",
+      "fr": "Un nom une couleur un éclat singulier",
+      "reason": "Ligne du texte théorique non retenue dans la piste audio : fenêtre 152.72–156.78 vérifiée en mode audio-first."
+    }
+  ]
+}

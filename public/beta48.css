@@ -1,0 +1,48 @@
+/* Beta48: steady import panels, grouped seasons and legible calendar categories. */
+.series-dialog{width:min(920px,94vw);max-height:88dvh;padding:24px;overflow:auto;background:#131b32;color:#f4f0ff;border:1px solid #9980c9;border-radius:18px}
+.series-dialog>header{display:flex;align-items:start;gap:20px;justify-content:space-between;margin-bottom:20px}
+.series-dialog h2{margin:0;font-size:25px;overflow-wrap:anywhere}
+.series-dialog>header p{color:#cfc6ea}
+.series-season-row{display:grid;grid-template-columns:65px minmax(0,1fr) auto;gap:16px;align-items:center;border:1px solid #77629755;background:#1e2541;border-radius:12px;padding:12px;margin:12px 0}
+.series-season-row:not(:has(img)){grid-template-columns:minmax(0,1fr) auto}
+.series-season-row img{width:65px;height:92px;object-fit:cover;border-radius:7px}
+.series-season-row>div{display:flex;flex-direction:column;gap:7px;min-width:0}
+.series-season-row span{overflow-wrap:anywhere}
+.series-season-row small{color:#ded7ee}
+.series-gap{color:#ffdd76!important;background:#66511933;border-radius:7px;padding:7px 10px}
+.series-card-hint{font-size:12px;color:#e5cf8c;margin:8px 0}
+.series-show{flex-basis:100%;border-color:#aa8ce6!important;background:#514283!important}
+.series-form-fields{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;border-top:1px solid #9980c944;padding-top:16px;margin-top:14px}
+.series-form-fields>.check{grid-column:1/-1}
+.series-view-filter{display:flex;align-items:center;gap:8px;margin:12px 0}
+html body #importDialog{width:min(1280px,96vw);height:min(920px,94dvh);max-height:94dvh;min-width:0;box-sizing:border-box}
+html body #importDialog .dialog-content{height:100%;display:flex;flex-direction:column;min-height:0}
+html body #importDialog .csv-import-workspace{flex:1;min-height:0;overflow:auto;align-items:stretch}
+html body #importDialog .csv-import-sidebar,html body #importDialog .csv-preview-workspace{min-width:0}
+html body #importDialog .csv-progress-current,html body #importDialog #csvProgressCurrent{min-height:3.2em;max-height:3.2em;overflow:hidden;overflow-wrap:anywhere}
+html body #settingsForm>.nocturne-dialog-hero,html body #importDialog .nocturne-dialog-hero{min-height:112px;height:112px;flex-shrink:0;padding:14px 22px;box-sizing:border-box;background-position:right 50%;margin-bottom:16px}
+html body #settingsForm>.nocturne-dialog-hero h2,html body #importDialog .nocturne-dialog-hero h2{font-size:clamp(23px,2.4vw,29px)}
+html body #settingsForm>.nocturne-dialog-hero p,html body #importDialog .nocturne-dialog-hero p{margin:8px 0 0}
+html body .timed-dismiss{position:relative;overflow:visible!important}
+html body .timed-dismiss .dismiss-ring{position:absolute!important;inset:-3px!important;width:calc(100% + 6px)!important;height:calc(100% + 6px)!important;max-width:none;pointer-events:none;overflow:visible}
+html body .dismiss-ring rect{fill:none;stroke:#c8a4ff;stroke-width:2;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--dismiss-left,100));vector-effect:non-scaling-stroke}
+html body .calendar-event[data-category=watching],html body .calendar-legend [data-category=watching]{--event-color:#ffdf3a}
+html body .calendar-event[data-category=planned],html body .calendar-legend [data-category=planned]{--event-color:#3bf0ca}
+html body .calendar-event[data-category=premiere],html body .calendar-legend [data-category=premiere]{--event-color:#e782ff}
+html body .calendar-event[data-category=episode],html body .calendar-legend [data-category=episode]{--event-color:#6cc5ff}
+html body .calendar-event[data-category=movie],html body .calendar-legend [data-category=movie]{--event-color:#ff958b}
+html body .calendar-event{display:flex;align-items:start;gap:6px;border-left-width:5px;background:color-mix(in srgb,var(--event-color) 24%,#121a31)}
+html body .calendar-event svg{width:15px;height:15px;flex:0 0 15px;margin-top:2px;color:var(--event-color)}
+html body .calendar-legend>span{color:var(--event-color);font-weight:650}
+html body .calendar-legend>span:before{display:none}
+html body .calendar-legend svg{width:20px;height:20px;flex-shrink:0}
+html body .calendar-legend>span>span:before{display:none}
+html body .audit-review-card,html body .audit-card{contain:layout style}
+@media(max-width:700px){.series-dialog{padding:15px}.series-season-row{grid-template-columns:48px minmax(0,1fr);gap:10px}.series-season-row img{width:48px;height:70px}.series-season-row button{grid-column:1/-1}.series-form-fields{grid-template-columns:1fr}html body #importDialog{height:94dvh}.catalog-batch{align-items:stretch;flex-wrap:wrap}}
+
+
+html body #csvModalProgressLabel{height:3em;min-height:3em;max-height:3em;overflow:hidden;overflow-wrap:anywhere}html body #importDialog .csv-import-layout{min-height:0;flex:1}html body .series-view-toggle{white-space:nowrap}
+
+html body .timed-dismiss .dismiss-ring{transform:none!important}
+
+html body #settingsDialog .nocturne-dialog-hero,html body #importDialog .nocturne-dialog-hero{background-image:linear-gradient(90deg,#181c35fa 0%,#1c2244eb 35%,#20213b55 65%,#131b3030 100%),url('/assets/design/moon-library.webp')!important;background-size:cover!important;background-position:right 20%!important}

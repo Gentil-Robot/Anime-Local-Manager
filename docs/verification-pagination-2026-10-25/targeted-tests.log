@@ -1,0 +1,90 @@
+### scripts/test-beta80-paging.cjs
+OK Beta80 paging: all 5000 IDs in order, page clamp, full view, global search outside the page, correct edit/note, keyboard focus, seven languages, hidden-view controls, no data mutation.
+
+
+### scripts/test-beta82-memories-filters.cjs
+OK Beta82 memories: read-only local projection; personal/ambiguous text preserved; reversible automatic annotations; 7-language filters; truthful release-date sort; safe covers and text; anime/notebook routing; bounded pagination; retry and stale-response protection.
+
+
+### scripts/test-beta82-community-navigation.cjs
+OK Beta82 community navigation: natural startup survives renders and coalesced collection changes; early identity, fixed footer, all seven languages, one clickable common count, empty results, unpublished recommendations, login prompt, content policy, single send, stale-dialog isolation and immediate account-panel clearing on session loss.
+
+
+### scripts/test-beta82-card-actions.cjs
+OK Beta82 card actions: stable recommendation before/after paging and filters, exact record routing, seven languages, action order, unchanged notes, retained seasons page and GIF without caption.
+
+
+### scripts/test-beta82-recommend-catalog.cjs
+OK beta82 recommendations: catalog and owner identity, age, blocked content, no full-library activity work during send.
+
+
+### scripts/test-beta82-ux6.cjs
+
+
+### scripts/test-beta78-ui.cjs
+{
+  "titlesBackoff": true,
+  "titlesRetry": true,
+  "countdownInitialHover": true,
+  "countdownResume": true,
+  "gapGeneration": true,
+  "catalogRetry": true,
+  "settingsAllTabs": true,
+  "searchBusy": true,
+  "dateMarkup": true,
+  "dnaMarkup": true,
+  "xmlFinalResponse": true
+}
+OK Beta78 UI: network recovery, initial hover pause/resume, stale dialog replies, all settings tabs, busy state, escaped imported markup and terminal XML result.
+
+
+### scripts/test-beta74-import.cjs
+OK Beta74: visible cover suggestions, explicit choices, real shared detail dialog and focus return, no implicit writes, collapsed source with retained draft, selection counts, Enter search, independent rows, cancelled/stale/failed/empty searches, safe image fallback, seven complete languages, bounded scroll/footer, centered site signature and version derived from the shared app version.
+
+
+### scripts/test-beta73-ui.cjs
+OK Beta73 UI: status-first loading, early account identity, no friends call while disconnected, one shared friends call when connected, visible network errors; every homepage binding rendered in seven languages, signup/login and charter installed before initial paint, required unchecked charter, immediate duplicate-click loading, bounded scroll controls after dialog close and website links.
+
+
+### scripts/test-beta65-ui.cjs
+OK Beta65 UI: friend profiles/search/four sorts, pending requests, seven languages, account shortcuts on all pages, copying preserved, live status without lost filters, stale-response rejection and independent form scrolling.
+
+
+### scripts/test-nocturne.js
+OK Nocturne: design catalogues have equal keys in all seven languages
+OK Nocturne: 161 distinct main glossary definitions per language
+OK Nocturne: French extended notes remain available rather than silently replaced
+OK Nocturne: glossary pagination bounds each rendered page
+OK Nocturne: glossary favourites and history remain local
+OK Nocturne: support follows local-data and acknowledgements inside the about page
+OK Nocturne: karaoke is a discreet about-page bonus, not a main navigation item
+OK Nocturne: about navigation is simple and the roadmap card is removed
+OK Nocturne: hidden views override the visual layout rules
+OK Nocturne: legacy donations navigation routes to the unified page
+OK Nocturne: one audible video player with shared controls
+OK Nocturne: clip and new visual assets exist
+OK Nocturne: retains the five acknowledged companions and QR image
+OK Nocturne: old decorative phrases are not introduced in the new UI
+OK Nocturne: a unit is not active before its start
+OK Nocturne: shared group clock progresses only within the active group
+OK Nocturne: completed groups stay completed during a gap
+OK Nocturne: all completed groups stay completed after the line
+OK Nocturne: backward seeking does not reuse future progress
+OK Nocturne: translation progress follows one phrase fraction
+OK Nocturne: silent intervals have no active line
+OK Nocturne: 22517 timeline positions preserve bounded progress
+OK Nocturne: supplied lyrics and original timings are archived; audio restores five missing phrases
+OK Nocturne: approximate intra-line timing remains explicit
+OK Nocturne: audio review restores only the five documented source phrases
+OK Nocturne: clip is the sole clock without a looping silent second video
+OK Nocturne: body timeout applies even after successful response headers
+OK Nocturne: response bodies have a size bound
+OK Nocturne: each redirect is passed through the existing address validator
+OK Nocturne: UTF-8 body decoding is streaming-safe
+OK Nocturne: simultaneous source requests are coalesced and failures may be retried
+OK Nocturne: news response no longer blocks on eighty image lookups
+32/32 Nocturne checks passed; no external network, no vocal-alignment claim.
+
+
+### scripts/test-beta19-ux.js
+OK Beta 19 : tri d’import, autocomplétion et filtres indépendants validés.

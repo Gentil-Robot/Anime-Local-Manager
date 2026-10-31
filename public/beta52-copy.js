@@ -1,0 +1,93 @@
+(()=>{'use strict';const copy={
+  "fr": {
+    "seriesSeasonRange": "Saisons {from}–{to}",
+    "seriesProviderHint": "Ce découpage vient de BetaSeries. Les totaux par saison restent inconnus ; les statuts choisis sont enregistrés sans modifier tes épisodes vus.",
+    "seriesProviderUnknown": "Progression par saison non renseignée",
+    "seriesOpenRecord": "Ouvrir la fiche de la série",
+    "completionAwaitingTitle": "Informations en attente ({count})",
+    "completionAwaitingHint": "Ces fiches sont identifiées. Leur date ou leur nombre d’épisodes ne sont pas renseignés par la source. Elles seront actualisées lors des prochaines mises à jour.",
+    "csvDetailHint": "Consulte la fiche, puis choisis les entrées à importer dans la liste CSV.",
+    "seasonAdded": "« {title} » a été ajouté à À voir.",
+    "seasonAlreadyAdded": "« {title} » est déjà dans ta collection.",
+    "completionEmpty": "Aucune fiche à corriger.",
+    "seriesSeasonSingle": "Saison {season}"
+  },
+  "en": {
+    "seriesSeasonRange": "Seasons {from}–{to}",
+    "seriesProviderHint": "This division comes from BetaSeries. Season totals remain unknown; saved statuses do not change watched episodes.",
+    "seriesProviderUnknown": "Season progress not supplied",
+    "seriesOpenRecord": "Open the series record",
+    "completionAwaitingTitle": "Information awaiting details ({count})",
+    "completionAwaitingHint": "These titles are identified. The source has not supplied a date or episode count. Future updates can fill them in.",
+    "csvDetailHint": "Inspect the record, then select entries to import in the CSV list.",
+    "seasonAdded": "“{title}” was added to Plan to Watch.",
+    "seasonAlreadyAdded": "“{title}” is already in your collection.",
+    "completionEmpty": "No records need correction.",
+    "seriesSeasonSingle": "Season {season}"
+  },
+  "ja": {
+    "seriesSeasonRange": "シーズン {from}～{to}",
+    "seriesProviderHint": "BetaSeries の区分です。各シーズンの総話数は不明です。状態の保存では視聴話数を変更しません。",
+    "seriesProviderUnknown": "シーズン別の進捗は未登録",
+    "seriesOpenRecord": "シリーズの詳細を開く",
+    "completionAwaitingTitle": "未確定の情報（{count}）",
+    "completionAwaitingHint": "作品は特定済みですが、情報元に放送日または話数がありません。今後の更新で補完できます。",
+    "csvDetailHint": "詳細を確認し、CSV の一覧で取り込む項目を選んでください。",
+    "seasonAdded": "「{title}」を視聴予定に追加しました。",
+    "seasonAlreadyAdded": "「{title}」は登録済みです。",
+    "completionEmpty": "修正が必要な作品はありません。",
+    "seriesSeasonSingle": "シーズン {season}"
+  },
+  "es": {
+    "seriesSeasonRange": "Temporadas {from}–{to}",
+    "seriesProviderHint": "Esta división procede de BetaSeries. Los totales por temporada son desconocidos; guardar el estado no cambia los episodios vistos.",
+    "seriesProviderUnknown": "Progreso de temporada sin indicar",
+    "seriesOpenRecord": "Abrir la ficha de la serie",
+    "completionAwaitingTitle": "Información pendiente ({count})",
+    "completionAwaitingHint": "Estos títulos están identificados. La fuente aún no indica fecha o número de episodios. Se podrán completar en futuras actualizaciones.",
+    "csvDetailHint": "Consulta la ficha y selecciona las entradas que importar en la lista CSV.",
+    "seasonAdded": "«{title}» se añadió a Por ver.",
+    "seasonAlreadyAdded": "«{title}» ya está en tu colección.",
+    "completionEmpty": "No hay fichas que corregir.",
+    "seriesSeasonSingle": "Temporada {season}"
+  },
+  "de": {
+    "seriesSeasonRange": "Staffeln {from}–{to}",
+    "seriesProviderHint": "Diese Einteilung stammt von BetaSeries. Die Folgenzahl pro Staffel ist unbekannt. Gespeicherte Status ändern keine gesehenen Folgen.",
+    "seriesProviderUnknown": "Staffelfortschritt nicht angegeben",
+    "seriesOpenRecord": "Serieneintrag öffnen",
+    "completionAwaitingTitle": "Noch ausstehende Angaben ({count})",
+    "completionAwaitingHint": "Diese Titel sind identifiziert. Die Quelle liefert noch kein Datum oder keine Folgenzahl. Spätere Aktualisierungen können sie ergänzen.",
+    "csvDetailHint": "Prüfe den Eintrag und wähle die zu importierenden Einträge in der CSV-Liste.",
+    "seasonAdded": "„{title}“ wurde zu Geplant hinzugefügt.",
+    "seasonAlreadyAdded": "„{title}“ ist bereits in deiner Sammlung.",
+    "completionEmpty": "Keine Einträge müssen korrigiert werden.",
+    "seriesSeasonSingle": "Staffel {season}"
+  },
+  "pt-BR": {
+    "seriesSeasonRange": "Temporadas {from}–{to}",
+    "seriesProviderHint": "Esta divisão vem do BetaSeries. Os totais por temporada são desconhecidos; salvar o status não altera os episódios assistidos.",
+    "seriesProviderUnknown": "Progresso da temporada não informado",
+    "seriesOpenRecord": "Abrir a ficha da série",
+    "completionAwaitingTitle": "Informações pendentes ({count})",
+    "completionAwaitingHint": "Estes títulos estão identificados. A fonte ainda não informou a data ou o número de episódios. Atualizações futuras poderão completar esses dados.",
+    "csvDetailHint": "Consulte a ficha e selecione as entradas para importar na lista CSV.",
+    "seasonAdded": "“{title}” foi adicionado a Planejado.",
+    "seasonAlreadyAdded": "“{title}” já está na sua coleção.",
+    "completionEmpty": "Nenhuma ficha precisa de correção.",
+    "seriesSeasonSingle": "Temporada {season}"
+  },
+  "zh-CN": {
+    "seriesSeasonRange": "第 {from}～{to} 季",
+    "seriesProviderHint": "此分季来自 BetaSeries。各季总集数尚不明确。保存状态不会更改已观看集数。",
+    "seriesProviderUnknown": "尚未填写分季进度",
+    "seriesOpenRecord": "打开系列详情",
+    "completionAwaitingTitle": "待补充的信息（{count}）",
+    "completionAwaitingHint": "这些作品已确认。信息源尚未提供日期或集数，可在后续更新中补全。",
+    "csvDetailHint": "查看详情后，请在 CSV 列表中选择要导入的条目。",
+    "seasonAdded": "已将“{title}”添加到计划观看。",
+    "seasonAlreadyAdded": "“{title}”已在收藏中。",
+    "completionEmpty": "没有需要修正的条目。",
+    "seriesSeasonSingle": "第 {season} 季"
+  }
+};for(const [language,values]of Object.entries(copy))Object.assign(window.ALM_DESIGN_COPY[language],values);})();

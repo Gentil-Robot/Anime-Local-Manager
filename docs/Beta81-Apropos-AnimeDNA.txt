@@ -1,0 +1,87 @@
+Anime Local Manager — bêta 81, À propos et Anime DNA
+Retouche du 23 octobre 2026 — Europe/Paris
+
+Base : Anime-Local-Manager-Beta81-Reprise80-Nocturne.zip, empreinte de départ
+e46075fea23e9baf4fcb084d491d52f7e51116ae4d12bea825f18e64b739cae5.
+Les 624 fichiers de cette archive ont été vérifiés avant modification.
+La version reste 2.0.0-beta.81.
+Identifiant : beta81-reprise80-dna-layout-20261023.
+
+À PROPOS
+Le GIF et la grande image ALM menant au site sont retirés de ce bloc. Le fichier
+PNG de la grande image, désormais inutilisé, est également retiré de la livraison.
+Le lecteur et le panneau des quatre wallpapers ont les mêmes bords supérieur et
+inférieur sur les fenêtres en deux colonnes. La vidéo reste entière, sans
+déformation ni recadrage ; des bandes peuvent donc apparaître lorsque la hauteur
+du lecteur diffère du format vidéo. En petite fenêtre, les blocs se superposent.
+Les quatre images et les douze téléchargements FHD/QHD/4K sont conservés.
+
+ANIME DNA
+Le GIF existant est déplacé sous Top genres, dans la colonne de droite, à la
+place de l'ancien décor de bibliothèque. Il devient un vrai lien vers
+https://animelocalmanager.com/, accessible au clavier et nommé dans les sept langues.
+La zone garde le gabarit de l'ancien décor : 155 px de haut sur grand écran,
+145 px jusqu'à 1500 px de largeur. Le GIF garde ses proportions, est centré et
+limité à 450 x 140 px ; sa taille s'adapte lorsque la colonne est plus étroite.
+L'image fixe existante remplace toujours le GIF en mode animations réduites.
+Le lien reste présent après les actualisations des statistiques Anime DNA.
+
+VALIDATION
+- 56 cas d'interface : 2 vues, 7 langues, 4 largeurs (2300, 1400, 800 et 640 px),
+  sous Electron 44.9.3, rendu logiciel Linux, profil fictif de 146 fiches.
+- Alignement du lecteur et des wallpapers vérifié par les rectangles réellement
+  rendus en deux colonnes ; absence de débordement horizontal.
+- Lien, focus clavier, mode animé/fixe, maintien après recalcul DNA, 4 wallpapers
+  et 12 téléchargements contrôlés.
+- Vérification complémentaire d'ouverture et de fermeture du mode cinéma.
+- 7 suites ciblées réussies : beta74-import, beta73-ui, les 3 suites verify:beta81,
+  test-nocturne et beta47-karaoke. Audit des traductions : 1095 clés par langue.
+- Site reconstruit pour conserver ses copies de CSS et son manifeste cohérents.
+
+Les bancs bloquent les appels aux fournisseurs et utilisent uniquement un profil
+fictif. Aucun email, compte réel ou test de charge. La passe historique de 127
+suites n'a pas été entièrement relancée pour cette modification de présentation.
+La recette de l'installateur Windows reste celle de la livraison précédente.
+
+Les données, le carnet, les API, la maintenance, les dépendances et le retrait
+du doublon newsletter sont conservés. Aucun service distant modifié ou déployé.
+Ce document remplace les indications de placement des visuels données avant
+cette dernière retouche. Extraire les sources dans un nouveau dossier.
+
+Vérifications locales :
+npm ci
+npm run verify:archive
+npm run verify:beta81
+npm run audit:locales
+
+CORRECTIF DE PUBLICATION — 23 OCTOBRE 2026
+Identifiant de cette livraison : beta81-reprise80-publication-fix-20261023.
+La version applicative reste 2.0.0-beta.81.
+
+Le contrôle test-beta66-ui.cjs attendait encore le GIF sous le lecteur À propos.
+Cette attente était devenue obsolète après son déplacement demandé dans Anime DNA.
+Le test a été reproduit en échec : TypeError sur banner.closest(), car ce sélecteur
+ne trouve désormais aucune bannière dans À propos. Il vérifie maintenant le lien
+réel dans Anime DNA, son emplacement après Top genres, ses dimensions 450 x 140,
+son URL, ses protections de lien externe et son attribut de traduction. Il vérifie
+aussi l'absence des anciens blocs dans À propos, le lecteur et les 4 wallpapers.
+Les autres contrôles de ce test restent présents. Aucun contrôle n'est contourné.
+
+Les résultats de la nouvelle vérification complète sont livrés séparément dans
+ALM-Beta81-Correctif-Publication.txt et son archive de preuves. Cette retouche ne
+modifie ni le code applicatif, ni les dépendances, ni les données, ni les services.
+La fabrication et l'exécution de l'installateur final restent à confirmer sous
+Windows : la reproduction et la validation de ce correctif se font sous Linux.
+
+COMPLÉMENT AU CORRECTIF DE PUBLICATION — 23 OCTOBRE 2026
+Le second ancien contrôle test-beta68-ui.cjs attendait lui aussi le GIF dans
+À propos. Il vérifie désormais son emplacement dans Anime DNA, tout en
+conservant ses contrôles de compression et de compatibilité des avatars.
+
+Le bouton « Trouver les animés » utilise un violet plus sombre (#594d82),
+avec un état de survol et un focus clavier visibles. Le pied de page commun
+regroupe « Nous contacter », « Site internet » et « Discord » en rectangles
+de même style. Les liens ouvrent https://animelocalmanager.com/ et
+https://discord.gg/9KJ8MqhKh7 ; le libellé du site suit les sept langues.
+Les boutons passent à la ligne lorsque la largeur le nécessite.
+Ces retouches de présentation ne nécessitent aucune migration ni déploiement.

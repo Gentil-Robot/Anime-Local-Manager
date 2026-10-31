@@ -1,0 +1,7 @@
+.completion-reference-group { margin-top: 16px; padding: 14px; border: 1px solid rgba(139,165,211,.25); border-radius: 14px; background: rgba(17,25,48,.45); }
+.completion-reference-group summary { cursor: pointer; font-weight: 700; line-height: 1.5; }
+.completion-reference-group p { margin: 10px 0; color: var(--muted); line-height: 1.6; }
+.completion-reference-group .completion-awaiting-open { width: 100%; text-align: left; overflow-wrap: anywhere; margin-top: 7px; white-space: normal; }
+.completion-references-more { margin-top: 12px; }
+.series-import-reference { color: #b2c8ef; }
+.series-reference-pending { color: #f0d88c; }

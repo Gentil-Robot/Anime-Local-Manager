@@ -1,0 +1,54 @@
+/* The result list keeps a usable height, including small windows and OS zoom. */
+html body #importDialog .csv-import-workspace{overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;align-items:stretch;grid-template-rows:minmax(0,1fr)}
+html body #importDialog .csv-import-controls{height:100%;align-self:stretch;box-sizing:border-box}
+html body #importDialog .csv-results-panel{display:flex;flex-direction:column;min-height:520px;gap:12px}
+html body #importDialog .csv-results-panel>:not(.csv-results):not(.csv-results-placeholder){flex:0 0 auto}
+html body #csvImportForm .csv-results,html body #importDialog .csv-results-placeholder{flex:1 1 auto;height:auto;min-height:200px}
+html body #importDialog .csv-results-placeholder.hidden,html body #importDialog .csv-results.hidden,html body #importDialog .csv-review-bulk-actions.hidden{display:none!important}
+html body .csv-partial-row{grid-template-columns:1fr!important}
+html body .season-detail-open{border:0;padding:0;background:none;color:inherit;text-align:left;font-size:inherit;font-weight:inherit;line-height:inherit;cursor:pointer}
+html body .season-detail-open:hover{text-decoration:underline;color:#d4bcff}
+html body #scrollJumpControls{position:fixed!important;z-index:2147483000!important;isolation:isolate;opacity:1!important;visibility:visible!important}
+html body .record-search-dialog{width:min(1040px,94vw);max-height:92dvh;box-sizing:border-box;padding:24px;border:1px solid #9980c9;border-radius:18px;background:#151c32;color:#eeebfa;overflow:hidden}
+html body .record-search-dialog[open]{display:flex;flex-direction:column}
+html body .record-search-dialog header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+html body .record-search-dialog header h2{margin:0}
+html body .record-search-dialog>p{line-height:1.65}
+html body .record-search-dialog form{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 0;flex-shrink:0}
+html body .record-search-dialog form input{flex:1;min-width:160px}
+html body .record-search-dialog form label{display:flex;align-items:center;gap:12px}
+html body .record-search-dialog form select{width:auto;margin:0}
+html body #recordSearchResults{overflow:auto;min-height:80px;padding-right:60px;scrollbar-gutter:stable}
+html body .record-search-result{display:flex;align-items:center;gap:16px;border-top:1px solid #9980c933;padding:12px 0}
+html body .record-search-preview{flex:1;display:flex;gap:16px;align-items:center;text-align:left;min-width:0}
+html body .record-search-preview img{width:52px;height:74px;object-fit:cover;border-radius:6px}
+html body .record-search-preview span{display:flex;flex-direction:column;gap:8px;overflow-wrap:anywhere}
+html body .record-search-preview small{color:#cfc6ea}
+html body .record-search-dialog footer{display:flex;justify-content:space-between;gap:16px;padding-top:18px;flex-shrink:0}
+html body #recordSearchDialog .dialog-scroll-controls{bottom:100px!important;right:24px!important}
+@media(max-height:720px){html body #importDialog .nocturne-dialog-hero{height:86px;min-height:86px;padding:8px 18px;margin-bottom:8px}html body #importDialog .import-panel{padding:10px}html body #importDialog .import-tabs{margin:8px 0}html body #importDialog .csv-results-panel{min-height:480px}}
+@media(max-width:850px){html body #importDialog .csv-import-controls{height:auto}html body #importDialog .csv-results-panel{min-height:560px;height:560px}html body .record-search-result{flex-wrap:wrap}html body .record-search-result>button:last-child{margin-left:auto}}
+@media(max-height:720px){
+ html body #importDialog .dialog-content{padding:8px!important}
+ html body #importDialog .nocturne-dialog-hero{height:64px;min-height:64px;padding:8px 14px;margin-bottom:6px}
+ html body #importDialog .nocturne-dialog-hero p,html body #importDialog .nocturne-dialog-hero .nocturne-kicker{display:none}
+ html body #importDialog .import-tabs{padding:4px;margin:6px 0}
+ html body #importDialog .import-tab{padding:8px 12px}
+ html body #importDialog .csv-results-panel-head{order:0}
+ html body #importDialog .csv-results-search{order:1}
+ html body #importDialog .csv-results,html body #importDialog .csv-results-placeholder{order:2}
+ html body #importDialog .csv-review-bulk-actions{order:3}
+ html body #importDialog .csv-pagination{order:4}
+}
+html body #importDialog{width:min(1540px,calc(var(--alm-viewport-width,100vw)*.98))!important;max-width:calc(var(--alm-viewport-width,100vw)*.98)!important;height:min(1080px,calc(var(--alm-viewport-height,100dvh)*.96));max-height:calc(var(--alm-viewport-height,100dvh)*.96)}
+html body #importDialog.alm-short-window .dialog-content{padding:8px!important}
+html body #importDialog.alm-short-window .nocturne-dialog-hero{height:64px;min-height:64px;padding:8px 14px;margin-bottom:6px}
+html body #importDialog.alm-short-window .nocturne-dialog-hero p,html body #importDialog.alm-short-window .nocturne-dialog-hero .nocturne-kicker{display:none}
+html body #importDialog.alm-short-window .import-tabs{padding:4px;margin:6px 0}
+html body #importDialog.alm-short-window .import-tab{padding:8px 12px}
+html body #importDialog.alm-short-window .csv-results-panel-head{order:0}
+html body #importDialog.alm-short-window .csv-results-search{order:1}
+html body #importDialog.alm-short-window .csv-results,html body #importDialog.alm-short-window .csv-results-placeholder{order:2}
+html body #importDialog.alm-short-window .csv-review-bulk-actions{order:3}
+html body #importDialog.alm-short-window .csv-pagination{order:4}
+html body #csvImportResults{align-content:start;grid-auto-rows:max-content}

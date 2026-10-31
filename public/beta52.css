@@ -1,0 +1,17 @@
+/* Beta52: compact provider seasons and readable import detail links. */
+.csv-detail-open { background:none; border:0; padding:0; color:inherit; text-align:left; font:inherit; font-weight:750; cursor:pointer; overflow-wrap:anywhere; }
+.csv-detail-open:hover { color:var(--accent); text-decoration:underline; }
+.csv-detail-open:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:4px; }
+.series-provider-range summary { padding:14px; font-weight:750; cursor:pointer; }
+.series-provider-season>div { display:grid; gap:8px; }
+.series-provider-season small,.series-provider-hint { color:var(--muted); line-height:1.6; }
+.series-provider-season .series-status-control { margin:0; }
+.series-open-detail { margin:14px 0; }
+#completionAwaiting { grid-column:1/-1; margin-top:16px; padding:16px; border:1px solid var(--line,#38436e); border-radius:14px; }
+#completionAwaiting summary { cursor:pointer; font-weight:700; }
+#completionAwaiting p { color:var(--muted); line-height:1.6; }
+.completion-awaiting-open { display:block; width:100%; text-align:left; margin:10px 0; overflow-wrap:anywhere; }
+@media(max-width:650px) { .series-provider-season { align-items:stretch; flex-direction:column; gap:12px; } }
+/* Keep the description readable beside the completion action. */
+html body #completionIssuesList { grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr)); }
+html body .completion-issue-open { overflow-wrap:anywhere; }
