@@ -1,0 +1,114 @@
+name: ALM - preparer la release V2 (brouillon)
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID du build Windows GitHub Actions valide (par defaut : 153 tests reussis)"
+        required: true
+        type: string
+        default: "41232220268"
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: alm-v2-release-draft
+  cancel-in-progress: false
+
+jobs:
+  preparer:
+    name: Verifier et preparer une release NON PUBLIEE
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RUN_ID: ${{ inputs.run_id }}
+    steps:
+      - name: Recuperer les notes de la version V2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: publication/v2.0.0-beta-stable
+          persist-credentials: false
+
+      - name: Controler le build, le rapport et SHA-256
+        id: valider
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RUN_ID" =~ ^[0-9]{8,15}$ ]] || { echo "::error::ID de build invalide"; exit 1; }
+          run_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID")"
+          conclusion="$(jq -r '.conclusion' <<< "$run_json")"
+          branch="$(jq -r '.head_branch' <<< "$run_json")"
+          build_sha="$(jq -r '.head_sha' <<< "$run_json")"
+          if [[ "$conclusion" != "success" || "$branch" != "publication/v2.0.0-beta-stable" || ! "$build_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::La publication exige un build Windows reussi sur la branche V2."
+            exit 1
+          fi
+
+          mkdir -p release-assets
+          gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n "ALM-Windows-$build_sha" -D release-assets
+
+          mapfile -t installers < <(find release-assets -maxdepth 2 -type f -name '*Setup-x64.exe')
+          if [[ "${#installers[@]}" -ne 1 || ! -f release-assets/release-check.json ]]; then
+            echo "::error::Installateur unique ou rapport release-check.json introuvable."
+            exit 1
+          fi
+          installer="${installers[0]}"
+          file="$(basename "$installer")"
+          bytes="$(stat -c%s "$installer")"
+          if (( bytes < 50000000 )); then
+            echo "::error::Installateur incomplet (taille anormale)."
+            exit 1
+          fi
+          checksum="$(sha256sum "$installer" | cut -d ' ' -f 1)"
+          jq -e --arg file "$file" --arg digest "$checksum" '
+            .version == "2.0.0" and
+            .status == "passed" and
+            .smoke.installer.status == "passed" and
+            ([.artifacts[] | select(.file == $file and .sha256 == $digest and .target == "nsis")] | length == 1)
+          ' release-assets/release-check.json > /dev/null || {
+            echo "::error::Rapport Windows, test NSIS ou SHA-256 de l installateur incoherent."
+            exit 1
+          }
+          (cd release-assets && sha256sum "$file" > SHA256SUMS.txt)
+
+          echo "build_sha=$build_sha" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Build V2 verifie"
+            echo "- GitHub Actions : $RUN_ID"
+            echo "- Commit source : $build_sha"
+            echo "- Fichier : $file"
+            echo "- SHA-256 : $checksum"
+            echo "- Installation NSIS en CI : validée"
+            echo "- Publication : **brouillon non public uniquement**"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Creer la release V2 en brouillon
+        shell: bash
+        env:
+          BUILD_SHA: ${{ steps.valider.outputs.build_sha }}
+        run: |
+          set -euo pipefail
+          if gh release view v2.0.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::Une release v2.0.0 existe deja. Aucune modification automatique."
+            exit 1
+          fi
+          gh release create v2.0.0 \
+            release-assets/*Setup-x64.exe \
+            release-assets/SHA256SUMS.txt \
+            release-assets/release-check.json \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$BUILD_SHA" \
+            --title "Anime Local Manager V2.0.0 Bêta stable" \
+            --notes-file docs/RELEASE-NOTES-V2.0.0-BETA.md \
+            --draft \
+            --prerelease
+          {
+            echo ""
+            echo "### Etape suivante"
+            echo "La release est un **brouillon prive**. Un humain doit revoir les contenus tiers,"
+            echo "le certificat ou l avertissement SmartScreen, le fichier et les notes,"
+            echo "puis cliquer sur **Publish release** dans les Releases GitHub."
+          } >> "$GITHUB_STEP_SUMMARY"
