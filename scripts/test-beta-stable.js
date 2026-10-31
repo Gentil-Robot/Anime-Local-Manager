@@ -1452,7 +1452,7 @@ check("Copie de publication exclue des contrôles des sources", () => {
   }
 });
 
-check("Documentation de référence, recette Beta 82 et maintenance accessibles", () => {
+check("Documentation V2, archives techniques et maintenance accessibles", () => {
   const readme = read("README.md");
   // Garder la liste *exacte* des documents de livraison et de contribution.
   // Toute documentation ajoutée pour l'open source doit être revue ici.
@@ -1475,19 +1475,19 @@ check("Documentation de référence, recette Beta 82 et maintenance accessibles"
   // La release V2 doit inclure des notes de version utilisables par les lecteurs GitHub.
   const releaseNotes = read("docs/RELEASE-NOTES-V2.0.0-BETA.md");
   assert(releaseNotes.includes("Bêta stable") && releaseNotes.includes("Windows NSIS x64"));
-  assert(readme.includes("docs/HARMONISATION-AFFICHAGE-PUBLICATION-V200-2026-10-25.md"));
+  assert(readme.includes("docs/"), "Le README doit rendre les archives techniques accessibles");
   const profilage = read("docs/BETA82-PROFILAGE-SECURITE-2026-10-24.md");
   assert(profilage.includes("safeStorage") && profilage.includes("test-beta82-safe-storage.cjs"));
-  assert(readme.includes("docs/BETA82-PROFILAGE-SECURITE-2026-10-24.md"));
+  // Les archives historiques restent testées sans imposer leurs titres dans le README public.
   const recette = read("docs/BETA82-RECETTE-PREPUBLICATION.md");
   assert(recette.includes("Beta 82") && recette.includes("Verifier Beta82 Windows.bat"));
-  assert(readme.includes("docs/BETA82-RECETTE-PREPUBLICATION.md"));
+  assert(readme.includes("docs/RELEASE-NOTES-V2.0.0-BETA.md"), "Notes V2 absentes du README");
   const correctif = read("docs/CORRECTIF-UX-2026-10-24.md");
   assert(correctif.includes("Mes souvenirs") && correctif.includes("Windows"));
-  assert(readme.includes("docs/CORRECTIF-UX-2026-10-24.md"));
+  assert(readme.includes("docs/PUBLICATION-OPEN-SOURCE-V2.md"), "Documentation des sources V2 absente du README");
   const finalCheckup = read("docs/RELEASE-CHECKUP-2026-10-25.md");
   assert(finalCheckup.includes("Windows") && finalCheckup.includes("Supabase"));
-  assert(readme.includes("docs/RELEASE-CHECKUP-2026-10-25.md"));
+  assert(readme.includes("[`docs/`](docs/)"), "Lien vers les archives historiques absent du README");
   assert(readme.includes(packageJson.version));
   for (const command of ["npm ci", "npm run app", "npm run verify", "npm run build:community"]) assert(readme.includes(command));
   for (const file of ["Publier Installateur Windows.bat", "REPRENDRE_BUILD_WINDOWS.bat"]) assert(readme.includes(file));
