@@ -36,13 +36,20 @@ Le manifeste `data/database/metadata-manifest.json` décrit **30 430 fiches** re
 
 **Action :** documenter provenance, date, licence et droit de redistribution des métadonnées (synopsis inclus) ; distinguer liens vers images distantes et images réellement embarquées ; vérifier les droits des visuels tiers et les obligations d'attribution.
 
-### 4. Chanson du karaoké et clip
+### 4. Chanson du karaoké et clip — création Suno Pro déclarée
 
-`scripts/fixtures/karaoke/song.suno-source.json` indique une source musicale issue d'un flux Suno, avec paroles et durée. La vidéo du karaoké est distribuée avec l'installateur via Git LFS / `extraResources`. Les éléments visuels/sons peuvent relever d'autorisations distinctes.
+**Information confirmée par le créateur le 31 octobre 2026 : la chanson d'ALM (« 物語が息づく場所 » / « Là où les histoires prennent vie ») a été créée avec un compte Suno Pro.** Ce témoignage permet de **lever la réserve relative à une création sous offre gratuite**. Il ne constitue pas, à lui seul, un contrôle indépendant de l'historique du compte.
 
-Aide officielle Suno : https://help.suno.com/en/articles/9601665 et https://help.suno.com/en/articles/9601601. **Selon les conditions officielles consultées au 31 octobre 2026**, l'usage commercial est autorisé pour les créations effectuées sous abonnement éligible ; les créations du plan gratuit n'ont pas ces droits. Une souscription ultérieure ne confère pas automatiquement des droits rétroactifs.
+`scripts/fixtures/karaoke/song.suno-source.json` documente la provenance Suno, les paroles et les durées. Le clip vidéo est fourni via Git LFS et `extraResources`. Les droits des visuels et des éléments tiers de ce clip restent distincts de ceux de la musique.
 
-**Action :** conserver les preuves de date, plan/conditions lors de la création de la piste, auteur des paroles et provenance du clip/visuels, puis décider de leur diffusion avec la licence appropriée. Ne pas présumer qu'un projet gratuit/open source est automatiquement exempté.
+**Conditions officielles applicables :**
+- [Conditions Suno entrées en vigueur le 3 septembre 2026](https://suno.com/terms-september-2026) : attribution de droits pour les productions réalisées sous Pro/Premier, sous réserve des conditions ; l'**usage commercial** suppose notamment un **téléchargement autorisé depuis Suno** et les remixes d'autres utilisateurs ont des limitations spécifiques.
+- [Droits avec un abonnement payant](https://help.suno.com/en/articles/9601665) et [diffusion sur YouTube et plateformes](https://help.suno.com/en/articles/2410177) : utilisation commerciale de créations couvertes par le plan payant.
+- Les droits d'exploitation contractuels **ne garantissent pas** que la musique générée par IA bénéficie d'une protection par droit d'auteur.
+
+**Reste à documenter en privé**, sans publier de facture ni de données personnelles sur GitHub : date de création, période de validité de l'abonnement Pro, éventuel justificatif du téléchargement autorisé, et provenance des paroles ou éléments musicaux importés. La licence des images/animations du clip nécessite sa propre revue.
+
+**Conclusion limitée à Suno :** le risque `plan gratuit` n'est plus retenu sur la base de la déclaration du créateur ; la conformité contractuelle détaillée et la traçabilité doivent être archivées, mais **il n'est pas justifié de déclarer la musique « sans droits commerciaux »**.
 
 ### 5. Visuels originaux et ressources du site
 
@@ -65,6 +72,7 @@ Plusieurs logos, fonds, GIF, affiches et photos sont distribués dans `public/as
 - [x] Retour positif de recette Windows communiqué par le mainteneur.
 - [ ] Conditions et autorisation AniList pour le cas d'utilisation ALM.
 - [ ] Provenance et droits de redistribution du catalogue 30 430 fiches / médias.
-- [ ] Justificatifs des droits de la piste Suno et du clip.
+- [x] **Déclaration du créateur : chanson composée avec un abonnement Suno Pro actif** (31/10/2026) ; risque d'une création sous plan gratuit écarté.
+- [ ] Archiver de façon privée les preuves de période Pro et de téléchargement autorisé, ainsi que la provenance des paroles/entrées ; contrôler séparément les droits du clip et de ses visuels.
 - [ ] Validation finale des éléments tiers et de la politique de publication.
 - [ ] Release `v2.0.0` marquée **Pre-release** et publiée (pas seulement brouillon).
