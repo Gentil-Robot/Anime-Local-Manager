@@ -16,9 +16,6 @@ jobs:
     defaults:
       run:
         shell: pwsh
-    env:
-      ELECTRON_CACHE: ${{ runner.temp }}/alm-downloads/electron
-      ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/alm-downloads/builder
     steps:
       - name: Sources
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -38,6 +35,8 @@ jobs:
           restore-keys: alm-downloads-${{ runner.os }}-
       - name: Construction, contrôles et essais de l’installation
         env:
+          ELECTRON_CACHE: ${{ runner.temp }}/alm-downloads/electron
+          ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/alm-downloads/builder
           CSC_LINK: ${{ secrets.ALM_WINDOWS_CERTIFICATE }}
           CSC_KEY_PASSWORD: ${{ secrets.ALM_WINDOWS_CERTIFICATE_PASSWORD }}
           ALM_SIGNER_SUBJECT: ${{ vars.ALM_WINDOWS_SIGNER_SUBJECT }}
