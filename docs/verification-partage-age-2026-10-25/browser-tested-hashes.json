@@ -1,0 +1,16 @@
+{
+  "scope": "Hashes of the four modified UI file pairs and test script following the final 32-check browser run. Each app/site pair has matching hashes; the browser suite directly checks community-age.js and community.js mirror equality. Evidence-only filename selection corrected; runtime and test code unchanged, no test rerun.",
+  "browser": "134.0.6998.35",
+  "checks": 32,
+  "files": {
+    "public/community.js": "6a531f93145d59f50bc2c37a935fd5acdc4afd5e68924be69c6aaa382508eb17",
+    "public/community-age.js": "64a1070fcd5db95bffc6d71bc65235f84cbf260ac2d59fa47b70c7d22d211cb1",
+    "public/community-workspace.js": "0dc9ea54fcde7453c283acb25a847fde22a9d568284b876f804d5750a4813b0b",
+    "community/site/community.js": "6a531f93145d59f50bc2c37a935fd5acdc4afd5e68924be69c6aaa382508eb17",
+    "community/site/community-age.js": "64a1070fcd5db95bffc6d71bc65235f84cbf260ac2d59fa47b70c7d22d211cb1",
+    "community/site/community-workspace.js": "0dc9ea54fcde7453c283acb25a847fde22a9d568284b876f804d5750a4813b0b",
+    "scripts/test-beta82-age-sharing-browser.cjs": "bb39264114d6edcbc3f84f1b54c1e6a0fab385c759e7d5855ac591c573ca0b51",
+    "public/community-workspace-copy.js": "f8c36ae5073b9818cf4e4730e27d763b96d0f850e8e3c9a3d03ef49467c8f159",
+    "community/site/community-workspace-copy.js": "f8c36ae5073b9818cf4e4730e27d763b96d0f850e8e3c9a3d03ef49467c8f159"
+  }
+}

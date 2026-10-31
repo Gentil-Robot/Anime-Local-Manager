@@ -1,0 +1,29 @@
+{
+  "network": "mocked only; no credentials accessed",
+  "findings": [
+    {
+      "kind": "search",
+      "sourceLine": 7651,
+      "calls": [
+        {
+          "hasAbortSignal": false,
+          "redirectMode": "default follow",
+          "host": "api.betaseries.com"
+        }
+      ],
+      "directJsonReads": 1
+    },
+    {
+      "kind": "key-test",
+      "sourceLine": 10287,
+      "calls": [
+        {
+          "hasAbortSignal": false,
+          "redirectMode": "default follow",
+          "host": "api.betaseries.com"
+        }
+      ],
+      "directJsonReads": 1
+    }
+  ]
+}

@@ -2,78 +2,176 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Anime Local Manager</title>
+  <title>Anime Local Manager V2.0.0 Bêta stable</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/release-version.js"></script>
   <link rel="icon" href="/assets/anime-local-manager.ico">
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/design.css">
+  <link rel="stylesheet" href="/nocturne.css">
+  <link rel="stylesheet" href="/beta37.css">
+  <link rel="stylesheet" href="/beta38.css">
+  <link rel="stylesheet" href="/beta39.css">
+  <link rel="stylesheet" href="/beta40.css">
+<link rel="stylesheet" href="/beta41.css">
+  <link rel="stylesheet" href="/notebook.css">
+  <meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="/beta42.css">
+<link rel="stylesheet" href="/beta43.css">
+<link rel="stylesheet" href="/beta45.css">
+<link rel="stylesheet" href="/beta48.css">
+<link rel="stylesheet" href="/beta49.css">
+<link rel="stylesheet" href="/beta50.css">
+<link rel="stylesheet" href="/beta51.css">
+<link rel="stylesheet" href="/beta52.css">
+<link rel="stylesheet" href="/beta53.css">
+<link rel="stylesheet" href="/beta55.css">
+<link rel="stylesheet" href="/beta56.css">
+<link rel="stylesheet" href="/beta57.css">
+<link rel="stylesheet" href="/community.css"><link rel="stylesheet" href="/community-workspace.css">
+<link rel="stylesheet" href="/scroll-progress.css"><link rel="stylesheet" href="/beta81.css">
+<link rel="stylesheet" href="/ux-beta82.css">
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar">
+    <aside class="sidebar" id="studioSidebar">
       <div class="side-brand">
         <img src="/assets/anime-local-manager-logo.png" alt="Anime Local Manager">
         <div>
           <strong>Anime</strong>
           <span>Local Manager</span>
-          <small>V1</small>
+          <small>V2.0.0 Bêta stable</small>
         </div>
       </div>
 
       <nav class="side-nav">
         <button class="nav-item" data-filter="">▦ Animés</button>
+        <button class="nav-item" data-filter="Watching">▷ En cours</button>
         <button class="nav-item" data-filter="Plan to Watch">◇ À voir</button>
-        <button class="nav-item" id="navNews">▣ Saisons</button>
-        <button class="nav-item" id="navImages">▤ Images</button>
+        <button class="nav-item" id="navMemories" type="button" data-no-i18n><span class="studio-nav-label">Mes souvenirs</span></button>
+        <button class="nav-item" id="navDiscovery"><span data-design-text="searchPage" data-no-i18n>Recherche</span></button>
+<button class="nav-item" id="navSeasonNews">📺 Saisons</button>
+        <button class="nav-item" id="navRanking"><span data-design-text="ranking" data-no-i18n>Classement</span></button>
+        <button class="nav-item" id="navNewsV2">📰 Actualités</button>
+        <button class="nav-item" id="navReco">🔮 Recommandations</button>
+        <button class="nav-item" id="navDna">🧬 Anime DNA</button>
+        <button class="nav-item" id="navLexicon">📚 Dictionnaire</button>
+        <button class="nav-item" id="navAudit">🛡️ Contrôle anime</button>
         <button class="nav-item" id="navSettings">⚙ Réglages</button>
-        <button class="nav-item" id="navAbout">ⓘ À propos</button>
-        <button class="nav-item" id="navDonations">♡ Dons</button>
+        <button class="nav-item" id="navAbout"><span data-design-text="about" data-no-i18n >À propos</span></button>
+        <button class="nav-item" id="navDonations" hidden aria-hidden="true" tabindex="-1">♡ Dons</button>
       </nav>
+      <button type="button" id="commProfileEntry" class="community-profile-entry studio-account-shortcut studio-account-footer" data-no-i18n><img src="/assets/design/aster-portrait.webp" alt=""><span><strong id="commProfileName">Mon espace</strong><small id="commProfileState">Profil local</small></span></button>
     </aside>
 
     <main class="main-area">
       <header class="topbar">
+ <button class="studio-menu-button" id="studioMenuButton" type="button" aria-expanded="false" aria-controls="studioSidebar" data-design-aria="menu"><span aria-hidden="true">&#9776;</span></button>
+ <div id="studioBreadcrumb" class="studio-breadcrumb" data-no-i18n></div>
         <div class="top-title">
           <a id="homeLink" href="/">
             <img src="/assets/anime-local-manager-logo.png" alt="">
             <span>Anime Local Manager</span>
           </a>
-          <p>Bibliothèque locale avec images, import XML, sauvegarde JSON et nouvelles saisons</p>
+          <p>Bibliothèque locale avec images, imports XML/CSV, sauvegarde JSON et nouvelles saisons</p>
         </div>
 
         <div class="header-actions">
-          <button id="exportBtn">Exporter JSON</button>
-          <button id="importXmlBtn">Importer XML</button>
-          <button id="bulkInfo">Compléter les infos</button>
-          <button id="downloadAllImages">Télécharger les images</button>
-          <button id="seasonNewsBtn">News saisons</button>
+          <button id="importXmlBtn">Importer</button>
+          <button id="backupBtn" type="button" data-design-text="backupMenu" data-no-i18n>Sauvegarde</button>
+          <button id="bulkInfo">Compléter infos + images</button>
+          <button id="downloadAllImages" title="Retenter uniquement les jaquettes manquantes, sans modifier les autres informations">Images manquantes</button>
           <button id="settingsBtn">Réglages</button>
           <button class="primary" id="openAdd">+ Ajouter</button>
         </div>
       </header>
+      <section id="communityPage" class="v2-page hidden" data-no-i18n></section>
+      <section id="memoryPage" class="v2-page memory-page hidden" data-no-i18n>
+        <header class="studio-banner memory-page-hero"><div class="studio-banner-copy"><span class="studio-kicker" data-notebook-text="journalPrivate">ALM · JOURNAL PRIVÉ</span><h1 data-notebook-text="collectionNotebook">Mes souvenirs</h1><p data-notebook-text="privacy">Privé sur cet ordinateur · inclus dans tes sauvegardes · jamais publié sur ton profil.</p></div><span class="memory-page-hero-symbol" aria-hidden="true">✧</span></header>
+        <div class="memory-page-stats" id="memoryPageStats" aria-live="polite"></div>
+        <div class="memory-page-panel">
+          <div class="memory-page-filters">
+            <label class="memory-page-search"><span data-notebook-text="search">Rechercher dans mes souvenirs…</span><input id="memoryPageSearch" type="search" autocomplete="off" maxlength="160"></label>
+            <label><span data-notebook-text="status">Statut</span><select id="memoryPageStatus"><option value="" data-notebook-text="allStatuses">Tous les statuts</option><option value="Completed" data-notebook-text="status_Completed">Terminé</option><option value="Watching" data-notebook-text="status_Watching">En cours</option><option value="On-Hold" data-notebook-text="status_On-Hold">En pause</option><option value="Plan to Watch" data-notebook-text="status_Plan to Watch">À voir</option><option value="Dropped" data-notebook-text="status_Dropped">Abandonné</option></select></label>
+            <label><span data-notebook-text="memoryKind">Type de souvenir</span><select id="memoryPageFilter"><option value="all" data-notebook-text="allMemoryKinds">Tous les souvenirs</option><option value="notes" data-notebook-text="withNotes">Avec un commentaire</option><option value="episodes" data-notebook-text="withEpisodes">Épisodes marquants</option><option value="awards" data-notebook-text="withAwards">Choix annuels</option><option value="automatic" data-notebook-text="automaticNote">Annotations automatiques</option></select></label>
+            <label><span data-notebook-text="notebookFilter">Carnet</span><select id="memoryPageNotebook"><option value="" data-notebook-text="allNotebooks">Tous les carnets</option></select></label>
+            <label><span data-notebook-text="genre">Genre</span><select id="memoryPageGenre"><option value="" data-notebook-text="allGenres">Tous les genres</option></select></label>
+            <label><span data-notebook-text="releaseYear">Année de sortie</span><select id="memoryPageReleaseYear"><option value="" data-notebook-text="allYears">Toutes les années</option></select></label>
+            <label><span data-notebook-text="year">Année du choix</span><select id="memoryPageYear"><option value="" data-notebook-text="allYears">Toutes les années</option></select></label>
+          </div>
+          <div class="memory-page-toolbar memory-page-secondary">
+            <label class="memory-page-sort"><span data-notebook-text="sort">Trier</span><select id="memoryPageSort"><option value="az" data-notebook-text="az">Titre A–Z</option><option value="za" data-notebook-text="za">Titre Z–A</option><option value="newest" data-notebook-text="newestRelease">Sorties récentes</option><option value="oldest" data-notebook-text="oldestRelease">Sorties anciennes</option></select></label>
+            <div class="memory-page-actions"><button type="button" id="memoryPageReset" data-notebook-text="resetFilters">Réinitialiser les filtres</button><button type="button" id="memoryPageExport" data-notebook-text="export">Exporter une liste lisible</button></div>
+          </div>
+          <p id="memoryPageSortHint" class="memory-page-hint" hidden></p>
+          <div class="memory-page-automatic"><label><input id="memoryPageAutomatic" type="checkbox" aria-describedby="memoryPageAutomaticHint"><span data-notebook-text="showAutomatic">Afficher aussi les annotations automatiques</span></label><p id="memoryPageAutomaticHint" class="memory-page-hint" data-notebook-text="autoHint">Les annotations reconnues restent dans les carnets. Les notes ambiguës restent visibles.</p></div>
+          <p id="memoryPageSummary" class="memory-page-summary" role="status" aria-live="polite"></p><button type="button" id="memoryPageRetry" data-notebook-text="retry" hidden>Réessayer</button><div id="memoryPageEntries" class="memory-page-grid"></div>
+          <nav id="memoryPagePagination" class="memory-page-pagination" aria-label="Mes souvenirs" hidden><button type="button" data-memory-page="first" aria-label="Première page">&lt;&lt;</button><button type="button" data-memory-page="prev" aria-label="Page précédente">&lt;</button><span id="memoryPageNumber" aria-live="polite"></span><button type="button" data-memory-page="next" aria-label="Page suivante">&gt;</button><button type="button" data-memory-page="last" aria-label="Dernière page">&gt;&gt;</button></nav>
+        </div>
+      </section>
 
-      <section class="hero">
+      <section id="studioLibraryHero" class="studio-banner garden-banner library-banner">
+ <div class="studio-banner-copy"><span data-design-text="libraryKicker" data-no-i18n class="studio-kicker">TA COLLECTION</span><h1 data-design-text="library" data-no-i18n id="studioLibraryTitle">Ma bibliothèque</h1><p data-design-text="libraryIntro" data-no-i18n id="studioLibraryIntro">Chaque histoire a sa place. Retrouve tes animés, tes notes et tes prochaines aventures.</p></div>
+ <div class="studio-inline-actions"><button type="button" data-app-go="import" class="studio-button "><span data-design-text="import" data-no-i18n >Importer une liste</span></button><button type="button" data-app-go="add" class="studio-button primary"><span data-design-text="add" data-no-i18n >Ajouter un animé</span></button></div>
+ </section>
+ <section class="hero">
         <div class="stat-card"><span id="totalCount">0</span><small>Total</small></div>
         <div class="stat-card"><span id="completedCount">0</span><small>Terminés</small></div>
+        <div class="stat-card"><span id="onholdCount">0</span><small data-watch-status="On-Hold" data-no-i18n>En pause</small></div>
         <div class="stat-card"><span id="watchingCount">0</span><small>En cours</small></div>
         <div class="stat-card"><span id="planCount">0</span><small>À voir</small>
         </div>
       </section>
 
+      <!-- Banniere complétion intelligente -->
+      <div id="completionBanner" class="completion-banner hidden">
+        <div class="completion-banner-icon">⚡</div>
+        <div class="completion-banner-text">
+          <strong id="completionBannerTitle">Ta bibliothèque peut être améliorée</strong>
+          <span id="completionBannerSub"></span>
+        </div>
+        <button id="completionBannerBtn" class="completion-banner-btn">Tout compléter maintenant</button>
+        <button id="completionBannerClose" class="completion-banner-close">✕</button>
+      </div>
+
+      <section id="completionProgressPanel" class="completion-progress-panel hidden" aria-live="polite" aria-atomic="false">
+        <div class="completion-progress-head">
+          <div id="completionProgressIcon" class="completion-progress-icon" aria-hidden="true">⚡</div>
+          <div class="completion-progress-heading">
+            <span id="completionProgressState" class="completion-progress-state">Mise à jour de la bibliothèque</span>
+            <strong id="completionProgressTitle">Préparation…</strong>
+            <span id="completionProgressCurrent" class="completion-progress-current">Analyse des éléments manquants</span>
+          </div>
+          <div class="completion-progress-actions">
+            <button type="button" id="completionProgressMinimize" class="completion-progress-secondary">Masquer</button>
+            <button type="button" id="completionProgressCancel" class="completion-progress-cancel">Annuler</button>
+            <button type="button" id="completionProgressDismiss" class="completion-progress-secondary hidden">Fermer</button>
+          </div>
+        </div>
+        <div class="completion-progress-track" role="progressbar" aria-label="Progression de la mise à jour" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="completionProgressBar" class="completion-progress-bar"></div>
+        </div>
+        <div class="completion-progress-meta">
+          <span><strong id="completionProgressCount">0 / 0</strong> traités</span>
+          <span id="completionProgressPercent">0 %</span>
+          <span id="completionProgressTime">Calcul du temps restant…</span>
+        </div>
+        <div class="completion-progress-results">
+          <div><span>Fiches enrichies</span><strong id="completionProgressInfos">0</strong></div>
+          <div><span>Images ajoutées</span><strong id="completionProgressImages">0</strong></div>
+          <div><span>Traités avec succès</span><strong id="completionProgressSuccess">0</strong></div>
+          <div><span>À vérifier</span><strong id="completionProgressFailed">0</strong></div>
+        </div>
+      </section>
+
+      <button type="button" id="completionProgressDock" class="completion-progress-dock hidden" aria-label="Afficher la progression de la mise à jour">
+        <span class="completion-progress-dock-pulse"></span>
+        <span id="completionProgressDockText">Mise à jour en cours — 0 %</span>
+      </button>
+
       <section id="progressPanel" class="progress-panel hidden">
         <div class="progress-label" id="progressLabel">Traitement en cours...</div>
         <div class="progress"><div id="progressBar"></div></div>
-      </section>
-
-      <section id="newsPanel" class="news-panel hidden">
-        <div class="news-header">
-          <h2>▣ Nouvelles saisons détectées</h2>
-          <div class="news-tools">
-            <button id="loadNewsInfoBtn">Charger les informations</button>
-            <button id="forceNewsSearchBtn">Lancer une nouvelle recherche</button>
-            <button id="closeNews">Fermer</button>
-          </div>
-        </div>
-        <div id="newsList"></div>
       </section>
 
       <section class="filters">
@@ -81,11 +179,11 @@
 
         <select id="statusFilter">
           <option value="">Tous les statuts</option>
-          <option>Watching</option>
-          <option>Completed</option>
-          <option>On-Hold</option>
-          <option>Dropped</option>
-          <option>Plan to Watch</option>
+          <option value="Watching">En cours</option>
+          <option value="Completed">Terminé</option>
+          <option value="On-Hold">En pause</option>
+          <option value="Dropped">Abandonné</option>
+          <option value="Plan to Watch">À voir</option>
         </select>
 
         <select id="typeFilter">
@@ -96,6 +194,11 @@
           <option value="">Tous les genres</option>
         </select>
 
+        <select id="studioFilter" data-design-aria="allStudios"><option value="" data-design-text="allStudios">Tous les studios</option></select>
+        <select id="yearFilter" aria-label="Filtrer par année de diffusion">
+          <option value="">Toutes années</option>
+        </select>
+
         <select id="viewMode">
           <option value="cards">Vue mosaïque</option>
           <option value="compact">Vue compacte</option>
@@ -104,6 +207,7 @@
 
         <select id="sort">
           <option value="title">Tri : titre</option>
+          <option value="studio" data-design-text="sortStudio">Tri : studio</option>
           <option value="startDateDesc">Tri : plus récent</option>
           <option value="startDateAsc">Tri : plus ancien</option>
           <option value="scoreDesc">Tri : ma note</option>
@@ -116,109 +220,561 @@
       </section>
 
       <div id="stats" class="stats"></div>
-      <main id="animeGrid" class="grid view-cards"></main>
+      <div id="animeGrid" class="grid view-cards"></div>
 
 
-      <section id="aboutPage" class="about-page hidden">
-        <div class="about-hero">
-          <img src="/assets/anime-local-manager-logo.png" alt="Logo Anime Local Manager">
-          <div>
-            <h2>À propos d’Anime Local Manager</h2>
-            <p>Application locale open source pour organiser sa bibliothèque d’animés, gérer ses images, suivre ses statuts et détecter les nouvelles saisons.</p>
+
+<section id="aboutPage" class="about-page studio-about hidden">
+ <header class="about-hero studio-banner garden-banner">
+  <div class="studio-banner-copy"><span data-design-text="projectKicker" data-no-i18n class="studio-kicker">LE PROJET</span><h2 data-design-text="aboutTitle" data-no-i18n >À propos d’Anime Local Manager</h2><p data-design-text="aboutIntro" data-no-i18n >Un espace personnel pour ta passion : organiser, découvrir et garder une trace des histoires qui comptent.</p>
+   <div class="studio-badges"><span data-design-text="local" data-no-i18n >Stockage local</span><span data-design-text="noAccount" data-no-i18n >Compte facultatif</span><span data-design-text="openSource" data-no-i18n >Open source</span></div>
+   <div class="studio-inline-actions"><button type="button" data-app-go="support" class="studio-button "><span data-design-text="support" data-no-i18n >Soutenir le projet</span></button><button type="button" data-app-go="credits" class="studio-button "><span data-design-text="credits" data-no-i18n >Remerciements</span></button></div>
+  </div>
+  <img class="studio-brand-mark" src="/assets/anime-local-manager-logo.png" alt="Anime Local Manager">
+ </header>
+ <div class="about-studio-grid">
+  <article class="studio-panel about-logo-card creator-card">
+   <div class="creator-heading"><img src="/assets/gentil-robot-logo.png" alt="Gentil Robot"><div><h3 translate="no">Gentil Robot</h3><span data-design-text="author" data-no-i18n class="studio-muted">Créateur du projet</span></div></div>
+   <p data-design-text="authorCopy" data-no-i18n >Gentil Robot porte Anime Local Manager, son univers et ses choix. Un projet indépendant, enrichi par les retours de sa communauté.</p>
+   <a class="studio-link-button" href="https://github.com/Gentil-Robot/Anime-Local-Manager" target="_blank" rel="noopener noreferrer"><span data-design-text="github" data-no-i18n >Voir le projet sur GitHub</span> <span aria-hidden="true">&#8599;</span></a>
+  <a class="studio-link-button" href="https://animelocalmanager.com/" target="_blank" rel="noopener noreferrer"><span data-design-text="siteWebsite">Visiter le site ALM</span> ↗</a>
+  </article>
+  <article class="studio-panel aster-feature">
+   <img src="/assets/design/aster-cat.webp" alt="Aster" loading="lazy">
+   <div><span class="studio-kicker" translate="no">ASTER</span><h3 translate="no">Aster</h3><p data-design-text="asterRole" data-no-i18n class="studio-accent">Compagnon de création</p><p data-design-text="asterCopy" data-no-i18n >Aster accompagne la création d’ALM : idées, code, design et tests, aux côtés de Gentil Robot.</p></div>
+  </article>
+  <article class="studio-panel feature-hub">
+   <h3 data-design-text="features" data-no-i18n >Tout ton univers, au même endroit</h3>
+   <div class="feature-links"><button type="button" data-app-go="library" class="studio-button "><span data-design-text="library" data-no-i18n >Ma bibliothèque</span></button><button type="button" data-app-go="seasons" class="studio-button "><span data-design-text="seasons" data-no-i18n >Nouvelles saisons</span></button><button type="button" data-app-go="news" class="studio-button "><span data-design-text="news" data-no-i18n >Actualités</span></button><button type="button" data-app-go="reco" class="studio-button "><span data-design-text="reco" data-no-i18n >Recommandations</span></button><button type="button" data-app-go="dictionary" class="studio-button "><span data-design-text="dictionary" data-no-i18n >Dictionnaire</span></button><button type="button" data-app-go="dna" class="studio-button "><span translate="no">Anime DNA</span></button></div>
+  </article>
+  <article class="studio-panel about-local-summary" id="localDataSection">
+   <div class="about-summary-icon" aria-hidden="true">⌁</div>
+   <div><h3>Données locales et sauvegardes</h3><p data-design-text="localCopy" data-no-i18n>Ta bibliothèque reste sur ton ordinateur. Exporte régulièrement une sauvegarde JSON. Internet sert aux sources externes, aux images et au partage communautaire que tu déclenches.</p><button class="studio-button" data-app-go="export" type="button"><span data-design-text="backup" data-no-i18n>Exporter une sauvegarde</span></button></div>
+  <details><summary data-design-text="localDetails" data-no-i18n>Où sont mes données ?</summary>
+<p>Les données utilisateur sont stockées dans le dossier utilisateur de l’application sous Windows ou Linux : bibliothèque, images locales, caches, historique des actualités, décisions du Contrôle anime et base SQLite.</p>
+<p>La sauvegarde/restauration JSON reste locale et optionnelle. Pour plus de sécurité, les exports peuvent être placés dans un dossier synchronisé par l’outil de ton choix : OneDrive, Google Drive, Dropbox, Synology Drive, etc.</p>
+<p>L’application reste utilisable hors connexion pour les données déjà présentes. Internet est requis pour les sources externes, les images et la communauté facultative. La connexion ne publie pas ta bibliothèque : le partage est déclenché explicitement.</p>
+</details></article>
+ </div>
+
+ 
+ <section class="about-thanks" aria-labelledby="aboutThanksTitle">
+<div class="about-thanks-copy">
+<span class="about-thanks-kicker">Remerciements</span>
+<h3 id="aboutThanksTitle">Merci d’avoir fait partie de l’aventure</h3>
+<p><strong>Ashlol</strong>, de la communauté du forum <a href="https://forum.nextinpact.com" rel="noopener" target="_blank">Next INpact</a>.</p>
+<p><strong>Aster</strong> et <strong>Taé</strong>.</p>
+<p>Et une place spéciale pour les compagnons de cœur du projet : Aleistouille, Roudoudoux, Yuma et Nochka.</p><div class="about-data-thanks"><h4 data-design-text="dataThanksTitle" data-no-i18n>Les sources qui font vivre ALM</h4><p data-design-text="dataThanksCopy" data-no-i18n>Merci aux équipes qui rendent leurs données accessibles, ainsi qu’aux éditeurs des flux d’actualités. Leurs informations enrichissent nos collections.</p><div class="about-data-links"><a href="https://jikan.moe/" target="_blank" rel="noopener noreferrer" translate="no">Jikan / MyAnimeList</a><a href="https://anilist.co/" target="_blank" rel="noopener noreferrer" translate="no">AniList</a><a href="https://kitsu.app/" target="_blank" rel="noopener noreferrer" translate="no">Kitsu</a><a href="https://www.tvmaze.com/" target="_blank" rel="noopener noreferrer" translate="no">TVMaze</a><a href="https://www.betaseries.com/" target="_blank" rel="noopener noreferrer" translate="no">BetaSeries</a><a href="https://www.wikidata.org/" target="_blank" rel="noopener noreferrer" translate="no">Wikidata</a><a href="https://mymemory.translated.net/" target="_blank" rel="noopener noreferrer" translate="no">MyMemory</a></div></div>
+<div class="about-service-thanks"><h4 data-design-text="serviceThanksTitle" data-no-i18n>Les services qui accompagnent ALM</h4><p data-design-text="serviceThanksCopy" data-no-i18n>Merci aux outils qui rendent possibles la communauté, les emails et le site.</p><div class="about-data-links"><a href="https://supabase.com/" target="_blank" rel="noopener noreferrer" translate="no">Supabase</a><a href="https://resend.com/" target="_blank" rel="noopener noreferrer" translate="no">Resend</a><a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" translate="no">Vercel</a><a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" translate="no">Cloudflare</a></div></div>
+</div>
+<div aria-label="Les compagnons du projet" class="about-companions">
+<article class="about-companion-card cat aleistouille">
+<img alt="Aleistouille" loading="lazy" src="/assets/thanks/aleistouille.jpg"/>
+<div><strong>Aleistouille</strong></div>
+</article>
+<article class="about-companion-card cat roudoudoux">
+<img alt="Roudoudoux" loading="lazy" src="/assets/thanks/roudoudoux.jpg"/>
+<div><strong>Roudoudoux</strong></div>
+</article>
+<article class="about-companion-card memorial yuma">
+<img alt="Yuma" loading="lazy" src="/assets/thanks/yuma.jpg"/>
+<div><strong>Yuma 🕊️</strong><span>Pour toujours dans nos cœurs et dans nos pensées</span></div>
+</article>
+<article class="about-companion-card dog nochka">
+<img alt="Nochka" loading="lazy" src="/assets/thanks/nochka.jpg"/>
+<div><strong>Nochka</strong></div>
+</article>
+
+</div>
+
+</section>
+<section id="donationsPage" class="donations-page studio-support">
+  <header class="studio-section-heading"><h2 data-design-text="support" data-no-i18n >Soutenir le projet</h2><p data-design-text="supportCopy" data-no-i18n >Les dons sont facultatifs. Ils soutiennent le temps consacré au développement et aux améliorations d’ALM.</p></header>
+  <div class="studio-support-grid">
+  <div class="about-media-main">
+<section aria-labelledby="donationKaraokeTitle" class="donation-karaoke nocturne-player">
+<div class="donation-karaoke-head">
+<div aria-hidden="true" class="donation-karaoke-mic">🎤</div>
+<div>
+<span class="donation-karaoke-kicker" data-design-text="originalSong" data-no-i18n>La chanson originale d’ALM</span>
+<h3 id="donationKaraokeTitle"><span data-design-text="songTranslation" data-no-i18n>Le lieu où les histoires prennent vie</span><small lang="ja" translate="no">物語が息づく場所</small></h3>
+<p><span data-design-text="clipCopy" data-no-i18n="">La chanson d’ALM, en japonais. Le clip et les paroles partagent le même lecteur.</span></p>
+</div>
+<div class="donation-karaoke-head-actions">
+
+</div>
+</div>
+<div aria-live="off" class="donation-karaoke-stage has-clip">
+<video id="donationKaraokeClip" class="karaoke-clip" playsinline preload="metadata" poster="/assets/design/clip-complet-poster.jpg" aria-hidden="true"></video>
+<div class="karaoke-clip-shade" aria-hidden="true"></div>
+<div class="karaoke-opening-title" aria-hidden="true"><span translate="no">Anime Local Manager</span><strong lang="ja">物語が息づく場所</strong><small data-design-text="songTranslation" data-no-i18n></small></div>
+<div class="donation-karaoke-loading" id="donationKaraokeLoading">Préparation du karaoké…</div>
+<div aria-hidden="true" class="donation-karaoke-context donation-karaoke-previous" id="donationKaraokePrevious"></div>
+<div class="donation-karaoke-active">
+<span class="donation-karaoke-section" id="donationKaraokeSection">Prêt ?</span>
+
+<div class="donation-karaoke-ja-wrap donation-karaoke-romaji-wrap" id="donationKaraokeJaWrap">
+<i aria-hidden="true" class="donation-karaoke-ball hidden" id="donationKaraokeBall"></i>
+<div aria-label="Paroles japonaises originales" class="donation-karaoke-original" id="donationKaraokeOriginalLine" lang="ja"></div>
+</div>
+<div aria-label="Paroles en romaji à chanter" class="donation-karaoke-ja donation-karaoke-romaji" id="donationKaraokeJaLine" lang="ja-Latn"></div>
+<div aria-label="Traduction française" class="donation-karaoke-fr" id="donationKaraokeFrLine" lang="fr"></div>
+</div>
+<div aria-hidden="true" class="donation-karaoke-context donation-karaoke-next" id="donationKaraokeNext"></div>
+</div>
+<div class="donation-karaoke-controls">
+<button id="donationKaraokeRestart" type="button">↺ Recommencer</button>
+<button class="primary" id="donationKaraokePlay" type="button">▶ Lecture</button>
+<label class="donation-karaoke-seek">
+<span id="donationKaraokeTime">0:00 / 3:45</span>
+<input aria-label="Position dans la chanson" id="donationKaraokeSeek" max="225.166667" min="0" step="0.01" type="range" value="0"/>
+</label>
+<button class="donation-karaoke-mode" id="donationKaraokeMode" type="button">⛶ Mode karaoké</button>
+</div>
+<div class="donation-karaoke-dev" hidden="" id="donationKaraokeDev">
+<strong>Calibration karaoké</strong>
+<span id="donationKaraokeDevReadout">—</span>
+<div>
+<button data-karaoke-action="offset-minus">Offset −100 ms</button><button data-karaoke-action="offset-plus">Offset +100 ms</button>
+<button data-karaoke-action="line-prev">Ligne ←</button><button data-karaoke-action="line-next">Ligne →</button><button data-karaoke-action="jump-line">Aller à la ligne</button>
+<button data-karaoke-action="word-prev">Mot ←</button><button data-karaoke-action="word-next">Mot →</button>
+<button data-karaoke-action="start-minus">Début −20 ms</button><button data-karaoke-action="start-plus">Début +20 ms</button>
+<button data-karaoke-action="end-minus">Fin −20 ms</button><button data-karaoke-action="end-plus">Fin +20 ms</button>
+<button data-karaoke-action="export">Copier le JSON</button>
+</div>
+</div>
+<p class="donation-karaoke-note" data-beta37-text="videoClock" data-no-i18n></p>
+</section>
+   </div>
+   <section class="studio-panel donation-methods"><article class="donation-card paypal-card"><div><h3 data-design-text="paypal" data-no-i18n >Faire un don via PayPal</h3><p data-design-text="scan" data-no-i18n >Scanne le QR code avec ton téléphone.</p><span data-design-text="noAccount" data-no-i18n class="studio-tag">Compte facultatif</span></div><img src="/assets/paypal-donation-qr.png" alt="QR code PayPal" loading="lazy"></article>
+   <article class="donation-card kofi-card"><div><h3 data-design-text="kofi" data-no-i18n></h3><p data-design-text="scan" data-no-i18n></p><a class="kofi-button" href="https://ko-fi.com/G0E726UXV3" target="_blank" rel="noopener noreferrer" data-design-text="openKofi" data-no-i18n></a></div><img src="/assets/kofi-qr.png" width="160" height="160" alt="QR code Ko-fi" loading="lazy"></article></section>
+
+   <article class="studio-panel support-actions"><h3 data-design-text="helpOther" data-no-i18n >Participer autrement</h3><a href="https://github.com/Gentil-Robot/Anime-Local-Manager/issues" target="_blank" rel="noopener noreferrer"><span data-design-text="report" data-no-i18n >Signaler un problème</span> <span aria-hidden="true">&#8599;</span></a><a href="https://github.com/Gentil-Robot/Anime-Local-Manager" target="_blank" rel="noopener noreferrer"><span data-design-text="contribute" data-no-i18n >Contribuer au code</span> <span aria-hidden="true">&#8599;</span></a><a href="https://github.com/Gentil-Robot/Anime-Local-Manager/issues/new" target="_blank" rel="noopener noreferrer"><span data-design-text="shareIdeas" data-no-i18n >Proposer une idée</span> <span aria-hidden="true">&#8599;</span></a><button type="button" data-alm-form="contact" data-design-text="contact" data-no-i18n>Nous contacter</button></article>
+
+<section class="studio-panel alm-wallpapers" data-no-i18n><h3 data-beta37-text="wallpapers"></h3><p data-beta37-text="wallpaperHint"></p><div class="wallpaper-grid"><a href="/assets/wallpapers/ALM-chevauchee.png" download="ALM-chevauchee.png" data-wallpaper="chevauchee"><img src="/assets/wallpapers/ALM-chevauchee.webp" width="480" height="270" alt="" loading="lazy"><strong data-beta37-text="chevauchee"></strong><small>PNG · 1672 × 941 <span aria-hidden="true">↓</span></small></a><a href="/assets/wallpapers/ALM-jardin.png" download="ALM-jardin.png" data-wallpaper="jardin"><img src="/assets/wallpapers/ALM-jardin.webp" width="480" height="270" alt="" loading="lazy"><strong data-beta37-text="jardin"></strong><small>PNG · 1672 × 941 <span aria-hidden="true">↓</span></small></a><a href="/assets/wallpapers/ALM-bibliotheque.png" download="ALM-bibliotheque.png" data-wallpaper="bibliotheque"><img src="/assets/wallpapers/ALM-bibliotheque.webp" width="480" height="270" alt="" loading="lazy"><strong data-beta37-text="bibliotheque"></strong><small>PNG · 1672 × 941 <span aria-hidden="true">↓</span></small></a><a href="/assets/wallpapers/ALM-constellations.png" download="ALM-constellations.png" data-wallpaper="constellations"><img src="/assets/wallpapers/ALM-constellations.webp" width="480" height="270" alt="" loading="lazy"><strong data-beta37-text="constellations"></strong><small>PNG · 1672 × 941 <span aria-hidden="true">↓</span></small></a></div></section>
+  </div>
+
+ </section>
+
+ <details class="studio-panel about-technical">
+  <summary data-design-text="legal" data-no-i18n >Sources, licence et responsabilité</summary>
+  <p class="studio-version"><span data-design-version data-no-i18n></span> <span aria-hidden="true">·</span> <span translate="no">MIT · Windows / Linux · Gentil Robot</span></p>
+  <section class="about-privacy-note"><h3 data-design-text="privacyAboutTitle"></h3><p data-design-text="privacyAboutCopy"></p><p><a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" data-design-text="privacyPolicy"></a> · <a href="/legal-notice.html" target="_blank" rel="noopener noreferrer" data-design-text="legalNotice"></a> · <button type="button" data-alm-form="contact" data-category="privacyRequest" data-design-text="contact"></button></p></section><div class="studio-legal-grid"><details class="studio-detail"><summary>APIs et sources de données</summary><div class="studio-detail-body">
+<p>L’application s’appuie d’abord sur son snapshot metadata local, puis utilise au besoin Jikan/MyAnimeList, AniList et Kitsu pour compléter titres, dates, genres, scores publics, descriptions, relations et affiches.</p>
+<p>TVMaze sert uniquement de secours pour identifier les séries ou films généralistes présents dans certains imports. L’API BetaSeries est optionnelle : l’import CSV BetaSeries fonctionne sans clé API.</p>
+<p>Les actualités proviennent de flux RSS et sont conservées localement selon la durée choisie. Les données récupérées appartiennent à leurs ayants droit et/ou aux plateformes d’origine ; ALM reste un outil local d’organisation personnelle.</p>
+</div></details><details class="studio-detail"><summary>Images et propriété intellectuelle</summary><div class="studio-detail-body">
+<p>Les affiches, logos, jaquettes, images promotionnelles et descriptions d’animés restent la propriété de leurs détenteurs respectifs : studios, éditeurs, plateformes, auteurs et ayants droit.</p>
+<p>Anime Local Manager ne revendique aucun droit sur les œuvres listées ni sur les images récupérées automatiquement.</p>
+<p>Les images sont sauvegardées localement sur l’ordinateur de l’utilisateur pour un usage personnel de bibliothèque.</p>
+</div></details><details class="studio-detail"><summary>Responsabilité</summary><div class="studio-detail-body">
+<p>Le logiciel est fourni “tel quel”, sans garantie. Les informations récupérées automatiquement peuvent être incomplètes, incorrectes ou modifiées par les services tiers.</p>
+<p>L’utilisateur reste responsable de l’usage qu’il fait des données, images et sauvegardes.</p><p><a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" data-design-text="privacyPolicy">Politique de confidentialité</a> · <a href="/legal-notice.html" target="_blank" rel="noopener noreferrer" data-design-text="legalNotice">Mentions légales</a> · <a href="/community-notice.html" target="_blank" rel="noopener noreferrer">Communauté, règles de partage et confidentialité</a></p>
+</div></details><details class="studio-detail"><summary>Open source</summary><div class="studio-detail-body">
+<p>Le projet est publié sous licence MIT. Tu peux modifier, partager et adapter le code sous réserve de conserver les mentions de licence.</p>
+<p>Les dépendances utilisées peuvent avoir leurs propres licences.</p>
+<p>Le dépôt GitHub contient le code source, les scripts de build et la documentation principale. Les retours, idées et contributions sont toujours les bienvenus.</p>
+</div></details><details class="studio-detail"><summary>Projet</summary><div class="studio-detail-body">
+
+<p><strong>Nom :</strong> Anime Local Manager</p>
+<p><strong>Version :</strong> V2.0.0 Bêta stable</p>
+<p><strong>Statut :</strong> bêta stable — phase de validation utilisateur</p>
+<p><strong>Plateformes :</strong> Windows et Linux</p>
+<p><strong>Auteur :</strong> Gentil Robot</p>
+<p><button type="button" data-alm-form="contact" data-design-text="contact" data-no-i18n>Nous contacter</button></p>
+<p><strong>Licence :</strong> MIT</p>
+<p><strong>Date de création :</strong> 2026</p>
+</div></details><details class="studio-detail"><summary>Liens</summary><div class="studio-detail-body">
+
+<p><strong>GitHub :</strong> <a href="https://github.com/Gentil-Robot/Anime-Local-Manager" rel="noopener" target="_blank">https://github.com/Gentil-Robot/Anime-Local-Manager</a></p>
+<p><strong>Page officielle du projet :</strong> GitHub</p>
+<p><strong>Site web dédié :</strong> <a href="https://animelocalmanager.com/" target="_blank" rel="noopener noreferrer">animelocalmanager.com</a></p>
+<p><strong>PayPal / dons :</strong> voir la page Dons</p>
+</div></details></div>
+ </details>
+</section>
+
+
+      <!-- ══ PAGES V2 (dans main-area) ══ -->
+  <!-- ══ PAGE DNA ══ -->
+  <section id="dnaPage" class="dna-page hidden">
+    <div class="dna-header">
+      <div class="dna-header-icon" aria-hidden="true">🧬</div>
+      <div class="dna-header-copy">
+        <span class="dna-header-kicker">Profil de spectateur</span>
+        <h2>Anime DNA</h2>
+        <p>Découvre les genres qui définissent ta bibliothèque, tes habitudes de visionnage et les pistes à explorer.</p>
+      </div>
+      <div class="dna-header-hint">Clique une bulle pour filtrer ta bibliothèque</div>
+    </div>
+
+    <div id="dnaStats" class="dna-stats-row"></div>
+
+    <div class="dna-layout">
+      <div class="dna-main-col">
+        <section class="dna-panel dna-bubble-panel">
+          <div class="dna-panel-heading">
+            <div>
+              <span class="dna-panel-kicker">Carte des affinités</span>
+              <h3>Tes genres dominants</h3>
+            </div>
+            <span id="dnaBubbleMeta" class="dna-panel-note">La taille représente le nombre d’animés</span>
           </div>
-        </div>
-
-        <div class="about-logo-card">
-          <img src="/assets/gentil-robot-logo.png" alt="Logo Gentil Robot">
-          <div>
-            <h3>Gentil Robot</h3>
-            <p>Logo officiel du projet et de l’auteur. Tu pourras ajouter ici le lien GitHub, PayPal, site web ou forum quand ils seront disponibles.</p>
+          <div class="dna-canvas-wrap">
+            <div id="dnaBubbleLeftRail" class="dna-canvas-rail left" aria-label="Illustration Yin : chat blanc jouant avec des bulles lumineuses"></div>
+            <div class="dna-bubble-viewport"><canvas id="dnaCanvas"></canvas></div>
+            <div id="dnaBubbleRightRail" class="dna-canvas-rail right" aria-label="Illustration Yang : chat noir jouant avec des bulles lumineuses"></div>
+            <div id="dnaTooltip" class="dna-tooltip hidden"></div>
           </div>
-        </div>
+          <div id="dnaLegend" class="dna-legend"></div>
+        </section>
 
-        <div class="about-grid">
-          <article>
-            <h3>Projet</h3>
-            <p><strong>Nom :</strong> Anime Local Manager</p>
-            <p><strong>Version :</strong> V1</p>
-            <p><strong>Auteur :</strong> Gentil Robot</p>
-            <p><strong>Contact :</strong> jesuisungentilrobot [at] gmail [dot] com</p>
-            <p><strong>Licence :</strong> MIT</p>
-            <p><strong>Date de création :</strong> 2026</p>
-          </article>
+        <section class="dna-panel dna-signature-panel" aria-labelledby="dnaSignatureTitle">
+          <div class="dna-panel-heading">
+            <div>
+              <span class="dna-panel-kicker">Empreinte vivante</span>
+              <h3 id="dnaSignatureTitle">Ta signature Anime DNA</h3>
+            </div>
+            <span class="dna-panel-note">Animation générée depuis tes genres dominants</span>
+          </div>
+          <div class="dna-signature-stage">
+            <canvas id="dnaSignatureCanvas" aria-label="Animation personnalisée de l'empreinte Anime DNA"></canvas>
+            <div id="dnaSignatureMemoriesLabel" class="dna-signature-memories-label">Fragments de ta bibliothèque</div>
+            <div id="dnaSignatureMemories" class="dna-signature-memories" aria-label="Fragments représentatifs de ta bibliothèque"></div>
+            <div class="dna-signature-copy">
+              <strong id="dnaSignatureName">Profil en construction…</strong>
+              <span id="dnaSignatureDesc">Tes goûts donnent forme à cette empreinte.</span>
+              <div id="dnaSignatureGenres" class="dna-signature-genres"></div>
+            </div>
+          </div>
+        </section>
 
-          <article>
-            <h3>Liens</h3>
-            <p><strong>GitHub :</strong> <a href="https://github.com/Gentil-Robot/Anime-Local-Manager" target="_blank" rel="noopener">https://github.com/Gentil-Robot/Anime-Local-Manager</a></p>
-            <p><strong>Forum bêta test :</strong> <a href="https://forum.nextinpact.com/topic/199369-anime-local-manager-recherche-b%C3%A9ta-testeur/" target="_blank" rel="noopener">Sujet Next INpact</a></p>
-            <p><strong>Site web :</strong> à compléter</p>
-            <p><strong>PayPal / dons :</strong> voir la page Dons</p>
-          </article>
+      </div>
 
-          <article>
-            <h3>APIs et sources de données</h3>
-            <p>L’application peut interroger des services publics liés aux animés, notamment Jikan/MyAnimeList et AniList, afin de récupérer des métadonnées comme titres, dates, genres, scores publics, classements, descriptions et affiches.</p>
-            <p>Les données récupérées appartiennent à leurs ayants droit et/ou aux plateformes d’origine. L’application sert uniquement d’outil local d’organisation personnelle.</p>
-          </article>
+      <aside id="dnaDashboard" class="dna-dashboard">
+        <section class="dna-dashboard-card dna-radar-card">
+          <div class="dna-panel-heading compact">
+            <div>
+              <span class="dna-panel-kicker">Vue synthétique</span>
+              <h3>Radar de profil</h3>
+            </div>
+          </div>
+          <canvas id="dnaRadarCanvas" width="360" height="260"></canvas>
+          <div id="dnaRadarLegend" class="dna-radar-legend" aria-label="Valeurs du radar"></div>
+          <p id="dnaRadarHelp" class="dna-radar-help">Chaque anime compte une seule fois par axe. Le pourcentage correspond à la part de toute la bibliothèque.</p>
+        </section>
+        <div id="dnaSideStats" class="dna-side-stats"></div>
+        <a class="alm-retro-banner dna-site-banner" href="https://animelocalmanager.com/" target="_blank" rel="noopener noreferrer" data-design-aria="bannerLabel"><img id="almRetroBanner" src="/assets/design/alm-retro-banner.gif" width="450" height="140" alt="Anime Local Manager — Votre bibliothèque d’animés, en local. Organise · Trie · Recherche. Open source." loading="lazy"></a>
+      </aside>
+    </div>
 
-          <article>
-            <h3>Images et propriété intellectuelle</h3>
-            <p>Les affiches, logos, jaquettes, images promotionnelles et descriptions d’animés restent la propriété de leurs détenteurs respectifs : studios, éditeurs, plateformes, auteurs et ayants droit.</p>
-            <p>Anime Local Manager ne revendique aucun droit sur les œuvres listées ni sur les images récupérées automatiquement.</p>
-            <p>Les images sont sauvegardées localement sur l’ordinateur de l’utilisateur pour un usage personnel de bibliothèque.</p>
-          </article>
+    <div id="dnaInsights" class="dna-insights"></div>
 
-          <article>
-            <h3>Responsabilité</h3>
-            <p>Le logiciel est fourni “tel quel”, sans garantie. Les informations récupérées automatiquement peuvent être incomplètes, incorrectes ou modifiées par les services tiers.</p>
-            <p>L’utilisateur reste responsable de l’usage qu’il fait des données, images et sauvegardes.</p>
-          </article>
-
-          <article>
-            <h3>Open source</h3>
-            <p>Le projet est publié sous licence MIT. Tu peux modifier, partager et adapter le code sous réserve de conserver les mentions de licence.</p>
-            <p>Les dépendances utilisées peuvent avoir leurs propres licences.</p>
-          </article>
-        </div>
+    <div class="dna-bottom-grid">
+      <section class="dna-dashboard-card" id="dnaScoreDistCard">
+        <div class="dna-dashboard-title">📊 Distribution de tes notes</div>
+        <p class="dna-dashboard-subtitle">Répartition de tes notes personnelles de 1 à 10. Clique sur une note pour ouvrir les animés correspondants dans ta bibliothèque, ou sur une jaquette pour y accéder plus vite.</p>
+        <div id="dnaScoreSummary" class="dna-score-summary" aria-live="polite"></div>
+        <div id="dnaScorePosters" class="dna-score-posters" aria-label="Tes animés les mieux notés"></div>
+        <div id="dnaScoreDist" class="dna-score-dist"></div>
       </section>
 
-      
-      <section id="donationsPage" class="donations-page hidden">
-        <div class="about-hero">
-          <img src="/assets/anime-local-manager-logo.png" alt="Logo Anime Local Manager">
-          <div>
-            <h2>Soutenir Anime Local Manager</h2>
-            <p>Anime Local Manager est un projet open source développé bénévolement par Gentil Robot. Les dons permettent de soutenir le développement futur du logiciel.</p>
-          </div>
-        </div>
-
-        <div class="about-grid">
-          <article class="donation-card">
-            <h3>Don PayPal</h3>
-            <p>Scanne le QR code avec ton téléphone pour ouvrir PayPal.</p>
-            <img src="/assets/paypal-donation-qr.png" alt="QR code PayPal">
-          </article>
-
-          <article>
-            <h3>Liens officiels</h3>
-            <p><strong>GitHub :</strong> <a href="https://github.com/Gentil-Robot/Anime-Local-Manager" target="_blank" rel="noopener">https://github.com/Gentil-Robot/Anime-Local-Manager</a></p>
-            <p><strong>Forum bêta test :</strong> <a href="https://forum.nextinpact.com/topic/199369-anime-local-manager-recherche-b%C3%A9ta-testeur/" target="_blank" rel="noopener">Sujet Next INpact</a></p>
-            <img class="gentil-donation-logo" src="/assets/gentil-robot-logo.png" alt="Logo Gentil Robot"></article>
-        </div>
+      <section class="dna-dashboard-card" id="dnaAlmostDoneCard">
+        <div class="dna-dashboard-title">⏳ Prochains à finir</div>
+        <div id="dnaAlmostDone" class="dna-almost-done"></div>
       </section>
 
+      <section class="dna-dashboard-card" id="dnaWatchingCard">
+        <div class="dna-dashboard-title">👁️ En cours · à surveiller</div>
+        <div id="dnaWatchingList" class="dna-watching-list"></div>
+      </section>
+    </div>
+  </section>
+  <!-- ══ PAGE NEWS SAISONS (indépendante) ══ -->
+<section id="rankingPage" class="v2-page hidden" data-no-i18n>
+        <header class="studio-banner ranking-banner"><div class="studio-banner-copy"><span class="studio-kicker" data-design-text="rankingSource"></span><h1 data-design-text="rankingTitle"></h1><p data-design-text="rankingIntro"></p><button type="button" id="rankingRefresh" data-design-text="rankingRefresh"></button></div></header>
+        <div class="ranking-studio-filter"><label for="rankingStudio" data-beta37-text="studio"></label><select id="rankingStudio"><option value="" data-beta37-text="allStudios"></option></select></div>
+        <div class="ranking-status"><p id="rankingStatus" role="status" aria-live="polite"></p><span id="rankingCount"></span></div>
+        <div class="ranking-layout"><div><div id="rankingResults" class="ranking-results"></div><nav class="ranking-pagination"><button id="rankingFirst" type="button" aria-label="Première page">&lt;&lt;</button><button id="rankingPrevious" type="button" aria-label="Page précédente">&lt;</button><span id="rankingPageNumber"></span><button id="rankingNext" type="button" aria-label="Page suivante">&gt;</button><button id="rankingLast" type="button" aria-label="Dernière page">&gt;&gt;</button></nav></div><article id="rankingDetail" class="discovery-detail ranking-detail"></article></div>
+      </section>
+      <section id="discoveryPage" class="discovery-page hidden" data-no-i18n><header class="studio-page-heading discovery-heading"><span class="studio-kicker">ALM</span><h2 data-design-text="searchPage"></h2><p data-design-text="searchIntro"></p></header><form id="discoveryForm" class="discovery-search"><input id="discoveryQuery" type="search" minlength="2" maxlength="160" required data-design-aria="searchPage"><button type="submit" class="primary" data-design-text="searchAction"></button><button type="button" id="catalogReset" class="catalog-reset" data-design-text="catalogReset"></button></form><div class="discovery-toolbar"><p id="discoveryStatus" role="status" aria-live="polite"></p><label class="discovery-sort"><span id="discoverySortLabel"></span><select id="discoverySort"></select></label></div><div class="discovery-layout"><div id="discoveryResults" class="discovery-results"></div><article id="discoveryDetail" class="discovery-detail"><p data-design-text="searchChoose"></p></article></div></section>
+  <section id="seasonNewsPage" class="season-news-page hidden">
+    <div class="season-news-header">
+      <div class="season-news-title-row">
+        <h2>📺 Nouvelles Saisons</h2>
+        <div class="season-news-actions-top">
+          <button id="seasonNewsRefreshBtn" class="btn-refresh-news">↻ Nouvelle recherche</button>
+          <button id="seasonNewsCompleteBtn" class="btn-complete-seasons">📋 Compléter les infos</button>
+          <button id="seasonNewsSelectAllBtn" class="btn-refresh-news">✓ Tout sélectionner</button>
+          <button id="seasonNewsClearSelectionBtn" class="btn-refresh-news">☐ Tout désélectionner</button>
+          <button id="seasonNewsAddAllBtn" class="btn-add-all-seasons">+ Ajouter la sélection à voir</button>
+          <button id="seasonNewsForgetAllBtn" class="btn-season-forget-all">🗑 Tout oublier</button>
+          <button id="seasonNewsUndoBtn" class="btn-refresh-news hidden">↶ Annuler les derniers ajouts</button>
+        </div>
+      </div>
+      <p id="seasonNewsSubtitle">Suites et nouvelles saisons détectées dans ta bibliothèque</p>
+    </div>
+
+    <section id="seasonNewsFilters" class="season-news-filters" data-no-i18n></section>
+    <section id="seasonProgressPanel" class="completion-progress-panel season-progress-panel hidden" aria-live="polite" aria-atomic="false">
+      <div class="completion-progress-head">
+        <div class="completion-progress-icon season-progress-icon" aria-hidden="true">📺</div>
+        <div class="completion-progress-heading">
+          <span id="seasonProgressState" class="completion-progress-state">Analyse des nouvelles saisons</span>
+          <strong id="seasonProgressTitle">Préparation…</strong>
+          <span id="seasonProgressCurrent" class="completion-progress-current">Lecture de la bibliothèque locale</span>
+        </div>
+        <div class="completion-progress-actions">
+          <button type="button" id="seasonProgressMinimize" class="completion-progress-secondary">Masquer</button>
+          <button type="button" id="seasonProgressCancel" class="completion-progress-cancel">Annuler</button>
+          <button type="button" id="seasonProgressDismiss" class="completion-progress-secondary hidden">Fermer</button>
+        </div>
+      </div>
+      <div class="completion-progress-track" role="progressbar" aria-label="Progression de la recherche des saisons" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="seasonProgressBar" class="completion-progress-bar"></div>
+      </div>
+      <div class="completion-progress-meta">
+        <span><strong id="seasonProgressCount">0 / 0</strong> <span id="seasonProgressCountLabel">analysés</span></span>
+        <span id="seasonProgressPercent">0 %</span>
+        <span id="seasonProgressTime">Calcul du temps restant…</span>
+      </div>
+      <div class="completion-progress-results">
+        <div><span id="seasonProgressMetric1Label">Cache réutilisé</span><strong id="seasonProgressMetric1">0</strong></div>
+        <div><span id="seasonProgressMetric2Label">Identifiants locaux</span><strong id="seasonProgressMetric2">0</strong></div>
+        <div><span id="seasonProgressMetric3Label">Appels réseau</span><strong id="seasonProgressMetric3">0</strong></div>
+        <div><span id="seasonProgressMetric4Label">Suites trouvées</span><strong id="seasonProgressMetric4">0</strong></div>
+      </div>
+    </section>
+
+    <button type="button" id="seasonProgressDock" class="completion-progress-dock season-progress-dock hidden" aria-label="Afficher la progression de la recherche des saisons">
+      <span class="completion-progress-dock-pulse"></span>
+      <span id="seasonProgressDockText">Recherche des saisons — préparation…</span>
+    </button>
+
+    <div id="seasonNewsContainer" class="season-news-container">
+      <div class="season-news-loading">
+        <div class="news-spinner"></div>
+        <p>Analyse de ta bibliothèque...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PAGE ACTUALITES V2 ══ -->
+  <section id="newsV2Page" class="news-v2-page hidden">
+    <div class="news-v2-header">
+      <div class="news-v2-title-row">
+        <h2>📰 Actualités Anime</h2>
+        <button type="button" id="newsV2RefreshBtn" class="btn-refresh-news">↻ Actualiser</button>
+      </div>
+      <p>Les dernières nouvelles du monde de l'animation japonaise</p>
+      <div class="news-v2-filters">
+        <button type="button" class="news-v2-filter active" data-filter="all">Tout</button>
+        <button type="button" class="news-v2-filter" data-filter="nouveaux">🆕 Nouveaux</button>
+        <button type="button" class="news-v2-filter" data-filter="saisons">📺 Saisons</button>
+        <button type="button" class="news-v2-filter" data-filter="films">🎬 Films</button>
+        <button type="button" class="news-v2-filter" data-filter="france">🇫🇷 France</button>
+        <button type="button" class="news-v2-filter" data-filter="manga">📖 Manga</button>
+      </div>
+      <div class="news-v2-langs">
+        <span class="news-lang-label">Langue :</span>
+        <button type="button" class="news-lang-btn active" data-lang="all">🌍 Toutes</button>
+        <button type="button" class="news-lang-btn" data-lang="fr">🇫🇷 Français</button>
+        <button type="button" class="news-lang-btn" data-lang="en">🇬🇧 English</button>
+        <button type="button" class="news-lang-btn" data-lang="ja">🇯🇵 日本語</button>
+        <button type="button" class="news-lang-btn" data-lang="es">🇪🇸 Español</button>
+        <button type="button" class="news-lang-btn" data-lang="de">🇩🇪 Deutsch</button>
+        <button type="button" class="news-lang-btn" data-lang="pt-BR">🇧🇷 Português (Brasil)</button>
+      </div>
+      <div class="news-calendar-row" aria-label="Filtrer les actualités par date">
+        <span class="news-lang-label">Calendrier :</span>
+        <label>Du <input id="newsDateFrom" type="date"></label>
+        <label>Au <input id="newsDateTo" type="date"></label>
+        <label class="news-range-preset-label">Période rapide
+          <select id="newsRangePreset" aria-label="Choisir une période rapide">
+            <option value="all" selected>Toutes les dates</option>
+            <option value="custom" hidden>Période personnalisée</option>
+            <option value="7">7 derniers jours</option>
+            <option value="30">30 derniers jours</option>
+            <option value="90">90 derniers jours</option>
+            <option value="180">6 derniers mois</option>
+            <option value="365">1 dernière année</option>
+            <option value="730">2 dernières années</option>
+          </select>
+        </label>
+        <button type="button" id="newsDateClear" class="news-date-clear">Toutes les dates</button>
+      </div>
+      <div class="news-history-row" aria-label="Durée de conservation des actualités">
+        <label for="newsHistoryRetention">Historique conservé :</label>
+        <select id="newsHistoryRetention">
+          <option value="7">7 jours</option>
+          <option value="30">30 jours</option>
+          <option value="90">90 jours</option>
+          <option value="180">6 mois</option>
+          <option value="365" selected>1 an — recommandé</option>
+          <option value="730">2 ans — maximum standard</option>
+          <option value="0">Tout l’historique</option>
+        </select>
+        <span id="newsHistoryStatus" class="news-history-status" role="status" aria-live="polite">Historique local en cours de chargement…</span>
+      </div>
+    </div>
+    <div id="newsV2Container" class="news-v2-container"></div>
+  </section>
+
+
+  <!-- ══ PAGE LEXIQUE / DICTIONNAIRE ══ -->
+  <section id="lexiconPage" class="lexicon-page hidden">
+    <header class="lexicon-hero">
+      <div class="lexicon-hero-icon" aria-hidden="true">📚</div>
+      <div>
+        <span class="lexicon-eyebrow">Dictionnaire de la bibliothèque</span>
+        <h2>Dictionnaire / glossaire anime &amp; manga</h2>
+        <p>Comprendre les genres, publics éditoriaux, formats, métiers, supports d’origine et mots employés par la communauté.</p>
+      </div>
+      <div class="lexicon-hero-badge"><strong id="lexiconTotal">161</strong><span>termes hors ligne</span></div>
+    </header>
+
+    <div class="lexicon-important-note">
+      <span aria-hidden="true">💡</span>
+      <div>
+        <strong>Shōnen, shōjo, seinen et josei ne sont pas des genres.</strong>
+        <p>Ce sont d’abord des catégories éditoriales liées au lectorat du magazine d’origine. Une œuvre shōnen peut être une romance, un sport, une comédie ou une aventure.</p>
+      </div>
+    </div>
+
+    <div class="studio-lexicon-overview" id="studioLexiconOverview" data-no-i18n></div>
+ <div id="lexiconCategoryGallery" class="lexicon-category-gallery" aria-label="Explorer les catégories du dictionnaire"></div>
+
+    <div class="lexicon-controls" role="search" aria-label="Rechercher dans le dictionnaire">
+      <label class="lexicon-search-label" for="lexiconSearch">
+        <span>Rechercher un terme</span>
+        <div class="lexicon-search-wrap">
+          <input id="lexiconSearch" type="search" placeholder="Ex. isekai, OVA, seiyuu, shōnen…" autocomplete="off" aria-autocomplete="list" aria-controls="lexiconSuggestions">
+          <div id="lexiconSuggestions" class="lexicon-search-suggestions hidden" role="listbox" aria-label="Termes possibles"></div>
+        </div>
+      </label>
+      <label for="lexiconCategory">
+        <span>Catégorie</span>
+        <select id="lexiconCategory"><option value="all">Toutes les catégories</option></select>
+      </label>
+      <button type="button" id="lexiconReset">Réinitialiser</button>
+    </div>
+
+    <div class="lexicon-toolbar">
+      <div id="lexiconAlphabet" class="lexicon-alphabet" aria-label="Filtrer par première lettre"></div>
+      <span id="lexiconCount" class="lexicon-count" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="studio-lexicon-layout"><div id="lexiconGrid" class="lexicon-grid"></div><aside id="studioLexiconAside" class="studio-lexicon-aside" data-no-i18n></aside></div>
+  </section>
+
+  <!-- ══ PAGE CONTRÔLE ANIME / QUARANTAINE ══ -->
+  <section id="auditPage" class="audit-page hidden">
+    <header class="audit-hero">
+      <div class="audit-hero-icon" aria-hidden="true">🛡️</div>
+      <div>
+        <span class="audit-eyebrow">Qualité de la bibliothèque</span>
+        <h2>Contrôle anime &amp; quarantaine</h2>
+        <p>Repère les séries TV live action importées par erreur, compare les candidats et choisis explicitement la fiche à conserver.</p>
+      </div>
+      <div class="audit-hero-actions">
+        <button type="button" id="auditBulkBtn" class="audit-bulk-btn" disabled>Mettre les hors-anime sûrs en quarantaine</button>
+        <button type="button" id="auditClearBtn" class="audit-clear-btn" disabled>🗑 Vider la quarantaine</button>
+        <button type="button" id="auditScanBtn" class="audit-scan-btn">↻ Analyser maintenant</button>
+      </div>
+    </header>
+
+    <div class="audit-safety-note">
+      <span aria-hidden="true">🔒</span>
+      <div><strong>Aucune suppression automatique.</strong><p>Les entrées suspectes restent dans ta bibliothèque jusqu’à ton choix. « Retirer » les déplace d’abord dans une quarantaine restaurable.</p></div>
+    </div>
+
+    <div class="audit-score-note">
+      <span aria-hidden="true">🧭</span>
+      <div><strong>Comment décider ?</strong><p>Les pourcentages mesurent uniquement la proximité des titres. Compare aussi la jaquette, l’année, le type et la source, puis utilise le bouton placé sous le candidat de gauche ou sous la fiche anime de droite.</p></div>
+    </div>
+
+    <div id="auditStats" class="audit-stats" aria-live="polite">
+      <div><span>Bibliothèque</span><strong>—</strong></div>
+      <div><span>Anime confirmés</span><strong>—</strong></div>
+      <div><span>Hors anime probables</span><strong>—</strong></div>
+      <div><span>À vérifier</span><strong>—</strong></div>
+      <div><span>Quarantaine</span><strong>—</strong></div>
+    </div>
+
+    <div id="auditLoading" class="audit-loading hidden" role="status" aria-live="polite">
+      <div class="audit-loading-head"><span class="audit-spinner"></span><strong id="auditProgressTitle">Analyse locale en cours…</strong><span id="auditProgressPercent">0 %</span></div>
+      <div class="audit-progress-track" role="progressbar" aria-label="Progression du contrôle anime" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="auditProgressBar"></div></div>
+      <div class="audit-progress-meta"><span id="auditProgressCurrent">Préparation de la bibliothèque…</span><span id="auditProgressCount">0 / 0</span></div>
+    </div>
+
+    <div class="audit-browser-toolbar" role="search" aria-label="Rechercher et naviguer dans le contrôle anime">
+      <label class="audit-search-label" for="auditSearchInput">
+        <span>Rechercher une fiche</span>
+        <input id="auditSearchInput" type="search" placeholder="Ex. Bastard, Avatar, Stargate…" autocomplete="off" spellcheck="false">
+      </label>
+      <div class="audit-page-jump" aria-label="Navigation rapide dans la quarantaine">
+        <button type="button" id="auditFirstPageBtn" title="Première page">⏮ Première</button>
+        <button type="button" id="auditPrevPageTopBtn" title="Page précédente">←</button>
+        <label for="auditPageSelect"><span>Page</span><select id="auditPageSelect" aria-label="Choisir une page"><option value="0">1</option></select></label>
+        <span id="auditPageTotal">/ 1</span>
+        <button type="button" id="auditNextPageTopBtn" title="Page suivante">→</button>
+        <button type="button" id="auditLastPageBtn" title="Dernière page">Dernière ⏭</button>
+      </div>
+      <span id="auditSearchStatus" class="audit-search-status" role="status" aria-live="polite"></span>
+    </div>
+
+    <section class="audit-section">
+      <div class="audit-section-head">
+        <div><span class="audit-section-kicker">Bibliothèque actuelle</span><h3>Entrées à examiner</h3><p>Les fiches reliées à une entrée MAL/AniList confirmée dans la metadata locale restent automatiquement protégées.</p></div>
+        <span id="auditLibraryCount" class="audit-section-count">0</span>
+      </div>
+      <div id="auditLibraryList" class="audit-list"></div>
+    </section>
+
+    <section class="audit-section quarantine">
+      <div class="audit-section-head">
+        <div><span class="audit-section-kicker">Imports protégés</span><h3>Quarantaine</h3><p>Les séries généralistes et correspondances ambiguës ne sont plus importées sans confirmation. Les jaquettes visibles se complètent progressivement depuis la metadata locale ou TVMaze.</p></div>
+        <span id="auditQuarantineCount" class="audit-section-count">0</span>
+      </div>
+      <div id="auditQuarantineList" class="audit-list"></div>
+      <div id="auditBottomPageJump" class="audit-page-jump audit-page-jump-bottom" aria-label="Navigation en bas de la quarantaine">
+        <button type="button" id="auditFirstPageBottomBtn" title="Première page">⏮ Première</button>
+        <button type="button" id="auditPrevPageBottomBtn" title="Page précédente">←</button>
+        <label for="auditPageBottomSelect"><span>Page</span><select id="auditPageBottomSelect" aria-label="Choisir une page"><option value="0">1</option></select></label>
+        <span id="auditPageBottomTotal">/ 1</span>
+        <button type="button" id="auditNextPageBottomBtn" title="Page suivante">→</button>
+        <button type="button" id="auditLastPageBottomBtn" title="Dernière page">Dernière ⏭</button>
+      </div>
+    </section>
+  </section>
+
+  <!-- ══ PAGE RECOMMANDATIONS ══ -->
+  <section id="recoPage" class="reco-page hidden">
+    <div class="reco-header">
+      <h2>🔮 Recommandations</h2>
+      <p id="recoSubtitle">Découverte personnalisée basée sur ta bibliothèque</p>
+      <button id="recoRefreshBtn" class="btn-refresh-news">↻ Recalculer</button>
+    </div>
+    <div id="recoHeroBlock" class="reco-hero-block"></div>
+    <div id="recoContainer" class="reco-container"></div>
+  </section>
       <footer class="site-footer">
-        <div><strong>Anime Local Manager</strong> — V1</div>
+        <div><strong>Anime Local Manager</strong> — V2.0.0 Bêta stable</div>
         <div>Licence MIT • Date de création : 2026 • Auteur : Gentil Robot</div>
-        <div>Contact : <span data-user="jesuisungentilrobot" data-domain="gmail.com" id="contactMail">jesuisungentilrobot [at] gmail [dot] com</span></div>
-        <div>Données locales : dossier utilisateur Windows de l’application + sauvegarde JSON local optionnelle</div>
+        <div class="site-footer-actions">
+          <button type="button" data-alm-form="contact" data-design-text="contact" data-no-i18n>Nous contacter</button>
+          <a href="https://animelocalmanager.com/" target="_blank" rel="noopener noreferrer" data-design-text="footerWebsite" data-no-i18n>Site internet</a>
+          <a href="https://discord.gg/9KJ8MqhKh7" target="_blank" rel="noopener noreferrer" data-no-i18n>Discord</a>
+        </div>
+        <div>Données locales : dossier utilisateur Windows/Linux de l’application + sauvegarde JSON locale optionnelle</div>
       </footer>
     </main>
   </div>
 
   <dialog id="formDialog">
     <form id="animeForm" method="dialog">
-      <h2 id="dialogTitle">Ajouter un animé</h2>
+      <div class="anime-form-body">
+      <header class="nocturne-dialog-hero"><div><span class="studio-kicker" data-design-text="collectionTools" data-no-i18n>TA COLLECTION</span><h2 id="dialogTitle">Ajouter un animé</h2></div></header>
       <input type="hidden" id="animeId">
 
       <label>Titre
@@ -228,11 +784,11 @@
       <div class="two">
         <label>Statut
           <select id="status">
-            <option>Watching</option>
-            <option>Completed</option>
-            <option>On-Hold</option>
-            <option>Dropped</option>
-            <option>Plan to Watch</option>
+            <option value="Watching" data-watch-status="Watching" data-no-i18n>En cours</option>
+            <option value="Completed" data-watch-status="Completed" data-no-i18n>Terminé</option>
+            <option value="On-Hold" data-watch-status="On-Hold" data-no-i18n>En pause</option>
+            <option value="Dropped" data-watch-status="Dropped" data-no-i18n>Abandonné</option>
+            <option value="Plan to Watch" data-watch-status="Plan to Watch" data-no-i18n>À voir</option>
           </select>
         </label>
 
@@ -249,7 +805,7 @@
 
       <div class="three">
         <label>Ma note
-          <input id="score" type="number" min="0" max="10" placeholder="0-10">
+          <input id="score" type="number" min="1" max="10" placeholder="1–10" aria-describedby="notebookUnratedHint"><small id="notebookUnratedHint" data-notebook-text="unrated" data-no-i18n>Sans note</small>
         </label>
         <label>Épisodes vus
           <input id="episodesSeen" type="number" min="0">
@@ -258,6 +814,12 @@
           <input id="episodesTotal" type="number" min="0">
         </label>
       </div>
+
+      <div class="two viewing-date-fields" data-no-i18n>
+        <label><span data-design-text="viewingDate">Date de ce visionnage (facultative)</span><input id="watchedOn" type="date"></label>
+        <label><span data-design-text="viewingCompletedOn">Date de fin de visionnage (facultative)</span><input id="completedOn" type="date"></label>
+      </div>
+      <p class="muted" data-design-text="viewingDateHelp" data-no-i18n></p>
 
       <div class="two">
         <label>Date début
@@ -276,73 +838,260 @@
         <input id="tags" placeholder="favori, isekai, à revoir">
       </label>
 
-      <label>Notes
-        <textarea id="notes" rows="3"></textarea>
+      <label><span data-notebook-text="notes" data-no-i18n>Mes notes et impressions</span>
+        <textarea id="notes" rows="6" maxlength="50000"></textarea>
       </label>
 
+<label class="check manual-switch" data-no-i18n><input type="checkbox" id="manualMode"><span data-design-text="manualMode"></span></label><p data-design-text="manualCopy" data-no-i18n></p><section id="manualFields" class="manual-fields" hidden data-no-i18n><label><span data-design-text="manualImage"></span><input type="file" id="manualPosterFile" accept="image/png,image/jpeg,image/webp"><small>PNG · JPEG · WebP · 8 MB</small></label><img id="manualPosterPreview" alt="" hidden><label><span data-design-text="manualPoster"></span><input id="manualPosterUrl" type="text" inputmode="url"></label><label><span data-design-text="manualSynopsis"></span><textarea id="manualSynopsis" rows="5"></textarea></label><div class="two"><label><span data-design-text="manualPublicScore"></span><input id="manualPublicScore" type="number" min="0" max="10" step="0.01"></label><label><span data-design-text="manualRank"></span><input id="manualRank" type="number" min="1"></label></div></section>
       <label class="check">
         <input id="autoInfo" type="checkbox" checked>
         Récupérer automatiquement affiche, dates, épisodes, note publique, classement et genres
       </label>
 
+      </div>
       <menu>
         <button type="button" id="cancel">Annuler</button>
         <button type="submit" class="primary">Enregistrer</button>
       </menu>
     </form>
   </dialog>
+  <dialog id="importDialog" class="import-dialog">
+    <div class="dialog-content">
+      <header class="nocturne-dialog-hero"><div><span class="studio-kicker" data-design-text="collectionTools" data-no-i18n>TA COLLECTION</span><h2>Importer une liste</h2><p class="muted">Choisis le format d’import selon le service utilisé.</p></div></header>
 
-  <dialog id="importDialog">
-    <form id="importForm" method="dialog">
-      <h2>Importer une liste XML</h2>
-      <p class="muted">Compatible avec l’export XML MyAnimeList.</p>
+      <div class="import-tabs">
+        <button type="button" class="import-tab active" data-tab="xmlImportPanel">MyAnimeList XML</button>
+        <button type="button" class="import-tab" data-tab="csvImportPanel">BetaSeries CSV</button>
+        <button type="button" class="import-tab" data-tab="listImportPanel" data-notebook-text="importList" data-no-i18n>Importer une liste libre</button>
+      </div>
 
-      <label>Fichier XML
-        <input id="xmlFile" type="file" accept=".xml,text/xml" required>
-      </label>
+      <form id="importForm" method="dialog" class="import-panel" data-panel="xmlImportPanel">
+        <h3>Import MyAnimeList XML</h3>
+        <p class="muted">Compatible avec l’export XML MyAnimeList.</p>
 
-      <label class="check">
-        <input id="overwriteImport" type="checkbox">
-        Écraser les informations similaires déjà présentes
-      </label>
+        <label>Fichier XML
+          <input id="xmlFile" type="file" accept=".xml,text/xml">
+        </label>
 
-      <menu>
-        <button type="button" id="cancelImport">Annuler</button>
-        <button type="submit" class="primary">Importer</button>
-      </menu>
-    </form>
+        <label class="check">
+          <input id="overwriteImport" type="checkbox">
+          Écraser les informations similaires déjà présentes
+        </label>
+
+        <menu>
+          <button type="button" id="cancelImport">Annuler</button>
+          <button type="submit" class="primary">Importer XML</button>
+        </menu>
+        <figure class="xml-import-showcase"><img src="/assets/design/alm-retro-banner.gif" alt="Anime Local Manager" loading="lazy" decoding="async"></figure>
+      </form>
+
+      <form id="csvImportForm" method="dialog" class="import-panel hidden" data-panel="csvImportPanel">
+        <div class="csv-import-workspace">
+          <div class="csv-import-controls">
+            <div>
+              <h3>Import BetaSeries CSV</h3>
+              <p class="muted">
+                Compatible avec l’export CSV BetaSeries.
+                Analyse d’abord le fichier : les anime confirmés sont sélectionnés automatiquement et les cas ambigus restent consultables avant import.
+              </p>
+            </div>
+
+            <label>Fichier CSV BetaSeries
+              <input id="csvFile" type="file" accept=".csv,text/csv">
+            </label>
+
+            <label class="check">
+              <input id="overwriteCsvImport" type="checkbox">
+              Écraser les informations similaires déjà présentes
+            </label>
+
+            <div class="csv-actions">
+              <button type="button" id="previewCsvImport">Analyser le CSV</button>
+              <button type="button" id="importSelectedCsv" class="primary" disabled>Importer la sélection</button>
+            </div>
+
+            <div id="csvModalProgress" class="csv-modal-progress hidden">
+              <div id="csvModalProgressLabel">Analyse CSV en attente...</div>
+              <div class="csv-modal-progress-track">
+                <div id="csvModalProgressBar" class="csv-modal-progress-bar"></div>
+              </div>
+              <div id="csvModalProgressDetails" class="csv-modal-progress-details">
+                <div><strong>Étape :</strong> <span id="csvCurrentStep">En attente</span></div>
+                <div><strong>Temps écoulé :</strong> <span id="csvElapsedTime">00:00</span></div>
+                <div><strong>Temps estimé restant :</strong> <span id="csvEtaTime">--:--</span></div>
+              </div>
+              <div id="csvLiveLog" class="csv-live-log hidden"></div>
+            </div>
+
+            <div id="csvImportSummary" class="csv-summary hidden"></div>
+          </div>
+
+          <aside id="csvResultsPanel" class="csv-results-panel is-empty" aria-label="Résultats de l’analyse BetaSeries">
+            <div class="csv-results-panel-head">
+              <div>
+                <span class="csv-results-kicker">Résultats de l’analyse</span>
+                <strong>Entrées détectées</strong>
+              </div>
+              <span id="csvResultsVisibleCount" class="csv-results-count">0 / 0</span>
+            </div>
+            <label class="csv-results-search">
+              <span>Rechercher dans les résultats</span>
+              <div class="csv-results-search-wrap">
+                <input id="csvResultsSearch" type="search" autocomplete="off" aria-autocomplete="list" aria-controls="csvResultsSuggestions" placeholder="Titre importé, candidat anime, série…">
+                <div id="csvResultsSuggestions" class="csv-results-suggestions hidden" role="listbox" aria-label="Correspondances possibles"></div>
+              </div>
+            </label>
+            <div id="csvReviewBulkActions" class="csv-review-bulk-actions hidden" role="group" aria-label="Actions groupées sur les résultats affichés">
+              <strong id="csvBulkSelectionCount">0 sélectionné</strong>
+              <button type="button" id="csvSelectVisibleReview">Tout sélectionner</button>
+              <button type="button" id="csvClearReviewSelection">Tout désélectionner</button>
+              <button type="button" id="csvForceSelectedReview" disabled>✓ Forcer l’import</button>
+              <button type="button" id="csvDismissSafeNonAnime">🛡️ Écarter les hors-anime sûrs</button>
+              <button type="button" id="csvDismissSelectedReview" class="danger" disabled>🗑 Écarter</button>
+              <button type="button" id="csvUndoDismissReview" class="hidden">↶ Annuler</button>
+            </div>
+            <div id="csvResultsPlaceholder" class="csv-results-placeholder">
+              <strong>Les résultats apparaîtront ici.</strong>
+              <span>Après l’analyse, clique aussi sur « À vérifier » ou « Séries non-anime » pour n’afficher que cette catégorie.</span>
+            </div>
+            <div id="csvImportResults" class="csv-results hidden"></div>
+          </aside>
+        </div>
+
+        <menu>
+          <button type="button" id="cancelCsvAnalysis" class="danger hidden">Annuler l’analyse</button>
+          <button type="button" id="cancelCsvImport">Fermer</button>
+        </menu>
+      </form>
+      <section id="listImportPanel" class="import-panel notebook-import-panel hidden" data-panel="listImportPanel" data-no-i18n></section>
+    </div>
   </dialog>
+
 
   <dialog id="settingsDialog" class="settings-dialog">
     <form id="settingsForm" method="dialog">
-      <h2>Réglages</h2>
+      <header class="nocturne-dialog-hero"><div><span class="studio-kicker" data-design-text="yourSpace" data-no-i18n>TON ESPACE ALM</span><h2>Réglages</h2><p data-design-text="settingsIntro" data-no-i18n>Ton univers, à ta façon. Langues, sauvegardes et confort de lecture.</p></div></header>
 
       <section class="settings-grid">
         <div class="settings-main">
 
-          <section class="settings-section">
-            <h3>Sauvegarde / restauration JSON</h3>
-            <p class="json-backup-note">Conseil : pour plus de sécurité, place tes sauvegardes JSON dans un dossier synchronisé JSON local comme OneDrive, Google Drive, Dropbox ou Synology Drive.</p>
-            <button type="button" id="exportBackup">Créer une sauvegarde complète JSON</button>
+          <details class="settings-section settings-disclosure">
+            <summary>
+              <span class="settings-summary-icon" aria-hidden="true">💾</span>
+              <span><strong>Sauvegarde / restauration JSON</strong><small>Exporter ou restaurer toutes les données locales</small></span>
+              <span class="settings-summary-chevron" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="settings-disclosure-body">
+              <p class="json-backup-note">Conseil : pour plus de sécurité, place tes sauvegardes JSON dans un dossier synchronisé comme OneDrive, Google Drive, Dropbox ou Synology Drive.</p>
+              <p class="muted"><strong>Confidentialité :</strong> une sauvegarde complète contient aussi les réglages et les éventuels identifiants de connexion aux API. Conserve ce fichier dans un emplacement privé.</p>
+              <button type="button" id="exportBackup">Créer une sauvegarde complète JSON</button>
+              <label>Restaurer une sauvegarde JSON
+                <input id="restoreBackupFile" type="file" accept=".json,.alm-backup,.almbackup,.alm,application/json">
+              </label>
+              <button type="button" id="restoreBackup">Restaurer les données</button>
+            </div>
+          </details>
 
-            <label>Restaurer une sauvegarde JSON
-              <input id="restoreBackupFile" type="file" accept=".json,application/json">
-            </label>
+          <details class="settings-section settings-disclosure">
+            <summary>
+              <span class="settings-summary-icon" aria-hidden="true">🔑</span>
+              <span><strong>BetaSeries API <em class="settings-optional-badge">Optionnelle</em></strong><small>Bonus/fallback uniquement — jamais nécessaire pour l’import CSV</small></span>
+              <span class="settings-summary-chevron" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="settings-disclosure-body">
+              <p class="muted">La base metadata locale suffit pour les correspondances. Une clé BetaSeries sert seulement de bonus pour certains imports/fallbacks.</p>
+              <label>Clé API BetaSeries
+                <input id="betaseriesApiKey" type="password" placeholder="Clé API BetaSeries optionnelle, non nécessaire">
+                <p id="betaseriesApiSavedHint" class="muted">Clé non chargée.</p>
+                <p class="muted betaseries-api-help">
+                  Comment obtenir une clé : va sur <a href="https://developers.betaseries.com/docs/getting-started/making-requests/" target="_blank" rel="noopener">documentation développeur BetaSeries</a>,
+                  connecte-toi, crée/demande une clé API développeur, puis colle ici uniquement la clé API.
+                </p>
+              </label>
+              <div class="settings-inline-actions">
+                <button type="button" id="saveBetaSeriesKey">Enregistrer / retirer la clé BetaSeries</button>
+                <button type="button" id="testBetaSeriesKey">Tester la connexion BetaSeries</button>
+              </div>
+              <p id="betaseriesLastTestStatus" class="muted">Dernier test : jamais</p>
+              <p id="betaseriesApiStatus" class="muted">BetaSeries API : vérification…</p>
+            </div>
+          </details>
 
-            <button type="button" id="restoreBackup">Restaurer les données</button>
-          </section>
+          <details class="settings-section settings-disclosure">
+            <summary>
+              <span class="settings-summary-icon" aria-hidden="true">🗃️</span>
+              <span><strong data-design-text="catalogueTitle" data-no-i18n>Catalogue anime local</strong><small data-design-text="catalogueSummary" data-no-i18n>Recherche hors ligne, fiches enregistrées et restauration</small></span>
+              <span class="settings-summary-chevron" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="settings-disclosure-body metadata-settings-simple">
+              <p class="muted" data-design-text="catalogueHelp" data-no-i18n>Le catalogue embarqué et les fiches déjà enregistrées servent à la recherche hors ligne et aux correspondances des imports. Les sources disponibles peuvent compléter des fiches ; elles ne régénèrent pas un nouveau catalogue complet.</p>
+              <p class="metadata-offline-note" data-design-text="metadataOfflineCopy" data-no-i18n>La base anime est conservée sur ton ordinateur. Si une API devient indisponible, tes fiches et les métadonnées déjà enregistrées restent accessibles. Les autres sources disponibles peuvent encore compléter certaines informations ; sans source en ligne, tu peux continuer à gérer et modifier ta collection manuellement.</p>
+              <p id="metadataSettingsStatus" class="muted">Metadata : vérification…</p>
+              <label class="checkbox-row metadata-user-toggle">
+                <input id="metadataAutonomousUpdateOnStart" type="checkbox">
+                <span data-design-text="catalogueAuto" data-no-i18n>Compléter les fiches avec les sources disponibles au lancement</span>
+              </label>
+              <section id="metadataJobProgress" class="metadata-job" data-no-i18n hidden><strong id="metadataJobLabel" role="status"></strong><progress id="metadataJobBar" max="1" value="0" aria-labelledby="metadataJobLabel"></progress><p id="metadataJobCounts"></p><p id="metadataJobResult"></p></section>
+              <div class="metadata-actions-row">
+                <button type="button" id="saveMetadataSettings">Enregistrer</button>
+                <button type="button" id="syncMetadataAutonomousNow" data-design-text="catalogueRefresh" data-no-i18n>Compléter le catalogue avec les sources disponibles</button>
+              </div>
+              <details class="advanced-settings metadata-expert-settings">
+                <summary>Options avancées metadata — utilisateurs expérimentés</summary>
+                <p class="muted">À ne modifier que si tu sais ce que tu fais. Les valeurs par défaut sont recommandées.</p>
+                <label>Intervalle de maintenance autonome, en heures
+                  <input id="metadataAutonomousIntervalHours" type="number" min="1" max="720" step="1" value="168">
+                </label>
+                <label>Pages saisons actuelles à vérifier
+                  <input id="metadataAutonomousSeasonalPages" type="number" min="1" max="12" step="1" value="2">
+                </label>
+                <label>Pages saisons à venir à vérifier
+                  <input id="metadataAutonomousUpcomingPages" type="number" min="0" max="12" step="1" value="2">
+                </label>
+                <label>Pages populaires à rafraîchir
+                  <input id="metadataAutonomousTopPages" type="number" min="0" max="20" step="1" value="2">
+                </label>
+                <label>Pages AniList récentes à vérifier
+                  <input id="metadataAutonomousAniListPages" type="number" min="0" max="5" step="1" value="2">
+                </label>
+                <hr class="settings-separator">
+                <h4>Mises à jour GitHub optionnelles</h4>
+                <p class="muted">Facultatif. Sert seulement si un mainteneur publie un manifest/snapshot officiel.</p>
+                <label>URL du manifest metadata GitHub
+                  <input id="metadataManifestUrl" type="url" placeholder="https://raw.githubusercontent.com/.../metadata-manifest.json">
+                </label>
+                <label>URL directe de secours du snapshot
+                  <input id="metadataUrl" type="url" placeholder="https://raw.githubusercontent.com/.../metadata-full.sql.gz">
+                </label>
+                <label class="checkbox-row">
+                  <input id="metadataUpdateOnStart" type="checkbox">
+                  Vérifier les mises à jour GitHub optionnelles au lancement
+                </label>
+                <label>Intervalle de vérification GitHub, en heures
+                  <input id="metadataUpdateIntervalHours" type="number" min="1" max="720" step="1" value="168">
+                </label>
+                <button type="button" id="syncMetadataNow">Synchroniser GitHub maintenant</button>
+              </details>
+            </div>
+          </details>
 
-          <section class="settings-section">
-            <h3>Maintenance</h3>
-            <button type="button" id="clearNewsCache">Vider cache news</button>
-          </section>
+          <details class="settings-section settings-disclosure">
+            <summary>
+              <span class="settings-summary-icon" aria-hidden="true">🧹</span>
+              <span><strong>Maintenance</strong><small>Actions techniques ponctuelles</small></span>
+              <span class="settings-summary-chevron" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="settings-disclosure-body">
+              <button type="button" id="clearNewsCache">Vider les caches techniques des actualités</button>
+            </div>
+          </details>
         </div>
 
-        <aside class="settings-help">
-          <h3>À propos des chemins</h3>
-          <p>Dans la version application Windows, le bouton <strong>Parcourir</strong> ouvre un vrai sélecteur de dossier.</p>
-          <p>Choisis un dossier synchronisé comme OneDrive, Google Drive ou Dropbox pour tes sauvegardes.</p>
-          <p>Le chemin sera mémorisé pour les prochaines sauvegardes.</p>
+        <aside class="settings-help"><img class="settings-aster" src="/assets/design/aster-cat.webp" alt="" aria-hidden="true" loading="lazy">
+          <h3>Réglages simplifiés</h3>
+          <p>Les options sont regroupées par thème pour éviter un long mur de réglages.</p>
+          <p><strong>Sauvegarde</strong> contient l’export/restauration JSON. <strong>BetaSeries</strong> reste entièrement optionnel.</p>
+          <p data-design-text="catalogueAside" data-no-i18n>Le catalogue local reste utile pour rechercher des animés hors ligne et restaurer leurs fiches.</p>
         </aside>
       </section>
 
@@ -353,7 +1102,114 @@
     </form>
   </dialog>
 
-  <script src="/app.js"></script>
+  <dialog id="completionDialog" class="completion-dialog" aria-labelledby="completionDialogTitle" aria-describedby="completionDialogIntro">
+    <div class="completion-dialog-card">
+      <div class="completion-dialog-header">
+        <div class="completion-dialog-icon" aria-hidden="true">⚡</div>
+        <div>
+          <span class="completion-dialog-kicker">Une seule passe</span>
+          <h3 id="completionDialogTitle">Compléter la bibliothèque ?</h3>
+          <p id="completionDialogIntro">Les informations et images manquantes seront recherchées automatiquement.</p>
+        </div>
+      </div>
+
+      <div class="completion-dialog-summary">
+        <div><span>À traiter</span><strong id="completionDialogTotal">0</strong></div>
+        <div><span>Sans informations</span><strong id="completionDialogMissingInfo">0</strong></div>
+        <div><span>Sans image</span><strong id="completionDialogMissingImage">0</strong></div>
+        <div><span>Temps estimé</span><strong id="completionDialogEstimate">~1 min</strong></div>
+      </div>
+
+      <div class="completion-dialog-note">
+        <span aria-hidden="true">✓</span>
+        <p>L’opération continue en arrière-plan. Tu verras l’avancement animé par animé et tu pourras l’annuler proprement à tout moment.</p>
+      </div>
+
+      <menu>
+        <button type="button" id="completionDialogCancel">Pas maintenant</button>
+        <button type="button" id="completionDialogStart" class="primary">Lancer la mise à jour</button>
+      </menu>
+    </div>
+  </dialog>
+
+<dialog id="appConfirmDialog" class="app-confirm-dialog">
+  <div class="app-confirm-card">
+    <h3 id="appConfirmTitle">Confirmation</h3>
+    <p id="appConfirmMessage"></p>
+    <menu>
+      <button type="button" id="appConfirmCancel">Annuler</button>
+      <button type="button" id="appConfirmOk" class="primary">OK</button>
+    </menu>
+  </div>
+</dialog>
+  <script src="/countdown.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/watch-status.js"></script>
+  <script src="/design-copy.js"></script>
+  <script src="/beta38-copy.js"></script>
+  <script src="/release-copy.js"></script>
+  <script src="/beta39-copy.js"></script>
+  <script src="/beta40-copy.js"></script>
+<script src="/beta41-copy.js"></script>
+<script src="/beta42-copy.js"></script>
+<script src="/retours-copy.js"></script>
+<script src="/beta48-copy.js"></script>
+<script src="/beta49-copy.js"></script>
+<script src="/beta50-copy.js"></script>
+<script src="/beta51-copy.js"></script>
+<script src="/beta52-copy.js"></script>
+  <script src="/design-core.js"></script>
+  <script src="/beta37.js"></script>
+  <script src="/collection-state.js"></script>
+  <script src="/scroll-progress.js"></script>
+  <script src="/title-preference.js"></script>
+  <script src="/localized-titles.js"></script>
+<script src="/season-reference.js"></script>
+<script src="/series-state.js"></script>
+<script src="/input-focus.js"></script>
+<script src="/library-paging.js"></script>
+<script src="/app.js"></script>
   <script src="/settings.js"></script>
+  <script src="/dna-radar.js"></script>
+  <script src="/alm-v2.js"></script>
+  <script src="/season-filters.js"></script>
+  <script src="/glossary-copy.js"></script>
+  <script src="/lexicon.js"></script>
+  <script src="/karaoke-clock.js"></script>
+  <script src="/clipboard.js"></script><script src="/karaoke.js"></script>
+  <script src="/diagnostics.js"></script>
+  <script src="/design.js"></script>
+<script src="/nocturne.js"></script><script src="/content-language.js"></script><script src="/retouches.js"></script><script src="/discovery.js"></script><script src="/navigation.js"></script><script src="/settings-navigation.js"></script><script src="/rankings.js"></script><script src="/selects.js"></script>
+<script src="/beta38.js"></script>
+<script src="/release-watch.js"></script>
+<script src="/calendar-companions.js"></script>
+<script src="/beta39.js"></script>
+<script src="/beta40.js"></script>
+<script src="/notification-center.js"></script>
+<script src="/beta55-copy.js"></script>
+<script src="/beta56.js"></script>
+<script src="/beta57.js"></script>
+<script src="/import-gap.js"></script>
+<script src="/beta41.js"></script>
+<script src="/notebook-copy.js"></script>
+<script src="/notebook.js"></script>
+<script src="/memories-page.js"></script>
+<script src="/catalog.js"></script>
+<script src="/beta42.js"></script>
+<script src="/beta43.js"></script>
+<script src="/beta44.js"></script>
+<script src="/beta45.js"></script>
+<script src="/series-ui.js"></script>
+<script src="/record-search.js"></script>
+<script src="/anime-video.js"></script>
+<script src="/anime-association.js"></script>
+<script src="/beta49.js"></script>
+<script src="/community-security.js"></script>
+<script src="/community-content.js"></script>
+<script src="/community-age.js"></script><script src="/community-model.js"></script><script src="/community-copy.js"></script><script src="/community-upgrade-copy.js"></script>
+<script src="/community-qr.js"></script>
+<script src="/community-forms.js"></script>
+<script src="/community-ui-extra.js"></script>
+<script src="/community-workspace-copy.js"></script><script src="/community-workspace.js"></script><script src="/community-requests.js"></script><script src="/community-charter.js"></script><script src="/community.js"></script><script src="/support-diagnostics.js"></script><script src="/maintenance.js"></script>
 </body>
 </html>

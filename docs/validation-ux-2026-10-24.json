@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "releaseId": "beta82-ux-souvenirs-navigation-compte-20261024",
+  "version": "2.0.0-beta.82",
+  "dateUtc": "2026-10-24T18:44:18.822548+00:00",
+  "parentArchive": "Anime-Local-Manager-Beta82-Correctif-Publication-Test-Beta73-2026-10-24-COMPLET(1).zip",
+  "parentArchiveSha256": "dd952f40e06cb9436d0bd0a89c9ab47aeed30bb2c87e5172b6fc70cae5f316d4",
+  "environment": {
+    "platform": "Linux",
+    "node": "24.22.1",
+    "npm": "11.9.0",
+    "browser": "Chromium 134.0.6998.35",
+    "electron": "45.0.0"
+  },
+  "verification": {
+    "status": "passed-across-runs",
+    "suites": 145,
+    "fullUninterruptedRunPassed": false,
+    "mainRunPassed": 140,
+    "mainRunFailed": 1,
+    "retriedPassed": 1,
+    "remainingPassed": 4,
+    "groups": {
+      "Structure et régressions": 86,
+      "Interface et karaoké": 8,
+      "Imports et bibliothèque": 26,
+      "Données, sauvegardes et sécurité": 14,
+      "Publication": 11
+    },
+    "combinedReport": "verification-ux/verification-combined.json",
+    "mainReport": "verification-ux/verification-project.json",
+    "log": "verification-ux/verification-project.log"
+  },
+  "browser": {
+    "applicationChecks": 31,
+    "navigationChecks": 23,
+    "javascriptErrors": 0,
+    "fictionalRecords": 70,
+    "notesUnchanged": true,
+    "desktopWidth": 1440,
+    "narrowWidth": 390,
+    "communityWrites": 0,
+    "externalNetworkBlocked": true
+  },
+  "locales": {
+    "languages": [
+      "fr",
+      "en",
+      "ja",
+      "es",
+      "de",
+      "pt-BR",
+      "zh-CN"
+    ],
+    "auditedKeysPerLanguage": 1095,
+    "missingKeys": 0
+  },
+  "npmAudit": {
+    "scope": "production dependencies (--omit=dev)",
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependenciesUnchanged": true
+  },
+  "integrity": {
+    "originalArchivePreserved": true,
+    "originalFilesRetained": 655,
+    "protectedFilesUnchanged": 112,
+    "communityMirrorsIdentical": 19,
+    "scrollMirrorsIdentical": 2,
+    "sourceHashes": "../SOURCE-MANIFEST.json"
+  },
+  "limitations": [
+    "The 145 suites passed across the main run and five isolated supplemental suites; there was no uninterrupted successful 145-suite run. The incomplete-ASAR diagnostic failed once and then passed unchanged; its cause was not reproduced.",
+    "Native Windows NSIS build, installation and launch were not executed in this Linux environment.",
+    "Community account reads were simulated during browser testing; no actual recommendation was sent.",
+    "The community website was not deployed. Shared source files are synchronized in this archive.",
+    "The npm result is a production dependency audit at execution time, not a general security guarantee."
+  ]
+}

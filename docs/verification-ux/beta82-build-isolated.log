@@ -1,0 +1,35 @@
+OK build82: reported 276-character NSIS path reproduced
+OK build82: automatic short workspace does not depend on extraction depth
+OK build82: case-insensitive Windows identity and stable resume location
+OK build82: separate source copies never share their compilation cache
+OK build82: profile fallback without LOCALAPPDATA
+OK build82: no overlong cache accepted silently
+OK build82: Linux workspace unchanged
+OK build82: real filesystem workspace and source-side locator created
+OK build82: concurrent build rejected without terminating another process
+OK build82: resume reuses workspace and leaves original files untouched
+OK build82: missing NSIS include rejected before compiler launch
+OK build82: empty NSIS input rejected
+OK build82: existing readable NSIS input and short uninstaller output validated
+OK build82: native path budget checked independently of filesystem existence
+OK build82: foreign workspace ownership is never overwritten
+OK build82: stale lock from a terminated process recovered
+OK build82: temporary EBUSY retried asynchronously with bounded backoff
+OK build82: permanent lock remains a real failed test
+OK build82: unrelated filesystem errors never swallowed or endlessly retried
+OK build82: actual recursive cleanup completes
+OK build82: cleanup waits for owned Electron utility exit and stop is idempotent
+OK build82: already-exited missing-module test is handled correctly
+OK build82: utility shutdown timeout fails instead of pretending success
+OK build82: deep Windows publication directory uses atomic mkdir instead of mkdtemp
+OK build82: NSIS failure preserves previous installer and verified checkpoint
+OK build82: verification diagnostics copied back and build lock released on failure
+OK build82: resume skips already verified source/dependency steps after compiler failure
+OK build82: installer and report promoted atomically to original dist directory
+OK build82: unchanged build reused but native smoke gate still requested
+OK build82: modified cached installer is rebuilt, not delivered silently
+OK build82: source modification invalidates verification cache
+OK build82: dependency-tree modification invalidates verification cache
+OK build82: same publish/resume buttons, automatic resume and quoted source directory
+OK build82: new regression gate added without removing previous package tests
+34 build82 checks passed. Native Windows/NSIS execution still requires Windows.

@@ -1,0 +1,41 @@
+{
+  "20": {
+    "titles": {
+      "fr": "Naruto",
+      "en": "Naruto",
+      "ja": "NARUTO -ナルト-",
+      "de": "Naruto",
+      "zh-CN": "火影忍者"
+    },
+    "entity": "Q25929253",
+    "checkedAt": 1791223249468,
+    "source": "Wikidata"
+  },
+  "199": {
+    "titles": {
+      "fr": "Le Voyage de Chihiro",
+      "en": "Spirited Away",
+      "ja": "千と千尋の神隠し",
+      "es": "El viaje de Chihiro",
+      "de": "Chihiros Reise ins Zauberland",
+      "pt-BR": "A Viagem de Chihiro",
+      "zh-CN": "千与千寻"
+    },
+    "entity": "Q155653",
+    "source": "Wikidata",
+    "checkedAt": 1791222903687
+  },
+  "1735": {
+    "titles": {
+      "fr": "Naruto: Shippūden",
+      "en": "Naruto: Shippūden",
+      "ja": "NARUTO -ナルト- 疾風伝",
+      "es": "Naruto: Shippūden",
+      "de": "Naruto: Shippūden",
+      "zh-CN": "火影忍者疾風傳"
+    },
+    "entity": "Q12500134",
+    "checkedAt": 1791223249468,
+    "source": "Wikidata"
+  }
+}

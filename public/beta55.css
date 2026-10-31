@@ -1,0 +1,13 @@
+#completionIssuesPanel .completion-kind-filters{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.completion-kind-filters button[aria-pressed="true"]{background:#ffd05e;color:#17102b;border-color:#ffd05e}
+.completion-issue-row[data-kind="progress"]{border-left:4px solid #ffd05e}
+.completion-issue-row[data-kind="season"]{border-left:4px solid #aa8bff}
+.completion-issue-row[data-kind="identity"]{border-left:4px solid #ff9fa9}
+.completion-issue-row[data-kind="metadata"]{border-left:4px solid #74d3ee}
+#importGapDialog{width:min(700px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;padding:26px;background:#151329;color:#f4efff;border:1px solid #7364a1;border-radius:18px}
+#importGapDialog p{line-height:1.6;color:#d9d2ec}
+#importGapDialog dl{display:grid;grid-template-columns:minmax(150px,1fr) 1fr;gap:12px;margin:22px 0}
+#importGapDialog dd{margin:0;overflow-wrap:anywhere}
+#importGapDialog .import-gap-close{float:right;margin:0 0 18px 18px}
+#importGapDialog .completion-actions{clear:both;gap:12px;display:flex;flex-wrap:wrap}
+@media(max-width:550px){#importGapDialog dl{grid-template-columns:1fr}#importGapDialog dd{margin-bottom:8px}}

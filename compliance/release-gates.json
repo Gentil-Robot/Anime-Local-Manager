@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "reviewedAt": "2026-10-25",
+  "version": "2.0.0",
+  "purpose": "Release evidence checklist; does not alter runtime access or attest legal compliance.",
+  "gates": [
+    {
+      "finding": "ALM-09",
+      "status": "evidence_required",
+      "subject": "AniList and redistributed catalogue/media rights",
+      "requiredEvidence": "Written permission or documented applicable terms covering ALM tracking, caching, redistribution and actual revenue; identify each media owner."
+    },
+    {
+      "finding": "ALM-11",
+      "status": "decision_required",
+      "subject": "Minors and legal bases",
+      "requiredEvidence": "Publisher audience/age decision and legal basis for each optional processing; implement the corresponding server rule or parental process, then test existing and new accounts."
+    },
+    {
+      "finding": "ALM-12",
+      "status": "evidence_required",
+      "subject": "Vercel eligibility and contracts",
+      "requiredEvidence": "Actual account plan, usage and applicable executed agreement; qualify donations and commercial use without assuming their amount or legal effect."
+    },
+    {
+      "finding": "ALM-13",
+      "status": "operational_proof_required",
+      "subject": "Remote backup restoration",
+      "requiredEvidence": "Encrypted off-site export, retention and a successful isolated restoration including Auth and rights/deletion replay; source migrations and local application backups alone do not prove recovery."
+    },
+    {
+      "finding": "ALM-16",
+      "status": "partially_remediated",
+      "subject": "Privacy information and operating procedures",
+      "requiredEvidence": "Identifiable responsible publisher, alternative privacy contact, mailbox/log/backup retention and deletion proof, applicable processor/transfer agreements and rights/incident drill."
+    },
+    {
+      "finding": "ALM-04/05",
+      "status": "platform_test_required",
+      "subject": "Native Windows distribution",
+      "requiredEvidence": "Install NSIS as standard user, verify signature when supplied, cold --maintenance through Task Scheduler, backup/restore, update and uninstall with explicit handling of user data."
+    },
+    {
+      "finding": "ALM-17",
+      "status": "optional_observation",
+      "subject": "DMARC monitoring",
+      "requiredEvidence": "Only tighten after legitimate senders and alignment are verified and a report mailbox has been chosen; do not enable reject automatically."
+    },
+    {
+      "finding": "ALM-18",
+      "status": "platform_test_required",
+      "subject": "Electron embedded Node/Brotli/Undici security",
+      "requiredEvidence": "Electron 45.2.1 (official Node 24.22.1) is pinned in package and lock; regenerate a clean Windows NSIS build, validate its bundled runtime, run the 151-suite regression plan, verify SHA-256, and repeat VM installation and data persistence checks before distributing binaries."
+    },
+    {
+      "finding": "ALM-19",
+      "status": "site_deployment_required",
+      "subject": "Production alignment and strict account deletion confirmation",
+      "requiredEvidence": "La migration Supabase 20261025060253_alm_beta82_delete_confirmation.sql a été appliquée et vérifiée le 25/10/2026 ; vérifier la concordance du site publié avec le manifeste V2.0.0 Bêta stable. Ne pas redéployer automatiquement."
+    },
+    {
+      "finding": "ALM-20",
+      "status": "operational_proof_required",
+      "subject": "Real authentication and email journeys",
+      "requiredEvidence": "Confirm Supabase Auth CAPTCHA/SMTP configuration and perform consented sign-up, confirmation and recovery tests. Read-only DNS/provider checks and historical delivery counts do not establish these journeys."
+    }
+  ],
+  "changesApplied": [
+    "Electron 45.2.1 pinned in source and dependency lock; Windows verification pending",
+    "Node version pins aligned",
+    "loopback-origin fallback 3123-3143 with isolated tests",
+    "local source/site/release hashes refreshed",
+    "Account footer shows display name only",
+    "Engine callbacks and final diagnostics protected on shutdown",
+    "AniList provider cooldown and BetaSeries request boundaries enforced",
+    "Public fetch rejects Brotli and unknown content encodings",
+    "Strict delete confirmation migration deployed in ALM Community (20261025060253)",
+    "Electron prepared before dependency fingerprint/staging; GitHub actions pinned to commits"
+  ],
+  "validatedParentArchiveSha256": "494407e42c74a846cb9c8e8e36b3bf6182384664ab9450020dc95e657ba36b10"
+}

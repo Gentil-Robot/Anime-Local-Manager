@@ -1,0 +1,839 @@
+{
+  "capturedAt": "2026-10-09",
+  "responses": {
+    "shows/83670": {
+      "id": 83670,
+      "url": "https://www.tvmaze.com/shows/83670/the-exiled-heavy-knight-knows-how-to-game-the-system",
+      "name": "The Exiled Heavy Knight Knows How to Game the System",
+      "type": "Animation",
+      "language": "Japanese",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Anime",
+        "Fantasy"
+      ],
+      "status": "Running",
+      "runtime": 30,
+      "averageRuntime": 30,
+      "premiered": "2026-07-02",
+      "ended": null,
+      "officialSite": "https://sh-anime.shochiku.co.jp/jukishi-anime/",
+      "schedule": {
+        "time": "00:26",
+        "days": [
+          "Thursday"
+        ]
+      },
+      "rating": {
+        "average": null
+      },
+      "weight": 96,
+      "network": {
+        "id": 24,
+        "name": "MBS",
+        "country": {
+          "name": "Japan",
+          "code": "JP",
+          "timezone": "Asia/Tokyo"
+        },
+        "officialSite": null
+      },
+      "webChannel": null,
+      "dvdCountry": {
+        "name": "Japan",
+        "code": "JP",
+        "timezone": "Asia/Tokyo"
+      },
+      "externals": {
+        "tvrage": null,
+        "thetvdb": 453028,
+        "imdb": null
+      },
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/630/1577273.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/630/1577273.jpg"
+      },
+      "summary": "<p>\"You good-for-nothing bastard.. You are the son of a Sword Saint, yet you dare pull such a defective Class!?\" During the \"Divine Blessing Ceremony\" of the 15-year-old Elma who came from a lineage of Sword Saints, he had manifested a commonly deemed defective class known as the Heavy Knight. He had been deprived of his position as the next head of the Edvan Household and was then exiled. The Heavy Knight class had an unbalanced status and useless skills, to top it off, it was even said to be a class cowardly and indolent people have. But, Elma knew better—that this world was the world of the game he had used to play before—and that the Heavy Knight class was the strongest class to exist. Elma made full use of the knowledge he had in his previous life and began his efficient walkthrough of the world he was reincarnated into.</p>",
+      "updated": 1791516548,
+      "_links": {
+        "self": {
+          "href": "https://api.tvmaze.com/shows/83670"
+        },
+        "previousepisode": {
+          "href": "https://api.tvmaze.com/episodes/3766556",
+          "name": "Dreamlord of the Dreamhole"
+        },
+        "nextepisode": {
+          "href": "https://api.tvmaze.com/episodes/3766557",
+          "name": "Episode 16"
+        }
+      }
+    },
+    "shows/83670/akas": [
+      {
+        "name": "Tsuihō Sareta Tensei Jū Kishi wa Game Chishiki de Musō Suru",
+        "country": {
+          "name": "Japan",
+          "code": "JP",
+          "timezone": "Asia/Tokyo"
+        }
+      },
+      {
+        "name": "追放された転生重騎士はゲーム知識で無双する",
+        "country": {
+          "name": "Japan",
+          "code": "JP",
+          "timezone": "Asia/Tokyo"
+        }
+      },
+      {
+        "name": "Tsuihou Sareta Tensei Juukishi wa Game Chishiki de Musou Suru",
+        "country": {
+          "name": "Japan",
+          "code": "JP",
+          "timezone": "Asia/Tokyo"
+        }
+      },
+      {
+        "name": "Вигнаний важкоозброєний лицар стає непереможним завдяки знанням гри",
+        "country": {
+          "name": "Ukraine",
+          "code": "UA",
+          "timezone": "Europe/Kyiv"
+        }
+      },
+      {
+        "name": "Изгнанный реинкарнированный тяжёлый рыцарь не имеет себе равных в знаниях игры",
+        "country": {
+          "name": "Russian Federation",
+          "code": "RU",
+          "timezone": "Asia/Kamchatka"
+        }
+      }
+    ],
+    "shows/83670/episodes": [
+      {
+        "id": 3569437,
+        "url": "https://www.tvmaze.com/episodes/3569437/the-exiled-heavy-knight-knows-how-to-game-the-system-1x01-im-elymas-the-heavy-knight",
+        "name": "I'm Elymas the Heavy Knight",
+        "season": 1,
+        "number": 1,
+        "type": "regular",
+        "airdate": "2026-07-02",
+        "airtime": "00:26",
+        "airstamp": "2026-07-02T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 7.7
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/630/1577275.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/630/1577275.jpg"
+        },
+        "summary": "<p>Elymas Edvaughn is disowned by his father for becoming a Heavy Knight.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3569437"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661003,
+        "url": "https://www.tvmaze.com/episodes/3661003/the-exiled-heavy-knight-knows-how-to-game-the-system-1x02-menacing-foul-eight-legged-beast",
+        "name": "Menacing Foul Eight-Legged Beast",
+        "season": 1,
+        "number": 2,
+        "type": "regular",
+        "airdate": "2026-07-09",
+        "airtime": "00:26",
+        "airstamp": "2026-07-09T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 7.3
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/631/1579679.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/631/1579679.jpg"
+        },
+        "summary": "<p>Elymas uses his wits and game knowledge to defeat a much more powerful monster.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661003"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661004,
+        "url": "https://www.tvmaze.com/episodes/3661004/the-exiled-heavy-knight-knows-how-to-game-the-system-1x03-the-raid-quest",
+        "name": "The Raid Quest",
+        "season": 1,
+        "number": 3,
+        "type": "regular",
+        "airdate": "2026-07-16",
+        "airtime": "00:26",
+        "airstamp": "2026-07-16T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 7.7
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/632/1582469.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/632/1582469.jpg"
+        },
+        "summary": "<p>Elymas finds himself surrounded by fearful newbies and an arrogant veteran on his first Raid Quest.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661004"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661005,
+        "url": "https://www.tvmaze.com/episodes/3661005/the-exiled-heavy-knight-knows-how-to-game-the-system-1x04-existence-evolution",
+        "name": "Existence Evolution",
+        "season": 1,
+        "number": 4,
+        "type": "regular",
+        "airdate": "2026-07-23",
+        "airtime": "00:26",
+        "airstamp": "2026-07-23T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 8
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/633/1584164.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/633/1584164.jpg"
+        },
+        "summary": "<p>With Gowtan paralyzed, Elymas must survive against the Mad Headder until he can get back in the fight.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661005"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661006,
+        "url": "https://www.tvmaze.com/episodes/3661006/the-exiled-heavy-knight-knows-how-to-game-the-system-1x05-fang-of-smoldering-insanity",
+        "name": "Fang of Smoldering Insanity",
+        "season": 1,
+        "number": 5,
+        "type": "regular",
+        "airdate": "2026-07-30",
+        "airtime": "00:26",
+        "airstamp": "2026-07-30T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 8.3
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/634/1586789.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/634/1586789.jpg"
+        },
+        "summary": "<p>Elymas goes shopping for a skillbook only to discover they're prohibitively expensive.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661006"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661007,
+        "url": "https://www.tvmaze.com/episodes/3661007/the-exiled-heavy-knight-knows-how-to-game-the-system-1x06-ruche-the-pierrot",
+        "name": "Ruche the Pierrot",
+        "season": 1,
+        "number": 6,
+        "type": "regular",
+        "airdate": "2026-08-06",
+        "airtime": "00:26",
+        "airstamp": "2026-08-06T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 7.7
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/635/1589206.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/635/1589206.jpg"
+        },
+        "summary": "<p>Elymas begs Ruche to join his party so he can use her skills to find the item he needs.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661007"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661008,
+        "url": "https://www.tvmaze.com/episodes/3661008/the-exiled-heavy-knight-knows-how-to-game-the-system-1x07-golden-raana-farming",
+        "name": "Golden Raana Farming",
+        "season": 1,
+        "number": 7,
+        "type": "regular",
+        "airdate": "2026-08-13",
+        "airtime": "00:26",
+        "airstamp": "2026-08-13T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 9
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/636/1591887.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/636/1591887.jpg"
+        },
+        "summary": "<p>Elymas uses his game knowledge to exploit the weaknesses of the elusive Golden Raana.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661008"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661009,
+        "url": "https://www.tvmaze.com/episodes/3661009/the-exiled-heavy-knight-knows-how-to-game-the-system-1x08-wandering",
+        "name": "Wandering",
+        "season": 1,
+        "number": 8,
+        "type": "regular",
+        "airdate": "2026-08-20",
+        "airtime": "00:26",
+        "airstamp": "2026-08-20T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 9
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/637/1594348.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/637/1594348.jpg"
+        },
+        "summary": "<p>Elymas and Ruche's celebration is interrupted by a wandering dungeon boss.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661009"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661010,
+        "url": "https://www.tvmaze.com/episodes/3661010/the-exiled-heavy-knight-knows-how-to-game-the-system-1x09-dreamlord",
+        "name": "Dreamlord",
+        "season": 1,
+        "number": 9,
+        "type": "regular",
+        "airdate": "2026-08-27",
+        "airtime": "00:26",
+        "airstamp": "2026-08-27T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 6.3
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/638/1596760.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/638/1596760.jpg"
+        },
+        "summary": "<p>Ruche returns to save Elymas from a desperate situation, and they make one last gamble to beat the Dreamlord.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661010"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661011,
+        "url": "https://www.tvmaze.com/episodes/3661011/the-exiled-heavy-knight-knows-how-to-game-the-system-1x10-negotiation",
+        "name": "Negotiation",
+        "season": 1,
+        "number": 10,
+        "type": "regular",
+        "airdate": "2026-09-03",
+        "airtime": "00:26",
+        "airstamp": "2026-09-03T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 9
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/639/1599748.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/639/1599748.jpg"
+        },
+        "summary": "<p>Elymas and Ruche celebrate their payout and promotion and return to the shady shop for a Skill Book.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661011"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661012,
+        "url": "https://www.tvmaze.com/episodes/3661012/the-exiled-heavy-knight-knows-how-to-game-the-system-1x11-inescapable-past",
+        "name": "Inescapable Past",
+        "season": 1,
+        "number": 11,
+        "type": "regular",
+        "airdate": "2026-09-10",
+        "airtime": "00:26",
+        "airstamp": "2026-09-10T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 9.8
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/640/1601873.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/640/1601873.jpg"
+        },
+        "summary": "<p>Elymas' father hears about his success and visits the guild with Malice, who has a twisted attachment to him.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661012"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3661013,
+        "url": "https://www.tvmaze.com/episodes/3661013/the-exiled-heavy-knight-knows-how-to-game-the-system-1x12-malice-the-master-swordsman",
+        "name": "Malice the Master Swordsman",
+        "season": 1,
+        "number": 12,
+        "type": "regular",
+        "airdate": "2026-09-17",
+        "airtime": "00:26",
+        "airstamp": "2026-09-17T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 6
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/641/1604572.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/641/1604572.jpg"
+        },
+        "summary": "<p>Elymas activates the true power of the Heavy Knight to make a comeback against Malice.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3661013"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766554,
+        "url": "https://www.tvmaze.com/episodes/3766554/the-exiled-heavy-knight-knows-how-to-game-the-system-1x13-lacoryna-city-of-adventurers",
+        "name": "Lacoryna, City of Adventurers",
+        "season": 1,
+        "number": 13,
+        "type": "regular",
+        "airdate": "2026-09-24",
+        "airtime": "00:26",
+        "airstamp": "2026-09-24T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 9.5
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/642/1607300.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/642/1607300.jpg"
+        },
+        "summary": "<p>After defeating Malice and saying goodbye to his father, Elymas visits Lacoryna, the holy land of adventurers.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766554"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766555,
+        "url": "https://www.tvmaze.com/episodes/3766555/the-exiled-heavy-knight-knows-how-to-game-the-system-1x14-mythril-giant",
+        "name": "Mythril Giant",
+        "season": 1,
+        "number": 14,
+        "type": "regular",
+        "airdate": "2026-10-01",
+        "airtime": "00:26",
+        "airstamp": "2026-10-01T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": 9
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/643/1609755.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/643/1609755.jpg"
+        },
+        "summary": "<p>Elymas and Ruche take on an overpowering foe in hopes of acquiring powerful materials.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766555"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766556,
+        "url": "https://www.tvmaze.com/episodes/3766556/the-exiled-heavy-knight-knows-how-to-game-the-system-1x15-dreamlord-of-the-dreamhole",
+        "name": "Dreamlord of the Dreamhole",
+        "season": 1,
+        "number": 15,
+        "type": "regular",
+        "airdate": "2026-10-08",
+        "airtime": "00:26",
+        "airstamp": "2026-10-08T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": {
+          "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/645/1612810.jpg",
+          "original": "https://static.tvmaze.com/uploads/images/original_untouched/645/1612810.jpg"
+        },
+        "summary": "<p>With their new skills gained on level up, Elymas and Ruche decide to take on the Rock Centipede.</p>",
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766556"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766557,
+        "url": "https://www.tvmaze.com/episodes/3766557/the-exiled-heavy-knight-knows-how-to-game-the-system-1x16-episode-16",
+        "name": "Episode 16",
+        "season": 1,
+        "number": 16,
+        "type": "regular",
+        "airdate": "2026-10-15",
+        "airtime": "00:26",
+        "airstamp": "2026-10-15T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766557"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766558,
+        "url": "https://www.tvmaze.com/episodes/3766558/the-exiled-heavy-knight-knows-how-to-game-the-system-1x17-episode-17",
+        "name": "Episode 17",
+        "season": 1,
+        "number": 17,
+        "type": "regular",
+        "airdate": "2026-10-22",
+        "airtime": "00:26",
+        "airstamp": "2026-10-22T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766558"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766559,
+        "url": "https://www.tvmaze.com/episodes/3766559/the-exiled-heavy-knight-knows-how-to-game-the-system-1x18-episode-18",
+        "name": "Episode 18",
+        "season": 1,
+        "number": 18,
+        "type": "regular",
+        "airdate": "2026-10-29",
+        "airtime": "00:26",
+        "airstamp": "2026-10-29T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766559"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766560,
+        "url": "https://www.tvmaze.com/episodes/3766560/the-exiled-heavy-knight-knows-how-to-game-the-system-1x19-episode-19",
+        "name": "Episode 19",
+        "season": 1,
+        "number": 19,
+        "type": "regular",
+        "airdate": "2026-11-05",
+        "airtime": "00:26",
+        "airstamp": "2026-11-05T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766560"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766561,
+        "url": "https://www.tvmaze.com/episodes/3766561/the-exiled-heavy-knight-knows-how-to-game-the-system-1x20-episode-20",
+        "name": "Episode 20",
+        "season": 1,
+        "number": 20,
+        "type": "regular",
+        "airdate": "2026-11-12",
+        "airtime": "00:26",
+        "airstamp": "2026-11-12T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766561"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766562,
+        "url": "https://www.tvmaze.com/episodes/3766562/the-exiled-heavy-knight-knows-how-to-game-the-system-1x21-episode-21",
+        "name": "Episode 21",
+        "season": 1,
+        "number": 21,
+        "type": "regular",
+        "airdate": "2026-11-19",
+        "airtime": "00:26",
+        "airstamp": "2026-11-19T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766562"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766563,
+        "url": "https://www.tvmaze.com/episodes/3766563/the-exiled-heavy-knight-knows-how-to-game-the-system-1x22-episode-22",
+        "name": "Episode 22",
+        "season": 1,
+        "number": 22,
+        "type": "regular",
+        "airdate": "2026-11-26",
+        "airtime": "00:26",
+        "airstamp": "2026-11-26T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766563"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766564,
+        "url": "https://www.tvmaze.com/episodes/3766564/the-exiled-heavy-knight-knows-how-to-game-the-system-1x23-episode-23",
+        "name": "Episode 23",
+        "season": 1,
+        "number": 23,
+        "type": "regular",
+        "airdate": "2026-12-03",
+        "airtime": "00:26",
+        "airstamp": "2026-12-03T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766564"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766565,
+        "url": "https://www.tvmaze.com/episodes/3766565/the-exiled-heavy-knight-knows-how-to-game-the-system-1x24-episode-24",
+        "name": "Episode 24",
+        "season": 1,
+        "number": 24,
+        "type": "regular",
+        "airdate": "2026-12-10",
+        "airtime": "00:26",
+        "airstamp": "2026-12-10T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766565"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766566,
+        "url": "https://www.tvmaze.com/episodes/3766566/the-exiled-heavy-knight-knows-how-to-game-the-system-1x25-episode-25",
+        "name": "Episode 25",
+        "season": 1,
+        "number": 25,
+        "type": "regular",
+        "airdate": "2026-12-17",
+        "airtime": "00:26",
+        "airstamp": "2026-12-17T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766566"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      },
+      {
+        "id": 3766567,
+        "url": "https://www.tvmaze.com/episodes/3766567/the-exiled-heavy-knight-knows-how-to-game-the-system-1x26-episode-26",
+        "name": "Episode 26",
+        "season": 1,
+        "number": 26,
+        "type": "regular",
+        "airdate": "2026-12-24",
+        "airtime": "00:26",
+        "airstamp": "2026-12-24T15:26:00+00:00",
+        "runtime": 30,
+        "rating": {
+          "average": null
+        },
+        "image": null,
+        "summary": null,
+        "_links": {
+          "self": {
+            "href": "https://api.tvmaze.com/episodes/3766567"
+          },
+          "show": {
+            "href": "https://api.tvmaze.com/shows/83670",
+            "name": "The Exiled Heavy Knight Knows How to Game the System"
+          }
+        }
+      }
+    ]
+  }
+}

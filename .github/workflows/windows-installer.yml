@@ -1,0 +1,70 @@
+name: ALM — installateur Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master, 'publication/v2.0.0-beta-stable']
+    tags: ['v*', '2.0.0-*']
+permissions:
+  contents: read
+concurrency:
+  group: alm-windows-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  installer:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          lfs: true
+      - name: Node et cache npm
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Cache des téléchargements Electron et NSIS
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6, official tag verified 2026-10-25
+        with:
+          path: ${{ runner.temp }}/alm-downloads
+          key: alm-downloads-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: alm-downloads-${{ runner.os }}-
+      - name: Construction, contrôles et essais de l’installation
+        env:
+          ELECTRON_CACHE: ${{ runner.temp }}/alm-downloads/electron
+          ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/alm-downloads/builder
+          CSC_LINK: ${{ secrets.ALM_WINDOWS_CERTIFICATE }}
+          CSC_KEY_PASSWORD: ${{ secrets.ALM_WINDOWS_CERTIFICATE_PASSWORD }}
+          ALM_SIGNER_SUBJECT: ${{ vars.ALM_WINDOWS_SIGNER_SUBJECT }}
+        run: |
+          node scripts/release-windows.js --ci
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Installateur et rapport final
+        if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ALM-Windows-${{ github.sha }}
+          path: |
+            dist/*Setup-x64.exe
+            dist/release-check.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+      - name: Journaux de vérification
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ALM-Diagnostics-${{ github.run_id }}
+          path: |
+            logs/
+            .release-work/*/verification.json
+            .release-work/*/verification.log
+            .release-work/*/audit-production.json
+            .release-work/*/audit-outillage.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,0 +1,40 @@
+[
+  {
+    "version": "44.9.3",
+    "safeStorage": {
+      "url": "https://raw.githubusercontent.com/electron/electron/v44.9.3/docs/api/safe-storage.md",
+      "asyncAPISections": [
+        "### Asynchronous API",
+        "### `safeStorage.isAsyncEncryptionAvailable()`",
+        "### `safeStorage.encryptStringAsync(plainText)`",
+        "### `safeStorage.decryptStringAsync(encrypted)`"
+      ]
+    },
+    "nodePatches": {
+      "url": "https://raw.githubusercontent.com/electron/electron/v44.9.3/patches/node/.patches",
+      "networkSecurityNamedPatches": [
+        "tls_reject_chains_containing_blocked_public_keys.patch"
+      ],
+      "patchCount": 64
+    }
+  },
+  {
+    "version": "43.8.3",
+    "safeStorage": {
+      "url": "https://raw.githubusercontent.com/electron/electron/v43.8.3/docs/api/safe-storage.md",
+      "asyncAPISections": [
+        "### Asynchronous API",
+        "### `safeStorage.isAsyncEncryptionAvailable()`",
+        "### `safeStorage.encryptStringAsync(plainText)`",
+        "### `safeStorage.decryptStringAsync(encrypted)`"
+      ]
+    },
+    "nodePatches": {
+      "url": "https://raw.githubusercontent.com/electron/electron/v43.8.3/patches/node/.patches",
+      "networkSecurityNamedPatches": [
+        "tls_reject_chains_containing_blocked_public_keys.patch"
+      ],
+      "patchCount": 66
+    }
+  }
+]

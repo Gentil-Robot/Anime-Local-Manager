@@ -1,0 +1,39 @@
+{
+  "baseline_archive_sha256": "494407e42c74a846cb9c8e8e36b3bf6182384664ab9450020dc95e657ba36b10",
+  "baseline_files": 677,
+  "removed": [],
+  "modified": [
+    ".github/workflows/windows-installer.yml",
+    "README.md",
+    "community/site/community-workspace-copy.js",
+    "community/site/community.js",
+    "community/site/release-manifest.json",
+    "compliance/release-gates.json",
+    "csv-worker.js",
+    "lib/calendar-sources.js",
+    "lib/public-fetch.js",
+    "lib/release-watch.js",
+    "lib/server-process.js",
+    "lib/service-health.js",
+    "public/community-workspace-copy.js",
+    "public/community.js",
+    "scripts/release-windows.js",
+    "scripts/test-beta-stable.js",
+    "scripts/test-beta58-release.js",
+    "scripts/test-beta82-build.cjs",
+    "scripts/test-beta82-community-navigation.cjs",
+    "scripts/test-beta82-ux-browser.cjs",
+    "scripts/verification-plan.json",
+    "server.js"
+  ],
+  "added_source": [
+    "docs/RELEASE-CHECKUP-2026-10-25.md",
+    "lib/anilist-fetch.js",
+    "scripts/test-beta82-anilist-network.cjs",
+    "scripts/test-beta82-betaseries-network.cjs",
+    "scripts/test-beta82-delete-confirmation.cjs",
+    "scripts/test-beta82-engine-callbacks.cjs",
+    "scripts/test-beta82-public-encoding.cjs",
+    "supabase/migrations/20261025060253_alm_beta82_delete_confirmation.sql"
+  ]
+}

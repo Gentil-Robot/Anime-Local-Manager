@@ -1,0 +1,31 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('fs'),os=require('os'),path=require('path');
+const {createServiceHealth}=require('../lib/service-health'),{createRankings}=require('../lib/rankings'),identity=require('../public/collection-state');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-beta34-'));let checks=0;
+const check=(label,fn)=>{fn();checks++;console.log('OK Beta34:',label);};
+(async()=>{
+ let key='',calls=0,active=0,max=0,mode='good';
+ const health=createServiceHealth({jikanRetired:false,getBetaSeriesKey:()=>key,rssSources:[{name:'Demo feed',url:'https://news.example/feed',lang:'fr'}],fetchText:async(url,options)=>{calls++;active++;max=Math.max(active,max);await new Promise(r=>setTimeout(r,5));active--;
+  if(mode==='offline')throw Error('Socket failed: secret-key');
+  if(mode==='timeout')throw Error('Source response timed out');
+  let data=url.includes('wikidata')?{entities:{Q155653:{claims:{P4086:[{rank:'normal',mainsnak:{datavalue:{value:'199'}}}]}}}}:url.includes('jikan')?{data:{mal_id:1}}:url.includes('anilist')?{data:{Media:{id:1,idMal:1}}}:url.includes('kitsu')?{data:[{type:'anime',id:'1'}]}:url.includes('tvmaze')?[{show:{id:1}}]:url.includes('betaseries')?{shows:[]}:url.includes('mymemory')?{responseStatus:200,responseData:{translatedText:'Bonjour'}}:null;
+  const status=mode==='limited'?429:200;return {response:{ok:status===200,status,headers:new Headers()},text:mode==='invalid'?'<html>Login page</html>':data?JSON.stringify(data):'<rss><channel><item><title>Test</title></item></channel></rss>'};
+ }});
+ check('opening the service catalog makes no external requests',()=>{assert.equal(health.list().length,8);assert.equal(calls,0);});
+ check('missing optional key is distinct from an outage',()=>assert.equal(health.list().find(x=>x.id==='betaseries').configured,false));
+ assert.equal((await health.test('betaseries')).state,'unconfigured');assert.equal(calls,0);
+ const both=await Promise.all([health.test('jikan'),health.test('jikan')]);check('simultaneous identical tests share one request',()=>{assert.equal(calls,1);assert.equal(both[0].state,'available');});
+ await health.test('jikan');check('one-minute cache prevents repeated requests',()=>assert.equal(calls,1));
+ await Promise.all(health.list().map(s=>health.test(s.id)));check('all providers and RSS parse and concurrency stays at three',()=>{assert(max<=3);assert(health.list().filter(s=>s.configured).every(s=>s.last.state==='available'),JSON.stringify(health.list()));});
+ key='secret-key';await health.test('betaseries');check('saving a key enables a test without disclosing it',()=>{assert.equal(health.list().find(s=>s.id==='betaseries').last.state,'available');assert(!JSON.stringify(health.list()).includes(key));});
+ for(const [value,state]of [['offline','network'],['timeout','timeout'],['limited','limited'],['invalid','invalid']]){mode=value;key+='x';const result=await health.test('betaseries');check('distinct state '+state,()=>{assert.equal(result.state,state);assert(!JSON.stringify(result).includes('secret-key'));});}
+ await assert.rejects(health.test('https://127.0.0.1/private'));check('unknown destinations cannot be probed',()=>assert.equal(health.list().length,8));
+ let clock=100000000,requests=0,broken=false;const opts={directory:dir,now:()=>clock,wait:async()=>{},getLocal:()=>[{malId:999,title:'Saved anime',rank:1,score:9}],fetchPage:async page=>{requests++;if(broken&&page===2)throw Error('outage');return {data:Array.from({length:25},(_,n)=>{const rank=(page-1)*25+n+1;return {mal_id:rank,title:'Anime '+rank,score:9-rank/1000,rank,images:{jpg:{large_image_url:'https://example.com/'+rank+'.jpg'}},synopsis:'Public example',studios:[{name:'Studio '+rank}]};})};}};
+ const rankings=createRankings(opts);check('first offline view is labelled as a local selection',()=>assert.equal(rankings.state().source,'local'));
+ await Promise.all([rankings.refresh(),rankings.refresh()]);check('100 unique ranks are fetched once across four pages',()=>{assert.equal(requests,4);assert.equal(rankings.state().items.length,100);assert.equal(rankings.state().items[99].rank,100);assert.equal(rankings.state().source,'jikan');});
+ await rankings.refresh();check('daily ranking cache avoids automatic refetch',()=>assert.equal(requests,4));
+ clock+=86400001;broken=true;await rankings.refresh();check('partial refresh keeps the last complete ranking and its date',()=>{assert.equal(rankings.state().items.length,100);assert(rankings.state().unavailable);assert(rankings.state().stale);assert.equal(requests,6);});
+ check('ranking survives restart without a network request',()=>{const restart=createRankings(opts);assert.equal(restart.state().items.length,100);assert.equal(restart.state().source,'jikan');assert.equal(requests,6);});
+ check('catalog matching preserves distinct MAL seasons',()=>{assert(identity.same({malId:1,title:'Translated title'},{malId:1,title:'Original title'}));assert(!identity.same({malId:1,title:'Same name'},{malId:2,title:'Same name'}));assert(identity.same({title:'  MY Anime ',status:'Completed'},{title:'My anime'}));assert(identity.same({title:'Alternate English'},{title:'Original',titleEn:'Alternate English'}));});
+ console.log(checks+' Beta34 runtime checks passed. Network responses are controlled fixtures.');
+})().catch(err=>{console.error(err);process.exitCode=1;}).finally(()=>fs.rmSync(dir,{recursive:true,force:true}));

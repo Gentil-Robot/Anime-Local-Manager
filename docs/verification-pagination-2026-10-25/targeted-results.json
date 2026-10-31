@@ -1,0 +1,62 @@
+[
+  {
+    "test": "scripts/test-beta80-paging.cjs",
+    "exitCode": 0,
+    "durationMs": 1633
+  },
+  {
+    "test": "scripts/test-beta82-memories-filters.cjs",
+    "exitCode": 0,
+    "durationMs": 777
+  },
+  {
+    "test": "scripts/test-beta82-community-navigation.cjs",
+    "exitCode": 0,
+    "durationMs": 917
+  },
+  {
+    "test": "scripts/test-beta82-card-actions.cjs",
+    "exitCode": 0,
+    "durationMs": 1067
+  },
+  {
+    "test": "scripts/test-beta82-recommend-catalog.cjs",
+    "exitCode": 0,
+    "durationMs": 64
+  },
+  {
+    "test": "scripts/test-beta82-ux6.cjs",
+    "exitCode": 0,
+    "durationMs": 64
+  },
+  {
+    "test": "scripts/test-beta78-ui.cjs",
+    "exitCode": 0,
+    "durationMs": 1117
+  },
+  {
+    "test": "scripts/test-beta74-import.cjs",
+    "exitCode": 0,
+    "durationMs": 1870
+  },
+  {
+    "test": "scripts/test-beta73-ui.cjs",
+    "exitCode": 0,
+    "durationMs": 867
+  },
+  {
+    "test": "scripts/test-beta65-ui.cjs",
+    "exitCode": 0,
+    "durationMs": 1018
+  },
+  {
+    "test": "scripts/test-nocturne.js",
+    "exitCode": 0,
+    "durationMs": 165
+  },
+  {
+    "test": "scripts/test-beta19-ux.js",
+    "exitCode": 0,
+    "durationMs": 32
+  }
+]

@@ -1,0 +1,972 @@
+{
+  "columns": 8,
+  "rows": 7,
+  "entries": [
+    {
+      "term": "Démographie éditoriale",
+      "atlas": 1,
+      "row": 1,
+      "column": 1
+    },
+    {
+      "term": "Shōnen",
+      "atlas": 1,
+      "row": 1,
+      "column": 2
+    },
+    {
+      "term": "Shōjo",
+      "atlas": 1,
+      "row": 1,
+      "column": 3
+    },
+    {
+      "term": "Seinen",
+      "atlas": 1,
+      "row": 1,
+      "column": 4
+    },
+    {
+      "term": "Josei",
+      "atlas": 1,
+      "row": 1,
+      "column": 5
+    },
+    {
+      "term": "Kodomo",
+      "atlas": 1,
+      "row": 1,
+      "column": 6
+    },
+    {
+      "term": "Action",
+      "atlas": 1,
+      "row": 1,
+      "column": 7
+    },
+    {
+      "term": "Aventure",
+      "atlas": 1,
+      "row": 1,
+      "column": 8
+    },
+    {
+      "term": "Fantasy",
+      "atlas": 1,
+      "row": 2,
+      "column": 1
+    },
+    {
+      "term": "Dark fantasy",
+      "atlas": 1,
+      "row": 2,
+      "column": 2
+    },
+    {
+      "term": "Urban fantasy",
+      "atlas": 1,
+      "row": 2,
+      "column": 3
+    },
+    {
+      "term": "Science-fiction",
+      "atlas": 1,
+      "row": 2,
+      "column": 4
+    },
+    {
+      "term": "Cyberpunk",
+      "atlas": 1,
+      "row": 2,
+      "column": 5
+    },
+    {
+      "term": "Space opera",
+      "atlas": 1,
+      "row": 2,
+      "column": 6
+    },
+    {
+      "term": "Mecha",
+      "atlas": 1,
+      "row": 2,
+      "column": 7
+    },
+    {
+      "term": "Romance",
+      "atlas": 1,
+      "row": 2,
+      "column": 8
+    },
+    {
+      "term": "Comédie romantique",
+      "atlas": 1,
+      "row": 3,
+      "column": 1
+    },
+    {
+      "term": "Comédie",
+      "atlas": 1,
+      "row": 3,
+      "column": 2
+    },
+    {
+      "term": "Parodie",
+      "atlas": 1,
+      "row": 3,
+      "column": 3
+    },
+    {
+      "term": "Drame",
+      "atlas": 1,
+      "row": 3,
+      "column": 4
+    },
+    {
+      "term": "Mystère",
+      "atlas": 1,
+      "row": 3,
+      "column": 5
+    },
+    {
+      "term": "Thriller",
+      "atlas": 1,
+      "row": 3,
+      "column": 6
+    },
+    {
+      "term": "Horreur",
+      "atlas": 1,
+      "row": 3,
+      "column": 7
+    },
+    {
+      "term": "Surnaturel",
+      "atlas": 1,
+      "row": 3,
+      "column": 8
+    },
+    {
+      "term": "Psychologique",
+      "atlas": 1,
+      "row": 4,
+      "column": 1
+    },
+    {
+      "term": "Historique",
+      "atlas": 1,
+      "row": 4,
+      "column": 2
+    },
+    {
+      "term": "Militaire",
+      "atlas": 1,
+      "row": 4,
+      "column": 3
+    },
+    {
+      "term": "Sport",
+      "atlas": 1,
+      "row": 4,
+      "column": 4
+    },
+    {
+      "term": "Musique",
+      "atlas": 1,
+      "row": 4,
+      "column": 5
+    },
+    {
+      "term": "Tranche de vie",
+      "atlas": 1,
+      "row": 4,
+      "column": 6
+    },
+    {
+      "term": "Iyashikei",
+      "atlas": 1,
+      "row": 4,
+      "column": 7
+    },
+    {
+      "term": "Gourmet",
+      "atlas": 1,
+      "row": 4,
+      "column": 8
+    },
+    {
+      "term": "Workplace",
+      "atlas": 1,
+      "row": 5,
+      "column": 1
+    },
+    {
+      "term": "Isekai",
+      "atlas": 1,
+      "row": 5,
+      "column": 2
+    },
+    {
+      "term": "Reverse isekai",
+      "atlas": 1,
+      "row": 5,
+      "column": 3
+    },
+    {
+      "term": "Tensei",
+      "atlas": 1,
+      "row": 5,
+      "column": 4
+    },
+    {
+      "term": "Time travel",
+      "atlas": 1,
+      "row": 5,
+      "column": 5
+    },
+    {
+      "term": "Time loop",
+      "atlas": 1,
+      "row": 5,
+      "column": 6
+    },
+    {
+      "term": "Villainess",
+      "atlas": 1,
+      "row": 5,
+      "column": 7
+    },
+    {
+      "term": "Otome isekai",
+      "atlas": 1,
+      "row": 5,
+      "column": 8
+    },
+    {
+      "term": "Harem",
+      "atlas": 1,
+      "row": 6,
+      "column": 1
+    },
+    {
+      "term": "Reverse harem",
+      "atlas": 1,
+      "row": 6,
+      "column": 2
+    },
+    {
+      "term": "Triangle amoureux",
+      "atlas": 1,
+      "row": 6,
+      "column": 3
+    },
+    {
+      "term": "Ecchi",
+      "atlas": 1,
+      "row": 6,
+      "column": 4
+    },
+    {
+      "term": "Fan service",
+      "atlas": 1,
+      "row": 6,
+      "column": 5
+    },
+    {
+      "term": "Boys’ Love",
+      "atlas": 1,
+      "row": 6,
+      "column": 6
+    },
+    {
+      "term": "Girls’ Love",
+      "atlas": 1,
+      "row": 6,
+      "column": 7
+    },
+    {
+      "term": "CGDCT",
+      "atlas": 1,
+      "row": 6,
+      "column": 8
+    },
+    {
+      "term": "Mahō shōjo",
+      "atlas": 1,
+      "row": 7,
+      "column": 1
+    },
+    {
+      "term": "Battle shōnen",
+      "atlas": 1,
+      "row": 7,
+      "column": 2
+    },
+    {
+      "term": "Death game",
+      "atlas": 1,
+      "row": 7,
+      "column": 3
+    },
+    {
+      "term": "Survival",
+      "atlas": 1,
+      "row": 7,
+      "column": 4
+    },
+    {
+      "term": "Post-apocalyptique",
+      "atlas": 1,
+      "row": 7,
+      "column": 5
+    },
+    {
+      "term": "Dystopie",
+      "atlas": 1,
+      "row": 7,
+      "column": 6
+    },
+    {
+      "term": "School",
+      "atlas": 1,
+      "row": 7,
+      "column": 7
+    },
+    {
+      "term": "Delinquents",
+      "atlas": 1,
+      "row": 7,
+      "column": 8
+    },
+    {
+      "term": "Idols",
+      "atlas": 2,
+      "row": 1,
+      "column": 1
+    },
+    {
+      "term": "Detective",
+      "atlas": 2,
+      "row": 1,
+      "column": 2
+    },
+    {
+      "term": "Organized Crime",
+      "atlas": 2,
+      "row": 1,
+      "column": 3
+    },
+    {
+      "term": "Revenge",
+      "atlas": 2,
+      "row": 1,
+      "column": 4
+    },
+    {
+      "term": "Coming of age",
+      "atlas": 2,
+      "row": 1,
+      "column": 5
+    },
+    {
+      "term": "Found family",
+      "atlas": 2,
+      "row": 1,
+      "column": 6
+    },
+    {
+      "term": "Slow burn",
+      "atlas": 2,
+      "row": 1,
+      "column": 7
+    },
+    {
+      "term": "Enemies to lovers",
+      "atlas": 2,
+      "row": 1,
+      "column": 8
+    },
+    {
+      "term": "Childcare",
+      "atlas": 2,
+      "row": 2,
+      "column": 1
+    },
+    {
+      "term": "Medical",
+      "atlas": 2,
+      "row": 2,
+      "column": 2
+    },
+    {
+      "term": "Série TV",
+      "atlas": 2,
+      "row": 2,
+      "column": 3
+    },
+    {
+      "term": "Film",
+      "atlas": 2,
+      "row": 2,
+      "column": 4
+    },
+    {
+      "term": "OVA / OAV",
+      "atlas": 2,
+      "row": 2,
+      "column": 5
+    },
+    {
+      "term": "ONA",
+      "atlas": 2,
+      "row": 2,
+      "column": 6
+    },
+    {
+      "term": "Special",
+      "atlas": 2,
+      "row": 2,
+      "column": 7
+    },
+    {
+      "term": "Short",
+      "atlas": 2,
+      "row": 2,
+      "column": 8
+    },
+    {
+      "term": "Cour",
+      "atlas": 2,
+      "row": 3,
+      "column": 1
+    },
+    {
+      "term": "Split cour",
+      "atlas": 2,
+      "row": 3,
+      "column": 2
+    },
+    {
+      "term": "Saison",
+      "atlas": 2,
+      "row": 3,
+      "column": 3
+    },
+    {
+      "term": "Partie",
+      "atlas": 2,
+      "row": 3,
+      "column": 4
+    },
+    {
+      "term": "Suite",
+      "atlas": 2,
+      "row": 3,
+      "column": 5
+    },
+    {
+      "term": "Préquelle",
+      "atlas": 2,
+      "row": 3,
+      "column": 6
+    },
+    {
+      "term": "Spin-off",
+      "atlas": 2,
+      "row": 3,
+      "column": 7
+    },
+    {
+      "term": "Side story",
+      "atlas": 2,
+      "row": 3,
+      "column": 8
+    },
+    {
+      "term": "Récapitulatif",
+      "atlas": 2,
+      "row": 4,
+      "column": 1
+    },
+    {
+      "term": "Remake",
+      "atlas": 2,
+      "row": 4,
+      "column": 2
+    },
+    {
+      "term": "Reboot",
+      "atlas": 2,
+      "row": 4,
+      "column": 3
+    },
+    {
+      "term": "Remaster",
+      "atlas": 2,
+      "row": 4,
+      "column": 4
+    },
+    {
+      "term": "Adaptation",
+      "atlas": 2,
+      "row": 4,
+      "column": 5
+    },
+    {
+      "term": "Anime original",
+      "atlas": 2,
+      "row": 4,
+      "column": 6
+    },
+    {
+      "term": "Manga",
+      "atlas": 2,
+      "row": 4,
+      "column": 7
+    },
+    {
+      "term": "Light novel",
+      "atlas": 2,
+      "row": 4,
+      "column": 8
+    },
+    {
+      "term": "Web novel",
+      "atlas": 2,
+      "row": 5,
+      "column": 1
+    },
+    {
+      "term": "Visual novel",
+      "atlas": 2,
+      "row": 5,
+      "column": 2
+    },
+    {
+      "term": "Jeu otome",
+      "atlas": 2,
+      "row": 5,
+      "column": 3
+    },
+    {
+      "term": "Manhwa",
+      "atlas": 2,
+      "row": 5,
+      "column": 4
+    },
+    {
+      "term": "Manhua",
+      "atlas": 2,
+      "row": 5,
+      "column": 5
+    },
+    {
+      "term": "Webtoon",
+      "atlas": 2,
+      "row": 5,
+      "column": 6
+    },
+    {
+      "term": "Yonkoma",
+      "atlas": 2,
+      "row": 5,
+      "column": 7
+    },
+    {
+      "term": "Dōjinshi",
+      "atlas": 2,
+      "row": 5,
+      "column": 8
+    },
+    {
+      "term": "Mangaka",
+      "atlas": 2,
+      "row": 6,
+      "column": 1
+    },
+    {
+      "term": "Auteur original",
+      "atlas": 2,
+      "row": 6,
+      "column": 2
+    },
+    {
+      "term": "Illustrateur",
+      "atlas": 2,
+      "row": 6,
+      "column": 3
+    },
+    {
+      "term": "Réalisateur",
+      "atlas": 2,
+      "row": 6,
+      "column": 4
+    },
+    {
+      "term": "Studio d’animation",
+      "atlas": 2,
+      "row": 6,
+      "column": 5
+    },
+    {
+      "term": "Comité de production",
+      "atlas": 2,
+      "row": 6,
+      "column": 6
+    },
+    {
+      "term": "Staff",
+      "atlas": 2,
+      "row": 6,
+      "column": 7
+    },
+    {
+      "term": "Cast",
+      "atlas": 2,
+      "row": 6,
+      "column": 8
+    },
+    {
+      "term": "Seiyū",
+      "atlas": 2,
+      "row": 7,
+      "column": 1
+    },
+    {
+      "term": "Character designer",
+      "atlas": 2,
+      "row": 7,
+      "column": 2
+    },
+    {
+      "term": "Series composition",
+      "atlas": 2,
+      "row": 7,
+      "column": 3
+    },
+    {
+      "term": "Storyboard",
+      "atlas": 2,
+      "row": 7,
+      "column": 4
+    },
+    {
+      "term": "Sakuga",
+      "atlas": 2,
+      "row": 7,
+      "column": 5
+    },
+    {
+      "term": "Genga",
+      "atlas": 2,
+      "row": 7,
+      "column": 6
+    },
+    {
+      "term": "Dōga",
+      "atlas": 2,
+      "row": 7,
+      "column": 7
+    },
+    {
+      "term": "Animation director",
+      "atlas": 2,
+      "row": 7,
+      "column": 8
+    },
+    {
+      "term": "Episode director",
+      "atlas": 3,
+      "row": 1,
+      "column": 1
+    },
+    {
+      "term": "Key visual",
+      "atlas": 3,
+      "row": 1,
+      "column": 2
+    },
+    {
+      "term": "PV",
+      "atlas": 3,
+      "row": 1,
+      "column": 3
+    },
+    {
+      "term": "Teaser",
+      "atlas": 3,
+      "row": 1,
+      "column": 4
+    },
+    {
+      "term": "Opening",
+      "atlas": 3,
+      "row": 1,
+      "column": 5
+    },
+    {
+      "term": "Ending",
+      "atlas": 3,
+      "row": 1,
+      "column": 6
+    },
+    {
+      "term": "OST",
+      "atlas": 3,
+      "row": 1,
+      "column": 7
+    },
+    {
+      "term": "Insert song",
+      "atlas": 3,
+      "row": 1,
+      "column": 8
+    },
+    {
+      "term": "Simulcast",
+      "atlas": 3,
+      "row": 2,
+      "column": 1
+    },
+    {
+      "term": "Simulpub",
+      "atlas": 3,
+      "row": 2,
+      "column": 2
+    },
+    {
+      "term": "VOSTFR",
+      "atlas": 3,
+      "row": 2,
+      "column": 3
+    },
+    {
+      "term": "VF",
+      "atlas": 3,
+      "row": 2,
+      "column": 4
+    },
+    {
+      "term": "Sub",
+      "atlas": 3,
+      "row": 2,
+      "column": 5
+    },
+    {
+      "term": "Dub",
+      "atlas": 3,
+      "row": 2,
+      "column": 6
+    },
+    {
+      "term": "Fansub",
+      "atlas": 3,
+      "row": 2,
+      "column": 7
+    },
+    {
+      "term": "Scantrad",
+      "atlas": 3,
+      "row": 2,
+      "column": 8
+    },
+    {
+      "term": "Licence",
+      "atlas": 3,
+      "row": 3,
+      "column": 1
+    },
+    {
+      "term": "Licensor",
+      "atlas": 3,
+      "row": 3,
+      "column": 2
+    },
+    {
+      "term": "Streaming",
+      "atlas": 3,
+      "row": 3,
+      "column": 3
+    },
+    {
+      "term": "Home video",
+      "atlas": 3,
+      "row": 3,
+      "column": 4
+    },
+    {
+      "term": "Uncut",
+      "atlas": 3,
+      "row": 3,
+      "column": 5
+    },
+    {
+      "term": "Censure",
+      "atlas": 3,
+      "row": 3,
+      "column": 6
+    },
+    {
+      "term": "Region lock",
+      "atlas": 3,
+      "row": 3,
+      "column": 7
+    },
+    {
+      "term": "Arc narratif",
+      "atlas": 3,
+      "row": 3,
+      "column": 8
+    },
+    {
+      "term": "Canon",
+      "atlas": 3,
+      "row": 4,
+      "column": 1
+    },
+    {
+      "term": "Filler",
+      "atlas": 3,
+      "row": 4,
+      "column": 2
+    },
+    {
+      "term": "Anime-original",
+      "atlas": 3,
+      "row": 4,
+      "column": 3
+    },
+    {
+      "term": "Moe",
+      "atlas": 3,
+      "row": 4,
+      "column": 4
+    },
+    {
+      "term": "Chibi",
+      "atlas": 3,
+      "row": 4,
+      "column": 5
+    },
+    {
+      "term": "Tsundere",
+      "atlas": 3,
+      "row": 4,
+      "column": 6
+    },
+    {
+      "term": "Yandere",
+      "atlas": 3,
+      "row": 4,
+      "column": 7
+    },
+    {
+      "term": "Kuudere",
+      "atlas": 3,
+      "row": 4,
+      "column": 8
+    },
+    {
+      "term": "Dandere",
+      "atlas": 3,
+      "row": 5,
+      "column": 1
+    },
+    {
+      "term": "Waifu",
+      "atlas": 3,
+      "row": 5,
+      "column": 2
+    },
+    {
+      "term": "Husbando",
+      "atlas": 3,
+      "row": 5,
+      "column": 3
+    },
+    {
+      "term": "Otaku",
+      "atlas": 3,
+      "row": 5,
+      "column": 4
+    },
+    {
+      "term": "Fujoshi / Fudanshi",
+      "atlas": 3,
+      "row": 5,
+      "column": 5
+    },
+    {
+      "term": "AMV",
+      "atlas": 3,
+      "row": 5,
+      "column": 6
+    },
+    {
+      "term": "Cosplay",
+      "atlas": 3,
+      "row": 5,
+      "column": 7
+    },
+    {
+      "term": "Ship",
+      "atlas": 3,
+      "row": 5,
+      "column": 8
+    },
+    {
+      "term": "Spoiler",
+      "atlas": 3,
+      "row": 6,
+      "column": 1
+    },
+    {
+      "term": "Headcanon",
+      "atlas": 3,
+      "row": 6,
+      "column": 2
+    },
+    {
+      "term": "Retcon",
+      "atlas": 3,
+      "row": 6,
+      "column": 3
+    },
+    {
+      "term": "Hiatus",
+      "atlas": 3,
+      "row": 6,
+      "column": 4
+    },
+    {
+      "term": "Cour 1 / Cour 2",
+      "atlas": 3,
+      "row": 6,
+      "column": 5
+    },
+    {
+      "term": "Watch order",
+      "atlas": 3,
+      "row": 6,
+      "column": 6
+    },
+    {
+      "term": "Backlog",
+      "atlas": 3,
+      "row": 6,
+      "column": 7
+    },
+    {
+      "term": "Drop",
+      "atlas": 3,
+      "row": 6,
+      "column": 8
+    },
+    {
+      "term": "Rewatch",
+      "atlas": 3,
+      "row": 7,
+      "column": 1
+    }
+  ]
+}

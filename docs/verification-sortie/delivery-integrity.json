@@ -1,0 +1,17 @@
+{
+  "code_matches_canonical_test_snapshot": true,
+  "changed_after_canonical_tests": [
+    "docs/RELEASE-CHECKUP-2026-10-25.md"
+  ],
+  "new_after_canonical_tests": "Only consolidated evidence under docs/verification-sortie and source-manifest metadata",
+  "canonical_status": "passed",
+  "canonical_suites": 150,
+  "canonical_started_at": "2026-10-25T06:11:01.893Z",
+  "canonical_finished_at": "2026-10-25T06:16:43.755Z",
+  "baseline_files_retained": 677,
+  "baseline_archive_sha256": "494407e42c74a846cb9c8e8e36b3bf6182384664ab9450020dc95e657ba36b10",
+  "historical_migrations_unchanged": 11,
+  "dependency_manifest_and_lock_unchanged": true,
+  "native_windows_tested": false,
+  "production_mutated": false
+}

@@ -1,0 +1,88 @@
+{
+  "observed_date": "2026-10-25",
+  "timezone": "Europe/Paris",
+  "production_mutations": false,
+  "local_changes": [
+    "supabase/migrations/20261025060253_alm_beta82_delete_confirmation.sql",
+    "scripts/test-beta82-delete-confirmation.cjs"
+  ],
+  "confirmed_bug": {
+    "category": "own-account deletion confirmation NULL",
+    "severity": "medium",
+    "cross_account_access": false,
+    "local_fix_tested": true,
+    "production_fix_applied": false
+  },
+  "deployment": {
+    "site_version": "2.0.0-beta.76",
+    "edge_release_version": "2.0.0-beta.82",
+    "edge_revision": 23,
+    "edge_files_equal_to_local": 4,
+    "remote_migrations": 11,
+    "local_migrations_after_fix": 12,
+    "supabase_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003"
+  },
+  "access_control": {
+    "rls_public_tables": 6,
+    "rls_private_tables": 10,
+    "functions": 67,
+    "private_security_definer_functions": 40,
+    "anonymous_executable_alm_functions": 0,
+    "public_security_definer_alm_functions": 0,
+    "private_schema_exposed": false,
+    "public_client_direct_write_grants": false,
+    "constraints": 73,
+    "indexes": 30
+  },
+  "advisors": {
+    "security_warning": "leaked password protection disabled",
+    "security_info_private_rls_without_policies": 9,
+    "performance_info": "alm_session_devices_owner unused; retained"
+  },
+  "services": {
+    "supabase_plan": "Free",
+    "vercel_plan": "not observable through returned metadata",
+    "turnstile": {
+      "mode": "managed",
+      "domains": [
+        "127.0.0.1",
+        "localhost",
+        "animelocalmanager.com"
+      ]
+    },
+    "resend": {
+      "sending_domain": "mail.animelocalmanager.com",
+      "verified": true,
+      "sending_enabled": true,
+      "tracking_open": false,
+      "tracking_click": false,
+      "daily_used": 0,
+      "daily_limit": 100,
+      "monthly_used": 8,
+      "monthly_limit": 3000,
+      "api_requests_per_second": 10,
+      "historical_sent": 8,
+      "historical_delivered": 8,
+      "historical_bounced": 0,
+      "historical_complained": 0,
+      "historical_failed": 0
+    },
+    "dns": {
+      "spf_verified": true,
+      "dkim_verified": true,
+      "dmarc_sender_subdomain": "v=DMARC1; p=none;",
+      "dmarc_apex_present": false
+    }
+  },
+  "not_attested": [
+    "Supabase Auth CAPTCHA enabled",
+    "server password policy",
+    "current SMTP credentials / auth hook config",
+    "real signup and recovery email delivery",
+    "production restore",
+    "load capacity",
+    "Vercel and Cloudflare billing plan"
+  ],
+  "report": "api-review.md"
+}

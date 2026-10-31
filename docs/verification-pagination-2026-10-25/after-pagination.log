@@ -1,0 +1,33 @@
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm82-pagination-dIMgZA/collection.sqlite
+OK Library bottom Next returns to page top
+OK Library Last reaches the short final page at its top
+OK Library bottom Next works from the keyboard
+OK Library bottom Previous returns to the page top
+OK Watching paging reaches the page top
+OK Plan to Watch paging reaches the page top
+OK Grouped seasons are actually present
+OK Grouped-series pagination reaches the page top
+OK A normal repaint does not request the new page-navigation reset
+OK Memories Next returns above its filters
+OK Memories Last returns above its filters
+OK Memories First returns above its filters
+OK Catalogue waits for the next page then returns to the top
+OK Late catalogue response does not move a different view
+OK Ranking Next returns to the page top
+OK Ranking Last returns to the page top
+OK Dictionary bottom Next returns above its filters
+OK Dictionary Last returns above its filters
+OK Own shared library returns to the page top
+OK Friend library returns to the page top
+OK Common-anime list returns to the page top
+OK Quarantine bottom Next returns to the page top
+OK Quarantine Last returns to the page top
+OK Missing-information Next returns to the page top
+OK CSV desktop resets its reading containers, preserving the background
+OK CSV short window resets the workspace, preserving the background
+OK Mobile library bottom Next returns to the document top
+OK Mobile retains page width
+OK Account background alone is slightly transparent
+OK All notes and journals are preserved
+33 pagination browser checks passed.

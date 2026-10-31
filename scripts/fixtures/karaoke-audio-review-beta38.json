@@ -1,0 +1,489 @@
+{
+  "source": "alm-clip-complet-1080p.mp4",
+  "model": "Whisper medium, CPU int8, Japanese",
+  "changes": [
+    {
+      "id": "L01",
+      "ja": "幾千の世界が　画面の中に",
+      "previousStart": 13.7,
+      "previousEnd": 18.06,
+      "start": 13.7,
+      "end": 17.8,
+      "restored": false
+    },
+    {
+      "id": "L02",
+      "ja": "旅の途中で　忘れた名前",
+      "previousStart": 18.1,
+      "previousEnd": 22.66,
+      "start": 17.8,
+      "end": 22.22,
+      "restored": false
+    },
+    {
+      "id": "L03",
+      "ja": "季節はページのように重なって",
+      "previousStart": 22.7,
+      "previousEnd": 26.76,
+      "start": 22.22,
+      "end": 26.4,
+      "restored": false
+    },
+    {
+      "id": "R01",
+      "ja": "「また明日」と　続きを待ってる",
+      "previousStart": null,
+      "previousEnd": null,
+      "start": 26.4,
+      "end": 30.88,
+      "restored": true
+    },
+    {
+      "id": "L04",
+      "ja": "静かな記憶の片隅で",
+      "previousStart": 26.8,
+      "previousEnd": 31.16,
+      "start": 30.88,
+      "end": 35.24,
+      "restored": false
+    },
+    {
+      "id": "R02",
+      "ja": "すべての冒険が　居場所を見つけ",
+      "previousStart": null,
+      "previousEnd": null,
+      "start": 35.24,
+      "end": 39.42,
+      "restored": true
+    },
+    {
+      "id": "L05",
+      "ja": "エピソードが　物語を紡ぎ",
+      "previousStart": 31.2,
+      "previousEnd": 35.5,
+      "start": 39.42,
+      "end": 43.92,
+      "restored": false
+    },
+    {
+      "id": "R03",
+      "ja": "時が過ぎても　その跡は消えない",
+      "previousStart": null,
+      "previousEnd": null,
+      "start": 43.92,
+      "end": 48.28,
+      "restored": true
+    },
+    {
+      "id": "L06",
+      "ja": "見てきたもの　これから見る夢",
+      "previousStart": 39.9,
+      "previousEnd": 42.96,
+      "start": 48.28,
+      "end": 52.54,
+      "restored": false
+    },
+    {
+      "id": "L07",
+      "ja": "すべてがここに　ひとつになる",
+      "previousStart": 43.0,
+      "previousEnd": 47.9,
+      "start": 52.54,
+      "end": 58.7,
+      "restored": false
+    },
+    {
+      "id": "L08",
+      "ja": "Anime Local Manager",
+      "previousStart": 53.1,
+      "previousEnd": 61.36,
+      "start": 61.08,
+      "end": 63.6,
+      "restored": false
+    },
+    {
+      "id": "L09",
+      "ja": "旅した世界を　そっと守って",
+      "previousStart": 61.4,
+      "previousEnd": 63.86,
+      "start": 63.6,
+      "end": 67.22,
+      "restored": false
+    },
+    {
+      "id": "L10",
+      "ja": "出会いも　季節も　すべて",
+      "previousStart": 63.9,
+      "previousEnd": 67.26,
+      "start": 67.22,
+      "end": 70.1,
+      "restored": false
+    },
+    {
+      "id": "L11",
+      "ja": "千の面影　僕のコレクション",
+      "previousStart": 67.3,
+      "previousEnd": 70.16,
+      "start": 70.1,
+      "end": 74.4,
+      "restored": false
+    },
+    {
+      "id": "L12",
+      "ja": "Anime Local Manager",
+      "previousStart": 70.2,
+      "previousEnd": 74.46,
+      "start": 74.4,
+      "end": 75.98,
+      "restored": false
+    },
+    {
+      "id": "L13",
+      "ja": "移ろう世界の中にいても",
+      "previousStart": 74.5,
+      "previousEnd": 76.16,
+      "start": 75.98,
+      "end": 78.74,
+      "restored": false
+    },
+    {
+      "id": "L14",
+      "ja": "この思い出は　僕とともに",
+      "previousStart": 76.2,
+      "previousEnd": 78.86,
+      "start": 78.74,
+      "end": 83.04,
+      "restored": false
+    },
+    {
+      "id": "L15",
+      "ja": "いつでもここに　寄り添ってる",
+      "previousStart": 78.9,
+      "previousEnd": 83.1,
+      "start": 83.04,
+      "end": 88.74,
+      "restored": false
+    },
+    {
+      "id": "L16",
+      "ja": "新しい季節が　幕を開け",
+      "previousStart": 87.7,
+      "previousEnd": 92.26,
+      "start": 91.34,
+      "end": 95.02,
+      "restored": false
+    },
+    {
+      "id": "L17",
+      "ja": "新たな知らせが　胸を鳴らす",
+      "previousStart": 92.3,
+      "previousEnd": 96.26,
+      "start": 95.92,
+      "end": 100.08,
+      "restored": false
+    },
+    {
+      "id": "L18",
+      "ja": "恋と冒険　星々の彼方",
+      "previousStart": 96.3,
+      "previousEnd": 100.26,
+      "start": 100.08,
+      "end": 104.24,
+      "restored": false
+    },
+    {
+      "id": "L19",
+      "ja": "また別の世界が　僕を呼んでる",
+      "previousStart": 100.3,
+      "previousEnd": 103.76,
+      "start": 104.24,
+      "end": 108.32,
+      "restored": false
+    },
+    {
+      "id": "L20",
+      "ja": "おすすめが　心を映し",
+      "previousStart": 103.8,
+      "previousEnd": 109.16,
+      "start": 108.74,
+      "end": 112.98,
+      "restored": false
+    },
+    {
+      "id": "L21",
+      "ja": "プロフィールに　情熱が浮かぶ",
+      "previousStart": 109.2,
+      "previousEnd": 113.16,
+      "start": 112.98,
+      "end": 117.18,
+      "restored": false
+    },
+    {
+      "id": "L22",
+      "ja": "集まったすべてのヒーローが",
+      "previousStart": 113.2,
+      "previousEnd": 117.56,
+      "start": 117.18,
+      "end": 121.34,
+      "restored": false
+    },
+    {
+      "id": "L23",
+      "ja": "想像の地図を　描いてゆく",
+      "previousStart": 117.6,
+      "previousEnd": 121.8,
+      "start": 121.96,
+      "end": 125.78,
+      "restored": false
+    },
+    {
+      "id": "L24",
+      "ja": "愛した世界　もう一度めぐる夢",
+      "previousStart": 126.1,
+      "previousEnd": 130.56,
+      "start": 125.78,
+      "end": 129.96,
+      "restored": false
+    },
+    {
+      "id": "L25",
+      "ja": "すべてがここに　ひとつになる",
+      "previousStart": 130.6,
+      "previousEnd": 139.3,
+      "start": 130.52,
+      "end": 135.74,
+      "restored": false
+    },
+    {
+      "id": "L26",
+      "ja": "笑顔をくれた　あの物語",
+      "previousStart": 143.1,
+      "previousEnd": 147.26,
+      "start": 138.06,
+      "end": 142.68,
+      "restored": false
+    },
+    {
+      "id": "L27",
+      "ja": "成長する意味を　教えた物語",
+      "previousStart": 147.3,
+      "previousEnd": 151.46,
+      "start": 142.68,
+      "end": 147.14,
+      "restored": false
+    },
+    {
+      "id": "L28",
+      "ja": "心に残った　あの主題歌",
+      "previousStart": 151.5,
+      "previousEnd": 156.06,
+      "start": 147.14,
+      "end": 150.86,
+      "restored": false
+    },
+    {
+      "id": "L29",
+      "ja": "忘れられない　別れの言葉",
+      "previousStart": 156.1,
+      "previousEnd": 160.36,
+      "start": 151.38,
+      "end": 155.78,
+      "restored": false
+    },
+    {
+      "id": "L30",
+      "ja": "いくつもの時を越えても残る",
+      "previousStart": 160.4,
+      "previousEnd": 163.46,
+      "start": 155.78,
+      "end": 160.06,
+      "restored": false
+    },
+    {
+      "id": "L31",
+      "ja": "ひとつの名前　ひとつの色",
+      "previousStart": 163.5,
+      "previousEnd": 168.66,
+      "start": 160.06,
+      "end": 163.78,
+      "restored": false
+    },
+    {
+      "id": "R04",
+      "ja": "これはただの　コレクションじゃない",
+      "previousStart": null,
+      "previousEnd": null,
+      "start": 164.56,
+      "end": 168.36,
+      "restored": true
+    },
+    {
+      "id": "L32",
+      "ja": "僕らの心を映す　かけら",
+      "previousStart": 168.7,
+      "previousEnd": 172.2,
+      "start": 168.36,
+      "end": 173.94,
+      "restored": false
+    },
+    {
+      "id": "L33",
+      "ja": "Anime Local Manager",
+      "previousStart": 175.3,
+      "previousEnd": 177.46,
+      "start": 174.7,
+      "end": 177.24,
+      "restored": false
+    },
+    {
+      "id": "L34",
+      "ja": "旅した世界を　今も輝かせ",
+      "previousStart": 177.5,
+      "previousEnd": 181.56,
+      "start": 177.24,
+      "end": 181.38,
+      "restored": false
+    },
+    {
+      "id": "L35",
+      "ja": "すべての話　すべての季節が",
+      "previousStart": 181.6,
+      "previousEnd": 185.86,
+      "start": 181.38,
+      "end": 185.68,
+      "restored": false
+    },
+    {
+      "id": "R05",
+      "ja": "僕のコレクションに　帰ってくる",
+      "previousStart": null,
+      "previousEnd": null,
+      "start": 185.68,
+      "end": 189.92,
+      "restored": true
+    },
+    {
+      "id": "L36",
+      "ja": "Anime Local Manager",
+      "previousStart": 185.9,
+      "previousEnd": 190.16,
+      "start": 189.92,
+      "end": 192.1,
+      "restored": false
+    },
+    {
+      "id": "L37",
+      "ja": "僕の図書館　物語の居場所",
+      "previousStart": 190.2,
+      "previousEnd": 192.16,
+      "start": 192.1,
+      "end": 196.18,
+      "restored": false
+    },
+    {
+      "id": "L38",
+      "ja": "物語は　僕らとともに",
+      "previousStart": 192.2,
+      "previousEnd": 196.56,
+      "start": 196.18,
+      "end": 200.58,
+      "restored": false
+    },
+    {
+      "id": "L39",
+      "ja": "この世界に　息づいてゆく",
+      "previousStart": 196.6,
+      "previousEnd": 200.7,
+      "start": 200.58,
+      "end": 204.78,
+      "restored": false
+    },
+    {
+      "id": "L40",
+      "ja": "物語は　まだ続く……",
+      "previousStart": 205.3,
+      "previousEnd": 209.66,
+      "start": 204.78,
+      "end": 209.14,
+      "restored": false
+    },
+    {
+      "id": "L41",
+      "ja": "まだ見ぬ世界へ……",
+      "previousStart": 209.7,
+      "previousEnd": 213.96,
+      "start": 209.14,
+      "end": 213.66,
+      "restored": false
+    },
+    {
+      "id": "L42",
+      "ja": "ひとつずつ　胸に残して……",
+      "previousStart": 214.0,
+      "previousEnd": 218.46,
+      "start": 213.66,
+      "end": 217.94,
+      "restored": false
+    },
+    {
+      "id": "L43",
+      "ja": "消えないように……",
+      "previousStart": 218.5,
+      "previousEnd": 222.96,
+      "start": 217.94,
+      "end": 220.86,
+      "restored": false
+    }
+  ],
+  "restoredLines": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05"
+  ],
+  "omittedIntroRecognition": {
+    "start": 5.440000000000004,
+    "end": 8.88,
+    "text": "《旅の途中》",
+    "words": [
+      {
+        "start": 5.440000000000004,
+        "end": 6.28,
+        "text": "《",
+        "probability": 0.007792752236127853
+      },
+      {
+        "start": 6.28,
+        "end": 7.06,
+        "text": "旅",
+        "probability": 0.4985132231377065
+      },
+      {
+        "start": 7.06,
+        "end": 7.06,
+        "text": "の",
+        "probability": 0.4771266579627991
+      },
+      {
+        "start": 7.06,
+        "end": 7.06,
+        "text": "途",
+        "probability": 0.759974867105484
+      },
+      {
+        "start": 7.06,
+        "end": 8.7,
+        "text": "中",
+        "probability": 0.9967929720878601
+      },
+      {
+        "start": 8.7,
+        "end": 8.88,
+        "text": "》",
+        "probability": 0.39630642533302307
+      }
+    ]
+  },
+  "limitations": "Recognition is evidence for missing lines and line placement, not a guarantee of exact phonetic timing. Low-confidence spellings retain the supplied lyrics. The instrumental-intro recognition is discarded."
+}

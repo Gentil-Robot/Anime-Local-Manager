@@ -1,0 +1,2215 @@
+{
+  "schemaVersion": 2,
+  "title": "物語が息づく場所",
+  "subtitle": "Threads of Stories",
+  "artist": "Anime Local Manager",
+  "duration": 210.0,
+  "audio": "/assets/threads-of-stories.wav",
+  "globalOffsetMs": 0,
+  "timingSource": "Supplied WAV: structural segmentation + center-channel voice-band minima + spectral-onset snapping",
+  "timingNote": "Timings are derived from the supplied 3:30 WAV recording. A user sync trim of ±50 ms steps is available for device/output-latency differences; detailed development calibration remains available with ?karaokeDev=1.",
+  "sections": [
+    {
+      "id": "verse1",
+      "type": "verse",
+      "labelJa": "第1番",
+      "labelFr": "Couplet 1",
+      "lines": [
+        {
+          "ja": "幾千の世界が　画面の中に",
+          "fr": "Des milliers de mondes vivent au cœur de l’écran",
+          "start": 17.31,
+          "end": 21.42,
+          "jaUnits": [
+            {
+              "text": "幾千の",
+              "start": 17.31,
+              "end": 18.55
+            },
+            {
+              "text": "世界が　",
+              "start": 18.55,
+              "end": 19.64
+            },
+            {
+              "text": "画面の",
+              "start": 19.64,
+              "end": 20.73
+            },
+            {
+              "text": "中に",
+              "start": 20.73,
+              "end": 21.42
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Des milliers de",
+              "start": 17.31,
+              "end": 18.55
+            },
+            {
+              "text": "mondes vivent",
+              "start": 18.55,
+              "end": 19.64
+            },
+            {
+              "text": "au cœur de",
+              "start": 19.64,
+              "end": 20.73
+            },
+            {
+              "text": "l’écran",
+              "start": 20.73,
+              "end": 21.42
+            }
+          ]
+        },
+        {
+          "ja": "旅の途中で　忘れた名前",
+          "fr": "Des noms oubliés au fil de mes voyages",
+          "start": 21.95,
+          "end": 23.88,
+          "jaUnits": [
+            {
+              "text": "旅の",
+              "start": 21.95,
+              "end": 22.36
+            },
+            {
+              "text": "途中で　",
+              "start": 22.36,
+              "end": 22.915
+            },
+            {
+              "text": "忘れた",
+              "start": 22.915,
+              "end": 23.32
+            },
+            {
+              "text": "名前",
+              "start": 23.32,
+              "end": 23.88
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Des noms",
+              "start": 21.95,
+              "end": 22.36
+            },
+            {
+              "text": "oubliés",
+              "start": 22.36,
+              "end": 22.84
+            },
+            {
+              "text": "au fil de",
+              "start": 22.84,
+              "end": 23.32
+            },
+            {
+              "text": "mes voyages",
+              "start": 23.32,
+              "end": 23.88
+            }
+          ]
+        },
+        {
+          "ja": "季節はページのように散らばって",
+          "fr": "Les saisons s’éparpillent comme les pages d’un livre",
+          "start": 23.88,
+          "end": 27.28,
+          "jaUnits": [
+            {
+              "text": "季節は",
+              "start": 23.88,
+              "end": 24.53
+            },
+            {
+              "text": "ページのように",
+              "start": 24.53,
+              "end": 26.18
+            },
+            {
+              "text": "散らばって",
+              "start": 26.18,
+              "end": 27.28
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les saisons",
+              "start": 23.88,
+              "end": 24.53
+            },
+            {
+              "text": "s’éparpillent comme",
+              "start": 24.53,
+              "end": 25.86
+            },
+            {
+              "text": "les pages d’un livre",
+              "start": 25.86,
+              "end": 27.28
+            }
+          ]
+        },
+        {
+          "ja": "「また明日」と　続きを待ってる",
+          "fr": "« À demain » murmurent-elles en attendant la suite",
+          "start": 27.45,
+          "end": 30.02,
+          "jaUnits": [
+            {
+              "text": "「また明日」と　",
+              "start": 27.45,
+              "end": 28.62
+            },
+            {
+              "text": "続きを",
+              "start": 28.62,
+              "end": 29.18
+            },
+            {
+              "text": "待ってる",
+              "start": 29.18,
+              "end": 30.02
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "« À demain »",
+              "start": 27.45,
+              "end": 28.09
+            },
+            {
+              "text": "murmurent-elles",
+              "start": 28.09,
+              "end": 28.92
+            },
+            {
+              "text": "en attendant la suite",
+              "start": 28.92,
+              "end": 30.02
+            }
+          ]
+        },
+        {
+          "ja": "静かな記憶の片隅で",
+          "fr": "Dans un coin tranquille de ma mémoire",
+          "start": 30.23,
+          "end": 34.32,
+          "jaUnits": [
+            {
+              "text": "静かな",
+              "start": 30.23,
+              "end": 31.64
+            },
+            {
+              "text": "記憶の",
+              "start": 31.64,
+              "end": 32.73
+            },
+            {
+              "text": "片隅で",
+              "start": 32.73,
+              "end": 34.32
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Dans un coin",
+              "start": 30.23,
+              "end": 31.5
+            },
+            {
+              "text": "tranquille",
+              "start": 31.5,
+              "end": 32.73
+            },
+            {
+              "text": "de ma mémoire",
+              "start": 32.73,
+              "end": 34.32
+            }
+          ]
+        },
+        {
+          "ja": "すべての冒険が　居場所を見つけ",
+          "fr": "Chaque aventure finit par trouver sa place",
+          "start": 35.15,
+          "end": 38.5,
+          "jaUnits": [
+            {
+              "text": "すべての",
+              "start": 35.15,
+              "end": 35.95
+            },
+            {
+              "text": "冒険が　",
+              "start": 35.95,
+              "end": 36.82
+            },
+            {
+              "text": "居場所を",
+              "start": 36.82,
+              "end": 37.64
+            },
+            {
+              "text": "見つけ",
+              "start": 37.64,
+              "end": 38.5
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Chaque aventure",
+              "start": 35.15,
+              "end": 36.41
+            },
+            {
+              "text": "finit par",
+              "start": 36.41,
+              "end": 37.33
+            },
+            {
+              "text": "trouver",
+              "start": 37.33,
+              "end": 37.64
+            },
+            {
+              "text": "sa place",
+              "start": 37.64,
+              "end": 38.5
+            }
+          ]
+        },
+        {
+          "ja": "エピソードが物語を紡ぎ",
+          "fr": "Les épisodes tissent peu à peu leur histoire",
+          "start": 39.49,
+          "end": 42.78,
+          "jaUnits": [
+            {
+              "text": "エピソードが",
+              "start": 39.49,
+              "end": 41.17
+            },
+            {
+              "text": "物語を",
+              "start": 41.17,
+              "end": 42.2
+            },
+            {
+              "text": "紡ぎ",
+              "start": 42.2,
+              "end": 42.78
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les épisodes",
+              "start": 39.49,
+              "end": 40.55
+            },
+            {
+              "text": "tissent peu à peu",
+              "start": 40.55,
+              "end": 41.98
+            },
+            {
+              "text": "leur histoire",
+              "start": 41.98,
+              "end": 42.78
+            }
+          ]
+        },
+        {
+          "ja": "時さえも　その跡を消せはしない",
+          "fr": "Même le temps ne pourra effacer leurs traces",
+          "start": 43.69,
+          "end": 46.0,
+          "jaUnits": [
+            {
+              "text": "時さえも　",
+              "start": 43.69,
+              "end": 44.18
+            },
+            {
+              "text": "その跡を",
+              "start": 44.18,
+              "end": 45.0
+            },
+            {
+              "text": "消せはしない",
+              "start": 45.0,
+              "end": 46.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Même le temps",
+              "start": 43.69,
+              "end": 44.18
+            },
+            {
+              "text": "ne pourra",
+              "start": 44.18,
+              "end": 45.0
+            },
+            {
+              "text": "effacer leurs traces",
+              "start": 45.0,
+              "end": 46.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pre1",
+      "type": "prechorus",
+      "labelJa": "プレコーラス",
+      "labelFr": "Pré-refrain",
+      "lines": [
+        {
+          "ja": "見てきたもの　これから見る夢",
+          "fr": "Tout ce que j’ai vu tous les rêves qui m’attendent",
+          "start": 46.11,
+          "end": 49.86,
+          "jaUnits": [
+            {
+              "text": "見てきたもの　",
+              "start": 46.11,
+              "end": 47.73
+            },
+            {
+              "text": "これから見る",
+              "start": 47.73,
+              "end": 49.64
+            },
+            {
+              "text": "夢",
+              "start": 49.64,
+              "end": 49.86
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tout ce que j’ai vu",
+              "start": 46.11,
+              "end": 47.59
+            },
+            {
+              "text": "tous les rêves",
+              "start": 47.59,
+              "end": 48.54
+            },
+            {
+              "text": "qui m’attendent",
+              "start": 48.54,
+              "end": 49.86
+            }
+          ]
+        },
+        {
+          "ja": "すべてがここに　ひとつになる",
+          "fr": "Ici, tout se rassemble pour ne faire qu’un",
+          "start": 50.37,
+          "end": 55.5,
+          "jaUnits": [
+            {
+              "text": "すべてがここに　",
+              "start": 50.37,
+              "end": 53.1
+            },
+            {
+              "text": "ひとつに",
+              "start": 53.1,
+              "end": 54.82
+            },
+            {
+              "text": "なる",
+              "start": 54.82,
+              "end": 55.5
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ici, tout",
+              "start": 50.37,
+              "end": 51.55
+            },
+            {
+              "text": "se rassemble",
+              "start": 51.55,
+              "end": 53.1
+            },
+            {
+              "text": "pour ne faire qu’un",
+              "start": 53.1,
+              "end": 55.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chorus1",
+      "type": "chorus",
+      "labelJa": "サビ",
+      "labelFr": "Refrain",
+      "lines": [
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 55.5,
+          "end": 58.84,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 55.5,
+              "end": 56.45
+            },
+            {
+              "text": "Local ",
+              "start": 56.45,
+              "end": 57.54
+            },
+            {
+              "text": "Manager",
+              "start": 57.54,
+              "end": 58.84
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 55.5,
+              "end": 56.45
+            },
+            {
+              "text": "Local",
+              "start": 56.45,
+              "end": 57.54
+            },
+            {
+              "text": "Manager",
+              "start": 57.54,
+              "end": 58.84
+            }
+          ]
+        },
+        {
+          "ja": "旅した世界を　そっと守って",
+          "fr": "Garde précieusement les mondes que j’ai parcourus",
+          "start": 61.23,
+          "end": 63.38,
+          "jaUnits": [
+            {
+              "text": "旅した世界を　",
+              "start": 61.23,
+              "end": 62.18
+            },
+            {
+              "text": "そっと",
+              "start": 62.18,
+              "end": 62.72
+            },
+            {
+              "text": "守って",
+              "start": 62.72,
+              "end": 63.38
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Garde précieusement",
+              "start": 61.23,
+              "end": 62.18
+            },
+            {
+              "text": "les mondes",
+              "start": 62.18,
+              "end": 62.45
+            },
+            {
+              "text": "que j’ai parcourus",
+              "start": 62.45,
+              "end": 63.38
+            }
+          ]
+        },
+        {
+          "ja": "出会いも　季節も　すべて",
+          "fr": "Les rencontres les saisons chacun de ces instants",
+          "start": 63.47,
+          "end": 68.22,
+          "jaUnits": [
+            {
+              "text": "出会いも　",
+              "start": 63.47,
+              "end": 65.32
+            },
+            {
+              "text": "季節も　",
+              "start": 65.32,
+              "end": 66.82
+            },
+            {
+              "text": "すべて",
+              "start": 66.82,
+              "end": 68.22
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les rencontres",
+              "start": 63.47,
+              "end": 64.89
+            },
+            {
+              "text": "les saisons",
+              "start": 64.89,
+              "end": 65.99
+            },
+            {
+              "text": "chacun de ces instants",
+              "start": 65.99,
+              "end": 68.22
+            }
+          ]
+        },
+        {
+          "ja": "千の面影　僕のコレクション",
+          "fr": "Mille souvenirs composent ma collection",
+          "start": 68.55,
+          "end": 72.08,
+          "jaUnits": [
+            {
+              "text": "千の面影　",
+              "start": 68.55,
+              "end": 69.68
+            },
+            {
+              "text": "僕の",
+              "start": 69.68,
+              "end": 70.36
+            },
+            {
+              "text": "コレクション",
+              "start": 70.36,
+              "end": 72.08
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Mille souvenirs",
+              "start": 68.55,
+              "end": 69.82
+            },
+            {
+              "text": "composent",
+              "start": 69.82,
+              "end": 70.9
+            },
+            {
+              "text": "ma collection",
+              "start": 70.9,
+              "end": 72.08
+            }
+          ]
+        },
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 72.21,
+          "end": 76.54,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 72.21,
+              "end": 73.5
+            },
+            {
+              "text": "Local ",
+              "start": 73.5,
+              "end": 74.59
+            },
+            {
+              "text": "Manager",
+              "start": 74.59,
+              "end": 76.54
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 72.21,
+              "end": 73.5
+            },
+            {
+              "text": "Local",
+              "start": 73.5,
+              "end": 74.59
+            },
+            {
+              "text": "Manager",
+              "start": 74.59,
+              "end": 76.54
+            }
+          ]
+        },
+        {
+          "ja": "移ろう世界の中にいても",
+          "fr": "Même au cœur d’un monde qui ne cesse de changer",
+          "start": 76.79,
+          "end": 80.7,
+          "jaUnits": [
+            {
+              "text": "移ろう世界の中に",
+              "start": 76.79,
+              "end": 79.63
+            },
+            {
+              "text": "いても",
+              "start": 79.63,
+              "end": 80.7
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Même au cœur d’un monde",
+              "start": 76.79,
+              "end": 78.94
+            },
+            {
+              "text": "qui ne cesse de changer",
+              "start": 78.94,
+              "end": 80.7
+            }
+          ]
+        },
+        {
+          "ja": "この思い出は　僕とともに",
+          "fr": "Ces souvenirs continuent leur route avec moi",
+          "start": 80.89,
+          "end": 85.0,
+          "jaUnits": [
+            {
+              "text": "この思い出は　",
+              "start": 80.89,
+              "end": 83.31
+            },
+            {
+              "text": "僕と",
+              "start": 83.31,
+              "end": 84.0
+            },
+            {
+              "text": "ともに",
+              "start": 84.0,
+              "end": 85.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ces souvenirs",
+              "start": 80.89,
+              "end": 82.22
+            },
+            {
+              "text": "continuent leur route",
+              "start": 82.22,
+              "end": 84.39
+            },
+            {
+              "text": "avec moi",
+              "start": 84.39,
+              "end": 85.0
+            }
+          ]
+        },
+        {
+          "ja": "いつでもここに　寄り添ってる",
+          "fr": "Toujours ici tout près de moi",
+          "start": 85.23,
+          "end": 88.58,
+          "jaUnits": [
+            {
+              "text": "いつでもここに　",
+              "start": 85.23,
+              "end": 87.13
+            },
+            {
+              "text": "寄り添ってる",
+              "start": 87.13,
+              "end": 88.58
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Toujours ici",
+              "start": 85.23,
+              "end": 86.72
+            },
+            {
+              "text": "tout près de moi",
+              "start": 86.72,
+              "end": 88.58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verse2",
+      "type": "verse",
+      "labelJa": "第2番",
+      "labelFr": "Couplet 2",
+      "lines": [
+        {
+          "ja": "新しい季節が　幕を開け",
+          "fr": "Une nouvelle saison lève le rideau",
+          "start": 89.27,
+          "end": 90.4,
+          "jaUnits": [
+            {
+              "text": "新しい季節が　",
+              "start": 89.27,
+              "end": 89.73
+            },
+            {
+              "text": "幕を",
+              "start": 89.73,
+              "end": 90.26
+            },
+            {
+              "text": "開け",
+              "start": 90.26,
+              "end": 90.4
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Une nouvelle saison",
+              "start": 89.27,
+              "end": 89.73
+            },
+            {
+              "text": "lève",
+              "start": 89.73,
+              "end": 90.26
+            },
+            {
+              "text": "le rideau",
+              "start": 90.26,
+              "end": 90.4
+            }
+          ]
+        },
+        {
+          "ja": "ひとつの知らせが　夜を駆ける",
+          "fr": "Une nouvelle traverse la nuit à toute vitesse",
+          "start": 91.69,
+          "end": 95.16,
+          "jaUnits": [
+            {
+              "text": "ひとつの知らせが　",
+              "start": 91.69,
+              "end": 93.82
+            },
+            {
+              "text": "夜を",
+              "start": 93.82,
+              "end": 94.36
+            },
+            {
+              "text": "駆ける",
+              "start": 94.36,
+              "end": 95.16
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Une nouvelle",
+              "start": 91.69,
+              "end": 92.69
+            },
+            {
+              "text": "traverse la nuit",
+              "start": 92.69,
+              "end": 93.99
+            },
+            {
+              "text": "à toute vitesse",
+              "start": 93.99,
+              "end": 95.16
+            }
+          ]
+        },
+        {
+          "ja": "恋と冒険　星々の彼方",
+          "fr": "Amour et aventure au-delà des étoiles",
+          "start": 95.95,
+          "end": 97.66,
+          "jaUnits": [
+            {
+              "text": "恋と冒険　",
+              "start": 95.95,
+              "end": 96.54
+            },
+            {
+              "text": "星々の",
+              "start": 96.54,
+              "end": 97.36
+            },
+            {
+              "text": "彼方",
+              "start": 97.36,
+              "end": 97.66
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Amour et aventure",
+              "start": 95.95,
+              "end": 96.54
+            },
+            {
+              "text": "au-delà",
+              "start": 96.54,
+              "end": 97.09
+            },
+            {
+              "text": "des étoiles",
+              "start": 97.09,
+              "end": 97.66
+            }
+          ]
+        },
+        {
+          "ja": "また別の世界が　僕を呼んでる",
+          "fr": "Un autre monde m’appelle encore",
+          "start": 97.87,
+          "end": 99.9,
+          "jaUnits": [
+            {
+              "text": "また別の世界が　",
+              "start": 97.87,
+              "end": 99.0
+            },
+            {
+              "text": "僕を",
+              "start": 99.0,
+              "end": 99.28
+            },
+            {
+              "text": "呼んでる",
+              "start": 99.28,
+              "end": 99.9
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Un autre monde",
+              "start": 97.87,
+              "end": 98.73
+            },
+            {
+              "text": "m’appelle",
+              "start": 98.73,
+              "end": 99.28
+            },
+            {
+              "text": "encore",
+              "start": 99.28,
+              "end": 99.9
+            }
+          ]
+        },
+        {
+          "ja": "おすすめは　心を映し",
+          "fr": "Les recommandations reflètent ce qui me touche",
+          "start": 100.51,
+          "end": 104.34,
+          "jaUnits": [
+            {
+              "text": "おすすめは　",
+              "start": 100.51,
+              "end": 102.56
+            },
+            {
+              "text": "心を",
+              "start": 102.56,
+              "end": 103.37
+            },
+            {
+              "text": "映し",
+              "start": 103.37,
+              "end": 104.34
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les recommandations",
+              "start": 100.51,
+              "end": 102.28
+            },
+            {
+              "text": "reflètent",
+              "start": 102.28,
+              "end": 103.09
+            },
+            {
+              "text": "ce qui me touche",
+              "start": 103.09,
+              "end": 104.34
+            }
+          ]
+        },
+        {
+          "ja": "プロフィールに　情熱が浮かぶ",
+          "fr": "Et mon profil révèle toutes mes passions",
+          "start": 104.67,
+          "end": 106.62,
+          "jaUnits": [
+            {
+              "text": "プロフィールに　",
+              "start": 104.67,
+              "end": 105.72
+            },
+            {
+              "text": "情熱が",
+              "start": 105.72,
+              "end": 106.17
+            },
+            {
+              "text": "浮かぶ",
+              "start": 106.17,
+              "end": 106.62
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Et mon profil",
+              "start": 104.67,
+              "end": 105.282
+            },
+            {
+              "text": "révèle",
+              "start": 105.282,
+              "end": 105.675
+            },
+            {
+              "text": "toutes mes passions",
+              "start": 105.675,
+              "end": 106.62
+            }
+          ]
+        },
+        {
+          "ja": "集まったすべてのヒーローが",
+          "fr": "Tous les héros réunis dans ma bibliothèque",
+          "start": 106.79,
+          "end": 108.58,
+          "jaUnits": [
+            {
+              "text": "集まった",
+              "start": 106.79,
+              "end": 107.3
+            },
+            {
+              "text": "すべてのヒーローが",
+              "start": 107.3,
+              "end": 108.58
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tous les héros",
+              "start": 106.79,
+              "end": 107.45
+            },
+            {
+              "text": "réunis dans ma bibliothèque",
+              "start": 107.45,
+              "end": 108.58
+            }
+          ]
+        },
+        {
+          "ja": "想像の地図を　描いてゆく",
+          "fr": "Dessinent peu à peu la carte de mon imaginaire",
+          "start": 109.27,
+          "end": 112.84,
+          "jaUnits": [
+            {
+              "text": "想像の地図を　",
+              "start": 109.27,
+              "end": 111.27
+            },
+            {
+              "text": "描いて",
+              "start": 111.27,
+              "end": 112.26
+            },
+            {
+              "text": "ゆく",
+              "start": 112.26,
+              "end": 112.84
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Dessinent peu à peu",
+              "start": 109.27,
+              "end": 110.86
+            },
+            {
+              "text": "la carte",
+              "start": 110.86,
+              "end": 111.54
+            },
+            {
+              "text": "de mon imaginaire",
+              "start": 111.54,
+              "end": 112.84
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pre2",
+      "type": "prechorus",
+      "labelJa": "プレコーラス",
+      "labelFr": "Pré-refrain",
+      "lines": [
+        {
+          "ja": "愛したもの　もう一度見たい夢",
+          "fr": "Ce que j’ai aimé les rêves que je veux revoir",
+          "start": 113.11,
+          "end": 116.92,
+          "jaUnits": [
+            {
+              "text": "愛したもの　",
+              "start": 113.11,
+              "end": 114.45
+            },
+            {
+              "text": "もう一度見たい",
+              "start": 114.45,
+              "end": 116.72
+            },
+            {
+              "text": "夢",
+              "start": 116.72,
+              "end": 116.92
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce que j’ai aimé",
+              "start": 113.11,
+              "end": 114.45
+            },
+            {
+              "text": "les rêves",
+              "start": 114.45,
+              "end": 115.34
+            },
+            {
+              "text": "que je veux revoir",
+              "start": 115.34,
+              "end": 116.92
+            }
+          ]
+        },
+        {
+          "ja": "すべてがここに　ひとつになる",
+          "fr": "Ici, tout se rassemble pour ne faire qu’un",
+          "start": 118.01,
+          "end": 122.0,
+          "jaUnits": [
+            {
+              "text": "すべてがここに　",
+              "start": 118.01,
+              "end": 120.25
+            },
+            {
+              "text": "ひとつに",
+              "start": 120.25,
+              "end": 121.35
+            },
+            {
+              "text": "なる",
+              "start": 121.35,
+              "end": 122.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ici, tout",
+              "start": 118.01,
+              "end": 118.91
+            },
+            {
+              "text": "se rassemble",
+              "start": 118.91,
+              "end": 120.25
+            },
+            {
+              "text": "pour ne faire qu’un",
+              "start": 120.25,
+              "end": 122.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chorus2",
+      "type": "chorus",
+      "labelJa": "サビ",
+      "labelFr": "Refrain",
+      "lines": [
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 122.0,
+          "end": 124.34,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 122.0,
+              "end": 122.73
+            },
+            {
+              "text": "Local ",
+              "start": 122.73,
+              "end": 123.27
+            },
+            {
+              "text": "Manager",
+              "start": 123.27,
+              "end": 124.34
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 122.0,
+              "end": 122.73
+            },
+            {
+              "text": "Local",
+              "start": 122.73,
+              "end": 123.27
+            },
+            {
+              "text": "Manager",
+              "start": 123.27,
+              "end": 124.34
+            }
+          ]
+        },
+        {
+          "ja": "旅した世界を　そっと守って",
+          "fr": "Garde précieusement les mondes que j’ai parcourus",
+          "start": 124.55,
+          "end": 128.24,
+          "jaUnits": [
+            {
+              "text": "旅した世界を　",
+              "start": 124.55,
+              "end": 126.53
+            },
+            {
+              "text": "そっと",
+              "start": 126.53,
+              "end": 127.36
+            },
+            {
+              "text": "守って",
+              "start": 127.36,
+              "end": 128.24
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Garde précieusement",
+              "start": 124.55,
+              "end": 126.0
+            },
+            {
+              "text": "les mondes",
+              "start": 126.0,
+              "end": 126.95
+            },
+            {
+              "text": "que j’ai parcourus",
+              "start": 126.95,
+              "end": 128.24
+            }
+          ]
+        },
+        {
+          "ja": "出会いも　季節も　すべて",
+          "fr": "Les rencontres les saisons chacun de ces instants",
+          "start": 130.77,
+          "end": 133.1,
+          "jaUnits": [
+            {
+              "text": "出会いも　",
+              "start": 130.77,
+              "end": 131.72
+            },
+            {
+              "text": "季節も　",
+              "start": 131.72,
+              "end": 132.4
+            },
+            {
+              "text": "すべて",
+              "start": 132.4,
+              "end": 133.1
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Les rencontres",
+              "start": 130.77,
+              "end": 131.45
+            },
+            {
+              "text": "les saisons",
+              "start": 131.45,
+              "end": 131.91
+            },
+            {
+              "text": "chacun de ces instants",
+              "start": 131.91,
+              "end": 133.1
+            }
+          ]
+        },
+        {
+          "ja": "千の面影　僕のコレクション",
+          "fr": "Mille souvenirs composent ma collection",
+          "start": 133.25,
+          "end": 138.0,
+          "jaUnits": [
+            {
+              "text": "千の面影　",
+              "start": 133.25,
+              "end": 134.73
+            },
+            {
+              "text": "僕の",
+              "start": 134.73,
+              "end": 135.8
+            },
+            {
+              "text": "コレクション",
+              "start": 135.8,
+              "end": 138.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Mille souvenirs",
+              "start": 133.25,
+              "end": 135.13
+            },
+            {
+              "text": "composent",
+              "start": 135.13,
+              "end": 136.35
+            },
+            {
+              "text": "ma collection",
+              "start": 136.35,
+              "end": 138.0
+            }
+          ]
+        },
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 138.0,
+          "end": 141.86,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 138.0,
+              "end": 139.09
+            },
+            {
+              "text": "Local ",
+              "start": 139.09,
+              "end": 140.18
+            },
+            {
+              "text": "Manager",
+              "start": 140.18,
+              "end": 141.86
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 138.0,
+              "end": 139.09
+            },
+            {
+              "text": "Local",
+              "start": 139.09,
+              "end": 140.18
+            },
+            {
+              "text": "Manager",
+              "start": 140.18,
+              "end": 141.86
+            }
+          ]
+        },
+        {
+          "ja": "移ろう世界の中にいても",
+          "fr": "Même au cœur d’un monde qui ne cesse de changer",
+          "start": 142.0,
+          "end": 146.04,
+          "jaUnits": [
+            {
+              "text": "移ろう世界の中に",
+              "start": 142.0,
+              "end": 144.938
+            },
+            {
+              "text": "いても",
+              "start": 144.938,
+              "end": 146.04
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Même au cœur d’un monde",
+              "start": 142.0,
+              "end": 143.98
+            },
+            {
+              "text": "qui ne cesse de changer",
+              "start": 143.98,
+              "end": 146.04
+            }
+          ]
+        },
+        {
+          "ja": "この思い出は　僕とともに",
+          "fr": "Ces souvenirs continuent leur route avec moi",
+          "start": 146.25,
+          "end": 150.0,
+          "jaUnits": [
+            {
+              "text": "この思い出は　",
+              "start": 146.25,
+              "end": 148.36
+            },
+            {
+              "text": "僕と",
+              "start": 148.36,
+              "end": 149.18
+            },
+            {
+              "text": "ともに",
+              "start": 149.18,
+              "end": 150.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ces souvenirs",
+              "start": 146.25,
+              "end": 147.27
+            },
+            {
+              "text": "continuent leur route",
+              "start": 147.27,
+              "end": 149.18
+            },
+            {
+              "text": "avec moi",
+              "start": 149.18,
+              "end": 150.0
+            }
+          ]
+        },
+        {
+          "ja": "いつでもここに　寄り添ってる",
+          "fr": "Toujours ici tout près de moi",
+          "start": 150.0,
+          "end": 154.0,
+          "jaUnits": [
+            {
+              "text": "いつでもここに　",
+              "start": 150.0,
+              "end": 152.16
+            },
+            {
+              "text": "寄り添ってる",
+              "start": 152.16,
+              "end": 154.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Toujours ici",
+              "start": 150.0,
+              "end": 151.63
+            },
+            {
+              "text": "tout près de moi",
+              "start": 151.63,
+              "end": 154.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "type": "bridge",
+      "labelJa": "ブリッジ ― 静かに",
+      "labelFr": "Pont — doucement",
+      "lines": [
+        {
+          "ja": "笑顔をくれた　あの物語",
+          "fr": "Cette histoire qui m’a donné le sourire",
+          "start": 154.0,
+          "end": 157.06,
+          "jaUnits": [
+            {
+              "text": "笑顔をくれた　",
+              "start": 154.0,
+              "end": 155.72
+            },
+            {
+              "text": "あの",
+              "start": 155.72,
+              "end": 156.54
+            },
+            {
+              "text": "物語",
+              "start": 156.54,
+              "end": 157.06
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Cette histoire",
+              "start": 154.0,
+              "end": 155.15
+            },
+            {
+              "text": "qui m’a donné",
+              "start": 155.15,
+              "end": 156.252
+            },
+            {
+              "text": "le sourire",
+              "start": 156.252,
+              "end": 157.06
+            }
+          ]
+        },
+        {
+          "ja": "成長する意味を　教えた物語",
+          "fr": "Celle qui m’a appris ce que grandir voulait dire",
+          "start": 157.43,
+          "end": 159.3,
+          "jaUnits": [
+            {
+              "text": "成長する意味を　",
+              "start": 157.43,
+              "end": 158.59
+            },
+            {
+              "text": "教えた",
+              "start": 158.59,
+              "end": 158.98
+            },
+            {
+              "text": "物語",
+              "start": 158.98,
+              "end": 159.3
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Celle qui m’a appris",
+              "start": 157.43,
+              "end": 158.17
+            },
+            {
+              "text": "ce que grandir",
+              "start": 158.17,
+              "end": 158.72
+            },
+            {
+              "text": "voulait dire",
+              "start": 158.72,
+              "end": 159.3
+            }
+          ]
+        },
+        {
+          "ja": "心に残った　あの主題歌",
+          "fr": "Ce générique resté gravé dans mon cœur",
+          "start": 159.75,
+          "end": 161.68,
+          "jaUnits": [
+            {
+              "text": "心に残った　",
+              "start": 159.75,
+              "end": 160.63
+            },
+            {
+              "text": "あの",
+              "start": 160.63,
+              "end": 161.18
+            },
+            {
+              "text": "主題歌",
+              "start": 161.18,
+              "end": 161.68
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce générique",
+              "start": 159.75,
+              "end": 160.35
+            },
+            {
+              "text": "resté gravé",
+              "start": 160.35,
+              "end": 160.9
+            },
+            {
+              "text": "dans mon cœur",
+              "start": 160.9,
+              "end": 161.68
+            }
+          ]
+        },
+        {
+          "ja": "忘れられない　別れの言葉",
+          "fr": "Ces mots d’adieu que je n’oublierai jamais",
+          "start": 161.68,
+          "end": 163.22,
+          "jaUnits": [
+            {
+              "text": "忘れられない　",
+              "start": 161.68,
+              "end": 162.54
+            },
+            {
+              "text": "別れの",
+              "start": 162.54,
+              "end": 162.95
+            },
+            {
+              "text": "言葉",
+              "start": 162.95,
+              "end": 163.22
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ces mots d’adieu",
+              "start": 161.68,
+              "end": 162.284
+            },
+            {
+              "text": "que je n’oublierai",
+              "start": 162.284,
+              "end": 162.95
+            },
+            {
+              "text": "jamais",
+              "start": 162.95,
+              "end": 163.22
+            }
+          ]
+        },
+        {
+          "ja": "いくつもの時を越えても残る",
+          "fr": "Ils demeurent malgré toutes les années traversées",
+          "start": 163.79,
+          "end": 166.82,
+          "jaUnits": [
+            {
+              "text": "いくつもの時を越えても",
+              "start": 163.79,
+              "end": 166.354
+            },
+            {
+              "text": "残る",
+              "start": 166.354,
+              "end": 166.82
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ils demeurent",
+              "start": 163.79,
+              "end": 164.68
+            },
+            {
+              "text": "malgré toutes les années traversées",
+              "start": 164.68,
+              "end": 166.82
+            }
+          ]
+        },
+        {
+          "ja": "ひとつの名前　ひとつの色",
+          "fr": "Un nom une couleur un éclat singulier",
+          "start": 166.82,
+          "end": 169.36,
+          "jaUnits": [
+            {
+              "text": "ひとつの名前　",
+              "start": 166.82,
+              "end": 168.22
+            },
+            {
+              "text": "ひとつの",
+              "start": 168.22,
+              "end": 169.08
+            },
+            {
+              "text": "色",
+              "start": 169.08,
+              "end": 169.36
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Un nom",
+              "start": 166.82,
+              "end": 167.45
+            },
+            {
+              "text": "une couleur",
+              "start": 167.45,
+              "end": 167.99
+            },
+            {
+              "text": "un éclat singulier",
+              "start": 167.99,
+              "end": 169.36
+            }
+          ]
+        },
+        {
+          "ja": "これはただの　コレクションじゃない",
+          "fr": "Ce n’est pas simplement une collection",
+          "start": 169.36,
+          "end": 171.9,
+          "jaUnits": [
+            {
+              "text": "これはただの　",
+              "start": 169.36,
+              "end": 170.18
+            },
+            {
+              "text": "コレクションじゃない",
+              "start": 170.18,
+              "end": 171.9
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce n’est pas",
+              "start": 169.36,
+              "end": 170.18
+            },
+            {
+              "text": "simplement une collection",
+              "start": 170.18,
+              "end": 171.9
+            }
+          ]
+        },
+        {
+          "ja": "僕らの心を映す　かけら",
+          "fr": "Ce sont des fragments qui reflètent nos cœurs",
+          "start": 172.03,
+          "end": 174.46,
+          "jaUnits": [
+            {
+              "text": "僕らの心を映す　",
+              "start": 172.03,
+              "end": 173.731
+            },
+            {
+              "text": "かけら",
+              "start": 173.731,
+              "end": 174.46
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ce sont des fragments",
+              "start": 172.03,
+              "end": 173.16
+            },
+            {
+              "text": "qui reflètent nos cœurs",
+              "start": 173.16,
+              "end": 174.46
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "type": "finalchorus",
+      "labelJa": "最後のサビ ― 壮大に",
+      "labelFr": "Refrain final — grandiose",
+      "lines": [
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 174.73,
+          "end": 176.8,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 174.73,
+              "end": 175.36
+            },
+            {
+              "text": "Local ",
+              "start": 175.36,
+              "end": 176.16
+            },
+            {
+              "text": "Manager",
+              "start": 176.16,
+              "end": 176.8
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 174.73,
+              "end": 175.36
+            },
+            {
+              "text": "Local",
+              "start": 175.36,
+              "end": 176.16
+            },
+            {
+              "text": "Manager",
+              "start": 176.16,
+              "end": 176.8
+            }
+          ]
+        },
+        {
+          "ja": "旅した世界を　今も輝かせ",
+          "fr": "Fais encore briller les mondes que j’ai parcourus",
+          "start": 176.89,
+          "end": 179.8,
+          "jaUnits": [
+            {
+              "text": "旅した世界を　",
+              "start": 176.89,
+              "end": 178.62
+            },
+            {
+              "text": "今も",
+              "start": 178.62,
+              "end": 178.9
+            },
+            {
+              "text": "輝かせ",
+              "start": 178.9,
+              "end": 179.8
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Fais encore briller",
+              "start": 176.89,
+              "end": 178.22
+            },
+            {
+              "text": "les mondes",
+              "start": 178.22,
+              "end": 178.62
+            },
+            {
+              "text": "que j’ai parcourus",
+              "start": 178.62,
+              "end": 179.8
+            }
+          ]
+        },
+        {
+          "ja": "すべての話　すべての季節が",
+          "fr": "Chaque histoire chaque saison sans exception",
+          "start": 179.98,
+          "end": 183.24,
+          "jaUnits": [
+            {
+              "text": "すべての話　",
+              "start": 179.98,
+              "end": 181.338
+            },
+            {
+              "text": "すべての",
+              "start": 181.338,
+              "end": 182.42
+            },
+            {
+              "text": "季節が",
+              "start": 182.42,
+              "end": 183.24
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Chaque histoire",
+              "start": 179.98,
+              "end": 181.08
+            },
+            {
+              "text": "chaque saison",
+              "start": 181.08,
+              "end": 182.153
+            },
+            {
+              "text": "sans exception",
+              "start": 182.153,
+              "end": 183.24
+            }
+          ]
+        },
+        {
+          "ja": "僕のコレクションに　帰ってくる",
+          "fr": "Revient retrouver sa place dans ma collection",
+          "start": 183.47,
+          "end": 185.5,
+          "jaUnits": [
+            {
+              "text": "僕のコレクションに　",
+              "start": 183.47,
+              "end": 184.89
+            },
+            {
+              "text": "帰って",
+              "start": 184.89,
+              "end": 185.4
+            },
+            {
+              "text": "くる",
+              "start": 185.4,
+              "end": 185.5
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Revient retrouver",
+              "start": 183.47,
+              "end": 184.33
+            },
+            {
+              "text": "sa place",
+              "start": 184.33,
+              "end": 184.89
+            },
+            {
+              "text": "dans ma collection",
+              "start": 184.89,
+              "end": 185.5
+            }
+          ]
+        },
+        {
+          "ja": "Anime Local Manager",
+          "fr": "Anime Local Manager",
+          "start": 185.67,
+          "end": 188.56,
+          "jaUnits": [
+            {
+              "text": "Anime ",
+              "start": 185.67,
+              "end": 186.52
+            },
+            {
+              "text": "Local ",
+              "start": 186.52,
+              "end": 187.49
+            },
+            {
+              "text": "Manager",
+              "start": 187.49,
+              "end": 188.56
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Anime",
+              "start": 185.67,
+              "end": 186.52
+            },
+            {
+              "text": "Local",
+              "start": 186.52,
+              "end": 187.49
+            },
+            {
+              "text": "Manager",
+              "start": 187.49,
+              "end": 188.56
+            }
+          ]
+        },
+        {
+          "ja": "僕の図書館　心の居場所",
+          "fr": "Ma bibliothèque le refuge de mon cœur",
+          "start": 188.69,
+          "end": 191.94,
+          "jaUnits": [
+            {
+              "text": "僕の図書館　",
+              "start": 188.69,
+              "end": 190.35
+            },
+            {
+              "text": "心の",
+              "start": 190.35,
+              "end": 190.9
+            },
+            {
+              "text": "居場所",
+              "start": 190.9,
+              "end": 191.94
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ma bibliothèque",
+              "start": 188.69,
+              "end": 190.03
+            },
+            {
+              "text": "le refuge",
+              "start": 190.03,
+              "end": 190.9
+            },
+            {
+              "text": "de mon cœur",
+              "start": 190.9,
+              "end": 191.94
+            }
+          ]
+        },
+        {
+          "ja": "すべての世界が　僕とともに",
+          "fr": "Tous ces mondes avancent désormais avec moi",
+          "start": 192.19,
+          "end": 194.14,
+          "jaUnits": [
+            {
+              "text": "すべての世界が　",
+              "start": 192.19,
+              "end": 193.327
+            },
+            {
+              "text": "僕と",
+              "start": 193.327,
+              "end": 193.63
+            },
+            {
+              "text": "ともに",
+              "start": 193.63,
+              "end": 194.14
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tous ces mondes",
+              "start": 192.19,
+              "end": 192.81
+            },
+            {
+              "text": "avancent désormais",
+              "start": 192.81,
+              "end": 193.91
+            },
+            {
+              "text": "avec moi",
+              "start": 193.91,
+              "end": 194.14
+            }
+          ]
+        },
+        {
+          "ja": "ここでひとつに　結ばれてゆく",
+          "fr": "Ici, ils se rejoignent pour ne faire qu’un",
+          "start": 194.45,
+          "end": 196.68,
+          "jaUnits": [
+            {
+              "text": "ここでひとつに　",
+              "start": 194.45,
+              "end": 195.651
+            },
+            {
+              "text": "結ばれて",
+              "start": 195.651,
+              "end": 196.337
+            },
+            {
+              "text": "ゆく",
+              "start": 196.337,
+              "end": 196.68
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ici, ils se rejoignent",
+              "start": 194.45,
+              "end": 195.658
+            },
+            {
+              "text": "pour ne faire",
+              "start": 195.658,
+              "end": 196.338
+            },
+            {
+              "text": "qu’un",
+              "start": 196.338,
+              "end": 196.68
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "labelJa": "アウトロ ― ささやくように",
+      "labelFr": "Outro — en chuchotant",
+      "lines": [
+        {
+          "ja": "数えきれない物語……",
+          "fr": "Tant d’histoires qu’on ne peut les compter…",
+          "start": 197.0,
+          "end": 198.2,
+          "jaUnits": [
+            {
+              "text": "数えきれない",
+              "start": 197.0,
+              "end": 197.9
+            },
+            {
+              "text": "物語……",
+              "start": 197.9,
+              "end": 198.2
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Tant d’histoires",
+              "start": 197.0,
+              "end": 197.503
+            },
+            {
+              "text": "qu’on ne peut les compter…",
+              "start": 197.503,
+              "end": 198.2
+            }
+          ]
+        },
+        {
+          "ja": "まだ見ぬ世界へ……",
+          "fr": "Vers des mondes encore inconnus…",
+          "start": 199.53,
+          "end": 200.02,
+          "jaUnits": [
+            {
+              "text": "まだ見ぬ",
+              "start": 199.53,
+              "end": 199.81
+            },
+            {
+              "text": "世界へ……",
+              "start": 199.81,
+              "end": 200.02
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Vers des mondes",
+              "start": 199.53,
+              "end": 199.766
+            },
+            {
+              "text": "encore inconnus…",
+              "start": 199.766,
+              "end": 200.02
+            }
+          ]
+        },
+        {
+          "ja": "ひとつとして……",
+          "fr": "Pour qu’aucune…",
+          "start": 200.69,
+          "end": 201.14,
+          "jaUnits": [
+            {
+              "text": "ひとつとして……",
+              "start": 200.69,
+              "end": 201.14
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Pour qu’aucune…",
+              "start": 200.69,
+              "end": 201.14
+            }
+          ]
+        },
+        {
+          "ja": "消えないように……",
+          "fr": "Ne disparaisse jamais…",
+          "start": 202.26,
+          "end": 204.0,
+          "jaUnits": [
+            {
+              "text": "消えないように……",
+              "start": 202.26,
+              "end": 204.0
+            }
+          ],
+          "frUnits": [
+            {
+              "text": "Ne disparaisse jamais…",
+              "start": 202.26,
+              "end": 204.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "completedAt": "2026-10-25T15:10:13.124600+00:00",
+  "tests": [
+    {
+      "script": "scripts/test-beta72-age.cjs",
+      "exitCode": 0,
+      "durationSeconds": 2.767,
+      "log": "test-beta72-age.log"
+    },
+    {
+      "script": "scripts/test-beta66-policy.cjs",
+      "exitCode": 0,
+      "durationSeconds": 4.878,
+      "log": "test-beta66-policy.log"
+    },
+    {
+      "script": "scripts/test-beta82-recommend-catalog.cjs",
+      "exitCode": 0,
+      "durationSeconds": 0.088,
+      "log": "test-beta82-recommend-catalog.log"
+    },
+    {
+      "script": "scripts/test-beta59-http.js",
+      "exitCode": 0,
+      "durationSeconds": 7.745,
+      "log": "test-beta59-http.log"
+    },
+    {
+      "script": "scripts/test-beta72-ui.cjs",
+      "exitCode": 0,
+      "durationSeconds": 2.076,
+      "log": "test-beta72-ui.log"
+    },
+    {
+      "script": "scripts/test-beta61-ui.cjs",
+      "exitCode": 0,
+      "durationSeconds": 1.753,
+      "log": "test-beta61-ui.log"
+    },
+    {
+      "script": "scripts/test-beta66-ui.cjs",
+      "exitCode": 0,
+      "durationSeconds": 1.777,
+      "log": "test-beta66-ui.log"
+    },
+    {
+      "script": "scripts/test-beta73-ui.cjs",
+      "exitCode": 0,
+      "durationSeconds": 1.163,
+      "log": "test-beta73-ui.log"
+    },
+    {
+      "script": "scripts/test-beta82-community-navigation.cjs",
+      "exitCode": 0,
+      "durationSeconds": 1.391,
+      "log": "test-beta82-community-navigation.log"
+    },
+    {
+      "script": "scripts/test-beta61-flows.cjs",
+      "exitCode": 0,
+      "durationSeconds": 0.979,
+      "log": "test-beta61-flows.log"
+    }
+  ],
+  "passed": 10,
+  "total": 10
+}

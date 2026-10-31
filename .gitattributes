@@ -1,0 +1,5 @@
+# Preserve source bytes to keep SOURCE-MANIFEST.json checksums reproducible.
+* -text
+# The original 1080p clip is larger than GitHub's 100 MB Git blob limit.
+# Git LFS keeps the exact original media bytes available on checkout.
+public/assets/alm-clip-complet-1080p.mp4 filter=lfs diff=lfs merge=lfs -text

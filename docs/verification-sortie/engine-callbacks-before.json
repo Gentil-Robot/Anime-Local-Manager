@@ -1,0 +1,5 @@
+{
+  "baselineExitCode": 1,
+  "baselineTestRejected": true,
+  "failureOutput": "AssertionError [ERR_ASSERTION]: notify post-exit work suppressed\n\n2 !== 1\n\n    at /workspace/scratch/0dfaa795a9bc/audit/baseline-engine-callbacks-probe.cjs:59:45 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: 2,\n  expected: 1,\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n"
+}

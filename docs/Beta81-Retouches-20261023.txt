@@ -1,0 +1,70 @@
+Anime Local Manager — bêta 81, retours du 23 octobre 2026
+Europe/Paris
+
+BASE
+Archive : Anime-Local-Manager-Beta81-Reprise80-Nocturne.zip
+SHA-256 avant ces retouches :
+61a2443f55b2bd5ce2f554d64eed6b42af7a409a16bf9cfe214e6d3e05c7fb2f
+Les 622 fichiers du manifeste ont été vérifiés avant modification.
+La version reste 2.0.0-beta.81 ; les anciennes propositions 81/82 restent écartées.
+Identifiant de cette livraison : beta81-reprise80-retouches-20261023.
+
+MODIFICATIONS
+1. Dans À propos, la carte du site est remplacée par l'image fournie le 23 octobre
+   (ALM, paysage nocturne et adresse). Le PNG original est copié sans retouche,
+   déformation ou recadrage. Le lien reste cliquable et accessible au clavier,
+   avec son nom traduit dans les sept langues. Le GIF existant est conservé.
+2. La rangée GIF/site utilise la largeur disponible. Les cartes de fonds d'écran
+   suivent la hauteur de leur contenu : suppression des rangées étirées et de
+   la hauteur minimale excessive des titres. Vidéo, commandes, 4 images et les
+   12 téléchargements FHD/QHD/4K sont conservés.
+3. Sur l'accueil du site, un seul accès à la newsletter : le bloc dédié reste,
+   le bouton doublon du pied de page est retiré. Les autres pages conservent leur
+   accès habituel. Formulaire, consentement, CAPTCHA et désinscription inchangés.
+
+VÉRIFICATIONS EXÉCUTÉES POUR CES RETOUCHES
+- 35 cas natifs dans Electron 44.9.3 : 7 langues, 5 configurations de fenêtre,
+  de 640 à 2300 pixels, dont un facteur de zoom 150 % relu dans Electron.
+- 14 cas du site généré : 7 langues, 2 largeurs ; un seul accès newsletter,
+  ouverture du vrai formulaire, email et consentement obligatoires, focus clavier.
+- 8 suites ciblées : beta74-import, beta79-services, beta76-public, beta81-common,
+  beta81-seasons, beta81-maintenance, beta73-ui et beta67-ui.
+- Traductions principales : 1095 clés présentes pour chacune des 7 langues.
+- Rebuild du site, manifeste des sources, empreintes des ressources et CRC du ZIP.
+
+Les fournisseurs sont bloqués dans les bancs graphiques ; aucun vrai compte ou
+email n'est utilisé. Le test du site ouvre le formulaire sans le soumettre.
+Les 127 suites avaient réussi le 22 octobre sur l'archive de départ ; elles ne
+sont pas annoncées comme intégralement relancées pour ces seules retouches.
+La recette native Windows (installation/planificateur/mise à jour/désinstallation)
+reste celle décrite dans Beta81-Reprise80-et-VM.txt. Aucun changement à ces modules.
+
+SERVICES OBSERVÉS LE 23 OCTOBRE — LECTURE SEULE
+Vercel : équipe ALM, projet anime-local-manager, production READY. Le site public
+et son manifeste annoncent encore 2.0.0-beta.76. Les deux accès newsletter ont été
+reproduits sur l'accueil public. Les corrections sont préparées dans community/site
+et ne seront visibles sur Internet qu'après une publication autorisée.
+Supabase : ALM Community, projet duzwwoyqproxpytmfzdx, 11 migrations. Les versions
+de migration correspondent aux fichiers locaux ; aucune migration nouvelle n'est
+requise par ces retouches. La fonction alm-public déployée est en version 22.
+La comparaison de ses fichiers avec le ZIP de référence montre uniquement le
+passage du marqueur de version fixe beta76 à la constante RELEASE_VERSION ;
+support-model.ts et deno.json sont identiques. /config répond 200, ready=true,
+et annonce beta76. Pas de test d'envoi réel ni d'audit complet d'Auth/SMTP/RLS ici.
+Resend : domaine mail.animelocalmanager.com vérifié, envoi actif, suivi d'ouvertures
+et de clics désactivé. Aucune mise à jour de code propre à cette interface.
+Cloudflare : widget Turnstile ALM managed, domaines animelocalmanager.com,
+localhost et 127.0.0.1, clé publique cohérente avec les sources. Aucune zone DNS
+de ce domaine visible dans le compte connecté : pas de validation DNS/TLS globale.
+
+Aucun service n'a été modifié ou déployé ; aucun SQL, email, achat ou purge.
+Le schéma, Auth, le carnet, les imports et les correctifs de maintenance sont
+conservés. Pour reprendre la version précédente, utiliser son historique et
+l'empreinte de référence ci-dessus ; ne pas superposer deux dossiers extraits.
+
+POUR VÉRIFIER LES SOURCES
+npm ci
+npm run verify:archive
+npm run verify:beta81
+npm run audit:locales
+Le rapport et les preuves de cette retouche sont fournis séparément.

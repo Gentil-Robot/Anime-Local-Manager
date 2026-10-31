@@ -1,0 +1,15 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..'),dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm78-season-'));process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');process.env.ALM_RELEASE_SMOKE='1';process.env.ALM_AUTOMATION_STARTUP='0';process.env.ALM_MAINTENANCE_MODE='1';fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({metadataUpdateOnStart:false,metadataAutonomousUpdateOnStart:false}));
+const nativeFetch=global.fetch;global.fetch=()=>Promise.reject(Error('Offline fixture'));
+(async()=>{let host;try{
+ const api=require('../server'),db=require('../db');await db.whenReady();host=api.app.listen(0,'127.0.0.1');await new Promise(resolve=>host.once('listening',resolve));const base='http://127.0.0.1:'+host.address().port;
+ const send=async(route,body)=>{const response=await nativeFetch(base+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});assert.equal(response.status,200);return response.json();};
+ const stale=[{title:'Fictional sequel',malId:999999}];assert.equal((await send('/api/news/results/save',{items:stale})).count,1);await send('/api/news/ignore-sequel',stale[0]);assert.equal((await send('/api/news/results/save',{items:stale})).count,0,'Late snapshot cannot resurrect an ignored season');assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir,'news-results.json'),'utf8')),[]);
+ // Execute the exact asynchronous job registration with a deterministic pause.
+ const source=fs.readFileSync(path.join(root,'server.js'),'utf8'),start=source.indexOf('app.post("/api/news/details/job"'),end=source.indexOf('app.get("/api/news/details/progress/',start);assert(start>0&&end>start);
+ let handler,release,ignored=false,written;const gate=new Promise(resolve=>release=resolve),jobs={};const ctx={app:{post:(_p,h)=>handler=h},_newsDetailsJobs:jobs,Date,Math,readNewsResults:()=>stale,hydrateSeasonNewsWithLocalDetails:x=>x,hasUsefulSeasonNewsDetails:()=>true,seasonDetails:{recent:()=>false,prime:async()=>{}},yieldToEventLoop:()=>gate,runWithConcurrency:async()=>{},searchNewsDetailsAllMethods:async x=>x,seasonNewsCompleteness:()=>({complete:true}),writeNewsResults:items=>(written=ignored?[]:items)};
+ vm.runInNewContext(source.slice(start,end),ctx);let response;handler({body:{items:stale}},{json:x=>response=x});ignored=true;release();for(let i=0;i<10&&jobs[response.jobId].status==='running';i++)await new Promise(resolve=>setImmediate(resolve));assert.equal(jobs[response.jobId].status,'done');assert.equal(jobs[response.jobId].count,0);assert.equal(jobs[response.jobId].items.length,0);assert.equal(written.length,0);
+ console.log('OK Beta78: HTTP late snapshots remain filtered; completed asynchronous details job reports the actual persisted count.');
+ }finally{global.fetch=nativeFetch;await require('./runtime-cleanup').cleanupRuntime(dir,host);}
+})().catch(error=>{console.error(error);process.exitCode=1;});

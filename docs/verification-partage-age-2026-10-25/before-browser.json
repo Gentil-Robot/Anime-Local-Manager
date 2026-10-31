@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "message": "The profile editor must render a real age-aware exclusion control\n\n0 !== 1\n",
+  "stack": "AssertionError [ERR_ASSERTION]: The profile editor must render a real age-aware exclusion control\n\n0 !== 1\n\n    at /workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-age-sharing-browser.cjs:94:10\n    at async check (/workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-age-sharing-browser.cjs:83:47)\n    at async /workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-age-sharing-browser.cjs:93:2",
+  "checks": [],
+  "errors": [],
+  "requests": [
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    },
+    {
+      "name": "status",
+      "method": "GET"
+    },
+    {
+      "name": "friends",
+      "method": "GET"
+    }
+  ]
+}

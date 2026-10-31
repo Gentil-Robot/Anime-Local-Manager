@@ -1,0 +1,28 @@
+/* Separate horizontal anime navigation from vertical reading controls. */
+html body .anime-peek-navigation{padding:16px 90px 16px 24px;min-height:76px;gap:16px}
+#animePeekPrevious::before{content:'←';margin-right:10px;font-size:21px}
+#animePeekNext::after{content:'→';margin-left:10px;font-size:21px}
+html body #animePeekDialog .dialog-scroll-controls{bottom:100px!important;right:16px!important}
+#animePeekPersonal .episode-stepper{width:fit-content;padding:10px 12px;margin:12px 0 18px;border:1px solid #a089ca55;border-radius:12px;background:#27233d}
+html body #settingsDialog{width:min(1100px,calc(100vw - 32px))}
+html body #settingsForm{height:min(760px,90dvh);max-height:90dvh}
+html body #settingsForm>.nocturne-dialog-hero{min-height:100px;padding:16px 24px}
+html body #settingsForm>.settings-grid{grid-template-columns:215px minmax(0,1fr)!important}
+html body #settingsDialog .settings-main{padding:20px 24px;line-height:1.55}
+html body #settingsDialog .settings-tab-panel>section{margin-block:14px}
+html body #settingsDialog #settingsSections button{min-height:46px;padding:9px 12px}
+.window-action{min-width:38px;min-height:38px;font-size:22px;line-height:1;padding:5px 10px}
+.window-actions{display:flex;align-items:center;gap:0;margin-left:6px;flex-shrink:0;-webkit-app-region:no-drag}
+.topbar{-webkit-app-region:drag}.topbar button,.topbar a,.topbar input,.topbar select,.topbar label,.topbar .header-actions{-webkit-app-region:no-drag}
+.window-actions .window-action{display:grid;place-items:center;width:44px;min-width:44px;height:34px;min-height:34px;padding:8px 13px;border:0;border-radius:0;background:transparent;color:#ede9f7}
+.window-actions .window-action:first-child{border-radius:6px 0 0 6px}.window-actions .window-action:last-child{border-radius:0 6px 6px 0}
+.window-actions .window-action svg{width:16px;height:16px;display:block}.window-actions .window-action:hover{background:#d4bdf321}.window-actions .window-action:focus-visible{outline:2px solid #bca4f3;outline-offset:-2px}
+#appQuit:hover{background:#723b57;color:#fff}
+/* Dress violet for upcoming text, deeper plum for sung text; muted contour. */
+html body .nocturne-player .donation-karaoke-stage .karaoke-original-unit,
+html body .nocturne-player .donation-karaoke-stage .karaoke-romaji-unit{background:linear-gradient(90deg,#391442 0 var(--karaoke-progress,0%),#804790 var(--karaoke-progress,0%) 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-stroke:.35px #c5adc4;filter:drop-shadow(0 1px 1px #25132b66)!important;text-shadow:none!important}
+html body .nocturne-player .donation-karaoke-stage .karaoke-fr-unit{color:#592963!important;-webkit-text-fill-color:#592963!important;-webkit-text-stroke:.25px #c5adc4;text-shadow:0 1px 1px #25132b44!important}
+html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title,
+html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title>*,
+html body .nocturne-player.karaoke-outro .donation-karaoke-stage .karaoke-opening-title>*{color:#804790!important;-webkit-text-fill-color:#804790!important;-webkit-text-stroke:.35px #c5adc4;text-shadow:0 1px 1px #25132b66!important}
+@media(max-width:760px){html body #settingsForm>.settings-grid{grid-template-columns:minmax(0,1fr)!important}html body #settingsDialog .settings-main{padding:16px}html body .anime-peek-navigation{padding:12px 62px 12px 12px;gap:8px}#animePeekPrevious::before,#animePeekNext::after{font-size:18px;margin-inline:4px}html body #animePeekDialog .dialog-scroll-controls{right:10px!important;bottom:100px!important}}

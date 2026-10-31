@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const M=require('../public/community-model'),S=require('../public/community-security');
+assert(S.password('A-Long-Unique-Phrase-84!'));for(const bad of ['123456789012','Password123!','aaaaaaaaaaaa','short','NoNumbersHere!'])assert(!S.password(bad));
+assert.equal(S.messageKey({code:'invalid_credentials'}),'credentialsError');assert.equal(S.messageKey({message:'PROFILE_UNAVAILABLE'}),'profileUnavailable');assert.equal(S.errorCode({message:'private token email@example.test'}),'error');
+assert.equal(S.tag({display_name:'GentilRobot',discriminator:1}),'GentilRobot#0001');assert.equal(S.tag({display_name:'GentilRobot',discriminator:12345}),'GentilRobot#12345');
+const items=M.items([{malId:1,title:'Shared',status:'Completed',favorite:true,notes:'SECRET NOTE',mediaPath:'/private/path'},{malId:2,title:'Private',status:'Watching'}]);
+const preview=M.preview({profile:{display_name:'User',visibility:'friends',share_favorites:true},items,dna:[{genre:'secret',count:3}],activity:[{date:'2026-10-14',episodes:2}]});assert.equal(preview.items.length,1);assert.deepEqual(preview.dna,[]);assert.deepEqual(preview.activity,[]);assert(!JSON.stringify(preview).includes('SECRET'));assert.equal(M.preview({profile:{visibility:'private',share_library:true},items,dna:[],activity:[]}).items.length,0);
+const context={window:{ALM_DESIGN_COPY:{},ALM_DESIGN:{language:()=> 'fr'}},document:{documentElement:{lang:'fr'}}};vm.createContext(context);for(const file of ['community-copy.js','community-upgrade-copy.js','community-site-copy.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../public',file),'utf8'),context);
+const keys=['confirmPassword','confirm','contact','newsletter','deleteAccount','notifications','preview','siteTitle','noticeAccount'];for(const lang of ['fr','en','es','de','ja','pt-BR','zh-CN'])for(const key of keys){assert(context.window.ALM_DESIGN_COPY[lang][key]||context.window.ALM_COMMUNITY_COPY[lang][key],lang+': '+key);}
+for(const filename of ['public/index.html','public/community-notice.html','community/site/index.html','community/site/compte.html','community/site/community-notice.html'])assert(!fs.readFileSync(path.join(__dirname,'..',filename),'utf8').includes('jesuisungentilrobot'));
+console.log('OK Beta60 runtime: password guidance, safe error codes, numbered identities, private preview, seven complete translation sets and no public contact address.');

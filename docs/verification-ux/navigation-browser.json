@@ -1,0 +1,30 @@
+{
+  "browser": "134.0.6998.35",
+  "checks": [
+    "Long library has two separated views of one synchronized pager",
+    "Short last page has one pager, no adjacent duplicate",
+    "Empty result hides both pagers despite all production display rules",
+    "One-page result has no paging arrows",
+    "Show all retains only one return-to-pages action",
+    "Library to memories hides the library controls in computed layout",
+    "Friend page has neither library leftovers nor one-page arrows",
+    "Returning to library restores a single model and no duplicate IDs",
+    "Hidden parent cannot leave the independent library pagers visible",
+    "One page scroll controller shows only the useful direction at the top",
+    "Scroll to bottom hides its exhausted action and offers ascent",
+    "Scrollable notebook has one controller and suppresses the background",
+    "Short notebook hides useless vertical commands",
+    "Reader owns exactly one active controller",
+    "Short empty library hides all vertical commands",
+    "Accessible scroll labels retained for fr",
+    "Accessible scroll labels retained for en",
+    "Accessible scroll labels retained for es",
+    "Accessible scroll labels retained for de",
+    "Accessible scroll labels retained for ja",
+    "Accessible scroll labels retained for pt-BR",
+    "Accessible scroll labels retained for zh-CN",
+    "Narrow view has no duplicated pager or horizontal overflow"
+  ],
+  "errors": [],
+  "scope": "Fictional local fixtures, production CSS and navigation/card/paging/scroll modules; no live account or native Windows installer"
+}

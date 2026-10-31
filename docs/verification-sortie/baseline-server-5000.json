@@ -1,0 +1,206 @@
+{
+  "root": "/workspace/scratch/0dfaa795a9bc/perf-baseline/Anime-Local-Manager-Beta82",
+  "version": "2.0.0-beta.82",
+  "node": "24.22.1",
+  "count": 5000,
+  "ready_ms": 4776.991816,
+  "index_ms": 1681.9849130000002,
+  "measures": {
+    "db-read": {
+      "ms": {
+        "n": 25,
+        "median": 18.81176200000027,
+        "p95": 20.20525600000019,
+        "min": 17.310044999999263,
+        "max": 22.943489999999656
+      },
+      "cpu_ms": {
+        "n": 25,
+        "median": 18.812,
+        "p95": 20.219,
+        "min": 17.317,
+        "max": 23.047
+      },
+      "rss_bytes": {
+        "n": 25,
+        "median": 635678720,
+        "p95": 635678720,
+        "min": 635678720,
+        "max": 635678720
+      }
+    },
+    "read-integrity-snapshot": {
+      "ms": {
+        "n": 25,
+        "median": 112.84141099999943,
+        "p95": 143.06279399999949,
+        "min": 101.86149900000055,
+        "max": 143.47008099999948
+      },
+      "cpu_ms": {
+        "n": 25,
+        "median": 125.623,
+        "p95": 155.41,
+        "min": 110.226,
+        "max": 167.385
+      },
+      "rss_bytes": {
+        "n": 25,
+        "median": 642084864,
+        "p95": 645603328,
+        "min": 637956096,
+        "max": 645832704
+      }
+    },
+    "metadata-1000-lookups": {
+      "ms": {
+        "n": 25,
+        "median": 11.085366999999678,
+        "p95": 12.987137000000075,
+        "min": 9.95300700000007,
+        "max": 13.6978909999998
+      },
+      "cpu_ms": {
+        "n": 25,
+        "median": 11.158,
+        "p95": 15.303,
+        "min": 9.958,
+        "max": 15.317
+      },
+      "rss_bytes": {
+        "n": 25,
+        "median": 647045120,
+        "p95": 667230208,
+        "min": 645734400,
+        "max": 680861696
+      }
+    },
+    "/api/animes": {
+      "ms": {
+        "n": 25,
+        "median": 102.58212800000001,
+        "p95": 122.35823599999821,
+        "min": 95.53621000000021,
+        "max": 125.7319490000009
+      },
+      "cpu_ms": {
+        "n": 25,
+        "median": 107.58,
+        "p95": 252.902,
+        "min": 95.8,
+        "max": 274.939
+      },
+      "rss_bytes": {
+        "n": 25,
+        "median": 783327232,
+        "p95": 788672512,
+        "min": 728682496,
+        "max": 788680704
+      }
+    },
+    "/api/catalog?limit=60&sort=score": {
+      "ms": {
+        "n": 25,
+        "median": 99.80230299999857,
+        "p95": 109.709601999999,
+        "min": 92.41767299999992,
+        "max": 110.99883899999986
+      },
+      "cpu_ms": {
+        "n": 25,
+        "median": 102.115,
+        "p95": 110.183,
+        "min": 92.519,
+        "max": 111.599
+      },
+      "rss_bytes": {
+        "n": 25,
+        "median": 787062784,
+        "p95": 788738048,
+        "min": 784961536,
+        "max": 788889600
+      }
+    },
+    "/api/v2/stats": {
+      "ms": {
+        "n": 12,
+        "median": 84.78711199999816,
+        "p95": null,
+        "min": 82.59067499999946,
+        "max": 95.42163900000014
+      },
+      "cpu_ms": {
+        "n": 12,
+        "median": 87.257,
+        "p95": null,
+        "min": 82.825,
+        "max": 106.648
+      },
+      "rss_bytes": {
+        "n": 12,
+        "median": 790491136,
+        "p95": null,
+        "min": 790487040,
+        "max": 790872064
+      }
+    }
+  },
+  "responseHashes": {
+    "/api/animes": {
+      "bytes": 4326152,
+      "sha256": "1001de8d9e729a2bbbda59a66636b7dde605bd2a0edc1f6f7c4d6ed4f8136510"
+    },
+    "/api/catalog?limit=60&sort=score": {
+      "bytes": 76183,
+      "sha256": "86e0536844896d8376121777264d7288e76e2c3835262d45673a44dd1a42ce6b"
+    },
+    "/api/v2/stats": {
+      "bytes": 496,
+      "sha256": "abc613cb2f24ba1f7ef2c46bdcd7f90a7ae56c157bf91bf1ba3f9329037636dd"
+    }
+  },
+  "memory_cycles": [
+    {
+      "rss": 785326080,
+      "heapTotal": 269664256,
+      "heapUsed": 105188200,
+      "external": 4789044,
+      "arrayBuffers": 333174
+    },
+    {
+      "rss": 785231872,
+      "heapTotal": 269664256,
+      "heapUsed": 105076648,
+      "external": 4454859,
+      "arrayBuffers": 331873
+    },
+    {
+      "rss": 785403904,
+      "heapTotal": 267976704,
+      "heapUsed": 105140184,
+      "external": 4453558,
+      "arrayBuffers": 331873
+    },
+    {
+      "rss": 785408000,
+      "heapTotal": 268238848,
+      "heapUsed": 105069952,
+      "external": 4453558,
+      "arrayBuffers": 331873
+    },
+    {
+      "rss": 785408000,
+      "heapTotal": 267976704,
+      "heapUsed": 105015888,
+      "external": 4453558,
+      "arrayBuffers": 331873
+    }
+  ],
+  "event_loop": {
+    "max_ms": 219.152383,
+    "p95_ms": 116.391935
+  },
+  "external_requests_blocked": 0,
+  "library_sha256": "1001de8d9e729a2bbbda59a66636b7dde605bd2a0edc1f6f7c4d6ed4f8136510",
+  "profile": "/workspace/scratch/0dfaa795a9bc/audit/performance/baseline-profile-5000"
+}

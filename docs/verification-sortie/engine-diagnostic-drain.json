@@ -1,0 +1,12 @@
+{
+  "before": {
+    "exitCode": 1,
+    "containsModuleDiagnostic": false,
+    "failureStillRejected": true
+  },
+  "after": {
+    "exitCode": 1,
+    "containsModuleDiagnostic": true,
+    "failureStillRejected": true
+  }
+}

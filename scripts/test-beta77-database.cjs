@@ -1,0 +1,15 @@
+'use strict';
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),assert=require('node:assert/strict');const root=path.resolve(process.env.ALM_TEST_ROOT||path.join(__dirname,'..'));
+async function invalid(){
+ const row={id:1,title:'Fictional record',notes:'Fictional note'};
+ for(const rows of [[row,null],[row,{id:2,title:null}],[row,{id:'1',title:'Duplicate'}],[{id:0,title:'Invalid'}],[{title:'Missing'}]]){
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm77-invalid-')),file=path.join(dir,'animes.json'),original=Buffer.from(JSON.stringify(rows)),backup=Buffer.from(JSON.stringify([row]));fs.writeFileSync(file,original);fs.writeFileSync(file+'.bak',backup);delete require.cache[require.resolve(root+'/db')];const db=require(root+'/db');
+  try{await assert.rejects(db.initDb(dir),/Invalid library JSON records/);assert.deepEqual(fs.readFileSync(file),original);assert.deepEqual(fs.readFileSync(file+'.bak'),backup);assert(!fs.existsSync(path.join(dir,'collection.sqlite')));}finally{db.close();fs.rmSync(dir,{recursive:true,force:true});}
+ }
+ delete require.cache[require.resolve(root+'/db')];console.log('OK startup: null/title/duplicate/missing/zero records stop before SQLite; originals and .bak preserved.');
+}
+async function catalog(){
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm77-catalog-'));process.env.ALM_DATA_DIR=dir;process.env.ALM_IMAGES_DIR=path.join(dir,'images');process.env.ALM_AUTOMATION_STARTUP='0';fs.writeFileSync(path.join(dir,'config.json'),JSON.stringify({metadataAutonomousUpdateOnStart:false,metadataUpdateOnStart:false,metadataAutonomousLearnFromSearch:false}));let listener;
+ try{const api=require(root+'/server'),db=require(root+'/db');await db.whenReady();db.writeAllAnimes([{id:1,title:'Naruto',malId:'20',notes:'Fictional note',tags:[],genres:[]}]);const before=JSON.stringify(db.getAllAnimes());listener=await new Promise(resolve=>{const s=api.app.listen(0,'127.0.0.1',()=>resolve(s));});const origin='http://127.0.0.1:'+listener.address().port;const send=ids=>fetch(origin+'/api/catalog/add-batch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ids,status:'Plan to Watch'})});const r=await send([9000000]),body=await r.json();console.log(JSON.stringify({missingIsNull:db.getMetadataByMalId(9000000)===null,status:r.status,body,unchanged:JSON.stringify(db.getAllAnimes())===before}));assert.equal(db.getMetadataByMalId(9000000),null);assert.equal(r.status,400);assert.equal(body.code,'ALM_CATALOG_MISSING');assert.equal(JSON.stringify(db.getAllAnimes()),before);const good=await send([1]);assert.equal(good.status,200);assert.equal((await good.json()).added,1);assert(db.getAllAnimes().every(a=>a.title&&a.malId));console.log('OK catalogue: absent ID rejected, collection intact; existing ID still inserts.');}finally{await require(root+'/scripts/runtime-cleanup').cleanupRuntime(dir,listener);}
+}
+(async()=>{if(!process.argv.includes('--catalog'))await invalid();await catalog();})().catch(e=>{console.error(e);process.exitCode=1;});

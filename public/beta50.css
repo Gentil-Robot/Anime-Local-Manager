@@ -1,0 +1,36 @@
+/* Shared framing is independent of banner width and dynamic import text. */
+html body #importDialog{width:min(1540px,98vw)!important;max-width:98vw!important;height:min(1080px,96dvh);max-height:96dvh;overflow:hidden;padding:14px}
+html body #importDialog .dialog-content{overflow:auto;scrollbar-gutter:stable;padding-right:2px}
+html body #importDialog #csvImportForm{display:flex;flex-direction:column;flex:1;min-height:0;max-height:none}
+html body #importDialog #csvImportForm.hidden{display:none}
+html body #importDialog .csv-import-workspace{overflow:hidden;grid-template-columns:minmax(300px,350px) minmax(0,1fr);min-height:0}
+html body #importDialog .csv-import-controls{overflow:auto;min-height:0;scrollbar-gutter:stable}
+html body #importDialog .csv-results-panel{display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;min-height:0;max-height:none;overflow:hidden;align-content:stretch;background-image:none}
+html body #importDialog .csv-results-placeholder{min-height:0;height:100%;box-sizing:border-box;background-image:linear-gradient(0deg,#11203de0,#11203d88),url('/assets/design/moon-library.webp');background-size:100% 100%,auto 440px!important;background-position:center,right center!important;background-repeat:no-repeat}
+html body #csvImportForm .csv-results{min-height:0;max-height:none;height:100%;overflow:auto;scrollbar-gutter:stable;contain:layout style}
+html body #csvImportForm>menu{flex-shrink:0;margin:10px 0 0}
+html body .csv-pagination{grid-row:5;display:flex;align-items:center;justify-content:center;gap:18px;padding:10px 0 0}
+html body .csv-pagination[hidden]{display:none}
+html body [data-csv-summary-filter][hidden],html body #csvDismissSafeNonAnime[hidden]{display:none!important}
+html body #settingsDialog .nocturne-dialog-hero,html body #importDialog .nocturne-dialog-hero{height:112px;min-height:112px;flex-shrink:0;background-size:100% 100%,auto 400px!important;background-position:center,right 24%!important;background-repeat:no-repeat!important;background-color:#171d35}
+html body .series-dialog{box-sizing:border-box;overflow:hidden;max-height:92dvh}
+html body .series-dialog[open]{display:flex;flex-direction:column}
+html body #seriesContents{overflow:auto;min-height:0;overscroll-behavior:contain;padding-right:60px;scrollbar-gutter:stable}
+html body .series-dialog>footer{display:flex;justify-content:flex-end;padding-top:16px;margin-top:14px;border-top:1px solid #9980c944;flex-shrink:0}
+html body .series-earlier{margin:16px 0;padding:12px;background:#9980c90c;border:1px solid #9980c944;border-radius:12px}
+html body .series-earlier summary{cursor:pointer;font-weight:600;color:#e5cf8c}
+html body .series-status-control{display:flex;align-items:center;gap:12px;font-size:12px;margin:0}
+html body .series-status-control select{width:auto;min-width:150px;max-width:100%;margin:0;min-height:34px}
+html body .series-missing-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:12px 0;border-top:1px solid #9980c933}
+html body .series-card-hint{overflow-wrap:anywhere;line-height:1.5}
+html body #seriesDialog .dialog-scroll-controls{bottom:94px!important;right:24px!important}
+html body #importDialog .dialog-scroll-controls{bottom:124px!important;right:28px!important}
+html body #completionIssuesPanel[hidden]{display:none}
+html body .completion-issue-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid #9980c933}
+html body .completion-issue-row input{width:18px;height:18px}
+html body .completion-issue-row .completion-issue-open{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:100%;text-align:left}
+html body .completion-actions{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+html body .scroll-jump-controls[hidden]{display:none!important}
+html body #scrollJumpControls:not([hidden]){display:flex!important}
+html body dialog[open] .dialog-scroll-controls:not([hidden]){display:flex!important}
+@media(max-width:850px){html body #importDialog .csv-import-workspace{display:flex;flex-direction:column;overflow:auto;gap:18px}html body #importDialog .csv-import-controls{overflow:visible;flex:0 0 auto}html body #importDialog .csv-results-panel{height:560px;min-height:560px;flex:0 0 auto}html body .series-missing-row{flex-direction:column;align-items:flex-start}html body .completion-issue-row{grid-template-columns:auto minmax(0,1fr)}html body .completion-issue-row>button{grid-column:2}html body .series-status-control{flex-wrap:wrap}}

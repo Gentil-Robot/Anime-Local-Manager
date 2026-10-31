@@ -1,0 +1,23 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),{PassThrough}=require('node:stream');
+const {wrapWriter,ensureAsarFinished}=require('./ensure-asar-finished');
+const {checkArchive}=require('./check-packaged-integrity');
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'alm-package-check-'));
+let count=0;const ok=name=>{count++;console.log('OK '+name);};
+(async()=>{
+ const output=new PassThrough();output.resume();let complete=false;
+ const waiting=wrapWriter(async()=>output)().then(()=>{complete=true;});
+ await new Promise(r=>setImmediate(r));assert.equal(complete,false);output.end('fixture');await waiting;assert.equal(complete,true);ok('Packaging waits for the final archive write');
+ const broken=new PassThrough();broken.resume();const rejected=wrapWriter(async()=>broken)();await new Promise(r=>setImmediate(r));broken.destroy(Error('disk write failure'));await assert.rejects(rejected,/disk write failure/);ok('Archive write failure rejects the build');
+ const source=path.join(root,'source');fs.mkdirSync(path.join(source,'public'),{recursive:true});
+ for(const name of ['main.js','preload.js','server.js','db.js','csv-worker.js'])fs.writeFileSync(path.join(source,name),'module.exports={};\n');
+ fs.writeFileSync(path.join(source,'public/index.html'),'<!doctype html><title>ALM fixture</title>');
+ fs.writeFileSync(path.join(source,'public/media.mp4'),Buffer.alloc(128,7));
+ ensureAsarFinished();ensureAsarFinished();const asar=require('@electron/asar'),archive=path.join(root,'app.asar');
+ await asar.createPackageWithOptions(source,archive,{unpack:'**/*.mp4'});assert.equal(checkArchive(archive).files,7);ok('Real ASAR including unpacked media passes integrity validation');
+ const original=fs.readFileSync(archive);fs.truncateSync(archive,original.length-3);assert.throws(()=>checkArchive(archive),/missing or altered/);ok('Truncated ASAR is rejected');
+ fs.writeFileSync(archive,original);const raw=asar.getRawHeader(archive),info=asar.statFile(archive,'server.js');const changed=Buffer.from(original);changed[8+raw.headerSize+Number(info.offset)]^=1;fs.writeFileSync(archive,changed);assert.throws(()=>checkArchive(archive),/missing or altered/);ok('Altered packed server is rejected');
+ fs.writeFileSync(archive,original);fs.writeFileSync(path.join(archive+'.unpacked','public/media.mp4'),Buffer.alloc(128,8));assert.throws(()=>checkArchive(archive),/missing or altered/);ok('Altered unpacked media is rejected');
+ fs.unlinkSync(path.join(archive+'.unpacked','public/media.mp4'));assert.throws(()=>checkArchive(archive),/ENOENT/);ok('Missing unpacked media is rejected');
+ console.log(`${count} packaged-integrity checks passed.`);
+})().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>fs.rmSync(root,{recursive:true,force:true}));

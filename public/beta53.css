@@ -1,0 +1,40 @@
+/* ASS AABBGGRR: Secondary &H00FFFFFF, Primary &H0000B0FF, Outline &H00441F0A. */
+.donation-karaoke {
+  --karaoke-unsung: #FFFFFF;
+  --karaoke-sung: #FFB000;
+  --karaoke-outline: #0A1F44;
+}
+html body .nocturne-player .donation-karaoke-stage .karaoke-original-unit,
+html body .nocturne-player .donation-karaoke-stage .karaoke-romaji-unit {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  background: linear-gradient(90deg, var(--karaoke-sung) 0 var(--karaoke-progress, 0%), var(--karaoke-unsung) var(--karaoke-progress, 0%) 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-stroke: .5px var(--karaoke-outline);
+  paint-order: stroke fill;
+  filter: drop-shadow(.8px 0 0 var(--karaoke-outline)) drop-shadow(-.8px 0 0 var(--karaoke-outline)) drop-shadow(0 .8px 0 var(--karaoke-outline)) drop-shadow(0 -.8px 0 var(--karaoke-outline)) !important;
+  text-shadow: none !important;
+}
+html body .nocturne-player .donation-karaoke-stage .karaoke-original-unit {
+  -webkit-text-stroke: 0 var(--karaoke-outline);
+}
+html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title,
+html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title > * {
+  color: var(--karaoke-unsung) !important;
+  -webkit-text-fill-color: var(--karaoke-unsung) !important;
+  -webkit-text-stroke: .7px var(--karaoke-outline);
+  text-shadow: 0 1px 1px var(--karaoke-outline) !important;
+}
+.csv-tv-unverified { margin-block: 10px; color: #f2cc83; line-height: 1.6; }
+
+/* Every translation language stays readable in one fixed colour. */
+html body .nocturne-player .donation-karaoke-stage .karaoke-fr-unit {
+  color: var(--karaoke-unsung) !important;
+  -webkit-text-fill-color: var(--karaoke-unsung) !important;
+  background: none !important;
+  -webkit-text-stroke: .5px var(--karaoke-outline);
+  paint-order: stroke fill;
+  filter: drop-shadow(.8px 0 0 var(--karaoke-outline)) drop-shadow(-.8px 0 0 var(--karaoke-outline)) drop-shadow(0 .8px 0 var(--karaoke-outline)) drop-shadow(0 -.8px 0 var(--karaoke-outline)) !important;
+  text-shadow: none !important;
+}

@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "type": "supplemental-isolated-suite",
+  "test": "scripts/test-beta69-package.cjs",
+  "status": "passed",
+  "exitCode": 0,
+  "reportedDurationMs": 22898.136,
+  "sourceSha256": "3814a862e24ef107de6377b4bf03099a562ad82ef7dd62cff548ed7700562f57",
+  "sourceUnchangedFromInput": true,
+  "log": "beta69-isolated.log",
+  "electronPhases": [
+    {
+      "phase": "missing",
+      "electron": "45.0.0",
+      "missingModuleRejected": true
+    },
+    {
+      "phase": "seed",
+      "electron": "45.0.0",
+      "catalogue": 30430,
+      "imported": 1,
+      "backup": true,
+      "persistence": false,
+      "nativeStorage": "not-available"
+    },
+    {
+      "phase": "verify",
+      "electron": "45.0.0",
+      "catalogue": 30430,
+      "imported": 1,
+      "backup": true,
+      "persistence": true,
+      "nativeStorage": "not-exercised"
+    }
+  ],
+  "note": "The unmodified test passed in a separate process after its deliberately incomplete-ASAR case failed to include the expected diagnostic in the main run."
+}

@@ -1,3 +1,24 @@
 {
-  "storageMode": "local-json"
+  "storageMode": "local-json",
+  "useAliasCache": true,
+  "updateAliasesOnStart": true,
+  "viewMode": "cards",
+  "workerMode": "database",
+  "betaseriesApiKey": "",
+  "betaseriesLastTest": null,
+  "preloadCacheOnStart": true,
+  "databaseEdition": true,
+  "metadataUrl": "",
+  "preloadMetadataOnStart": true,
+  "metadataManifestUrl": "",
+  "metadataUpdateOnStart": false,
+  "metadataUpdateIntervalHours": 168,
+  "metadataAutonomousUpdateOnStart": true,
+  "metadataAutonomousIntervalHours": 168,
+  "metadataAutonomousSeasonalPages": 2,
+  "metadataAutonomousUpcomingPages": 2,
+  "metadataAutonomousTopPages": 0,
+  "metadataAutonomousAniListPages": 0,
+  "metadataAutonomousLearnFromSearch": true,
+  "newsHistoryRetentionDays": 365
 }

@@ -1,0 +1,164 @@
+Anime Local Manager — nouvelle bêta 81, reprise de la bêta 80
+22 octobre 2026 — Europe/Paris
+
+RÉFÉRENCE
+Cette livraison remplace les anciennes propositions 81/82. Sa base est uniquement
+la bêta 80 validée : archive SHA-256
+350a12828dd6fb474ca0f7f07cdfa97aed713c34acd407693bda8b1553300dea.
+Les 615 fichiers de cette base ont été vérifiés avant modification.
+Le nom de l'archive « Beta81-Reprise80 » distingue cette nouvelle bêta 81 de
+l'ancienne bêta 81, qui portait le même numéro mais un autre contenu.
+
+PÉRIMÈTRE
+- Bibliothèque d'un ami : Animes en commun avec son pseudo complet, entre les
+  deux compteurs existants. Le bouton ouvre la même présentation, les filtres,
+  tris, jaquettes et fiches que la bibliothèque partagée.
+- Nouvelles saisons : recherche, statut de l'anime suivi, type, genre, studio,
+  année et tris pertinents ; réinitialisation ; compteur sur les résultats chargés.
+- À propos : bloc du site centré, lisible au clavier et en petite fenêtre ; GIF
+  existant conservé, lien et bouton Visiter le site ALM.
+- Tâches planifiées : vérification de propriété et du répertoire de travail,
+  respect d'une désactivation dans Windows, succès explicite, reprise après
+  interruption, codes de sortie et erreurs sans secrets.
+- Electron 44.9.3 : correction de sécurité ciblée, sans changement majeur.
+
+Les ajouts TMDB/JustWatch, Où regarder, pays/plateformes, avatars sociaux sur les
+cartes et partage de souvenirs des anciennes 81/82 ne font pas partie de cette
+livraison. Le carnet qui existait en 80 est conservé dans sa forme d'origine.
+Aucune migration locale n'est ajoutée. Les formats et bibliothèques ne sont pas
+réinitialisés. Aucun script de purge de données personnelles n'est exécuté.
+
+ANIMES EN COMMUN
+Ouvrir Bibliothèque d'un ami, choisir son identifiant complet, puis Ouvrir.
+Le compteur du milieu devient disponible après la réponse autorisée du serveur.
+Il compare les identifiants MAL présents dans les deux périmètres partagés.
+Il ne déduit pas une correspondance du seul titre et ne révèle pas les fiches
+privées ou exclues. Les séries sont comptées une fois selon le regroupement
+existant. Le détail contient seulement les fiches/saisons réellement communes.
+Une autre saison de l'ami n'est pas ajoutée au détail par supposition.
+Si ton propre partage est privé ou partiel, le résultat est réduit en conséquence.
+Toute la bibliothèque partagée permet de revenir à la vue complète de l'ami.
+Une actualisation des permissions invalide le résultat et recharge automatiquement
+la bibliothèque sélectionnée avec une nouvelle réponse autorisée. Les filtres sont
+conservés ; un retrait de relation supprime le résultat.
+
+FILTRES DES NOUVELLES SAISONS
+Ouvrir Nouvelles saisons. Les filtres agissent sur les propositions déjà chargées ;
+ils ne lancent pas une nouvelle recherche réseau. Le compteur indique X sur Y
+résultats chargés, et pas un total mondial de saisons disponibles.
+Le statut est celui de l'anime suivi à l'origine de la proposition, reconnu par
+sourceAnimeId ou sourceMalId. Un titre semblable n'est pas une preuve : un statut
+inconnu reste non renseigné. Type, genre, studio et année concernent la proposition.
+Les données manquantes ne sont pas inventées.
+Les choix cochés sont conservés lorsqu'un filtre masque puis réaffiche une fiche.
+Tout sélectionner, désélectionner, ajouter la sélection et oublier en groupe
+concernent uniquement les propositions visibles. L'oubli demande confirmation et
+conserve les propositions masquées. Réinitialiser restaure les filtres, pas les
+propositions que tu as volontairement oubliées.
+
+INSTALLATION ET MISE À JOUR WINDOWS — RECETTE À EXÉCUTER SUR VM
+Les contrôles de code et de paquet Linux ne remplacent pas le Planificateur,
+l'installateur NSIS et le stockage natif Windows. Les étapes suivantes n'ont pas
+été exécutées sur une VM Windows dans cet environnement.
+
+1. Instantané de la VM. Préparer une bibliothèque fictive en bêta 80 et une
+   sauvegarde/export ; conserver notes, progression, favoris et carnet de contrôle.
+2. Extraire l'archive complète Beta81-Reprise80 dans un NOUVEAU dossier. Ne pas
+   copier les fichiers par-dessus une ancienne extraction 81/82. Ne pas reprendre
+   leurs node_modules ou leur dossier dist.
+3. Installer Node/npm conformes à package.json et aux fichiers .node-version/.nvmrc.
+   Exécuter Publier Installateur Windows.bat. Le build doit vérifier les sources,
+   installer le lockfile, tester et produire uniquement l'installateur NSIS prévu.
+4. VM vierge : installer avec le compte utilisateur normal, sans élévation
+   inutile. Vérifier version 2.0.0-beta.81, Electron 44.9.3, démarrage, bibliothèque
+   vide, imports, recherche, notes/carnet, sauvegarde et restauration.
+5. VM bêta 80 : installer la nouvelle 81. Vérifier que le profil utilisateur, la
+   bibliothèque, les statuts, notes, favoris et préférences n'ont pas changé.
+   Fermer puis rouvrir et comparer l'export. Aucun profil réel pour cette recette.
+6. Si une ancienne 81 ou 82 a été installée, la mise à jour automatique ne constitue
+   pas un retour arrière fiable : le numéro est identique ou inférieur. Sauvegarder,
+   fermer ALM et installer manuellement la nouvelle archive reconstruite ; ne pas
+   supprimer les fichiers personnels. Conserver les sauvegardes des essais écartés
+   séparément si elles contiennent des textes à récupérer.
+
+TÂCHES — INVENTAIRE ET RECETTE NATIVE WINDOWS
+Une tâche par profil : \ALM\Anime Local Manager - Maintenance - <empreinte>.
+Action : l'exécutable réellement installé avec l'argument exact --maintenance.
+Répertoire de travail : le dossier de cet exécutable. Compte courant, ouverture
+de session interactive, privilèges ordinaires ; aucun mot de passe mémorisé.
+Déclenchement : ouverture de session + 90 secondes, répétition toutes les 2 heures,
+exécution manquée rattrapable ; instances multiples ignorées ; plafond de 30 minutes.
+Pas de garantie d'exécution lorsque l'utilisateur est déconnecté : mode interactif.
+
+Quatre traitements internes, configurables :
+- Actualités : 2 heures par défaut.
+- Saisons : 24 heures par défaut.
+- Catalogue : 48 heures par défaut.
+- Application : 6 heures par défaut ; vérification/téléchargement selon préférences.
+La maintenance globale est désactivée par défaut. Réseau mesuré ou inconnu évité
+si la préférence correspondante est activée.
+
+A. Activer depuis ALM, puis examiner le Planificateur : action, dossier de travail,
+   compte, déclencheur, limite et option Ignorer la nouvelle instance. Exécuter
+   deux fois : absence de doublon et un seul traitement à la fois.
+B. ALM fermé : Exécuter la tâche ; aucune fenêtre inutile. Contrôler le résultat
+   réel du traitement, pas uniquement Dernier résultat = 0.
+C. ALM ouvert : Exécuter la tâche ; l'instance existante doit rester seule et les
+   préférences de maintenance continuent de gouverner ses traitements.
+D. Couper le réseau puis rétablir. Vérifier motif offline/metered/network-unknown
+   et absence de faux lastSuccess. Aucun essai en rafale sur les fournisseurs.
+E. Interrompre un traitement sur la VM, puis relancer : son ancien état running
+   devient ALM_MAINTENANCE_INTERRUPTED. Réessai autorisé après 15 minutes, à la
+   prochaine exécution. Cela ne crée pas un nouveau déclencheur Windows : ALM
+   fermé, le rythme de la tâche reste de 2 heures. Relancer manuellement après
+   15 minutes si nécessaire pour la recette.
+F. Une erreur d'un traitement courant doit laisser un état error et un code de
+   sortie 1 après fermeture propre du moteur. Un travail ignoré pour absence de
+   réseau n'est pas annoncé comme actualisé. lastSuccess désigne un vrai succès.
+G. Désactiver la tâche directement dans Windows, fermer et rouvrir ALM : elle doit
+   rester désactivée. Le bouton Réparer/Enregistrer est une action explicite qui
+   peut la réactiver. Vérifier aussi la désactivation faite dans ALM.
+H. Mettre à jour avec maintenance activée, puis désactivée. Vérifier remplacement
+   effectif de l'exécutable et de l'exécuteur embarqué, chemin et dossier corrects,
+   absence d'ancienne tâche ALM du même profil. Un homonyme non attribuable à ALM
+   doit provoquer un conflit, sans être écrasé ni supprimé.
+I. Répéter dans un chemin avec espaces et accents. Tester veille/réveil et une
+   exécution manquée. Le rattrapage dépend des paramètres Windows réellement lus.
+J. Désinstaller : seules les tâches attribuables à ALM de ce profil sont retirées.
+   Préparer une tâche témoin appartenant à un autre logiciel et vérifier sa
+   conservation. Simuler un échec : la désinstallation propose Réessayer/Annuler
+   et conserve les fichiers si le nettoyage échoue. En silencieux, elle doit
+   s’arrêter avec un code non nul ; aucune boucle de réessai automatique.
+
+L'état local maintenance-state.json contient les quatre derniers états, dates,
+codes d'erreur et compteurs de résultat ; il ne constitue pas un journal infini.
+Ne jamais joindre de secret, de fichier de session ou de base personnelle à un
+rapport. Le lancement de plusieurs serveurs Node indépendants sur un même profil
+n'est pas un mode d'exploitation pris en charge ni validé par cette recette.
+
+SERVICES DISTANTS ET DONNÉES
+Le projet Supabase ALM Community a été vérifié en lecture seule. Les migrations
+observées s'arrêtent à 20261018115617 (bêta 73). Aucune table/fonction de souvenirs,
+disponibilités ou avatars ajoutée par les anciennes 81/82 n'a été trouvée.
+La fonction publique alm-public est restée à sa version déployée 22, et le site
+public annonce encore beta76. Aucun déploiement ni SQL de suppression n'est requis
+pour retirer des objets qui n'y ont pas été installés. Les utilisateurs, comptes,
+partages existants, domaine et emails sont conservés.
+
+RETOUR ARRIÈRE
+Conserver l'archive bêta 80 de référence et une sauvegarde avant installation.
+Le retour se fait manuellement sur la VM ; aucun nouveau schéma local ou distant
+n'est imposé par cette nouvelle 81. Electron 44.9.0 de la référence 80 est concerné
+par l'avis GHSA-jr5w-w6x2-84p9 : réserver ce retour au diagnostic isolé, pas à une
+diffusion réseau non corrigée.
+
+CONTRÔLES REPRODUCTIBLES
+npm ci
+npm run verify:beta81
+npm run audit:locales
+npm run verify:archive
+npm run verify
+
+Les résultats réellement exécutés, empreintes et limites sont dans le rapport et
+les preuves livrés séparément. Le code ne certifie pas les conditions juridiques,
+la configuration SMTP d'Auth ou le bon fonctionnement d'une installation Windows.

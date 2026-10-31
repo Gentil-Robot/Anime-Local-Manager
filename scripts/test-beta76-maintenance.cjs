@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');let engine=0,runs=0,quits=0;
+const app={commandLine:{appendSwitch(){}},requestSingleInstanceLock(){return true},on(){},whenReady(){return {then(){return {catch(){}};}};},getVersion(){return require('../package.json').version;},getPath(){return require('node:os').tmpdir();},quit(){quits++;}};
+const api={startServer:async()=>({almPort:3123}),PORT:3123,maintenanceState:async()=>({settings:{enabled:false}}),configureMaintenanceUpdate:async()=>{},runMaintenance:async()=>{runs++;return {tasks:{},reason:''};}};
+const electron={app,BrowserWindow:function(){throw Error('Maintenance must not create a window');},ipcMain:{removeHandler(){},handle(){}},dialog:{},shell:{},screen:{},safeStorage:{},Notification:{},clipboard:{}};
+const loader=name=>name==='electron'?electron:name==='./lib/release-smoke'?{prepareReleaseSmoke:()=>null}:name==='./server'?(engine++,api):name==='./lib/integrated-updater'?{createIntegratedUpdater:()=>({state:()=>({supported:false,phase:'idle'})})}:name==='./lib/os-maintenance'?{createScheduler:()=>({supported:false})}:name.startsWith('./')?require(path.join(root,name)):require(name);
+const context={require:loader,process:{platform:'linux',argv:['electron','app','--maintenance'],env:{}},__dirname:root,console,setTimeout,clearTimeout,Promise,Buffer};
+vm.runInNewContext(fs.readFileSync(path.join(root,'main.js'),'utf8')+'\nprepareWritableDataFolders=()=>{};this.testStart=startApplication;',context);
+(async()=>{await context.testStart();assert.equal(engine,1);assert.equal(runs,1);assert.equal(quits,1);console.log('OK Beta76: actual cold maintenance startup initializes the engine, runs once and quits without a window. Native Windows scheduler remains a platform check.');})().catch(error=>{console.error(error);process.exitCode=1;});

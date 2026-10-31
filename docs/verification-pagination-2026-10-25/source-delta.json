@@ -1,0 +1,29 @@
+{
+  "parentArchiveSha256": "3ec6454a8a9bf56de22aa38088978677cc7dbe808112bc9774ada77c051eef94",
+  "modifiedRuntimeFiles": [
+    "community/site/community-workspace.css",
+    "community/site/community-workspace.js",
+    "community/site/scroll-progress.js",
+    "public/alm-v2.js",
+    "public/app.js",
+    "public/beta41.js",
+    "public/catalog.js",
+    "public/community-workspace.css",
+    "public/community-workspace.js",
+    "public/lexicon.js",
+    "public/library-paging.js",
+    "public/memories-page.js",
+    "public/rankings.js",
+    "public/scroll-progress.js"
+  ],
+  "newTest": "scripts/test-beta82-pagination-browser.cjs",
+  "removedOriginalFiles": [],
+  "dependenciesChanged": false,
+  "backendOrMigrationsChanged": false,
+  "browserChecks": {
+    "pagination": 33,
+    "navigation": 23,
+    "ux": 31
+  },
+  "targetedSuites": 12
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "path": "supabase/migrations/20261013192520_alm_community.sql",
+    "sha256": "34068f4b047153e848a124e950b56bed4842099fd8180cdac86a6f84b90dde97",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261013192931_alm_community_hardening.sql",
+    "sha256": "db1a22c9a450c7547beb4843b81b11b15dfc9e74721f2899806619d8863f016a",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261014180211_alm_beta60_identity_security.sql",
+    "sha256": "550e8684889687e0c09b7d4e62ed19b38b8a7a7b55bb37895701fbe8269c5482",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261014183409_alm_beta60_minimal_payload.sql",
+    "sha256": "e6622ec94a5db3d90a82133f92ea600ad4ee320e7022329c74651241d52858d6",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261016173601_alm_beta61_community_workspace.sql",
+    "sha256": "7eba79b7400b570423b7bb0127b4aee99f8c5cefa7d6ff724c628ebafe6ecf6b",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261017123150_alm_beta62_social_limits.sql",
+    "sha256": "0c919cf1b0b1eb8c0923d7657b9484454313f5bd9b6504f046ba58a0c0e2e6b5",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261017174703_alm_beta63_sessions_and_covers.sql",
+    "sha256": "4b0e31e576961edacd11a8085ff4dc5b3ddaca6396b157dddfd51ee9835b3f92",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261017211127_alm_beta66_content_policy.sql",
+    "sha256": "51c697af89e4b64e8915fda916eac5763e118fe709e5aa7da223536c14c85c53",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261018105401_alm_beta72_age_sharing.sql",
+    "sha256": "357d8e51258bcf27e9abcab6a958622411cfa848a24ebafc463eaf7b951efa4d",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261018115356_alm_beta73_library_performance.sql",
+    "sha256": "c6c20cddc557050d616ebca7d8af81da721d83156a6194a967fca876ae9de3d0",
+    "unchanged": true
+  },
+  {
+    "path": "supabase/migrations/20261018115617_alm_beta73_charter.sql",
+    "sha256": "d9a45a445b69f2344db0fa7bde4ca6ff02adb5203497e659fb076208db15e263",
+    "unchanged": true
+  }
+]

@@ -1,0 +1,265 @@
+{
+  "browser": "134.0.6998.35",
+  "baselineAssets": false,
+  "status": "passed",
+  "checks": [
+    "Library bottom Next returns to page top",
+    "Library Last reaches the short final page at its top",
+    "Library First after short last page",
+    "Library bottom Next works from the keyboard",
+    "Library bottom Previous returns to the page top",
+    "Watching paging reaches the page top",
+    "Plan to Watch paging reaches the page top",
+    "Grouped seasons are actually present",
+    "Grouped-series pagination reaches the page top",
+    "A normal repaint does not request the new page-navigation reset",
+    "Memories Next returns above its filters",
+    "Memories Last returns above its filters",
+    "Memories First returns above its filters",
+    "Catalogue waits for the next page then returns to the top",
+    "Late catalogue response does not move a different view",
+    "Ranking Next returns to the page top",
+    "Ranking Last returns to the page top",
+    "Ranking First after the one-record page",
+    "Dictionary bottom Next returns above its filters",
+    "Dictionary Last returns above its filters",
+    "Own shared library returns to the page top",
+    "Friend library returns to the page top",
+    "Common-anime list returns to the page top",
+    "Quarantine bottom Next returns to the page top",
+    "Quarantine Last returns to the page top",
+    "Missing-information Next returns to the page top",
+    "CSV desktop resets its reading containers, preserving the background",
+    "CSV short window resets the workspace, preserving the background",
+    "Mobile library bottom Next returns to the document top",
+    "Mobile retains page width",
+    "Hidden stale scope cannot cancel the active page reset",
+    "Account background alone is slightly transparent",
+    "All notes and journals are preserved"
+  ],
+  "measurements": [
+    {
+      "name": "Library bottom Next returns to page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1528.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library Last reaches the short final page at its top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1475.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library First after short last page",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1528.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library bottom Next works from the keyboard",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1528.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library bottom Previous returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1528.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Watching paging reaches the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 887.40625,
+      "firstBottom": 1641.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Plan to Watch paging reaches the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1475.34375,
+      "viewport": 1000
+    },
+    {
+      "name": "Grouped-series pagination reaches the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1581.84375,
+      "viewport": 1000
+    },
+    {
+      "name": "Library repaint",
+      "before": 600,
+      "after": 47,
+      "resetCalls": 0
+    },
+    {
+      "name": "Memories Next returns above its filters",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 172.5625,
+      "firstBottom": 218.4375,
+      "viewport": 1000
+    },
+    {
+      "name": "Memories Last returns above its filters",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 172.5625,
+      "firstBottom": 218.4375,
+      "viewport": 1000
+    },
+    {
+      "name": "Memories First returns above its filters",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 172.5625,
+      "firstBottom": 218.4375,
+      "viewport": 1000
+    },
+    {
+      "name": "Catalogue waits for the next page then returns to the top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 87.796875,
+      "firstBottom": 248.359375,
+      "viewport": 1000
+    },
+    {
+      "name": "Ranking Next returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 143.9375,
+      "firstBottom": 188.5625,
+      "viewport": 1000
+    },
+    {
+      "name": "Ranking Last returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 143.9375,
+      "firstBottom": 188.5625,
+      "viewport": 1000
+    },
+    {
+      "name": "Ranking First after the one-record page",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 143.9375,
+      "firstBottom": 188.5625,
+      "viewport": 1000
+    },
+    {
+      "name": "Dictionary bottom Next returns above its filters",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 87.796875,
+      "firstBottom": 347.796875,
+      "viewport": 1000
+    },
+    {
+      "name": "Dictionary Last returns above its filters",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 87.796875,
+      "firstBottom": 347.796875,
+      "viewport": 1000
+    },
+    {
+      "name": "Own shared library returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 186.4375,
+      "firstBottom": 226.109375,
+      "viewport": 1000
+    },
+    {
+      "name": "Friend library returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 186.4375,
+      "firstBottom": 226.109375,
+      "viewport": 1000
+    },
+    {
+      "name": "Common-anime list returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 186.4375,
+      "firstBottom": 226.109375,
+      "viewport": 1000
+    },
+    {
+      "name": "Quarantine bottom Next returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 87.796875,
+      "firstBottom": 302.796875,
+      "viewport": 1000
+    },
+    {
+      "name": "Quarantine Last returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 87.796875,
+      "firstBottom": 302.796875,
+      "viewport": 1000
+    },
+    {
+      "name": "Missing-information Next returns to the page top",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 87.796875,
+      "firstBottom": 302.796875,
+      "viewport": 1000
+    },
+    {
+      "name": "CSV desktop resets its reading containers, preserving the background",
+      "results": 0,
+      "workspace": 0,
+      "dialog": 0,
+      "background": 550,
+      "focusInside": true
+    },
+    {
+      "name": "CSV short window resets the workspace, preserving the background",
+      "results": 0,
+      "workspace": 0,
+      "dialog": 0,
+      "background": 550,
+      "focusInside": true
+    },
+    {
+      "name": "Mobile library bottom Next returns to the document top",
+      "y": 0,
+      "windowY": 0,
+      "viewport": 844
+    },
+    {
+      "name": "Hidden stale scope cannot cancel the active page reset",
+      "y": 0,
+      "windowY": 0,
+      "firstTop": 774.40625,
+      "firstBottom": 1528.34375,
+      "viewport": 1000
+    }
+  ],
+  "errors": [],
+  "failure": null,
+  "scope": "Real local app and production CSS; ephemeral library/catalogue/notebook; fictional community/ranking/import-review fixtures; external traffic blocked; no real account, import, deletion or native Windows installer"
+}

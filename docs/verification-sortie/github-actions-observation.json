@@ -1,0 +1,10 @@
+{
+  "observedAt": "2026-10-25T06:04:56.869Z",
+  "repository": "Gentil-Robot/Anime-Local-Manager",
+  "endpoint": "https://api.github.com/repos/Gentil-Robot/Anime-Local-Manager/actions/runs?per_page=5",
+  "response": {
+    "total_count": 0,
+    "workflow_runs": []
+  },
+  "mutationPerformed": false
+}

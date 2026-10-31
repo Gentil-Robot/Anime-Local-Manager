@@ -1,0 +1,19 @@
+[package-profile] {"test":"beta69","phase":"filter-validation","durationMs":95.902}
+[package-profile] {"test":"beta69","phase":"copy-sources","durationMs":402.634}
+[package-profile] {"test":"beta69","phase":"npm-ls","durationMs":969.734}
+[package-profile] {"test":"beta69","phase":"copy-production-modules","durationMs":733.468}
+[package-profile] {"test":"beta69","phase":"load-asar-tools","durationMs":22.873}
+[package-profile] {"test":"beta69","phase":"missing-module-asar","durationMs":4463.481}
+[package-profile] {"test":"beta69","phase":"complete-asar-and-integrity","durationMs":3059.868}
+[package-profile] {"test":"beta69","phase":"module-fixtures","durationMs":29.242}
+ALM_PACKAGE_ENGINE_OK {"phase":"missing","electron":"45.0.0","missingModuleRejected":true}
+[package-profile] {"test":"beta69","phase":"electron-missing","durationMs":914.945}
+ALM_PACKAGE_ENGINE_OK {"phase":"seed","electron":"45.0.0","catalogue":30430,"imported":1,"backup":true,"persistence":false,"nativeStorage":"not-available"}
+[package-profile] {"test":"beta69","phase":"electron-seed","durationMs":10306.476}
+ALM_PACKAGE_ENGINE_OK {"phase":"verify","electron":"45.0.0","catalogue":30430,"imported":1,"backup":true,"persistence":true,"nativeStorage":"not-exercised"}
+[package-profile] {"test":"beta69","phase":"electron-verify","durationMs":1833.518}
+[package-profile] {"test":"beta69","phase":"redacted-error-fixture","durationMs":5.528}
+[package-profile] {"test":"beta69","phase":"cleanup","durationMs":60.255}
+OK Beta69 package: builder filtering, missing-module reproduction in Electron, ASAR dependency checks, actual Electron utility launches, catalogue/import/backup/persistence, protected session and redacted diagnostics. Native Windows EXE validation remains required.
+[package-profile] summary {"test":"beta69","totalMs":22898.136,"phases":[{"name":"filter-validation","durationMs":95.902},{"name":"copy-sources","durationMs":402.634},{"name":"npm-ls","durationMs":969.734},{"name":"copy-production-modules","durationMs":733.468},{"name":"load-asar-tools","durationMs":22.873},{"name":"missing-module-asar","durationMs":4463.481},{"name":"complete-asar-and-integrity","durationMs":3059.868},{"name":"module-fixtures","durationMs":29.242},{"name":"electron-missing","durationMs":914.945},{"name":"electron-seed","durationMs":10306.476},{"name":"electron-verify","durationMs":1833.518},{"name":"redacted-error-fixture","durationMs":5.528},{"name":"cleanup","durationMs":60.255}]}
+OK nettoyage du dossier temporaire et fermeture des processus de test.

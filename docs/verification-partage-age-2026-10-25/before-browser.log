@@ -1,0 +1,16 @@
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm82-age-sharing-onMULf/collection.sqlite
+AssertionError [ERR_ASSERTION]: The profile editor must render a real age-aware exclusion control
+
+0 !== 1
+
+    at /workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-age-sharing-browser.cjs:94:10
+    at async check (/workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-age-sharing-browser.cjs:83:47)
+    at async /workspace/scratch/0dfaa795a9bc/work/Anime-Local-Manager-Beta82/scripts/test-beta82-age-sharing-browser.cjs:93:2 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

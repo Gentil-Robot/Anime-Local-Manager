@@ -1,0 +1,85 @@
+{
+  "observed_at": "2026-10-25T06:00:49.860270+00:00",
+  "read_only": true,
+  "checks": [
+    {
+      "name": "site_manifest",
+      "url": "https://animelocalmanager.com/release-manifest.json",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data: https://cdn.myanimelist.net https://s4.anilist.co; connect-src 'self' https://duzwwoyqproxpytmfzdx.supabase.co wss://duzwwoyqproxpytmfzdx.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
+        "content-type": "application/json; charset=utf-8",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff"
+      },
+      "body_summary": {
+        "version": "2.0.0-beta.76"
+      }
+    },
+    {
+      "name": "site_home",
+      "url": "https://animelocalmanager.com/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data: https://cdn.myanimelist.net https://s4.anilist.co; connect-src 'self' https://duzwwoyqproxpytmfzdx.supabase.co wss://duzwwoyqproxpytmfzdx.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "referrer-policy": "no-referrer",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "name": "edge_config",
+      "url": "https://duzwwoyqproxpytmfzdx.supabase.co/functions/v1/alm-public/config",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "access-control-allow-origin": "https://animelocalmanager.com",
+        "cache-control": "no-store",
+        "vary": "Accept-Encoding, Origin",
+        "access-control-allow-methods": "GET, POST, OPTIONS",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload"
+      },
+      "body_summary": {
+        "ready": true
+      }
+    },
+    {
+      "name": "edge_invalid_origin",
+      "url": "https://duzwwoyqproxpytmfzdx.supabase.co/functions/v1/alm-public/config",
+      "status": 403,
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "vary": "Accept-Encoding, Origin",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload"
+      },
+      "body_summary": {
+        "code": "INVALID_INPUT"
+      }
+    },
+    {
+      "name": "auth_settings",
+      "url": "https://duzwwoyqproxpytmfzdx.supabase.co/auth/v1/settings",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "vary": "Origin, Accept-Encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "body_summary": {}
+    }
+  ]
+}
