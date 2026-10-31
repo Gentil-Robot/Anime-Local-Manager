@@ -8,7 +8,9 @@ Anime Local Manager (ALM) est une application **gratuite, locale et open source 
 
 ## V2.0.0 Bêta stable
 
-**État au 31 octobre 2026 : version candidate validée en intégration Windows, publication officielle en préparation.**
+<!-- ALM-V2:STATUS:START -->
+**Statut : V2.0.0 Bêta stable validée sous Windows.** La release GitHub et son installateur sont préparés en **brouillon** ; la publication publique attend encore l'activation de la préversion.
+<!-- ALM-V2:STATUS:END -->
 
 - **153 suites de tests réussies** sur GitHub Actions pour la révision `6c2c350`.
 - **Installateur Windows NSIS x64 compilé**, avec tests de démarrage et de persistance sur le runner de validation. Cela ne remplace pas tous les essais d'installation sur un PC neuf.
@@ -30,11 +32,13 @@ La branche [`publication/v2.0.0-beta-stable`](https://github.com/Gentil-Robot/An
 
 ## Télécharger Anime Local Manager
 
-**Disponible actuellement :** [Anime Local Manager V1](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0).
+<!-- ALM-V2:DOWNLOAD:START -->
+**Version actuellement téléchargeable :** [Anime Local Manager V1](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v1.0).
 
-**À venir :** [Anime Local Manager V2.0.0 Bêta stable](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0), publiée comme **préversion GitHub**. **Le lien V2 n'est pas encore actif et aucun installateur V2 n'est disponible dans les releases à ce jour.**
+**V2.0.0 Bêta stable :** l'installateur Windows x64, le rapport de validation et son empreinte SHA-256 sont prêts dans le brouillon GitHub. Ils deviendront disponibles sur la [page officielle des téléchargements](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) après publication de la préversion.
 
-Le futur installateur Windows x64 sera non signé numériquement : SmartScreen pourra afficher un avertissement. Téléchargez uniquement depuis la release GitHub officielle et comparez l'empreinte SHA-256 à celle indiquée sur la release.
+**Sécurité du téléchargement :** l'installateur n'est pas signé numériquement et peut entraîner un avertissement Windows SmartScreen. Une fois publié, téléchargez-le uniquement depuis GitHub Releases et comparez son SHA-256 avec `SHA256SUMS.txt`.
+<!-- ALM-V2:DOWNLOAD:END -->
 
 Pour tester ou compiler la V2 avant publication, consultez les [instructions de la branche V2](https://github.com/Gentil-Robot/Anime-Local-Manager/blob/publication/v2.0.0-beta-stable/README.md). **Compiler `main` construit encore la V1, pas la V2.**
 
