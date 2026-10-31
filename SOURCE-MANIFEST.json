@@ -2652,8 +2652,8 @@
     },
     {
       "path": "scripts/test-beta-stable.js",
-      "bytes": 80671,
-      "sha256": "f750b6d302277b9e403c4743071971c29c52fd5c38fab74f11ed4dc7df5c92ba"
+      "bytes": 80750,
+      "sha256": "045fedd4036d59f93ef593f9cdcbd0752e0e9e32fbbd74f00abc6ff332873e63"
     },
     {
       "path": "scripts/test-beta15-ui-logic.js",
