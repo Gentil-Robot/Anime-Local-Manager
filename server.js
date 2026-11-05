@@ -1,3 +1,5 @@
+const rescueMode = require('./lib/rescue-mode');
+rescueMode.bootstrap();
 const collectionIdentity = require('./public/collection-state');
 const { boundedTextFetch, singleFlight } = require("./lib/bounded-text-fetch");
 const { aniListFetch } = require("./lib/anilist-fetch");
@@ -38,7 +40,7 @@ const {createVersionCheck}=require('./lib/version-check');
 const db = require("./db");
 
 const app    = express();
-const PORT   = 3123;
+const PORT   = 3143; // Separate from the stable application.
 const BACKUP_VERSION = "2.0.0-beta.82"; // Format historique : préserver les sauvegardes existantes.
 const PRODUCT_RELEASE = require("./release-version.json");
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 64 * 1024 * 1024, files: 1 } });
@@ -101,7 +103,7 @@ const dbReady = db.initDb(DATA_DIR);
 app.disable?.("x-powered-by");
 app.use(localRequestGuard);
 app.use((req,res,next)=>{
-  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; media-src 'self' blob: https:; connect-src 'self' https://duzwwoyqproxpytmfzdx.supabase.co https://challenges.cloudflare.com; font-src 'self'; object-src 'none'; frame-src https://www.youtube-nocookie.com https://challenges.cloudflare.com; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
   const token=process.env.ALM_SESSION_TOKEN;
   if(token){
     if(req.method==='GET'&&(req.path==='/'||req.path==='/index.html'))res.cookie('alm_session',token,{httpOnly:true,sameSite:'strict',path:'/'});
@@ -560,25 +562,25 @@ const DEFAULT_CONFIG = Object.freeze({
   cloudBackupPath: "",
   storageMode: "local-project",
   useAliasCache: true,
-  updateAliasesOnStart: true,
+  updateAliasesOnStart: false,
   viewMode: "cards",
   workerMode: "database",
   betaseriesApiKey: "",
   betaseriesLastTest: null,
-  preloadCacheOnStart: true,
+  preloadCacheOnStart: false,
   databaseEdition: true,
   metadataUrl: "",
   metadataManifestUrl: "",
-  preloadMetadataOnStart: true,
+  preloadMetadataOnStart: false,
   metadataUpdateOnStart: false,
   metadataUpdateIntervalHours: 168,
-  metadataAutonomousUpdateOnStart: true,
+  metadataAutonomousUpdateOnStart: false,
   metadataAutonomousIntervalHours: 168,
   metadataAutonomousSeasonalPages: 2,
   metadataAutonomousUpcomingPages: 2,
   metadataAutonomousTopPages: 0,
   metadataAutonomousAniListPages: 0,
-  metadataAutonomousLearnFromSearch: true,
+  metadataAutonomousLearnFromSearch: false,
   newsHistoryRetentionDays: 365
 });
 
@@ -2501,6 +2503,7 @@ function updateMetadataProgress(patch){
 }
 
 async function runMetadataAutonomousUpdate(options = {}) {
+  if (rescueMode.active) return rescueMode.skipped();
   if (metadataAutonomousJob && options.wait !== true) return { ok: true, skipped: true, reason: "already-running" };
   if (metadataAutonomousJob) return metadataAutonomousJob;
 
@@ -2819,6 +2822,7 @@ async function almMetadataDirectRemoteImport(url, options = {}) {
 }
 
 async function almMetadataRemoteSync(options = {}) {
+  if (rescueMode.active) return rescueMode.skipped();
   await db.whenReady();
 
   const force = options.force === true;
@@ -2925,6 +2929,7 @@ async function almMetadataRemoteSync(options = {}) {
 }
 
 async function almMetadataPreload(options = {}) {
+  if (rescueMode.active) return rescueMode.skipped();
   await db.whenReady();
 
   const force = options.force === true;
@@ -10713,6 +10718,15 @@ function createBackupPayload() {
 const storageMaintenance=require('./lib/storage-maintenance').mountStorage(app,{dataDir:DATA_DIR,imagesDir:IMAGES_DIR,db});
 const notificationCenter=require('./lib/notification-center').createNotificationCenter({file:path.join(DATA_DIR,'notification-center.json')});
 const localizedTitles=require('./lib/localized-titles').createLocalizedTitles({file:path.join(DATA_DIR,'localized-titles.json')});
+const independentStore = require('./lib/independent-catalogue').createCatalogue(path.join(DATA_DIR, 'independent-catalogue'));
+try {
+  if (!independentStore.read()) {
+    const bundled = require('./lib/independent-catalogue').createCatalogue(path.join(__dirname, 'data/independent-catalogue')).read();
+    if (bundled) independentStore.install(bundled.data);
+  }
+} catch (error) { console.warn('[catalogue-secours] Catalogue unavailable:', error.code || error.message); }
+require('./lib/independent-catalogue-api').mountIndependentCatalogue(app, {catalogue: independentStore, db, readAnimes: () => readAnimes(false), writeAnimes});
+app.get('/api/rescue/status', (_req, res) => res.json({active: true, offline: true, experimental: true, personalProfile: 'separate', catalogueCoverageValidated: false}));
 const catalogOperations=require('./lib/catalog').mountCatalog(app,{db,readAnimes:()=>readAnimes(false),writeAnimes,titles:localizedTitles,updatedAt:()=>{const status=readMetadataAutonomousStatus();return status?.completedAt||status?.finishedAt||safeReadJsonFile(path.join(__dirname,'data/database/metadata-manifest.json'),{}).generatedAt||null;}});
 require('./lib/notebook').mountNotebook(app,{db,readAnimes,writeAnimes,titles:localizedTitles,rememberBatch:added=>catalogOperations.remember({kind:'batch',added})});
 const releaseWatch=createReleaseWatch({stateFile:path.join(DATA_DIR,'episode-releases.json'),getAnimes:readAnimes}),versionCheck=createVersionCheck();
@@ -10962,7 +10976,7 @@ async function startServer(port = PORT, attempt = 0) {
       instance.once("listening", onListening);
     });
     server.almPort = Number(server.address()?.port || safePort);
-    console.log(`${PRODUCT_RELEASE.publicName} lancé : http://127.0.0.1:${server.almPort}`);
+    console.log(`${rescueMode.active ? 'ALM — prototype de secours' : PRODUCT_RELEASE.publicName} lancé : http://127.0.0.1:${server.almPort}`);
     return server;
   } catch (error) {
     if (error?.code === "EADDRINUSE" && attempt < 20 && safePort < 65535) {
@@ -12053,7 +12067,7 @@ const maintenance=require('./lib/maintenance').createMaintenance({directory:DATA
  catalog:async()=>{await db.whenReady();if(metadataAutonomousJob)return {ok:true,skipped:true,reason:'already-running'};const remote=isMetadataRemoteConfigured()?await almMetadataRemoteSync({startup:true,force:true}):null;if(remote?.ok&&!remote.skipped)return remote;return runMetadataAutonomousUpdate({force:true,wait:true});},
  application:async({settings})=>maintenanceUpdate(settings)
 }});
-if(process.env.ALM_RELEASE_SMOKE!=='1'&&process.env.ALM_MAINTENANCE_MODE!=='1')maintenance.start();
+if(!rescueMode.active&&process.env.ALM_RELEASE_SMOKE!=='1'&&process.env.ALM_MAINTENANCE_MODE!=='1')maintenance.start();
 app.get('/api/maintenance/status',(_req,res)=>res.json(maintenance.state()));
 app.post('/api/maintenance/run',(_req,res)=>{maintenance.run({force:true}).catch(error=>console.warn('[maintenance]',error.message));res.status(202).json({ok:true});});
 app.put('/api/maintenance/settings',(req,res)=>{try{res.json(maintenance.configure(req.body||{}));}catch(error){res.status(409).json({error:error.message});}});
@@ -13323,6 +13337,7 @@ app.post("/api/bulk/images-only", async (req, res) => {
 
 // ── Auto-seed metadata depuis le cache Jikan et la bibliothèque locale ──
 async function autoSeedMetadataFromCache() {
+  if (rescueMode.active) return rescueMode.skipped();
   try {
     await db.whenReady();
     const stats = db.getMetadataStats ? db.getMetadataStats() : { count: 0 };
@@ -13410,6 +13425,7 @@ dbReady.then(async () => {
   await db.prepareMetadataTitleIndex();
   if(runtimeStopping)return;
   try{upgradeLocalCollection();}catch(error){console.warn('['+PRODUCT_RELEASE.publicVersion+'] Réparation locale différée :',error.message);}
+  if (rescueMode.active) return; // No provider enrichment or startup seed in this prototype.
   if(process.env.ALM_MAINTENANCE_MODE!=='1')await startLibraryAutomation(legacyImportedIds);
   if(process.env.ALM_MAINTENANCE_MODE==='1')return;
   metadataStartupTimer = setTimeout(() => {
@@ -13462,13 +13478,13 @@ module.exports = {
   startServer,
   PORT,
   configureBackupSecrets:store=>backupManager.configureStorage(store),
-  startReleaseNotifications:callback=>releaseWatch.start(async item=>{notificationCenter.record({...item,malId:readAnimes().find(a=>a.id===item.animeId)?.malId});if(!notificationCenter.state().muted)await callback(item);return true;}),
+  startReleaseNotifications:callback=>rescueMode.active ? Promise.resolve(rescueMode.skipped()) : releaseWatch.start(async item=>{notificationCenter.record({...item,malId:readAnimes().find(a=>a.id===item.animeId)?.malId});if(!notificationCenter.state().muted)await callback(item);return true;}),
   testNotification:async callback=>{notificationCenter.record({title:'Anime Local Manager'},'test');return !notificationCenter.state().muted&&callback?!!await callback({title:'Anime Local Manager',episode:1,source:'ALM · Test'}):false;},
   checkUpdates:(force,channel)=>versionCheck.check(force,channel),
   maintenanceState:()=>maintenance.state(),
   configureMaintenance:input=>maintenance.configure(input),
   runMaintenance:options=>maintenance.run(options),
-  configureMaintenanceUpdate:callback=>{maintenanceUpdate=callback;maintenance.start();},
+  configureMaintenanceUpdate:callback=>{maintenanceUpdate=callback; if (!rescueMode.active) maintenance.start();},
   prepareUpdateBackup:async()=>{await db.whenReady();const directory=path.join(DATA_DIR,'update-recovery');fs.mkdirSync(directory,{recursive:true});const file=path.join(directory,'library-'+Date.now()+'.json');require('./lib/atomic-file').atomicJson(file,createBackupPayload());return {ok:true,file};},
   closeCommunity:()=>community.close(),
   stopMaintenance:()=>maintenance.stop(),

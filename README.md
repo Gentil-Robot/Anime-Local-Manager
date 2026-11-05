@@ -1,91 +1,62 @@
-# Anime Local Manager
+# Anime Local Manager — branche de secours
 
-**Votre bibliothèque d'animés, vos saisons et vos souvenirs, au même endroit.**
+**Prototype expérimental hors ligne, préparé depuis la V2 validée.**
 
-Anime Local Manager (ALM) est une application **locale, gratuite et open source (MIT)** pour organiser sa collection d'animés sous Windows et Linux. La bibliothèque reste locale par défaut ; la communauté est facultative.
+Cette branche prépare une alternative pendant l’attente des réponses d’AniList et de MyAnimeList. Elle utilise un **profil séparé**, un petit catalogue Wikidata et le moteur local d’ALM. **Elle ne remplace pas encore le catalogue de 30 430 fiches et ne doit pas être publiée comme une nouvelle bêta stable.**
 
-[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2**](docs/RELEASE-NOTES-V2.0.0-BETA.md) · [**Historique technique**](docs/)
+La V2 de référence reste sur [`publication/v2.0.0-beta-stable`](https://github.com/Gentil-Robot/Anime-Local-Manager/tree/publication/v2.0.0-beta-stable). Aucun déploiement, aucune migration de production et aucune modification d’historique Git ne sont nécessaires pour tester cette branche.
 
-## V2.0.0 Bêta stable
+## Ce qui est préparé
 
-**État au 31 octobre 2026 : candidate Windows validée, publication publique en préparation.** Cette branche contient les sources de la V2 ; la branche `main` conserve encore la V1, jusqu'à la fusion contrôlée.
+| Élément | État de cette branche |
+| --- | --- |
+| Bibliothèque, statuts, épisodes, notes et souvenirs | Moteur local conservé ; essais dans un profil de test |
+| Imports personnels XML et sauvegardes locales | Conservés ; identifiants externes gardés comme références |
+| Catalogue de remplacement | **3 fiches réelles Wikidata**, échantillon d’intégration uniquement |
+| Identité des fiches | `alm:wd:Q…` ; aucune association automatique par titre avec MAL |
+| Mise à jour du catalogue | Import local explicite, version, SHA-256, remplacement atomique et rollback |
+| Images, résumés et classements publics du nouveau catalogue | Absents |
+| AniList, MAL, Jikan, Kitsu, TMDB et autres services distants | Réseau désactivé dans ce prototype, y compris actualités et communauté |
+| Installateur et mise à jour de l’application | Construction bloquée ; mise à jour et planification système désactivées |
 
-- **153/153 suites de tests réussies** sur GitHub Actions pour le commit `6c2c350` (avant mise à jour de ce README).
-- Installateur **Windows NSIS x64** compilé ; essais de démarrage et de persistance réussis sur le runner Windows.
-- Audit des dépendances de production : **0 alerte** ; **15 alertes modérées** connues dans l'outillage de compilation.
-- Electron **45.2.1** ; Node.js **22.23.4** recommandé pour construire le projet.
+Les anciens snapshots SQL MAL, leurs copies de récupération et les seeds de catalogue concernés sont retirés de la tête de cette branche. **Ils restent dans les anciennes branches, les commits, les archives et les éventuels assets publiés** : cette préparation n’est pas une purge de l’historique ni une validation de tous les contenus tiers du projet.
 
-### Télécharger la V2
+## Tester le prototype
 
-**Release officielle prévue : `v2.0.0`, marquée « pre-release » (bêta).**
+Node.js 22.12 ou plus récent ; dépendances identiques à la V2.
 
-- [**Lien direct vers Anime Local Manager V2.0.0 Bêta stable**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0) — **à venir : ce lien ne sera actif qu'après publication de la release.**
-- [**Page officielle des releases**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) — la V1 y reste accessible d'ici là.
-- [**Suivi de validation et de publication de la V2**](https://github.com/Gentil-Robot/Anime-Local-Manager/pull/2) — pull request de revue, non encore fusionnée.
-
-Le fichier Windows attendu est `Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.exe`. Lorsqu'il sera publié, téléchargez-le **uniquement depuis la release officielle** et comparez son SHA-256 à l'empreinte annoncée sur cette release. **L'installateur n'est pas signé numériquement** : Windows SmartScreen peut afficher un avertissement.
-
-## Fonctionnalités
-
-- **Bibliothèque personnelle :** fiches, statuts, épisodes, favoris, notes, filtres, sauvegardes et restauration.
-- **Imports et catalogue :** listes BetaSeries (CSV) et XML ; **30 430 fiches** de catalogue embarquées pour un fonctionnement local.
-- **Découverte :** recherche, recommandations, nouvelles saisons, classement, calendrier et actualités.
-- **Anime DNA et Mes souvenirs :** exploration des profils d'animés, historique personnel et carnet de souvenirs.
-- **Dictionnaire :** 161 termes illustrés autour de l'animation japonaise.
-- **Communauté facultative :** amis, bibliothèques partagées, animés en commun, recommandations et contrôles d'âge et de confidentialité.
-- **Sept langues :** français, anglais, espagnol, allemand, japonais, portugais brésilien et chinois simplifié.
-
-## Windows
-
-**Distribution publique ciblée :** installateur NSIS x64 uniquement. La version portable Windows n'est plus proposée.
-
-Pour compiler les sources sous Windows, installer Node.js `22.23.4`, npm 10+, Git et Git LFS, puis :
-
-```powershell
+```sh
 npm ci
-npm run verify
+npm run verify:rescue
+npm start
 ```
 
-Lancer ensuite `Publier Installateur Windows.bat` pour les vérifications et la construction ; `REPRENDRE_BUILD_WINDOWS.bat` permet de reprendre une construction interrompue. Les fichiers de sortie et le rapport `release-check.json` sont produits dans `dist/`. La compilation ne publie pas automatiquement de release GitHub.
+Ouvrir [http://127.0.0.1:3143](http://127.0.0.1:3143), puis le lien **Tester le catalogue expérimental** dans le bandeau. L’échantillon permet une recherche locale et l’ajout à la bibliothèque de test. La couverture par saison n’est pas validée : aucun rapprochement automatique avec les imports n’est effectué.
 
-## Linux
+- Depuis les sources : le profil local par défaut est `.rescue-profile/`, ignoré par Git et les manifestes.
+- Avec `npm run app` : le profil Electron est `anime-local-manager-secours`, distinct de celui de la V2. Les tâches système et l’installation de mises à jour restent désactivées.
+- Les essais automatisés utilisent des répertoires temporaires. `ALM_DATA_DIR` et `ALM_IMAGES_DIR` sont réservés aux profils de test explicitement choisis ; ne pas les faire pointer vers les données de l’installation habituelle.
 
-Les sources fonctionnent aussi sur Linux. Les paquets **AppImage** et **DEB** sont prévus, mais leur publication binaire doit faire l'objet d'une validation distincte de la recette Windows.
+La recherche habituelle, les saisons et la communauté ne bénéficient pas encore du nouveau catalogue. La page expérimentale est un premier parcours séparé, pas une intégration complète dans tous les écrans ALM.
 
-Après installation de Node.js 22+, npm et Git LFS :
+## Préparer ou restaurer un catalogue local
 
-```bash
-git lfs pull
-npm ci
-npm run app
+Le script accepte un export JSON du Query Service Wikidata ou un export `Special:EntityData`. Il conserve uniquement les identifiants Wikidata, les libellés dans les langues prises en charge, les nombres d’épisodes non ambigus et les révisions disponibles. Il ignore images, descriptions, scores et identifiants MAL.
+
+Une [requête SPARQL limitée](scripts/independent-catalogue.wikidata.rq) est fournie pour poursuivre l’étude. L’accès au Query Service n’est pas requis au lancement d’ALM. L’échantillon inclus provient de trois exports d’entités dont les révisions sont consignées dans [provenance.json](data/independent-catalogue/provenance.json).
+
+```sh
+npm run catalogue:prepare -- --input export-wikidata.json --version 2026-11-05.2
+npm run catalogue:status
+npm run catalogue:rollback
 ```
 
-La construction Linux peut se lancer avec `bash "Creer App Linux.sh"`. Elle produit les livrables dans `dist/` si l'environnement est compatible.
+Ces commandes ciblent le profil utilisé par `npm start`. Pour un autre profil de test, ajouter `--directory CHEMIN_DU_PROFIL/data/independent-catalogue`. Une version déjà utilisée avec un contenu différent, une baisse de plus de 10 % du nombre de fiches ou une empreinte invalide sont refusées. Le rollback explicite peut restaurer la version précédente même si le fichier courant est corrompu. Aucun téléchargement automatique de catalogue n’est activé.
 
-## Développement et contributions
+## Sources et limites de validation
 
-```bash
-npm ci
-npm run app             # application Electron
-npm run verify          # vérification du projet
-npm run build:community # génération locale des fichiers du site communautaire
-```
+Le code ALM reste sous [licence MIT](LICENSE). Les données structurées de Wikidata sont annoncées sous **CC0** par [sa politique de licence](https://www.wikidata.org/wiki/Wikidata:Licensing). Cela ne transforme pas les jaquettes ou les textes provenant d’autres sites en contenus librement réutilisables.
 
-Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour contribuer, [SECURITY.md](SECURITY.md) pour signaler un problème de sécurité et [LICENSE](LICENSE) pour la licence MIT du code. **Les contenus tiers, métadonnées et jaquettes conservent leurs conditions de licence propres.** La publication du code ou la compilation ne déploie pas Vercel, Supabase, Cloudflare ou Resend.
+`anime-offline-database` reste une **piste d’étude non importée**. Le projet agrège plusieurs fournisseurs ; sa licence ODbL/DbCL, les obligations de redistribution et la provenance des champs demandent une vérification séparée. Kitsu et TMDB ne sont pas activés comme remplaçants par défaut. Voir [l’état de préparation et les sources examinées](docs/BRANCHE-SECOURS.md).
 
-### Sauvegardes et Confidentialité
-
-Les données principales restent sur l'ordinateur de l'utilisateur. Faites une sauvegarde avant toute migration importante. Les fonctionnalités de communauté demandent une activation volontaire et appliquent les restrictions de partage et d'âge.
-
-### Documentation et historique technique
-
-Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.0.0 Bêta stable** est la version présentée publiquement. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
-
-- [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
-- [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)
-- [Recette technique et publication Electron](docs/ELECTRON-45.2.1-RECETTE-ET-PUBLICATION.md)
-- [Documentation et archives de développement](docs/)
-
----
-
-**Gentil Robot** · [animelocalmanager.com](https://animelocalmanager.com/) · *物語が息づく場所* — Là où les histoires prennent vie.
+`npm run verify:rescue` couvre la provenance, les identités, la recherche multilingue, les écritures interrompues, la corruption, le rollback, le blocage réseau et un parcours local avec notes/import XML/redémarrage. Un essai DOM vérifie la recherche et l’ajout dans l’interface expérimentale. **Ce ne sont ni la recette complète de la V2, ni une validation d’installateur Windows/Linux.**

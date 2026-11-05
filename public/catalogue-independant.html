@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ALM · Catalogue de secours expérimental</title>
+  <link rel="icon" href="/assets/anime-local-manager.ico">
+  <link rel="stylesheet" href="/rescue.css">
+  <script src="/catalogue-independant.js" defer></script>
+</head>
+<body class="rescue-catalogue">
+  <main class="rescue-page">
+    <a href="/">← Ma bibliothèque de test</a>
+    <h1>Le catalogue de secours prend forme.</h1>
+    <p>Ce prototype explore des données structurées de Wikidata. Sa couverture reste à vérifier : une fiche peut représenter une série entière, plutôt qu’une saison. Les ajouts vont dans votre bibliothèque de test, sans association automatique avec les fiches importées.</p>
+    <p>Les jaquettes, résumés, classements publics et disponibilités de streaming ne sont pas inclus. La recherche et l’ajout fonctionnent hors ligne.</p>
+    <label for="catalogue-query">Rechercher un titre dans l’échantillon</label>
+    <input id="catalogue-query" type="search" maxlength="160" placeholder="Titre français, anglais ou japonais…" autocomplete="off">
+    <p id="catalogue-status" class="rescue-status" role="status" aria-live="polite"></p>
+    <section id="catalogue-results" class="rescue-results" aria-label="Résultats du catalogue"></section>
+    <button id="catalogue-more" type="button" hidden>Afficher la suite</button>
+  </main>
+</body>
+</html>

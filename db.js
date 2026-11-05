@@ -564,6 +564,7 @@ function _readMaybeGzip(filePath) {
 }
 
 function _seedMetadataFromBundledSql() {
+  if (require('./lib/rescue-mode').active) return;
   if (!_db || _useJson) return;
   try {
     const currentCount = getMetadataCount();

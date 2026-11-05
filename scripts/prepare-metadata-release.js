@@ -105,6 +105,7 @@ function runFullGeneration() {
 }
 
 async function prepareMetadataRelease() {
+  if (require('../lib/rescue-mode').active) throw new Error('ALM_RESCUE_NOT_RELEASE_READY: prototype hors ligne, installateur bloque avant validation du catalogue et recette Windows/Linux.');
   fs.mkdirSync(DATABASE_DIR, { recursive: true });
 
   let snapshot = findUsableSnapshot(FULL_SNAPSHOT_CANDIDATES, MIN_RELEASE_ROWS);

@@ -1,5 +1,6 @@
 # Installed dependencies, generated releases, local build caches and diagnostics.
 node_modules/
+.rescue-profile/
 dist/
 .release-work/
 logs/

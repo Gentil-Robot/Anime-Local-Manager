@@ -1,0 +1,15 @@
+# Export a LIMITED prototype from https://query.wikidata.org/ as SPARQL JSON.
+# The existence of a MAL identifier is a selection criterion on Wikidata only.
+# Neither the identifier nor MAL content is copied into the resulting catalogue.
+# One Wikidata item is not necessarily one season: do not auto-merge with imports.
+SELECT ?item ?label ?episodes WHERE {
+  {
+    SELECT DISTINCT ?item WHERE { ?item wdt:P4086 ?externalReference . }
+    ORDER BY ?item
+    LIMIT 100
+  }
+  ?item rdfs:label ?label .
+  FILTER(LANG(?label) IN ("fr", "en", "ja", "es", "de", "pt", "pt-br", "zh", "zh-hans"))
+  OPTIONAL { ?item wdt:P1113 ?episodes . }
+}
+ORDER BY ?item ?label

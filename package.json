@@ -93,7 +93,11 @@
     "verify:beta81": "node scripts/test-beta81-common.cjs && node scripts/test-beta81-seasons.cjs && node scripts/test-beta81-maintenance.cjs",
     "verify:beta82": "node scripts/test-beta82-prepublication.cjs",
     "release:sync": "node scripts/sync-release-version.cjs",
-    "release:check": "node scripts/test-release-v200.cjs"
+    "release:check": "node scripts/test-release-v200.cjs",
+    "catalogue:prepare": "node scripts/prepare-independent-catalogue.cjs",
+    "catalogue:status": "node scripts/prepare-independent-catalogue.cjs --action status",
+    "catalogue:rollback": "node scripts/prepare-independent-catalogue.cjs --action rollback",
+    "verify:rescue": "node --test scripts/test-independent-catalogue.cjs scripts/test-rescue-runtime.cjs scripts/test-rescue-ui.cjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.3",
@@ -112,8 +116,8 @@
     "qrcode": "1.5.4"
   },
   "build": {
-    "appId": "fr.gentilrobot.animelocalmanager",
-    "productName": "Anime Local Manager",
+    "appId": "fr.gentilrobot.animelocalmanager.secours",
+    "productName": "Anime Local Manager Secours",
     "directories": {
       "output": "dist"
     },
@@ -131,15 +135,8 @@
       "public/**/*",
       "README.md",
       "LICENSE",
-      "data/aliases-anime.json",
-      "data/database/metadata-full.sql.gz",
-      "data/database/metadata-manifest.json",
-      "data/database/metadata-bundled-status.json",
       "!**/{.env,.env.*,*.log,*.sqlite,*.sqlite-*,*.db,*.pem,*.pfx,*.p12}",
       "!**/node_modules/**/{test,tests,__tests__,example,examples}/**",
-      "data/localized-titles-seed.json",
-      "data/database/metadata-recovery.sql.gz",
-      "data/database/metadata-recovery.json",
       "data/database/catalogue-identities.json",
       "community-config.json",
       "data/disposable-email-domains.txt",
@@ -148,7 +145,8 @@
       "community/library-stats.js",
       "community/content-policy.js",
       "data/database/community-content-policy.json",
-      "!public/assets/alm-clip-complet-1080p.mp4"
+      "!public/assets/alm-clip-complet-1080p.mp4",
+      "data/independent-catalogue/**/*"
     ],
     "win": {
       "target": [
@@ -175,7 +173,7 @@
       ],
       "category": "Utility",
       "icon": "build/icons",
-      "executableName": "anime-local-manager",
+      "executableName": "anime-local-manager-secours",
       "maintainer": "Gentil Robot <noreply@mail.animelocalmanager.com>",
       "vendor": "Gentil Robot",
       "synopsis": "Bibliothèque locale et gestionnaire d’animés",
@@ -209,8 +207,7 @@
     },
     "asarUnpack": [
       "node_modules/sql.js/dist/*.wasm",
-      "public/assets/*.wav",
-      "data/database/metadata-full.sql.gz"
+      "public/assets/*.wav"
     ],
     "afterPack": "scripts/check-packaged-integrity.js"
   },

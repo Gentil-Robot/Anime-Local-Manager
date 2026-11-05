@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "purpose": "Limited integration sample, not a complete anime catalogue",
+  "retrievedOn": "2026-11-05",
+  "source": "Wikidata structured entity data",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+  "rawExportSha256": "114d335b68a1c3f08b103de9aad4bdbcc3b34413630878142f6b7bfeb82a2fff",
+  "entities": [
+    {
+      "id": "Q25929253",
+      "revision": 2563677391,
+      "sourceUrl": "https://www.wikidata.org/w/index.php?title=Q25929253&oldid=2563677391"
+    },
+    {
+      "id": "Q155653",
+      "revision": 2564728230,
+      "sourceUrl": "https://www.wikidata.org/w/index.php?title=Q155653&oldid=2564728230"
+    },
+    {
+      "id": "Q12500134",
+      "revision": 2561617564,
+      "sourceUrl": "https://www.wikidata.org/w/index.php?title=Q12500134&oldid=2561617564"
+    }
+  ],
+  "fieldsRetained": [
+    "Q-id",
+    "labels in supported languages",
+    "unambiguous number of episodes",
+    "source revision"
+  ],
+  "coverageValidated": false,
+  "imagesIncluded": false,
+  "synopsesIncluded": false,
+  "aodImported": false,
+  "legacyMALSnapshotImported": false
+}

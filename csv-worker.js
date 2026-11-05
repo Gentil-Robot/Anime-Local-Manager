@@ -4,6 +4,7 @@
  * Communication via parentPort.postMessage()
  */
 
+require('./lib/rescue-mode').bootstrap();
 const { workerData, parentPort } = require("worker_threads");
 const fs   = require("fs");
 const path = require("path");

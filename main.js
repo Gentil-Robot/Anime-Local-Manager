@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, shell, screen, safeStorage, Notific
 const fs = require("fs");
 const path = require("path");
 const { validIpcSender } = require("./lib/local-security");
+const rescueMode = require('./lib/rescue-mode');
 const releaseSmoke = require("./lib/release-smoke").prepareReleaseSmoke(app);
 
 // Electron 30 sélectionne automatiquement X11 ou Wayland. Le décor côté Wayland
@@ -11,7 +12,16 @@ if (process.platform === "linux") {
   app.commandLine.appendSwitch("enable-features", "WaylandWindowDecorations");
 }
 
-// Opt-in test profile. Default userData/appId/icon stay unchanged.
+// The experimental application never opens the stable Electron profile.
+if (!releaseSmoke && rescueMode.active) {
+  app.setName('Anime Local Manager Secours');
+  const profile = path.join(app.getPath('appData'), rescueMode.PROFILE_NAME);
+  fs.mkdirSync(profile, {recursive: true});
+  app.setPath('userData', profile);
+  app.setPath('sessionData', profile);
+}
+
+// An explicitly requested audit profile is separate from both application profiles.
 if (!releaseSmoke && process.env.ALM_TEST_PROFILE === "1") {
   const testProfile = path.join(app.getPath("appData"), "anime-local-manager-audit-beta29");
   fs.mkdirSync(testProfile, {recursive: true});
@@ -29,7 +39,7 @@ let server = null;
 let activeServerOrigin = null;
 let serverModule = null;
 let startServer = null;
-let defaultPort = 3123;
+let defaultPort = 3143;
 
 const SUPPORTED_APP_LANGUAGES = new Set(["fr", "en", "ja", "es", "de", "pt-BR", "zh-CN"]);
 
@@ -253,7 +263,7 @@ async function startApplication() {
   if(releaseSmoke)require('./lib/release-smoke').checkpoint(releaseSmoke,'engine-ready');
   const serverPort = Number(server?.almPort || server?.address?.()?.port || defaultPort);
   activeServerOrigin = `http://127.0.0.1:${serverPort}`;
-  if(process.platform==='win32')app.setAppUserModelId?.('fr.gentilrobot.animelocalmanager');
+  if(process.platform==='win32')app.setAppUserModelId?.('fr.gentilrobot.animelocalmanager.secours');
   const activeNotifications=new Set();
   const showEpisodeNotification=async item=>{
     if(!Notification?.isSupported?.())return false;
@@ -271,9 +281,9 @@ async function startApplication() {
   }
   const portable=process.platform==='win32'?!!process.env.PORTABLE_EXECUTABLE_FILE:!!process.env.APPIMAGE;
   const updateTarget=process.env.PORTABLE_EXECUTABLE_FILE||process.env.APPIMAGE||process.execPath;
-  const updater=require('./lib/integrated-updater').createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:app.isPackaged,portable,target:updateTarget,directory:path.join(app.getPath('userData'),'updates'),getRelease:async force=>serverModule.checkUpdates(force,(await serverModule.maintenanceState()).settings.channel),quit:()=>{closeLocalServer();app.quit();},onChange:state=>mainWindow?.webContents.send('alm-update-state',state)});
+  const updater=require('./lib/integrated-updater').createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:app.isPackaged&&!rescueMode.active,portable,target:updateTarget,directory:path.join(app.getPath('userData'),'updates'),getRelease:async force=>serverModule.checkUpdates(force,(await serverModule.maintenanceState()).settings.channel),quit:()=>{closeLocalServer();app.quit();},onChange:state=>mainWindow?.webContents.send('alm-update-state',state)});
   appUpdater=updater;
-  scheduler=require('./lib/os-maintenance').createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:app.isPackaged,userData:app.getPath('userData')});
+  scheduler=require('./lib/os-maintenance').createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:app.isPackaged&&!rescueMode.active,userData:app.getPath('userData')});
   await serverModule.configureMaintenanceUpdate(async()=>{
     if(!updater.state().supported)return {ok:true,skipped:true,reason:'package-manager'};
     if(updater.state().phase==='ready')return {ok:true};
@@ -373,8 +383,8 @@ if (!gotSingleInstanceLock) {
 
   app.whenReady().then(async () => {
     if(releaseSmoke)require('./lib/release-smoke').checkpoint(releaseSmoke,'electron-ready');
-    if (process.platform === "win32") app.setAppUserModelId("fr.gentilrobot.animelocalmanager");
-    if(removeMaintenance){const removal=require('./lib/os-maintenance').createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:app.isPackaged,userData:app.getPath('userData')});await removal.configure(false);app.quit();return;}
+    if (process.platform === "win32") app.setAppUserModelId("fr.gentilrobot.animelocalmanager.secours");
+    if(removeMaintenance){const removal=require('./lib/os-maintenance').createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:app.isPackaged&&!rescueMode.active,userData:app.getPath('userData')});await removal.configure(false);app.quit();return;}
     await startApplication();
     if(releaseSmoke){await require('./lib/release-smoke').executeReleaseSmoke({context:releaseSmoke,app,window:mainWindow,close:closeLocalServer});return;}
 

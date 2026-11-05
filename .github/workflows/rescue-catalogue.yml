@@ -1,0 +1,45 @@
+name: ALM — prototype de secours hors ligne
+on:
+  push:
+    branches: ['secours/**']
+  pull_request:
+    branches: ['publication/v2.0.0-beta-stable']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: alm-rescue-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: startsWith(github.head_ref || github.ref_name, 'secours/')
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          lfs: true
+          persist-credentials: false
+      - name: Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Intégrité et contrôle des sources
+        run: node scripts/check-source-files.js
+      - name: Scanner de publication
+        run: node scripts/audit-publication.cjs
+      - name: Dépendances verrouillées
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Catalogue, réseau et parcours local
+        run: npm run verify:rescue
+      - name: Parcours local avec SQLite WebAssembly
+        env:
+          ALM_SQLJS_ONLY: '1'
+        run: npm run verify:rescue
+      - name: Régressions locales et stockage
+        run: node scripts/test-manual-add-runtime.js && node scripts/test-core-regressions-runtime.js && node scripts/test-beta78-storage.cjs && node scripts/test-beta78-library-fields.cjs && node scripts/test-beta82-safe-storage.cjs

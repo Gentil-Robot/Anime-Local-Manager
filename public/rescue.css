@@ -1,0 +1,17 @@
+.rescue-notice {position:relative;z-index:25;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;padding:.7rem 1.2rem;background:#233247;color:#e4edf7;border-bottom:1px solid #48627e;font:14px/1.5 system-ui,sans-serif}
+.rescue-notice a {color:#bdddfc;text-underline-offset:3px}
+.rescue-page {max-width:1050px;margin:3rem auto;padding:0 1.25rem;color:#e4edf7;font:16px/1.6 system-ui,sans-serif}
+body.rescue-catalogue {background:#101923;margin:0}
+.rescue-page h1 {font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.2;font-weight:650;letter-spacing:-.035em}
+.rescue-page p {color:#bcc8d7;max-width:780px}
+.rescue-page a {color:#bdddfc}
+.rescue-page label {display:block;margin-top:2rem;font-weight:600}
+.rescue-page input {box-sizing:border-box;width:100%;padding:1rem;margin:.5rem 0 1.5rem;background:#192635;color:#eef5ff;border:1px solid #57718b;border-radius:10px;font:inherit}
+.rescue-results {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1rem}
+.rescue-card {background:#192635;border:1px solid #344a60;border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.6rem}
+.rescue-card h2 {font-size:1.15rem;line-height:1.4;margin:0}
+.rescue-card p {font-size:.9rem;margin:0}
+.rescue-card button {margin-top:auto;padding:.7rem .9rem;background:#345578;color:#fff;border:1px solid #5d83ac;border-radius:8px;cursor:pointer;font:inherit}
+.rescue-card button:disabled {opacity:.65;cursor:default}
+.rescue-page :focus-visible {outline:3px solid #92c8ff;outline-offset:3px}
+.rescue-status {min-height:1.5em}

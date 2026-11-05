@@ -27,6 +27,7 @@ function role(item){
  return 'main';
 }
 function identity(item){
+ if(item?.catalogueId)return item.catalogueId;
  const mal=Number(item?.malId),ani=Number(item?.anilistId);
  return Number.isSafeInteger(mal)&&mal>0?'mal:'+mal:Number.isSafeInteger(ani)&&ani>0?'ani:'+ani:'local:'+item?.id;
 }

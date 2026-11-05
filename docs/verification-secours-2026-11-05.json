@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "date": "2026-11-05",
+  "baseCommit": "bc3028343d27b96efeaf63c97aa994612eee0569",
+  "runtime": "v24.22.1",
+  "platform": "linux",
+  "results": [
+    {
+      "name": "rescue-native",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 1147,
+      "tests": 13
+    },
+    {
+      "name": "rescue-wasm",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 1335,
+      "tests": 13
+    },
+    {
+      "name": "test-manual-add-runtime.js",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 182
+    },
+    {
+      "name": "test-core-regressions-runtime.js",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 196
+    },
+    {
+      "name": "test-beta78-storage.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 866
+    },
+    {
+      "name": "test-beta78-library-fields.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 352
+    },
+    {
+      "name": "test-beta82-safe-storage.cjs",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 77
+    }
+  ],
+  "sampleRecords": 3,
+  "legacySnapshotLoaded": false,
+  "productionChanged": false,
+  "installerBuilt": false,
+  "fullV2SuiteRun": false,
+  "browserRenderingVerified": false,
+  "uiTest": "jsdom DOM integration",
+  "limitations": [
+    "Replacement coverage not validated",
+    "New catalogue not integrated into all ALM screens",
+    "Windows/Linux installer acceptance pending",
+    "Source history and previous releases retained"
+  ]
+}
