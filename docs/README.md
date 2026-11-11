@@ -3,6 +3,12 @@
 > **Version actuelle de cette branche : ALM V2.0.0 Bêta stable.**
 > Les mentions « Beta 60 », « Beta 81 », « Beta 82 » désignent **des itérations internes antérieures à la V2.0.0**, et non des versions plus récentes du logiciel.
 
+## Comment la V2 est née
+
+La V2 d'Anime Local Manager représente **environ six mois de travail**. Durant cette période, son créateur a réalisé **de très nombreuses versions bêta internes non publiées** afin de développer, tester et améliorer les fonctionnalités du logiciel. Leur nombre exact n'est pas établi ; les mentions « Beta 60 », « Beta 81 », « Beta 82 » sont des **jalons de développement**, et non autant de versions publiques.
+
+Après ces mois de mise au point, la **V2.0.0 Bêta stable** a été publiée sur GitHub le **7 novembre 2026**. Il s'agit de la version publique de la V2, avec un statut GitHub **« pre-release »** : « Bêta stable » n'est pas synonyme de « version finale hors bêta ».
+
 ## Par où commencer ?
 
 - [Notes de version V2.0.0 Bêta stable](RELEASE-NOTES-V2.0.0-BETA.md) — présentation de la version distribuée.
