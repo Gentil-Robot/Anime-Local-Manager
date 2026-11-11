@@ -2,6 +2,12 @@
 
 **Canal : bêta publique.** Anime Local Manager est un gestionnaire local d'animés open source, sous licence MIT.
 
+## Six mois de développement avant la sortie publique
+
+La V2.0.0 Bêta stable est le résultat d'**environ six mois de travail**, de tests et de nombreuses versions bêta internes **jamais distribuées publiquement**. Les noms historiques « Beta 60 » à « Beta 82 » présents dans les archives correspondent à des étapes de développement, sans constituer un décompte exhaustif des bêtas réalisées.
+
+La release **`v2.0.0` a été publiée sur GitHub le 7 novembre 2026**. Elle a été diffusée comme **bêta publique (« pre-release »)** après cette longue phase de préparation, et non comme une version finale stable.
+
 ## Points forts
 
 - Bibliothèque personnelle, progression des épisodes, statuts et favoris, avec stockage local et sauvegardes.
