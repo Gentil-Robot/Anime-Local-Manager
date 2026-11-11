@@ -8,7 +8,13 @@ Anime Local Manager (ALM) est une application **locale, gratuite et open source 
 
 ## V2.0.0 Bêta stable
 
-**État au 31 octobre 2026 : candidate Windows validée, publication publique en préparation.** Cette branche contient les sources de la V2 ; la branche `main` conserve encore la V1, jusqu'à la fusion contrôlée.
+**Version publiée sur GitHub le 7 novembre 2026, avec le statut « pre-release » (bêta publique).** Cette branche contient les sources de la V2 ; la branche `main` conserve l'historique de la V1.
+
+### Six mois de travail avant la publication
+
+> **Le mot du créateur :** « J'ai travaillé environ six mois sur la V2 d'Anime Local Manager. J'ai réalisé de nombreuses versions bêta internes, testé des fonctionnalités, corrigé des problèmes et amélioré le logiciel étape par étape. Toutes ces bêtas étaient des versions de travail non publiées. Après cette période de développement, j'ai finalement rendu la **V2.0.0 Bêta stable** accessible au public sur GitHub. »
+
+Les anciennes mentions `Beta 60`, `Beta 81` ou `Beta 82` renvoient à ces étapes internes. Il n'existe pas ici de décompte exhaustif permettant d'affirmer combien de bêtas ont été créées. La version **2.0.0 Bêta stable** est l'aboutissement de ces essais ; malgré son nom, elle reste officiellement publiée sur le **canal bêta**, et non comme version finale stable.
 
 - **153/153 suites de tests réussies** sur GitHub Actions pour le commit `6c2c350` (avant mise à jour de ce README).
 - Installateur **Windows NSIS x64** compilé ; essais de démarrage et de persistance réussis sur le runner Windows.
@@ -17,13 +23,12 @@ Anime Local Manager (ALM) est une application **locale, gratuite et open source 
 
 ### Télécharger la V2
 
-**Release officielle prévue : `v2.0.0`, marquée « pre-release » (bêta).**
+**Release officielle `v2.0.0` publiée le 7 novembre 2026, marquée « pre-release » (bêta publique).**
 
-- [**Lien direct vers Anime Local Manager V2.0.0 Bêta stable**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0) — **à venir : ce lien ne sera actif qu'après publication de la release.**
-- [**Page officielle des releases**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) — la V1 y reste accessible d'ici là.
-- [**Suivi de validation et de publication de la V2**](https://github.com/Gentil-Robot/Anime-Local-Manager/pull/2) — pull request de revue, non encore fusionnée.
+- [**Télécharger Anime Local Manager V2.0.0 Bêta stable**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0).
+- [**Consulter toutes les releases**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases).
 
-Le fichier Windows attendu est `Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.exe`. Lorsqu'il sera publié, téléchargez-le **uniquement depuis la release officielle** et comparez son SHA-256 à l'empreinte annoncée sur cette release. **L'installateur n'est pas signé numériquement** : Windows SmartScreen peut afficher un avertissement.
+L'installateur Windows est `Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.exe`. Téléchargez-le **uniquement depuis la release officielle** et comparez son SHA-256 à l'empreinte annoncée sur cette release. **L'installateur n'est pas signé numériquement** : Windows SmartScreen peut afficher un avertissement.
 
 ## Fonctionnalités
 
