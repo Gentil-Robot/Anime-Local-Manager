@@ -9,7 +9,9 @@ async function run(){
   const noAck=launchWindows(job,mock(),{timeoutMs:80,pollMs:5});await assert.rejects(noAck,/ALM_UPDATE_HELPER_TIMEOUT/);assert(fs.readFileSync(log,'utf8').includes('ALM_UPDATE_HELPER_TIMEOUT'));
   await assert.rejects(launchWindows(job,mock((j)=>fs.writeFileSync(j.status,JSON.stringify({nonce:'stale',phase:'waiting'}))),{timeoutMs:80,pollMs:5}),/TIMEOUT/);
   await assert.rejects(launchWindows(job,mock((_j,c)=>c.emit('exit',1)),{timeoutMs:80,pollMs:5}),/ALM_UPDATE_HELPER_EXIT/);
-  await launchWindows(job,mock(j=>fs.writeFileSync(j.status,JSON.stringify({nonce:j.nonce,phase:'waiting'}))),{timeoutMs:100,pollMs:5});assert.equal(invocation[2].cwd,path.dirname(log));assert.equal(invocation[2].detached,true);
+  await launchWindows(job,mock(j=>fs.writeFileSync(j.status,JSON.stringify({nonce:j.nonce,phase:'waiting'}))),{timeoutMs:1000,pollMs:5});assert.equal(invocation[2].cwd,path.dirname(log));assert.equal(invocation[2].detached,false);
+  await launchWindows(job,mock((j,c)=>{c.emit('exit',0);setTimeout(()=>fs.writeFileSync(j.status,JSON.stringify({nonce:j.nonce,phase:'waiting'})),10);}),{timeoutMs:1000,pollMs:5});
+  const granted=JSON.parse(fs.readFileSync(JSON.parse(invocation[2].env.ALM_UPDATE_JOB).authorization));assert(granted.authorized,'A separate worker must be acknowledged and authorized even after the bootstrap exits');
   const payload=Buffer.alloc(2048);payload.write('MZ');payload.writeUInt32LE(128,60);payload.write('PE\0\0',128);const digest=crypto.createHash('sha256').update(payload).digest('hex');
   const name='Anime-Local-Manager-9.0.0-Setup-x64.exe',release={available:true,latest:'v9.0.0',prerelease:true,assets:[{name,state:'uploaded',size:payload.length,digest:'sha256:'+digest,browser_download_url:'https://github.com/Gentil-Robot/Anime-Local-Manager/releases/download/v9.0.0/'+name}]};
   let quits=0,launched;

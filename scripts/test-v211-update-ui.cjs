@@ -24,6 +24,7 @@ async function run(){
   offline=false;release={available:false,error:'ALM_UPDATE_SOURCE'};w.document.getElementById('almUpdateCheck').click();await tick();assert.equal(w.document.getElementById('almUpdateStatus').textContent,w.ALM_DESIGN.t('updateError'));
   nativeUpdate({supported:true,phase:'error',error:'ALM_UPDATE_HELPER_EXIT',canRetry:true});assert(!w.document.getElementById('almUpdateInstall').hidden);assert(w.document.getElementById('almUpdateStatus').textContent.includes('ALM reste ouvert'));
   nativeUpdate({supported:true,phase:'error',error:'ALM_UPDATE_INSTALL_FAILED',canRetry:true});assert(w.document.getElementById('almUpdateStatus').textContent.includes('fichier téléchargé'));
+  const failure={supported:true,phase:'error',error:'ALM_UPDATE_HELPER_EXIT',canRetry:true};w.showAppConfirm=async()=>true;w.animeManager.updateState=async()=>failure;w.animeManager.updateInstall=async()=>{nativeUpdate(failure);throw Error('fixture helper failed');};w.document.getElementById('almUpdateInstall').click();await tick();assert(w.document.getElementById('almUpdateStatus').textContent.includes('ALM reste ouvert'),'IPC rejection must retain the precise installation error');
   data.items[0].version='<img src=x onerror=alert(1)>';await w.ALM_NOTIFICATIONS.refresh();assert(!w.document.querySelector('.notification-update img'),'Release metadata is rendered as text');
   console.log('OK 2.1.2 update UI: seven languages, bell and desktop actions, checking feedback, persistent error feedback and safe metadata.');
  }finally{dom.window.close();}

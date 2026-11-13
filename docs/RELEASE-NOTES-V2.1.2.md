@@ -2,6 +2,7 @@
 
 ## Installation des mises à jour sous Windows
 
+- Le mode de lancement PowerShell détaché, qui pouvait retourner un succès sans exécuter le script, est remplacé par un lancement caché vérifié après fermeture d’un vrai processus Electron.
 - ALM attend la confirmation du lanceur Windows avant de se fermer. La création d’un processus seule ne vaut plus confirmation.
 - Un journal est ouvert dès la tentative, y compris pour les erreurs de démarrage de PowerShell. L’échec est affiché dans ALM, qui reste ouvert si le lanceur n’a pas confirmé son démarrage.
 - Le lanceur vérifie l’intégrité du fichier, attend la fermeture d’ALM, installe la mise à jour puis relance explicitement l’application. Le code de sortie de l’installateur est contrôlé.
@@ -12,7 +13,7 @@ Les messages d’échec sont disponibles dans les sept langues. Les notification
 
 ## Vérification avant publication
 
-La publication exige les 165 suites, les trois parcours natifs Electron et la recette NSIS. Cette dernière teste désormais la séquence complète : confirmation du lanceur, sortie réelle du processus parent, installation, redémarrage automatique d’ALM installé, import et persistance après un second lancement. Le résultat figure dans `smoke.updater` du rapport `release-check.json`.
+La publication exige les 165 suites, les trois parcours natifs Electron et la recette NSIS. Cette dernière teste désormais la séquence complète : confirmation du lanceur, sortie réelle du processus parent, installation, redémarrage automatique d’ALM installé, conservation d’une collection créée avant la mise à jour et persistance après un second lancement. Le résultat figure dans `smoke.updater` du rapport `release-check.json`.
 
 ## Installation
 

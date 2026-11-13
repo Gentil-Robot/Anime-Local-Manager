@@ -622,8 +622,8 @@
     },
     {
       "path": "docs/RELEASE-NOTES-V2.1.2.md",
-      "bytes": 2484,
-      "sha256": "01becf45f435a326a59e5303351fef1e167545faa1615cc0bcb790489783c453"
+      "bytes": 2740,
+      "sha256": "22f2982b7d56ae3e4aabc82f52473dca4faf5ea9c71b159108f584b744ac4cd0"
     },
     {
       "path": "docs/REVUE-V2.1.0-2026-11-13.md",
@@ -1352,8 +1352,8 @@
     },
     {
       "path": "lib/integrated-updater.js",
-      "bytes": 9255,
-      "sha256": "6385d9641086b3bf155b4fd8900051e3261fd76a1d1a63a6a1b4c83cc9d9a34b"
+      "bytes": 9305,
+      "sha256": "496d17122ffa21297b8ecb73af51f142fd4d468857a54de715fcf87413e0a90c"
     },
     {
       "path": "lib/library-automation.js",
@@ -1562,8 +1562,8 @@
     },
     {
       "path": "lib/windows-update-launcher.js",
-      "bytes": 4790,
-      "sha256": "4f30e525114b875c29203fce72237c40f21265511641dc2cc3cb29c7968f8b82"
+      "bytes": 6533,
+      "sha256": "d7c03fd92ad4cb5856537f2c25686530affc72ae9ea1d5fda219379c19caa993"
     },
     {
       "path": "LICENSE",
@@ -2482,8 +2482,8 @@
     },
     {
       "path": "public/release-watch.js",
-      "bytes": 8138,
-      "sha256": "f48e22a05e14ae5d03094b7896856932da55f13550fc64606ecd84bb50f7b89b"
+      "bytes": 8243,
+      "sha256": "c7ed22af6b35bca121ce8209181e38d5c94cf372cc66ea7c32c11d45cae30b07"
     },
     {
       "path": "public/retouches.js",
@@ -2852,8 +2852,8 @@
     },
     {
       "path": "scripts/probe-windows-update-helper.cjs",
-      "bytes": 2558,
-      "sha256": "046b2cf4adb1b13dedc95088bb950e6aaff7d42f9823f16fc74b9762d8d1d957"
+      "bytes": 2846,
+      "sha256": "d05793f3de58d5a5a70a04c5cd1069601e7f2458c94794ee754fb5f93c3e4f27"
     },
     {
       "path": "scripts/production-copy-roots.js",
@@ -2897,8 +2897,8 @@
     },
     {
       "path": "scripts/smoke-update-handoff.cjs",
-      "bytes": 5073,
-      "sha256": "c361ddd6ffe14d269faeb2d33c9cf06ac552a92e7a2c7e83037275a5e3b70caa"
+      "bytes": 5815,
+      "sha256": "e8644b5176391e92a6ba0103f50e80ebac46b7b44872915d5816edceb93f7486"
     },
     {
       "path": "scripts/smoke-windows.js",
@@ -3072,8 +3072,8 @@
     },
     {
       "path": "scripts/test-beta39-runtime.js",
-      "bytes": 11765,
-      "sha256": "68d64b5bf08c68ca346657a9e3781cf1a5feae945c4ebc61cfe8a472736e3741"
+      "bytes": 11883,
+      "sha256": "df27891945af2088ee8d43cb36e120a280572e4099fadbf9fbd4a97b70ca9917"
     },
     {
       "path": "scripts/test-beta40-browser.py",
@@ -4027,13 +4027,13 @@
     },
     {
       "path": "scripts/test-v211-update-ui.cjs",
-      "bytes": 4751,
-      "sha256": "382ba28bbec8092a3d2f8aecee379310b3777348969bf964e64ce2c13305979f"
+      "bytes": 5239,
+      "sha256": "a7b3b6dc90a28b86b18a2b41504974e1e45a72353a0cb24b51bd8c4e459ac7f3"
     },
     {
       "path": "scripts/test-windows-update-handoff.cjs",
-      "bytes": 3576,
-      "sha256": "9179d48815e0c8f075d6a17011d29b3005f0a38eb669673c4417a0fb69ce5a67"
+      "bytes": 3978,
+      "sha256": "314d77243926b25b99bfed87c3f80440451c65d05402e6b4b8e4095081654543"
     },
     {
       "path": "scripts/verification-plan.json",
