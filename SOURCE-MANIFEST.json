@@ -17,8 +17,8 @@
     },
     {
       "path": ".github/workflows/windows-installer.yml",
-      "bytes": 3929,
-      "sha256": "673cc320aef773138317fb98b61664dbcee3475416856894b7133245274565f1"
+      "bytes": 4458,
+      "sha256": "e08c7295e33a83b372e91ef04cf00828e8737a39a8ed0b88d47c1f183062b453"
     },
     {
       "path": ".gitignore",
@@ -2849,6 +2849,11 @@
       "path": "scripts/prepare-metadata-seed.js",
       "bytes": 7483,
       "sha256": "f3b253b5559b0e74d7476a4b9df228cc20d39c4497c9aa1f537bfc451ba63327"
+    },
+    {
+      "path": "scripts/probe-windows-update-helper.cjs",
+      "bytes": 2558,
+      "sha256": "046b2cf4adb1b13dedc95088bb950e6aaff7d42f9823f16fc74b9762d8d1d957"
     },
     {
       "path": "scripts/production-copy-roots.js",
