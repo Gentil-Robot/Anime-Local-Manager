@@ -21,7 +21,11 @@ async function run(){
   releases[0].prerelease=false;await service.check(true);assert.equal(calls,2);assert.equal(center.state().items.find(i=>i.version==='2.3.0').prerelease,false,'Promoting a beta updates its badge without a duplicate');
   center.reconcileUpdates('2.3.0','beta');assert.equal(center.state().unread,0);assert.equal(center.state().items.length,0,'Installed updates no longer appear as available');
   for(const candidate of [{latest:'v2.4.0',releaseUrl:'https://evil.invalid/release'},{latest:'<img onerror=alert(1)>',releaseUrl:RELEASES+'/tag/invalid'},{latest:'v2.4.0',releaseUrl:RELEASES+'/tag/v2.4.0',error:'OFFLINE'}])center.recordUpdate({available:true,...candidate});assert.equal(center.state().items.length,0);
-  releases[0]={tag_name:'v2.9.0',prerelease:true,draft:true,html_url:RELEASES+'/tag/v2.9.0'};await service.check(true);assert.equal(calls,2,'Draft releases never notify');
+  center.configure(true);releases[0]={tag_name:'v2.4.0',prerelease:true,html_url:RELEASES+'/tag/v2.4.0'};await service.check(true);center.configure(false);
+  offline=true;await service.check(true);assert.equal(calls,2,'Unmuting offline must not deliver an unconfirmed pending update');offline=false;
+  releases[0].draft=true;await service.check(true);assert.equal(calls,2,'A withdrawn pending release must not notify');
+  releases[0].draft=false;await service.check(true);assert.equal(calls,3,'The pending alert resumes only after a successful source check');
+  releases[0]={tag_name:'v2.9.0',prerelease:true,draft:true,html_url:RELEASES+'/tag/v2.9.0'};await service.check(true);assert.equal(calls,3,'Draft releases never notify');
   for(const language of copy.languages){let instance,opened=0;class Notification extends EventEmitter{static isSupported(){return true;}constructor(options){super();this.options=options;instance=this;}show(){this.emit('show');}}
    const notify=createDesktopUpdateNotification({Notification,language:()=>language,icon:'fixture.ico',open:()=>opened++});assert.equal(await notify({version:'2.4.0',prerelease:true}),true);assert(instance.options.title.includes('2.4.0'));assert(instance.options.title.includes(copy.text('beta',language)));instance.emit('click');assert.equal(opened,1);assert(copy.text('checking',language));assert(copy.text('view',language));
   }
