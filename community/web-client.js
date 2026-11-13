@@ -9,7 +9,9 @@ async function accountAge(){try{return {...await rpc('alm_account_age_state'),av
 const check=result=>{if(result.error)throw Error(S.errorCode(result.error));if(result.data?.ok===false)throw Error(result.data.code||'INVALID_INPUT');return result.data;};
 const one=r=>Array.isArray(r)?r[0]:r;
 const callbackParams=new URLSearchParams(location.hash.slice(1)),callbackType=callbackParams.get('type'),callbackPresent=callbackParams.has('access_token')||callbackParams.has('error')||callbackParams.has('error_code')||new URLSearchParams(location.search).has('error')||new URLSearchParams(location.search).has('error_code');
-const ready=fetch('/community-config.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('ALM_NETWORK');return r.json();}).then(c=>{config=c;if(c.url&&c.publishableKey){if(!/^https:\/\/[a-z0-9]{20}\.supabase\.co$/.test(c.url)||!c.publishableKey.startsWith('sb_publishable_'))throw Error('INVALID_INPUT');client=createClient(c.url,c.publishableKey,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});access=sessionAccess(client);client.auth.onAuthStateChange((event,session)=>{const nextOwner=session?.user?.id||null;if(event==='SIGNED_OUT'||sessionOwner&&nextOwner!==sessionOwner)setTimeout(()=>window.dispatchEvent(new CustomEvent('alm:community-session')),0);sessionOwner=nextOwner;if(['SIGNED_OUT','SIGNED_IN','TOKEN_REFRESHED','USER_UPDATED'].includes(event)){access.clear();dataEpoch++;ownValue=null;ownPending=null;ensurePending=null;ownAt=0;ensuredAt=0;}if(event==='SIGNED_IN')deviceRegistered=false;if(event==='SIGNED_OUT'){deviceRegistered=false;profileDraft=null;favoriteDrafts.clear();identity=null;owner=null;}if(event==='PASSWORD_RECOVERY'){const panel=document.getElementById('webRecovery');if(panel)panel.hidden=false;}});}});
+const callbackSearch=new URLSearchParams(location.search),callbackError=callbackParams.has('error')||callbackParams.has('error_code')||callbackSearch.has('error')||callbackSearch.has('error_code'),recoveryIntent=callbackType==='recovery'||callbackSearch.get('type')==='recovery';
+let recoveryVerified=false,recoveryCompleted=false;
+const ready=fetch('/community-config.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('ALM_NETWORK');return r.json();}).then(c=>{config=c;if(c.url&&c.publishableKey){if(!/^https:\/\/[a-z0-9]{20}\.supabase\.co$/.test(c.url)||!c.publishableKey.startsWith('sb_publishable_'))throw Error('INVALID_INPUT');client=createClient(c.url,c.publishableKey,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});access=sessionAccess(client);client.auth.onAuthStateChange((event,session)=>{const nextOwner=session?.user?.id||null;if(event==='SIGNED_OUT'||sessionOwner&&nextOwner!==sessionOwner)setTimeout(()=>window.dispatchEvent(new CustomEvent('alm:community-session')),0);sessionOwner=nextOwner;if(['SIGNED_OUT','SIGNED_IN','TOKEN_REFRESHED','USER_UPDATED'].includes(event)){access.clear();dataEpoch++;ownValue=null;ownPending=null;ensurePending=null;ownAt=0;ensuredAt=0;}if(event==='SIGNED_IN')deviceRegistered=false;if(event==='SIGNED_OUT'){deviceRegistered=false;profileDraft=null;favoriteDrafts.clear();identity=null;owner=null;}if(event==='PASSWORD_RECOVERY'&&!callbackError){recoveryVerified=true;showRecoveryForm();}});}});
 async function user(){await ready;if(!client)throw Error('ALM_COMMUNITY_NOT_READY');return access.current();}
 async function rpc(name,args={}){await user();return check(await client.rpc(name,args));}
 async function ensure(){const u=await user();if(identity&&owner===u.id&&Date.now()-ensuredAt<30000)return u;if(ensurePending)return ensurePending;ensurePending=loadIdentity().then(value=>{ensuredAt=Date.now();return value;}).finally(()=>{ensurePending=null;});return ensurePending;}
@@ -45,11 +47,91 @@ window.ALM_COMMUNITY_API=async(endpoint,method='GET',body={})=>{
  throw Error('INVALID_INPUT');
 };
 let activationState='';
-function renderActivation(){const panel=document.getElementById('webActivation');if(!panel||!activationState)return;const language=window.ALM_DESIGN.language();panel.textContent=window.ALM_COMMUNITY_T(activationState)+(language==='en'?'':'\n\n'+window.ALM_COMMUNITY_COPY.en[activationState]);}
+function renderActivation(){
+ const panel=document.getElementById('webActivation');
+ if(!panel||!activationState)return;
+ const language=window.ALM_DESIGN.language();
+ panel.textContent=window.ALM_COMMUNITY_T(activationState)+(language==='en'?'':'\n\n'+window.ALM_COMMUNITY_COPY.en[activationState]);
+ if(activationState==='expiredLink'){
+  const retry=document.createElement('a');
+  retry.href='/compte.html?action=login';
+  retry.className='primary';
+  retry.textContent=window.ALM_COMMUNITY_T('login');
+  panel.append(retry);
+ }
+}
+function isolateRecoveryPage(){
+ document.body.classList.add('alm-recovery-mode');
+ const landing=document.getElementById('webLanding');if(landing)landing.hidden=true;
+ const community=document.getElementById('communityPage');if(community)community.hidden=true;
+}
+function showRecoveryForm(){
+ if(callbackError||recoveryCompleted)return;
+ isolateRecoveryPage();
+ const activation=document.getElementById('webActivation');if(activation)activation.hidden=true;
+ const panel=document.getElementById('webRecovery');
+ if(!panel)return;
+ panel.hidden=false;
+ panel.scrollIntoView?.({block:'start'});
+}
+function showExpiredRecoveryLink(){
+ if(recoveryCompleted)return;
+ recoveryVerified=false;
+ isolateRecoveryPage();
+ const recovery=document.getElementById('webRecovery');if(recovery)recovery.hidden=true;
+ const panel=document.getElementById('webActivation');
+ if(panel){panel.hidden=false;activationState='expiredLink';renderActivation();panel.scrollIntoView?.({block:'start'});}
+}
 window.addEventListener('alm:language-changed',renderActivation);
 window.addEventListener('DOMContentLoaded',async()=>{
- const form=document.getElementById('webRecoveryForm');if(form)form.onsubmit=async ev=>{ev.preventDefault();const data=new FormData(form),password=data.get('password');try{if(password!==data.get('confirm_password'))throw Error('ALM_PASSWORD_MISMATCH');if(!S.password(password))throw Error('ALM_PASSWORD_WEAK');await user();check(await client.auth.updateUser({password}));form.reset();document.getElementById('webRecoveryStatus').textContent=window.ALM_COMMUNITY_T('resetDone');}catch(error){document.getElementById('webRecoveryStatus').textContent=window.ALM_COMMUNITY_ERROR(error);}};
- const panel=document.getElementById('webActivation');if(panel&&(location.pathname==='/confirmation.html'||callbackPresent&&callbackType!=='recovery')){panel.hidden=false;const landing=document.getElementById('webLanding');if(landing)landing.hidden=true;panel.textContent=window.ALM_COMMUNITY_T('running');try{if(new URLSearchParams(location.search).has('error')||new URLSearchParams(location.search).has('error_code')||callbackParams.has('error')||callbackParams.has('error_code'))throw Error('SESSION_EXPIRED');await ready;const u=await user();if(!u.email_confirmed_at)throw Error('SESSION_EXPIRED');activationState='activationSuccess';renderActivation();panel.scrollIntoView({block:'start'});}catch{activationState='expiredLink';renderActivation();}}
- if(callbackType==='recovery'){const landing=document.getElementById('webLanding');if(landing)landing.hidden=true;const recovery=document.getElementById('webRecovery');if(recovery)recovery.hidden=false;}
- if(callbackType||callbackPresent){await ready;await client?.auth.getSession();history.replaceState(null,'',location.pathname);}
+ const form=document.getElementById('webRecoveryForm'),status=document.getElementById('webRecoveryStatus');
+ if(form)form.onsubmit=async ev=>{
+  ev.preventDefault();
+  if(!recoveryVerified||callbackError||recoveryCompleted){showExpiredRecoveryLink();return;}
+  const button=form.querySelector('button[type=submit]');
+  if(button?.disabled)return;
+  if(button)button.disabled=true;
+  const data=new FormData(form),password=data.get('password');
+  try{
+   if(password!==data.get('confirm_password'))throw Error('ALM_PASSWORD_MISMATCH');
+   if(!S.password(password))throw Error('ALM_PASSWORD_WEAK');
+   await user();
+   check(await client.auth.updateUser({password}));
+   recoveryCompleted=true;
+   form.reset();
+   form.classList.add('is-complete');
+   status.textContent=window.ALM_COMMUNITY_T('resetDone');
+   // The one-time recovery session is not needed after changing the password.
+   try{await client.auth.signOut({scope:'local'});}catch{}
+  }catch(error){
+   status.textContent=window.ALM_COMMUNITY_ERROR(error);
+   if(button)button.disabled=false;
+  }
+ };
+ if(callbackError)showExpiredRecoveryLink();
+ else if(recoveryVerified)showRecoveryForm();
+ else if(recoveryIntent){
+  isolateRecoveryPage();
+  const panel=document.getElementById('webActivation');
+  if(panel){panel.hidden=false;activationState='running';renderActivation();}
+  try{await ready;await client?.auth.getSession();}catch{}
+  setTimeout(()=>{if(!recoveryVerified&&!recoveryCompleted)showExpiredRecoveryLink();},1500);
+ }
+ else if(document.getElementById('webActivation')&&(location.pathname==='/confirmation.html'||callbackPresent)){
+  const panel=document.getElementById('webActivation');
+  panel.hidden=false;
+  const landing=document.getElementById('webLanding');if(landing)landing.hidden=true;
+  panel.textContent=window.ALM_COMMUNITY_T('running');
+  try{
+   await ready;
+   const u=await user();
+   if(!u.email_confirmed_at)throw Error('SESSION_EXPIRED');
+   activationState='activationSuccess';
+   renderActivation();
+   panel.scrollIntoView({block:'start'});
+  }catch{activationState='expiredLink';renderActivation();}
+ }
+ if(callbackType||callbackPresent||callbackSearch.has('code')){
+  try{await ready;await client?.auth.getSession();}finally{history.replaceState(null,'',location.pathname);}
+ }
 });
