@@ -50,12 +50,13 @@ async function smokeWindows({root,unpacked,installer,installerSmoke=false,log,si
  if(process.env.GITHUB_ACTIONS!=='true'&&process.env.ALM_INSTALLER_TEST_DISPOSABLE!=='1')throw Error('Essai NSIS réservé au runner Windows neuf ou à une VM jetable explicitement désignée.');
  const check="$ErrorActionPreference='Stop'; $items=@(Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -eq 'Anime Local Manager' }); Write-Output ([bool]($items.Count -gt 0))";
  const exists=await run('powershell.exe',['-NoProfile','-NonInteractive','-Command',check],{log,signal,timeoutMs:30000});if(exists.code!==0||!/^false\s*$/i.test(exists.output.trim()))throw Error('Essai NSIS refusé : installation ALM existante ou contrôle du registre indisponible.');
- const installDir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-install-'));let installed=false;
+ const installDir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-install- é '));let installed=false;
  try{
   const result=await run(installer,['/S','/D='+installDir],{log,signal,timeoutMs:180000,windowsVerbatimArguments:true});if(result.code!==0)throw Error('Installation NSIS silencieuse échouée.');installed=true;
   const installedExe=path.join(installDir,exeName);if(fileHash(installedExe)!==report.application.exeSha256)throw Error('L’EXE installé ne correspond pas à l’application préparée.');
   const before=fileHash(path.join(unpacked,'resources/app.asar')),after=fileHash(path.join(installDir,'resources/app.asar'));if(before!==after)throw Error('ASAR installé incohérent.');
   report.installer={...await testApp(installedExe,proofOptions),asarSha256:after};
+  report.updater=await require('./smoke-update-handoff.cjs').testUpdateHandoff({root,installer,installedExe,...proofOptions,smokeEnvironment,validateProof});
  }finally{
   const uninstall=fs.readdirSync(installDir).filter(name=>/^Uninstall.*\.exe$/i.test(name));
   if(installed||uninstall.length){if(uninstall.length!==1)throw Error('Désinstallateur de test introuvable.');const result=await run(path.join(installDir,uninstall[0]),['/S'],{log,timeoutMs:120000});if(result.code!==0)throw Error('Désinstallation du test échouée.');}

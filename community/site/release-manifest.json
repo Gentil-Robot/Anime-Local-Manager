@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "2.1.1",
+  "version": "2.1.2",
   "baselineArchiveSha256": "350a12828dd6fb474ca0f7f07cdfa97aed713c34acd407693bda8b1553300dea",
   "files": [
     {
@@ -176,7 +176,7 @@
     {
       "path": "design-core.js",
       "bytes": 4169,
-      "sha256": "837d8bd6eb08550e7f99da2b8e9e07fea6e787c0ad923d7244eeb566a3620d47"
+      "sha256": "885e975df70df9fcc7fdb3faa06f7eab950da44e644b1ebfbea0a058ee262e63"
     },
     {
       "path": "index.html",
@@ -206,7 +206,7 @@
     {
       "path": "release-version.js",
       "bytes": 565,
-      "sha256": "cb622f383a5c1758e764546c8465c76bd5c9e215728fc6ca077ebc0a8fb436dd"
+      "sha256": "ba6cb4dc1f4e0a259844f15f762f528a5f24c98f1f7f3f5ad82d5e761d0f96d8"
     },
     {
       "path": "scroll-progress.css",
@@ -264,7 +264,7 @@
       "sha256": "17b5abebee9b9657be0668fa94d7d8d02a7f44b8fd70f178303aab4aaa0810b4"
     }
   ],
-  "releaseId": "v211-beta-stable-20261113",
+  "releaseId": "v212-beta-stable-20261113",
   "sourceArchiveSha256": "bbf8b99c9faa2d014069e3f1320c75f01535a758b5c9ec6caf39b473a32dae00",
-  "previousValidatedVersion": "2.1.0"
+  "previousValidatedVersion": "2.1.1"
 }

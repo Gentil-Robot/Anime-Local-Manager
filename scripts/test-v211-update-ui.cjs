@@ -3,11 +3,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const tick=()=>new Promise(resolve=>setTimeout(resolve,20)),read=name=>fs.readFileSync(path.join(__dirname,'../public',name),'utf8');
 async function run(){
  const dom=new JSDOM('<!doctype html><button id="backupBtn"></button><button id="settingsBtn"></button><dialog id="settingsDialog"><section id="settingsPanel-appearance"></section><section id="settingsPanel-updates"></section></dialog><section id="animeGrid"></section>',{url:'http://alm.test',runScripts:'outside-only'}),w=dom.window;
- let language='fr',offline=false,release,updateClicks=0,downloadCalls=0,nativeClick,resolveCheck;
+ let language='fr',offline=false,release,updateClicks=0,downloadCalls=0,nativeClick,resolveCheck,nativeUpdate;
  w.ALM_DESIGN_COPY=Object.fromEntries(['fr','en','ja','es','de','pt-BR','zh-CN'].map(l=>[l,{}]));w.ALM_DESIGN={language:()=>language,icon:()=>'',t:(key,values={})=>(w.ALM_DESIGN_COPY[language]?.[key]||key).replace(/\{(\w+)\}/g,(_,key)=>values[key]??''),applyText(){},storage:{get(){},set(){}}};
  w.setInterval=()=>0;w.setTimeout=()=>0;
  w.ALM_SETTINGS={select:key=>{assert.equal(key,'updates');updateClicks++;}};w.document.getElementById('settingsBtn').onclick=()=>{w.document.getElementById('settingsDialog').open=true;};
- w.animeManager={updateState:async()=>({supported:true,phase:'idle'}),onUpdateOpen:fn=>nativeClick=fn,updateDownload:()=>downloadCalls++};
+ w.animeManager={updateState:async()=>({supported:true,phase:'idle'}),onUpdateOpen:fn=>nativeClick=fn,onUpdate:fn=>nativeUpdate=fn,updateDownload:()=>downloadCalls++};
  let data={muted:false,unread:1,items:[{id:'update',type:'update',version:'2.2.0',prerelease:true,createdAt:Date.now(),read:false}]};
  w.fetch=async(url,options)=>{
   if(url==='/api/updates/check'){if(offline)throw Error('offline');if(resolveCheck)await new Promise(resolve=>resolveCheck=resolve);return {ok:true,json:async()=>release||{available:true,latest:'v2.2.0',releaseUrl:'https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.2.0'}};}
@@ -22,8 +22,10 @@ async function run(){
   resolveCheck=true;w.document.getElementById('almUpdateCheck').click();assert(w.document.getElementById('almUpdateStatus').textContent.includes('Vérification en cours'));assert(w.document.getElementById('almUpdateCheck').disabled);resolveCheck();resolveCheck=null;await tick();
   offline=true;w.document.getElementById('almUpdateCheck').click();await tick();assert.equal(w.document.getElementById('almUpdateStatus').textContent,w.ALM_DESIGN.t('updateError'));assert(w.document.getElementById('almUpdateNotice').hidden);assert(w.document.getElementById('almUpdateDownload').hidden);
   offline=false;release={available:false,error:'ALM_UPDATE_SOURCE'};w.document.getElementById('almUpdateCheck').click();await tick();assert.equal(w.document.getElementById('almUpdateStatus').textContent,w.ALM_DESIGN.t('updateError'));
+  nativeUpdate({supported:true,phase:'error',error:'ALM_UPDATE_HELPER_EXIT',canRetry:true});assert(!w.document.getElementById('almUpdateInstall').hidden);assert(w.document.getElementById('almUpdateStatus').textContent.includes('ALM reste ouvert'));
+  nativeUpdate({supported:true,phase:'error',error:'ALM_UPDATE_INSTALL_FAILED',canRetry:true});assert(w.document.getElementById('almUpdateStatus').textContent.includes('fichier téléchargé'));
   data.items[0].version='<img src=x onerror=alert(1)>';await w.ALM_NOTIFICATIONS.refresh();assert(!w.document.querySelector('.notification-update img'),'Release metadata is rendered as text');
-  console.log('OK 2.1.1 update UI: seven languages, bell and desktop actions, checking feedback, persistent error feedback and safe metadata.');
+  console.log('OK 2.1.2 update UI: seven languages, bell and desktop actions, checking feedback, persistent error feedback and safe metadata.');
  }finally{dom.window.close();}
 }
 run().catch(error=>{console.error(error);process.exitCode=1;});

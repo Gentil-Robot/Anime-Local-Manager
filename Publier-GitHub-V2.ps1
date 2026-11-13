@@ -1,4 +1,4 @@
-# Anime Local Manager V2.1.1 Beta stable - release gate and optional GitHub publication.
+# Anime Local Manager V2.1.2 Beta stable - release gate and optional GitHub publication.
 # By default this script ONLY checks the files. Add -Publier to publish the prerelease.
 # Requires GitHub CLI (gh) authenticated to Gentil-Robot and a matching source ref.
 [CmdletBinding()]
@@ -7,8 +7,8 @@ param(
     [Parameter(Mandatory=$true)] [string]$RapportBuild,
     [switch]$Publier,
     [string]$Depot = 'Gentil-Robot/Anime-Local-Manager',
-    [string]$Tag = 'v2.1.1',
-    [string]$Ref = 'release/v2.1.1'
+    [string]$Tag = 'v2.1.2',
+    [string]$Ref = 'release/v2.1.2'
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -35,6 +35,7 @@ $manifestHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $manifestPath).Hash
 if ($report.source.manifestSha256 -ne $manifestHash) { throw 'Le rapport ne correspond pas aux sources courantes.' }
 if ($report.status -ne 'passed') { throw 'La compilation doit etre terminee avec status=passed (essai NSIS reel). Le statut passed-with-limitations ne suffit pas.' }
 if ($report.smoke.installer.status -ne 'passed') { throw 'Le veritable installateur NSIS doit avoir ete teste sur une VM propre / runner jetable.' }
+if ($report.smoke.updater.status -ne 'passed' -or -not $report.smoke.updater.automaticRestart -or -not $report.smoke.updater.parentExited -or -not $report.smoke.updater.helperAcknowledged -or -not $report.smoke.updater.persistence -or -not $report.smoke.updater.payloadRestored) { throw 'Le parcours fermer, installer et relancer doit avoir reussi sur Windows.' }
 if ($report.smoke.installer.runtime.electron -ne '45.3.1') { throw 'La version Electron reelle de la VM ne correspond pas.' }
 if (@($report.artifacts).Count -ne 1 -or $report.artifacts[0].target -ne 'nsis') { throw 'Rapport de livrable non conforme.' }
 $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $installerPath).Hash.ToLowerInvariant()
@@ -75,7 +76,7 @@ $attrsContent = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String([str
 if ($attrsContent -notmatch 'alm-clip-complet-1080p\.mp4\s+filter=lfs') { throw 'Git LFS du clip non configure sur la reference selectionnee.' }
 & gh release view $Tag --repo $Depot 1>$null 2>$null
 if ($LASTEXITCODE -eq 0) { throw "Une release $Tag existe deja. Aucune publication ni remplacement automatique." }
-$notes = Join-Path $source 'docs/RELEASE-NOTES-V2.1.1.md'
+$notes = Join-Path $source 'docs/RELEASE-NOTES-V2.1.2.md'
 if (-not (Test-Path -LiteralPath $notes)) { throw 'Notes de version manquantes.' }
 $shaFile = Join-Path (Split-Path -Parent $installerPath) 'SHA256SUMS.txt'
 [IO.File]::WriteAllText($shaFile, "$actualHash  $installerName`n",[Text.Encoding]::ASCII)

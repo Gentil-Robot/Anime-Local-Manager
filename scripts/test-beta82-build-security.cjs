@@ -14,7 +14,7 @@ const wanted = new Map([
   ['node_modules/undici', ['7.30.1', 'sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==']],
   ['node_modules/node-gyp/node_modules/undici', ['6.29.1', 'sha512-EvRlUt/QqAEvXdQeRMYUfwOQsfzpDztykrG2owGEE/rBOBoYv9uF39ZzsNDh4lTFHhTr2XOZjKkYgueD12ZmGA==']],
 ]);
-assert.equal(pkg.version, '2.1.1');
+assert.equal(pkg.version, '2.1.2');
 assert.equal(lock.version, pkg.version);
 assert.equal(lock.lockfileVersion, 3);
 assert.equal(pkg.dependencies.multer, '2.5.0');

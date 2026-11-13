@@ -29,7 +29,7 @@ async function run(){
   for(const language of copy.languages){let instance,opened=0;class Notification extends EventEmitter{static isSupported(){return true;}constructor(options){super();this.options=options;instance=this;}show(){this.emit('show');}}
    const notify=createDesktopUpdateNotification({Notification,language:()=>language,icon:'fixture.ico',open:()=>opened++});assert.equal(await notify({version:'2.4.0',prerelease:true}),true);assert(instance.options.title.includes('2.4.0'));assert(instance.options.title.includes(copy.text('beta',language)));instance.emit('click');assert.equal(opened,1);assert(copy.text('checking',language));assert(copy.text('view',language));
   }
-  console.log('OK 2.1.1 update alerts: concurrent checks, restart dedupe, quiet mode, channel changes, installed releases, promotion, source failures and native clicks in seven languages.');
+  console.log('OK 2.1.2 update alerts: concurrent checks, restart dedupe, quiet mode, channel changes, installed releases, promotion, source failures and native clicks in seven languages.');
  }finally{service.stop();fs.rmSync(dir,{recursive:true,force:true});}
 }
 run().catch(error=>{console.error(error);process.exitCode=1;});

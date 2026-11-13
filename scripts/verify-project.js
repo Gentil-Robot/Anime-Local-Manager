@@ -9,6 +9,7 @@ const release=require('../release-version.json');
 function category(file){if(/build|package|release|beta58|beta70-windows/.test(file))return 'Publication';if(/karaoke|timeline|nocturne|ui-logic|polish|retours-window|native/.test(file))return 'Interface et karaoké';if(/38|39|40|41|42|43|44|45|46|audit|retours-runtime|association-concurrency/.test(file))return 'Données, sauvegardes et sécurité';if(/beta(23|26|48|49|50|51|52|53|54|55|56|57)|csv|betaseries|manual-add/.test(file))return 'Imports et bibliothèque';return 'Structure et régressions';}
 
 const exactNames=Object.freeze({
+ 'test-windows-update-handoff.cjs':'Mises à jour Windows : confirmation avant fermeture et reprise',
  'test-v211-update-notifications.cjs':'Mises à jour : alertes persistantes et notifications système',
  'test-v211-update-ui.cjs':'Mises à jour : cloche, actions et retour de vérification',
  'test-v210-password-recovery.cjs':'Compte : récupération vérifiée et MFA',

@@ -14,7 +14,7 @@ const karaokeJs = read("public/karaoke.js");
 // Historical timeline regression. The supplied Beta37 timeline is tested separately.
 const song = JSON.parse(read("scripts/fixtures/karaoke/song.beta36-backup.json"));
 
-assert.strictEqual(pkg.version, "2.1.1");
+assert.strictEqual(pkg.version, "2.1.2");
 assert.equal(pkg.scripts.verify, "node scripts/verify-project.js");
 assert(JSON.parse(read("scripts/verification-plan.json")).steps.includes("scripts/test-beta25-final.js"));
 

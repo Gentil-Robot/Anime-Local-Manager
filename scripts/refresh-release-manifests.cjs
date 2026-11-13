@@ -29,13 +29,13 @@ const currentSite=JSON.parse(fs.readFileSync(path.join(site,'release-manifest.js
 const siteFiles=walk(site);
 assert(siteFiles.some(x=>x.path==='release-version.js'));
 assert(siteFiles.some(x=>x.path==='index.html'));
-const siteManifest={...currentSite,version:release.technicalVersion,files:siteFiles,releaseId:'v211-beta-stable-20261113',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion};
+const siteManifest={...currentSite,version:release.technicalVersion,files:siteFiles,releaseId:'v212-beta-stable-20261113',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion};
 save('community/site/release-manifest.json',siteManifest);
 const old=JSON.parse(fs.readFileSync(path.join(root,'SOURCE-MANIFEST.json'),'utf8'));
 const sourceFiles=walk(root);
 assert(sourceFiles.some(x=>x.path==='community/site/release-manifest.json'));
 assert(sourceFiles.some(x=>x.path==='data/database/metadata-full.sql.gz'));
 assert(sourceFiles.some(x=>x.path==='docs/RECETTE-V200-BETA-STABLE-2026-10-25.md'));
-const candidate={...old,version:release.technicalVersion,releaseId:'v211-beta-stable-20261113',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion,files:sourceFiles};
+const candidate={...old,version:release.technicalVersion,releaseId:'v212-beta-stable-20261113',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion,files:sourceFiles};
 save('SOURCE-MANIFEST.json',candidate);
 console.log(`${check?'OK':'Updated'} release manifest: site ${siteFiles.length} files, source ${sourceFiles.length} files, SHA-256 verified.`);

@@ -14,7 +14,7 @@ const lexicon = read("public/lexicon.js");
 const server = read("server.js");
 const pkg = JSON.parse(read("package.json"));
 
-assert.strictEqual(pkg.version, "2.1.1");
+assert.strictEqual(pkg.version, "2.1.2");
 
 // Import BetaSeries : actions groupées complètes + recherche assistée.
 for (const id of [

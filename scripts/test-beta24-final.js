@@ -11,7 +11,7 @@ const i18n = read("public/i18n.js");
 const server = read("server.js");
 const db = read("db.js");
 
-assert.strictEqual(pkg.version, "2.1.1");
+assert.strictEqual(pkg.version, "2.1.2");
 for (const code of ["fr","en","ja","es","de","pt-BR"]) {
   assert(html.includes(`data-lang="${code}"`) || code === "fr");
   assert(fs.existsSync(path.join(root, "public/locales", `${code}.json`)));
