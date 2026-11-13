@@ -17,8 +17,8 @@
     },
     {
       "path": ".github/workflows/windows-installer.yml",
-      "bytes": 4458,
-      "sha256": "1d64e6b6285dd5586addaa6e1fc56c2bf00af3c0bf90f0cbebb8783e4d214e3c"
+      "bytes": 4649,
+      "sha256": "e9730ba2c19a08fdb8aa31dd2d45f62e838a01ddd4ab31012b8b533b1c926473"
     },
     {
       "path": ".gitignore",
@@ -1352,8 +1352,8 @@
     },
     {
       "path": "lib/integrated-updater.js",
-      "bytes": 9495,
-      "sha256": "071f66e64e350544bc1add140a8a1041b65985fe4a1ebae9c8066c40739407b5"
+      "bytes": 9514,
+      "sha256": "3c29319f18961668cd89803ade49d32be1fef31353e8641d9f45738b8c4fd43a"
     },
     {
       "path": "lib/library-automation.js",
@@ -1542,8 +1542,8 @@
     },
     {
       "path": "lib/update-cache.js",
-      "bytes": 1862,
-      "sha256": "049a2156a4d28644c9014d9641309d4e14cbdf557abdc9b27c24bc279be72330"
+      "bytes": 2151,
+      "sha256": "da82fd080fda171d8ea704b2a7572408849f7239e6eacc69e80e1def49169a04"
     },
     {
       "path": "lib/update-notifications.js",
@@ -3967,8 +3967,8 @@
     },
     {
       "path": "scripts/test-update-cache-cleanup.cjs",
-      "bytes": 6637,
-      "sha256": "cb387ac123601ee7db5bd51bdc7ce51a69e73f7968814f0cfd89f6126ec01a31"
+      "bytes": 7249,
+      "sha256": "1477aa87e755d4a97bd0684ae7bfd4c35a22421eac256367661af4c10f247076"
     },
     {
       "path": "scripts/test-v200-auth-browser.cjs",
