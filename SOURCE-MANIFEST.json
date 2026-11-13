@@ -1562,8 +1562,8 @@
     },
     {
       "path": "lib/windows-update-launcher.js",
-      "bytes": 6533,
-      "sha256": "d7c03fd92ad4cb5856537f2c25686530affc72ae9ea1d5fda219379c19caa993"
+      "bytes": 6580,
+      "sha256": "94587a9431a34ba718bf9a60373bae6b5afe8feba61c1dfe3a64c95a1fc2974d"
     },
     {
       "path": "LICENSE",
@@ -2852,8 +2852,8 @@
     },
     {
       "path": "scripts/probe-windows-update-helper.cjs",
-      "bytes": 3015,
-      "sha256": "dad7f1431b75ca142dedb1c6b605c20e1b15f3efae35d26faecdd3e8424f0b82"
+      "bytes": 3036,
+      "sha256": "99f2d4caaa9381ab14fe0b23a4b3e25ee0abecadc1cc60b406f9a13cc088cf2e"
     },
     {
       "path": "scripts/production-copy-roots.js",
