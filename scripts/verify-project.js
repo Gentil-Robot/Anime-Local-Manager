@@ -9,8 +9,17 @@ const release=require('../release-version.json');
 function category(file){if(/build|package|release|beta58|beta70-windows/.test(file))return 'Publication';if(/karaoke|timeline|nocturne|ui-logic|polish|retours-window|native/.test(file))return 'Interface et karaoké';if(/38|39|40|41|42|43|44|45|46|audit|retours-runtime|association-concurrency/.test(file))return 'Données, sauvegardes et sécurité';if(/beta(23|26|48|49|50|51|52|53|54|55|56|57)|csv|betaseries|manual-add/.test(file))return 'Imports et bibliothèque';return 'Structure et régressions';}
 
 const exactNames=Object.freeze({
+ 'test-v210-password-recovery.cjs':'Compte : récupération vérifiée et MFA',
+ 'test-v210-update-channels.cjs':'Mises à jour : canaux et compatibilité 2.0.0',
+ 'test-v200-engine-main.cjs':'Moteur : reprise dans Electron',
+ 'test-v200-engine-supervisor.cjs':'Moteur : surveillance et redémarrage',
+ 'test-v200-auth-security-ui.cjs':'Compte : interface MFA et secrets',
+ 'test-v200-auth-security-http.cjs':'Compte : intégration HTTP du MFA',
+ 'test-v200-auth-security-sql.cjs':'Compte : sécurité SQL et révocation',
+ 'test-v200-auth-security.cjs':'Compte : authentification et MFA',
  'test-source-files.js':'Intégrité des sources',
- 'test-beta-stable.js':'Conformité V2.0.0 Bêta stable',
+ 'test-v200-http-errors.cjs':'HTTP : erreurs et continuité du service',
+ 'test-beta-stable.js':'Conformité '+release.publicVersion,
  'test-nocturne.js':'Présentation et navigation',
  'test-beta76-imports.cjs':'Imports : contrôle des données',
  'test-beta78-storage.cjs':'Stockage : persistance et récupération',
@@ -42,7 +51,7 @@ const exactNames=Object.freeze({
  'test-beta82-safe-storage.cjs':'Chiffrement et stockage sécurisé',
  'test-beta82-delete-confirmation.cjs':'Suppression de compte : confirmation',
  'test-beta82-betaseries-network.cjs':'BetaSeries : protections réseau',
- 'test-release-v200.cjs':'Compatibilité V2.0.0 Bêta stable'
+ 'test-release-v200.cjs':'Compatibilité '+release.publicVersion
 });
 const parts=Object.freeze({
  source:'sources',files:'fichiers',audit:'audit',upgrade:'mise à niveau',karaoke:'karaoké',timeline:'synchronisation',

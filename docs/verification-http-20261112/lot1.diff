@@ -1,0 +1,242 @@
+--- a/server.js
++++ b/server.js
+@@ -48,7 +48,12 @@
+     if (typeof handler !== "function" || handler.length > 3) return handler;
+     return function almGuardedHandler(req, res, next) {
+       const result = handler.call(this, req, res, next);
+-      if (result && typeof result.then === "function" && typeof next === "function") result.then(undefined, next);
++      if (result && typeof result.then === "function" && typeof next === "function") {
++        // Empty rejection reasons and Express routing sentinels are still
++        // failures: passing them directly to next() would silently skip them.
++        result.then(undefined, error => next(error && error !== "route" && error !== "router"
++          ? error : new Error("Rejected route promise")));
++      }
+       return result;
+     };
+   };
+@@ -13477,7 +13482,7 @@
+ // Express par défaut renvoie la pile en HTML hors NODE_ENV=production.
+ app.use((error, req, res, next) => {
+   if (res.headersSent) return next(error);
+-  const status = Number(error?.status || error?.statusCode);
++  const status = error?.code === "LIMIT_FILE_SIZE" ? 413 : Number(error?.status || error?.statusCode);
+   const safe = Number.isInteger(status) && status >= 400 && status < 600 ? status : 500;
+   if (safe >= 500) console.error("[http]", req.method, req.path, error?.stack || error);
+   const code = /^[A-Z0-9_]{3,64}$/.test(String(error?.code || "")) ? String(error.code) : (safe >= 500 ? "ALM_INTERNAL_ERROR" : "ALM_REQUEST_REJECTED");
+--- /dev/null
++++ b/scripts/test-v200-http-errors.cjs
+@@ -0,0 +1,165 @@
++'use strict';
++// Exercise the real Express app and its final error handler on an isolated
++// profile. Fixture routes exist only in this process, never in the product.
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const os = require('node:os');
++const path = require('node:path');
++const vm = require('node:vm');
++const {EventEmitter} = require('node:events');
++const multer = require('multer');
++const {cleanupRuntime} = require('./runtime-cleanup');
++
++const root = path.resolve(__dirname, '..');
++const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'alm-v200-http-errors-'));
++process.env.ALM_DATA_DIR = directory;
++process.env.ALM_IMAGES_DIR = path.join(directory, 'images');
++process.env.ALM_RELEASE_SMOKE = '1';
++process.env.ALM_MAINTENANCE_MODE = '1';
++process.env.ALM_AUTOMATION_STARTUP = '0';
++// Exercise the desktop session guard as well as HTTP error propagation.
++process.env.ALM_SESSION_TOKEN = 'fictional-http-error-session';
++fs.writeFileSync(path.join(directory, 'config.json'), JSON.stringify({
++  metadataAutonomousUpdateOnStart: false,
++  metadataUpdateOnStart: false,
++  metadataAutonomousLearnFromSearch: false
++}));
++
++const localFetch = global.fetch;
++global.fetch = (url, ...args) => String(url).startsWith('http://127.0.0.1:')
++  ? localFetch(url, ...args) : Promise.reject(Error('No live providers in HTTP error tests'));
++const unhandled = [];
++const observe = reason => unhandled.push(reason);
++let listener;
++
++async function main() {
++  process.on('unhandledRejection', observe);
++  try {
++    const api = require('../server');
++    const db = require('../db');
++    await db.whenReady();
++    const {app} = api;
++    // Express 4's error middleware is terminal. Insert fixture routes before
++    // that existing middleware without copying or recreating production code.
++    const stack = app._router.stack;
++    const finalErrorHandler = stack.pop();
++    assert.equal(finalErrorHandler.handle.length, 4);
++    const prefix = '/api/__http-error-test';
++    const privateDetail = 'FICTIONAL_PRIVATE_PATH_AND_STACK';
++    const fail = () => { throw Error(privateDetail); };
++    let acceptedUploads = 0;
++    try {
++      for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
++        app[method](prefix + '/' + method, [[(_req, _res, next) => next(), async () => fail()]]);
++      }
++      app.get(prefix + '/sync', fail);
++      app.get(prefix + '/promise', () => Promise.reject(Error(privateDetail)));
++      for (const [index, reason] of [undefined, null, false, 0, '', 'route', 'router'].entries()) {
++        app.get(prefix + '/empty-rejection/' + index, () => Promise.reject(reason));
++      }
++      app.get(prefix + '/client-error', async () => {
++        throw Object.assign(Error('Fictional request rejected'), {status: 422, code: 'ALM_TEST_REJECTED'});
++      });
++      app.get(prefix + '/status-code', async () => {
++        throw Object.assign(Error('Fictional conflict'), {statusCode: 409});
++      });
++      app.get(prefix + '/invalid-status', async () => {
++        throw Object.assign(Error(privateDetail), {status: 200, code: '<unsafe-code>'});
++      });
++      app.get(prefix + '/route-error-handler', fail, (error, _req, res, _next) => {
++        assert.equal(error.message, privateDetail);
++        res.status(422).json({code: 'ALM_TEST_HANDLED'});
++      });
++      app.post(prefix + '/upload', multer({storage: multer.memoryStorage(), limits: {fileSize: 32}}).single('file'), (_req, res) => {
++        acceptedUploads++;
++        res.json({ok: true});
++      });
++    } finally {
++      stack.push(finalErrorHandler);
++    }
++    app.set('alm-http-error-fixture', 'preserved');
++    assert.equal(app.get('alm-http-error-fixture'), 'preserved', 'app.get(setting) must retain Express semantics');
++
++    listener = await new Promise(resolve => {
++      const server = app.listen(0, '127.0.0.1', () => resolve(server));
++    });
++    const origin = 'http://127.0.0.1:' + listener.address().port;
++    const request = (route, options = {}) => localFetch(origin + route, {
++      ...options,
++      headers: {Cookie: 'alm_session=' + process.env.ALM_SESSION_TOKEN, ...options.headers},
++      signal: AbortSignal.timeout(5000)
++    });
++    async function expectError(route, options, status, code) {
++      const response = await request(route, options);
++      assert.equal(response.status, status, route);
++      assert.match(response.headers.get('content-type'), /^application\/json\b/);
++      const text = await response.text();
++      const value = JSON.parse(text);
++      assert.equal(value.code, code, route);
++      assert(!Object.hasOwn(value, 'stack'));
++      assert(!text.includes(privateDetail), 'Internal error details must stay out of responses');
++      if (status >= 500) assert.equal(value.error, 'Erreur interne.');
++      return value;
++    }
++    for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
++      await expectError(prefix + '/' + method, {method: method.toUpperCase()}, 500, 'ALM_INTERNAL_ERROR');
++    }
++    for (const route of ['/sync', '/promise', '/invalid-status']) {
++      await expectError(prefix + route, {}, 500, 'ALM_INTERNAL_ERROR');
++    }
++    for (let index = 0; index < 7; index++) {
++      await expectError(prefix + '/empty-rejection/' + index, {}, 500, 'ALM_INTERNAL_ERROR');
++    }
++    const client = await expectError(prefix + '/client-error', {}, 422, 'ALM_TEST_REJECTED');
++    assert.equal(client.error, 'Fictional request rejected');
++    await expectError(prefix + '/status-code', {}, 409, 'ALM_REQUEST_REJECTED');
++    assert.equal((await request(prefix + '/route-error-handler')).status, 422);
++
++    await expectError(prefix + '/post', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{'}, 400, 'ALM_REQUEST_REJECTED');
++    await expectError(prefix + '/post', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({text: 'x'.repeat(257 * 1024)})}, 413, 'ALM_REQUEST_SIZE');
++    await expectError(prefix + '/post', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({text: 'x'.repeat(20 * 1024 * 1024)})}, 413, 'ALM_REQUEST_REJECTED');
++    const form = bytes => {
++      const data = new FormData();
++      data.append('file', new Blob([Buffer.alloc(bytes)]), 'fictional.txt');
++      return data;
++    };
++    await expectError(prefix + '/upload', {method: 'POST', body: form(33)}, 413, 'LIMIT_FILE_SIZE');
++    assert.equal(acceptedUploads, 0, 'An oversized upload must not run its route');
++    assert.equal((await request(prefix + '/upload', {method: 'POST', body: form(32)})).status, 200);
++    assert.equal(acceptedUploads, 1);
++    assert.equal((await request(prefix + '/not-found')).status, 404, 'Unknown routes keep their 404');
++    const healthy = await request('/api/animes');
++    assert.equal(healthy.status, 200, 'The real library remains available after every error');
++    assert.deepEqual(await healthy.json(), []);
++    await new Promise(resolve => setImmediate(resolve));
++    assert.deepEqual(unhandled, [], 'Route failures must never become unhandled rejections');
++
++    // Execute the actual host module with a fictional parent boundary. This
++    // checks logging and a subsequent RPC, not recovery of arbitrary DB work.
++    const hostProcess = new EventEmitter();
++    hostProcess.parentPort = new EventEmitter();
++    const messages = [], logs = [];
++    hostProcess.parentPort.postMessage = message => messages.push(message);
++    vm.runInNewContext(fs.readFileSync(path.join(root, 'lib/server-host.js'), 'utf8'), {
++      require: name => {
++        if (name === '../server') return {startServer: async () => ({almPort: 3123})};
++        if (name === '../db') return {};
++        throw Error('Unexpected host dependency: ' + name);
++      },
++      process: hostProcess, console: {error: (...args) => logs.push(args)},
++      setTimeout, clearTimeout
++    }, {filename: 'server-host.js', timeout: 1000});
++    hostProcess.emit('unhandledRejection', 'fictional-background-rejection');
++    assert.equal(logs.length, 1);
++    assert(logs[0].join(' ').includes('fictional-background-rejection'));
++    hostProcess.parentPort.emit('message', {data: {id: 1, method: 'start', args: [3123]}});
++    await new Promise(resolve => setImmediate(resolve));
++    assert.equal(messages[0].value.port, 3123);
++    console.log('OK V2 HTTP errors: async/sync failures, empty rejection reasons, JSON 400/413, Multer 413, status preservation, no leaked stack, healthy library and host logging.');
++  } finally {
++    process.removeListener('unhandledRejection', observe);
++    global.fetch = localFetch;
++    await cleanupRuntime(directory, listener);
++  }
++}
++main().catch(error => { console.error(error); process.exitCode = 1; });
+--- a/scripts/verification-plan.json
++++ b/scripts/verification-plan.json
+@@ -2,6 +2,7 @@
+   "schema": 1,
+   "steps": [
+     "scripts/test-source-files.js",
++    "scripts/test-v200-http-errors.cjs",
+     "scripts/test-beta-stable.js",
+     "scripts/test-karaoke-timeline.js",
+     "scripts/test-beta15-ui-logic.js",
+--- a/scripts/verify-project.js
++++ b/scripts/verify-project.js
+@@ -10,6 +10,7 @@
+ 
+ const exactNames=Object.freeze({
+  'test-source-files.js':'Intégrité des sources',
++ 'test-v200-http-errors.cjs':'HTTP : erreurs et continuité du service',
+  'test-beta-stable.js':'Conformité V2.0.0 Bêta stable',
+  'test-nocturne.js':'Présentation et navigation',
+  'test-beta76-imports.cjs':'Imports : contrôle des données',
+--- a/scripts/smoke-windows.js
++++ b/scripts/smoke-windows.js
+@@ -15,7 +15,7 @@
+  const destination=diagnosticsDir||(log?.file?path.join(path.dirname(log.file),'smoke-diagnostics'):null);
+  if(!destination)return null;
+  fs.mkdirSync(destination,{recursive:true});
+- const file=path.join(destination,'smoke-'+Date.now()+'-'+phase+'.json');
++ const file=path.join(destination,'smoke-'+Date.now()+'-'+phase+'-'+crypto.randomBytes(8).toString('hex')+'.json');
+  let chromium='';try{const source=path.join(profile,'chromium-'+phase+'.log'),fd=fs.openSync(source,'r');try{const size=fs.fstatSync(fd).size,buffer=Buffer.alloc(Math.min(size,131072));fs.readSync(fd,buffer,0,buffer.length,Math.max(0,size-buffer.length));chromium=buffer.toString('utf8');}finally{fs.closeSync(fd);}}catch{}
+  // Keep only test reports and bounded log tails, never the temporary database or keys.
+  atomicJson(file,JSON.parse(redact(JSON.stringify({schema:1,phase,exitCode:result.code??null,signal:result.signal||null,launchError:result.error||null,proof:proof.value||null,proofError:proof.error||null,output:(result.output||'').slice(-131072),chromium}))));
+--- a/scripts/test-beta68-release.cjs
++++ b/scripts/test-beta68-release.cjs
+@@ -10,10 +10,15 @@
+   const makeProof=(env,changes={})=>{profile=env.ALM_RELEASE_PROFILE;const marker=JSON.parse(fs.readFileSync(path.join(profile,'.alm-release-test.json'),'utf8'));const value={status:'passed',nonce:env.ALM_RELEASE_NONCE,phase:marker.phase,version:options.version,runtime:{electron:options.electron},packaged:true,ui:true,catalogueCount:30430,episodesSeen:3,imported:1,backup:true,persistence:marker.phase==='verify',...changes};fs.writeFileSync(path.join(profile,'smoke-result.json'),JSON.stringify(value));return value;};
+   const proof=await testApp(executable,{...options,run:async(_exe,args,{env})=>{launches.push(env.ALM_RELEASE_PROFILE);assert.equal(args[0],'--enable-logging=file');const phase=launches.length===1?'seed':'verify';assert.equal(args[1],'--log-file='+path.join(env.ALM_RELEASE_PROFILE,'chromium-'+phase+'.log'));makeProof(env);return {code:0,output:''};}});
+   assert.equal(proof.launches,2);assert.equal(launches[0],launches[1]);assert(proof.persistence);assert(!fs.existsSync(profile));assert(!fs.existsSync(diagnosticsDir));
++  // Two failures in the same millisecond must retain two independent reports.
++  const originalNow=Date.now;try{Date.now=()=>1794441600000;
+   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{makeProof(env,{status:'failed',stage:'engine-start',error:'CONTROLLED_ENGINE_FAILURE'});fs.writeFileSync(path.join(env.ALM_RELEASE_PROFILE,'chromium-seed.log'),'Controlled Windows child log');return {code:1,output:''};}}),error=>error.message.includes('CONTROLLED_ENGINE_FAILURE')&&error.message.includes('engine-start')&&error.message.includes('0x00000001')&&error.message.includes('Diagnostic :'));
+   assert(!fs.existsSync(profile));let records=()=>fs.readdirSync(diagnosticsDir).map(f=>JSON.parse(fs.readFileSync(path.join(diagnosticsDir,f),'utf8')));assert.equal(records().length,1);assert.equal(records()[0].proof.status,'failed');assert.equal(records()[0].chromium,'Controlled Windows child log');
+   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{profile=env.ALM_RELEASE_PROFILE;return {code:-1073741819,output:'',signal:null};}}),/0xC0000005/);
+   assert(!fs.existsSync(profile));assert.equal(records().length,2);
++  assert(records().some(record=>record.proof?.error==='CONTROLLED_ENGINE_FAILURE'));
++  assert(records().some(record=>record.exitCode===-1073741819));
++  }finally{Date.now=originalNow;}
+   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{profile=env.ALM_RELEASE_PROFILE;return {code:0,output:''};}}),/Rapport de l’application absent/);assert(!fs.existsSync(profile));
+   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{makeProof(env,{nonce:'wrong'});return {code:0,output:''};}}),/absent ou incohérent/);
+   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{makeProof(env);return {code:1,output:'nonzero even with a passed proof'};}}),/Code de sortie 1/);

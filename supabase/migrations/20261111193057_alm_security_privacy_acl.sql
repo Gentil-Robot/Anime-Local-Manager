@@ -54,3 +54,4 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
 
 -- Note: Supabase-managed role "supabase_admin" has separate defaults, which
 -- cannot be modified by this postgres session. Track this residual separately.
+

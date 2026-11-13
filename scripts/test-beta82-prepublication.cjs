@@ -9,16 +9,17 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const pkg=JSON.parse(read('package.json'));
 const lock=JSON.parse(read('package-lock.json'));
-assert.equal(pkg.version,'2.0.0');
+assert.equal(pkg.version,'2.1.0');
 assert.equal(pkg.version,lock.version);
 assert.equal(lock.packages[''].version,pkg.version);
-assert.equal(pkg.devDependencies.electron,'45.2.1');
-assert.equal(lock.packages[''].devDependencies.electron,'45.2.1');
-assert.equal(lock.packages['node_modules/electron'].version,'45.2.1');
-assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.npmjs.org/electron/-/electron-45.2.1.tgz');
-assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-t433yuo8Kh8WG/mTStnPRT/NtpWw8A+caNLJgeU0tS/FlfOkeNEntFsac4ViLgDxZOmDe7BeSkOANVqrqNHhDA==');
+assert.equal(pkg.devDependencies.electron,'45.3.1');
+assert.equal(lock.packages[''].devDependencies.electron,'45.3.1');
+assert.equal(lock.packages['node_modules/electron'].version,'45.3.1');
+assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.npmjs.org/electron/-/electron-45.3.1.tgz');
+// Independent registry pin, not a value copied from the lock under test.
+assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-1oYau2B4RXF27Df2fzvrFDJoy8AOSVlgS6gklo6wkLZ/QWJemJCJHkY4+uuacvSFUtR8IimiLukLNFoYP0fmjA==');
 assert.equal(read('.nvmrc'),read('.node-version'));
-assert.equal(read('supabase/functions/alm-public/release.ts').includes('"2.0.0"'),true);
+assert.equal(read('supabase/functions/alm-public/release.ts').includes('"2.1.0"'),true);
 assert.equal(read('public/design-core.js').includes('release-version.json') || read('public/design-core.js').includes('ALM_RELEASE'),true);
 assert.equal(read('community/site/design-core.js'),read('public/design-core.js'));
 assert.equal(JSON.parse(read('community/site/release-manifest.json')).version,pkg.version);
@@ -59,5 +60,5 @@ for(const origin of ['http://127.0.0.1:3144','http://localhost:3122','http://0.0
  const post=new Request('https://fixture.invalid/functions/v1/alm-public',{method:'POST',headers:{Origin:'http://127.0.0.1:3124','Content-Type':'application/json'},body:JSON.stringify({action:'contact',email:'sample@example.test',category:'problem',message:'Fixture showing CAPTCHA remains mandatory',consent:true,website:''})});
  // The local port fix must not bypass CAPTCHA even if the origin is allowed.
  assert.equal((await handle(post,deps)).status,403); // Missing Turnstile token: fail closed even on port 3124.
- console.log('OK Beta82: 45.2.1 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.');
+ console.log('OK Beta82: 45.3.1 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -50,3 +50,4 @@ WHERE d.defaclobjtype='r' AND
   (n.nspname='public' OR d.defaclnamespace=0)
   AND pg_get_userbyid(d.defaclrole) IN ('postgres','supabase_admin')
 ORDER BY creator,schema,grantee,privilege_type;
+

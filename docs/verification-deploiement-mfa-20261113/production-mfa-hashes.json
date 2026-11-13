@@ -1,0 +1,382 @@
+[
+  {
+    "path": "THIRD-PARTY-NOTICES.txt",
+    "sha1": "0657afb91581122b8359534e553fa7b4b20899e2"
+  },
+  {
+    "path": "alm-gallery.css",
+    "sha1": "694834a5daace9ed129f4cb9d4a882c001968a0e"
+  },
+  {
+    "path": "alm-gallery.js",
+    "sha1": "d5ebc0099a35fd0f82b5d75f42e71ae586776e17"
+  },
+  {
+    "path": "alm-night-sakura.css",
+    "sha1": "8b2cc67da7f7d79d3d8ad4b171e55ad915b2a6be"
+  },
+  {
+    "path": "alm-presentation-video.css",
+    "sha1": "b8b1f8624746cc6299dba207cf392a43b17ea98b"
+  },
+  {
+    "path": "alm-presentation-video.js",
+    "sha1": "9db3dc7dd6fa1cd799516994f6942096be0e3201"
+  },
+  {
+    "path": "alm-site.css",
+    "sha1": "ee0fab540e92e7b1d6610356187f1b19cccb2a13"
+  },
+  {
+    "path": "alm-site.js",
+    "sha1": "6a023fe9755403a9fdcfe838f550967fc3a4c5ec"
+  },
+  {
+    "path": "api/visitor-locale.js",
+    "sha1": "509ff6fc33fa18a76f700eac6afd1c49d3929295"
+  },
+  {
+    "path": "assets/anime-local-manager-logo.png",
+    "sha1": "be1fd031789bd2018c512ffc5034369251500186"
+  },
+  {
+    "path": "assets/banners/alm-banner-de.webp",
+    "sha1": "d3b15282a5e6b673721978a71e664b7f62c4e3f9"
+  },
+  {
+    "path": "assets/banners/alm-banner-en.webp",
+    "sha1": "6860c07abaf97096607aeddda0f78fabc66dbc43"
+  },
+  {
+    "path": "assets/banners/alm-banner-es.webp",
+    "sha1": "9fe7fe41d411f53bdba8619e058f07490954ff70"
+  },
+  {
+    "path": "assets/banners/alm-banner-fr.webp",
+    "sha1": "2baa831e9fbab0d1c4986dc31b84e6661e06663c"
+  },
+  {
+    "path": "assets/banners/alm-banner-ja.webp",
+    "sha1": "22d90870882e0ce9293c256de4329e946babd46d"
+  },
+  {
+    "path": "assets/banners/alm-banner-pt-BR.webp",
+    "sha1": "5e87ce0daf9ba9242252421bc023e308e5e2ef79"
+  },
+  {
+    "path": "assets/banners/alm-banner-zh-CN.webp",
+    "sha1": "5f024a9a12818ff910b0901fba31efdfa64f13fd"
+  },
+  {
+    "path": "assets/design/aster-portrait.webp",
+    "sha1": "2f66e8a01133965211ede33d7d11fcdc33ca2cb8"
+  },
+  {
+    "path": "assets/design/moon-library.webp",
+    "sha1": "df411c8a3a461f9cfce5b6f799ff065034a45769"
+  },
+  {
+    "path": "assets/design/night-garden.webp",
+    "sha1": "52dac3cbc32e6bcc27a2c083f86448a4f580f8e0"
+  },
+  {
+    "path": "assets/design/night-path.webp",
+    "sha1": "dd6de857e32e945c7211d648086475941cc73b75"
+  },
+  {
+    "path": "assets/screenshots/anime-dna-thumb.webp",
+    "sha1": "fcdad5f90d2ca99e8dfce2c4dc92ad1cb780ebe5"
+  },
+  {
+    "path": "assets/screenshots/anime-dna.webp",
+    "sha1": "fdc3807e9ef4655bc103ac0a9ef67450f1b2570c"
+  },
+  {
+    "path": "assets/screenshots/calendar-thumb.webp",
+    "sha1": "a74554765782663a3fe2da7ced872a9d7c6e3bad"
+  },
+  {
+    "path": "assets/screenshots/calendar.webp",
+    "sha1": "c671406c633dfb9f5d921a3f4fbff62fc1517583"
+  },
+  {
+    "path": "assets/screenshots/glossary-thumb.webp",
+    "sha1": "4c563448135f64af2eb235e4d58a11e0e84100b4"
+  },
+  {
+    "path": "assets/screenshots/glossary.webp",
+    "sha1": "68b5c2119fdad40e2c4e772b78d6ca73e35d4a41"
+  },
+  {
+    "path": "assets/screenshots/library-alt.webp",
+    "sha1": "6152420bcf2c753f00eeb24fbb405c8c4e3974f0"
+  },
+  {
+    "path": "assets/screenshots/library-thumb.webp",
+    "sha1": "fd5112716f1eee6789f9cdad8a9e8a530acc4d4a"
+  },
+  {
+    "path": "assets/screenshots/library.webp",
+    "sha1": "f0c59eb5a0dfb38a5bb95831240b460450c8dc86"
+  },
+  {
+    "path": "assets/screenshots/memories-thumb.webp",
+    "sha1": "f84e930924e6c1937f1add4089d58c0f010b1015"
+  },
+  {
+    "path": "assets/screenshots/memories.webp",
+    "sha1": "1c633179a78b0ef3a87dae8ccf8413362d59993e"
+  },
+  {
+    "path": "assets/screenshots/new-seasons-thumb.webp",
+    "sha1": "25dec4f53f78efee876407ecf47dd5cf7c3deb3e"
+  },
+  {
+    "path": "assets/screenshots/new-seasons.webp",
+    "sha1": "bd3dd073909ef06249de6c7a09809599f5363728"
+  },
+  {
+    "path": "assets/screenshots/news-thumb.webp",
+    "sha1": "ffb53e5e2324f7c4ca011cb42641f2e5f2825ddd"
+  },
+  {
+    "path": "assets/screenshots/news.webp",
+    "sha1": "0c9780a7997e442297ad906bc13097f6c7ded0fe"
+  },
+  {
+    "path": "assets/screenshots/rankings-thumb.webp",
+    "sha1": "9c4a216959ddb0752da5689cb7771e7e50054071"
+  },
+  {
+    "path": "assets/screenshots/rankings.webp",
+    "sha1": "6643881405856a1fe92070bbca77cc20792ed2ca"
+  },
+  {
+    "path": "assets/screenshots/recommendations-thumb.webp",
+    "sha1": "cfe3e85dd2fe2ef6e0d6fd6375072d6e393b9973"
+  },
+  {
+    "path": "assets/screenshots/recommendations.webp",
+    "sha1": "4d89cfabba354fa1f980eba9b8b878782177baa7"
+  },
+  {
+    "path": "assets/screenshots/search-thumb.webp",
+    "sha1": "220d952c140675b17eec8c52b8b90aaa75c75631"
+  },
+  {
+    "path": "assets/screenshots/search.webp",
+    "sha1": "53a008024ed7dc705a70231266c6eb3850adb6cd"
+  },
+  {
+    "path": "assets/screenshots/watching-thumb.webp",
+    "sha1": "e0dbb997354d2d04de9669f3db9e9c7cec262708"
+  },
+  {
+    "path": "assets/screenshots/watching.webp",
+    "sha1": "d7372c3a6a2a919f51588b83263ec3463dc8afc0"
+  },
+  {
+    "path": "assets/screenshots/watchlist-thumb.webp",
+    "sha1": "b48ce63cfa6c52c9a91b960d51ee3c0f2753ae2c"
+  },
+  {
+    "path": "assets/screenshots/watchlist.webp",
+    "sha1": "248e5e0afd01c5e7edd3be3cef546b3ed59f648a"
+  },
+  {
+    "path": "beta81.css",
+    "sha1": "f4117499b3d5ff8a42975a1fcfda54dfd08aac51"
+  },
+  {
+    "path": "clipboard.js",
+    "sha1": "395c30edc791ea38139ac25c50bb197384743a90"
+  },
+  {
+    "path": "community-age.js",
+    "sha1": "28f429fd84d52a95fbcbc6ec7e9c01401e075644"
+  },
+  {
+    "path": "community-charter.html",
+    "sha1": "c7bd590bc8d35653fe7a041ac7c99f6452443519"
+  },
+  {
+    "path": "community-charter.js",
+    "sha1": "32edd1976a5c644d06a135aad3344ca91c17346a"
+  },
+  {
+    "path": "community-config.json",
+    "sha1": "05e28a2b847f05491f8e12f4d0830bb363dcea9c"
+  },
+  {
+    "path": "community-content.js",
+    "sha1": "ff3f7789e9892f74b413e5ed6e1493208b6130f2"
+  },
+  {
+    "path": "community-copy.js",
+    "sha1": "83dc2de89bb5e7cce8c0ab31ad2a5b4747290778"
+  },
+  {
+    "path": "community-forms.js",
+    "sha1": "65a933cf3445c996dd761924db122925dfbb0ee6"
+  },
+  {
+    "path": "community-mfa-copy.js",
+    "sha1": "d24fa425d5948806aa3471f1eddbd4596303a377"
+  },
+  {
+    "path": "community-mfa.css",
+    "sha1": "b8d2e49ffa3db0d84957d7832ae752695d8f1f38"
+  },
+  {
+    "path": "community-mfa.js",
+    "sha1": "8f231a9a21a7e4cfe4a939755b8e1219bd9a848a"
+  },
+  {
+    "path": "community-model.js",
+    "sha1": "f9cccfd561f27c5e3e4545bd7bde4443cff874ae"
+  },
+  {
+    "path": "community-notice.css",
+    "sha1": "72e12be93aad7239c4d17c9757b412a6dd9a804c"
+  },
+  {
+    "path": "community-notice.html",
+    "sha1": "7dcaa6b6ee8c401be02d6f5ee29bcb6249d331ab"
+  },
+  {
+    "path": "community-page-init.js",
+    "sha1": "50f821b87fd318a5c05610d187fe0b099079cd05"
+  },
+  {
+    "path": "community-qr.js",
+    "sha1": "330a80944c57b279d712757fc97f0180708f8825"
+  },
+  {
+    "path": "community-requests.js",
+    "sha1": "530b27818c290958321223c6c5c1159b8c36ac12"
+  },
+  {
+    "path": "community-security.js",
+    "sha1": "bac3984b32780fe38c0ead974aa5c07602da0eb5"
+  },
+  {
+    "path": "community-site-copy.js",
+    "sha1": "f11f1ed3246efcc9d6fc0b5a934953d8fc24842c"
+  },
+  {
+    "path": "community-ui-extra.js",
+    "sha1": "40b21bfe61fad879802523fa0db61ed195a377ce"
+  },
+  {
+    "path": "community-upgrade-copy.js",
+    "sha1": "c59ca12765308baf8a0b141eaa72eddd0f2d7feb"
+  },
+  {
+    "path": "community-workspace-copy.js",
+    "sha1": "6562f999e46659d5ecf2db508eb9aafd3651a821"
+  },
+  {
+    "path": "community-workspace.css",
+    "sha1": "7443e111d2e4d94de2bb6b24be3ed057ee089389"
+  },
+  {
+    "path": "community-workspace.js",
+    "sha1": "dbc12258eec715486eff33818de33357fed3286f"
+  },
+  {
+    "path": "community.css",
+    "sha1": "ccb58fd9d91f6f8aa5305cdffead7b4445e1597e"
+  },
+  {
+    "path": "community.js",
+    "sha1": "fbae3aa9dd04df638d11ae14ad12345aedb8cfd1"
+  },
+  {
+    "path": "compte.html",
+    "sha1": "deb46a3a11dc299b6a6a5020aece41022862890b"
+  },
+  {
+    "path": "confirmation.html",
+    "sha1": "d057f74ea101047129d5a0c4e51aeddcf7d837eb"
+  },
+  {
+    "path": "design-core.js",
+    "sha1": "bf909a6a982db04cf1324a9b31ee6b90969c669c"
+  },
+  {
+    "path": "index.html",
+    "sha1": "237eb50cef8b6db8b3cb2840dda7439ba808b575"
+  },
+  {
+    "path": "legal-content.js",
+    "sha1": "f199a7d7dd7d063f9934f874a386dd5bd1060fea"
+  },
+  {
+    "path": "legal-notice.html",
+    "sha1": "12aa7aa53c1eeb2884b8deed13365ca7faa96787"
+  },
+  {
+    "path": "newsletter.html",
+    "sha1": "7425dcb0d0dd8ef9b4dc16fcf9b9495b7ae27ee8"
+  },
+  {
+    "path": "privacy-policy.html",
+    "sha1": "b77fe47a12416b8f14679bdb0e008ae9ce68745a"
+  },
+  {
+    "path": "release-manifest.json",
+    "sha1": "7543aad074e5aae8666537349087d51dfeab3b03"
+  },
+  {
+    "path": "release-version.js",
+    "sha1": "db24394fd36988fbcfa7a584fdce5540dddceb0a"
+  },
+  {
+    "path": "scroll-progress.css",
+    "sha1": "2c058ed1462227f63b7e0d3c2cc96088d7c3b091"
+  },
+  {
+    "path": "scroll-progress.js",
+    "sha1": "ee2fac9aac5260f3272275bfcecfddd5fcb7147d"
+  },
+  {
+    "path": "season-reference.js",
+    "sha1": "54a71aca94cdd1f2e8a499495253f0a45bffc666"
+  },
+  {
+    "path": "series-state.js",
+    "sha1": "2ad62d698845d7bb2c4411e0f2db45ca72934fbe"
+  },
+  {
+    "path": "site-init.js",
+    "sha1": "4e5a2fd11a39bb80319d850b6b2bc45ce348a4fa"
+  },
+  {
+    "path": "site-shared.css",
+    "sha1": "4a886a23ebdb17f80e4e80ed031136682abce0a1"
+  },
+  {
+    "path": "site-shared.js",
+    "sha1": "2263a599c4ca8573e757c546a9db003d152d54b3"
+  },
+  {
+    "path": "site.css",
+    "sha1": "d7497577ac21c2fa6ae2891c444d98a1120318f1"
+  },
+  {
+    "path": "support-diagnostics.js",
+    "sha1": "5e786360ecab592d647228da6bc8f351c69b785b"
+  },
+  {
+    "path": "vercel.json",
+    "sha1": "47f9b2f2c6b216579d4d96256dbd5036f36fb90c"
+  },
+  {
+    "path": "watch-status.js",
+    "sha1": "4171b50240d8aba20e7b70bc3b74116908ed9cbd"
+  },
+  {
+    "path": "web-client.js",
+    "sha1": "209e3b4462f47be1bbd85eec941bd6ed5907be01"
+  }
+]

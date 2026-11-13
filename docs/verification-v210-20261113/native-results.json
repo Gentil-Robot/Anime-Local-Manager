@@ -1,0 +1,33 @@
+{
+  "testedCodeTree": "76337afc037d26640f67c4fa46a1173058d5cb43",
+  "recipes": [
+    {
+      "recipe": "ALM_NATIVE_RECOVERY_OK",
+      "electron": "45.3.1",
+      "node": "24.22.2",
+      "utilities": 2,
+      "portFallback": true,
+      "localTokenRotated": true,
+      "persistedRows": 1,
+      "notesPreserved": true
+    },
+    {
+      "recipe": "ALM_AUTH_BROWSER_OK",
+      "status": "passed",
+      "electron": "45.3.1",
+      "node": "24.22.2",
+      "chromium": "156.0.8078.96",
+      "flows": [
+        "optional-login-setup",
+        "primary-enrollment",
+        "backup-enrollment",
+        "backup-login",
+        "invalid-code-denied",
+        "sensitive-reauthentication"
+      ],
+      "languages": 7,
+      "mobileWidth": 390,
+      "noHorizontalOverflow": true
+    }
+  ]
+}

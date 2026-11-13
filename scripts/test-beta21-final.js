@@ -10,7 +10,7 @@ const css = read('public/style.css');
 // Historical timeline regression. The supplied Beta37 timeline is tested separately.
 const song = JSON.parse(read('scripts/fixtures/karaoke/song.beta36-backup.json'));
 const lines = song.sections.flatMap(s => s.lines || []);
-assert.strictEqual(pkg.version,'2.0.0');
+assert.strictEqual(pkg.version,'2.1.0');
 assert(css.includes('grid-template-columns: minmax(320px, 360px) minmax(0, 1fr);'));
 assert(css.includes('.csv-results-panel:not(.is-empty)'));
 assert(css.includes('min-height: min(74vh, 820px);'));

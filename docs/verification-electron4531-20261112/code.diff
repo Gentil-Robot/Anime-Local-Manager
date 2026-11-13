@@ -1,0 +1,282 @@
+--- a/compliance/release-gates.json
++++ b/compliance/release-gates.json
+@@ -50,7 +50,7 @@
+       "finding": "ALM-18",
+       "status": "platform_test_required",
+       "subject": "Electron embedded Node/Brotli/Undici security",
+-      "requiredEvidence": "Electron 45.2.1 (official Node 24.22.1) is pinned in package and lock; regenerate a clean Windows NSIS build, validate its bundled runtime, run the 151-suite regression plan, verify SHA-256, and repeat VM installation and data persistence checks before distributing binaries."
++      "requiredEvidence": "Electron 45.3.1 (official Node 24.22.2) is pinned in package and lock; regenerate a clean Windows NSIS build, validate its bundled runtime, run the 160-suite regression plan, verify SHA-256, and repeat VM installation and data persistence checks before distributing binaries."
+     },
+     {
+       "finding": "ALM-19",
+@@ -66,7 +66,7 @@
+     }
+   ],
+   "changesApplied": [
+-    "Electron 45.2.1 pinned in source and dependency lock; Windows verification pending",
++    "Electron 45.3.1 pinned in source and dependency lock; Windows verification pending",
+     "Node version pins aligned",
+     "loopback-origin fallback 3123-3143 with isolated tests",
+     "local source/site/release hashes refreshed",
+--- a/docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md
++++ b/docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md
+@@ -0,0 +1,83 @@
++# Electron 45.3.1 — Intégration et recette ALM
++
++Date : 12 novembre 2026. Cette candidate source reprend l’archive MFA/supervision validée précédemment. Aucun installateur Windows, site ou service distant n’est publié par cette mise à jour.
++
++## Changement de moteur
++
++| Composant embarqué | Archive précédente | Nouvelle candidate |
++| --- | --- | --- |
++| Electron | 45.2.1 | 45.3.1 |
++| Node.js | 24.22.1 | 24.22.2 |
++| Chromium | 156.0.8078.75 | 156.0.8078.96 |
++
++Ces versions embarquées sont indépendantes du Node installé sur le PC. La contrainte ALM reste `Node >=22.12.0`, npm 10 ou plus. La CI garde son épinglage Node 22.23.4 ; un PC équipé de Node 24 LTS peut aussi construire les sources. Cette livraison ne change pas le numéro public ALM 2.0.0 ni les formats de sauvegarde.
++
++La mise à jour reste dans la branche majeure Electron 45. Les notes officielles intermédiaires ont été relues : mises à jour Node/Chromium, corrections de plantages, puis modification de confiance des intermédiaires RSA eMudhra révoqués en 45.3.1. Le test natif du moteur et celui du rendu sont nécessaires pour vérifier le comportement d’ALM avec ces nouveaux binaires.
++
++## Verrouillage et contrôles
++
++- `package.json` et `package-lock.json` épinglent exactement `45.3.1`, sans plage de version.
++- Le test de prépublication vérifie explicitement la version, l’URL du paquet et son intégrité SHA-512 obtenue dans le registre npm : `sha512-1oYau2B4RXF27Df2fzvrFDJoy8AOSVlgS6gklo6wkLZ/QWJemJCJHkY4+uuacvSFUtR8IimiLukLNFoYP0fmjA==`. Cette valeur attendue reste indépendante du verrouillage lu par le test.
++- Les tests historiques de prépublication et de chaîne de compilation exigent maintenant 45.3.1. Leurs autres contrôles, dont le sandbox, les origines et le CAPTCHA, sont conservés.
++- Le script PowerShell de publication vérifie 45.3.1 dans les sources locales, le rapport natif de l’installateur et le dépôt distant. Ses conditions de publication restent actives.
++- La recette native de l’interface vérifie également que le binaire exécuté correspond à la version épinglée. Les résultats enregistrent les versions réellement chargées.
++- Le README, les références de recette et la liste des preuves attendues pour Windows suivent cette candidate. Les rapports précédents 45.2.1 restent des preuves historiques.
++
++## Validation
++
++**160 suites sur 160 réussies**, en 385 secondes, avec les nouveaux contrôles de version. Environnement de la suite : Linux, Node.js 24.22.1 installé sur l’hôte, npm 11.9.0. Une installation propre `npm ci` a réussi ; seuls l’épinglage racine et le paquet Electron ont changé dans le verrouillage.
++
++| Groupe | Suites réussies |
++| --- | ---: |
++| Structure et régressions | 99 |
++| Interface et karaoké | 8 |
++| Imports et bibliothèque | 27 |
++| Données, sauvegardes et sécurité | 14 |
++| Publication | 12 |
++
++Deux recettes natives supplémentaires ont réussi avec le **vrai Electron 45.3.1**, son **Node 24.22.2** et son **Chromium 156.0.8078.96** :
++
++- Moteur : arrêt brutal du processus utilitaire, redémarrage sur un autre port, nouveau jeton local, refus de l’ancien jeton et conservation d’une entrée de bibliothèque avec ses notes.
++- Interface : option MFA à la connexion, QR code local, ajout de deux authentificateurs, refus d’un code incorrect, connexion par l’appareil de secours, saisie de preuve sensible, sept langues et absence de débordement horizontal à 390 pixels. Le fournisseur Auth est fictif dans cette recette.
++
++`npm audit --audit-level=high` réussit : six alertes modérées dans la chaîne de compilation, aucune élevée ou critique. L’audit des dépendances de production ne signale aucune vulnérabilité. Les six alertes de build restent inchangées ; elles n’ont pas été masquées par une mise à jour forcée.
++
++Les vérifications Windows/NSIS avec cette candidate et les parcours contre Auth hébergé restent à exécuter avant publication. Le code métier du MFA, sa migration SQL et le superviseur sont identiques à l’archive précédente ; cette livraison ne les déploie pas.
++
++Preuves : [suite complète](verification-electron4531-20261112/verification.json), [journal](verification-electron4531-20261112/verification.log), [moteur natif](verification-electron4531-20261112/electron-recovery.json), [interface native](verification-electron4531-20261112/electron-mfa.json), [audit](verification-electron4531-20261112/npm-audit-complet.json), [métadonnées npm](verification-electron4531-20261112/npm-electron-metadata.json), [diff par rapport à l’archive MFA](verification-electron4531-20261112/code.diff).
++
++
++## Reprise sous Windows
++
++Extraire la nouvelle archive dans un dossier distinct, puis ouvrir PowerShell dans le dossier contenant `package.json`. Exécuter les commandes dans cet ordre et attendre la fin de chacune :
++
++```powershell
++npm.cmd ci
++npm.cmd ls electron --depth=0
++node scripts/check-source-files.js
++npm.cmd run verify
++```
++
++La version installée doit être `electron@45.3.1`. `npm ci` utilise le verrouillage fourni ; il n’est pas nécessaire de modifier les dépendances à la main ni de régénérer le manifeste de l’archive.
++
++Pour la recette fonctionnelle : `npm.cmd run app`. Deux recettes natives isolées sont aussi disponibles :
++
++```powershell
++.\node_modules\.bin\electron.cmd .\scripts\test-v200-engine-native.cjs
++.\node_modules\.bin\electron.cmd .\scripts\test-v200-auth-browser.cjs
++```
++
++Elles utilisent des profils jetables ; le fournisseur Auth du test d’interface est simulé. Leur réussite ne prouve pas les parcours contre le service Auth hébergé.
++
++Après validation, utiliser `Publier Installateur Windows.bat` pour construire et tester le NSIS. Conserver le rapport `dist/release-check.json` et refaire la recette en VM : démarrage, imports, images, sauvegardes/restauration, arrêt/redémarrage, mise à jour et désinstallation. Le contrôle de version dans un fichier ne remplace pas ces essais.
++
++La publication du MFA reste coordonnée avec la nouvelle application, le module d’authentification du site et la migration SQL décrits dans [la note MFA/supervision](security/MFA-ET-SUPERVISION-2026-11-12.md). Cette mise à jour d’Electron ne déploie pas cette migration et ne réécrit pas la vitrine actuelle du site. Choisir la prochaine version ALM avant une nouvelle publication pour que l’outil de mise à jour puisse la détecter.
++
++## Sources
++
++- [Versions Electron stables](https://releases.electronjs.org/?channel=stable)
++- [Electron 45.2.2](https://github.com/electron/electron/releases/tag/v45.2.2)
++- [Electron 45.2.3](https://github.com/electron/electron/releases/tag/v45.2.3)
++- [Electron 45.3.0](https://github.com/electron/electron/releases/tag/v45.3.0)
++- [Electron 45.3.1](https://github.com/electron/electron/releases/tag/v45.3.1)
++- [Métadonnées npm exactes](https://registry.npmjs.org/electron/45.3.1)
+--- a/docs/PUBLICATION-OPEN-SOURCE-V2.md
++++ b/docs/PUBLICATION-OPEN-SOURCE-V2.md
+@@ -34,6 +34,6 @@
+ 3. Depuis PowerShell, dans le dossier source : `node scripts/check-source-files.js` et `node scripts/audit-publication.cjs`.
+ 4. Executer `./Preparer-GitHub-V2.ps1` pour creer un clone local, **reprendre la branche distante de preparation deja existante** et creer un commit **sans push**.
+ 5. Examiner les differences et l'envoi propose. Si tout est bon : executer `./Preparer-GitHub-V2.ps1 -PublierBranche -RepertoireTravail <chemin-du-clone>` pour envoyer le commit et, si `gh` est disponible, creer une PR brouillon.
+-6. **Avant le push**, separer dans Vercel la connexion Git du depot ALM : tant qu'elle existe, un push sur la branche de preparation declenche un deploiement Vercel Preview en erreur. Ensuite, le workflow Windows se lance sur le push de la branche de preparation et fournit le nouvel installateur **en artefact prive de workflow**. Verifier son rapport, son SHA-256 et ses parcours sur VM Windows ; ne creer une release prepublication avec EXE qu'apres cette recette et la revue des droits/conditions applicables. Conserver ce decouplage Vercel avant toute fusion dans `main`, pour ne pas re-deployer le site. Voir `docs/ELECTRON-45.2.1-RECETTE-ET-PUBLICATION.md`.
++6. **Avant le push**, separer dans Vercel la connexion Git du depot ALM : tant qu'elle existe, un push sur la branche de preparation declenche un deploiement Vercel Preview en erreur. Ensuite, le workflow Windows se lance sur le push de la branche de preparation et fournit le nouvel installateur **en artefact prive de workflow**. Verifier son rapport, son SHA-256 et ses parcours sur VM Windows ; ne creer une release prepublication avec EXE qu'apres cette recette et la revue des droits/conditions applicables. Conserver ce decouplage Vercel avant toute fusion dans `main`, pour ne pas re-deployer le site. Voir la recette actuelle `docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md` (la recette 45.2.1 reste un historique).
+ 
+ La preparation des sources et leur envoi sur GitHub **ne deployent pas** le site, Supabase, Vercel, Cloudflare ni Resend.
+--- a/docs/SIGNPATH-OPEN-SOURCE.md
++++ b/docs/SIGNPATH-OPEN-SOURCE.md
+@@ -8,7 +8,7 @@
+ - Depot public : https://github.com/Gentil-Robot/Anime-Local-Manager
+ - Licence : MIT ; droits des assets et donnees tierces a distinguer.
+ - Mainteneur : Gentil Robot.
+-- Build : `.github/workflows/windows-installer.yml`, runners Windows GitHub Actions ; Node `22.23.4` ; `npm ci` verrouille ; Electron `45.2.1` (candidate non encore revalidee sous Windows), electron-builder `26.16.1`.
++- Build : `.github/workflows/windows-installer.yml`, runners Windows GitHub Actions ; Node `22.23.4` ; `npm ci` verrouille ; Electron `45.3.1` (candidate non encore revalidee sous Windows), electron-builder `26.16.1`.
+ - Tests : `scripts/verify-project.js`, 151 suites en date du 26/10/2026, essai application empaquetee, SHA-256 du livrable, recette manuelle VM Windows.
+ - Distribution : version `2.0.0` nommee *V2.0.0 Beta stable* a publier en **prerelease** GitHub et non en version stable.
+ - Signature : aucun certificat ni compte SignPath configure ; workflow actuel sait deja utiliser `ALM_WINDOWS_CERTIFICATE`, mais **la signature SignPath necessite une integration et une approbation propres**, non une simple substitution de secret.
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -17,7 +17,7 @@
+       },
+       "devDependencies": {
+         "@electric-sql/pglite": "0.3.14",
+-        "electron": "45.2.1",
++        "electron": "45.3.1",
+         "electron-builder": "26.16.1",
+         "esbuild": "0.28.2",
+         "jsdom": "26.1.0",
+@@ -2113,9 +2113,9 @@
+       }
+     },
+     "node_modules/electron": {
+-      "version": "45.2.1",
+-      "resolved": "https://registry.npmjs.org/electron/-/electron-45.2.1.tgz",
+-      "integrity": "sha512-t433yuo8Kh8WG/mTStnPRT/NtpWw8A+caNLJgeU0tS/FlfOkeNEntFsac4ViLgDxZOmDe7BeSkOANVqrqNHhDA==",
++      "version": "45.3.1",
++      "resolved": "https://registry.npmjs.org/electron/-/electron-45.3.1.tgz",
++      "integrity": "sha512-1oYau2B4RXF27Df2fzvrFDJoy8AOSVlgS6gklo6wkLZ/QWJemJCJHkY4+uuacvSFUtR8IimiLukLNFoYP0fmjA==",
+       "dev": true,
+       "license": "MIT",
+       "dependencies": {
+--- a/package.json
++++ b/package.json
+@@ -105,7 +105,7 @@
+   "author": "Gentil Robot",
+   "devDependencies": {
+     "@electric-sql/pglite": "0.3.14",
+-    "electron": "45.2.1",
++    "electron": "45.3.1",
+     "electron-builder": "26.16.1",
+     "esbuild": "0.28.2",
+     "jsdom": "26.1.0",
+--- a/Publier-GitHub-V2.ps1
++++ b/Publier-GitHub-V2.ps1
+@@ -21,7 +21,7 @@
+ # Read-only verification works without GitHub CLI; gh is required only for -Publier.
+ if ($Publier -and -not (Get-Command 'gh' -ErrorAction SilentlyContinue)) { throw 'GitHub CLI (gh) absent. Installer gh avant -Publier.' }
+ $pkg = Get-Content -Raw -LiteralPath (Join-Path $source 'package.json') | ConvertFrom-Json
+-if ($pkg.version -ne '2.0.0' -or $pkg.devDependencies.electron -ne '45.2.1') { throw 'Sources V2 / Electron non conformes.' }
++if ($pkg.version -ne '2.0.0' -or $pkg.devDependencies.electron -ne '45.3.1') { throw 'Sources V2 / Electron non conformes.' }
+ & node (Join-Path $source 'scripts/check-source-files.js')
+ if ($LASTEXITCODE -ne 0) { throw 'Sources non conformes au manifeste SHA-256.' }
+ & node (Join-Path $source 'scripts/audit-publication.cjs')
+@@ -29,7 +29,7 @@
+ $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json
+ if ($report.status -ne 'passed') { throw 'La compilation doit etre terminee avec status=passed (essai NSIS reel). Le statut passed-with-limitations ne suffit pas.' }
+ if ($report.smoke.installer.status -ne 'passed') { throw 'Le veritable installateur NSIS doit avoir ete teste sur une VM propre / runner jetable.' }
+-if ($report.smoke.installer.runtime.electron -ne '45.2.1') { throw 'La version Electron reelle de la VM ne correspond pas.' }
++if ($report.smoke.installer.runtime.electron -ne '45.3.1') { throw 'La version Electron reelle de la VM ne correspond pas.' }
+ if (@($report.artifacts).Count -ne 1 -or $report.artifacts[0].target -ne 'nsis') { throw 'Rapport de livrable non conforme.' }
+ $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $installerPath).Hash.ToLowerInvariant()
+ $expectedHash = [string]$report.artifacts[0].sha256
+@@ -51,7 +51,7 @@
+ if ($LASTEXITCODE -ne 0) { throw 'Impossible de lire package.json depuis GitHub main.' }
+ $remote = ($remoteJson | Out-String) | ConvertFrom-Json
+ $remoteData = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String([string]$remote.content)) | ConvertFrom-Json
+-if ($remoteData.version -ne '2.0.0' -or $remoteData.devDependencies.electron -ne '45.2.1') { throw 'GitHub main contient encore une ancienne version. Integrer d abord la branche de publication V2.' }
++if ($remoteData.version -ne '2.0.0' -or $remoteData.devDependencies.electron -ne '45.3.1') { throw 'GitHub main contient encore une ancienne version. Integrer d abord la branche de publication V2.' }
+ # Verify Git LFS manifest for the clip: do not release a repository without the original media.
+ $attributesUrl = "repos/$Depot/contents/.gitattributes?ref=main"
+ $attrsJSON = & gh api $attributesUrl
+--- a/README.md
++++ b/README.md
+@@ -7,6 +7,10 @@
+ [**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2**](docs/RELEASE-NOTES-V2.0.0-BETA.md) · [**Historique technique**](docs/)
+ 
+ ## V2.0.0 Bêta stable
++
++**Candidate source du 12 novembre 2026 : Electron 45.3.1**, avec Node.js 24.22.2 et Chromium 156.0.8078.96 embarqués. Le MFA optionnel et la supervision du moteur sont conservés. Consulter la [recette Electron 45.3.1](docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md) pour les résultats et les étapes Windows avant compilation/publication. Cette archive ne constitue pas un nouvel installateur publié.
++
++### Historique de validation initiale
+ 
+ **État au 31 octobre 2026 : candidate Windows validée, publication publique en préparation.** Cette branche contient les sources de la V2 ; la branche `main` conserve encore la V1, jusqu'à la fusion contrôlée.
+ 
+@@ -39,7 +43,7 @@
+ 
+ **Distribution publique ciblée :** installateur NSIS x64 uniquement. La version portable Windows n'est plus proposée.
+ 
+-Pour compiler les sources sous Windows, installer Node.js `22.23.4`, npm 10+, Git et Git LFS, puis :
++Pour compiler les sources sous Windows, installer Node.js `22.23.4` (version épinglée en CI) ou Node.js 24 LTS, npm 10+, Git et Git LFS, puis :
+ 
+ ```powershell
+ npm ci
+@@ -83,7 +87,7 @@
+ 
+ - [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
+ - [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)
+-- [Recette technique et publication Electron](docs/ELECTRON-45.2.1-RECETTE-ET-PUBLICATION.md)
++- [Recette technique Electron actuelle](docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md)
+ - [Documentation et archives de développement](docs/)
+ 
+ ---
+--- a/scripts/test-beta82-prepublication.cjs
++++ b/scripts/test-beta82-prepublication.cjs
+@@ -12,11 +12,12 @@
+ assert.equal(pkg.version,'2.0.0');
+ assert.equal(pkg.version,lock.version);
+ assert.equal(lock.packages[''].version,pkg.version);
+-assert.equal(pkg.devDependencies.electron,'45.2.1');
+-assert.equal(lock.packages[''].devDependencies.electron,'45.2.1');
+-assert.equal(lock.packages['node_modules/electron'].version,'45.2.1');
+-assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.npmjs.org/electron/-/electron-45.2.1.tgz');
+-assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-t433yuo8Kh8WG/mTStnPRT/NtpWw8A+caNLJgeU0tS/FlfOkeNEntFsac4ViLgDxZOmDe7BeSkOANVqrqNHhDA==');
++assert.equal(pkg.devDependencies.electron,'45.3.1');
++assert.equal(lock.packages[''].devDependencies.electron,'45.3.1');
++assert.equal(lock.packages['node_modules/electron'].version,'45.3.1');
++assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.npmjs.org/electron/-/electron-45.3.1.tgz');
++// Independent registry pin, not a value copied from the lock under test.
++assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-1oYau2B4RXF27Df2fzvrFDJoy8AOSVlgS6gklo6wkLZ/QWJemJCJHkY4+uuacvSFUtR8IimiLukLNFoYP0fmjA==');
+ assert.equal(read('.nvmrc'),read('.node-version'));
+ assert.equal(read('supabase/functions/alm-public/release.ts').includes('"2.0.0"'),true);
+ assert.equal(read('public/design-core.js').includes('release-version.json') || read('public/design-core.js').includes('ALM_RELEASE'),true);
+@@ -59,5 +60,5 @@
+  const post=new Request('https://fixture.invalid/functions/v1/alm-public',{method:'POST',headers:{Origin:'http://127.0.0.1:3124','Content-Type':'application/json'},body:JSON.stringify({action:'contact',email:'sample@example.test',category:'problem',message:'Fixture showing CAPTCHA remains mandatory',consent:true,website:''})});
+  // The local port fix must not bypass CAPTCHA even if the origin is allowed.
+  assert.equal((await handle(post,deps)).status,403); // Missing Turnstile token: fail closed even on port 3124.
+- console.log('OK Beta82: 45.2.1 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.');
++ console.log('OK Beta82: 45.3.1 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.');
+ })().catch(error=>{console.error(error);process.exitCode=1;});
+--- a/scripts/test-gap82-toolchain.cjs
++++ b/scripts/test-gap82-toolchain.cjs
+@@ -7,7 +7,7 @@
+ assert.equal(read('.node-version'),'22.23.4');
+ assert.equal(read('.nvmrc'),read('.node-version'));
+ assert.equal(pkg.engines.node,'>=22.12.0');
+-assert.equal(pkg.devDependencies.electron,'45.2.1');
++assert.equal(pkg.devDependencies.electron,'45.3.1');
+ assert.equal(pkg.dependencies.multer,'2.5.0');
+ assert(read('README.md').includes('22.23.4'));
+-console.log('OK GAP82 toolchain: verified security release Node 22.23.4 for builds, unchanged app engines and Electron 45.2.1 candidate.');
++console.log('OK GAP82 toolchain: Node 22.23.4 CI pin, unchanged app engines and Electron 45.3.1 candidate.');
+--- a/scripts/test-v200-auth-browser.cjs
++++ b/scripts/test-v200-auth-browser.cjs
+@@ -43,7 +43,8 @@
+ }
+ async function enroll(){await until(()=>document.querySelector('#commDialog input[name=secret]'));await screenshot('mfa-enrollment.png');await js(()=>{const f=document.querySelector('#commDialog form');f.elements.code.value='123456';f.requestSubmit();});await until(()=>!document.getElementById('commDialog').open);}
+ async function run(){
+- await app.whenReady();const server=express();server.get('/',(_req,res)=>res.type('html').send(html));server.use(express.static(path.join(root,'public')));
++ await app.whenReady();assert.equal(process.versions.electron,require('../package.json').devDependencies.electron);
++ const server=express();server.get('/',(_req,res)=>res.type('html').send(html));server.use(express.static(path.join(root,'public')));
+  listener=server.listen(0,'127.0.0.1');await new Promise(resolve=>listener.once('listening',resolve));const origin='http://127.0.0.1:'+listener.address().port;
+  window=new BrowserWindow({width:1160,height:940,show:true,useContentSize:true,webPreferences:{offscreen:true,backgroundThrottling:false,contextIsolation:true,nodeIntegration:false,sandbox:true}});
+  window.webContents.on('paint',(_event,_dirty,image)=>{lastFrame=image;});
+@@ -82,7 +83,7 @@
+   await window.webContents.executeJavaScript('window.fixtureLanguage='+JSON.stringify(language)+';document.documentElement.lang='+JSON.stringify(language)+';window.ALM_COMMUNITY_MFA.settings();');
+   await until(()=>document.querySelector('#commDialog h2')?.textContent===window.ALM_COMMUNITY_COPY[window.fixtureLanguage].securityTitle);
+  }
+- const result={status:'passed',electron:process.versions.electron,chromium:process.versions.chrome,flows:['optional-login-setup','primary-enrollment','backup-enrollment','backup-login','invalid-code-denied','sensitive-reauthentication'],languages:7,mobileWidth:390,noHorizontalOverflow:true};
++ const result={status:'passed',electron:process.versions.electron,node:process.versions.node,chromium:process.versions.chrome,flows:['optional-login-setup','primary-enrollment','backup-enrollment','backup-login','invalid-code-denied','sensitive-reauthentication'],languages:7,mobileWidth:390,noHorizontalOverflow:true};
+  fs.writeFileSync(path.join(output,'result.json'),JSON.stringify(result,null,2)+'\n');
+  console.log('ALM_AUTH_BROWSER_OK '+JSON.stringify(result));
+ }

@@ -1,0 +1,46 @@
+[
+  {
+    "path": "compliance/release-gates.json",
+    "kind": "modified"
+  },
+  {
+    "path": "docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md",
+    "kind": "added"
+  },
+  {
+    "path": "docs/PUBLICATION-OPEN-SOURCE-V2.md",
+    "kind": "modified"
+  },
+  {
+    "path": "docs/SIGNPATH-OPEN-SOURCE.md",
+    "kind": "modified"
+  },
+  {
+    "path": "package-lock.json",
+    "kind": "modified"
+  },
+  {
+    "path": "package.json",
+    "kind": "modified"
+  },
+  {
+    "path": "Publier-GitHub-V2.ps1",
+    "kind": "modified"
+  },
+  {
+    "path": "README.md",
+    "kind": "modified"
+  },
+  {
+    "path": "scripts/test-beta82-prepublication.cjs",
+    "kind": "modified"
+  },
+  {
+    "path": "scripts/test-gap82-toolchain.cjs",
+    "kind": "modified"
+  },
+  {
+    "path": "scripts/test-v200-auth-browser.cjs",
+    "kind": "modified"
+  }
+]

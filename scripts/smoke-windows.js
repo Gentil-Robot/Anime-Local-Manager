@@ -15,7 +15,7 @@ function preserveFailure(profile,phase,result,proof,{log,diagnosticsDir}={}){
  const destination=diagnosticsDir||(log?.file?path.join(path.dirname(log.file),'smoke-diagnostics'):null);
  if(!destination)return null;
  fs.mkdirSync(destination,{recursive:true});
- const file=path.join(destination,'smoke-'+Date.now()+'-'+phase+'.json');
+ const file=path.join(destination,'smoke-'+Date.now()+'-'+phase+'-'+crypto.randomBytes(8).toString('hex')+'.json');
  let chromium='';try{const source=path.join(profile,'chromium-'+phase+'.log'),fd=fs.openSync(source,'r');try{const size=fs.fstatSync(fd).size,buffer=Buffer.alloc(Math.min(size,131072));fs.readSync(fd,buffer,0,buffer.length,Math.max(0,size-buffer.length));chromium=buffer.toString('utf8');}finally{fs.closeSync(fd);}}catch{}
  // Keep only test reports and bounded log tails, never the temporary database or keys.
  atomicJson(file,JSON.parse(redact(JSON.stringify({schema:1,phase,exitCode:result.code??null,signal:result.signal||null,launchError:result.error||null,proof:proof.value||null,proofError:proof.error||null,output:(result.output||'').slice(-131072),chromium}))));

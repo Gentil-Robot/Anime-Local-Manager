@@ -30,6 +30,7 @@ let activeServerOrigin = null;
 let serverModule = null;
 let startServer = null;
 let defaultPort = 3123;
+let engineSupervisor = null;
 
 const SUPPORTED_APP_LANGUAGES = new Set(["fr", "en", "ja", "es", "de", "pt-BR", "zh-CN"]);
 
@@ -274,21 +275,22 @@ async function startApplication() {
   const updater=require('./lib/integrated-updater').createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:app.isPackaged,portable,target:updateTarget,directory:path.join(app.getPath('userData'),'updates'),getRelease:async force=>serverModule.checkUpdates(force,(await serverModule.maintenanceState()).settings.channel),quit:()=>{closeLocalServer();app.quit();},onChange:state=>mainWindow?.webContents.send('alm-update-state',state)});
   appUpdater=updater;
   scheduler=require('./lib/os-maintenance').createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:app.isPackaged,userData:app.getPath('userData')});
-  await serverModule.configureMaintenanceUpdate(async()=>{
+  const maintenanceUpdateFor=engine=>async()=>{
     if(!updater.state().supported)return {ok:true,skipped:true,reason:'package-manager'};
     if(updater.state().phase==='ready')return {ok:true};
-    const prefs=(await serverModule.maintenanceState()).settings;
-    const release=await serverModule.checkUpdates(true,prefs.channel);
+    const prefs=(await engine.maintenanceState()).settings;
+    const release=await engine.checkUpdates(true,prefs.channel);
     if(release.error)return {ok:false,error:release.error};
     if(!release.available)return {ok:true};
     // Do not hold a utility RPC callback for the duration of a large download.
     updater.download().catch(error=>console.warn('[update]',error.message));
     return {ok:true,skipped:true,reason:'downloading'};
-  });
+  };
+  await serverModule.configureMaintenanceUpdate(maintenanceUpdateFor(serverModule));
   const savedMaintenance=await serverModule.maintenanceState();
   const registerStartupSchedule=()=>{if(savedMaintenance.settings.enabled&&scheduler.supported&&!releaseSmoke)scheduler.configure(true,{preserveDisabled:true}).catch(error=>console.warn('[schedule]',error.code||'ALM_SCHEDULE_FAILED'));};
   const trusted = event => {
-    if (!validIpcSender(event, mainWindow, `http://127.0.0.1:${serverPort}`)) throw new Error("Untrusted IPC sender");
+    if (!validIpcSender(event, mainWindow, activeServerOrigin)) throw new Error("Untrusted IPC sender");
   };
   for(const channel of ['update-state','update-download','update-install','update-cancel'])ipcMain.removeHandler(channel);
   ipcMain.removeHandler('display-get');ipcMain.removeHandler('display-set');
@@ -335,6 +337,56 @@ async function startApplication() {
     return result.filePaths[0];
   });
   if(maintenanceMode){const outcome=await serverModule.runMaintenance();while(updater.state().phase==='downloading'||updater.state().phase==='checking')await new Promise(resolve=>setTimeout(resolve,500));if(maintenanceMode){if(!outcome||typeof outcome.tasks!=='object'||!outcome.reason&&Object.values(outcome.tasks).some(task=>task.phase==='error'&&task.lastAttempt>=outcome.lastRun)){await closeLocalServer();app.exit(1);}else app.quit();}}
+  if(serverModule.remote&&!maintenanceMode&&!releaseSmoke){
+    engineSupervisor=require('./lib/engine-supervisor').createEngineSupervisor({
+      initial:serverModule,
+      create:()=>{
+        process.env.ALM_SESSION_TOKEN=require('node:crypto').randomBytes(32).toString('hex');
+        return require('./lib/server-process').createServerProcess(utility);
+      },
+      reconnect:async engine=>{
+        const replacement=await engine.startServer(defaultPort);
+        if(backupSecrets)await engine.configureBackupSecrets(backupSecrets);
+        await engine.startReleaseNotifications(showEpisodeNotification);
+        await engine.configureMaintenanceUpdate(maintenanceUpdateFor(engine));
+        serverModule=engine;startServer=engine.startServer;server=replacement;shutdownPromise=null;
+        activeServerOrigin=`http://127.0.0.1:${Number(replacement.almPort)}`;
+        if(mainWindow&&!mainWindow.isDestroyed()){await mainWindow.loadURL(activeServerOrigin);focusMainWindow();}
+        return replacement;
+      },
+      onFailure:async(information,controls)=>{
+        const nativeMessage=options=>mainWindow&&!mainWindow.isDestroyed()?dialog.showMessageBox(mainWindow,options):dialog.showMessageBox(options);
+        let failure=information;
+        while(engineSupervisor){
+          const words=require('./lib/engine-recovery-copy').copy(readAppLanguage()||normalizeAppLanguage(app.getLocale()));
+          const state=controls.snapshot(),choices=[];
+          if(failure.reason==='unresponsive')choices.push('wait');
+          if(state.canRestart)choices.push('restart');
+          choices.push('diagnostic','close');
+          const chosen=await nativeMessage({type:'warning',title:words.title,
+            message:words[failure.reason==='unresponsive'?'unresponsive':failure.reason==='restart-failed'?'failed':'stopped'],
+            detail:words.notice+(state.canRestart?'':'\n\n'+words.limit),
+            buttons:choices.map(key=>words[key]),defaultId:Math.max(0,choices.indexOf('restart')),cancelId:choices.indexOf('close'),noLink:true});
+          if(!engineSupervisor)return;
+          const action=choices[chosen.response];
+          if(action==='wait'){controls.resume();return;}
+          if(action==='diagnostic'){
+            const current=controls.snapshot().diagnostics;
+            await nativeMessage({type:'info',title:words.title,message:words.diagnostic,
+              detail:String(current?.detail||failure.error||'ALM_ENGINE_STOPPED').slice(-16000),buttons:[words.back],noLink:true});
+            continue;
+          }
+          if(action==='restart'){
+            try{await controls.restart();return;}
+            catch(error){failure={reason:'restart-failed',error:/^[A-Z0-9_]+$/.test(error.code||'')?error.code:'ALM_ENGINE_RESTART_FAILED'};continue;}
+          }
+          engineSupervisor.dispose();engineSupervisor=null;
+          try{await controls.terminate();}catch{app.exit(1);return;}
+          server=null;quitReady=true;app.quit();return;
+        }
+      }
+    });
+  }
   if(!maintenanceMode&&!mainWindow)createWindow();
   if (!maintenanceMode&&mainWindow && !mainWindow.isDestroyed()) {
     await mainWindow.loadURL(activeServerOrigin);
@@ -344,6 +396,7 @@ async function startApplication() {
 
 let shutdownPromise=null, quitReady=false;
 function closeLocalServer() {
+  engineSupervisor?.dispose();engineSupervisor=null;
   if(serverModule?.remote){if(!shutdownPromise)shutdownPromise=serverModule.shutdown().then(()=>{serverModule.kill();server=null;});return shutdownPromise;}
   if (!server) return;
   if (!shutdownPromise) shutdownPromise = (async () => {

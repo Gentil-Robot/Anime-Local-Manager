@@ -4,26 +4,24 @@
 
 Anime Local Manager (ALM) est une application **locale, gratuite et open source (MIT)** pour organiser sa collection d'animés sous Windows et Linux. La bibliothèque reste locale par défaut ; la communauté est facultative.
 
-[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2**](docs/RELEASE-NOTES-V2.0.0-BETA.md) · [**Historique technique**](docs/)
+[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2.1.0**](docs/RELEASE-NOTES-V2.1.0.md) · [**Historique technique**](docs/)
 
-## V2.0.0 Bêta stable
+## V2.1.0 Bêta stable
 
-**État au 31 octobre 2026 : candidate Windows validée, publication publique en préparation.** Cette branche contient les sources de la V2 ; la branche `main` conserve encore la V1, jusqu'à la fusion contrôlée.
+La V2.1.0 ajoute le **MFA facultatif** par application d'authentification, avec un second appareil de secours, la réauthentification des opérations sensibles et la révocation des sessions. Elle supervise le moteur local et propose un redémarrage contrôlé en cas de panne. La bibliothèque reste utilisable hors connexion.
 
-- **153/153 suites de tests réussies** sur GitHub Actions pour le commit `6c2c350` (avant mise à jour de ce README).
-- Installateur **Windows NSIS x64** compilé ; essais de démarrage et de persistance réussis sur le runner Windows.
-- Audit des dépendances de production : **0 alerte** ; **15 alertes modérées** connues dans l'outillage de compilation.
-- Electron **45.2.1** ; Node.js **22.23.4** recommandé pour construire le projet.
+**Electron 45.3.1**, Node.js **24.22.2** et Chromium **156.0.8078.96** embarqués ; Node.js **24.22.2 LTS** épinglé pour la compilation. La vérification complète comporte **162 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
 
-### Télécharger la V2
+La V2 représente environ **six mois de travail**, avec de nombreuses bêtas de développement non publiées. La première **V2.0.0 Bêta stable** a été rendue publique le **7 novembre 2026**. Les fichiers et numéros des anciennes bêtas restent dans l'historique technique.
 
-**Release officielle prévue : `v2.0.0`, marquée « pre-release » (bêta).**
+### Télécharger
 
-- [**Lien direct vers Anime Local Manager V2.0.0 Bêta stable**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0) — **à venir : ce lien ne sera actif qu'après publication de la release.**
-- [**Page officielle des releases**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) — la V1 y reste accessible d'ici là.
-- [**Suivi de validation et de publication de la V2**](https://github.com/Gentil-Robot/Anime-Local-Manager/pull/2) — pull request de revue, non encore fusionnée.
+- [Release V2.1.0](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.0) — installateur, rapport Windows et empreinte SHA-256 après réussite de la publication.
+- [Toutes les releases](https://github.com/Gentil-Robot/Anime-Local-Manager/releases), dont la [V2.0.0](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0).
 
-Le fichier Windows attendu est `Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.exe`. Lorsqu'il sera publié, téléchargez-le **uniquement depuis la release officielle** et comparez son SHA-256 à l'empreinte annoncée sur cette release. **L'installateur n'est pas signé numériquement** : Windows SmartScreen peut afficher un avertissement.
+L'installateur attendu est `Anime-Local-Manager-2.1.0-Setup-x64.exe`. Ce nom permet aussi à la V2.0.0 de télécharger la mise à jour intégrée. Le canal reste **bêta publique**, avec la release GitHub marquée « pre-release ». Téléchargez depuis la release officielle et comparez l'empreinte dans `SHA256SUMS.txt` ; l'installateur non signé peut provoquer un avertissement Windows SmartScreen.
+
+Consultez les [notes de version 2.1.0](docs/RELEASE-NOTES-V2.1.0.md) et la [revue du code](docs/REVUE-V2.1.0-2026-11-13.md).
 
 ## Fonctionnalités
 
@@ -31,7 +29,7 @@ Le fichier Windows attendu est `Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.
 - **Imports et catalogue :** listes BetaSeries (CSV) et XML ; **30 430 fiches** de catalogue embarquées pour un fonctionnement local.
 - **Découverte :** recherche, recommandations, nouvelles saisons, classement, calendrier et actualités.
 - **Anime DNA et Mes souvenirs :** exploration des profils d'animés, historique personnel et carnet de souvenirs.
-- **Dictionnaire :** 161 termes illustrés autour de l'animation japonaise.
+- **Dictionnaire :** 162 termes illustrés autour de l'animation japonaise.
 - **Communauté facultative :** amis, bibliothèques partagées, animés en commun, recommandations et contrôles d'âge et de confidentialité.
 - **Sept langues :** français, anglais, espagnol, allemand, japonais, portugais brésilien et chinois simplifié.
 
@@ -39,7 +37,7 @@ Le fichier Windows attendu est `Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.
 
 **Distribution publique ciblée :** installateur NSIS x64 uniquement. La version portable Windows n'est plus proposée.
 
-Pour compiler les sources sous Windows, installer Node.js `22.23.4`, npm 10+, Git et Git LFS, puis :
+Pour compiler les sources sous Windows, installer Node.js `24.22.2` LTS (version épinglée en CI), npm 10+, Git et Git LFS, puis :
 
 ```powershell
 npm ci
@@ -79,11 +77,11 @@ Les données principales restent sur l'ordinateur de l'utilisateur. Faites une s
 
 ### Documentation et historique technique
 
-Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.0.0 Bêta stable** est la version présentée publiquement. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
+Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.1.0 Bêta stable** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
 
 - [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
 - [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)
-- [Recette technique et publication Electron](docs/ELECTRON-45.2.1-RECETTE-ET-PUBLICATION.md)
+- [Recette technique Electron actuelle](docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md)
 - [Documentation et archives de développement](docs/)
 
 ---

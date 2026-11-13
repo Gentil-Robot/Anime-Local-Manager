@@ -8,7 +8,7 @@ Informations pour la demande :
 - Depot public : https://github.com/Gentil-Robot/Anime-Local-Manager
 - Licence : MIT ; droits des assets et donnees tierces a distinguer.
 - Mainteneur : Gentil Robot.
-- Build : `.github/workflows/windows-installer.yml`, runners Windows GitHub Actions ; Node `22.23.4` ; `npm ci` verrouille ; Electron `45.2.1` (candidate non encore revalidee sous Windows), electron-builder `26.16.1`.
+- Build : `.github/workflows/windows-installer.yml`, runners Windows GitHub Actions ; Node `22.23.4` ; `npm ci` verrouille ; Electron `45.3.1` (candidate non encore revalidee sous Windows), electron-builder `26.16.1`.
 - Tests : `scripts/verify-project.js`, 151 suites en date du 26/10/2026, essai application empaquetee, SHA-256 du livrable, recette manuelle VM Windows.
 - Distribution : version `2.0.0` nommee *V2.0.0 Beta stable* a publier en **prerelease** GitHub et non en version stable.
 - Signature : aucun certificat ni compte SignPath configure ; workflow actuel sait deja utiliser `ALM_WINDOWS_CERTIFICATE`, mais **la signature SignPath necessite une integration et une approbation propres**, non une simple substitution de secret.

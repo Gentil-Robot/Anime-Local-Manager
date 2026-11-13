@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "reviewedAt": "2026-10-25",
-  "version": "2.0.0",
+  "reviewedAt": "2026-11-13",
+  "version": "2.1.0",
   "purpose": "Release evidence checklist; does not alter runtime access or attest legal compliance.",
   "gates": [
     {
@@ -50,7 +50,7 @@
       "finding": "ALM-18",
       "status": "platform_test_required",
       "subject": "Electron embedded Node/Brotli/Undici security",
-      "requiredEvidence": "Electron 45.2.1 (official Node 24.22.1) is pinned in package and lock; regenerate a clean Windows NSIS build, validate its bundled runtime, run the 151-suite regression plan, verify SHA-256, and repeat VM installation and data persistence checks before distributing binaries."
+      "requiredEvidence": "Electron 45.3.1 (official Node 24.22.2) is pinned in package and lock; regenerate a clean Windows NSIS build, validate its bundled runtime, run the 160-suite regression plan, verify SHA-256, and repeat VM installation and data persistence checks before distributing binaries."
     },
     {
       "finding": "ALM-19",
@@ -66,7 +66,7 @@
     }
   ],
   "changesApplied": [
-    "Electron 45.2.1 pinned in source and dependency lock; Windows verification pending",
+    "Electron 45.3.1 pinned in source and dependency lock; Windows verification pending",
     "Node version pins aligned",
     "loopback-origin fallback 3123-3143 with isolated tests",
     "local source/site/release hashes refreshed",

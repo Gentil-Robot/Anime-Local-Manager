@@ -1,0 +1,163 @@
+{
+  "functions": [
+    {
+      "anon": false,
+      "name": "alm_approve_sensitive",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "name": "alm_authorize_factor_change",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "name": "alm_begin_sensitive",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "name": "alm_confirm_mfa_enrollment",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "name": "alm_finish_factor_change",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "name": "alm_logout_session",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "name": "alm_security_state",
+      "invoker": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "authenticated": true
+    }
+  ],
+  "security_rows": 0,
+  "private_tables": [
+    {
+      "rls": true,
+      "name": "account_security",
+      "anon_select": false,
+      "authenticated_select": false
+    },
+    {
+      "rls": true,
+      "name": "sensitive_authorizations",
+      "anon_select": false,
+      "authenticated_select": false
+    },
+    {
+      "rls": true,
+      "name": "trusted_mfa_factors",
+      "anon_select": false,
+      "authenticated_select": false
+    }
+  ],
+  "trusted_factors": 0,
+  "restrictive_policies": [
+    {
+      "cmd": "ALL",
+      "check": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "roles": [
+        "authenticated"
+      ],
+      "table": "alm_activity",
+      "using": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "permissive": "RESTRICTIVE"
+    },
+    {
+      "cmd": "ALL",
+      "check": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "roles": [
+        "authenticated"
+      ],
+      "table": "alm_dna",
+      "using": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "permissive": "RESTRICTIVE"
+    },
+    {
+      "cmd": "ALL",
+      "check": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "roles": [
+        "authenticated"
+      ],
+      "table": "alm_friendships",
+      "using": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "permissive": "RESTRICTIVE"
+    },
+    {
+      "cmd": "ALL",
+      "check": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "roles": [
+        "authenticated"
+      ],
+      "table": "alm_library",
+      "using": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "permissive": "RESTRICTIVE"
+    },
+    {
+      "cmd": "ALL",
+      "check": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "roles": [
+        "authenticated"
+      ],
+      "table": "alm_profiles",
+      "using": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "permissive": "RESTRICTIVE"
+    },
+    {
+      "cmd": "ALL",
+      "check": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "roles": [
+        "authenticated"
+      ],
+      "table": "alm_recommendations",
+      "using": "(( SELECT alm_private.active_actor() AS active_actor) IS NOT NULL)",
+      "permissive": "RESTRICTIVE"
+    }
+  ],
+  "private_internal_permissions": [
+    {
+      "anon": false,
+      "name": "consume_sensitive",
+      "authenticated": false
+    },
+    {
+      "anon": false,
+      "name": "session_actor",
+      "authenticated": false
+    }
+  ]
+}

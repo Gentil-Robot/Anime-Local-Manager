@@ -1,0 +1,1384 @@
+[publication] V2.0.0 Bêta stable · Structure et régressions · Intégrité des sources (1/99)
+[trace technique] script=scripts/test-source-files.js
+OK : archive complete, fixtures absentes ou non referencees, server.js manquant, fichier altere et manifeste invalide detectes.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Intégrité des sources (1/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · HTTP : erreurs et continuité du service (2/99)
+[trace technique] script=scripts/test-v200-http-errors.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm-v200-http-errors-tnxtsR/collection.sqlite
+[http] GET /api/__http-error-test/get Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at fail (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:49:32)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:88
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:68
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+[http] POST /api/__http-error-test/post Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at fail (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:49:32)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:88
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:68
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+[http] PUT /api/__http-error-test/put Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at fail (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:49:32)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:88
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:68
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+[http] PATCH /api/__http-error-test/patch Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at fail (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:49:32)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:88
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:68
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+[http] DELETE /api/__http-error-test/delete Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at fail (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:49:32)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:88
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:53:68
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+[http] GET /api/__http-error-test/sync Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at fail (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:49:32)
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:284:15
+    at router.process_params (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:346:12)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/serve-static/index.js:121:7)
+[http] GET /api/__http-error-test/promise Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:56:57
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:284:15
+    at router.process_params (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:346:12)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/serve-static/index.js:121:7)
+[http] GET /api/__http-error-test/invalid-status Error: FICTIONAL_PRIVATE_PATH_AND_STACK
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-v200-http-errors.cjs:67:29
+    at almGuardedHandler (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:50:30)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/layer.js:95:5)
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:284:15
+    at router.process_params (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:346:12)
+    at next (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/express/lib/router/index.js:280:10)
+    at SendStream.error (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/serve-static/index.js:121:7)
+[http] GET /api/__http-error-test/empty-rejection/0 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+[http] GET /api/__http-error-test/empty-rejection/1 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+[http] GET /api/__http-error-test/empty-rejection/2 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+[http] GET /api/__http-error-test/empty-rejection/3 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+[http] GET /api/__http-error-test/empty-rejection/4 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+[http] GET /api/__http-error-test/empty-rejection/5 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+[http] GET /api/__http-error-test/empty-rejection/6 Error: Rejected route promise
+    at /workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/server.js:55:21
+OK V2 HTTP errors: async/sync failures, empty rejection reasons, JSON 400/413, Multer 413, status preservation, no leaked stack, healthy library and host logging.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · HTTP : erreurs et continuité du service (2/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Moteur : reprise dans Electron (3/99)
+[trace technique] script=scripts/test-v200-engine-main.cjs
+OK V2 desktop recovery: real main/supervisor integration, idle native alert, new port, backup/notification/maintenance reattachment, updated IPC origin and quiet shutdown.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Moteur : reprise dans Electron (3/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Moteur : surveillance et redémarrage (4/99)
+[trace technique] script=scripts/test-v200-engine-supervisor.cjs
+OK V2 engine supervision: idle exits, late subscribers, secret redaction across generations, expected stop, bounded termination, one writer, callback drain, restart limits, heartbeat grace and shutdown races.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Moteur : surveillance et redémarrage (4/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Compte : interface MFA et secrets (5/99)
+[trace technique] script=scripts/test-v200-auth-security-ui.cjs
+OK V2 Auth UI: seven languages, visible optional setup, escaped factors, backup login, close cancellation, private local QR, secret cleanup and sensitive target/password/MFA forwarding.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Compte : interface MFA et secrets (5/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Compte : intégration HTTP du MFA (6/99)
+[trace technique] script=scripts/test-v200-auth-security-http.cjs
+OK V2 Auth HTTP: optional community auth routes, mandatory pending MFA, backup verification, sanitized status, fresh targeted authorization and server revocation on logout.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Compte : intégration HTTP du MFA (6/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Compte : sécurité SQL et révocation (7/99)
+[trace technique] script=scripts/test-v200-auth-security-sql.cjs
+OK V2 Auth SQL: optional MFA, trusted primary/backup, stolen AAL1/AAL2 rejection, fresh password session proof, one-use action/target grants, real revocation, no metadata bypass, safe factor changes, logout and deletion isolation.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Compte : sécurité SQL et révocation (7/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Compte : authentification et MFA (8/99)
+[trace technique] script=scripts/test-v200-auth-security.cjs
+OK V2 Auth client: required challenge, backup factor, code validation, cancellation races, fresh reauthentication, restoration on failure, QR secrecy, expiry, safe disable and explicit revocation failure.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Compte : authentification et MFA (8/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Conformité V2.0.0 Bêta stable (9/99)
+[trace technique] script=scripts/test-beta-stable.js
+Anime Local Manager V2.0.0 Bêta stable — validation technique
+
+OK  Version npm 2.0.0
+OK  Version visible V2.0.0 Bêta stable
+OK  User-Agent actifs harmonisés
+OK  Syntaxe de tous les fichiers JavaScript
+OK  Identifiants HTML uniques
+OK  Références label et ARIA valides
+OK  Scripts et ressources HTML présents
+OK  Structure CSS équilibrée
+OK  Routes HTTP exactes sans doublon
+OK  Extracteur d’images : Open Graph
+OK  Extracteur d’images : lazy loading et contenu principal
+OK  Extracteur d’images : srcset choisit la grande image
+OK  Extracteur d’images : JSON-LD
+OK  Extracteur d’images : arrière-plan lazy-load
+OK  Extracteur d’images : rejette logos et pixels
+OK  Actualités : résolution et persistance des vignettes câblées
+OK  Actualités : mise à jour réelle du stockage JSON sans doublon
+OK  Parseurs créateur Jikan et AniList
+OK  Carrières créateur : rôles techniques exclus
+OK  Parseurs seiyuu japonais Jikan et AniList
+OK  Œuvres créateur/seiyuu fusionnées et bibliothèque exclue
+OK  Recommandations multi-source et endpoints de secours présents
+OK  Recommandations rapides : AniList prioritaire et images immédiates
+OK  Seiyuu AniList : pagination characterMedia puis secours Staff.characters
+OK  Anime DNA : radar absolu, sans double comptage
+OK  Classification d'import : anime, série TV et ambiguïtés séparés
+OK  Contrôle anime : bibliothèque existante, quarantaine et sauvegarde
+OK  Contrôle anime : jaquettes et scores contextualisés
+OK  Contrôle anime : migration, cache et choix gauche/droite
+OK  Contrôle anime : rendu comparatif fonctionnel
+OK  Import BetaSeries protégé : sélection sûre et validation manuelle
+OK  Contrôle anime : rendu progressif, actions rapides et vidage total
+OK  Anime DNA : empreinte animée personnalisée
+OK  BetaSeries API reste optionnelle
+OK  Dictionnaire : 161 termes uniques et huit catégories
+OK  Dictionnaire intégré à la navigation et à la bibliothèque
+OK  Dictionnaire adouci : galerie illustrée et navigation haut/bas
+OK  Dictionnaire : exemples visuels issus de la metadata locale
+OK  Package Node 22 et fichiers de release
+OK  Configuration Linux AppImage + DEB
+OK  Jeu d’icônes Linux multi-résolution
+OK  Scripts Linux valides et portables entre Windows et Linux
+OK  Scripts Windows V2.0.0 Bêta stable
+OK  Release nettoyée des anciens rapports RC
+OK  Electron : mono-instance, Wayland/X11 et données persistantes
+OK  Snapshot metadata : gzip, schema, row count and manifest SHA-256
+OK  Correctifs vidéo : saisons filtrées et ajout réversible
+OK  BetaSeries : répartition multi-saisons comportementale
+OK  BetaSeries : intégration réelle sans suite inventée
+OK  Complétion, exclusions et candidats : régressions comportementales
+OK  Complétion : règles strictes câblées dans les jobs
+OK  Correctifs vidéo : actualités rapides et lecture nettoyée
+OK  Exceptions hors anime exclues de toutes les fonctions anime
+OK  Correctifs vidéo : import et recommandations simplifiés
+OK  Import CSV : annulation réelle et aucun résultat partiel
+OK  Import BetaSeries : progression visible et attente réseau bornée
+OK  Nouvelles saisons : pourcentage de phase fondé sur les lots
+OK  Actualités : nouvelle tentative d’image par clé stable
+OK  Contrôle anime : anciens faux candidats invalidés
+OK  Navigation : chaque page principale revient en haut
+OK  Correctifs vidéo : finitions interface française
+OK  Beta 9 : bannière anti-répétition liée à la bibliothèque
+OK  Beta 9 : Actualités sans faux état vide au premier rafraîchissement
+OK  Beta 9 : Contrôle anime filtre les TV certaines sans rechargement bloquant
+OK  Beta 10 : périodes Actualités filtrées localement et CTA héros cohérent
+OK  Beta 10 : Dictionnaire retrouve Shounen et les genres bibliothèque
+OK  Beta 13 : progression réelle du Contrôle anime
+OK  Beta 13 : Contrôle anime évite les gels de scroll et de décision
+OK  Beta 13 : logo, À propos, installateur et karaoké finalisés
+OK  Beta 14 : timeline karaoké ancrée sur l’enregistrement réel
+OK  Beta 13 : ajout manuel vérifiable et non silencieux
+OK  Beta 13 : ajout manuel couvert par un test runtime
+OK  Beta 13 : Contrôle anime recherche et accès direct aux pages
+OK  Beta 37 : clip complet et une seule horloge, sans réglage de synchro grand public
+OK  Beta 14 : Recommandations revient réellement en haut après reconstruction
+OK  Beta 15 : bannière de complétion ne boucle plus sur une fiche inchangée
+OK  Beta 15 : karaoké japonais + romaji + français à fort contraste
+OK  Beta 15 : articles agrandis remis en paragraphes lisibles
+OK  Beta 15 : suggestions de recherche dans les Recommandations
+OK  Beta 17 : bannière de complétion respecte réellement le snooze/navigation
+OK  Beta 17 : Distribution Anime DNA ouvre les animés par note
+OK  Beta 17 : Réglages regroupés en menus repliables
+OK  Beta 17 : import BetaSeries en deux colonnes et résultats filtrables
+OK  Beta 17 : articles longs encore plus aérés
+OK  Copie de publication exclue des contrôles des sources
+OK  Documentation V2, archives techniques et maintenance accessibles
+
+86/86 contrôles réussis.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Conformité V2.0.0 Bêta stable (9/99) · 29 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Expérience utilisateur (10/99)
+[trace technique] script=scripts/test-beta19-ux.js
+OK Beta 19 : tri d’import, autocomplétion et filtres indépendants validés.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Expérience utilisateur (10/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Régressions (11/99)
+[trace technique] script=scripts/test-beta21-final.js
+OK régressions Beta 21 conservées dans la Beta 23.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Régressions (11/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Régressions (12/99)
+[trace technique] script=scripts/test-beta24-final.js
+OK Beta 24 final : 6 langues news réellement persistées/filtrées, réglage indépendant et Notes enrichies (1078 chaînes cataloguées par locale).
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Régressions (12/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Régressions (13/99)
+[trace technique] script=scripts/test-beta25-final.js
+OK Beta 25 final : 1078 chaînes/locales, news directes, histogramme de notes et karaoké 6 langues sur 42 lignes.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Régressions (13/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Régressions (14/99)
+[trace technique] script=scripts/test-beta27-final.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js intentionally unavailable
+OK Beta 27 : recommandations, Anime DNA, zh-CN et fusion multi-saisons.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Régressions (14/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Régressions (15/99)
+[trace technique] script=scripts/test-beta28-final.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js intentionally unavailable
+OK Beta 28 : banniere Hell Mode silencieuse, notes BetaSeries nettoyees, remerciements et zh-CN Electron/NSIS.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Régressions (15/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (16/99)
+[trace technique] script=scripts/test-beta36-runtime.js
+OK Beta36: Kitsu diagnostic sends the JSON:API Accept header
+OK Beta36: explicit retries respect the short cooldown
+OK Beta36: an old error can be rechecked without waiting one minute
+OK Beta36: Retry-After longer than the ordinary cache is respected
+OK Beta36: testing resumes after Retry-After
+OK Beta36: optional BetaSeries without a key makes no request
+OK Beta36: only the Windows installer is published
+OK Beta36: publication fails when the installer is missing
+[release] Anime-Local-Manager-2.0.0-Beta-Stable-Setup-x64.exe : 2048 octets, SHA-256 261263433de19ded536115bf45273622444715c6aba727c5feeccc86d1bf0064, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+OK Beta36: installer hash and signature are reported
+OK Beta36: truncated installer stops publication
+OK Beta36: unsafe installer filename is rejected
+OK Beta36: all seven locale catalogs contain the reference keys
+12 Beta36 runtime checks passed. PE fixtures are synthetic; this is not a Windows execution test.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (16/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (17/99)
+[trace technique] script=scripts/test-beta37-runtime.js
+OK Beta37: full synopsis, whole-word UTF-8 chunks and cache
+OK Beta37: a failed translation returns the complete original, never half a synopsis
+OK Beta37: 45 incomplete seasons use 3 exact-ID batches and do not retry unknown future dates
+OK Beta37: unavailable season sources have a short retry cooldown
+OK Beta37: studio ranking validates credits, sorts scores, coalesces calls and keeps its cache on failure
+OK Beta37: one visible window precedes slow startup and the second launch focuses it
+OK Beta37: update IPC refuses untrusted frames and remains unsupported outside a packaged app
+OK Beta37: input focus IPC is restricted and a cancelled folder picker restores renderer focus
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm37-z2cxBu/http/collection.sqlite
+OK Beta37: background database job returns immediately, reports real work and preserves partial success
+OK Beta37: studio local queries use actual credits and reject unlisted remote requests
+OK Beta37: complete video and four local wallpapers are served from the app
+11 Beta37 behavior checks passed. No native Windows or exact vocal-alignment claim.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (17/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Calendrier (18/99)
+[trace technique] script=scripts/test-beta47-calendar.js
+OK calendar: current provider episode 16 is on 15 October in Paris when AniList returns an empty schedule; personal progress stays 15
+OK calendar: an unresolved earlier anime does not prevent a later verified schedule from loading
+OK calendar: adding a followed anime invalidates a fresh cache, persists exact dates and keeps normal repeated reads cached
+OK calendar: foreign IDs, live action, language, titles and premiere mismatches cannot supply an anime schedule
+OK calendar: unknown dates, other seasons and wrong parent shows are rejected; existing exact AniList forecasts need no fallback
+OK calendar: title-only fallback refuses ambiguous homonyms
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Calendrier (18/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Communauté (19/99)
+[trace technique] script=scripts/test-beta59-community.js
+OK Beta59 community: whitelist, private defaults, summaries, real dated viewing, encrypted keyed session storage, no token exposure, publishing, withdrawal and offline profile.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Communauté (19/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Maintenance (20/99)
+[trace technique] script=scripts/test-beta59-maintenance.js
+OK Beta59 maintenance: due times, disabled tasks, unknown/metered/offline network, failure backoff, shared run, saved success dates, Windows encoded data, Linux timer lifecycle. Native OS registration remains a VM check.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Maintenance (20/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · HTTP (21/99)
+[trace technique] script=scripts/test-beta59-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm59-http-2m7Hg8/data/collection.sqlite
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+OK Beta59 HTTP: real local engine, community routes, offline profile edits, unconfigured auth, maintenance settings, cross-origin denial and pre-update backup.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · HTTP (21/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (22/99)
+[trace technique] script=scripts/test-beta60-runtime.cjs
+OK Beta60 runtime: password guidance, safe error codes, numbered identities, private preview, seven complete translation sets and no public contact address.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (22/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · SQL (23/99)
+[trace technique] script=scripts/test-beta60-sql.cjs
+OK Beta60 hardening: SQL payload remains data, failed searches counted, same-name numbering, session revocation, recent-auth deletion, auth hook, private newsletter, one-time confirmation and durable quotas.
+OK Beta60 PostgreSQL: private-by-default, no direct writes, accepted friendships, section privacy, recipient-only acceptance, outsider isolation, recommendation whitelisting, withdrawal, blocking and anonymous denial.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · SQL (23/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Site public (24/99)
+[trace technique] script=scripts/test-beta60-public.cjs
+OK Beta60 public forms: origin and content checks, size caps, honeypot, server CAPTCHA, exact hostname and action, provider failures, durable quota, disposable mail, fixed recipient, HTML escaping, private secrets, signed confirmation, one-click unsubscribe and fail-closed configuration.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Site public (24/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (25/99)
+[trace technique] script=scripts/test-beta61-runtime.cjs
+OK Beta60 runtime: password guidance, safe error codes, numbered identities, private preview, seven complete translation sets and no public contact address.
+OK Beta61 runtime: raster-only avatars, seven-language legal/account copy, minimal sharing data, trusted write-only clipboard IPC, retained owner copies and NSIS-only Windows target.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Fonctionnement (25/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (26/99)
+[trace technique] script=scripts/test-beta61-ui.cjs
+OK Beta62 UI: single default avatar, double-click and keyboard copy, friend-only recommendations, duplicate-submit prevention, unified calendar/community notifications, separate pending actions, invitation and seven-language close labels.
+OK Beta61 UI: dedicated community navigation, accepted-friend chooser, shared library filters, three import statuses, pending-only inbox, native clipboard, redacted diagnostics, account settings and conditional sharing.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (26/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Parcours (27/99)
+[trace technique] script=scripts/test-beta61-flows.cjs
+Error: Uncaught [TypeError: range.getClientRects is not a function]
+    at reportException (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at Timeout.task [as _onTimeout] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/jsdom/lib/jsdom/browser/Window.js:584:9)
+    at listOnTimeout (node:internal/timers:685:17)
+    at process.processTimers (node:internal/timers:618:7) TypeError: range.getClientRects is not a function
+    at eval (eval at <anonymous> (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-beta61-flows.cjs:32:4), <anonymous>:226:38)
+    at Array.map (<anonymous>)
+    at measureUnits (eval at <anonymous> (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/scripts/test-beta61-flows.cjs:32:4), <anonymous>:224:85)
+    at Timeout.task [as _onTimeout] (/workspace/scratch/7a391d0f96fc/work/Anime-Local-Manager-publication-v2.0.0-beta-stable/node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+    at listOnTimeout (node:internal/timers:685:17)
+    at process.processTimers (node:internal/timers:618:7)
+OK Beta61 flows: root signup success FR/EN, expired links with existing sessions, URL cleanup, recovery isolation, real account settings navigation, paused/playing overlay, click playback and double-click expansion.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Parcours (27/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Tâches planifiées (28/99)
+[trace technique] script=scripts/test-beta61-scheduler.cjs
+OK Beta61 scheduler: verified task readback, rejection of wrong/missing task, failed status, no command interpolation, cached reads, disable and source-mode restrictions. Native Windows COM remains a VM check.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Tâches planifiées (28/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · SQL (29/99)
+[trace technique] script=scripts/test-beta61-sql.cjs
+OK Beta61 hardening: SQL payload remains data, failed searches counted, same-name numbering, session revocation, recent-auth deletion, auth hook, private newsletter, one-time confirmation and durable quotas.
+OK Beta61 PostgreSQL: private-by-default, no direct writes, accepted friendships, section privacy, recipient-only acceptance, outsider isolation, recommendation whitelisting, withdrawal, blocking and anonymous denial.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · SQL (29/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Site public (30/99)
+[trace technique] script=scripts/test-beta61-public.cjs
+OK Beta61 public forms (including empty HTTP 204 RPC): origin and content checks, size caps, honeypot, server CAPTCHA, exact hostname and action, provider failures, durable quota, disposable mail, fixed recipient, HTML escaping, private secrets, signed confirmation, one-click unsubscribe and fail-closed configuration.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Site public (30/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Synchronisation (31/99)
+[trace technique] script=scripts/test-beta62-sync.cjs
+OK Beta62 sync: startup, database readiness, five-minute interval, changed data only, explicit sharing, opt-out, account isolation, remote privacy, showcase permissions and offline recovery.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Synchronisation (31/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · SQL (32/99)
+[trace technique] script=scripts/test-beta62-sql.cjs
+OK Beta62 PostgreSQL: separate rolling quotas, failed searches, burst limits, duplicates, accepted friends, persistent counters, quota expiry, automatic refresh under server permissions, private profiles, section RLS, anonymous denial and revoked sessions.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · SQL (32/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (33/99)
+[trace technique] script=scripts/test-beta63-ui.cjs
+OK Beta63 UI: ranking-style friends, actual shared detail dialog, filtered navigation and focus return, five statuses, enriched synopsis, escaped titles, explicit add without friend progress/rating, unread recommendation preserved, offline fallback and authorised website detail in seven languages.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (33/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Assistance (34/99)
+[trace technique] script=scripts/test-beta63-support.cjs
+OK Beta63 support: real preview and opt-out, no automatic send, clipboard feedback, strict redaction, scheduler codes and HRESULT, persistent failure after polling, repair control and seven-language copy.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Assistance (34/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · SQL (35/99)
+[trace technique] script=scripts/test-beta63-sql.cjs
+OK Beta63 PostgreSQL: own devices, selective revocation, owner isolation, current-session guard, revoked-token rejection, cascading labels, safe covers without personal data, and durable 3/hour plus 30/day contact quotas.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · SQL (35/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (36/99)
+[trace technique] script=scripts/test-beta64-ui.cjs
+OK Beta64 UI: five translated statuses with stable saved values and custom menus in seven languages, shared toolbar on all entry pages, sync states, newest years with counts, scoped statistics, filtering, series grouping and manual favorite controls.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (36/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Favoris (37/99)
+[trace technique] script=scripts/test-beta64-favorites.cjs
+OK Beta64 favorites: 9–10 automatic, legacy/manual picks, persistent removal precedence, score changes, restart, private sharing and unchanged library.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Favoris (37/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Diagnostics (38/99)
+[trace technique] script=scripts/test-beta64-diagnostic.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm64-diagnostic-2k3gLi/data/collection.sqlite
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+OK Beta64 diagnostics: actual control/diagnostic parity, obsolete flags, complete technical sections, identical buttons, optional connected account and strict redaction.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Diagnostics (38/99) · 5 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (39/99)
+[trace technique] script=scripts/test-beta65-ui.cjs
+OK Beta65 UI: friend profiles/search/four sorts, pending requests, seven languages, account shortcuts on all pages, copying preserved, live status without lost filters, stale-response rejection and independent form scrolling.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (39/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Synchronisation (40/99)
+[trace technique] script=scripts/test-beta65-sync.cjs
+OK Beta65 sync: actual publication/status round trip, stable collection order, automatic acknowledgment, edits during send, failure/recovery and opt-out.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Synchronisation (40/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (41/99)
+[trace technique] script=scripts/test-beta66-ui.cjs
+OK Beta66 UI: full series cards and season dialog, real anime popup scope, safe quick additions, five/three community counters, live counts without lost filters, paused counts and filter, mandatory content option in seven languages, linked GIF in Anime DNA, About video and four wallpapers retained.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (41/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Confidentialité (42/99)
+[trace technique] script=scripts/test-beta66-policy.cjs
+OK Beta66 policy: pinned client HEAD counts beyond 1000 records, RLS totals, accepted friends, partial sharing, privacy/block exclusions, mandatory adult/unknown filters, featured/genre filtering, normal and automatic publication, recommendations and anonymous denial.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Confidentialité (42/99) · 3 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Souvenirs (43/99)
+[trace technique] script=scripts/test-beta67-notebook.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm67-notebook-iKSNql/collection.sqlite
+OK Beta67 notebook: real HTTP persistence and backup restoration, paragraphs retained, independent seasons/progress, optimistic conflicts, confirmed yearly replacements, validated local list import, per-row viewing statuses and duplicate protection, honest unknown progress, safe undo, offline escaped exports in seven languages and no community leakage.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Souvenirs (43/99) · 7 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (44/99)
+[trace technique] script=scripts/test-beta67-ui.cjs
+OK Beta67 UI: real notebook editor, optional episode scores, yearly episode choices, dirty-close protection, language changes retain drafts, memory search/year filters and direct edits, explicit list matching and safe undo, shared detail access and scroll/footer separation.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (44/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (45/99)
+[trace technique] script=scripts/test-beta68-ui.cjs
+OK Beta68 UI: avatar limits, compression, bitmap cleanup, legacy compatibility and seven languages; budget removed, linked GIF in Anime DNA, About video and four wallpapers retained.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (45/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Âge et partage (46/99)
+[trace technique] script=scripts/test-beta72-age.cjs
+OK Beta72 age: private signup declaration, legacy-account completion, birthday boundary, immutable declaration, metadata spoof resistance, safe defaults, mutual adult opt-in, actual library/recommendation RLS, immediate opt-out, unknown-content exclusion, private aggregates, anonymous denial and account-deletion cascade.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Âge et partage (46/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (47/99)
+[trace technique] script=scripts/test-beta72-ui.cjs
+OK Beta72 UI: queued internal confirmations, Escape/direct close and focus restoration, no native confirmations, one modal for three import tabs, keyboard navigation and retained drafts, seven languages, isolated age form and mandatory signup attestation. Native Windows focus behavior still requires user validation.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (47/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Charte (48/99)
+[trace technique] script=scripts/test-beta73-charter.cjs
+OK Beta73 charter: seven languages, exact-version explicit acceptance, signup rollback on refusal, immutable private dated receipt, existing accounts preserved and deletion cascade.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Charte (48/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Requêtes (49/99)
+[trace technique] script=scripts/test-beta73-requests.cjs
+OK Beta73 requests: duplicate reads coalesced, short TTL, write invalidation, stale session rejection, error eviction, bounded waits and one server identity check per token burst.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Requêtes (49/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (50/99)
+[trace technique] script=scripts/test-beta73-ui.cjs
+OK Beta73 UI: status-first loading, early account identity, no friends call while disconnected, one shared friends call when connected, visible network errors; every homepage binding rendered in seven languages, signup/login and charter installed before initial paint, required unchecked charter, immediate duplicate-click loading, bounded scroll controls after dialog close and website links.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (50/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Import (51/99)
+[trace technique] script=scripts/test-beta74-import.cjs
+OK Beta74: visible cover suggestions, explicit choices, real shared detail dialog and focus return, no implicit writes, collapsed source with retained draft, selection counts, Enter search, independent rows, cancelled/stale/failed/empty searches, safe image fallback, seven complete languages, bounded scroll/footer, centered site signature and version derived from the shared app version.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Import (51/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Imports : contrôle des données (52/99)
+[trace technique] script=scripts/test-beta76-imports.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm76-imports-SI2WdS/collection.sqlite
+OK Beta76: SQL data-only parser, injection rejection without collection changes, invalid/empty replacement preserves catalogue, real HTTP XML concurrent note/progress/deletion, full 30430-row atomic replacement.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Imports : contrôle des données (52/99) · 12 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Réseau (53/99)
+[trace technique] script=scripts/test-beta76-network.cjs
+OK Beta76: socket lookup uses validated IP only, private/reserved IPv4/IPv6 and ports rejected, redirects rechecked, compressed/body/time budgets, HTTPS-only snapshots and renewed provider cooldown.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Réseau (53/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Maintenance (54/99)
+[trace technique] script=scripts/test-beta76-maintenance.cjs
+OK Beta76: actual cold maintenance startup initializes the engine, runs once and quits without a window. Native Windows scheduler remains a platform check.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Maintenance (54/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Site public (55/99)
+[trace technique] script=scripts/test-beta76-public.cjs
+OK Beta76: timeout-after-acceptance retries preserve email key/body and newsletter links, changed message gets a distinct key; third-party MIT notices and site release hashes verified. No real mail sent.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Site public (55/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Restauration (56/99)
+[trace technique] script=scripts/test-beta77-restoration.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm77-restore-BNLHnN/collection.sqlite
+OK restoration HTTP/SQLite: invalid, duplicate and partial writes rejected; original library/news preserved; valid/empty replacements work.
+OK JSON: EACCES propagates; file/cache intact; empty replacement works; corrupt history preserved.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Restauration (56/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Actualités (57/99)
+[trace technique] script=scripts/test-beta77-news.cjs
+[{"case":"meta","bytes":524292,"milliseconds":2.789711000000011},{"case":"link","bytes":524292,"milliseconds":2.228678000000002},{"case":"image","bytes":524290,"milliseconds":2.692705999999987},{"case":"article","bytes":524295,"milliseconds":11.604804999999999},{"case":"main","bytes":524292,"milliseconds":12.535574999999994},{"case":"content","bytes":524313,"milliseconds":83.917338},{"case":"jsonld","bytes":524300,"milliseconds":1.8981019999999944},{"case":"css","bytes":524295,"milliseconds":3.1219110000000114},{"case":"attribute","bytes":524288,"milliseconds":1.3163579999999797}]
+OK bounded malformed HTML and JSON-LD; valid images and Unicode retained.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Actualités (57/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Contrôle des animés (58/99)
+[trace technique] script=scripts/test-beta77-review.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm77-review-UGTh3K/collection.sqlite
+OK concurrent decisions, free progress, I/O/DB rollback, corrupt structures preserved, capacity 409 and successful notes recovery.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Contrôle des animés (58/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Contrôle des animés visuel (59/99)
+[trace technique] script=scripts/test-beta77-review-visual.cjs
+[{"scenario":"notes-progress","writes":1,"record":{"id":1,"title":"Fictional series","malId":"20","poster":"https://example.invalid/cover.jpg","imageUrl":"https://example.invalid/cover.jpg","notes":"New concurrent note","episodesSeen":"7"},"displayPoster":"https://example.invalid/cover.jpg","skipped":false},{"scenario":"manual-poster","writes":1,"record":{"id":1,"title":"Fictional series","malId":"20","poster":"/images/custom.jpg","imageUrl":"https://example.invalid/cover.jpg","notes":"New concurrent note","episodesSeen":"7"},"displayPoster":"/images/custom.jpg","skipped":false},{"scenario":"identity-change","writes":0,"record":{"id":1,"title":"Fictional series","malId":"1","poster":"","imageUrl":"","notes":"Old","episodesSeen":"1"},"displayPoster":null,"skipped":true},{"scenario":"deletion","writes":0,"record":null,"displayPoster":null,"skipped":true}]
+OK real visual resolver across network wait: personal fields, custom poster, identity and deletion survive.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Contrôle des animés visuel (59/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Base de données (60/99)
+[trace technique] script=scripts/test-beta77-database.cjs
+OK startup: null/title/duplicate/missing/zero records stop before SQLite; originals and .bak preserved.
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm77-catalog-wLu2Nx/collection.sqlite
+{"missingIsNull":true,"status":400,"body":{"error":"ALM_CATALOG_MISSING","code":"ALM_CATALOG_MISSING"},"unchanged":true}
+OK catalogue: absent ID rejected, collection intact; existing ID still inserts.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Base de données (60/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Communauté : saisie et contrôles (61/99)
+[trace technique] script=scripts/test-beta78-community-inputs.cjs
+OK Beta78: CAPTCHA failure can retry, concurrent mounts share a loader, tokens reset, desktop has one main landmark. No real CAPTCHA or email sent.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Communauté : saisie et contrôles (61/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Communauté (62/99)
+[trace technique] script=scripts/test-beta78-community.cjs
+{
+  "minimalStatusPatch": true,
+  "localLibraryReloaded": true,
+  "completedCounter": true,
+  "prototypeGenres": true
+}
+OK Beta78: community status changes preserve personal fields, completed counter and local refresh; special genre names work.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Communauté (62/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Tâches différées (63/99)
+[trace technique] script=scripts/test-beta78-deferred.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm78-deferred-L1WZ3h/animes.sqlite
+Deferred failure contained; retry persisted.
+[db] sauvegarde SQLite : Fictional disk full
+
+OK Beta78: deferred WASM disk failure is contained, reported, retried and reopened.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Tâches différées (63/99) · 5 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Bibliothèque : validation des champs (64/99)
+[trace technique] script=scripts/test-beta78-library-fields.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm78-fields-efFxSY/collection.sqlite
+[{"field":"genres","status":400},{"field":"tags","status":400},{"field":"studios","status":400},{"field":"synonyms","status":400}]
+Profile HTTP after invalid edits: 200
+OK Beta78: malformed list fields rejected on edit and restore, previous data kept, valid names preserved.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Bibliothèque : validation des champs (64/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Actualités (65/99)
+[trace technique] script=scripts/test-beta78-news.cjs
+OK cache trim: locked first file stays accounted; next removable file is deleted. Sizes simulated, no large allocation.
+OK RSS refresh: SQL publish/final write/prune failures stay explicit; success timestamps and revisions do not advance; retry succeeds.
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm78-news-BHOfPJ/collection.sqlite
+OK HTTP: failed purge/clear return errors and keep news; successful clear removes it.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Actualités (65/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Saisons : concurrence des requêtes (66/99)
+[trace technique] script=scripts/test-beta78-season-races.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm78-season-Njhm2a/collection.sqlite
+OK Beta78: HTTP late snapshots remain filtered; completed asynchronous details job reports the actual persisted count.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Saisons : concurrence des requêtes (66/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Serveur (67/99)
+[trace technique] script=scripts/test-beta78-server.cjs
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm78-server-rwbqVj/collection.sqlite
+OK workers: first error stops new work and waits for the other active writer.
+OK completion/legacy downloads: edits, opt-out, additions and deletions survive; failed image copies are counted as failures.
+OK quarantine/XML: different seasons stay separate; selection preserves notes; XML keeps IDs/types and repeated rows merge their notes.
+OK config/backup/cache/stats: unreadable originals are preserved; backup failure is explicit; path traversal is rejected; on-hold entries are counted.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Serveur (67/99) · 4 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Stockage : persistance et récupération (68/99)
+[trace technique] script=scripts/test-beta78-storage.cjs
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/mirror/collection.sqlite
+[db] Synchronisation JSON récente -> SQLite : 1 animés.
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/wasm/collection.sqlite
+[db] Synchronisation JSON récente -> SQLite : 1 animés.
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/wasm-tie/collection.sqlite
+OK Beta78: durable deletion stays deleted after abrupt stop and mirror failure; initial WASM migration keeps newer or equal-timestamp JSON and revision.
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/edges/collection.sqlite
+OK Beta78: library and backup read errors stay explicit; native image counts match actual changes; malformed studios cannot break listing.
+OK Beta78: invalid viewing events are skipped and valid events retained.
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] Search index unavailable; bounded LIKE fallback: Fictional interrupted FTS rebuild
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/index/collection.sqlite
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/index/collection.sqlite
+[db] SQLite initialisé : /tmp/alm78-storage-1U0QXH/index/collection.sqlite
+OK Beta78: failed index creation rolls back; restart rebuilds; existing partial genre/studio/FTS indexes are repaired.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Stockage : persistance et récupération (68/99) · 20 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface récupération (69/99)
+[trace technique] script=scripts/test-beta78-ui-recovery.cjs
+{
+  "savedKeyHint": true,
+  "savedKeyCleared": true,
+  "localeRecovery": true,
+  "chineseLexicon": true
+}
+OK Beta78: masked saved-key state, secret input clearing, locale recovery and Chinese glossary controls.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface récupération (69/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Interface (70/99)
+[trace technique] script=scripts/test-beta78-ui.cjs
+{
+  "titlesBackoff": true,
+  "titlesRetry": true,
+  "countdownInitialHover": true,
+  "countdownResume": true,
+  "gapGeneration": true,
+  "catalogRetry": true,
+  "settingsAllTabs": true,
+  "searchBusy": true,
+  "dateMarkup": true,
+  "dnaMarkup": true,
+  "xmlFinalResponse": true
+}
+OK Beta78 UI: network recovery, initial hover pause/resume, stale dialog replies, all settings tabs, busy state, escaped imported markup and terminal XML result.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Interface (70/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Traitements en arrière-plan (71/99)
+[trace technique] script=scripts/test-beta78-worker.cjs
+OK worker provider fixture: configured MAL ; no retired host; identity preserved.
+OK worker provider fixture: mapped Kitsu without key ; no retired host; identity preserved.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Traitements en arrière-plan (71/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Services et version du site (72/99)
+[trace technique] script=scripts/test-beta79-services.cjs
+OK Beta79: Edge config, beta release metadata, dynamic UI version, 8 HTML entry points, all website SHA-256 hashes, no-store and origin protections. No network or email.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Services et version du site (72/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Performances (73/99)
+[trace technique] script=scripts/test-beta80-performance.cjs
+OK Beta80: bounded read-plan cache, independent active cursors, rebinding, schema changes and rollback.
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm80-perf-0WL9Fj/catalog-0/collection.sqlite
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm80-perf-0WL9Fj/catalog-1/animes.sqlite
+OK Beta80: native and sql.js hide-owned semantics preserve numeric casts, empty-ID title matching and nonmatching IDs.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Performances (73/99) · 7 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Pagination (74/99)
+[trace technique] script=scripts/test-beta80-paging.cjs
+OK Beta80 paging: all 5000 IDs in order, page clamp, full view, global search outside the page, correct edit/note, keyboard focus, seven languages, hidden-view controls, no data mutation.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Pagination (74/99) · 2 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Animés communs (75/99)
+[trace technique] script=scripts/test-beta81-common.cjs
+OK new Beta81 common library: exact IDs, deduplication and grouped seasons, selected friend tag and stat order, shared scope, filters/reset/detail, no extra requests, stale response/removal and 5000 IDs.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Animés communs (75/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Saisons (76/99)
+[trace technique] script=scripts/test-beta81-seasons.cjs
+OK new Beta81 seasons: combined filters and exact source status, sort/detail identity, preserved selection, loaded counts, visible-only bulk delete, reset/focus, no filter network, seven languages and unmodified input.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Saisons (76/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Maintenance (77/99)
+[trace technique] script=scripts/test-beta81-maintenance.cjs
+OK new Beta81 maintenance: explicit success, partial failure, interruption/backoff, single pending run, redacted errors, preserved disabled task and ownership/readback controls. Windows COM checks are code/fixture checks, not a native registration.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Maintenance (77/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Prépublication (78/99)
+[trace technique] script=scripts/test-beta82-prepublication.cjs
+OK Beta82: 45.3.1 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Prépublication (78/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Performances (79/99)
+[trace technique] script=scripts/test-beta82-perf.cjs
+OK Beta82 performance: 60 library filter states, group ordering/cache invalidation, BetaSeries repair and 25 DNA selection scenarios exactly equivalent; no network or real user data.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Performances (79/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Local jaquettes (80/99)
+[trace technique] script=scripts/test-gap82-local-images.cjs
+OK GAP82 uploads: atomic async save, byte integrity, duplicate skip, concurrency, invalid input, filesystem failure, temporary cleanup, seven error languages and symlink rejection.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Local jaquettes (80/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Outils de construction (81/99)
+[trace technique] script=scripts/test-gap82-toolchain.cjs
+OK GAP82 toolchain: Node 22.23.4 CI pin, unchanged app engines and Electron 45.3.1 candidate.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Outils de construction (81/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Chiffrement et stockage sécurisé (82/99)
+[trace technique] script=scripts/test-beta82-safe-storage.cjs
+OK Beta82 safeStorage: legacy cipher, async result, atomic rotation, transient failures, missing key protection, basic_text refusal, backup store recovery and no sync calls.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Chiffrement et stockage sécurisé (82/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Copie de publication : intégrité (83/99)
+[trace technique] script=scripts/test-beta82-production-copy.cjs
+ALM_PRODUCTION_COPY_BENCH {"schema":1,"scenario":"10 parent packages, 50 nested packages, 750 files, seven independent repetitions","oldMedianMs":14.074504,"newMedianMs":8.046745,"oldMs":[15.584054,12.919318,14.987226,12.804376,14.074504,16.204377,12.129031],"newMs":[7.639853,8.888409,8.046745,7.873865,8.673477,8.049289,7.194924],"copiesBefore":60,"copiesAfter":10,"identical":true}
+OK Beta82: copy root selection, exact file hashes and rejection of external paths.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Copie de publication : intégrité (83/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Amis : animés en commun (84/99)
+[trace technique] script=scripts/test-beta82-common-profile.cjs
+OK beta82 friend profile: common list, preview, clickthrough tab and filterable library, owner-only and private data boundaries.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Amis : animés en commun (84/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Jaquettes : cache local (85/99)
+[trace technique] script=scripts/test-beta82-cover-cache.cjs
+OK beta82 cover cache: safe hosts, lazy storage, no duplicate requests, concurrency bound, size eviction, offline/failure behaviour.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Jaquettes : cache local (85/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Anime DNA : jaquettes et titres (86/99)
+[trace technique] script=scripts/test-beta82-dna-posters.cjs
+OK Anime DNA: local cached artwork, safe metadata fallback, library-only scope, custom covers, full titles and stable placeholders.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Anime DNA : jaquettes et titres (86/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Catalogue reset (87/99)
+[trace technique] script=scripts/test-beta82-catalog-reset.cjs
+OK catalogue reset: clear query, all 5 facets, sort, owned checkbox, pagination, concurrent request, focus and 7 languages.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Catalogue reset (87/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Recommandations : catalogue (88/99)
+[trace technique] script=scripts/test-beta82-recommend-catalog.cjs
+OK beta82 recommendations: catalog and owner identity, age, blocked content, no full-library activity work during send.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Recommandations : catalogue (88/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Communauté : sécurité et cache (89/99)
+[trace technique] script=scripts/test-beta82-social-cache-hardening.cjs
+OK: static community site and desktop community assets are synchronized and hash-verified.
+OK: consistent local-only common anime across profile and friend library; revocation and logout fail closed.
+OK: canonical cache keys, URL size budget, bounded transient retry and long cooldown for bad images.
+OK: redirect cannot escape approved image CDNs, using entirely mocked HTTPS transport.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Communauté : sécurité et cache (89/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Jaquettes : reprises réseau (90/99)
+[trace technique] script=scripts/test-beta82-cover-retries.cjs
+OK: HTTP 429/503/404 remain distinct and Retry-After seconds/date parsed.
+OK: provider-wide 429/503, independent CDN, progressive cooldown, online reset, offline content and permanent errors.
+OK: browser online recovery is visible-only, staged and strictly same-origin.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Jaquettes : reprises réseau (90/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Expérience utilisateur : finitions (91/99)
+[trace technique] script=scripts/test-beta82-ux6.cjs
+OK Beta82 UX6: private standalone memories page with filtering and pagination, XSS escaping, central paging, GIF, concise card layout, async account loading and all 7 retry translations.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Expérience utilisateur : finitions (91/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Compte : fermeture et nettoyage (92/99)
+[trace technique] script=scripts/test-beta82-account-teardown.cjs
+OK Beta82 account: refresh success and failure after closing the browser do not access the destroyed document.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Compte : fermeture et nettoyage (92/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Souvenirs : recherche et filtres (93/99)
+[trace technique] script=scripts/test-beta82-memories-filters.cjs
+OK Beta82 memories: read-only local projection; personal/ambiguous text preserved; reversible automatic annotations; 7-language filters; truthful release-date sort; safe covers and text; anime/notebook routing; bounded pagination; retry and stale-response protection.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Souvenirs : recherche et filtres (93/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Communauté : navigation (94/99)
+[trace technique] script=scripts/test-beta82-community-navigation.cjs
+OK Beta82 community navigation: natural startup survives renders and coalesced collection changes; early identity, fixed footer, all seven languages, one clickable common count, empty results, unpublished recommendations, login prompt, content policy, single send, stale-dialog isolation and immediate account-panel clearing on session loss.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Communauté : navigation (94/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Fiches : actions utilisateur (95/99)
+[trace technique] script=scripts/test-beta82-card-actions.cjs
+OK Beta82 card actions: stable recommendation before/after paging and filters, exact record routing, seven languages, action order, unchanged notes, retained seasons page and GIF without caption.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Fiches : actions utilisateur (95/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Moteur : callbacks et arrêt (96/99)
+[trace technique] script=scripts/test-beta82-engine-callbacks.cjs
+OK Beta82 engine callbacks: normal replies/errors, completed in-flight writes, late callbacks suppressed, closed-transport race, bounded stderr drain and listener cleanup.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Moteur : callbacks et arrêt (96/99) · 1 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Site public encodage (97/99)
+[trace technique] script=scripts/test-beta82-public-encoding.cjs
+OK Beta82 public encoding: no Brotli negotiation/decoder invocation, unknown encodings rejected, gzip/deflate/identity preserved, decoded-body limits enforced.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Site public encodage (97/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · AniList : protections réseau (98/99)
+[trace technique] script=scripts/test-beta82-anilist-network.cjs
+OK normal response and caller payload are preserved
+OK only the exact AniList endpoint is accepted
+OK 429 cancels its body and blocks a burst until expiry
+OK Retry-After dates and the later rate-limit reset are respected
+OK GraphQL status429 uses the same provider pause
+OK a successful final allowance is delivered before the pause
+OK a late parallel success cannot clear a newer provider pause
+OK 503 with provider Retry-After also stops immediate retries
+OK the deadline aborts a stalled transport
+OK caller cancellation aborts an unfinished response body
+OK oversized response bodies are cancelled
+OK recommendations keep normal successes and transient retry behavior
+OK recommendations do not retry429 or permanent access errors
+OK service diagnostics report and reuse the shared provider pause
+{"suite":"beta82-anilist-network","passed":14,"network":"mocked only"}
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · AniList : protections réseau (98/99) · 0 s
+[publication] V2.0.0 Bêta stable · Structure et régressions · Suppression de compte : confirmation (99/99)
+[trace technique] script=scripts/test-beta82-delete-confirmation.cjs
+OK Beta82 deletion confirmation: NULL and invalid confirmations preserve all data; active confirmed recent session and exact DELETE required; anonymous and foreign-session denial; only own account removed; grants and search_path preserved.
+[publication] OK · V2.0.0 Bêta stable · Structure et régressions · Suppression de compte : confirmation (99/99) · 2 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Karaoké synchronisation (1/8)
+[trace technique] script=scripts/test-karaoke-timeline.js
+OK: 48 audio-recalibrated lyric lines, five restored phrases, seven languages, 22517 timeline positions and original archived. Intra-line timing remains approximate.
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Karaoké synchronisation (1/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Interface logique (2/8)
+[trace technique] script=scripts/test-beta15-ui-logic.js
+OK Beta 15 UI : bannière stable, articles aérés et suggestions de recherche validées.
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Interface logique (2/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Interface logique (3/8)
+[trace technique] script=scripts/test-beta16-ui-logic.js
+OK Beta 16 UI : note Anime DNA, bannière, Réglages et import BetaSeries validés.
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Interface logique (3/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Régressions finitions (4/8)
+[trace technique] script=scripts/test-beta17-final-polish.js
+OK Beta 17 final polish : saisons, Anime DNA, pagination audit, import BetaSeries, icône et structure karaoké vérifiés (sans validation audio).
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Régressions finitions (4/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Présentation et navigation (5/8)
+[trace technique] script=scripts/test-nocturne.js
+OK Nocturne: design catalogues have equal keys in all seven languages
+OK Nocturne: 161 distinct main glossary definitions per language
+OK Nocturne: French extended notes remain available rather than silently replaced
+OK Nocturne: glossary pagination bounds each rendered page
+OK Nocturne: glossary favourites and history remain local
+OK Nocturne: support follows local-data and acknowledgements inside the about page
+OK Nocturne: karaoke is a discreet about-page bonus, not a main navigation item
+OK Nocturne: about navigation is simple and the roadmap card is removed
+OK Nocturne: hidden views override the visual layout rules
+OK Nocturne: legacy donations navigation routes to the unified page
+OK Nocturne: one audible video player with shared controls
+OK Nocturne: clip and new visual assets exist
+OK Nocturne: retains the five acknowledged companions and QR image
+OK Nocturne: old decorative phrases are not introduced in the new UI
+OK Nocturne: a unit is not active before its start
+OK Nocturne: shared group clock progresses only within the active group
+OK Nocturne: completed groups stay completed during a gap
+OK Nocturne: all completed groups stay completed after the line
+OK Nocturne: backward seeking does not reuse future progress
+OK Nocturne: translation progress follows one phrase fraction
+OK Nocturne: silent intervals have no active line
+OK Nocturne: 22517 timeline positions preserve bounded progress
+OK Nocturne: supplied lyrics and original timings are archived; audio restores five missing phrases
+OK Nocturne: approximate intra-line timing remains explicit
+OK Nocturne: audio review restores only the five documented source phrases
+OK Nocturne: clip is the sole clock without a looping silent second video
+OK Nocturne: body timeout applies even after successful response headers
+OK Nocturne: response bodies have a size bound
+OK Nocturne: each redirect is passed through the existing address validator
+OK Nocturne: UTF-8 body decoding is streaming-safe
+OK Nocturne: simultaneous source requests are coalesced and failures may be retried
+OK Nocturne: news response no longer blocks on eighty image lookups
+32/32 Nocturne checks passed; no external network, no vocal-alignment claim.
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Présentation et navigation (5/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Natif (6/8)
+[trace technique] script=scripts/test-beta43-native.js
+OK Beta43: fresh profiles require notification opt-in without losing fetched schedules
+OK Beta43: one-time choice persists; later settings can disable it without prompting again
+OK Beta43: both existing enabled and disabled preferences migrate unchanged
+OK Beta43: cached confirmed releases deliver once concurrently; failed native delivery remains available for fallback
+OK Beta43: display default, trusted changes, scale bounds and persistent preferences execute in the real main-process code
+OK Beta43: fullscreen exit, F11 toggle, close action and untrusted IPC rejection execute real main-process handlers
+OK Beta43: test notification uses the actual native delivery path and rejects untrusted IPC
+OK Beta43: confirmed native notification includes episode/source and opens the matching anime on click
+OK Beta43: failed and unsupported OS notifications report failure for renderer fallback
+OK Beta43: new backup, history, status and notification controls exist in all seven languages
+10 Beta43 native regression checks passed. OS events are controlled fixtures; Windows delivery is not asserted.
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Natif (6/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Parcours fenêtres (7/8)
+[trace technique] script=scripts/test-retours-window.js
+OK window: resize waits for native fullscreen exit, restores a smaller unmaximized window and persists windowed mode
+OK window: trusted IPC and F11 follow the same return-to-window behavior
+OK window: a rapid new preference wins without racing native exit or leaving a mismatched saved mode
+OK window: standard minimize, maximize and restore preserve display preferences and reject foreign IPC
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Parcours fenêtres (7/8) · 0 s
+[publication] V2.0.0 Bêta stable · Interface et karaoké · Karaoké (8/8)
+[trace technique] script=scripts/test-beta47-karaoke.js
+OK karaoke: 48 original lyric lines and translations remain intact; 270 paired words and their acoustic curves advance monotonically
+OK karaoke: silence holds colour, actual inter-word pauses have no active word, and the following word starts independently
+OK karaoke: repeated forward/backward seeks and instrumental gaps are deterministic; old timelines still use their linear fallback
+[publication] OK · V2.0.0 Bêta stable · Interface et karaoké · Karaoké (8/8) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Ajout manuel : fonctionnement (1/27)
+[trace technique] script=scripts/test-manual-add-runtime.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js volontairement indisponible pour tester le secours JSON
+OK runtime + Ajouter : 2 fiches persistées malgré réseau indisponible, relecture vérifiée et doublon bloqué
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Ajout manuel : fonctionnement (1/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Regroupement des saisons : fonctionnement (2/27)
+[trace technique] script=scripts/test-beta23-multiseason-runtime.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js intentionally unavailable
+OK Beta 23 multi-saisons : HELL MODE S1 12/12 reste terminé et S2 7/12 reste en cours.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Regroupement des saisons : fonctionnement (2/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Régressions (3/27)
+[trace technique] script=scripts/test-beta23-final.js
+OK Beta 23 final : 6 langues, HELL MODE/multi-saisons et structure karaoké vérifiée (sans validation audio).
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Régressions (3/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Overflow fonctionnement (4/27)
+[trace technique] script=scripts/test-beta26-overflow-runtime.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js intentionally unavailable
+[library] 0 doublon(s) fusionné(s).
+OK Beta 26 overflow : HELL MODE 19/12 => S1 12/12 terminée + 7 épisodes non répartis, aucune saison inventée, migration persistée et avertissement dédupliqué.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Overflow fonctionnement (4/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (5/27)
+[trace technique] script=scripts/test-beta48-runtime.js
+[db] sql.js non disponible — mode JSON de secours activé : isolated JSON fixture
+OK Beta48: completed CSV rows retain their real episode count and never generate sentinel seasons
+OK Beta48: legacy phantom cards are repaired idempotently and all originals, notes and ratings remain recoverable
+OK Beta48: unresolved seasons reject S1 matches, and overwrite imports preserve personal title, score, poster and notes
+OK Beta48: completion preserves edits and uploaded covers, does not resurrect deleted cards or remove newly added cards
+OK Beta48: series totals, S2 gaps, unknown totals, separate films and confirmed renamed sequels keep independent progress
+OK Beta48: calendar uses confirmed broadcast dates, duplicate notices share one episode and reception dates never become invented broadcasts
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (5/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · CSV import progression fonctionnement (6/27)
+[trace technique] script=scripts/test-csv-import-progress-runtime.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js intentionally unavailable
+[metadata] Base vide — seed automatique depuis cache Jikan...
+CSV import progress runtime: OK (1727 ms, 5 requête(s) simulée(s))
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · CSV import progression fonctionnement (6/27) · 2 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · BetaSeries progression fonctionnement (7/27)
+[trace technique] script=scripts/test-betaseries-progress-runtime.js
+[db] sql.js non disponible — mode JSON de secours activé : sql.js intentionally unavailable
+BetaSeries progress runtime: OK
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · BetaSeries progression fonctionnement (7/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (8/27)
+[trace technique] script=scripts/test-beta48-worker.js
+OK Beta48 worker: 383 rows resolved from native catalogue.sqlite with no network and no legacy database in 449 ms; last progress 383
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (8/27) · 1 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · HTTP (9/27)
+[trace technique] script=scripts/test-beta48-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm48-http-mrdEdP/collection.sqlite
+OK Beta48 HTTP: search imports all three statuses; only completion requires an unknown-total confirmation
+OK Beta48 HTTP: completed CSV imports are idempotent and overwrite preserves renamed title, notes and personal score
+OK Beta48 HTTP: distinct official sequel IDs survive identical titles, repeated additions never clone them
+OK Beta48 HTTP: repeated anime-control reads return the same intact result; 91 ms then 23 ms
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · HTTP (9/27) · 6 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · HTTP (10/27)
+[trace technique] script=scripts/test-beta49-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm49-http-NPJrkE/collection.sqlite
+OK Beta49: all incomplete anime are visible separately in control, including one never attempted; no quarantine
+OK Beta49: unchanged partial records await sources, never count as newly enriched or decisions
+OK Beta49: exact-ID remote enrichment repairs two records and rejects the mismatched third identity
+OK Beta49: resolved markers disappear, counters count unique anime, and progress / notes / personal score survive
+OK Beta49: both backup kinds are previewed by content regardless of extension; cancel and wrong password preserve collection
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · HTTP (10/27) · 8 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (11/27)
+[trace technique] script=scripts/test-beta50-runtime.js
+OK Beta50: source identities, reversible/idempotent Conan and overflow upgrades, unknown totals and persisted gap statuses
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (11/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (12/27)
+[trace technique] script=scripts/test-beta50-worker.js
+OK Beta50 worker: mixed 383-row fixture retains order, uses TV evidence after the network deadline and rejects the live action / film mismatch (112 ms)
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (12/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · HTTP (13/27)
+[trace technique] script=scripts/test-beta50-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm50-http-MYSrsm/collection.sqlite
+[library] 0 doublon(s) fusionné(s).
+OK Beta50 HTTP: independent season statuses persist after reload; selected completion resolves a true S2 and a split cour through verified relations and preserves personal fields
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · HTTP (13/27) · 10 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (14/27)
+[trace technique] script=scripts/test-beta51-runtime.js
+OK Beta51: summary counts saved gap statuses, leaves unconfirmed episodes untouched and identifies the BetaSeries S26 division
+OK Beta51: atomic association and chosen statuses preserve notes, score and watched count; invalid status and duplicates leave the record unchanged
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (14/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (15/27)
+[trace technique] script=scripts/test-beta51-worker.js
+OK Beta51 worker streaming: mixed 383-row fixture retains order, uses TV evidence after the network deadline and rejects the live action / film mismatch (111 ms)
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (15/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Bibliothèque : services HTTP (16/27)
+[trace technique] script=scripts/test-beta51-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm51-live-4GrRNm/collection.sqlite
+OK Beta51 HTTP: actual CSV worker delivers incremental results, cursor batches contain no duplicates, final response is complete and preview never imports the collection
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Bibliothèque : services HTTP (16/27) · 19 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (17/27)
+[trace technique] script=scripts/test-beta52-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm52-runtime-Q3ACH7/collection.sqlite
+[library] 0 doublon(s) fusionné(s).
+OK Beta52: short synopses accepted; announced unknown data advisory; concurrent Ao no Miburo adds one linked S2; Conan ranges and statuses preserve progress; TV evidence removes and caches Dexter.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (17/27) · 4 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (18/27)
+[trace technique] script=scripts/test-beta52-worker.js
+OK Beta52 worker streaming: mixed 383-row fixture retains order, uses TV evidence after the network deadline and rejects the live action / film mismatch (107 ms)
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (18/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (19/27)
+[trace technique] script=scripts/test-beta53-runtime.js
+OK Beta53: large-list TV reserve is bounded and separate; excluded TV stays inspectable; ambiguous titles and unconfirmed animation remain protected
+OK Beta53: import exclusions and incomplete TV checks are translated in all seven interface languages
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (19/27) · 0 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Imports : intégration HTTP (20/27)
+[trace technique] script=scripts/test-beta53-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm53-http-0qgql8/collection.sqlite
+Beta53 bounded provider timing: {"localPreparationMs":1095,"networkAndFinalizationMs":1010,"totalMs":2105}
+OK Beta53 HTTP: real CSV worker classifies uncached TV/film evidence, retains all rows and cached decisions, exposes dismissed TV, signals incomplete checks and imports only the verified anime
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Imports : intégration HTTP (20/27) · 20 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (21/27)
+[trace technique] script=scripts/test-beta54-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm54-p6IVKh/collection.sqlite
+[library] 0 doublon(s) fusionné(s).
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+OK Beta54: exact provisional S1 resolves; S2/parts and identity conflicts protected; edit honours autoInfo; bulk fills and removes completed records; saved association is idempotent; audit agrees; translations fixed, current song title.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (21/27) · 7 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (22/27)
+[trace technique] script=scripts/test-beta55-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm55-uC3vxW/collection.sqlite
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+[db] SQLite initialisé : /tmp/alm55-uC3vxW/collection.sqlite
+OK Beta55 restart: repaired identities, personal fields and preserved discrepancies persist without another migration.
+OK Beta55: canonical repair, aliases, ambiguity, split cours, continuous series, version identity, independent progress review, optimistic concurrency and preserved source data.
+{"fixture":false,"afterStartupIssues":1,"afterCompletionIssues":0,"beforeKinds":{"progress":1},"afterKinds":{},"awaiting":2,"records":2,"canonicalRowsRepaired":0,"automaticAliasesRemoved":0,"job":{"done":1,"total":1,"failed":0,"successful":0},"remainingSeasons":[]}
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (22/27) · 6 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (23/27)
+[trace technique] script=scripts/test-beta55-worker.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm55-worker-PiZZ8I/collection.sqlite
+OK Beta55 HTTP CSV: repeat import stays idempotent, keeps personal title/notes/score and preserves continuous season markers without phantom cards.
+OK Beta55 worker: wrong cached film is replaced with the six-episode version, synopsis/end date survive CSV analysis, continuous source position is retained and TV remains excluded.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Traitements en arrière-plan (23/27) · 6 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (24/27)
+[trace technique] script=scripts/test-beta56-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm56-S9whzc/collection.sqlite
+[library] 0 doublon(s) fusionné(s).
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+OK Beta56: durable resume, verified link invalidation, safe undo, false-candidate rejection, canonical parts, exact Conan alias, responsive background import, automatic enrichment, stable reimport and preserved personal data.
+{"resolved":2,"waiting":1,"decisions":0,"records":5,"maxProgressRttMs":12}
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (24/27) · 7 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Restart (25/27)
+[trace technique] script=scripts/test-beta56-restart.js
+OK Beta56 process restart: interrupted import resumes, enrichment follows, committed progress and personal data persist, and completed work is not restarted.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Restart (25/27) · 12 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (26/27)
+[trace technique] script=scripts/test-beta57-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm57-ceZfqp/collection.sqlite
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+OK Beta57: canonical season aliases, OVA seasons, bonus rejection, cour inheritance, bounded bodies/cancellation, exact relation IDs, partial-cache recovery, protected edits/reimports, durable manual crosswalk, unique episode totals and stale-event rejection.
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · Fonctionnement (26/27) · 8 s
+[publication] V2.0.0 Bêta stable · Imports et bibliothèque · BetaSeries : protections réseau (27/27)
+[trace technique] script=scripts/test-beta82-betaseries-network.cjs
+OK Beta82 BetaSeries: search keeps the normal result and configuration behavior
+OK Beta82 BetaSeries: search preserves non-success HTTP results without parsing invalid JSON
+OK Beta82 BetaSeries: search skips networking when no key is configured
+OK Beta82 BetaSeries: search refuses a redirect before any second request
+OK Beta82 BetaSeries: search rejects an oversized declared body before reading it
+OK Beta82 BetaSeries: search bounds a streamed body without Content-Length
+OK Beta82 BetaSeries: search aborts a transport that never sends headers
+OK Beta82 BetaSeries: search keeps the deadline while reading an unfinished body
+OK Beta82 BetaSeries: key-test keeps the normal result and configuration behavior
+OK Beta82 BetaSeries: key-test preserves non-success HTTP results without parsing invalid JSON
+OK Beta82 BetaSeries: key-test skips networking when no key is configured
+OK Beta82 BetaSeries: key-test refuses a redirect before any second request
+OK Beta82 BetaSeries: key-test rejects an oversized declared body before reading it
+OK Beta82 BetaSeries: key-test bounds a streamed body without Content-Length
+OK Beta82 BetaSeries: key-test aborts a transport that never sends headers
+OK Beta82 BetaSeries: key-test keeps the deadline while reading an unfinished body
+{"suite":"beta82-betaseries-network","passed":16,"network":"mocked only","productionTimeoutMs":10000,"maxBytes":2097152}
+[publication] OK · V2.0.0 Bêta stable · Imports et bibliothèque · BetaSeries : protections réseau (27/27) · 0 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Audit mise à niveau (1/14)
+[trace technique] script=scripts/test-audit-upgrade.js
+[db] sql.js non disponible — mode JSON de secours activé : Test: deliberate JSON fallback
+OK audit: different MAL ids never merge through a shared BetaSeries season
+OK audit: conflicting official ids with identical titles remain separate
+OK audit: Part/Cour is not a season number
+OK audit: two cours without official ids are not collapsed
+OK audit: CJK-only library titles retain distinct identities
+OK audit: known season conflict wins over a mistakenly inherited MAL id
+OK audit: same explicit season can reconcile a provisional and official entry
+OK audit: HELL MODE overflow retains 7 unallocated episodes without inventing S2 capacity
+OK audit: overflow uses existing sequel capacity instead of copying S1 total
+OK audit: ambiguous split season retains overflow for review
+OK audit: bounded migration checkpoints residual progress instead of reallocating it
+OK audit: failed atomic rename preserves previous bytes and cleans temporary files
+OK audit: JSON library add/update/delete round trip and last-good backup
+OK audit: failed library write does not mutate the successful in-memory state
+OK audit: invalid bulk write cannot erase library
+OK audit: malformed JSON is an error, not an empty library
+OK audit: corrupt library fails startup before creating an empty SQLite database
+OK audit: bundled snapshot matches manifest by gzip, hash, size and unique ids
+OK audit: malformed or empty Jikan 200 responses are not end-of-catalogue
+OK audit: valid Jikan page is accepted and wrong page is rejected
+OK audit: large snapshot shrink requires explicit operator override
+OK audit: diagnostic is count-only and reports the completed Chinese catalog
+OK audit: news persists Chinese as its own language
+OK audit: recommendation search supports Japanese and Chinese
+OK audit: recommendations exclude existing library and duplicates
+OK audit: similar-response helper exists and tolerates empty data
+OK audit: image URLs cannot escape HTML attributes or use executable data schemes
+OK audit: IPC is limited to the trusted top-level renderer
+OK audit: actual HTTP loopback accepts local requests and rejects hostile origins/hosts
+
+29 behavioral audit checks passed (JSON fallback + real loopback HTTP; no live provider calls).
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Audit mise à niveau (1/14) · 0 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (2/14)
+[trace technique] script=scripts/test-beta38-runtime.js
+OK Beta38: dates are actual calendar dates, including leap years
+OK Beta38: completion uses exact metadata, then watched count; no invented total
+OK Beta38: past imports stay undated; explicitly dated viewing and completion are distinct
+OK Beta38: invalid dates and years are rejected
+OK Beta38: AES-GCM round trip protects content and uses fresh nonces and salt
+OK Beta38: wrong password, corruption and truncation fail authentication
+OK Beta38: local posters round trip, Unicode names work, traversal is rejected
+OK Beta38: automatic schedule coalesces concurrent runs, retains only its own files and never stores a plaintext password
+OK Beta38: restart needs a vault or explicit unlock; no silent plaintext fallback
+9 Beta38 checks passed. No native OS-vault or Windows execution claim.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (2/14) · 1 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · HTTP (3/14)
+[trace technique] script=scripts/test-beta38-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm38-http-7DXssm/collection.sqlite
+OK Beta38 HTTP: real SQLite addition completes exact metadata and records explicit completion date
+OK Beta38 HTTP: unknown totals require confirmation and remain unknown
+OK Beta38 HTTP: explicit watched count is used when metadata is absent
+OK Beta38 HTTP: PUT records viewing deltas and rejects invalid dates without changing the collection
+OK Beta38 HTTP: bulk completion uses exact totals without assigning an invented viewing date
+OK Beta38 HTTP: encrypted HTTP export and failed authentication preserve the collection
+OK Beta38 HTTP: encrypted restore preserves viewing and completion history
+OK Beta38 HTTP: a failed multi-file restore rolls back previous SQLite collection and exact configuration bytes
+OK Beta38 HTTP: local schedule preferences and current-version APIs operate on a fresh profile
+9 Beta38 HTTP checks passed; real Express/Multer/SQLite, no live sources.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · HTTP (3/14) · 6 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (4/14)
+[trace technique] script=scripts/test-beta39-runtime.js
+OK Beta39 runtime: AniList failure uses exact Jikan IDs, known past episodes and explicitly estimated Tokyo slots
+OK Beta39 runtime: foreign IDs, missing IDs and unsupported broadcast zones are never guessed
+OK Beta39 runtime: Jikan outage opens the circuit and preserves unavailable rows
+OK Beta39 runtime: source changes and restart do not announce an acknowledged episode again; estimates never notify
+OK Beta39 runtime: Beta38 notification acknowledgements survive the provider migration
+OK Beta39 runtime: calendar categorizes both tracked statuses, premieres, episodes and films, deduplicates and preserves cached dates offline
+OK Beta39 runtime: calendar checks every planned record, including collections larger than 120 entries
+OK Beta39 runtime: long-running anime use the latest episode page rather than their first hundred episodes
+OK Beta39 runtime: updater accepts only a newer compatible official asset with exact URL, size and SHA-256
+OK Beta39 runtime: stream download detects corruption, truncation, hostile redirects and non-PE executables
+OK Beta39 runtime: download alone never installs; installation stages a verified portable replacement while preserving paths with spaces and personal data
+OK Beta39 runtime: the downloaded file is rehashed before any installer launch or application shutdown
+OK Beta39 runtime: cancelled downloads never leave an installable partial file
+OK Beta39 runtime: Windows launcher passes paths as data to a fixed script, checks the digest again and retains a rollback copy
+14 Beta39 runtime checks passed; network fixtures, no native installer executed.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (4/14) · 0 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · HTTP (5/14)
+[trace technique] script=scripts/test-beta39-http.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm39-http-uSwfK2/collection.sqlite
+OK Beta39 HTTP: real SQLite addition completes exact metadata and records explicit completion date
+OK Beta39 HTTP: unknown totals require confirmation and remain unknown
+OK Beta39 HTTP: explicit watched count is used when metadata is absent
+OK Beta39 HTTP: PUT records viewing deltas and rejects invalid dates without changing the collection
+OK Beta39 HTTP: bulk completion uses exact totals without assigning an invented viewing date
+OK Beta39 HTTP: encrypted HTTP export and failed authentication preserve the collection
+OK Beta39 HTTP: encrypted restore preserves viewing and completion history
+OK Beta39 HTTP: a failed multi-file restore rolls back previous SQLite collection and exact configuration bytes
+OK Beta39 HTTP: local schedule preferences and current-version APIs operate on a fresh profile
+OK Beta39 HTTP: exact-ID completion corrects lowercase official titles and retains personal fields
+OK Beta39 HTTP: bulk completion also includes enriched records with a noncanonical title
+OK Beta39 HTTP: title normalization refuses another MAL identity
+OK Beta39 HTTP: catalog details expose exact public metadata and never personal notes
+OK Beta39 HTTP: calendar HTTP background refresh returns promptly and retains dated local metadata offline
+14 Beta39 HTTP checks passed; real Express/Multer/SQLite, no live sources.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · HTTP (5/14) · 5 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (6/14)
+[trace technique] script=scripts/test-beta40-runtime.js
+OK Beta40: fresh profiles require notification opt-in without losing fetched schedules
+OK Beta40: one-time choice persists; later settings can disable it without prompting again
+OK Beta40: both existing enabled and disabled preferences migrate unchanged
+OK Beta40: cached confirmed releases deliver once concurrently; failed native delivery remains available for fallback
+OK Beta40: display default, trusted changes, scale bounds and persistent preferences execute in the real main-process code
+OK Beta40: test notification uses the actual native delivery path and rejects untrusted IPC
+OK Beta40: confirmed native notification includes episode/source and opens the matching anime on click
+OK Beta40: failed and unsupported OS notifications report failure for renderer fallback
+OK Beta40: new backup, history, status and notification controls exist in all seven languages
+9 Beta40 runtime checks passed. OS events are controlled fixtures; Windows delivery is not asserted.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (6/14) · 0 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (7/14)
+[trace technique] script=scripts/test-beta41-runtime.js
+OK Beta41: canonical MAL/episode deduplication across sources
+OK Beta41: tests, history, read state, clearing and quiet mode survive restart
+OK Beta41: failed persistence never reports a saved notification
+OK Beta41: notification history stays bounded
+OK Beta41: localized labels reject wrong IDs, franchises and qualified season claims
+OK Beta41: verified labels are cached; missing languages and offline mode keep a real title
+OK Beta41: every new interface string exists in all seven ALM languages
+OK Beta41: client title batches continue when another page introduces new identities
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm41-ubZdae/profile/collection.sqlite
+OK Beta41: real notification APIs and native quiet mode always retain in-app tests
+OK Beta41: completion issues are visible without classifying a known anime as non-anime
+OK Beta41: title job corrects localized names offline and preserves all personal fields
+11 Beta41 runtime checks passed.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (7/14) · 4 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (8/14)
+[trace technique] script=scripts/test-beta42-runtime.js
+OK Beta42: maximized default and physical resolution presets stay within scaled screens
+OK Beta42: all catalogue, restoration and display strings exist in seven languages
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm42-01F7jp/profile/collection.sqlite
+Catalogue full first page: 184 ms
+OK Beta42: real 30430-row SQLite catalogue is bounded, paginated and handles literal/SQL-like search
+OK Beta42: decade, year, genre, format and verified localized names filter the database
+OK Beta42: batch addition deduplicates exact seasons and records completion without invented viewing dates
+OK Beta42: undo removes only untouched batch additions and preserves subsequent personal changes
+OK Beta42: episode commands are bounded, dated, undoable and offer completion without forcing it
+OK Beta42: restoration preview and cancellation never change the collection
+OK Beta42: authenticated encrypted preview restores after saving a complete recovery copy
+OK Beta42: stale previews and duplicate backup identities cannot overwrite current data
+OK Beta42: failed recovery-copy persistence aborts restoration before collection changes
+OK Beta42: recovery copies use the configured encrypted protection
+OK Beta42: new write APIs retain local-origin protection
+13 Beta42 runtime checks passed.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (8/14) · 5 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fournisseurs (9/14)
+[trace technique] script=scripts/test-beta44-providers.js
+OK Beta44: one verified Kitsu mapping preserves MAL identity, shares requests and never imports its score as MAL
+OK Beta44: foreign IDs, ambiguous seasons, manga and absent included records are rejected
+OK Beta44: Kitsu title search admits only records carrying an explicit MAL mapping
+OK Beta44: official MAL fields, relations and film format use their own exact IDs without credential redirects
+OK Beta44: network failure opens a cooldown across requests rather than multiplying timeouts
+OK Beta44: retired and unconfigured diagnostics return immediately without network access
+OK Beta44: official Top 100 publishes only four complete consistent pages and retains the last good ranking on failure
+OK Beta44: offline restoration recovers all 30430 rows with an identical hash and preserves collection and resume cache
+OK Beta44: an existing invalid snapshot is reported and never silently overwritten
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm44-toVx98/profile/collection.sqlite
+OK Beta44: fresh offline profile loads the full catalogue; updates preserve collection and report missing sources honestly
+OK Beta44: real discovery, rankings, diagnostics and metadata refresh make zero Jikan public requests
+OK Beta44: optional client settings validate header input, hide stored values and support removal
+OK Beta44: default calendar fallback cannot contact the retired public API
+OK Beta44: bulk AniList metadata collection is removed and its scores cannot populate MAL metadata
+14 Beta44 adaptation checks passed. Remote services used controlled fixtures; no personal MAL credentials available.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fournisseurs (9/14) · 4 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (10/14)
+[trace technique] script=scripts/test-beta45-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] Synchronisation JSON récente -> SQLite : 1 animés.
+[db] SQLite initialisé : /tmp/alm45-runtime-lR9nif/collection.sqlite
+OK Beta45: legacy migration preserves notes, scores, newer JSON progress and a recovery copy in three on-disk databases
+OK Beta45: connection identifiers migrate to authenticated encrypted config when an OS-protected key is available
+OK Beta45: local API requires the app session, rejects foreign origins and sends a strict script CSP
+OK Beta45: episode writes affect the personal record without rewriting the catalogue
+OK Beta45: image transport refuses internal addresses and active/non-image payloads
+OK Beta45: search and exact studio/genre indexes remain correct after record replacement
+OK Beta45: storage diagnostics and guarded cleanup preserve collection and catalogue
+OK Beta45: backup includes new local states and excludes connection credentials
+OK Beta45: restart after an abrupt exit recovers committed progress without relying on the delayed JSON mirror
+OK Beta45: corrupt disk SQLite refuses startup instead of silently replacing the collection with JSON fallback
+10 Beta45 runtime checks passed. Network providers are offline fixtures.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Fonctionnement (10/14) · 8 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Enrichissement (11/14)
+[trace technique] script=scripts/test-beta45-enrichment.js
+OK Beta45: exact mapped Kitsu synopsis/trailer complement MAL without changing its title or public score; requests are shared and cached
+OK Beta45: new exact-ID records and fresh synopses appear and can be translated; conflicting IDs never replace the saved record
+OK Beta45: signed Windows updates cannot downgrade to unsigned or change publisher; mandatory signature and publisher pins reject invalid packages
+OK Beta45: wrong or missing encryption keys cause explicit errors and never return an empty config
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Enrichissement (11/14) · 0 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Nettoyage et récupération des données (12/14)
+[trace technique] script=scripts/test-beta46-cleanup.js
+OK Beta46: failed native initialization releases allocated file handles without replacing evidence
+OK Beta46: real attached SQLite handles released and SQL progress preserved (normal)
+OK Beta46: real attached SQLite handles released and SQL progress preserved (mirror-failure)
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm46-cleanup-9JKAlr/http/collection.sqlite
+OK Beta46: HTTP and SQLite close before recursive removal, with bounded lock retries
+OK Beta46: permanent cleanup errors are reported, not turned into successful tests
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Nettoyage et récupération des données (12/14) · 11 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Parcours fonctionnement (13/14)
+[trace technique] script=scripts/test-retours-runtime.js
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm-retours-Nuh3vP/collection.sqlite
+OK retours: video frames are narrowly allowed and local mutation still requires the app session
+OK retours: manual renaming overrides an old canonical/localized title and persists in real SQLite
+OK retours: exact Witch Hat Atelier identity replaces the wrong clip while retaining personal data and progress
+OK retours: stale, duplicate and invalid associations are refused without changing saved data
+OK retours: retired Jikan is absent from settings; official MyAnimeList and old no-network diagnostics remain
+OK retours: backup keeps title overrides and the original 30,430-record offline catalogue is unchanged
+OK retours: link parsing rejects deceptive URLs and an ambiguous Atelier title never silently changes identity
+7 retours runtime checks passed.
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Parcours fonctionnement (13/14) · 4 s
+[publication] V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Associations concurrence (14/14)
+[trace technique] script=scripts/test-association-concurrency.js
+OK association: delayed source response preserves an episode and notes edited during the wait
+OK association: a stale source response cannot replace a more recent association
+OK association: a foreign source identity cannot be applied
+[publication] OK · V2.0.0 Bêta stable · Données, sauvegardes et sécurité · Associations concurrence (14/14) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Publication mises à jour (1/12)
+[trace technique] script=scripts/test-release-watch.js
+OK release: exact MAL mapping and official date-window query reject mismatches and invalid episodes
+OK release: Watching only, unknown IDs visible, future episodes never announced early, concurrent calls merged
+OK release: delivery acknowledgement survives restart and avoids duplicates
+OK release: watched count and notification preference suppress alerts
+OK release: source outage preserves the last schedule without inventing a release
+OK release: numeric prerelease and stable versions compare correctly; V1 is not a Beta38 update
+OK release: draft, foreign URL and unwanted prerelease releases are rejected
+OK release: official release check coalesces and caches; proposes a release page without running installers
+OK release: offline checks report source failure without a false update
+9 release checks passed. Providers are fixtures; native OS delivery is not asserted.
+[publication] OK · V2.0.0 Bêta stable · Publication · Publication mises à jour (1/12) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Application empaquetée intégrité (2/12)
+[trace technique] script=scripts/test-packaged-integrity.js
+OK Packaging waits for the final archive write
+OK Archive write failure rejects the build
+OK Real ASAR including unpacked media passes integrity validation
+OK Truncated ASAR is rejected
+OK Altered packed server is rejected
+OK Altered unpacked media is rejected
+OK Missing unpacked media is rejected
+7 packaged-integrity checks passed.
+[publication] OK · V2.0.0 Bêta stable · Publication · Application empaquetée intégrité (2/12) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Publication (3/12)
+[trace technique] script=scripts/test-beta58-release.js
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 1a88132ce59d8b44a5831c6c79ceedd1cf44bff5c6ef8278ea9bb201831a42c0, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 1a88132ce59d8b44a5831c6c79ceedd1cf44bff5c6ef8278ea9bb201831a42c0, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 261263433de19ded536115bf45273622444715c6aba727c5feeccc86d1bf0064, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 63263662f311d40c1d39ee1239bd0241d7d8ff12a3821578fa3bca7d46d95138, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 a00e13ecfc21fb2966835a6c14ef2597c37045f709d1964da31123e35f09eaea, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 a00e13ecfc21fb2966835a6c14ef2597c37045f709d1964da31123e35f09eaea, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+[release] ALM-2.0.0-beta.58-Setup-x64.exe : 2048 octets, SHA-256 c1cf49fbd1936fd5c80c83296e65f31adc62db455fdecde3c9c677cf67dae5ed, signature NotSigned
+[release] Installateur non signe : aucune signature Authenticode detectee.
+OK Beta58 release: quiet heartbeat/log redaction, audit gates, atomic rollback, NSIS-only preparation, verified resume, corrupt cache rejection, failed-build preservation, same-input verification reuse and source-change invalidation. Build/PE/native steps are controlled fixtures.
+[publication] OK · V2.0.0 Bêta stable · Publication · Publication (3/12) · 1 s
+[publication] V2.0.0 Bêta stable · Publication · Installation : vérification du démarrage (4/12)
+[trace technique] script=scripts/test-beta58-smoke.js
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[db] Metadata seed SQL importé/mis à niveau : 30430 fiches.
+[db] SQLite initialisé : /tmp/alm-release-5a2AEb/data/collection.sqlite
+Anime Local Manager V2.0.0 Bêta stable lancé : http://127.0.0.1:3123
+OK Beta58 smoke: temporary profile and nonce guards, evidence/version checks, real SQLite catalogue, actual XML import, progress/notes, repeated reads and backup export, external fetch blocked. Native executable launch remains a Windows CI check.
+[publication] OK · V2.0.0 Bêta stable · Publication · Installation : vérification du démarrage (4/12) · 7 s
+[publication] V2.0.0 Bêta stable · Publication · Outillage (5/12)
+[trace technique] script=scripts/test-beta58-tooling.js
+OK Beta58 tooling: builder uses the official modern download API, cache checksums reject corruption, failed checksum is refused, old proxy vulnerability chain is absent.
+[publication] OK · V2.0.0 Bêta stable · Publication · Outillage (5/12) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Publication (6/12)
+[trace technique] script=scripts/test-beta68-release.cjs
+OK Beta68 release: isolated child environment; two verified launches remain required; silent exit/NTSTATUS, app errors and Electron logs retained; invalid or missing proof blocks release. Native Windows execution is still required on Windows.
+[publication] OK · V2.0.0 Bêta stable · Publication · Publication (6/12) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Installation (7/12)
+[trace technique] script=scripts/test-beta69-package.cjs
+[package-profile] {"test":"beta69","phase":"filter-validation","durationMs":25.018}
+[package-profile] {"test":"beta69","phase":"copy-sources","durationMs":37.113}
+[package-profile] {"test":"beta69","phase":"npm-ls","durationMs":474.087}
+[package-profile] {"test":"beta69","phase":"copy-production-modules","durationMs":48.9}
+[package-profile] {"test":"beta69","phase":"load-asar-tools","durationMs":10.803}
+[package-profile] {"test":"beta69","phase":"missing-module-asar","durationMs":1295.926}
+[package-profile] {"test":"beta69","phase":"complete-asar-and-integrity","durationMs":1305.407}
+[package-profile] {"test":"beta69","phase":"module-fixtures","durationMs":12.882}
+ALM_PACKAGE_ENGINE_OK {"phase":"missing","electron":"45.3.1","missingModuleRejected":true}
+[package-profile] {"test":"beta69","phase":"electron-missing","durationMs":378.475}
+ALM_PACKAGE_ENGINE_OK {"phase":"seed","electron":"45.3.1","catalogue":30430,"imported":1,"backup":true,"persistence":false,"nativeStorage":"not-available"}
+[package-profile] {"test":"beta69","phase":"electron-seed","durationMs":4604.212}
+ALM_PACKAGE_ENGINE_OK {"phase":"verify","electron":"45.3.1","catalogue":30430,"imported":1,"backup":true,"persistence":true,"nativeStorage":"not-exercised"}
+[package-profile] {"test":"beta69","phase":"electron-verify","durationMs":1059.022}
+[package-profile] {"test":"beta69","phase":"redacted-error-fixture","durationMs":254.703}
+[package-profile] {"test":"beta69","phase":"cleanup","durationMs":27.423}
+OK Beta69 package: builder filtering, missing-module reproduction in Electron, ASAR dependency checks, actual Electron utility launches, catalogue/import/backup/persistence, protected session and redacted diagnostics. Native Windows EXE validation remains required.
+[package-profile] summary {"test":"beta69","totalMs":9534.326,"phases":[{"name":"filter-validation","durationMs":25.018},{"name":"copy-sources","durationMs":37.113},{"name":"npm-ls","durationMs":474.087},{"name":"copy-production-modules","durationMs":48.9},{"name":"load-asar-tools","durationMs":10.803},{"name":"missing-module-asar","durationMs":1295.926},{"name":"complete-asar-and-integrity","durationMs":1305.407},{"name":"module-fixtures","durationMs":12.882},{"name":"electron-missing","durationMs":378.475},{"name":"electron-seed","durationMs":4604.212},{"name":"electron-verify","durationMs":1059.022},{"name":"redacted-error-fixture","durationMs":254.703},{"name":"cleanup","durationMs":27.423}]}
+OK nettoyage du dossier temporaire et fermeture des processus de test.
+[publication] OK · V2.0.0 Bêta stable · Publication · Installation (7/12) · 10 s
+[publication] V2.0.0 Bêta stable · Publication · Installation : chemins Windows (8/12)
+[trace technique] script=scripts/test-beta70-windows-paths.cjs
+OK Beta70 Windows ASAR: actual locked filesystem under win32 paths, nested JSON and unpacked assets, local-module traversal, missing modules, corruption and missing external bytes.
+[publication] OK · V2.0.0 Bêta stable · Publication · Installation : chemins Windows (8/12) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Installation (9/12)
+[trace technique] script=scripts/test-beta71-package.cjs
+[package-profile] {"test":"beta71","phase":"dependency-fixtures","durationMs":1.067}
+[package-profile] {"test":"beta71","phase":"stage-physical-dependencies","durationMs":2106.632}
+[package-profile] {"test":"beta71","phase":"negative-builder","durationMs":9049.312}
+OK Beta71: actual electron-builder rejects the old linked dependency tree.
+[package-profile] {"test":"beta71","phase":"npm-production-tree","durationMs":1962.838}
+[package-profile] {"test":"beta71","phase":"positive-builder","durationMs":4600.515}
+[package-profile] {"test":"beta71","phase":"verify-asar-dependencies","durationMs":159.847}
+ALM_PACKAGE_ENGINE_OK {"phase":"seed","electron":"45.3.1","catalogue":30430,"imported":1,"backup":true,"persistence":false,"nativeStorage":"not-available"}
+[package-profile] {"test":"beta71","phase":"electron-seed","durationMs":4213.171}
+ALM_PACKAGE_ENGINE_OK {"phase":"verify","electron":"45.3.1","catalogue":30430,"imported":1,"backup":true,"persistence":true,"nativeStorage":"not-exercised"}
+[package-profile] {"test":"beta71","phase":"electron-verify","durationMs":1164.367}
+[package-profile] {"test":"beta71","phase":"cleanup","durationMs":183.471}
+OK Beta71: real electron-builder package, 82 production packages, dependency copy integrity and resume validation; real Electron utility process, catalogue/import/backup/persistence. The native Windows EXE gate remains required.
+[package-profile] summary {"test":"beta71","totalMs":23441.511,"phases":[{"name":"dependency-fixtures","durationMs":1.067},{"name":"stage-physical-dependencies","durationMs":2106.632},{"name":"negative-builder","durationMs":9049.312},{"name":"npm-production-tree","durationMs":1962.838},{"name":"positive-builder","durationMs":4600.515},{"name":"verify-asar-dependencies","durationMs":159.847},{"name":"electron-seed","durationMs":4213.171},{"name":"electron-verify","durationMs":1164.367},{"name":"cleanup","durationMs":183.471}]}
+OK nettoyage du dossier temporaire et fermeture des processus de test.
+[publication] OK · V2.0.0 Bêta stable · Publication · Installation (9/12) · 24 s
+[publication] V2.0.0 Bêta stable · Publication · Construction (10/12)
+[trace technique] script=scripts/test-beta82-build.cjs
+OK build82: large video is a distinct NSIS resource with a safe media path
+OK build82: reported 276-character NSIS path reproduced
+OK build82: automatic short workspace does not depend on extraction depth
+OK build82: case-insensitive Windows identity and stable resume location
+OK build82: separate source copies never share their compilation cache
+OK build82: profile fallback without LOCALAPPDATA
+OK build82: no overlong cache accepted silently
+OK build82: Linux workspace unchanged
+OK build82: real filesystem workspace and source-side locator created
+OK build82: concurrent build rejected without terminating another process
+OK build82: resume reuses workspace and leaves original files untouched
+OK build82: missing NSIS include rejected before compiler launch
+OK build82: empty NSIS input rejected
+OK build82: existing readable NSIS input and short uninstaller output validated
+OK build82: native path budget checked independently of filesystem existence
+OK build82: foreign workspace ownership is never overwritten
+OK build82: stale lock from a terminated process recovered
+OK build82: temporary EBUSY retried asynchronously with bounded backoff
+OK build82: permanent lock remains a real failed test
+OK build82: unrelated filesystem errors never swallowed or endlessly retried
+OK build82: actual recursive cleanup completes
+OK build82: cleanup waits for owned Electron utility exit and stop is idempotent
+OK build82: already-exited missing-module test is handled correctly
+OK build82: utility shutdown timeout fails instead of pretending success
+OK build82: deep Windows publication directory uses atomic mkdir instead of mkdtemp
+OK build82: external runtime override cannot invalidate the tested-engine evidence
+OK build82: NSIS failure preserves previous installer and verified checkpoint
+OK build82: verification diagnostics copied back and build lock released on failure
+OK build82: resume skips already verified source/dependency steps after compiler failure
+OK build82: installer and report promoted atomically to original dist directory
+OK build82: unchanged build reused but native smoke gate still requested
+OK build82: prepared runtime is captured in the dependency marker and staging
+OK build82: modified cached installer is rebuilt, not delivered silently
+OK build82: source modification invalidates verification cache
+OK build82: dependency-tree modification invalidates verification cache
+OK build82: missing runtime is prepared before verification and failure preserves the previous installer
+OK build82: runtime preparation can resume after a failure without skipping verification
+OK build82: an unexecuted installer check is reported as still required
+OK build82: same publish/resume buttons, automatic resume and quoted source directory
+OK build82: new regression gate added without removing previous package tests
+40 build82 checks passed. Native Windows/NSIS execution still requires Windows.
+[publication] OK · V2.0.0 Bêta stable · Publication · Construction (10/12) · 1 s
+[publication] V2.0.0 Bêta stable · Publication · Construction sécurité (11/12)
+[trace technique] script=scripts/test-beta82-build-security.cjs
+OK Beta82 security lock: five patched lock entries, SHA-512, compatible Express 4.22.3, exact multer 2.5.0, no unreviewed duplicates.
+[publication] OK · V2.0.0 Bêta stable · Publication · Construction sécurité (11/12) · 0 s
+[publication] V2.0.0 Bêta stable · Publication · Compatibilité V2.0.0 Bêta stable (12/12)
+[trace technique] script=scripts/test-release-v200.cjs
+OK 2.0.0 Bêta stable: version, installateur, canal GitHub, ancien format sauvegarde, client et site.
+[publication] OK · V2.0.0 Bêta stable · Publication · Compatibilité V2.0.0 Bêta stable (12/12) · 2 s

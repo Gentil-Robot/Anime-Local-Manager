@@ -38,6 +38,27 @@ const {createVersionCheck}=require('./lib/version-check');
 const db = require("./db");
 
 const app    = express();
+// Express 4 ne transmet pas une promesse rejetée au gestionnaire d'erreurs :
+// une route async sans try/catch devenait une unhandledRejection, donc un arrêt
+// du moteur local. Chaque gestionnaire de route est relié ici à next(error).
+for (const method of ["get", "post", "put", "patch", "delete"]) {
+  const register = app[method].bind(app);
+  const guard = handler => {
+    if (Array.isArray(handler)) return handler.map(guard);
+    if (typeof handler !== "function" || handler.length > 3) return handler;
+    return function almGuardedHandler(req, res, next) {
+      const result = handler.call(this, req, res, next);
+      if (result && typeof result.then === "function" && typeof next === "function") {
+        // Empty rejection reasons and Express routing sentinels are still
+        // failures: passing them directly to next() would silently skip them.
+        result.then(undefined, error => next(error && error !== "route" && error !== "router"
+          ? error : new Error("Rejected route promise")));
+      }
+      return result;
+    };
+  };
+  app[method] = (route, ...handlers) => register(route, ...handlers.map(guard));
+}
 const PORT   = 3123;
 const BACKUP_VERSION = "2.0.0-beta.82"; // Format historique : préserver les sauvegardes existantes.
 const PRODUCT_RELEASE = require("./release-version.json");
@@ -13455,6 +13476,17 @@ app.get("/api/diagnostics", async (req, res) => {
     const {diagnostics} = require("./lib/diagnostics");
     res.json(diagnostics(__dirname, db.storageStatus(), db.getAllAnimes(), RSS_SOURCES, {items:completionIssueItems(),awaiting:completionAwaitingItems()}));
   } catch (error) { res.status(500).json({error:"Diagnostic unavailable", code:"ALM_DIAGNOSTIC_FAILED"}); }
+});
+
+// Dernier maillon HTTP : réponse JSON sans trace de pile. Le gestionnaire
+// Express par défaut renvoie la pile en HTML hors NODE_ENV=production.
+app.use((error, req, res, next) => {
+  if (res.headersSent) return next(error);
+  const status = error?.code === "LIMIT_FILE_SIZE" ? 413 : Number(error?.status || error?.statusCode);
+  const safe = Number.isInteger(status) && status >= 400 && status < 600 ? status : 500;
+  if (safe >= 500) console.error("[http]", req.method, req.path, error?.stack || error);
+  const code = /^[A-Z0-9_]{3,64}$/.test(String(error?.code || "")) ? String(error.code) : (safe >= 500 ? "ALM_INTERNAL_ERROR" : "ALM_REQUEST_REJECTED");
+  res.status(safe).json({ error: safe >= 500 ? "Erreur interne." : String(error?.message || "Requête refusée."), code });
 });
 
 module.exports = {

@@ -2,7 +2,7 @@ name: ALM — installateur Windows
 on:
   workflow_dispatch:
   push:
-    branches: [main, master, 'publication/v2.0.0-beta-stable']
+    branches: [main, master, 'publication/v2.0.0-beta-stable', 'release/v2.1.0']
     tags: ['v*', '2.0.0-*']
 permissions:
   contents: read
@@ -54,6 +54,10 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 30
+      - name: Parcours natifs moteur et MFA
+        run: |
+          node scripts/verify-native.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Journaux de vérification
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -68,3 +72,31 @@ jobs:
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 14
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/release/v2.1.0'
+    needs: installer
+    runs-on: windows-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Sources exactes de la version testee
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          lfs: true
+          persist-credentials: false
+      - name: Node epingle
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+      - name: Installateur et rapport testes
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          name: ALM-Windows-${{ github.sha }}
+          path: dist
+      - name: Publication 2.1.0 apres verification des preuves
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & ./Publier-GitHub-V2.ps1 -Installateur './dist/Anime-Local-Manager-2.1.0-Setup-x64.exe' -RapportBuild './dist/release-check.json' -Tag 'v2.1.0' -Ref 'release/v2.1.0' -Publier

@@ -2,15 +2,15 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const {JSDOM}=require(process.env.ALM_JSDOM_MODULE||'jsdom');
 const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),tick=()=>new Promise(r=>setTimeout(r,25));
-async function dom(html,url='https://animelocalmanager.com/'){const d=new JSDOM(html,{url,runScripts:'outside-only',pretendToBeVisual:true});await new Promise(r=>d.window.document.addEventListener('DOMContentLoaded',r,{once:true}));d.window.HTMLElement.prototype.scrollIntoView=function(){};d.window.fixtureSessionAccess=require('../lib/community-session');return d;}
+async function dom(html,url='https://animelocalmanager.com/'){const d=new JSDOM(html,{url,runScripts:'outside-only',pretendToBeVisual:true});await new Promise(r=>d.window.document.addEventListener('DOMContentLoaded',r,{once:true}));d.window.HTMLElement.prototype.scrollIntoView=function(){};d.window.fixtureSessionAccess=require('../lib/community-session');d.window.fixtureSecurityModule=require('../community/auth-security');return d;}
 (async()=>{
  for(const [suffix,confirmed,expected]of [['/#access_token=fixture&type=signup',true,'activationSuccess'],['/#error=access_denied&error_code=otp_expired',true,'expiredLink'],['/?error_code=otp_expired',true,'expiredLink'],['/confirmation.html',false,'expiredLink'],['/#access_token=fixture&type=recovery',true,'recovery'],['/',true,'none']]){
   const d=await dom('<section id="webLanding"></section><section id="webActivation" hidden></section><section id="webRecovery" hidden></section>','https://animelocalmanager.com'+suffix),w=d.window;
   let userReads=0;w.ALM_COMMUNITY_MODEL={};w.ALM_COMMUNITY_SECURITY={errorCode:()=> 'error'};
   w.ALM_DESIGN={language:()=> 'fr'};w.ALM_COMMUNITY_T=k=>k;w.ALM_COMMUNITY_COPY={en:{activationSuccess:'Account confirmed',expiredLink:'Link expired'}};
   w.fetch=async()=>({ok:true,json:async()=>({url:'https://duzwwoyqproxpytmfzdx.supabase.co',publishableKey:'sb_publishable_fixture'})});
-  w.fixtureClient={auth:{onAuthStateChange(){},getUser:async()=>{userReads++;return {data:{user:{id:'fixture',email_confirmed_at:confirmed?'2026-10-15':null}}};},getSession:async()=>({data:{session:{access_token:'fixture',user:{id:'fixture'}}}})}};
-  w.eval(read('community/web-client.js').replace("import {createClient} from '@supabase/supabase-js';",'const createClient=()=>window.fixtureClient;').replace("import sessionAccess from '../lib/community-session.js';",'const sessionAccess=window.fixtureSessionAccess;').replace("import statsModule from './library-stats.js';",'const statsModule={libraryStats:async()=>({available:true,libraries:0,animes:0})};'));
+  w.fixtureClient={auth:{onAuthStateChange(callback){if(expected==='recovery')setTimeout(()=>callback('PASSWORD_RECOVERY'),0);},getUser:async()=>{userReads++;return {data:{user:{id:'fixture',email_confirmed_at:confirmed?'2026-10-15':null}}};},getSession:async()=>({data:{session:{access_token:'fixture',user:{id:'fixture'}}}})}};
+  w.eval(read('community/web-client.js').replace("import {createClient} from '@supabase/supabase-js';",'const createClient=()=>window.fixtureClient;').replace("import sessionAccess from '../lib/community-session.js';",'const sessionAccess=window.fixtureSessionAccess;').replace("import securityModule from './auth-security.js';",'const securityModule=window.fixtureSecurityModule;').replace("import statsModule from './library-stats.js';",'const statsModule={libraryStats:async()=>({available:true,libraries:0,animes:0})};'));
   w.dispatchEvent(new w.Event('DOMContentLoaded'));await tick();
   const panel=w.document.getElementById('webActivation');
   if(expected==='none')assert(panel.hidden);

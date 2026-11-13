@@ -1,0 +1,9 @@
+{
+  "electron": "45.2.1",
+  "node": "24.22.1",
+  "utilities": 2,
+  "portFallback": true,
+  "localTokenRotated": true,
+  "persistedRows": 1,
+  "notesPreserved": true
+}

@@ -18,7 +18,7 @@ function walk(start,relative=''){
  }else if(entry.isSymbolicLink()){throw Error('Archive source cannot contain symlinks: '+entry.name);}}
  return files;
 }
-const baseline='f5d1296ed71403e293c1228dd8e8d4f3daa41ef7f3e64a9cd551caa88cd7c57f';
+const baseline='bbf8b99c9faa2d014069e3f1320c75f01535a758b5c9ec6caf39b473a32dae00';
 const check=process.argv.includes('--check');
 function save(relative,obj){const file=path.join(root,relative),expected=JSON.stringify(obj,null,2)+'\n';
  if(check){assert.equal(fs.readFileSync(file,'utf8'),expected,relative+' manifest out of date');}
@@ -29,13 +29,13 @@ const currentSite=JSON.parse(fs.readFileSync(path.join(site,'release-manifest.js
 const siteFiles=walk(site);
 assert(siteFiles.some(x=>x.path==='release-version.js'));
 assert(siteFiles.some(x=>x.path==='index.html'));
-const siteManifest={...currentSite,version:release.technicalVersion,files:siteFiles,releaseId:'v200-beta-stable-candidate-20261025',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion};
+const siteManifest={...currentSite,version:release.technicalVersion,files:siteFiles,releaseId:'v210-beta-stable-20261113',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion};
 save('community/site/release-manifest.json',siteManifest);
 const old=JSON.parse(fs.readFileSync(path.join(root,'SOURCE-MANIFEST.json'),'utf8'));
 const sourceFiles=walk(root);
 assert(sourceFiles.some(x=>x.path==='community/site/release-manifest.json'));
 assert(sourceFiles.some(x=>x.path==='data/database/metadata-full.sql.gz'));
 assert(sourceFiles.some(x=>x.path==='docs/RECETTE-V200-BETA-STABLE-2026-10-25.md'));
-const candidate={...old,version:release.technicalVersion,releaseId:'v200-beta-stable-candidate-20261025',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion,files:sourceFiles};
+const candidate={...old,version:release.technicalVersion,releaseId:'v210-beta-stable-20261113',sourceArchiveSha256:baseline,previousValidatedVersion:release.previousValidatedVersion,files:sourceFiles};
 save('SOURCE-MANIFEST.json',candidate);
 console.log(`${check?'OK':'Updated'} release manifest: site ${siteFiles.length} files, source ${sourceFiles.length} files, SHA-256 verified.`);

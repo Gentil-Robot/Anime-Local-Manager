@@ -11,7 +11,7 @@ command -v node >/dev/null 2>&1 || fail "Node.js 22.12 ou plus récent est requi
 command -v npm >/dev/null 2>&1 || fail "npm est requis."
 node -e 'const [major,minor]=process.versions.node.split(".").map(Number);process.exit(major>22||(major===22&&minor>=12)?0:1)' || fail "Node.js 22.12 minimum requis (version détectée : $(node --version))."
 
-log "Préparation du build Linux V2.0.0 Beta stable"
+log "Préparation du build Linux V2.1.0 Beta stable"
 printf 'Node : %s\nnpm  : %s\n' "$(node --version)" "$(npm --version)"
 
 if [ "${ALM_SKIP_INSTALL:-0}" != "1" ]; then
@@ -44,7 +44,7 @@ log "Création des paquets : ${TARGETS[*]}"
 ./node_modules/.bin/electron-builder --linux "${TARGETS[@]}" --publish never
 
 mkdir -p dist
-CHECKSUM_NAME="SHA256SUMS-V2.0.0-Beta-Stable.txt"
+CHECKSUM_NAME="SHA256SUMS-V2.1.0-Beta-Stable.txt"
 CHECKSUM_FILE="dist/$CHECKSUM_NAME"
 : > "$CHECKSUM_FILE"
 while IFS= read -r -d '' artifact; do

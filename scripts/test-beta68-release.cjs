@@ -10,10 +10,15 @@ const {testApp,smokeEnvironment}=require('./smoke-windows'),{executeReleaseSmoke
   const makeProof=(env,changes={})=>{profile=env.ALM_RELEASE_PROFILE;const marker=JSON.parse(fs.readFileSync(path.join(profile,'.alm-release-test.json'),'utf8'));const value={status:'passed',nonce:env.ALM_RELEASE_NONCE,phase:marker.phase,version:options.version,runtime:{electron:options.electron},packaged:true,ui:true,catalogueCount:30430,episodesSeen:3,imported:1,backup:true,persistence:marker.phase==='verify',...changes};fs.writeFileSync(path.join(profile,'smoke-result.json'),JSON.stringify(value));return value;};
   const proof=await testApp(executable,{...options,run:async(_exe,args,{env})=>{launches.push(env.ALM_RELEASE_PROFILE);assert.equal(args[0],'--enable-logging=file');const phase=launches.length===1?'seed':'verify';assert.equal(args[1],'--log-file='+path.join(env.ALM_RELEASE_PROFILE,'chromium-'+phase+'.log'));makeProof(env);return {code:0,output:''};}});
   assert.equal(proof.launches,2);assert.equal(launches[0],launches[1]);assert(proof.persistence);assert(!fs.existsSync(profile));assert(!fs.existsSync(diagnosticsDir));
+  // Two failures in the same millisecond must retain two independent reports.
+  const originalNow=Date.now;try{Date.now=()=>1794441600000;
   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{makeProof(env,{status:'failed',stage:'engine-start',error:'CONTROLLED_ENGINE_FAILURE'});fs.writeFileSync(path.join(env.ALM_RELEASE_PROFILE,'chromium-seed.log'),'Controlled Windows child log');return {code:1,output:''};}}),error=>error.message.includes('CONTROLLED_ENGINE_FAILURE')&&error.message.includes('engine-start')&&error.message.includes('0x00000001')&&error.message.includes('Diagnostic :'));
   assert(!fs.existsSync(profile));let records=()=>fs.readdirSync(diagnosticsDir).map(f=>JSON.parse(fs.readFileSync(path.join(diagnosticsDir,f),'utf8')));assert.equal(records().length,1);assert.equal(records()[0].proof.status,'failed');assert.equal(records()[0].chromium,'Controlled Windows child log');
   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{profile=env.ALM_RELEASE_PROFILE;return {code:-1073741819,output:'',signal:null};}}),/0xC0000005/);
   assert(!fs.existsSync(profile));assert.equal(records().length,2);
+  assert(records().some(record=>record.proof?.error==='CONTROLLED_ENGINE_FAILURE'));
+  assert(records().some(record=>record.exitCode===-1073741819));
+  }finally{Date.now=originalNow;}
   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{profile=env.ALM_RELEASE_PROFILE;return {code:0,output:''};}}),/Rapport de l’application absent/);assert(!fs.existsSync(profile));
   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{makeProof(env,{nonce:'wrong'});return {code:0,output:''};}}),/absent ou incohérent/);
   await assert.rejects(testApp(executable,{...options,run:async(_exe,_args,{env})=>{makeProof(env);return {code:1,output:'nonzero even with a passed proof'};}}),/Code de sortie 1/);

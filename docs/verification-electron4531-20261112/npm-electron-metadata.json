@@ -1,0 +1,8 @@
+{
+  "source": "https://registry.npmjs.org/electron/45.3.1",
+  "version": "45.3.1",
+  "dist": {
+    "tarball": "https://registry.npmjs.org/electron/-/electron-45.3.1.tgz",
+    "integrity": "sha512-1oYau2B4RXF27Df2fzvrFDJoy8AOSVlgS6gklo6wkLZ/QWJemJCJHkY4+uuacvSFUtR8IimiLukLNFoYP0fmjA=="
+  }
+}

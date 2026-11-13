@@ -1,7 +1,16 @@
 {
   "schema": 1,
   "steps": [
+    "scripts/test-v210-update-channels.cjs",
+    "scripts/test-v210-password-recovery.cjs",
     "scripts/test-source-files.js",
+    "scripts/test-v200-http-errors.cjs",
+    "scripts/test-v200-engine-main.cjs",
+    "scripts/test-v200-engine-supervisor.cjs",
+    "scripts/test-v200-auth-security-ui.cjs",
+    "scripts/test-v200-auth-security-http.cjs",
+    "scripts/test-v200-auth-security-sql.cjs",
+    "scripts/test-v200-auth-security.cjs",
     "scripts/test-beta-stable.js",
     "scripts/test-karaoke-timeline.js",
     "scripts/test-beta15-ui-logic.js",

@@ -1,8 +1,8 @@
 /* Visual layer. No API calls or user-library mutations. */
 (() => {
   'use strict';
-  const VERSION = window.ALM_RELEASE?.technicalVersion || '2.0.0';
-  const edition = () => window.ALM_RELEASE?.publicVersion || 'V2.0.0 Bêta stable';
+  const VERSION = window.ALM_RELEASE?.technicalVersion || "2.1.0";
+  const edition = () => window.ALM_RELEASE?.publicVersion || "V2.1.0 Bêta stable";
   const storage = {
     get(key, fallback = '') { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } },
     set(key, value) { try { localStorage.setItem(key, String(value)); } catch {} }

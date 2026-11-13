@@ -1,0 +1,317 @@
+[
+  {
+    "path": "community/auth-security.js",
+    "kind": "added",
+    "bytes": 10665
+  },
+  {
+    "path": "community/site/community-charter.html",
+    "kind": "modified",
+    "bytes": 3070
+  },
+  {
+    "path": "community/site/community-mfa-copy.js",
+    "kind": "added",
+    "bytes": 15432
+  },
+  {
+    "path": "community/site/community-mfa.css",
+    "kind": "added",
+    "bytes": 1333
+  },
+  {
+    "path": "community/site/community-mfa.js",
+    "kind": "added",
+    "bytes": 13606
+  },
+  {
+    "path": "community/site/community-security.js",
+    "kind": "modified",
+    "bytes": 3805
+  },
+  {
+    "path": "community/site/community-ui-extra.js",
+    "kind": "modified",
+    "bytes": 8181
+  },
+  {
+    "path": "community/site/community-workspace.js",
+    "kind": "modified",
+    "bytes": 42987
+  },
+  {
+    "path": "community/site/community.js",
+    "kind": "modified",
+    "bytes": 39737
+  },
+  {
+    "path": "community/site/compte.html",
+    "kind": "modified",
+    "bytes": 5619
+  },
+  {
+    "path": "community/site/confirmation.html",
+    "kind": "modified",
+    "bytes": 5619
+  },
+  {
+    "path": "community/site/index.html",
+    "kind": "modified",
+    "bytes": 5509
+  },
+  {
+    "path": "community/site/legal-notice.html",
+    "kind": "modified",
+    "bytes": 3119
+  },
+  {
+    "path": "community/site/privacy-policy.html",
+    "kind": "modified",
+    "bytes": 3121
+  },
+  {
+    "path": "community/site/release-manifest.json",
+    "kind": "modified",
+    "bytes": 8371
+  },
+  {
+    "path": "community/site/web-client.js",
+    "kind": "modified",
+    "bytes": 242211
+  },
+  {
+    "path": "community/web-client.js",
+    "kind": "modified",
+    "bytes": 15146
+  },
+  {
+    "path": "docs/security/ALM_PRIVACY_ACL_VERIFICATION_2026-11-11.md",
+    "kind": "added",
+    "bytes": 4537
+  },
+  {
+    "path": "docs/security/MFA-ET-SUPERVISION-2026-11-12.md",
+    "kind": "added",
+    "bytes": 8169
+  },
+  {
+    "path": "docs/security/rollback_blocked_profile_privacy_20261111.sql",
+    "kind": "added",
+    "bytes": 1030
+  },
+  {
+    "path": "docs/verification-mfa-engine-20261112/electron-mfa.json",
+    "kind": "added",
+    "bytes": 329
+  },
+  {
+    "path": "docs/verification-mfa-engine-20261112/electron-recovery.json",
+    "kind": "added",
+    "bytes": 167
+  },
+  {
+    "path": "docs/verification-mfa-engine-20261112/npm-audit-complet.json",
+    "kind": "added",
+    "bytes": 3767
+  },
+  {
+    "path": "docs/verification-mfa-engine-20261112/npm-audit-production.json",
+    "kind": "added",
+    "bytes": 365
+  },
+  {
+    "path": "lib/community-account.js",
+    "kind": "modified",
+    "bytes": 9018
+  },
+  {
+    "path": "lib/community.js",
+    "kind": "modified",
+    "bytes": 13554
+  },
+  {
+    "path": "lib/engine-recovery-copy.js",
+    "kind": "added",
+    "bytes": 3171
+  },
+  {
+    "path": "lib/engine-supervisor.js",
+    "kind": "added",
+    "bytes": 3632
+  },
+  {
+    "path": "lib/server-host.js",
+    "kind": "modified",
+    "bytes": 2366
+  },
+  {
+    "path": "lib/server-process.js",
+    "kind": "modified",
+    "bytes": 6902
+  },
+  {
+    "path": "main.js",
+    "kind": "modified",
+    "bytes": 28228
+  },
+  {
+    "path": "package.json",
+    "kind": "modified",
+    "bytes": 13415
+  },
+  {
+    "path": "public/community-charter.html",
+    "kind": "modified",
+    "bytes": 3028
+  },
+  {
+    "path": "public/community-mfa-copy.js",
+    "kind": "added",
+    "bytes": 15432
+  },
+  {
+    "path": "public/community-mfa.css",
+    "kind": "added",
+    "bytes": 1333
+  },
+  {
+    "path": "public/community-mfa.js",
+    "kind": "added",
+    "bytes": 13606
+  },
+  {
+    "path": "public/community-security.js",
+    "kind": "modified",
+    "bytes": 3805
+  },
+  {
+    "path": "public/community-ui-extra.js",
+    "kind": "modified",
+    "bytes": 8181
+  },
+  {
+    "path": "public/community-workspace.js",
+    "kind": "modified",
+    "bytes": 42987
+  },
+  {
+    "path": "public/community.js",
+    "kind": "modified",
+    "bytes": 39737
+  },
+  {
+    "path": "public/index.html",
+    "kind": "modified",
+    "bytes": 87922
+  },
+  {
+    "path": "scripts/build-community-site.cjs",
+    "kind": "modified",
+    "bytes": 6395
+  },
+  {
+    "path": "scripts/sql-mfa-fixture.cjs",
+    "kind": "added",
+    "bytes": 1561
+  },
+  {
+    "path": "scripts/test-beta61-flows.cjs",
+    "kind": "modified",
+    "bytes": 6260
+  },
+  {
+    "path": "scripts/test-beta61-sql.cjs",
+    "kind": "modified",
+    "bytes": 14212
+  },
+  {
+    "path": "scripts/test-beta62-sql.cjs",
+    "kind": "modified",
+    "bytes": 6833
+  },
+  {
+    "path": "scripts/test-beta63-sql.cjs",
+    "kind": "modified",
+    "bytes": 5790
+  },
+  {
+    "path": "scripts/test-beta66-policy.cjs",
+    "kind": "modified",
+    "bytes": 9209
+  },
+  {
+    "path": "scripts/test-beta72-age.cjs",
+    "kind": "modified",
+    "bytes": 12301
+  },
+  {
+    "path": "scripts/test-beta82-delete-confirmation.cjs",
+    "kind": "modified",
+    "bytes": 5749
+  },
+  {
+    "path": "scripts/test-v200-auth-browser.cjs",
+    "kind": "added",
+    "bytes": 11855
+  },
+  {
+    "path": "scripts/test-v200-auth-security-http.cjs",
+    "kind": "added",
+    "bytes": 4071
+  },
+  {
+    "path": "scripts/test-v200-auth-security-sql.cjs",
+    "kind": "added",
+    "bytes": 10760
+  },
+  {
+    "path": "scripts/test-v200-auth-security-ui.cjs",
+    "kind": "added",
+    "bytes": 6202
+  },
+  {
+    "path": "scripts/test-v200-auth-security.cjs",
+    "kind": "added",
+    "bytes": 10061
+  },
+  {
+    "path": "scripts/test-v200-engine-main.cjs",
+    "kind": "added",
+    "bytes": 5188
+  },
+  {
+    "path": "scripts/test-v200-engine-native.cjs",
+    "kind": "added",
+    "bytes": 4374
+  },
+  {
+    "path": "scripts/test-v200-engine-supervisor.cjs",
+    "kind": "added",
+    "bytes": 6505
+  },
+  {
+    "path": "scripts/verification-plan.json",
+    "kind": "modified",
+    "bytes": 6402
+  },
+  {
+    "path": "scripts/verify-project.js",
+    "kind": "modified",
+    "bytes": 10226
+  },
+  {
+    "path": "supabase/migrations/20261111193057_alm_security_privacy_acl.sql",
+    "kind": "added",
+    "bytes": 1971
+  },
+  {
+    "path": "supabase/migrations/20261112081334_alm_optional_mfa_session_security.sql",
+    "kind": "added",
+    "bytes": 17367
+  },
+  {
+    "path": "supabase/tests/security_privacy_acl_20261111.sql",
+    "kind": "added",
+    "bytes": 2024
+  }
+]

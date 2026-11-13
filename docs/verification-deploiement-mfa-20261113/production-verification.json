@@ -1,0 +1,84 @@
+{
+  "deploymentId": "dpl_9r4jvT1hrYgkmsLhf5QVYxKxGYXX",
+  "productionSourceCount": 95,
+  "allSourceHashesMatchPreview": true,
+  "publicStaticFiles": [
+    {
+      "path": "community-security.js",
+      "http": 200,
+      "sha256": "f9a89c841c4df91931c96509b4cea9934e87c0fc6a99e78d08b75407fbd6edf6"
+    },
+    {
+      "path": "community-ui-extra.js",
+      "http": 200,
+      "sha256": "a43c6ae847e839cff3ff55e224f2a7864b9777d96c571f2353287e1c973780e6"
+    },
+    {
+      "path": "community-workspace.js",
+      "http": 200,
+      "sha256": "a397cd87eb61d155e26cda982e87d06a511aa012f08cb55e7c5063b2ece8be18"
+    },
+    {
+      "path": "community.js",
+      "http": 200,
+      "sha256": "b6850b4ef2501686d50d3d34da7845c2637d8a0362e5b5ae8e8531fdafb950ac"
+    },
+    {
+      "path": "compte.html",
+      "http": 200,
+      "sha256": "31c01bc9bedfe887b2cfc045681453d55cb12e9533c07a8836ab59580eff4d93"
+    },
+    {
+      "path": "confirmation.html",
+      "http": 200,
+      "sha256": "1a85f38a5d64516cb01c72d9b7b4db3e92be344779968c1ef1270efb419ea871"
+    },
+    {
+      "path": "index.html",
+      "http": 200,
+      "sha256": "bf4e1906a4f274fd31482430aa8e4f8eebbeebea33033fb0e43c9de48b954143"
+    },
+    {
+      "path": "release-manifest.json",
+      "http": 200,
+      "sha256": "84873a4bb6a0a9f778960c842ef1f995fd876181216927e24c74b9bd8dce3291"
+    },
+    {
+      "path": "web-client.js",
+      "http": 200,
+      "sha256": "8a21f8a00f0680856b5eaa31a0fe13a533a2d9e198ad6051a474d389de613bb0"
+    },
+    {
+      "path": "community-mfa.js",
+      "http": 200,
+      "sha256": "935f8768abdd875ef1d7ad6f69a7594edae58f6c6f823623c7aaa27205c8a958"
+    },
+    {
+      "path": "community-mfa-copy.js",
+      "http": 200,
+      "sha256": "aa810c28ee5c30d6b9d9c4ca0a8bff450e50d720dfaf8f9a9f400e541f793871"
+    },
+    {
+      "path": "community-mfa.css",
+      "http": 200,
+      "sha256": "c2d491dee27af36b050454c57137c370e3f35842d16ec80f654c1c9e9037207a"
+    }
+  ],
+  "rpcChecks": [
+    {
+      "rpc": "alm_security_state",
+      "anonymousHTTP": 401,
+      "code": "42501",
+      "notMissing": true
+    },
+    {
+      "rpc": "alm_begin_sensitive",
+      "anonymousHTTP": 401,
+      "code": "42501",
+      "notMissing": true
+    }
+  ],
+  "checkedAt": "2026-11-13T08:51:15.677670+00:00",
+  "browserLoginOptionVisible": true,
+  "liveAuthenticatedEnrollmentTested": false
+}

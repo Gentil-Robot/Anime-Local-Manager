@@ -11,7 +11,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repoName = 'Gentil-Robot/Anime-Local-Manager'
 $remoteUrl = 'https://github.com/Gentil-Robot/Anime-Local-Manager.git'
-$branchName = 'publication/v2.0.0-beta-stable'
+$branchName = 'release/v2.1.0'
 $source = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 function Run-Git([string[]]$ArgsToRun) {
@@ -69,7 +69,7 @@ if ($PublierBranche) {
         if ($LASTEXITCODE -eq 0 -and $existing) {
             Write-Host "PR existante : $existing"
         } else {
-            & gh pr create --repo $repoName --head $branchName --base main --draft --title 'V2.0.0 Beta stable - publication du code source (revue)' --body-file (Join-Path $RepertoireTravail 'docs\PUBLICATION-OPEN-SOURCE-V2.md')
+            & gh pr create --repo $repoName --head $branchName --base main --draft --title 'V2.1.0 Beta stable - publication du code source (revue)' --body-file (Join-Path $RepertoireTravail 'docs\PUBLICATION-OPEN-SOURCE-V2.md')
             if ($LASTEXITCODE -ne 0) { Write-Warning 'La branche est poussee, mais la PR brouillon est a creer depuis GitHub.' }
         }
     } else {
@@ -136,7 +136,7 @@ if ($missing.Count -gt 0 -or $unexpected.Count -gt 0) {
 # Keep the maintainer's personal email OUT of the public Git history.
 Run-Git -ArgsToRun @('-C', $RepertoireTravail, 'config', 'user.name', 'Gentil Robot')
 Run-Git -ArgsToRun @('-C', $RepertoireTravail, 'config', 'user.email', '288048240+Gentil-Robot@users.noreply.github.com')
-Run-Git -ArgsToRun @('-C', $RepertoireTravail, 'commit', '-m', 'feat: prepare Anime Local Manager V2.0.0 beta stable open source')
+Run-Git -ArgsToRun @('-C', $RepertoireTravail, 'commit', '-m', 'feat: prepare Anime Local Manager V2.1.0 beta stable open source')
 Write-Host "Branche locale prete : $branchName"
 Write-Host "Dossier de travail : $RepertoireTravail"
 Write-Host 'Aucun push effectue. Aucun EXE publie. Aucun service modifie.'

@@ -16,3 +16,4 @@ $function$
 
 ALTER POLICY friendship_read ON public.alm_friendships USING (((alm_private.active_actor() = requester) OR (alm_private.active_actor() = recipient)));
 COMMIT;
+

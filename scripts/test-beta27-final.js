@@ -7,7 +7,7 @@ const path = require("path");
 const Module = require("module");
 const ROOT = path.resolve(__dirname, "..");
 const pkg = require(path.join(ROOT, "package.json"));
-assert.strictEqual(pkg.version, "2.0.0");
+assert.strictEqual(pkg.version, "2.1.0");
 const html = fs.readFileSync(path.join(ROOT, "public", "index.html"), "utf8");
 const ui = fs.readFileSync(path.join(ROOT, "public", "alm-v2.js"), "utf8");
 const i18n = fs.readFileSync(path.join(ROOT, "public", "i18n.js"), "utf8");

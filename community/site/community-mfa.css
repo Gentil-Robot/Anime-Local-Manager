@@ -1,0 +1,14 @@
+.comm-security-card{display:grid;gap:.75rem;padding:1.15rem;margin:1.25rem 0;border:1px solid var(--border,#45405d);border-radius:16px;background:linear-gradient(135deg,rgba(133,107,180,.10),rgba(70,111,150,.06))}
+.comm-security-card h3,.comm-security-card p{margin:0}
+.comm-security-state{display:flex;align-items:center;gap:.6rem;font-weight:650}
+.comm-security-state::before{content:"";width:.65rem;height:.65rem;flex:0 0 auto;border-radius:50%;background:#a99abf}
+.comm-security-state[data-enabled=true]::before{background:#87bdad;box-shadow:0 0 0 4px rgba(135,189,173,.12)}
+.comm-mfa-dialog form{display:grid;gap:.85rem}
+.comm-mfa-dialog .comm-mfa-code{font-variant-numeric:tabular-nums;letter-spacing:.2em;font-size:1.25rem;max-width:16rem}
+.comm-mfa-qr{display:flex;justify-content:center;padding:.5rem}
+.comm-mfa-qr canvas{display:block;width:220px;max-width:100%;height:auto;border-radius:10px}
+.comm-mfa-secret{font-family:ui-monospace,monospace;letter-spacing:.06em;overflow-wrap:anywhere}
+.comm-mfa-factors{display:grid;gap:.75rem;padding:0;list-style:none}
+.comm-mfa-factors li{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;padding:.8rem;border:1px solid var(--border,#45405d);border-radius:12px}
+.comm-mfa-option{margin:.75rem 0}
+.comm-mfa-dialog .comm-actions{flex-wrap:wrap}

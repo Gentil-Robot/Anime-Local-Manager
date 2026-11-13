@@ -2,8 +2,8 @@
 chcp 65001 >nul
 setlocal EnableExtensions
 cd /d "%~dp0"
-title Anime Local Manager V2.0.0 Bêta stable - Verification avant publication
-echo === V2.0.0 Bêta stable : verifications dans le dossier du projet ===
+title Anime Local Manager V2.1.0 Bêta stable - Verification avant publication
+echo === V2.1.0 Bêta stable : verifications dans le dossier du projet ===
 where node >nul 2>nul
 if errorlevel 1 goto :error
 echo Versions du poste :
@@ -16,7 +16,9 @@ call npm list electron
 if errorlevel 1 goto :error
 call npx --no-install electron --version
 if errorlevel 1 goto :error
-call npm audit
+call npm audit --omit=dev
+if errorlevel 1 goto :error
+call npm audit --audit-level=high
 if errorlevel 1 goto :error
 call npm run release:check
 if errorlevel 1 goto :error

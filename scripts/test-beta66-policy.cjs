@@ -17,6 +17,7 @@ const ids=Array.from({length:6},(_,i)=>'00000000-0000-0000-0000-'+String(i+1).pa
  // The same count queries run against the actual application RLS policies.
  const db=new PGlite();try{
   await db.exec("create role anon;create role authenticated;create role service_role bypassrls;create role supabase_auth_admin;create schema auth;create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz default now(),raw_user_meta_data jsonb default '{\"alm_charter_accepted\":true,\"alm_charter_version\":\"2026-10-18\"}');create table auth.sessions(id uuid primary key,user_id uuid references auth.users(id) on delete cascade,created_at timestamptz default now(),refreshed_at timestamp,not_after timestamptz);create function auth.jwt() returns jsonb language sql stable as $$select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb$$;create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema auth to authenticated,anon;grant execute on function auth.uid() to authenticated,anon;");
+ await require('./sql-mfa-fixture.cjs').install(db);
   const migrations=path.join(__dirname,'../supabase/migrations');for(const name of fs.readdirSync(migrations).filter(n=>n.endsWith('.sql')).sort())await db.exec(fs.readFileSync(path.join(migrations,name),'utf8'));
   for(const [i,id]of ids.entries()){
    await db.query('insert into auth.users(id) values($1)',[id]);await db.query('insert into auth.sessions(id,user_id) values($1,$1)',[id]);

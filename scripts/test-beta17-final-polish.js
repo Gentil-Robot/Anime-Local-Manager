@@ -15,7 +15,7 @@ const karaokeJs = read("public/karaoke.js");
 const song = JSON.parse(read("scripts/fixtures/karaoke/song.beta36-backup.json"));
 const packageJson = JSON.parse(read("package.json"));
 
-assert.strictEqual(packageJson.version, "2.0.0");
+assert.strictEqual(packageJson.version, "2.1.0");
 
 // 1) Les réglages de synchro grand public ont disparu, le mode développeur reste.
 for (const id of ["donationKaraokeSyncMinus", "donationKaraokeSyncPlus", "donationKaraokeSyncReset", "donationKaraokeSyncValue"]) {

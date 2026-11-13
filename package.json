@@ -1,7 +1,7 @@
 {
   "name": "anime-local-manager",
-  "version": "2.0.0",
-  "description": "Anime Local Manager V2.0.0 Bêta stable — bibliothèque anime locale, import protégé, recommandations multi-source, actualités et dictionnaire intégré",
+  "version": "2.1.0",
+  "description": "Anime Local Manager V2.1.0 Bêta stable — bibliothèque anime locale, import protégé, recommandations multi-source, actualités et dictionnaire intégré",
   "main": "main.js",
   "scripts": {
     "start": "node server.js",
@@ -105,7 +105,7 @@
   "author": "Gentil Robot",
   "devDependencies": {
     "@electric-sql/pglite": "0.3.14",
-    "electron": "45.2.1",
+    "electron": "45.3.1",
     "electron-builder": "26.16.1",
     "esbuild": "0.28.2",
     "jsdom": "26.1.0",
@@ -145,6 +145,7 @@
       "data/disposable-email-domains.txt",
       "data/disposable-email-domains.meta.json",
       "data/disposable-email-LICENSE.txt",
+      "community/auth-security.js",
       "community/library-stats.js",
       "community/content-policy.js",
       "data/database/community-content-policy.json",
@@ -203,7 +204,7 @@
         "pt_BR",
         "zh_CN"
       ],
-      "artifactName": "Anime-Local-Manager-2.0.0-Beta-Stable-Setup-${arch}.${ext}",
+      "artifactName": "Anime-Local-Manager-2.1.0-Setup-${arch}.${ext}",
       "include": "build/installer.nsh",
       "preCompressedFileExtensions": []
     },

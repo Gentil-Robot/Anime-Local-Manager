@@ -9,9 +9,9 @@ const files=JSON.parse(fs.readFileSync(path.join(root,'scripts/verification-plan
 const banned=/\b(?:test-beta\d+|beta\s+\d+|beta\d+|nocturne)\b/i;
 
 async function main(){
- assert.equal(release.technicalVersion,'2.0.0');
+ assert.equal(release.technicalVersion,'2.1.0');
  assert.equal(release.distributionChannel,'beta');
- assert.equal(release.publicName,'Anime Local Manager V2.0.0 Bêta stable');
+ assert.equal(release.publicName,'Anime Local Manager V2.1.0 Bêta stable');
  assert(files.length>=151,'Le plan de recette ne doit pas perdre de contrôles');
  // The same public release metadata must reach both community diagnostics.
  for(const surface of ['public','community/site']){
@@ -34,7 +34,7 @@ async function main(){
  assert.equal(displayName('scripts/test-beta76-imports.cjs'),'Imports : contrôle des données');
  assert.equal(displayName('scripts/test-beta78-storage.cjs'),'Stockage : persistance et récupération');
  assert.equal(displayName('scripts/test-beta82-production-copy.cjs'),'Copie de publication : intégrité');
- assert.equal(displayName('scripts/test-beta-stable.js'),'Conformité V2.0.0 Bêta stable');
+ assert.equal(displayName('scripts/test-beta-stable.js'),'Conformité '+release.publicVersion);
  assert(!banned.test(diagnosticHeadline('AssertionError: expected test-beta76-imports.cjs')));
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-v200-publication-display-'));
  try{
@@ -50,7 +50,7 @@ async function main(){
   assert.equal(good.status,'passed');
   assert.equal(good.checks.length,files.length);
   assert(good.checks.every(c=>c.test&&c.label&&c.status==='passed'));
-  assert.equal(good.release.technicalVersion,'2.0.0');
+  assert.equal(good.release.technicalVersion,'2.1.0');
   assert(consoleLines.some(line=>line.includes(release.publicName+' · '+files.length+' suites')));
   for(const label of [displayName('test-beta51-http.js'),displayName('test-beta53-http.js'),displayName('test-beta76-imports.cjs'),displayName('test-beta78-storage.cjs')]){
    assert(consoleLines.some(line=>line.includes(label)&&line.includes('en cours')),`Missing heartbeat: ${label}`);
