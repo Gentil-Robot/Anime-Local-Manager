@@ -5,7 +5,8 @@ const {app,utilityProcess}=require('electron');
 const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),http=require('node:http'),crypto=require('node:crypto');
 const {createServerProcess}=require('../lib/server-process');
 const {createEngineSupervisor}=require('../lib/engine-supervisor');
-const directory=fs.mkdtempSync(path.join(os.tmpdir(),'alm-engine-native-'));
+// The Node driver removes this profile only after Electron has released it.
+const directory=process.env.ALM_NATIVE_TEST_DIRECTORY||fs.mkdtempSync(path.join(os.tmpdir(),'alm-engine-native-'));
 let engine,supervisor,blocker;const children=[];
 app.disableHardwareAcceleration();app.setPath('userData',path.join(directory,'electron'));
 process.env.ALM_DATA_DIR=path.join(directory,'data');process.env.ALM_IMAGES_DIR=path.join(directory,'images');
@@ -45,4 +46,4 @@ async function run(){
  assert.equal((await engine.ping()).ok,true);
  console.log('ALM_NATIVE_RECOVERY_OK '+JSON.stringify({electron:process.versions.electron,node:process.versions.node,utilities:children.length,portFallback:true,localTokenRotated:true,persistedRows:after.length,notesPreserved:after[0].notes==='Fictional persisted note'}));
 }
-run().then(async()=>{supervisor?.dispose();await engine?.shutdown();await engine?.terminate();await new Promise(resolve=>blocker?.listening?blocker.close(resolve):resolve());clearTimeout(timeout);fs.rmSync(directory,{recursive:true,force:true});app.quit();}).catch(async error=>{console.error(error);supervisor?.dispose();for(const child of children)child.kill();clearTimeout(timeout);await new Promise(resolve=>setTimeout(resolve,100));fs.rmSync(directory,{recursive:true,force:true});app.exit(1);});
+run().then(async()=>{supervisor?.dispose();await engine?.shutdown();await engine?.terminate();await new Promise(resolve=>blocker?.listening?blocker.close(resolve):resolve());clearTimeout(timeout);app.quit();}).catch(async error=>{console.error(error);supervisor?.dispose();for(const child of children)child.kill();clearTimeout(timeout);await new Promise(resolve=>setTimeout(resolve,100));app.exit(1);});

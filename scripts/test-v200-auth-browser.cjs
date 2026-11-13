@@ -3,7 +3,7 @@
 // not part of npm verify because it requires a graphical/headless Electron host.
 const {app,BrowserWindow}=require('electron');
 const assert=require('node:assert/strict'),express=require('express'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
-const root=path.resolve(__dirname,'..'),profile=fs.mkdtempSync(path.join(os.tmpdir(),'alm-mfa-browser-'));
+const root=path.resolve(__dirname,'..'),profile=process.env.ALM_NATIVE_TEST_DIRECTORY||fs.mkdtempSync(path.join(os.tmpdir(),'alm-mfa-browser-'));
 const output=path.join(root,'.release-work/visual-mfa');fs.mkdirSync(output,{recursive:true});
 app.disableHardwareAcceleration();app.setPath('userData',profile);
 let listener,window,lastFrame;
@@ -88,4 +88,4 @@ async function run(){
  console.log('ALM_AUTH_BROWSER_OK '+JSON.stringify(result));
 }
 const timeout=setTimeout(()=>{console.error('ALM_AUTH_BROWSER_TIMEOUT');app.exit(1);},90000);
-run().then(async()=>{clearTimeout(timeout);window?.destroy();await new Promise(resolve=>listener.close(resolve));fs.rmSync(profile,{recursive:true,force:true});app.quit();}).catch(async error=>{console.error(error);if(window&&!window.isDestroyed()){console.error(JSON.stringify(await js(()=>({viewport:[innerWidth,innerHeight],status:document.querySelector('#commDialog [role=status]')?.textContent,text:document.querySelector('#commDialog')?.textContent.slice(0,1500),calls:window.fixtureState?.calls.map(r=>r.endpoint)})).catch(()=>({}))));await screenshot('failure.png').catch(()=>{});}clearTimeout(timeout);window?.destroy();if(listener)await new Promise(resolve=>listener.close(resolve));fs.rmSync(profile,{recursive:true,force:true});app.exit(1);});
+run().then(async()=>{clearTimeout(timeout);window?.destroy();await new Promise(resolve=>listener.close(resolve));app.quit();}).catch(async error=>{console.error(error);if(window&&!window.isDestroyed()){console.error(JSON.stringify(await js(()=>({viewport:[innerWidth,innerHeight],status:document.querySelector('#commDialog [role=status]')?.textContent,text:document.querySelector('#commDialog')?.textContent.slice(0,1500),calls:window.fixtureState?.calls.map(r=>r.endpoint)})).catch(()=>({}))));await screenshot('failure.png').catch(()=>{});}clearTimeout(timeout);window?.destroy();if(listener)await new Promise(resolve=>listener.close(resolve));app.exit(1);});

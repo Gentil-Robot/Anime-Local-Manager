@@ -617,8 +617,8 @@
     },
     {
       "path": "docs/REVUE-V2.1.0-2026-11-13.md",
-      "bytes": 4215,
-      "sha256": "b740dbcc6d78f268fb22fdf288dddbbf6c424829f1ce85db3c0a45565f4fb205"
+      "bytes": 4870,
+      "sha256": "6bf80be1ea3e49d142dbb161cd4e7051e52edde960d8042c39c7ab03e5ff03de"
     },
     {
       "path": "docs/security/ALM_PRIVACY_ACL_VERIFICATION_2026-11-11.md",
@@ -3922,8 +3922,8 @@
     },
     {
       "path": "scripts/test-v200-auth-browser.cjs",
-      "bytes": 11976,
-      "sha256": "b6bff1e19810108eeb0d956d5ce441d6ddaf7ba6b07b08b1dbda5ac7460d57fb"
+      "bytes": 11921,
+      "sha256": "b881fa4d2ad715c826700591a8126e9db792757f390b1319275dde2c47b005c0"
     },
     {
       "path": "scripts/test-v200-auth-security-http.cjs",
@@ -3952,8 +3952,8 @@
     },
     {
       "path": "scripts/test-v200-engine-native.cjs",
-      "bytes": 4374,
-      "sha256": "130a9a5800a78467757214e8ffb2ea2051792fad6082d8e39cb9d79816c79362"
+      "bytes": 4392,
+      "sha256": "3df43ee521d98c2b0ad5af408a6ccdd40e1dc1c5b9a90abe9b56fcebad3abcdb"
     },
     {
       "path": "scripts/test-v200-engine-supervisor.cjs",
@@ -3982,8 +3982,8 @@
     },
     {
       "path": "scripts/verify-native.cjs",
-      "bytes": 748,
-      "sha256": "3d288c64bc306f6dd2fa9681b6c5c2a19687e869169d5605b6c1ad031c28e50d"
+      "bytes": 1303,
+      "sha256": "e2bcfb2437ff2cd788b6a0a09fd54f0b1fa5ace0564cbfda67982fb07058052a"
     },
     {
       "path": "scripts/verify-project.js",

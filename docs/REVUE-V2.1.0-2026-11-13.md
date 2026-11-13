@@ -34,3 +34,7 @@ Les tests MFA utilisent des comptes fictifs ; l'activation avec le compte réel 
 - https://supabase.com/docs/guides/auth/auth-mfa
 - https://supabase.com/docs/guides/auth/sessions
 - https://www.electronjs.org/docs/latest/tutorial/security
+
+## Recette Windows : nettoyage du profil de test
+
+Le premier passage Windows valide les 162 suites, la construction NSIS, l’installation, la persistance et les assertions de reprise du moteur. La recette native était ensuite bloquée par la suppression de son propre profil Chromium avant la fermeture d’Electron (`EPERM`). Le pilote Node supprime désormais le dossier temporaire après la fin du processus Electron, avec des tentatives bornées pour les verrous transitoires Windows. Les assertions fonctionnelles et les conditions de publication sont conservées. Le second passage Windows doit confirmer aussi le parcours MFA avant publication.
