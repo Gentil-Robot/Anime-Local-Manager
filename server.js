@@ -10737,7 +10737,8 @@ const localizedTitles=require('./lib/localized-titles').createLocalizedTitles({f
 const catalogOperations=require('./lib/catalog').mountCatalog(app,{db,readAnimes:()=>readAnimes(false),writeAnimes,titles:localizedTitles,updatedAt:()=>{const status=readMetadataAutonomousStatus();return status?.completedAt||status?.finishedAt||safeReadJsonFile(path.join(__dirname,'data/database/metadata-manifest.json'),{}).generatedAt||null;}});
 require('./lib/notebook').mountNotebook(app,{db,readAnimes,writeAnimes,titles:localizedTitles,rememberBatch:added=>catalogOperations.remember({kind:'batch',added})});
 const releaseWatch=createReleaseWatch({stateFile:path.join(DATA_DIR,'episode-releases.json'),getAnimes:readAnimes}),versionCheck=createVersionCheck();
-const calendar=createCalendar({stateFile:path.join(DATA_DIR,'broadcast-calendar.json'),getAnimes:readAnimes,getNotificationEvents:()=>notificationCenter.state().items.map(i=>i.airingAt?i:{...i,airingAt:releaseWatch.state().items.find(r=>r.animeId===i.animeId&&r.episode===i.episode)?.airingAt||null}),getMetadata:()=>db.listMetadataForCalendar().map(require('./lib/discovery').publicAnime),fetchTracked:providerBatchWithFallback});
+const updateNotifications=require('./lib/update-notifications').createUpdateNotifications({checker:versionCheck,center:notificationCenter,getChannel:()=>maintenance.state().settings.channel});
+const calendar=createCalendar({stateFile:path.join(DATA_DIR,'broadcast-calendar.json'),getAnimes:readAnimes,getNotificationEvents:()=>notificationCenter.state().items.filter(i=>i.type!=='update').map(i=>i.airingAt?i:{...i,airingAt:releaseWatch.state().items.find(r=>r.animeId===i.animeId&&r.episode===i.episode)?.airingAt||null}),getMetadata:()=>db.listMetadataForCalendar().map(require('./lib/discovery').publicAnime),fetchTracked:providerBatchWithFallback});
 onLibraryIdentityChange=ids=>{
  try{calendar.invalidate(ids);releaseWatch.invalidate(ids);notificationCenter.invalidate(ids);}catch(error){console.warn('[associations] Linked schedules will be refreshed:',error.message);}
 };
@@ -10749,7 +10750,7 @@ app.post('/api/airing/check',async(req,res)=>{try{await db.whenReady();res.json(
 app.post('/api/airing/settings',(req,res)=>res.json(releaseWatch.configure(req.body?.enabled)));
 app.get('/api/airing/notifications',(req,res)=>{const items=releaseWatch.unseen().slice(-5);for(const item of items)notificationCenter.record({...item,malId:readAnimes().find(a=>a.id===item.animeId)?.malId});res.json({items,muted:notificationCenter.state().muted});});
 app.post('/api/airing/ack',(req,res)=>res.json({ok:releaseWatch.ack(String(req.body?.key||''))}));
-app.get('/api/notifications',(req,res)=>res.json(notificationCenter.state()));
+app.get('/api/notifications',(req,res)=>res.json(updateNotifications.reconcile()));
 app.post('/api/notifications/read',(req,res)=>res.json(notificationCenter.read()));
 app.post('/api/notifications/clear',(req,res)=>res.json(notificationCenter.clear()));
 app.post('/api/notifications/settings',(req,res)=>res.json(notificationCenter.configure(req.body?.muted)));
@@ -10818,7 +10819,7 @@ app.post('/api/bulk/titles',async(req,res)=>{
  }catch(error){job.status='error';job.error=error.message;}finally{job.finishedAt=Date.now();job.elapsed=(Date.now()-job.startedAt)/1000;}})();
 });
 app.get('/api/updates',(req,res)=>res.json(versionCheck.state()));
-app.post('/api/updates/check',async(req,res)=>res.json(await versionCheck.check(req.body?.force===true,maintenance.state().settings.channel)));
+app.post('/api/updates/check',async(req,res)=>res.json(await updateNotifications.check(req.body?.force===true,maintenance.state().settings.channel)));
 const backupManager = encryptedBackup.createBackupManager({settingsFile:path.join(DATA_DIR,'encrypted-backup-settings.json'),imagesDir:IMAGES_DIR,getPayload:async()=>{await db.whenReady();return createBackupPayload();}});
 app.get('/api/backup/encrypted/status',(req,res)=>res.json(backupManager.state()));
 app.post('/api/backup/encrypted/settings',async(req,res)=>{
@@ -13496,7 +13497,8 @@ module.exports = {
   configureBackupSecrets:store=>backupManager.configureStorage(store),
   startReleaseNotifications:callback=>releaseWatch.start(async item=>{notificationCenter.record({...item,malId:readAnimes().find(a=>a.id===item.animeId)?.malId});if(!notificationCenter.state().muted)await callback(item);return true;}),
   testNotification:async callback=>{notificationCenter.record({title:'Anime Local Manager'},'test');return !notificationCenter.state().muted&&callback?!!await callback({title:'Anime Local Manager',episode:1,source:'ALM · Test'}):false;},
-  checkUpdates:(force,channel)=>versionCheck.check(force,channel),
+  checkUpdates:(force,channel)=>updateNotifications.check(force,channel),
+  configureUpdateNotifications:callback=>updateNotifications.start(callback),
   maintenanceState:()=>maintenance.state(),
   configureMaintenance:input=>maintenance.configure(input),
   runMaintenance:options=>maintenance.run(options),
@@ -13504,7 +13506,7 @@ module.exports = {
   prepareUpdateBackup:async()=>{await db.whenReady();const directory=path.join(DATA_DIR,'update-recovery');fs.mkdirSync(directory,{recursive:true});const file=path.join(directory,'library-'+Date.now()+'.json');require('./lib/atomic-file').atomicJson(file,createBackupPayload());return {ok:true,file};},
   closeCommunity:()=>community.close(),
   stopMaintenance:()=>maintenance.stop(),
-  stopBackups:()=>{runtimeStopping=true;automation.stop();clearTimeout(automationRetryTimer);clearTimeout(metadataStartupTimer);metadataStartupTimer=null;clearTimeout(_mediaReviewAliasRefreshTimer);_mediaReviewAliasRefreshTimer=null;backupManager.stop();releaseWatch.stop();},
+  stopBackups:()=>{runtimeStopping=true;automation.stop();clearTimeout(automationRetryTimer);clearTimeout(metadataStartupTimer);metadataStartupTimer=null;clearTimeout(_mediaReviewAliasRefreshTimer);_mediaReviewAliasRefreshTimer=null;backupManager.stop();releaseWatch.stop();updateNotifications.stop();},
   __test: {
     mergeAutoInfo,
     runWithConcurrency, parseMalXml, createBackupPayload, readConfig,

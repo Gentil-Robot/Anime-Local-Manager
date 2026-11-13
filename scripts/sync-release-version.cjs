@@ -31,6 +31,7 @@ put('community/site/release-version.js',client);
 const design=fs.readFileSync(path.join(root,'public/design-core.js'),'utf8')
  .replace(/^  const VERSION = .*;$/m,'  const VERSION = window.ALM_RELEASE?.technicalVersion || '+JSON.stringify(src.technicalVersion)+';')
  .replace(/^  const edition = .*;$/m,'  const edition = () => window.ALM_RELEASE?.publicVersion || '+JSON.stringify(src.publicVersion)+';');
+put('public/index.html',fs.readFileSync(path.join(root,'public/index.html'),'utf8').replace(/V\d+\.\d+\.\d+ Bêta stable/g,src.publicVersion));
 put('public/design-core.js',design);
 put('community/site/design-core.js',design);
 put('supabase/functions/alm-public/release.ts',

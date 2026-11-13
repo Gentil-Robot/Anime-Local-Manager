@@ -4,24 +4,24 @@
 
 Anime Local Manager (ALM) est une application **locale, gratuite et open source (MIT)** pour organiser sa collection d'animés sous Windows et Linux. La bibliothèque reste locale par défaut ; la communauté est facultative.
 
-[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2.1.0**](docs/RELEASE-NOTES-V2.1.0.md) · [**Historique technique**](docs/)
+[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2.1.1**](docs/RELEASE-NOTES-V2.1.1.md) · [**Historique technique**](docs/)
 
-## V2.1.0 Bêta stable
+## V2.1.1 Bêta stable
 
-La V2.1.0 ajoute le **MFA facultatif** par application d'authentification, avec un second appareil de secours, la réauthentification des opérations sensibles et la révocation des sessions. Elle supervise le moteur local et propose un redémarrage contrôlé en cas de panne. La bibliothèque reste utilisable hors connexion.
+La V2.1.1 ajoute les **notifications de mise à jour** dans la cloche et via le système, avec badge Stable/Bêta et mémorisation par version. Le canal « Versions stables et bêtas » est proposé par défaut. Elle comprend le **MFA facultatif** par application d'authentification, avec un second appareil de secours, la réauthentification des opérations sensibles et la révocation des sessions. Elle supervise le moteur local et propose un redémarrage contrôlé en cas de panne. La bibliothèque reste utilisable hors connexion.
 
-**Electron 45.3.1**, Node.js **24.22.2** et Chromium **156.0.8078.96** embarqués ; Node.js **24.22.2 LTS** épinglé pour la compilation. La vérification complète comporte **162 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
+**Electron 45.3.1**, Node.js **24.22.2** et Chromium **156.0.8078.96** embarqués ; Node.js **24.22.2 LTS** épinglé pour la compilation. La vérification complète comporte **164 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
 
 La V2 représente environ **six mois de travail**, avec de nombreuses bêtas de développement non publiées. La première **V2.0.0 Bêta stable** a été rendue publique le **7 novembre 2026**. Les fichiers et numéros des anciennes bêtas restent dans l'historique technique.
 
 ### Télécharger
 
-- [Release V2.1.0](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.0) — installateur, rapport Windows et empreinte SHA-256 après réussite de la publication.
+- [Release V2.1.1](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.1) — installateur, rapport Windows et empreinte SHA-256 après réussite de la publication.
 - [Toutes les releases](https://github.com/Gentil-Robot/Anime-Local-Manager/releases), dont la [V2.0.0](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0).
 
-L'installateur attendu est `Anime-Local-Manager-2.1.0-Setup-x64.exe`. Ce nom permet aussi à la V2.0.0 de télécharger la mise à jour intégrée. Le canal reste **bêta publique**, avec la release GitHub marquée « pre-release ». Téléchargez depuis la release officielle et comparez l'empreinte dans `SHA256SUMS.txt` ; l'installateur non signé peut provoquer un avertissement Windows SmartScreen.
+L'installateur attendu est `Anime-Local-Manager-2.1.1-Setup-x64.exe`. Ce nom permet aussi à la V2.0.0 de télécharger la mise à jour intégrée. Le canal reste **bêta publique**, avec la release GitHub marquée « pre-release ». Téléchargez depuis la release officielle et comparez l'empreinte dans `SHA256SUMS.txt` ; l'installateur non signé peut provoquer un avertissement Windows SmartScreen.
 
-Consultez les [notes de version 2.1.0](docs/RELEASE-NOTES-V2.1.0.md) et la [revue du code](docs/REVUE-V2.1.0-2026-11-13.md).
+Consultez les [notes de version 2.1.1](docs/RELEASE-NOTES-V2.1.1.md) et la [revue de la V2.1.0](docs/REVUE-V2.1.0-2026-11-13.md).
 
 ## Fonctionnalités
 
@@ -77,7 +77,7 @@ Les données principales restent sur l'ordinateur de l'utilisateur. Faites une s
 
 ### Documentation et historique technique
 
-Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.1.0 Bêta stable** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
+Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.1.1 Bêta stable** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
 
 - [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
 - [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)

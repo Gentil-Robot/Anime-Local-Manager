@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "2.1.0",
-  "releaseId": "v210-beta-stable-20261113",
+  "version": "2.1.1",
+  "releaseId": "v211-beta-stable-20261113",
   "baselineVersion": "2.0.0-beta.80",
   "baselineArchiveSha256": "350a12828dd6fb474ca0f7f07cdfa97aed713c34acd407693bda8b1553300dea",
   "files": [
@@ -18,7 +18,7 @@
     {
       "path": ".github/workflows/windows-installer.yml",
       "bytes": 3929,
-      "sha256": "a1a0578fd13cc2db4c76d18084569f6698797a8c180092361bf9431ef65b8efd"
+      "sha256": "a9eeef5716a0e58b231798b2ae470995c0b5991b8d1cbc28fcff39dae7abc512"
     },
     {
       "path": ".gitignore",
@@ -288,7 +288,7 @@
     {
       "path": "community/site/design-core.js",
       "bytes": 4169,
-      "sha256": "82f80c1f359c6dd339e1e8893799312742b89286972b9a9cb813ddb7acb315af"
+      "sha256": "837d8bd6eb08550e7f99da2b8e9e07fea6e787c0ad923d7244eeb566a3620d47"
     },
     {
       "path": "community/site/index.html",
@@ -318,12 +318,12 @@
     {
       "path": "community/site/release-manifest.json",
       "bytes": 8353,
-      "sha256": "21fa0be33bacc346633a4009f40b545d42c7b73f153a3d50713291203f876471"
+      "sha256": "9e562e92f4acef583074bff2cdb480c0d05ffdbd35887e5b4a7174f58dd08720"
     },
     {
       "path": "community/site/release-version.js",
       "bytes": 565,
-      "sha256": "45e309d794d50da4524d11f86c22476f995b69eba69403617bf78acdc0842847"
+      "sha256": "cb622f383a5c1758e764546c8465c76bd5c9e215728fc6ca077ebc0a8fb436dd"
     },
     {
       "path": "community/site/scroll-progress.css",
@@ -398,7 +398,7 @@
     {
       "path": "compliance/release-gates.json",
       "bytes": 4535,
-      "sha256": "22f17ac3daeed0e44e141363db50a0629f56ff6343575ea410ffbf6a8314e3b8"
+      "sha256": "f4ca462b6e159cec182abb1b8b3ce91de74640e86d86dbbcffcf73f3628027f0"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -408,7 +408,7 @@
     {
       "path": "Creer App Linux.sh",
       "bytes": 2347,
-      "sha256": "c98bdee0a13c8b1ffba753cfef345c1be22ed1aa0b89d3d3a12489be4a15d3e1"
+      "sha256": "3f7466ba98c5ca09ed366f99db11391f8b76fa4197b14940c0d714a6e70e03a1"
     },
     {
       "path": "csv-worker.js",
@@ -614,6 +614,11 @@
       "path": "docs/RELEASE-NOTES-V2.1.0.md",
       "bytes": 3203,
       "sha256": "34932820fa7c7c64f980d4b407fd739bdc26d3f4d39088a039109b08b04308b5"
+    },
+    {
+      "path": "docs/RELEASE-NOTES-V2.1.1.md",
+      "bytes": 3240,
+      "sha256": "9c5c89a3ab0f5b430afaf9fa9531480d2150ca3f9f4473957a8becdbd555c02a"
     },
     {
       "path": "docs/REVUE-V2.1.0-2026-11-13.md",
@@ -1286,6 +1291,11 @@
       "sha256": "00e841d32e1397084b59895a7e20c68125187124c8c5a1d3d251bcaa9bbe6332"
     },
     {
+      "path": "lib/desktop-update-notification.js",
+      "bytes": 1055,
+      "sha256": "0e4b9b76d983c473f3d6c697797beb8f33d16575fd8a148cc7823bf9e07466eb"
+    },
+    {
       "path": "lib/diagnostics.js",
       "bytes": 2987,
       "sha256": "3e82f992aca94c56e5a9b134104d902cf4f38c736f9863b4709222a0dc78be38"
@@ -1362,8 +1372,8 @@
     },
     {
       "path": "lib/maintenance.js",
-      "bytes": 4645,
-      "sha256": "e8f8e85de61aacc30fcb19e117c517edfa58bc9117dbd4496b2980ae58856a59"
+      "bytes": 4622,
+      "sha256": "d4765a2ed27ef41261dbafbd5eac14b48aeb5687047a6741e1f023c0cdb8784b"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1427,8 +1437,8 @@
     },
     {
       "path": "lib/notification-center.js",
-      "bytes": 2072,
-      "sha256": "06c6a63adc2ee36e6f236bf700ce5f20b90d839302bb897c232c9d1d3b05d90b"
+      "bytes": 4088,
+      "sha256": "db3980583fc931a35a8cebe1a1ce99306ebe86235b63376b7a94577e6a4778de"
     },
     {
       "path": "lib/os-maintenance.js",
@@ -1487,13 +1497,13 @@
     },
     {
       "path": "lib/server-host.js",
-      "bytes": 2366,
-      "sha256": "c23b16a01cf6bd90f2604d05ce63cb463a8fcdd29590970f69eacc5bc0562e86"
+      "bytes": 2484,
+      "sha256": "4d776f7ce594b5bdff0362db5d9311b7dd6e48f6a695c1991c767f022112fbc7"
     },
     {
       "path": "lib/server-process.js",
-      "bytes": 6902,
-      "sha256": "cdd7926a96ee2723af969f4731d46f914f39173d923c3959ccd283ea5ab97ed8"
+      "bytes": 7116,
+      "sha256": "9f0f80dee51ff05bdae3a98c458fd9c1cbb7293bb90c4ecd6b4c00dc3824d7c8"
     },
     {
       "path": "lib/service-health.js",
@@ -1526,6 +1536,11 @@
       "sha256": "f0c17af87a6f17c3c604947f54eef214ca43c817c14603fab3d743fa97926093"
     },
     {
+      "path": "lib/update-notifications.js",
+      "bytes": 952,
+      "sha256": "be1c7ff580dacff29820a8bcbb0498e825d9007546cab1ef377363a575b34184"
+    },
+    {
       "path": "lib/version-check.js",
       "bytes": 3657,
       "sha256": "5323440983a6ad74e21af9058592b4b6d8133506768e9fc8e5b38d767a456c2d"
@@ -1547,28 +1562,28 @@
     },
     {
       "path": "main.js",
-      "bytes": 28228,
-      "sha256": "c51f0a79eded1941a010fb85d7c910cb496f0fc5dddefb174be085330ec1babe"
+      "bytes": 28743,
+      "sha256": "1d38236edc96efd0de32449f3d03bee31cdd4736237aba99f155687a6b205487"
     },
     {
       "path": "package-lock.json",
       "bytes": 173432,
-      "sha256": "a229ffecc3639bab7664e49105cb7a92939cc2167cb5bdc837d825676c476be2"
+      "sha256": "98e39d47a37f057b9560ec948ff42055bda4f70cedd02f5e6af57b6266db4d65"
     },
     {
       "path": "package.json",
       "bytes": 13403,
-      "sha256": "87748186d89ea6fc0635b8126f393382a1ce6d5fdbb82aa94348b10183ae9eac"
+      "sha256": "3791b20a1eeff409ac4997aa63127b31d591cfbcc24cc57e0a4973ae16abbda0"
     },
     {
       "path": "preload.js",
-      "bytes": 2355,
-      "sha256": "a4394f2258da95c461216ebf0f28ab00928f3723efeaebeb208feb58fc1a7d01"
+      "bytes": 2523,
+      "sha256": "0be36df8e53a4e9338979e8b2d80d1e5776149d8455bd1b8f9fa9767bfafd206"
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
       "bytes": 8968,
-      "sha256": "f6cda7a9af39c44aba04dfd6f2edadd38ee41785da2092c047d478a64a1f418f"
+      "sha256": "db18a918d380cbdddb1f72eccc70fda0d0881610d18274dd549214059248ce02"
     },
     {
       "path": "public/alm-v2.js",
@@ -1942,8 +1957,8 @@
     },
     {
       "path": "public/beta41.css",
-      "bytes": 6135,
-      "sha256": "62d199900984c570bd0e6ea03ce3d1c52ec721dd3b5ddc96221ab2a96604ddff"
+      "bytes": 6358,
+      "sha256": "86cb8292c2967e5a25df49fd791a495b4c981725e9914876c2291f2a73132a73"
     },
     {
       "path": "public/beta41.js",
@@ -2243,7 +2258,7 @@
     {
       "path": "public/design-core.js",
       "bytes": 4169,
-      "sha256": "82f80c1f359c6dd339e1e8893799312742b89286972b9a9cb813ddb7acb315af"
+      "sha256": "837d8bd6eb08550e7f99da2b8e9e07fea6e787c0ad923d7244eeb566a3620d47"
     },
     {
       "path": "public/design-manifest.json",
@@ -2302,8 +2317,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 87922,
-      "sha256": "401db3a66511c3ec89c492442e94e2b04f583e5750b0dc3f965bdc827c9e187f"
+      "bytes": 87977,
+      "sha256": "66272cd6f96cdcc8db45621fb81a90a0cb2e538f658107d13a84d8ceeb492757"
     },
     {
       "path": "public/input-focus.js",
@@ -2427,8 +2442,8 @@
     },
     {
       "path": "public/notification-center.js",
-      "bytes": 7264,
-      "sha256": "5dafb1ce62aba963c900c4be375161707f9d671209b0e35bdbd76ca2987961c1"
+      "bytes": 8282,
+      "sha256": "e64c8c8265acf660e2399bdd857992bf404162fe11e9cb4785fc0e66dab82aa5"
     },
     {
       "path": "public/privacy-policy.html",
@@ -2453,12 +2468,12 @@
     {
       "path": "public/release-version.js",
       "bytes": 565,
-      "sha256": "45e309d794d50da4524d11f86c22476f995b69eba69403617bf78acdc0842847"
+      "sha256": "cb622f383a5c1758e764546c8465c76bd5c9e215728fc6ca077ebc0a8fb436dd"
     },
     {
       "path": "public/release-watch.js",
-      "bytes": 7447,
-      "sha256": "0b8c953721a83b8350daf40b3dcd68570fec90e9bccb91e1ea641979a5ab250b"
+      "bytes": 7967,
+      "sha256": "ca5bad5d156eba1501bf51ebeac90d33e008ce7c15e10980236590a0eb26d365"
     },
     {
       "path": "public/retouches.js",
@@ -2556,6 +2571,11 @@
       "sha256": "42b4dd0232c553347964f68b65871266f09c09df6720a287e4602cde87c455d4"
     },
     {
+      "path": "public/update-notification-copy.js",
+      "bytes": 2190,
+      "sha256": "c667dd320b6d65088818497f971c14ecfccfe7208dd76c62079835f27daaad70"
+    },
+    {
       "path": "public/ux-beta82.css",
       "bytes": 8945,
       "sha256": "454fcc37449730a2aa4f749d8693cb582efd910cab53a684a20756e3f9f0ca21"
@@ -2568,27 +2588,27 @@
     {
       "path": "Publier Installateur Windows.bat",
       "bytes": 776,
-      "sha256": "14a9f17e061410e47249ea9cd3f48b2ff258eed237dc14664d705a2ab5ebea5a"
+      "sha256": "30780374976cea107669ff223f3075a1195200debb2dd239ff856559a0e4bd69"
     },
     {
       "path": "Publier-GitHub-V2.ps1",
       "bytes": 6963,
-      "sha256": "2ae875c0ccd911ac3448882d28ed4e6d4aab6707492a179110d7db0c1767925c"
+      "sha256": "7ae3ca66a6766e6c3cca3b1cc354c3dd4691f0633f0e91e06c486516d7e55e7b"
     },
     {
       "path": "README.md",
-      "bytes": 6078,
-      "sha256": "c9031658f8d11acc0e1c5a32f9c30d17f7684c87db49ec5245fbb921de6cab41"
+      "bytes": 6292,
+      "sha256": "694defde01dbac9b61d19a64e3e6922210651f43fad7a176e27f347394264934"
     },
     {
       "path": "release-version.json",
       "bytes": 479,
-      "sha256": "194b8f6e925f99d0626a5cf8ab3941f6e10cf03c3fe0edfb84b787e6549354ff"
+      "sha256": "5d72c101ee436f81342a86ca4165085e5bec9269ad13f75a9f9ff5e27a51ed2b"
     },
     {
       "path": "REPRENDRE_BUILD_WINDOWS.bat",
       "bytes": 776,
-      "sha256": "14a9f17e061410e47249ea9cd3f48b2ff258eed237dc14664d705a2ab5ebea5a"
+      "sha256": "30780374976cea107669ff223f3075a1195200debb2dd239ff856559a0e4bd69"
     },
     {
       "path": "scripts/audit-locales.js",
@@ -2828,7 +2848,7 @@
     {
       "path": "scripts/refresh-release-manifests.cjs",
       "bytes": 3058,
-      "sha256": "595435f5574c6cf0ab422ded18c00823fbcfd54da200d45c6197f3f11090122c"
+      "sha256": "1606216b13b108e2f69397db8143a2759c95f189982c7fa1501c9fb315953cb3"
     },
     {
       "path": "scripts/release-utils.js",
@@ -2872,8 +2892,8 @@
     },
     {
       "path": "scripts/sync-release-version.cjs",
-      "bytes": 3041,
-      "sha256": "8dfe153d76c31fa80ce46ec633cf35462200df5c3b46c7644dd7ef744825a1c7"
+      "bytes": 3185,
+      "sha256": "01ca7b02c06742d62363ba409b57aa4a5c84591321f6709cd82ea67b57e0f9d6"
     },
     {
       "path": "scripts/test-association-concurrency.js",
@@ -2893,7 +2913,7 @@
     {
       "path": "scripts/test-beta-stable.js",
       "bytes": 80750,
-      "sha256": "423671a68865cdf7d4d3eff964ee6858362b9774ba6139cd32f8c8f538c75d0f"
+      "sha256": "c322a9ae016610b0cc3cad59098881ee3ad89908d9d8bd5da94162ef103b4fbb"
     },
     {
       "path": "scripts/test-beta15-ui-logic.js",
@@ -2908,7 +2928,7 @@
     {
       "path": "scripts/test-beta17-final-polish.js",
       "bytes": 4061,
-      "sha256": "b6188d213c4b1fb1844c5aa6af896217bad220be6bc8747db47adc22cb6801fa"
+      "sha256": "33152e622bd24a5951daabeb40b7fdf8cb148c06f1a2198044b38616d85c4296"
     },
     {
       "path": "scripts/test-beta18-final-ui.js",
@@ -2918,17 +2938,17 @@
     {
       "path": "scripts/test-beta19-ux.js",
       "bytes": 2730,
-      "sha256": "2bf553f86ad765c5df16165334b7533d560cf3815d30c185d7a806c267fc6e23"
+      "sha256": "3f1ed8f89194497018ddb5560bf50a2cb88febdefddf819ef2d5cb26f6b0f88a"
     },
     {
       "path": "scripts/test-beta21-final.js",
       "bytes": 1517,
-      "sha256": "124700d6a1ef9a01a0c0ae453923bacba04df7e316e718b596ddec3ce43dae15"
+      "sha256": "5b397f7e6fa2ce352328189e9c38cd883ebf8ecd4d74ccdf5f3456700993b6d5"
     },
     {
       "path": "scripts/test-beta23-final.js",
       "bytes": 4206,
-      "sha256": "35ea59c9c94e5cd8eb701ec27b1e7539e03c2f35bea79045084a1a8fabd6f639"
+      "sha256": "0729563f81a6ac07264a379db0486340211770765560bba25955a8fb63a20d72"
     },
     {
       "path": "scripts/test-beta23-multiseason-runtime.js",
@@ -2938,12 +2958,12 @@
     {
       "path": "scripts/test-beta24-final.js",
       "bytes": 2651,
-      "sha256": "80bd4d767cd07db96b17ac3426cd878508ddf7ce93b1b8cb7d003452dd93ef70"
+      "sha256": "8d88d878d1fa342d0721c313691c6e9b853be7b75bf6a10889e464cee42b8d2d"
     },
     {
       "path": "scripts/test-beta25-final.js",
       "bytes": 6877,
-      "sha256": "815e44875a568ac8d950a7a34e61762d521bba74552906c6ebc660b6fba4e6e7"
+      "sha256": "3707fea94edfdf34f0b4e7ec823c3b1476af71b8ed5b6064b4fff2f68f38c108"
     },
     {
       "path": "scripts/test-beta26-overflow-runtime.js",
@@ -2953,12 +2973,12 @@
     {
       "path": "scripts/test-beta27-final.js",
       "bytes": 3848,
-      "sha256": "def6aa2f25f8571c307bba005dade6352d28dd8a181d7a1f69aecc0d588d8f07"
+      "sha256": "ad21ff4c44d9f4a819a69adb02cfb6d0276b132a40ee724497c13f124bc02650"
     },
     {
       "path": "scripts/test-beta28-final.js",
       "bytes": 4771,
-      "sha256": "be7c8577fd575f459dec15d109425bd22355219a82380f45b2ecf9f7d9f1aa08"
+      "sha256": "d4aefd9ae0b96fd64b07ea9f735a61537065b3d2e42e0e2825d7a5b2f49e1b99"
     },
     {
       "path": "scripts/test-beta34-browser.py",
@@ -3678,7 +3698,7 @@
     {
       "path": "scripts/test-beta82-build-security.cjs",
       "bytes": 2711,
-      "sha256": "9521e91eb2e5848046079e1956d9bc849c8cda9f5aa8efc695eb9661d6a5409c"
+      "sha256": "6ea15a56a0c5290c2c9562fc3ac8999c667031885e3ae16b138311f9fd42ffa4"
     },
     {
       "path": "scripts/test-beta82-build.cjs",
@@ -3753,7 +3773,7 @@
     {
       "path": "scripts/test-beta82-prepublication.cjs",
       "bytes": 5292,
-      "sha256": "482900921704a1c22e93afa56441fce47d8e0382ce7f7e3b6829254b0699e7b1"
+      "sha256": "0101db96c89769dc746dd58b2bf4a8eaddba2ba66c560f9da15954b3e7096738"
     },
     {
       "path": "scripts/test-beta82-production-copy.cjs",
@@ -3873,12 +3893,12 @@
     {
       "path": "scripts/test-release-console.cjs",
       "bytes": 5853,
-      "sha256": "65f51f35ab23f2f3491da6beb1e683ebc1144e492f422b07ee2723efbe0e300f"
+      "sha256": "76cc9474c6297116d673add4d18e91b1aea7c870c9094521c2c8d2a04e9f8fb4"
     },
     {
       "path": "scripts/test-release-v200.cjs",
       "bytes": 5403,
-      "sha256": "ad5c4719b8c0a1a6871d95743bd11e1751a21538fa1e89430bec50f0bae76057"
+      "sha256": "b4a924164e6242e2ef2292d7705aaabc0983bb31a8b3227d7b8b5b5c79c48cb7"
     },
     {
       "path": "scripts/test-release-watch.js",
@@ -3968,27 +3988,42 @@
     {
       "path": "scripts/test-v210-password-recovery.cjs",
       "bytes": 4461,
-      "sha256": "fe517074cda739bedcd18a883cae76b898465b94b25042a277f838f4a502fdc0"
+      "sha256": "6699cc0ce70791da0eebfe35a88dd97d9596f2a9a83a36bd39a11703fe9e1efd"
     },
     {
       "path": "scripts/test-v210-update-channels.cjs",
       "bytes": 2549,
-      "sha256": "ffc97c3f7ed9ad2fc0dc2e798c1d50dbedb04b0989911ee031a8742a1dd2c9c3"
+      "sha256": "be9cf9742044e0378915cc67f1b99738bd1f5699fde00633d4f18003baa9c4e1"
+    },
+    {
+      "path": "scripts/test-v211-update-browser.cjs",
+      "bytes": 6188,
+      "sha256": "597231820a205a54b48a456a5de77887d0301911e102ecf214a003975c21236d"
+    },
+    {
+      "path": "scripts/test-v211-update-notifications.cjs",
+      "bytes": 4443,
+      "sha256": "2372dc85f89209d11dd781ee04a889e5a68993f46e5de262ebc880f9dfb8f178"
+    },
+    {
+      "path": "scripts/test-v211-update-ui.cjs",
+      "bytes": 4265,
+      "sha256": "acec34c5a8819c008289e5f6e226d3f42171164e535c9e3a19eca2820aa15139"
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 6494,
-      "sha256": "5be5298f157c3c45bd113709dc7a2de5c041a5761281d321c9f5b1ba8a34ce2a"
+      "bytes": 6583,
+      "sha256": "318f1432bf1845d41a2336f1639cd45296bfce611bf625de3828e9a8886e9204"
     },
     {
       "path": "scripts/verify-native.cjs",
-      "bytes": 1303,
-      "sha256": "e2bcfb2437ff2cd788b6a0a09fd54f0b1fa5ace0564cbfda67982fb07058052a"
+      "bytes": 1334,
+      "sha256": "285fdf9572125c2de7518ff408b56e3b9481521f0a4708f4c838264d6af5ba5f"
     },
     {
       "path": "scripts/verify-project.js",
-      "bytes": 10395,
-      "sha256": "059deb38f504c80a584b3580e15e0dc5ec85b33ac404271baae0d7ba9d28e2d2"
+      "bytes": 10588,
+      "sha256": "99664ad8ae950a8ccc02ed4223d72f4d2856bae7d57f1b5806fa0a7befb21237"
     },
     {
       "path": "SECURITY.md",
@@ -3997,8 +4032,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 625078,
-      "sha256": "103491feaba7eb2a973ff45b8c8d55b294ec4dc341c2c1c088d1569bf592e3ff"
+      "bytes": 625424,
+      "sha256": "9fb84d99920b45688e128eb05d4d849837b73e3e4e98b391ff0896e1d7cc2e3f"
     },
     {
       "path": "start_mac_linux.sh",
@@ -4073,7 +4108,7 @@
     {
       "path": "supabase/functions/alm-public/release.ts",
       "bytes": 90,
-      "sha256": "c186e97e43b1748d44a559f76a515dac6e6245a55fdfb73e1a461520c37105e6"
+      "sha256": "2490384ce14a59c86f6f7f1a5016473458f6958f2b917751e68ab1b3159cfb83"
     },
     {
       "path": "supabase/functions/alm-public/support-model.ts",
@@ -4158,11 +4193,11 @@
     {
       "path": "Verifier V2.0.0 Beta Stable Windows.bat",
       "bytes": 1034,
-      "sha256": "cfd6cb176e1734b12d7b6aca014017d5b7abd8ef8564344c5ced87ae8f4bbc6c"
+      "sha256": "d188ee980675ff6702b0b924826aea05e2f8db00deaccc31faa555136910b25d"
     }
   ],
   "parentArchiveSha256": "e97af43af2058352b3486831856637ad3bbbfa82cb4bf68429db2c66648e337b",
-  "previousValidatedVersion": "2.0.0",
+  "previousValidatedVersion": "2.1.0",
   "validatedParentArchiveSha256": "494407e42c74a846cb9c8e8e36b3bf6182384664ab9450020dc95e657ba36b10",
   "inheritedParentArchiveSha256": "494407e42c74a846cb9c8e8e36b3bf6182384664ab9450020dc95e657ba36b10",
   "parentReleaseId": "beta82-correctif-pagination-transparence-20261025",

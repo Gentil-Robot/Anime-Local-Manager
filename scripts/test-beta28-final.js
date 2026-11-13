@@ -13,7 +13,7 @@ const pkg = JSON.parse(read("package.json"));
 const html = read("public/index.html");
 const main = read("main.js");
 
-assert.strictEqual(pkg.version, "2.1.0");
+assert.strictEqual(pkg.version, "2.1.1");
 assert(!html.includes("anime-local-manager-recherche-b%C3%A9ta-testeur"), "ancien lien beta test encore present");
 for (const name of ["Ashlol", "Taé", "Aleistouille", "Roudoudoux", "Yuma", "Nochka"]) {
   assert(html.includes(name), `remerciement absent: ${name}`);

@@ -47,6 +47,6 @@ async function main(){
   assert.equal(verified.w.document.getElementById('webRecoveryForm').elements.password.value,'');
   await verified.submit();assert.equal(verified.calls.filter(c=>c[0]==='password').length,1,'A completed form cannot reset twice');
  }finally{verified.close();}
- console.log('OK 2.1.0 recovery: provider-verified intent, expired/forged URL refusal, dedicated form, MFA gate, one submission and password cleanup.');
+ console.log('OK 2.1.1 recovery: provider-verified intent, expired/forged URL refusal, dedicated form, MFA gate, one submission and password cleanup.');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});

@@ -33,3 +33,5 @@ html body #aboutPage .wallpaper-size-links small{font-size:9px!important;line-he
 html body .nocturne-player .donation-karaoke-stage .karaoke-original-unit,html body .nocturne-player .donation-karaoke-stage .karaoke-romaji-unit{text-shadow:none!important}
 
 html body .nocturne-player .donation-karaoke-stage .karaoke-opening-title>*{-webkit-text-fill-color:currentColor!important;filter:none!important;text-shadow:0 1px 2px #15233f,1px 0 1px #15233f,-1px 0 1px #15233f!important}
+
+.notification-update-badge{align-self:flex-start;padding:3px 9px;border:1px solid #6674a8;border-radius:999px;color:#dce0ff;font-size:.78rem}.notification-update:focus-visible{outline:2px solid #aebcff;outline-offset:3px}

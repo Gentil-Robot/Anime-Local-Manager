@@ -13,9 +13,19 @@
   button.setAttribute('aria-label',D.t('notificationCenter')+(count?' · '+count:'')+(data.muted?' · '+D.t('notificationMute'):''));
   button.title=button.getAttribute('aria-label');button.dataset.muted=String(data.muted);
   $('notificationQuiet').textContent=D.t(data.muted?'notificationResume':'notificationMute');$('notificationQuiet').setAttribute('aria-pressed',String(data.muted));
-  $('notificationClear').disabled=!data.items.length;$('notificationQuietHint').hidden=!data.muted;
+  $('notificationClear').disabled=!data.items.some(i=>i.type!=='update');$('notificationQuietHint').hidden=!data.muted;$('notificationQuietHint').textContent=(window.ALM_UPDATE_COPY?.text('muted',D.language())||D.t('notificationMutedHint'));
   const list=$('notificationList');list.replaceChildren();const calendar=section('calendar','calendarNotifications','season');
-  for(const item of data.items){
+  const updates=data.items.filter(i=>i.type==='update'),episodes=data.items.filter(i=>i.type!=='update');
+  if(updates.length){
+   const group=section('updates','updateTitle','bell'),copy=window.ALM_UPDATE_COPY;
+   for(const item of updates){
+    const row=document.createElement('button');row.type='button';row.className='notification-entry notification-update';
+    const title=document.createElement('strong'),badge=document.createElement('span'),action=document.createElement('small');
+    title.textContent=copy.text('available',D.language(),item.version);badge.className='notification-update-badge';badge.textContent=copy.text(item.prerelease?'beta':'stable',D.language());action.textContent=copy.text('view',D.language());row.append(title,badge,action);
+    row.onclick=()=>{panel.hidden=true;button.setAttribute('aria-expanded','false');window.ALM_UPDATES?.open();};group.append(row);
+   }list.append(group);
+  }
+  for(const item of episodes){
    const row=document.createElement('button');row.type='button';row.className='notification-entry';
    const name=document.createElement('strong'),meta=document.createElement('small'),anime=(window._almAnimes||[]).find(a=>a.id===item.animeId);
    name.textContent=item.type==='test'?D.t('notificationTestEntry'):(anime?window.ALM_TITLES.title(anime):item.title)+' · '+D.t('airingEpisode',{episode:item.episode});
@@ -25,7 +35,7 @@
    if(anime)row.onclick=()=>{panel.hidden=true;button.setAttribute('aria-expanded','false');window.showAnimesV1?.('Watching');window.openEdit(anime);$('manualMode').checked=false;window.ALM_FORM.sync();$('autoInfo').checked=true;};
    calendar.append(row);
   }
-  if(!data.items.length){const p=document.createElement('p');p.textContent=D.t('notificationEmpty');calendar.append(p);}list.append(calendar);
+  if(!episodes.length){const p=document.createElement('p');p.textContent=D.t('notificationEmpty');calendar.append(p);}list.append(calendar);
   if(pending){
    const group=section('community','communityNotifications','heart'),requests=pending.requests||[],recommendations=pending.recommendations||[];
    if(requests.length){const row=document.createElement('button');row.type='button';row.className='notification-entry';row.textContent=D.t('friendRequestsCount',{count:requests.length});row.onclick=()=>openCommunity('friends');group.append(row);}
@@ -38,7 +48,7 @@
  function init(){
   const button=document.createElement('button');button.type='button';button.id='notificationBell';button.setAttribute('aria-controls','notificationCenter');button.setAttribute('aria-expanded','false');$('backupBtn').after(button);
   const panel=document.createElement('section');panel.id='notificationCenter';panel.className='notification-center';panel.hidden=true;panel.setAttribute('data-no-i18n','');panel.setAttribute('aria-labelledby','notificationCenterHeading');
-  panel.innerHTML='<header><h2 id="notificationCenterHeading" data-design-text="notificationCenter"></h2><button type="button" id="notificationClose" data-design-text="close"></button></header><div class="notification-actions"><button type="button" id="notificationQuiet"></button><button type="button" id="notificationClear" data-design-text="notificationClearCalendar"></button></div><p id="notificationQuietHint" data-design-text="notificationMutedHint" hidden></p><div id="notificationList"></div>';
+  panel.innerHTML='<header><h2 id="notificationCenterHeading" data-design-text="notificationCenter"></h2><button type="button" id="notificationClose" data-design-text="close"></button></header><div class="notification-actions"><button type="button" id="notificationQuiet"></button><button type="button" id="notificationClear" data-design-text="notificationClearCalendar"></button></div><p id="notificationQuietHint" hidden></p><div id="notificationList"></div>';
   document.body.append(panel);
   const close=()=>{panel.hidden=true;button.setAttribute('aria-expanded','false');button.focus();};$('notificationClose').onclick=close;
   button.onclick=async()=>{if(!panel.hidden){close();return;}panel.hidden=false;button.setAttribute('aria-expanded','true');await refresh();try{data=await api('/read',{});paint();}catch{}$('notificationClose').focus();};

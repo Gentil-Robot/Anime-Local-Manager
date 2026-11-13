@@ -17,7 +17,7 @@ const server = read("server.js");
 const song = JSON.parse(read("scripts/fixtures/karaoke/song.beta36-backup.json"));
 const lines = (song.sections || []).flatMap(section => section.lines || []);
 
-assert.strictEqual(pkg.version, "2.1.0");
+assert.strictEqual(pkg.version, "2.1.1");
 assert.strictEqual(pkg.build?.nsis?.runAfterFinish, false);
 assert.strictEqual(pkg.build?.nsis?.multiLanguageInstaller, true);
 assert.deepStrictEqual(pkg.build?.nsis?.installerLanguages, ["fr_FR", "en_US", "ja_JP", "es_ES", "de_DE", "pt_BR", "zh_CN"]);

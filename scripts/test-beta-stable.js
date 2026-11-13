@@ -143,9 +143,9 @@ const serverJs = read("server.js");
 const appJs = read("public/app.js");
 const almV2Js = read("public/alm-v2.js");
 
-check("Version npm 2.1.0", () => assert.strictEqual(packageJson.version, "2.1.0"));
-check("Version visible V2.1.0 Bêta stable", () => {
-  assert(indexHtml.includes("V2.1.0 Bêta stable"));
+check("Version npm 2.1.1", () => assert.strictEqual(packageJson.version, "2.1.1"));
+check("Version visible V2.1.1 Bêta stable", () => {
+  assert(indexHtml.includes("V2.1.1 Bêta stable"));
   assert(!indexHtml.includes("V2.0.4 RC8"));
   assert(serverJs.includes('const BACKUP_VERSION = "2.0.0-beta.82"'));
 });
@@ -923,13 +923,13 @@ check("Scripts Linux valides et portables entre Windows et Linux", () => {
   assert(read("README.md").includes("## Linux"));
   const builder = read("Creer App Linux.sh");
   assert(builder.includes('artifact_name="$(basename -- "$artifact")"'));
-  assert(builder.includes("SHA256SUMS-V2.1.0-Beta-Stable.txt"));
+  assert(builder.includes("SHA256SUMS-V2.1.1-Beta-Stable.txt"));
 });
 
-check("Scripts Windows V2.1.0 Bêta stable", () => {
+check("Scripts Windows V2.1.1 Bêta stable", () => {
   for (const name of ["Publier Installateur Windows.bat", "REPRENDRE_BUILD_WINDOWS.bat"]) {
     const content = read(name);
-    assert(content.includes("V2.1.0 Bêta stable"), `${name}: version absente`);
+    assert(content.includes("V2.1.1 Bêta stable"), `${name}: version absente`);
     assert(content.includes("Node.js 22"), `${name}: controle Node absent`);
     assert(content.includes("release-windows.js"), `${name}: publication centralisée absente`);
   }

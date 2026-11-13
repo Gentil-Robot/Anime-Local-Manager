@@ -1,4 +1,4 @@
-# Anime Local Manager V2.1.0 Beta stable - release gate and optional GitHub publication.
+# Anime Local Manager V2.1.1 Beta stable - release gate and optional GitHub publication.
 # By default this script ONLY checks the files. Add -Publier to publish the prerelease.
 # Requires GitHub CLI (gh) authenticated to Gentil-Robot and a matching source ref.
 [CmdletBinding()]
@@ -7,8 +7,8 @@ param(
     [Parameter(Mandatory=$true)] [string]$RapportBuild,
     [switch]$Publier,
     [string]$Depot = 'Gentil-Robot/Anime-Local-Manager',
-    [string]$Tag = 'v2.1.0',
-    [string]$Ref = 'release/v2.1.0'
+    [string]$Tag = 'v2.1.1',
+    [string]$Ref = 'release/v2.1.1'
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -75,7 +75,7 @@ $attrsContent = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String([str
 if ($attrsContent -notmatch 'alm-clip-complet-1080p\.mp4\s+filter=lfs') { throw 'Git LFS du clip non configure sur la reference selectionnee.' }
 & gh release view $Tag --repo $Depot 1>$null 2>$null
 if ($LASTEXITCODE -eq 0) { throw "Une release $Tag existe deja. Aucune publication ni remplacement automatique." }
-$notes = Join-Path $source 'docs/RELEASE-NOTES-V2.1.0.md'
+$notes = Join-Path $source 'docs/RELEASE-NOTES-V2.1.1.md'
 if (-not (Test-Path -LiteralPath $notes)) { throw 'Notes de version manquantes.' }
 $shaFile = Join-Path (Split-Path -Parent $installerPath) 'SHA256SUMS.txt'
 [IO.File]::WriteAllText($shaFile, "$actualHash  $installerName`n",[Text.Encoding]::ASCII)

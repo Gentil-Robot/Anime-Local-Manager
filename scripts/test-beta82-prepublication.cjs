@@ -9,7 +9,7 @@ const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const pkg=JSON.parse(read('package.json'));
 const lock=JSON.parse(read('package-lock.json'));
-assert.equal(pkg.version,'2.1.0');
+assert.equal(pkg.version,'2.1.1');
 assert.equal(pkg.version,lock.version);
 assert.equal(lock.packages[''].version,pkg.version);
 assert.equal(pkg.devDependencies.electron,'45.3.1');
@@ -19,7 +19,7 @@ assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.n
 // Independent registry pin, not a value copied from the lock under test.
 assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-1oYau2B4RXF27Df2fzvrFDJoy8AOSVlgS6gklo6wkLZ/QWJemJCJHkY4+uuacvSFUtR8IimiLukLNFoYP0fmjA==');
 assert.equal(read('.nvmrc'),read('.node-version'));
-assert.equal(read('supabase/functions/alm-public/release.ts').includes('"2.1.0"'),true);
+assert.equal(read('supabase/functions/alm-public/release.ts').includes('"2.1.1"'),true);
 assert.equal(read('public/design-core.js').includes('release-version.json') || read('public/design-core.js').includes('ALM_RELEASE'),true);
 assert.equal(read('community/site/design-core.js'),read('public/design-core.js'));
 assert.equal(JSON.parse(read('community/site/release-manifest.json')).version,pkg.version);

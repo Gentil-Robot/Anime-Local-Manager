@@ -1,7 +1,7 @@
 {
   "name": "anime-local-manager",
-  "version": "2.1.0",
-  "description": "Anime Local Manager V2.1.0 Bêta stable — bibliothèque anime locale, import protégé, recommandations multi-source, actualités et dictionnaire intégré",
+  "version": "2.1.1",
+  "description": "Anime Local Manager V2.1.1 Bêta stable — bibliothèque anime locale, import protégé, recommandations multi-source, actualités et dictionnaire intégré",
   "main": "main.js",
   "scripts": {
     "start": "node server.js",
@@ -204,7 +204,7 @@
         "pt_BR",
         "zh_CN"
       ],
-      "artifactName": "Anime-Local-Manager-2.1.0-Setup-${arch}.${ext}",
+      "artifactName": "Anime-Local-Manager-2.1.1-Setup-${arch}.${ext}",
       "include": "build/installer.nsh",
       "preCompressedFileExtensions": []
     },

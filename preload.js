@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("animeManager", {
+  onUpdateOpen:callback=>{const listener=()=>callback();ipcRenderer.on('alm-update-open',listener);return ()=>ipcRenderer.removeListener('alm-update-open',listener);},
   onEpisode:callback=>{const listener=(_event,id)=>{if(Number.isSafeInteger(id)&&id>0)callback(id);};ipcRenderer.on('alm-episode-open',listener);return ()=>ipcRenderer.removeListener('alm-episode-open',listener);},
   onNavigation: callback=>{const listener=(_event,direction)=>{if(direction==='back'||direction==='forward')callback(direction);};ipcRenderer.on('alm-navigation',listener);return ()=>ipcRenderer.removeListener('alm-navigation',listener);},
   testNotification:()=>ipcRenderer.invoke('test-notification'),

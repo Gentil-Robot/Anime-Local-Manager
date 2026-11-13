@@ -262,7 +262,13 @@ async function startApplication() {
     const phrases={fr:`Épisode ${item.episode} diffusé · ${item.source||'AniList'}`,en:`Episode ${item.episode} aired · ${item.source||'AniList'}`,ja:`第${item.episode}話が放送されました · ${item.source||'AniList'}`,es:`Episodio ${item.episode} emitido · ${item.source||'AniList'}`,de:`Folge ${item.episode} ausgestrahlt · ${item.source||'AniList'}`,'pt-BR':`Episódio ${item.episode} exibido · ${item.source||'AniList'}`,'zh-CN':`第 ${item.episode} 集已播出 · ${item.source||'AniList'}`};
     return new Promise(resolve=>{const n=new Notification({title:item.title,body:phrases[language]||phrases.en,icon:path.join(__dirname,'public/assets/anime-local-manager.ico'),silent:true});activeNotifications.add(n);if(activeNotifications.size>64)activeNotifications.delete(activeNotifications.values().next().value);let done=false;const finish=value=>{if(done)return;done=true;clearTimeout(timeout);resolve(value);};const timeout=setTimeout(()=>finish(false),5000);n.once('show',()=>finish(true));n.once('failed',()=>{activeNotifications.delete(n);finish(false);});n.once('close',()=>activeNotifications.delete(n));n.on('click',()=>{focusMainWindow();mainWindow?.webContents.send('alm-episode-open',item.animeId);});n.show();});
   };
-  if(!releaseSmoke&&!maintenanceMode)await serverModule.startReleaseNotifications?.(showEpisodeNotification);
+  const showUpdateNotification=require('./lib/desktop-update-notification').createDesktopUpdateNotification({Notification,
+    language:()=>readAppLanguage()||normalizeAppLanguage(app.getLocale()),icon:path.join(__dirname,'public/assets/anime-local-manager.ico'),
+    open:()=>{focusMainWindow();mainWindow?.webContents.send('alm-update-open');}});
+  if(!releaseSmoke&&!maintenanceMode){
+    await serverModule.startReleaseNotifications?.(showEpisodeNotification);
+    await serverModule.configureUpdateNotifications?.(showUpdateNotification);
+  }
 
   const backupSecrets=await systemSecrets.backupStore(safeStorage,app.getPath('userData'));
   if(backupSecrets)await serverModule.configureBackupSecrets?.(backupSecrets);
@@ -348,6 +354,7 @@ async function startApplication() {
         const replacement=await engine.startServer(defaultPort);
         if(backupSecrets)await engine.configureBackupSecrets(backupSecrets);
         await engine.startReleaseNotifications(showEpisodeNotification);
+        await engine.configureUpdateNotifications?.(showUpdateNotification);
         await engine.configureMaintenanceUpdate(maintenanceUpdateFor(engine));
         serverModule=engine;startServer=engine.startServer;server=replacement;shutdownPromise=null;
         activeServerOrigin=`http://127.0.0.1:${Number(replacement.almPort)}`;

@@ -4,7 +4,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),electron=require('electron');
 const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;
 const flags=process.platform==='linux'?['--no-sandbox','--ozone-platform=headless']:[];
-for(const recipe of ['test-v200-engine-native.cjs','test-v200-auth-browser.cjs']){
+for(const recipe of ['test-v200-engine-native.cjs','test-v200-auth-browser.cjs','test-v211-update-browser.cjs']){
  // Chromium holds profile files open on Windows until the entire Electron
  // process exits. The independent Node parent therefore owns their cleanup.
  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'alm-native-recipe-'));
