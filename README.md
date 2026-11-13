@@ -10,7 +10,7 @@ Anime Local Manager (ALM) est une application **locale, gratuite et open source 
 
 La V2.1.2 fiabilise **l’installation des mises à jour sous Windows** : ALM attend la confirmation du lanceur avant de se fermer, conserve le téléchargement en cas d’échec et relance explicitement l’application après installation. Les notifications de mise à jour Stable/Bêta, le MFA facultatif et la supervision du moteur restent disponibles.
 
-**Electron 45.3.1**, Node.js **24.22.2** et Chromium **156.0.8078.96** embarqués ; Node.js **24.22.2 LTS** épinglé pour la compilation. La vérification complète comporte **165 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
+**Electron 45.3.1**, Node.js **24.22.2** et Chromium **156.0.8078.96** embarqués ; Node.js **24.22.2 LTS** épinglé pour la compilation. La vérification complète comporte **166 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
 
 La V2 représente environ **six mois de travail**, avec de nombreuses bêtas de développement non publiées. La première **V2.0.0 Bêta stable** a été rendue publique le **7 novembre 2026**. Les fichiers et numéros des anciennes bêtas restent dans l'historique technique.
 

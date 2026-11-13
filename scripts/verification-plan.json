@@ -1,6 +1,7 @@
 {
   "schema": 1,
   "steps": [
+    "scripts/test-update-cache-cleanup.cjs",
     "scripts/test-windows-update-handoff.cjs",
     "scripts/test-v211-update-notifications.cjs",
     "scripts/test-v211-update-ui.cjs",

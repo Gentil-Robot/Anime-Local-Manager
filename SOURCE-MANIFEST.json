@@ -17,8 +17,8 @@
     },
     {
       "path": ".github/workflows/windows-installer.yml",
-      "bytes": 4463,
-      "sha256": "4b9804ba068ef6b45c5249db0ffc652035d1e5c05e64727bc8cc907a4cce2a84"
+      "bytes": 4458,
+      "sha256": "1d64e6b6285dd5586addaa6e1fc56c2bf00af3c0bf90f0cbebb8783e4d214e3c"
     },
     {
       "path": ".gitignore",
@@ -622,8 +622,8 @@
     },
     {
       "path": "docs/RELEASE-NOTES-V2.1.2.md",
-      "bytes": 2740,
-      "sha256": "22f2982b7d56ae3e4aabc82f52473dca4faf5ea9c71b159108f584b744ac4cd0"
+      "bytes": 3494,
+      "sha256": "7f0dd15252f037bcdb2bedd54a0255e5a6ec712795a9dbdc636765de6f7cbac9"
     },
     {
       "path": "docs/REVUE-V2.1.0-2026-11-13.md",
@@ -1352,8 +1352,8 @@
     },
     {
       "path": "lib/integrated-updater.js",
-      "bytes": 9305,
-      "sha256": "496d17122ffa21297b8ecb73af51f142fd4d468857a54de715fcf87413e0a90c"
+      "bytes": 9495,
+      "sha256": "071f66e64e350544bc1add140a8a1041b65985fe4a1ebae9c8066c40739407b5"
     },
     {
       "path": "lib/library-automation.js",
@@ -1522,8 +1522,8 @@
     },
     {
       "path": "lib/storage-maintenance.js",
-      "bytes": 2772,
-      "sha256": "4d7a687c711afb31869a6f766193205e04e67ff54e923f96964a3605f06ee82d"
+      "bytes": 2440,
+      "sha256": "e2abd798b62d3b19eaab903a58721a752ddc2fcad4801a62e3552570325fc272"
     },
     {
       "path": "lib/studio-rankings.js",
@@ -1539,6 +1539,11 @@
       "path": "lib/system-secrets.js",
       "bytes": 4452,
       "sha256": "f0c17af87a6f17c3c604947f54eef214ca43c817c14603fab3d743fa97926093"
+    },
+    {
+      "path": "lib/update-cache.js",
+      "bytes": 1862,
+      "sha256": "049a2156a4d28644c9014d9641309d4e14cbdf557abdc9b27c24bc279be72330"
     },
     {
       "path": "lib/update-notifications.js",
@@ -2012,8 +2017,8 @@
     },
     {
       "path": "public/beta45.js",
-      "bytes": 14305,
-      "sha256": "9bd466d8135144a1914ed7164949f76a595b8c9e4e058e0edd208ac0310d4f6a"
+      "bytes": 16524,
+      "sha256": "368d21d4e46c004ec63e1123124c76bb3bd340b7f377bcc9fcc50dd56abb1da9"
     },
     {
       "path": "public/beta48-copy.js",
@@ -2608,7 +2613,7 @@
     {
       "path": "README.md",
       "bytes": 6111,
-      "sha256": "bab0217b69ff9052eaf41a30351a583187aea4993266dfdff1b912e5bbc23db7"
+      "sha256": "23710f791f44157217f81d0f1ba376e438154152427f66f4c91c995ea13ed08e"
     },
     {
       "path": "release-version.json",
@@ -3961,6 +3966,11 @@
       "sha256": "2b47550e2ea07e984f6238b5ed372d535326e1ebaf83c893659b120ca95aa834"
     },
     {
+      "path": "scripts/test-update-cache-cleanup.cjs",
+      "bytes": 6637,
+      "sha256": "cb387ac123601ee7db5bd51bdc7ce51a69e73f7968814f0cfd89f6126ec01a31"
+    },
+    {
       "path": "scripts/test-v200-auth-browser.cjs",
       "bytes": 11921,
       "sha256": "b881fa4d2ad715c826700591a8126e9db792757f390b1319275dde2c47b005c0"
@@ -4037,8 +4047,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 6630,
-      "sha256": "606e6496ad39d8e0683fdac5f259f8d1ec81366699f4a501e4be4452bcb172d2"
+      "bytes": 6675,
+      "sha256": "8e2f7d2db8aabeb20e5a35cb871631687c61fee9627ebd3ac9efc2a79aee2a58"
     },
     {
       "path": "scripts/verify-native.cjs",
@@ -4047,8 +4057,8 @@
     },
     {
       "path": "scripts/verify-project.js",
-      "bytes": 10690,
-      "sha256": "6617fcb219c43edcbb208d751cd6fc9a8abe13da7acb981f715883e8a822a976"
+      "bytes": 10785,
+      "sha256": "1e35236c847f2a0233e56df2ed2fe6326933fa5ca8af6ff46ecc617f307e900c"
     },
     {
       "path": "SECURITY.md",

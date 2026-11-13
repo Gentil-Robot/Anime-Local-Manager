@@ -11,9 +11,16 @@
 
 Les messages d’échec sont disponibles dans les sept langues. Les notifications Stable/Bêta et le canal « Versions stables et bêtas » par défaut restent disponibles.
 
+## Nettoyage des installateurs
+
+- Les installateurs de la version déjà installée et des versions antérieures sont supprimables immédiatement, sans attendre sept jours.
+- Le démarrage d’une version installée nettoie ces anciens fichiers du cache d’ALM. Le fichier préparé pour une version plus récente reste protégé.
+- Le bouton de nettoyage affiche le nombre de fichiers supprimés et l’espace libéré. Les fichiers qui n’ont pas pu être supprimés sont signalés ; un rafraîchissement des données de stockage n’efface plus ce résultat.
+- Les fichiers personnels, les téléchargements extérieurs au cache et les liens symboliques ne sont pas supprimés. La suppression revalide le contenu du dossier après la confirmation.
+
 ## Vérification avant publication
 
-La publication exige les 165 suites, les trois parcours natifs Electron et la recette NSIS. Cette dernière teste désormais la séquence complète : confirmation du lanceur, sortie réelle du processus parent, installation, redémarrage automatique d’ALM installé, conservation d’une collection créée avant la mise à jour et persistance après un second lancement. Le résultat figure dans `smoke.updater` du rapport `release-check.json`.
+La publication exige les 166 suites, les trois parcours natifs Electron et la recette NSIS. Cette dernière teste désormais la séquence complète : confirmation du lanceur, sortie réelle du processus parent, installation, redémarrage automatique d’ALM installé, conservation d’une collection créée avant la mise à jour et persistance après un second lancement. Le résultat figure dans `smoke.updater` du rapport `release-check.json`.
 
 ## Installation
 
@@ -23,4 +30,4 @@ Les dépendances, le format de sauvegarde et l’identifiant de l’application 
 
 ## English
 
-ALM 2.1.2 requires a positive acknowledgement from its Windows update helper before closing. Startup failures keep ALM open and retain the downloaded installer for a deliberate retry. The helper checks the installer exit code and explicitly restarts ALM. Publication requires 165 suites and a real Windows close/install/restart/persistence test. Older installations affected by the launch issue need one manual installation of 2.1.2.
+ALM 2.1.2 requires a positive acknowledgement from its Windows update helper before closing. Startup failures keep ALM open and retain the downloaded installer for a deliberate retry. The helper checks the installer exit code and explicitly restarts ALM. Publication requires 166 suites and a real Windows close/install/restart/persistence test. Older installations affected by the launch issue need one manual installation of 2.1.2.
