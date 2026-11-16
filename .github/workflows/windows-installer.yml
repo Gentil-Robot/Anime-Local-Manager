@@ -2,7 +2,7 @@ name: ALM — installateur Windows
 on:
   workflow_dispatch:
   push:
-    branches: [main, master, 'publication/v2.0.0-beta-stable', 'release/v2.1.2']
+    branches: [main, master, 'publication/v2.0.0-beta-stable', 'release/v2.1.3', 'security/v2.1.3-runtime-20261116']
     tags: ['v*', '2.0.0-*']
 permissions:
   contents: read
@@ -94,7 +94,7 @@ jobs:
     concurrency:
       group: alm-publish-${{ github.ref }}
       cancel-in-progress: false
-    if: github.event_name == 'push' && github.ref == 'refs/heads/release/v2.1.2'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/release/v2.1.3'
     needs: installer
     runs-on: windows-latest
     timeout-minutes: 15
@@ -115,9 +115,9 @@ jobs:
         with:
           name: ALM-Windows-${{ github.sha }}
           path: dist
-      - name: Publication 2.1.2 apres verification des preuves
+      - name: Publication 2.1.3 apres verification des preuves
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          & ./Publier-GitHub-V2.ps1 -Installateur './dist/Anime-Local-Manager-2.1.2-Setup-x64.exe' -RapportBuild './dist/release-check.json' -Tag 'v2.1.2' -Ref 'release/v2.1.2' -Publier
+          & ./Publier-GitHub-V2.ps1 -Installateur './dist/Anime-Local-Manager-2.1.3-Setup-x64.exe' -RapportBuild './dist/release-check.json' -Tag 'v2.1.3' -Ref 'release/v2.1.3' -Publier

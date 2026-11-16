@@ -2,10 +2,10 @@
 chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
-title Anime Local Manager V2.0.0 Bêta stable
+title Anime Local Manager V2.1.3 Bêta stable
 where node >nul 2>nul
 if errorlevel 1 goto node_missing
-node -e "if(Number(process.versions.node.split('.')[0])<22){console.error('Node.js 22 ou plus recent est requis.');process.exit(1)}"
+node -e "if(!require('./scripts/release-windows').validNode()){console.error('Node.js corrige 22.23.5+ ou 24.22.3+ requis.');process.exit(1)}"
 if errorlevel 1 goto fail
 if exist "node_modules\electron\dist\electron.exe" goto launch
 echo Installation des dependances...
@@ -17,7 +17,7 @@ call npm run app
 if errorlevel 1 goto fail
 exit /b 0
 :node_missing
-echo Node.js est absent. Installe Node.js 22 ou plus recent, puis relance.
+echo Node.js est absent. Installe Node.js 24.22.3 LTS, puis relance.
 goto fail
 :fail
 echo.
