@@ -7,7 +7,11 @@ const {removeBuildTree}=require('./build-cleanup');
 const {verifyProject}=require('./verify-project'),{checkArtifacts,artifactPaths}=require('./check-windows-artifacts');
 const labels={dependencies:'Dépendances verrouillées',audit:'Audit des dépendances',verification:'Vérification du projet',metadata:'Catalogue embarqué',unpacked:'Préparation commune de l’application',nsis:'Construction de l’installateur',smoke:'Essai réel de démarrage et persistance',promotion:'Validation et livraison'};
 const read=(file,fallback)=>{try{return JSON.parse(fs.readFileSync(file,'utf8'));}catch{return fallback;}};
-function validNode(version=process.versions.node){const [major,minor]=version.split('.').map(Number);return major>22||major===22&&minor>=12;}
+function validNode(version=process.versions.node){
+ const match=/^(\d+)\.(\d+)\.(\d+)$/.exec(version);if(!match)return false;
+ const [major,minor,patch]=match.slice(1).map(Number);
+ return major===22&&(minor>23||minor===23&&patch>=5)||major===24&&(minor>22||minor===22&&patch>=3);
+}
 function signingPolicy(env=process.env){return {requested:!!(env.CSC_LINK||env.WIN_CSC_LINK||env.CSC_NAME||env.WIN_CSC_NAME),required:env.ALM_REQUIRE_SIGNED_RELEASE==='1',publisher:env.ALM_SIGNER_SUBJECT||''};}
 function auditSummary(value,scope){const counts=value?.metadata?.vulnerabilities,levels=['info','low','moderate','high','critical'];if(!counts||value.error||![...levels,'total'].every(k=>Number.isSafeInteger(counts[k])&&counts[k]>=0)||counts.total!==levels.reduce((sum,k)=>sum+counts[k],0))throw Error('Audit '+scope+' indisponible : '+(value?.error?.message||'réponse invalide'));return {scope,status:'checked',...counts};}
 function auditGate(prod,all){
@@ -49,7 +53,7 @@ function electronRuntimeReady(root,version,platform=process.platform){
  }catch{return false;}
 }
 async function releaseWindows({root=path.resolve(__dirname,'..'),resume=false,installerSmoke=false,verifyOnly=false,verbose=false,signal,platform=process.platform,run=U.runCommand,verify=verifyProject,smoke,inspect=checkArtifacts,consoleOutput=console.log,now=Date.now,workspaceOptions}={}){
- if(!validNode())throw Error('Node.js 22.12 minimum requis ; la version de construction validée est indiquée dans .node-version.');
+ if(!validNode())throw Error('Node.js corrigé requis : 22.23.5+ (branche 22) ou 24.22.3+ (branche 24) ; la version de construction validée est indiquée dans .node-version.');
  if(platform!=='win32'&&!verifyOnly)throw Error('Cette publication requiert Windows pour tester le livrable réel. Utiliser GitHub Actions ou la VM Windows.');
  if(process.env.ELECTRON_OVERRIDE_DIST_PATH)throw Error('ELECTRON_OVERRIDE_DIST_PATH doit être retiré pour vérifier le moteur Electron verrouillé du projet.');
  const sourceStart=now();

@@ -7,11 +7,11 @@ cd "$ROOT_DIR"
 log() { printf '\n\033[1;36m[Anime Local Manager]\033[0m %s\n' "$*"; }
 fail() { printf '\n\033[1;31mErreur :\033[0m %s\n' "$*" >&2; exit 1; }
 
-command -v node >/dev/null 2>&1 || fail "Node.js 22.12 ou plus récent est requis."
+command -v node >/dev/null 2>&1 || fail "Node.js 24.22.3 LTS est conseillé (voir .node-version)."
 command -v npm >/dev/null 2>&1 || fail "npm est requis."
-node -e 'const [major,minor]=process.versions.node.split(".").map(Number);process.exit(major>22||(major===22&&minor>=12)?0:1)' || fail "Node.js 22.12 minimum requis (version détectée : $(node --version))."
+node -e 'process.exit(require("./scripts/release-windows").validNode()?0:1)' || fail "Node.js corrigé 22.23.5+ ou 24.22.3+ requis dans sa branche LTS (version détectée : $(node --version))."
 
-log "Préparation du build Linux V2.1.2 Beta stable"
+log "Préparation du build Linux V2.1.3 Beta stable"
 printf 'Node : %s\nnpm  : %s\n' "$(node --version)" "$(npm --version)"
 
 if [ "${ALM_SKIP_INSTALL:-0}" != "1" ]; then
@@ -44,7 +44,7 @@ log "Création des paquets : ${TARGETS[*]}"
 ./node_modules/.bin/electron-builder --linux "${TARGETS[@]}" --publish never
 
 mkdir -p dist
-CHECKSUM_NAME="SHA256SUMS-V2.1.2-Beta-Stable.txt"
+CHECKSUM_NAME="SHA256SUMS-V2.1.3-Beta-Stable.txt"
 CHECKSUM_FILE="dist/$CHECKSUM_NAME"
 : > "$CHECKSUM_FILE"
 while IFS= read -r -d '' artifact; do

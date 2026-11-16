@@ -4,24 +4,25 @@
 
 Anime Local Manager (ALM) est une application **locale, gratuite et open source (MIT)** pour organiser sa collection d'animés sous Windows et Linux. La bibliothèque reste locale par défaut ; la communauté est facultative.
 
-[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2.1.2**](docs/RELEASE-NOTES-V2.1.2.md) · [**Historique technique**](docs/)
+[**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2.1.3**](docs/RELEASE-NOTES-V2.1.3.md) · [**Historique technique**](docs/)
 
-## V2.1.2 Bêta stable
+## V2.1.3 Bêta stable
 
-La V2.1.2 fiabilise **l’installation des mises à jour sous Windows** : ALM attend la confirmation du lanceur avant de se fermer, conserve le téléchargement en cas d’échec et relance explicitement l’application après installation. Les notifications de mise à jour Stable/Bêta, le MFA facultatif et la supervision du moteur restent disponibles.
+La V2.1.3 prépare la **mise à jour de sécurité du moteur Electron et de Node.js**. Les correctifs d’installation, de relance et de nettoyage des installateurs de la V2.1.2 sont conservés, ainsi que les notifications Stable/Bêta, le MFA facultatif et la supervision du moteur.
 
-**Electron 45.3.1**, Node.js **24.22.2** et Chromium **156.0.8078.96** embarqués ; Node.js **24.22.2 LTS** épinglé pour la compilation. La vérification complète comporte **166 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
+**Electron 45.3.3**, Node.js **24.22.3** et Chromium **156.0.8078.100** embarqués ; Node.js **24.22.3 LTS** épinglé pour la compilation. La vérification complète comporte **166 suites**, complétées par les essais natifs Electron et la recette de l'installateur Windows en CI.
 
 La V2 représente environ **six mois de travail**, avec de nombreuses bêtas de développement non publiées. La première **V2.0.0 Bêta stable** a été rendue publique le **7 novembre 2026**. Les fichiers et numéros des anciennes bêtas restent dans l'historique technique.
 
 ### Télécharger
 
-- [Release V2.1.2](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.2) — installateur, rapport Windows et empreinte SHA-256 après réussite de la publication.
+- **V2.1.3 en préparation** : publication après validation des contrôles Windows.
+- [Release publiée V2.1.2](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.2) — dernier installateur disponible avant publication de la V2.1.3.
 - [Toutes les releases](https://github.com/Gentil-Robot/Anime-Local-Manager/releases), dont la [V2.0.0](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0).
 
-L'installateur attendu est `Anime-Local-Manager-2.1.2-Setup-x64.exe`. Ce nom permet aussi à la V2.0.0 de télécharger la mise à jour intégrée. Le canal reste **bêta publique**, avec la release GitHub marquée « pre-release ». Téléchargez depuis la release officielle et comparez l'empreinte dans `SHA256SUMS.txt` ; l'installateur non signé peut provoquer un avertissement Windows SmartScreen.
+L'installateur attendu est `Anime-Local-Manager-2.1.3-Setup-x64.exe`. Ce nom permet aussi à la V2.0.0 de télécharger la mise à jour intégrée. Le canal reste **bêta publique**, avec la release GitHub marquée « pre-release ». Téléchargez depuis la release officielle et comparez l'empreinte dans `SHA256SUMS.txt` ; l'installateur non signé peut provoquer un avertissement Windows SmartScreen.
 
-Consultez les [notes de version 2.1.2](docs/RELEASE-NOTES-V2.1.2.md) et la [revue de la V2.1.0](docs/REVUE-V2.1.0-2026-11-13.md).
+Consultez les [notes de version 2.1.3](docs/RELEASE-NOTES-V2.1.3.md) et la [revue de la V2.1.0](docs/REVUE-V2.1.0-2026-11-13.md).
 
 ## Fonctionnalités
 
@@ -37,7 +38,7 @@ Consultez les [notes de version 2.1.2](docs/RELEASE-NOTES-V2.1.2.md) et la [revu
 
 **Distribution publique ciblée :** installateur NSIS x64 uniquement. La version portable Windows n'est plus proposée.
 
-Pour compiler les sources sous Windows, installer Node.js `24.22.2` LTS (version épinglée en CI), npm 10+, Git et Git LFS, puis :
+Pour compiler les sources sous Windows, installer Node.js `24.22.3` LTS (version épinglée en CI), npm 10+, Git et Git LFS, puis :
 
 ```powershell
 npm ci
@@ -50,7 +51,7 @@ Lancer ensuite `Publier Installateur Windows.bat` pour les vérifications et la 
 
 Les sources fonctionnent aussi sur Linux. Les paquets **AppImage** et **DEB** sont prévus, mais leur publication binaire doit faire l'objet d'une validation distincte de la recette Windows.
 
-Après installation de Node.js 22+, npm et Git LFS :
+Après installation de Node.js 24.22.3 LTS (ou 22.23.5+ dans la branche 22), npm et Git LFS :
 
 ```bash
 git lfs pull
@@ -77,11 +78,11 @@ Les données principales restent sur l'ordinateur de l'utilisateur. Faites une s
 
 ### Documentation et historique technique
 
-Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.1.2 Bêta stable** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
+Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.1.3 Bêta stable** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
 
 - [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
 - [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)
-- [Recette technique Electron actuelle](docs/ELECTRON-45.3.1-RECETTE-2026-11-12.md)
+- [Recette technique Electron actuelle](docs/ELECTRON-45.3.3-RECETTE-2026-11-12.md)
 - [Documentation et archives de développement](docs/)
 
 ---
