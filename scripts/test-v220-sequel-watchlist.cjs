@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {missingSequels}=require('../lib/sequel-watchlist');
+const owned=[{title:'Anime',malId:12,status:'Completed'},{title:'Plan',malId:18,status:'Plan to Watch'}];
+const lookup=row=>row.malId===12?{row:{malId:13,title:'Anime Season 2',startDate:'2026-10-01'},proof:{source:'canonical-title'}}:row.malId===18?{row:{malId:19,title:'Plan season 2'},proof:{source:'canonical-title'}}:null;
+assert.deepEqual(missingSequels(owned,lookup).map(x=>x.malId),[13]);
+assert.deepEqual(missingSequels([...owned,{malId:13,status:'Watching'}],lookup).map(x=>x.malId),[]);
+assert.deepEqual(missingSequels(owned,lookup,{includePlanned:true}).map(x=>x.malId),[13,19]);
+assert.deepEqual(missingSequels(owned,()=>({row:{malId:13,title:'Unverified'},proof:{source:'title-guess'}})),[]);
+assert.deepEqual(missingSequels([...owned,owned[0]],lookup).map(x=>x.malId),[13]);
+console.log('OK ALM 2.2 sequel watchlist: identity, authorization, deduplication and status');
