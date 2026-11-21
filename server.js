@@ -3461,6 +3461,19 @@ app.get('/api/cover-cache/:malId', async (req,res)=>{
  return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});
 });
 
+// V2.2.0 — suggestions from the verified local season resolver only.
+// No network calls, no changes to the collection and no fuzzy auto-add.
+app.get('/api/v220/sequels',async(req,res)=>{
+ await db.whenReady();
+ const library=readAnimes(false).filter(row=>['Watching','Completed'].includes(row.status)).slice(0,120);
+ const candidates=require('./lib/sequel-watchlist').missingSequels(library,row=>{
+  const base=db.getMetadataByMalId(Number(row.malId));
+  return base?nextVerifiedLocalSeason(base):null;
+ },{maxCandidates:40});
+ res.set('Cache-Control','private, no-store');
+ res.json({items:candidates,scanned:library.length,offline:true});
+});
+
 app.get("/api/animes", (req, res) => {
   ownedCoverIndexAt=0;
   res.json(readAnimes(false));
