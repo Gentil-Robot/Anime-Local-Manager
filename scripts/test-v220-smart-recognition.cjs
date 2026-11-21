@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),path=require('node:path'),os=require('node:os'),fsp=require('node:fs/promises');
 const {guessEpisode,inferFromRelativePath,scanLocalMedia}=require('../lib/local-media-index');
 const {rank,normalize}=require('../public/v220-media-match');
-assert.equal(normalize('  L’Été  en   Ville! '),'l été en ville');
+assert.equal(normalize('  L’Été  en   Ville! '),'l ete en ville');
 assert.deepEqual(guessEpisode('Naruto S02E03.mkv'),{titleGuess:'Naruto',seasonGuess:2,episodeGuess:3,confidence:'high'});
 assert.deepEqual(guessEpisode('[SubsPlease] Frieren - 12 [1080p].mkv'),{titleGuess:'Frieren',seasonGuess:0,episodeGuess:12,confidence:'medium'});
 assert.deepEqual(guessEpisode('Vinland.Saga.02x05.mp4'),{titleGuess:'Vinland Saga',seasonGuess:2,episodeGuess:5,confidence:'high'});
