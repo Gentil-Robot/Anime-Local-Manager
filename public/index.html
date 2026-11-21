@@ -91,6 +91,27 @@
       <section id="memoryPage" class="v2-page memory-page hidden" data-no-i18n>
         <header class="studio-banner memory-page-hero"><div class="studio-banner-copy"><span class="studio-kicker" data-notebook-text="journalPrivate">ALM · JOURNAL PRIVÉ</span><h1 data-notebook-text="collectionNotebook">Mes souvenirs</h1><p data-notebook-text="privacy">Privé sur cet ordinateur · inclus dans tes sauvegardes · jamais publié sur ton profil.</p></div><span class="memory-page-hero-symbol" aria-hidden="true">✧</span></header>
         <div class="memory-page-stats" id="memoryPageStats" aria-live="polite"></div>
+        <section id="v220PersonalTimeline" class="alm-v220-personal-panel" data-no-i18n aria-labelledby="v220PersonalTimelineTitle">
+          <div class="alm-v220-personal-header"><div>
+            <h2 id="v220PersonalTimelineTitle">Ma chronologie de visionnage</h2>
+            <p id="v220TimelineIntro">Uniquement les dates de visionnage que tu as enregistrées dans ALM.</p>
+          </div>
+          <label class="alm-v220-personal-year"><span id="v220TimelineYearLabel">Année</span><select id="v220TimelineYear"></select></label>
+          </div>
+          <div class="alm-v220-personal-actions" role="group" aria-label="Affichage chronologique">
+            <button type="button" id="v220TimelineAxisMode" data-timeline-mode="axis" aria-pressed="true">Frise temporelle</button>
+            <button type="button" id="v220TimelineHistoryMode" data-timeline-mode="history" aria-pressed="false">Historique</button>
+          </div>
+          <p id="v220TimelineSummary" class="alm-v220-personal-summary" role="status" aria-live="polite"></p>
+          <div id="v220TimelineAxisPanel">
+            <div id="v220TimelineAxisScroll" class="alm-v220-timeline-scroll" tabindex="0" aria-label="Frise temporelle navigable">
+              <div id="v220TimelineAxisContent" class="alm-v220-timeline-scene"></div>
+            </div>
+            <div id="v220TimelineMonthOverview" class="alm-v220-timeline-months" aria-label="Activité mensuelle"></div>
+          </div>
+          <div id="v220TimelineHistoryPanel" class="alm-v220-timeline-history" hidden></div>
+          <div id="v220TimelineDetails" class="alm-v220-timeline-details" aria-live="polite"></div>
+        </section>
         <div class="memory-page-panel">
           <div class="memory-page-filters">
             <label class="memory-page-search"><span data-notebook-text="search">Rechercher dans mes souvenirs…</span><input id="memoryPageSearch" type="search" autocomplete="off" maxlength="160"></label>
@@ -512,6 +533,16 @@
         <div id="dnaScoreSummary" class="dna-score-summary" aria-live="polite"></div>
         <div id="dnaScorePosters" class="dna-score-posters" aria-label="Tes animés les mieux notés"></div>
         <div id="dnaScoreDist" class="dna-score-dist"></div>
+          <details id="v220ScoreBoard" class="alm-v220-score-board" data-no-i18n>
+            <summary id="v220ScoreBoardToggle">Explorer mes notes avec leurs affiches</summary>
+            <p id="v220ScoreBoardHint">Toutes les notes proviennent de ta bibliothèque locale ; aucun score ne sera modifié ici.</p>
+            <label class="alm-v220-score-filter">
+              <span id="v220ScoreFilterLabel">Afficher</span>
+              <select id="v220ScoreFilter"></select>
+            </label>
+            <p id="v220ScoreSummary" class="alm-v220-personal-summary" role="status"></p>
+            <div id="v220ScoreLanes" class="alm-v220-score-lanes" aria-live="polite"></div>
+          </details>
       </section>
 
       <section class="dna-dashboard-card" id="dnaAlmostDoneCard">
@@ -1286,6 +1317,8 @@
 <script src="/community-workspace-copy.js"></script><script src="/community-workspace.js"></script><script src="/community-requests.js"></script><script src="/community-charter.js"></script><script src="/community.js"></script><script src="/community-mfa.js"></script><script src="/support-diagnostics.js"></script><script src="/maintenance.js"></script>
 <script src="/v220-watch-model.js"></script>
 <script src="/v220-watch-rails.js"></script>
+<script src="/v220-personal-insights-model.js"></script>
+<script src="/v220-personal-insights.js"></script>
 <script src="/v220-media-match.js"></script>
 <script src="/v220-episode-gaps.js"></script>
 <script src="/v220-features.js"></script>
