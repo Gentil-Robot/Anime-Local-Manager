@@ -4131,9 +4131,14 @@
       "sha256": "378c2dacb0bf991d086987cb92eaccfca5b96a6996f902f6fa431211985a27e5"
     },
     {
+      "path": "scripts/test-v220-episode-gaps.cjs",
+      "bytes": 1088,
+      "sha256": "d47ddb5e9ba0d39010d5098c5be24b94e0dd2563658d60274f190b37fe83ee4d"
+    },
+    {
       "path": "scripts/test-v220-integration.cjs",
-      "bytes": 4814,
-      "sha256": "875be519cbd84d5910401a221778356bd8811e0e1b060334e1dd435fcf61303d"
+      "bytes": 4822,
+      "sha256": "60c44b57aa8f9a61b3bb5c424159827860859541c83e53d8a9efb6920c06b8d5"
     },
     {
       "path": "scripts/test-v220-local-media-index.cjs",
@@ -4141,14 +4146,29 @@
       "sha256": "3db561bc276f694e29fceb4b6e18ac3ae0b7826b040b976531f80b697e9e84f0"
     },
     {
+      "path": "scripts/test-v220-offline-media.cjs",
+      "bytes": 2743,
+      "sha256": "cb75e086b83809f232a24d989d61076c32e022fdc98e5f3ab1713b1ef4f4592f"
+    },
+    {
       "path": "scripts/test-v220-sequel-watchlist.cjs",
       "bytes": 1002,
       "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
     },
     {
+      "path": "scripts/test-v220-smart-recognition.cjs",
+      "bytes": 3013,
+      "sha256": "5bc7724e357d3e505c488444a38531ecb145e9a7275cea2e006ea9dab24ac618"
+    },
+    {
       "path": "scripts/test-v220-update-progress.cjs",
       "bytes": 7495,
       "sha256": "5960afd70fd3464bfba24eb47b5b5b7b36e4067dce2c94afd4dfb670d1f3fe67"
+    },
+    {
+      "path": "scripts/test-v220-upgrade-ui.cjs",
+      "bytes": 4663,
+      "sha256": "6c5b07a7b701ef458d56eebf5686502a26998890e47df9cb1f913d43ca866e1f"
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
@@ -4157,8 +4177,8 @@
     },
     {
       "path": "scripts/test-v220-watch-rails.cjs",
-      "bytes": 4712,
-      "sha256": "807d5f06c4fd124fe0357fa12564796d3e9458563fee94bbb76889dd3d9f1749"
+      "bytes": 5200,
+      "sha256": "9cfc28cdc63398711263a8729d9b84972467a3746408424281d47e1db50a1e27"
     },
     {
       "path": "scripts/test-windows-update-handoff.cjs",
