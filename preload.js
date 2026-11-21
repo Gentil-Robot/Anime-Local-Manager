@@ -23,6 +23,10 @@ contextBridge.exposeInMainWorld("animeManager", {
   writeClipboard: value => ipcRenderer.invoke("clipboard-write", value),
   restoreInputFocus: () => ipcRenderer.invoke("input-focus"),
   pickFolder: () => ipcRenderer.invoke("pick-folder"),
+  mediaSelectAndScan:()=>ipcRenderer.invoke('media-select-and-scan'),
+  mediaAssociate:(index,malId)=>ipcRenderer.invoke('media-associate',index,malId),
+  mediaDissociate:index=>ipcRenderer.invoke('media-dissociate',index),
+  mediaSummary:()=>ipcRenderer.invoke('media-summary'),
   getLanguage: () => ipcRenderer.invoke("get-language"),
   setLanguage: language => ipcRenderer.invoke("set-language", language),
   getSystemLocale: () => ipcRenderer.invoke("get-system-locale")
