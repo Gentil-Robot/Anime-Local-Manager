@@ -98,7 +98,7 @@ function rail(kind,rows){
 }
 function visible(){
  const body=document.body,root=$('v220WatchRails');
- return !!root&&!root.hidden&&!body.classList.contains('alm-v2-active')&&!(!$('aboutPage')?.classList.contains('hidden'));
+ return !!root&&!root.hidden&&!body.classList.contains('alm-v2-active')&&!!$('aboutPage')?.classList.contains('hidden');
 }
 function draw(){
  const root=$('v220WatchRails');if(!root)return;
@@ -142,7 +142,7 @@ function init(){
   const host=$(button.closest('.alm-watch-rail')?.dataset.rail==='fresh'?'v220RecentRows':'v220ResumeRows');
   if(!host)return;
   const width=Math.max(260,host.clientWidth*.8);
-  host.scrollBy?.({left:button.dataset.watchScroll==='prev'?-width:width,behavior:matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth'});
+  host.scrollBy?.({left:button.dataset.watchScroll==='prev'?-width:width,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth'});
  }));
  $('v220RecentRefresh')?.addEventListener('click',()=>{scheduleAt=0;void checkSchedule(true);});
  document.querySelectorAll('.nav-item[data-filter]').forEach(button=>button.addEventListener('click',()=>{lastView=button.dataset.filter==='Watching'?'Watching':button.dataset.filter==='Plan to Watch'?'Plan to Watch':'all';draw();}));
