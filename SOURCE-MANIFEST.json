@@ -606,6 +606,11 @@
       "sha256": "87eb12aeccc78fb78de33845fc5c20b1a972b98c9d25a172c1a2d851fc18dc63"
     },
     {
+      "path": "docs/RECETTE-V220-VM-TEST.md",
+      "bytes": 4336,
+      "sha256": "22e43541842d63886f06defb247d85f90ecfe526bc1082cd1213b9fba30edf0d"
+    },
+    {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
       "bytes": 30815,
       "sha256": "a03804a1ec7f0862f72969c1756f2c851a16425d1c39205b882e89b788af4304"
@@ -2702,8 +2707,8 @@
     },
     {
       "path": "scripts/build-v220-vm-preview.cjs",
-      "bytes": 3890,
-      "sha256": "8ad86a0780712f5938b1d8fdfd961f6271cafe1af77edec100d5c8048739568f"
+      "bytes": 4290,
+      "sha256": "8de54c85a6c7a0c79a6e6298178aa0be9a029d3f923cf3e26b859dbac9860af5"
     },
     {
       "path": "scripts/build-windows-retry.js",
