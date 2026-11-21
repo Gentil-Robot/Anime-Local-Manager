@@ -1577,8 +1577,8 @@
     },
     {
       "path": "lib/windows-update-launcher.js",
-      "bytes": 10289,
-      "sha256": "77394d3f548ecbf43b130b56e47580ed3cb218966b1ed793b107cddc483ebd57"
+      "bytes": 10432,
+      "sha256": "cefd00adff3cdee8f10a5403a90141926ae22014bbe284725502fb305e2c9021"
     },
     {
       "path": "LICENSE",
@@ -4252,8 +4252,8 @@
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",
-      "bytes": 7372,
-      "sha256": "89db156b3747f024d9cfaafedae6210d9db3bd96323435ad72643238d5d3a953"
+      "bytes": 7381,
+      "sha256": "70065562c160d97e3dd084bc9f68fbd24c84f0a46a63914e0e3031edc932d9a4"
     },
     {
       "path": "lib/local-media-index.js",
