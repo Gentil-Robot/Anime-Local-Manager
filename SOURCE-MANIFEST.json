@@ -2707,8 +2707,8 @@
     },
     {
       "path": "scripts/build-v220-vm-preview.cjs",
-      "bytes": 4290,
-      "sha256": "8de54c85a6c7a0c79a6e6298178aa0be9a029d3f923cf3e26b859dbac9860af5"
+      "bytes": 4478,
+      "sha256": "7d9348a0f951650a8bc45c02bf8a58b8119de3830f77021aa425389beccaa06a"
     },
     {
       "path": "scripts/build-windows-retry.js",
