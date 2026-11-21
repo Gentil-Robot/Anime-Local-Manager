@@ -19,6 +19,8 @@ const watched=[
 ];
 window._almAnimes=watched;
 let selected=null,requests=0,explicitChecks=0;
+let openedLocal=0;
+window.animeManager={mediaSummary:async()=>[{malId:321,count:1,latestEpisode:5,episodes:[5]}],mediaOpenEpisode:async(id,ep)=>{assert.equal(id,321);assert.equal(ep,5);openedLocal++;return {ok:true};}};
 window.openEdit=anime=>{selected=anime;};
 window.fetch=async (url,options)=>{if(url==='/api/airing/check'){assert.equal(options?.method,'POST');explicitChecks++;}else assert.equal(url,'/api/airing');requests++;return {ok:true,json:async()=>({checkedAt:new Date().toISOString(),items:[
  {animeId:7,episode:5,airingAt:Math.floor(Date.now()/1000)-40,source:'AniList'},
@@ -35,6 +37,9 @@ const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
  assert(!rails.hidden,'Display rails inside existing library');
  assert.equal(window.document.querySelectorAll('#v220RecentRows .alm-watch-card').length,1);
  assert.equal(window.document.querySelectorAll('#v220ResumeRows .alm-watch-card').length,1);
+ const localButton=window.document.querySelector('#v220ResumeRows .alm-watch-local-open');
+ assert(localButton&&!localButton.disabled,'Next locally linked video should be accessible by explicit action');
+ localButton.click();await flush();assert.equal(openedLocal,1);
  assert(window.document.getElementById('v220RecentRows').textContent.includes('NOUVEAU +2'),'Badge must count only aired and unviewed episodes');
  assert(window.document.getElementById('v220ResumeRows').textContent.includes('Épisode 5'));
  const img=window.document.querySelector('#v220ResumeRows img');
