@@ -1382,8 +1382,8 @@
     },
     {
       "path": "lib/local-media-index.js",
-      "bytes": 5202,
-      "sha256": "1676681632dbe6003f3db2f2af37fc96a00ededbecedaad9b3cc5a9e026e8cd7"
+      "bytes": 6834,
+      "sha256": "83a699532c67619ba88a8a14d70ccb070b537f73704b5b61bb30c4e73849251d"
     },
     {
       "path": "lib/local-season-links.js",
@@ -1407,8 +1407,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 2394,
-      "sha256": "decdf5b81f212870effc521ff205567342e0e13bf5c1d3bf5e9db7a0e611d053"
+      "bytes": 5765,
+      "sha256": "68b98c07bfec4d880cf5351cb0a8437ea76822ee93225ef7b88ca1883c5d2674"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1617,8 +1617,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 31218,
-      "sha256": "c94f0a1a101eaebb9f6f7d24da2b0fd5d041aa0c0a6a1ae3d36fc23c33ae124f"
+      "bytes": 31778,
+      "sha256": "e40e1875abfb54a9084346ae495235160216d32eeed27834efb6987c4ec6c74c"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1637,8 +1637,8 @@
     },
     {
       "path": "preload.js",
-      "bytes": 2803,
-      "sha256": "75b93735bc5198019b8344815d5c6017f40c92c1e89182e64d465b9739c1441c"
+      "bytes": 2947,
+      "sha256": "6f1106bd78047d1c991eee761c90651d4c839b61906c3b9fa270e90681950bdc"
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
@@ -2641,9 +2641,19 @@
       "sha256": "454fcc37449730a2aa4f749d8693cb582efd910cab53a684a20756e3f9f0ca21"
     },
     {
+      "path": "public/v220-episode-gaps.js",
+      "bytes": 1603,
+      "sha256": "d586268abb07338cc5ed0a24ac81fd39ea2fd0b59c0beba7a81553dd7b83c69e"
+    },
+    {
       "path": "public/v220-features.js",
       "bytes": 16758,
       "sha256": "a6e925cab85df60b1d59ef60878d97d6406cff27f22eec057f3eb50f4c5aadd7"
+    },
+    {
+      "path": "public/v220-media-match.js",
+      "bytes": 3174,
+      "sha256": "075f14f1b023c97545016f29bf5920653740a0d22c64311f3808f787a4cf23f1"
     },
     {
       "path": "public/v220-watch-model.js",
