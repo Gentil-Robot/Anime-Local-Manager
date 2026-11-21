@@ -7,6 +7,8 @@
     "scripts/test-v220-local-media-index.cjs",
     "scripts/test-v220-sequel-watchlist.cjs",
     "scripts/test-v220-integration.cjs",
+    "scripts/test-v220-watch-model.cjs",
+    "scripts/test-v220-watch-rails.cjs",
     "scripts/test-v211-update-notifications.cjs",
     "scripts/test-v211-update-ui.cjs",
     "scripts/test-v210-update-channels.cjs",
