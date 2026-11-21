@@ -1,0 +1,20 @@
+/* V2.2.0 VM preview — extends the existing ALM visual system */
+.alm-v220-section{border:1px solid var(--border,rgba(180,200,238,.18));border-radius:17px;padding:20px;margin:18px 0 24px;background:var(--panel,rgba(18,28,49,.62));color:inherit}
+.alm-v220-section h2{margin:0 0 5px;font-size:1.2rem}
+.alm-v220-section p{color:var(--muted,#a9b7cc);line-height:1.55}
+.alm-v220-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0}
+.alm-v220-toolbar button,.alm-v220-action,.alm-v220-sequel button{border:1px solid rgba(124,171,251,.4);border-radius:10px;padding:9px 13px;background:rgba(89,128,206,.2);color:inherit;cursor:pointer}
+.alm-v220-section button:disabled{opacity:.5;cursor:default}
+.alm-v220-media-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.alm-v220-media-card,.alm-v220-sequel{border:1px solid rgba(155,181,223,.2);background:rgba(110,145,200,.06);padding:14px;border-radius:12px}
+.alm-v220-media-card strong,.alm-v220-sequel strong{font-size:.95rem;overflow-wrap:anywhere;display:block}
+.alm-v220-media-card small,.alm-v220-sequel small{font-size:.8rem;opacity:.77;display:block;overflow-wrap:anywhere;margin-top:5px}
+.alm-v220-caption{margin:10px 0}
+.alm-v220-media-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+.alm-v220-media-actions input,.alm-v220-media-actions select{max-width:100%;min-width:0;flex:1 1 155px;border:1px solid rgba(155,181,223,.4);background:var(--panel,rgba(18,28,49,.9));color:inherit;padding:8px;border-radius:9px}
+.alm-v220-sequel-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:14px}
+.alm-v220-sequel{display:flex;gap:14px;align-items:center;justify-content:space-between}
+.alm-v220-sequel button{flex-shrink:0}
+.alm-v220-local-badge{display:block;margin-top:9px;color:#80dbb7;font-size:.85em;font-weight:600}
+.alm-v220-note{font-size:.8rem}
+@media(max-width:650px){.alm-v220-section{padding:14px}.alm-v220-sequel{flex-direction:column;align-items:flex-start}}
