@@ -278,7 +278,7 @@ async function startApplication() {
   }
   const portable=process.platform==='win32'?!!process.env.PORTABLE_EXECUTABLE_FILE:!!process.env.APPIMAGE;
   const updateTarget=process.env.PORTABLE_EXECUTABLE_FILE||process.env.APPIMAGE||process.execPath;
-  const updater=require('./lib/integrated-updater').createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:app.isPackaged,portable,target:updateTarget,directory:path.join(app.getPath('userData'),'updates'),getRelease:async force=>serverModule.checkUpdates(force,(await serverModule.maintenanceState()).settings.channel),quit:()=>{closeLocalServer();app.quit();},onChange:state=>mainWindow?.webContents.send('alm-update-state',state)});
+  const updater=require('./lib/integrated-updater').createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:app.isPackaged,portable,target:updateTarget,language:readAppLanguage(),directory:path.join(app.getPath('userData'),'updates'),getRelease:async force=>serverModule.checkUpdates(force,(await serverModule.maintenanceState()).settings.channel),quit:()=>{closeLocalServer();app.quit();},onChange:state=>mainWindow?.webContents.send('alm-update-state',state)});
   appUpdater=updater;
   scheduler=require('./lib/os-maintenance').createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:app.isPackaged,userData:app.getPath('userData')});
   const maintenanceUpdateFor=engine=>async()=>{
