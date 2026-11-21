@@ -27,6 +27,8 @@ contextBridge.exposeInMainWorld("animeManager", {
   mediaAssociate:(index,malId)=>ipcRenderer.invoke('media-associate',index,malId),
   mediaDissociate:index=>ipcRenderer.invoke('media-dissociate',index),
   mediaSummary:()=>ipcRenderer.invoke('media-summary'),
+  mediaSaved:()=>ipcRenderer.invoke('media-saved'),
+  mediaOpenEpisode:(malId,episode)=>ipcRenderer.invoke('media-open-episode',malId,episode),
   getLanguage: () => ipcRenderer.invoke("get-language"),
   setLanguage: language => ipcRenderer.invoke("set-language", language),
   getSystemLocale: () => ipcRenderer.invoke("get-system-locale")
