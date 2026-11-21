@@ -13,8 +13,24 @@ const copy={
  'pt-BR':{fresh:'Episódios exibidos recentemente',recentHint:'Exibições confirmadas nos últimos 7 dias · disponibilidade variável',resume:'Continue de onde parou',resumeHint:'Retome o acompanhamento dos seus animes',noFresh:'Nenhum episódio recente confirmado.',noResume:'Registre episódios vistos para aparecerem aqui.',episode:'Episódio',next:'Retomar no episódio',of:'de',newBadge:'NOVO',anime:'ANIME',unknown:'Total desconhecido',go:'Abrir detalhes e progresso',prev:'Cartões anteriores',following:'Próximos cartões',refresh:'Consultar transmissões online',airingError:'Calendário indisponível',noSchedule:'Última verificação indisponível'},
  'zh-CN':{fresh:'最近播出的剧集',recentHint:'最近7天已确认播出 · 各平台可用性不同',resume:'继续追番',resumeHint:'查看正在观看的动漫进度',noFresh:'没有最近确认播出的新剧集。',noResume:'记录观看进度后会在此显示。',episode:'第',next:'接着看第',of:'共',newBadge:'更新',anime:'动漫',unknown:'总集数未知',go:'打开作品和进度',prev:'上一组',following:'下一组',refresh:'联网检查播出信息',airingError:'播出日历不可用',noSchedule:'没有最近的播出记录'}
 };
-const t=key=>{const language=window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';return (copy[language]||copy.en)[key]||copy.en[key]||key;};
+const localLabels={
+ fr:['Ouvrir l’épisode lié','Le fichier associé n’est pas accessible : vérifie ton disque ou NAS.'],
+ en:['Open linked episode','The linked file is unavailable. Check the drive or NAS.'],
+ es:['Abrir episodio asociado','El archivo no está disponible. Comprueba el disco o NAS.'],
+ de:['Zugeordnete Folge öffnen','Die Datei ist nicht erreichbar. Laufwerk oder NAS prüfen.'],
+ ja:['関連付けされた動画を開く','関連ファイルを開けません。ディスクまたは NAS を確認してください。'],
+ 'pt-BR':['Abrir episódio associado','Arquivo indisponível. Confira o disco ou NAS.'],
+ 'zh-CN':['打开关联的剧集','关联的文件不可用，请检查磁盘或 NAS。']
+};
+const t=key=>{const language=window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';
+ if(key==='localOpen'||key==='fileError')return (localLabels[language]||localLabels.en)[key==='localOpen'?0:1];
+ return (copy[language]||copy.en)[key]||copy.en[key]||key;};
 let lastView='all',schedule={items:[]},scheduleAt=0,loading=null,removed=false;
+const associations=new Map();
+async function reloadAssociations(){
+ if(!window.animeManager?.mediaSummary)return;
+ try{const rows=await window.animeManager.mediaSummary();associations.clear();for(const entry of rows||[])associations.set(Number(entry.malId),entry);draw();}catch{}
+}
 const validId=v=>Number.isSafeInteger(Number(v))&&Number(v)>0?Number(v):0;
 const apiPoster=anime=>{
  const raw=String(anime?.poster||anime?.imageUrl||'').trim();
@@ -86,7 +102,24 @@ function rail(kind,rows){
  const host=$(kind==='fresh'?'v220RecentRows':'v220ResumeRows'),empty=$(kind==='fresh'?'v220RecentEmpty':'v220ResumeEmpty');
  if(!host||!empty)return;
  const frag=document.createDocumentFragment();
- for(const row of rows)frag.append(card(row,{fresh:kind==='fresh'}));
+ for(const row of rows){
+  const tile=card(row,{fresh:kind==='fresh'});
+  const episodes=associations.get(Number(row.anime?.malId))?.episodes;
+  if(kind==='resume'&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
+   const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';
+   const open=document.createElement('button');open.type='button';open.className='alm-watch-local-open';
+   open.textContent='▶ '+t('localOpen')+' '+row.next;
+   open.addEventListener('click',async()=>{
+    open.disabled=true;
+    try{
+     const result=await window.animeManager.mediaOpenEpisode(Number(row.anime.malId),row.next);
+     if(!result?.ok)window.notifyApp?.(t('fileError')+(result?.code?' ('+result.code+')':''),'error');
+    }catch{window.notifyApp?.(t('fileError'),'error');}
+    finally{open.disabled=false;}
+   });
+   wrapper.append(tile,open);frag.append(wrapper);
+  }else frag.append(tile);
+ }
  host.replaceChildren(frag);
  empty.textContent=rows.length?'':t(kind==='fresh'?'noFresh':'noResume');empty.hidden=rows.length>0;
  host.hidden=rows.length===0;
@@ -150,6 +183,11 @@ function init(){
  window.addEventListener('alm:library-rendered',onRendered);
  window.addEventListener('alm:collection-changed',()=>{draw();if(visible())void checkSchedule();});
  window.addEventListener('alm:language-changed',draw);
+ window.addEventListener('alm:media-associations-changed',event=>{
+   associations.clear();for(const item of event.detail?.summaries||[])associations.set(Number(item.malId),item);
+   draw();
+ });
+ void reloadAssociations();
  window.addEventListener('alm:view-changed',e=>{if(e.detail?.page==='aboutPage')root.hidden=true;});
  draw();
  if(M.watching(watched()).length)void checkSchedule();
