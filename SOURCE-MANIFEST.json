@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 6673,
-      "sha256": "cd4c62d11cc66704e6a41a7d1d49c88c761b5b7cb844874cf3961175e7c743d6"
+      "bytes": 6925,
+      "sha256": "efdb5fe7d5f72606e2f8d934af3f32eb2dedfc23cc8c30dde0df9f60fc825636"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 12480,
-      "sha256": "cb45119d03fca8bebbf24102ef7799d3f9df36b9bde9f578ca7967be4e2b385f"
+      "bytes": 12651,
+      "sha256": "2d42610039121ee3596d20d40dcd9e279aca63da924e3ae360ab838115e2d868"
     },
     {
       "path": "public/v220.css",
@@ -4133,12 +4133,12 @@
     {
       "path": "scripts/test-v220-watch-model.cjs",
       "bytes": 2112,
-      "sha256": "82861311a83f69eec77a7b0fcce9ecc2e8e055c89a1445af844a84bf5401aefd"
+      "sha256": "988c3659a024c47079cbf22a0c63adce1cd01125bfbde26b208a49dd93a4e1de"
     },
     {
       "path": "scripts/test-v220-watch-rails.cjs",
-      "bytes": 3941,
-      "sha256": "df5de6a18e8b7aad6e9976d80966e67d8bc6200b2ac9d48b2f59d2a4a8d36017"
+      "bytes": 4250,
+      "sha256": "667b15a1e93428b9e1cde48fec8e25649a0c1fa40b311f5c5dc4dab6c7740e26"
     },
     {
       "path": "scripts/test-windows-update-handoff.cjs",
