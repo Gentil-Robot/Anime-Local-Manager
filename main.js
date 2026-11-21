@@ -273,7 +273,7 @@ async function startApplication() {
   const backupSecrets=await systemSecrets.backupStore(safeStorage,app.getPath('userData'));
   if(backupSecrets)await serverModule.configureBackupSecrets?.(backupSecrets);
 
-  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary"]) {
+  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary", "media-saved", "media-open-episode"]) {
     ipcMain.removeHandler(channel);
   }
   const portable=process.platform==='win32'?!!process.env.PORTABLE_EXECUTABLE_FILE:!!process.env.APPIMAGE;
@@ -340,6 +340,14 @@ async function startApplication() {
   let mediaIndex=null;
   const mediaLinks=()=>mediaStore.load(mediaStoreFile);
   ipcMain.handle('media-summary',event=>{trusted(event);return mediaStore.summary(mediaStoreFile);});
+  ipcMain.handle('media-saved',event=>{trusted(event);return mediaStore.list(mediaStoreFile);});
+  ipcMain.handle('media-open-episode',async(event,malId,episode)=>{
+    trusted(event);
+    const located=await mediaStore.locate(mediaStoreFile,malId,episode);
+    if(!located.ok)return located;
+    const failure=await shell.openPath(located.absolutePath);
+    return failure?{ok:false,code:'ALM_MEDIA_OPEN_FAILED'}:{ok:true,filename:located.filename};
+  });
   ipcMain.handle('media-select-and-scan',async event=>{
     trusted(event);
     let selection;
@@ -364,7 +372,7 @@ async function startApplication() {
     const fstat=await require('node:fs/promises').lstat(full);
     if(!fstat.isFile()||fstat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
     return mediaStore.record(mediaStoreFile,{root:mediaIndex.root,relativePath:file.relativePath,
-      filename:file.filename,episodeGuess:file.episodeGuess,malId});
+      filename:file.filename,episodeGuess:file.episodeGuess,seasonGuess:file.seasonGuess,episodeEndGuess:file.episodeEndGuess,malId});
   });
   ipcMain.handle('media-dissociate',async(event,index)=>{
     trusted(event);
