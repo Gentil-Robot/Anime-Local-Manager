@@ -4252,8 +4252,8 @@
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",
-      "bytes": 7381,
-      "sha256": "70065562c160d97e3dd084bc9f68fbd24c84f0a46a63914e0e3031edc932d9a4"
+      "bytes": 7495,
+      "sha256": "5960afd70fd3464bfba24eb47b5b5b7b36e4067dce2c94afd4dfb670d1f3fe67"
     },
     {
       "path": "lib/local-media-index.js",
