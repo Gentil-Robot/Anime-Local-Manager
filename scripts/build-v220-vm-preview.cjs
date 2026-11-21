@@ -35,7 +35,11 @@ save('public/design-core.js',read('public/design-core.js').replace(/window\.ALM_
  .replace(/window\.ALM_RELEASE\?\.publicVersion \|\| "V2\.1\.3 Bêta stable"/g,'window.ALM_RELEASE?.publicVersion || "V2.2.0 VM TEST"'));
 save('main.js',read('main.js').replace("app.setAppUserModelId?.('fr.gentilrobot.animelocalmanager')","app.setAppUserModelId?.('fr.gentilrobot.animelocalmanager.vmtest')")
  .replace(/createIntegratedUpdater\(\{current:app\.getVersion\(\),platform:process\.platform,arch:process\.arch,packaged:app\.isPackaged,/,
- 'createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:false,'));
+ 'createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:false,')
+ .replace(/createScheduler\(\{exe:process\.env\.APPIMAGE\|\|process\.execPath,packaged:app\.isPackaged,/,
+ 'createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:false,'));
+// Keep the VM preview uninstall script tied to its OWN executable, never stable ALM.
+save('build/installer.nsh',read('build/installer.nsh').replace(/Anime Local Manager\.exe/g,'Anime Local Manager VM Test.exe'));
 const cli=require.resolve('electron-builder/out/cli/cli.js');
 console.log('[VM TEST] Building isolated preview 2.2.0 with independent app identity. Auto-updater disabled.');
 const result=spawnSync(process.execPath,[cli,'--win','nsis','--publish','never'],{
