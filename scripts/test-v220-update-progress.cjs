@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const {spawnSync}=require('node:child_process'),{EventEmitter}=require('node:events');
 const {WINDOWS_PROGRESS_SCRIPT}=require('../lib/windows-update-progress');
-const {WINDOWS_SCRIPT,WINDOWS_BOOTSTRAP_SCRIPT,launchWindows,readState}=require('../lib/windows-update-launcher');
+const {WINDOWS_SCRIPT,WINDOWS_BOOTSTRAP_SCRIPT,PROGRESS_LOADER,launchWindows,readState}=require('../lib/windows-update-launcher');
 const launcher=fs.readFileSync(path.join(__dirname,'../lib/windows-update-launcher.js'),'utf8');
 const integrated=fs.readFileSync(path.join(__dirname,'../lib/integrated-updater.js'),'utf8');
 const main=fs.readFileSync(path.join(__dirname,'../main.js'),'utf8');
@@ -33,12 +33,21 @@ assert(smoke.includes('showProgress:false')&&probe.includes('showProgress:false'
 if(process.platform==='win32'){
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'alm-update-ps-'));
   try{
-    for(const [name,source] of [['progress',WINDOWS_PROGRESS_SCRIPT],['worker',WINDOWS_SCRIPT],['bootstrap',WINDOWS_BOOTSTRAP_SCRIPT]]){
+    for(const [name,source] of [['progress',WINDOWS_PROGRESS_SCRIPT],['worker',WINDOWS_SCRIPT],['bootstrap',WINDOWS_BOOTSTRAP_SCRIPT],['progress-loader',PROGRESS_LOADER]]){
       const file=path.join(directory,name+'.ps1');fs.writeFileSync(file,source);
       const checker="$tokens=$null;$errors=$null;[System.Management.Automation.Language.Parser]::ParseFile($env:ALM_PS_FILE,[ref]$tokens,[ref]$errors)|Out-Null;foreach($problem in $errors){Write-Output ($problem.Message+' @ '+$problem.Extent.StartLineNumber)};if($errors.Count){exit 1}";
       const check=spawnSync('powershell.exe',['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(checker,'utf16le').toString('base64')],{env:{...process.env,ALM_PS_FILE:file},encoding:'utf8',timeout:15000});
       assert.equal(check.status,0,name+' PowerShell syntax error: '+(check.stdout||'')+(check.stderr||''));
     }
+    const fixture=path.join(directory,'trusted.ps1');fs.writeFileSync(fixture,"Write-Output 'ALM_GUI_CHECK_OK'");
+    const digest=require('node:crypto').createHash('sha256').update(fs.readFileSync(fixture)).digest('hex');
+    const args=['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(PROGRESS_LOADER,'utf16le').toString('base64')];
+    const env={...process.env,ALM_UPDATE_PROGRESS_FILE:fixture,ALM_UPDATE_PROGRESS_DIGEST:digest};
+    const good=spawnSync('powershell.exe',args,{env,encoding:'utf8',timeout:15000});
+    assert.equal(good.status,0,'Signed GUI loader should execute trusted content: '+good.stderr);
+    assert(good.stdout.includes('ALM_GUI_CHECK_OK'));
+    const bad=spawnSync('powershell.exe',args,{env:{...env,ALM_UPDATE_PROGRESS_DIGEST:'0'.repeat(64)},encoding:'utf8',timeout:15000});
+    assert.notEqual(bad.status,0,'Tampered GUI source must fail closed');
   }finally{fs.rmSync(directory,{recursive:true,force:true});}
 }
 (async()=>{
