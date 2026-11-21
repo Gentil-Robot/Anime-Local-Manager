@@ -217,17 +217,22 @@ function translate(){
  if($('v220MediaIntro'))$('v220MediaIntro').textContent=t('intro');
  if($('v220SequelTitle'))$('v220SequelTitle').textContent=t('sequelTitle');
  if($('v220SequelIntro'))$('v220SequelIntro').textContent=t('sequelIntro');
- renderMedia();refreshSummaries();
+ if($('v220GoWatching'))$('v220GoWatching').textContent=t('goWatching');
+ if($('v220GoSeasons'))$('v220GoSeasons').textContent=t('goSeasons');
+ connectivity();renderMedia();renderSaved();renderMissing();refreshSummaries();
 }
 function init(){
  const nav=$('navLocalMedia');
  nav?.addEventListener('click',()=>{if(typeof window.showV2Page==='function')window.showV2Page('localMediaPage','navLocalMedia');translate();});
  $('v220MediaChoose')?.addEventListener('click',choose);
  $('v220MediaMore')?.addEventListener('click',()=>{visible+=40;renderMedia();});
- $('navSeasonNews')?.addEventListener('click',()=>{void loadSequels();});
+ $('navSeasonNews')?.addEventListener('click',()=>{void loadSequels();renderMissing();});
+ $('v220GoWatching')?.addEventListener('click',()=>document.querySelector('.nav-item[data-filter="Watching"]')?.click());
+ $('v220GoSeasons')?.addEventListener('click',()=>$('navSeasonNews')?.click());
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});
  window.addEventListener('alm:collection-changed',()=>{void refreshSummaries();});
  window.addEventListener('alm:language-changed',translate);
+ window.addEventListener('online',connectivity);window.addEventListener('offline',connectivity);
  translate();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
