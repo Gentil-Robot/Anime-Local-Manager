@@ -38,3 +38,13 @@ Sources : https://korbo.fr/mentions-legales ; https://docs.anilist.co/guide/term
 ## Préconditions de publication
 
 Conserver le mode sans compilation native, les sauvegardes et les contrôles d'âge ; valider les sept langues ; tester un redémarrage sans Internet ; exécuter npm run verify et une recette d'installation Windows isolée ; ne jamais modifier la release v2.1.3 ni redistribuer d'images tierces non autorisées.
+
+## Mise a jour Windows : progres visible et resultat independant d'ALM
+
+Exigence 2.2.0 : l'installation declenchee depuis ALM doit afficher un suivi **independant de la fenetre Electron**. Le suivi est lance et confirme **avant** qu'ALM ne se ferme. Si Windows refuse de lancer ou d'afficher cette fenetre, ALM reste ouvert et conserve le fichier d'installation pour une tentative ulterieure.
+
+Phases reelles : attente de fermeture, verification du SHA-256, installation silencieuse NSIS (barre animee **indeterminee**, aucun pourcentage trompeur), verification de l'executable et de sa version, resultat **reussite ou echec**. Le suivi reste visible jusqu'a la fermeture volontaire de la fenetre, meme si ALM ne redemarre pas.
+
+Un echec du redemarrage ne doit **pas** devenir un faux echec d'installation. L'installateur doit retourner un code de sortie nul et sa cible/version doivent etre verifiees avant la confirmation de reussite. Les erreurs sont conservees dans `update-error.log`, l'installateur n'est pas efface en cas d'echec et les sept langues sont presentes dans la fenetre native.
+
+Implementation experimentale : `lib/windows-update-progress.js` et integration dans `lib/windows-update-launcher.js` ; tests `scripts/test-v220-update-progress.cjs`, `scripts/test-windows-update-handoff.cjs` et recette Windows `scripts/smoke-update-handoff.cjs` (mode sans interface pour CI automatisee). Le rendu WinForms et l'installation reelle doivent encore etre testes sur un poste Windows interactif ; **aucune v2.2.0 publique a ce stade**.
