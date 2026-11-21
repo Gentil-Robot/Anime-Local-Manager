@@ -49,3 +49,59 @@ jobs:
         run: |
           node scripts/verify-project.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+
+  vm-preview-installer:
+    # Only this PR branch, never public release or a deployment.
+    if: github.event_name == 'pull_request' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
+    needs: verify
+    runs-on: windows-latest
+    timeout-minutes: 100
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Sources de l'aperçu VM (Git LFS)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          lfs: true
+          persist-credentials: false
+      - name: Node LTS verrouillé
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Caches de compilation Electron
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ${{ runner.temp }}/alm-downloads
+          key: alm-v220-preview-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: alm-v220-preview-${{ runner.os }}-
+      - name: Dépendances verrouillées
+        run: npm ci
+      - name: Générer l'installateur 2.2.0 VM TEST (identité isolée)
+        env:
+          ALM_VM_PREVIEW_BUILD: '1'
+          ELECTRON_CACHE: ${{ runner.temp }}/alm-downloads/electron
+          ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/alm-downloads/builder
+        run: |
+          node scripts/build-v220-vm-preview.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Tester le vrai installateur NSIS sur ce runner jetable
+        env:
+          ALM_VM_PREVIEW_BUILD: '1'
+          ALM_INSTALLER_TEST_DISPOSABLE: '1'
+        run: |
+          node scripts/v220-smoke-preview.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Préversion à télécharger pour VM, jamais publiée
+        if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ALM-2.2.0-VM-TEST-${{ github.sha }}
+          path: |
+            dist/Anime-Local-Manager-2.2.0-VM-TEST-x64.exe
+            dist/VM-TEST-REPORT.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
