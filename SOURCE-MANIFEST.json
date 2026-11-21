@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 4336,
-      "sha256": "22e43541842d63886f06defb247d85f90ecfe526bc1082cd1213b9fba30edf0d"
+      "bytes": 6673,
+      "sha256": "cd4c62d11cc66704e6a41a7d1d49c88c761b5b7cb844874cf3961175e7c743d6"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -2377,8 +2377,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 89496,
-      "sha256": "cbb04aef49eb222b4f51e90830a8b7d2b454149310db53258ca11e05196d6ae9"
+      "bytes": 91968,
+      "sha256": "3f6409738251453b64d1bf641cad853dd676e6f860618b07fa909bbd0e80bcee"
     },
     {
       "path": "public/input-focus.js",
@@ -2646,9 +2646,19 @@
       "sha256": "a6e925cab85df60b1d59ef60878d97d6406cff27f22eec057f3eb50f4c5aadd7"
     },
     {
+      "path": "public/v220-watch-model.js",
+      "bytes": 3287,
+      "sha256": "90b6e58a24b69821e0a96b166a787be8e11ddd999f2a421c549cd0827f3d5046"
+    },
+    {
+      "path": "public/v220-watch-rails.js",
+      "bytes": 12480,
+      "sha256": "cb45119d03fca8bebbf24102ef7799d3f9df36b9bde9f578ca7967be4e2b385f"
+    },
+    {
       "path": "public/v220.css",
-      "bytes": 2034,
-      "sha256": "10285dae0d88b12dd6d0ec6380da6cb9dd5a3c4bd05cac8d94d4546e591feac3"
+      "bytes": 6451,
+      "sha256": "848de6a42eac7b8b192252917037320ff369d3e86225ee9671e6abd61edb73c2"
     },
     {
       "path": "public/watch-status.js",
@@ -4121,6 +4131,16 @@
       "sha256": "5960afd70fd3464bfba24eb47b5b5b7b36e4067dce2c94afd4dfb670d1f3fe67"
     },
     {
+      "path": "scripts/test-v220-watch-model.cjs",
+      "bytes": 2112,
+      "sha256": "82861311a83f69eec77a7b0fcce9ecc2e8e055c89a1445af844a84bf5401aefd"
+    },
+    {
+      "path": "scripts/test-v220-watch-rails.cjs",
+      "bytes": 3941,
+      "sha256": "df5de6a18e8b7aad6e9976d80966e67d8bc6200b2ac9d48b2f59d2a4a8d36017"
+    },
+    {
       "path": "scripts/test-windows-update-handoff.cjs",
       "bytes": 3978,
       "sha256": "314d77243926b25b99bfed87c3f80440451c65d05402e6b4b8e4095081654543"
@@ -4132,8 +4152,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 6854,
-      "sha256": "a1936a73003d714d39405ff15b70ecb0541c88f3845543fe87ff274a8e292631"
+      "bytes": 6936,
+      "sha256": "3edc0aa13e8393a6732771009419670294ea2e9feca48dcde328619c072314e2"
     },
     {
       "path": "scripts/verify-native.cjs",
