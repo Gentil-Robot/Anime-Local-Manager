@@ -1577,8 +1577,8 @@
     },
     {
       "path": "lib/windows-update-launcher.js",
-      "bytes": 10432,
-      "sha256": "cefd00adff3cdee8f10a5403a90141926ae22014bbe284725502fb305e2c9021"
+      "bytes": 10631,
+      "sha256": "89501eaced95b0549398559ba9173671fbbb72f92e10a50dfdb94a4a6879a724"
     },
     {
       "path": "LICENSE",
