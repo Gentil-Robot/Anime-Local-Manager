@@ -124,24 +124,34 @@ function renderMedia(){
   const card=el('article',null,'alm-v220-media-card'),head=el('div',null,'alm-v220-media-head');
   const title=el('strong',file.filename),meta=el('small',String(file.relativePath||'')+' · '+Math.max(0,Math.round((Number(file.sizeBytes)||0)/1048576))+' MB');
   const left=el('div');left.append(title,meta);head.append(left);
-  const match=bestMatch(file,idx);
+  const proposal=window.ALM_V220_MEDIA_MATCH?.rank(file,animeList())||null;
+  const match=proposal?proposal.confidence==='high'?proposal.malId:0:bestMatch(file,idx);
   const current=Number(file.linkedMalId)||0;
   const row=animeList().find(a=>Number(a.malId)===(current||match));
-  const caption=el('p',current?t('linked')+': '+(row?.title||String(current)):match?t('proposed')+': '+(row?.title||String(match)):t('unknown'),'alm-v220-caption');
+  const confidence=current?t('linked'):match?t('exact'):proposal?.candidates?.length?t('review'):t('unknown');
+  const caption=el('p',
+   current?t('linked')+': '+(row?.title||String(current)):
+   match?t('proposed')+': '+(row?.title||String(match))+' · '+confidence:
+   proposal?.candidates?.length?t('review')+': '+proposal.candidates.slice(0,3).map(a=>a.title).join(' / '):
+   t('unknown'),'alm-v220-caption');
   const actions=el('div',null,'alm-v220-media-actions');
   let selected=match;
   if(!current){
    const search=el('input');search.type='search';search.placeholder=t('search');search.maxLength=120;
    const suggestions=el('select');suggestions.setAttribute('aria-label',t('proposed'));
    const populate=term=>{
-    suggestions.replaceChildren();const choose=el('option',t('unknown'));choose.value='';suggestions.append(choose);
-    const options=animeList().filter(a=>Number(a.malId)>0&&(term?normalize(a.title).includes(normalize(term)):Number(a.malId)===match)).slice(0,20);
-    for(const a of options){const opt=el('option',a.title);opt.value=String(a.malId);suggestions.append(opt);}
-    suggestions.value=options.some(a=>Number(a.malId)===match)?String(match):'';
+    suggestions.replaceChildren();const choose=el('option',t('review'));choose.value='';suggestions.append(choose);
+    const candidates=term
+      ?animeList().filter(a=>Number(a.malId)>0&&[a.title,a.titleEn,a.titleRomaji,...(Array.isArray(a.synonyms)?a.synonyms.slice(0,10):[])].some(name=>normalize(name).includes(normalize(term)))).slice(0,20)
+      :proposal?.candidates?.length
+        ?proposal.candidates.map(c=>animeList().find(a=>Number(a.malId)===c.malId)).filter(Boolean)
+        :animeList().filter(a=>Number(a.malId)===match).slice(0,5);
+    for(const a of candidates){const option=el('option',a.title);option.value=String(a.malId);suggestions.append(option);}
+    suggestions.value=!term&&match&&candidates.some(a=>Number(a.malId)===match)?String(match):'';
     selected=Number(suggestions.value)||0;
    };
    populate('');search.addEventListener('input',()=>populate(search.value));suggestions.addEventListener('change',()=>{selected=Number(suggestions.value)||0;});
-   if(!match){search.hidden=false;}else search.hidden=true;
+   if(match)search.hidden=true;
    actions.append(search,suggestions);
   }
   const button=el('button',current?t('dissociate'):t('associate'),'alm-v220-action');
@@ -156,7 +166,15 @@ function renderMedia(){
     renderMedia();await refreshSummaries();
    }catch(e){window.notifyApp?.(String(e.message||e),'error');button.disabled=false;}
   });
-  actions.append(button);card.append(head,caption,actions);host.append(card);
+  actions.append(button);
+  if(current&&Number(file.episodeGuess)>0&&window.animeManager?.mediaOpenEpisode){
+    const open=el('button',t('openVideo'),'alm-v220-action');open.type='button';
+    open.addEventListener('click',async()=>{
+      open.disabled=true;await openEpisode(current,file.episodeGuess);open.disabled=false;
+    });
+    actions.append(open);
+  }
+  card.append(head,caption,actions);host.append(card);
  }
  const more=$('v220MediaMore');more.hidden=files.length<=visible;
  more.textContent=t('next')+' ('+(files.length-visible)+' '+t('more')+')';
