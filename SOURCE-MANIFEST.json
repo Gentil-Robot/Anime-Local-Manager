@@ -2377,8 +2377,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 91968,
-      "sha256": "3f6409738251453b64d1bf641cad853dd676e6f860618b07fa909bbd0e80bcee"
+      "bytes": 95671,
+      "sha256": "d48d49f8af805a8c578073b2301cd9ccd30a680e66dbbc2cbe1be8e37d9448ec"
     },
     {
       "path": "public/input-focus.js",
@@ -2647,13 +2647,23 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 16758,
-      "sha256": "a6e925cab85df60b1d59ef60878d97d6406cff27f22eec057f3eb50f4c5aadd7"
+      "bytes": 26622,
+      "sha256": "75c1749f47530c5396c94c2e7d68783fa3584a85651232dde078c14ac93598d8"
     },
     {
       "path": "public/v220-media-match.js",
       "bytes": 3174,
       "sha256": "075f14f1b023c97545016f29bf5920653740a0d22c64311f3808f787a4cf23f1"
+    },
+    {
+      "path": "public/v220-personal-insights-model.js",
+      "bytes": 4214,
+      "sha256": "109b3e2900ea070f28e9dfe700c23e42086eb4565973ceab8a32516d5f2c4891"
+    },
+    {
+      "path": "public/v220-personal-insights.js",
+      "bytes": 16032,
+      "sha256": "e1a4d3085976bb130bd7e58a2e23184427ae773d7f4c80f31c156fcafc01af09"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -2662,13 +2672,13 @@
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 12747,
-      "sha256": "797c64419e83f1c13d19ed6e536d12ffae5f90f8550b05e396ea1682ee76c7c7"
+      "bytes": 14991,
+      "sha256": "cc4ae928d81a889500e65684e3fabb01012fdd3246e254725f74af41d374e6e8"
     },
     {
       "path": "public/v220.css",
-      "bytes": 6451,
-      "sha256": "848de6a42eac7b8b192252917037320ff369d3e86225ee9671e6abd61edb73c2"
+      "bytes": 14867,
+      "sha256": "76e0d70ba75968843a82da7eb78860fbbfce92b48092016ca561a80d8cdfc60c"
     },
     {
       "path": "public/watch-status.js",
