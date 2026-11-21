@@ -7,7 +7,7 @@ async function testUpdateHandoff({root,installer,installedExe,version,expectedCo
  const profile=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'alm-release-'))),nonce=crypto.randomBytes(32).toString('hex');
  const updates=path.join(profile,'updates é $ (test)'),state=path.join(updates,'update-install.json'),errorLog=path.join(updates,'update-error.log');fs.mkdirSync(updates);
  const readyFile=path.join(updates,'ready.json');atomicJson(readyFile,{fixture:true});
- const job={file:installer,target:installedExe,digest:fileHash(installer),portable:false,installDir:path.dirname(installedExe),log:errorLog,readyFile,version};
+ const job={file:installer,target:installedExe,digest:fileHash(installer),portable:false,installDir:path.dirname(installedExe),log:errorLog,readyFile,version,showProgress:false};
  const recipe=path.join(updates,'parent.cjs');fs.writeFileSync(recipe,"'use strict';const fs=require('node:fs'),path=require('node:path'),{app}=require('electron');const {launchWindows}=require(process.env.ALM_HANDOFF_MODULE);const profile=path.join(process.env.ALM_RELEASE_PROFILE,'handoff-parent');fs.mkdirSync(profile,{recursive:true});app.setPath('userData',profile);app.disableHardwareAcceleration();app.whenReady().then(async()=>{await launchWindows({...JSON.parse(process.env.ALM_HANDOFF_JOB),pid:process.pid});fs.writeFileSync(process.env.ALM_HANDOFF_ACK,'acknowledged');app.quit();}).catch(e=>{console.error(e);app.exit(1);});");
  atomicJson(path.join(profile,'.alm-release-test.json'),{nonce,phase:'seed',expectedCount});
  const env={...smokeEnvironment(profile,nonce),ALM_HANDOFF_MODULE:path.join(root,'lib/windows-update-launcher.js'),ALM_HANDOFF_JOB:JSON.stringify(job),ALM_HANDOFF_ACK:path.join(updates,'ack.txt')};
