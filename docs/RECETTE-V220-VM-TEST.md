@@ -50,3 +50,35 @@ Les deux bandeaux sont une évolution des pages **Animés** et **En cours** exis
 6. Les images sont tirées des jaquettes **déjà référencées dans la bibliothèque ALM**, en réutilisant la route de cache local existante lorsqu'elle est applicable. Aucune aspiration ou redistribution nouvelle d'images tierces n'est effectuée.
 
 **Limites :** les images ne sont pas des captures de scènes vidéo et ALM n'est pas un lecteur de streaming ; seul le bouton de vérification peut lancer une recherche réseau bornée par le moteur de diffusion déjà présent dans ALM.
+
+
+## Upgrade V2.2.0 : quatre améliorations locales et deux vues enrichies
+
+L'objectif est d'améliorer les services **déjà existants**. Seanime sert de référence pour la continuité entre collection, fichiers et progression. AnimeList (cwh555/AnimeList) sert de référence fonctionnelle pour les regroupements par notes et la présentation chronologique. Aucun code, composant ni visuel tiers n'est copié.
+
+### Recette « Mes fichiers »
+
+1. Choisir un dossier avec plusieurs conventions de nommage : Frieren S01E04.mkv ; Vinland Saga 02x05.mp4 ; [Groupe] Frieren - 12 [1080p].mkv ; Frieren/Season 2/Episode 08.mkv ; fichiers sans numéro connu.
+2. Confirmer que les titres alternatifs et numéros de saison servent à **proposer** les correspondances. Deux saisons portant un nom identique sans saison claire doivent imposer une sélection manuelle. Aucune association sans clic volontaire.
+3. Associer E11 puis E13 et vérifier dans **Saisons** que E12 apparaît parmi les **épisodes non associés**, sans annoncer à tort que le fichier est introuvable sur le disque.
+4. Relancer l'application hors connexion : dans « Mes fichiers », les associations précédentes doivent être visibles sans rescanner un dossier. Le bouton d'ouverture d'un fichier utilise le lecteur défini par l'OS et ne marque aucun épisode comme vu. Un NAS déconnecté doit afficher une indisponibilité explicite.
+5. Tester les raccourcis de navigation « En cours » et « Saisons », les sept langues et la manipulation au clavier.
+
+### Recette « Anime DNA » : explorer mes notes
+
+1. Ajouter dans la bibliothèque quelques animés notés 10/10, 9/10 et 6/10 ainsi que des animés **sans note**.
+2. Ouvrir **Anime DNA**, puis le volet « Explorer mes notes avec leurs affiches » sous « Distribution de tes notes ». Les notes de **1 à 10** doivent être regroupées séparément, les non-notés dans leur propre catégorie.
+3. Choisir une note dans le filtre. Cliquer sur une affiche : la fiche de l'animé existante s'ouvre. **Aucune note n'est changée par le tableau** ; pas de glisser-déposer modifiant les données à cette étape.
+
+### Recette « Mes souvenirs » : chronologie réelle
+
+1. Renseigner volontairement une « Date de ce visionnage » (pour au moins deux épisodes), puis une « Date de fin de visionnage » sur un animé terminé.
+2. Ouvrir **Mes souvenirs**. La « Chronologie de visionnage » se trouve en haut de la page, sans seconde page indépendante. Sélectionner l'année, cliquer sur une date ou un mois, puis alterner « Frise temporelle » et « Historique ».
+3. Vérifier que la date de sortie / diffusion d'un animé **ne crée jamais un événement de visionnage**. Un animé terminé sans « Date de fin de visionnage » renseignée ne doit pas être placé arbitrairement.
+4. Couper Internet : les dates personnelles, les notes et les images locales déjà disponibles restent utilisables. Les pochettes CDN non mises en cache peuvent laisser apparaître un fond de repli.
+
+### Confidentialité, droit d'auteur et compatibilité
+
+Les noms et chemins absolus des médias sont sauvegardés dans le profil **local**, jamais transmis à la communauté. Les associations enregistrées ne déplacent ni ne modifient les vidéos. Les dates et notes proviennent des champs personnels existants de la bibliothèque, sans récupération réseau et sans inférence historique. Les images de tiers sont soumises à leurs droits : les nouvelles vues réutilisent le cache privé déjà présent et ne réalisent aucune collecte massive. AnimeList est publié sous MIT, Seanime sous GPLv3 ; ces deux projets sont uniquement des références de comportement, sans réutilisation de code ou d'illustrations.
+
+Les nouveaux tests sont intégrés au plan de vérification et doivent tous réussir avant qu'un nouvel installateur « V2.2.0 VM TEST » soit considéré comme utilisable. La 2.1.3 publique reste intacte.
