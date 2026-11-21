@@ -44,7 +44,7 @@ if(process.platform==='win32'){
     const args=['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(PROGRESS_LOADER,'utf16le').toString('base64')];
     const env={...process.env,ALM_UPDATE_PROGRESS_FILE:fixture,ALM_UPDATE_PROGRESS_DIGEST:digest};
     const good=spawnSync('powershell.exe',args,{env,encoding:'utf8',timeout:15000});
-    assert.equal(good.status,0,'Signed GUI loader should execute trusted content: '+good.stderr);
+    assert.equal(good.status,0,'Signed GUI loader should execute trusted content: '+String(good.stdout||'').replace(/[\r\n]+/g,' ').slice(-1000)+' '+String(good.stderr||'').replace(/[\r\n]+/g,' ').slice(-5000));
     assert(good.stdout.includes('ALM_GUI_CHECK_OK'));
     const bad=spawnSync('powershell.exe',args,{env:{...env,ALM_UPDATE_PROGRESS_DIGEST:'0'.repeat(64)},encoding:'utf8',timeout:15000});
     assert.notEqual(bad.status,0,'Tampered GUI source must fail closed');
