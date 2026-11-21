@@ -24,7 +24,7 @@ const apiPoster=anime=>{
  if(mal&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw))return '/api/cover-cache/'+mal;
  try{
   const url=new URL(raw,location.origin);
-  if(url.origin===location.origin&&url.pathname.startsWith('/api/'))return url.pathname;
+  if(url.origin===location.origin&&(/^\/api\/cover-cache\/[0-9]+$/.test(url.pathname)||/^\/images\/[^/]+$/.test(url.pathname)||url.pathname.startsWith('/assets/')))return url.pathname;
   if(url.protocol==='https:'&&/^(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)$/i.test(url.hostname))return url.href;
  }catch{}
  return '';
