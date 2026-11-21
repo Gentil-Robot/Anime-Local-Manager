@@ -540,13 +540,22 @@
       <p id="v220MediaIntro">Vidéos locales PC / NAS (lecture seule)</p>
     </div></header>
     <section class="alm-v220-section">
-      <div class="alm-v220-toolbar"><button type="button" id="v220MediaChoose">Choisir un dossier</button>
+      <div class="alm-v220-toolbar"><button type="button" id="v220MediaChoose">Choisir un dossier</button><span id="v220Connectivity" class="alm-v220-connectivity" role="status"></span>
         <p id="v220MediaStatus" role="status" aria-live="polite">Aucun dossier analysé.</p>
       </div>
       <p id="v220MediaRoot"></p>
       <div class="alm-v220-media-list" id="v220MediaRows" role="list"></div>
       <div class="alm-v220-toolbar"><button type="button" id="v220MediaMore" hidden>Afficher les fichiers suivants</button></div>
       <p class="alm-v220-note" id="v220MediaPrivacy"></p>
+      <div class="alm-v220-navigation" aria-label="Navigation du visionnage">
+        <button type="button" id="v220GoWatching">◉ En cours</button>
+        <button type="button" id="v220GoSeasons">▤ Saisons</button>
+      </div>
+    </section>
+    <section class="alm-v220-section" id="v220SavedBlock" aria-labelledby="v220SavedTitle">
+      <h2 id="v220SavedTitle">Mes associations locales</h2>
+      <p id="v220SavedIntro">Conservées sur cet appareil, même sans connexion Internet.</p>
+      <div id="v220SavedRows" class="alm-v220-saved-list" aria-live="polite"></div>
     </section>
   </section>
   <section id="seasonNewsPage" class="season-news-page hidden">
@@ -602,6 +611,11 @@
       <span id="seasonProgressDockText">Recherche des saisons — préparation…</span>
     </button>
 
+    <section id="v220MissingBlock" class="alm-v220-section" data-no-i18n aria-labelledby="v220MissingTitle">
+      <h2 id="v220MissingTitle">Épisodes non associés</h2>
+      <p id="v220MissingIntro">Repère les numéros absents entre deux épisodes déjà associés dans tes dossiers PC/NAS. Cela ne signifie pas que les vidéos sont indisponibles ailleurs.</p>
+      <div id="v220MissingRows" class="alm-v220-missing-list" aria-live="polite"></div>
+    </section>
     <section id="v220SequelBlock" class="alm-v220-section" data-no-i18n aria-labelledby="v220SequelTitle">
       <h2 id="v220SequelTitle">Suites absentes de ma bibliothèque</h2>
       <p id="v220SequelIntro">Relations vérifiées du catalogue local</p>
@@ -1272,6 +1286,8 @@
 <script src="/community-workspace-copy.js"></script><script src="/community-workspace.js"></script><script src="/community-requests.js"></script><script src="/community-charter.js"></script><script src="/community.js"></script><script src="/community-mfa.js"></script><script src="/support-diagnostics.js"></script><script src="/maintenance.js"></script>
 <script src="/v220-watch-model.js"></script>
 <script src="/v220-watch-rails.js"></script>
+<script src="/v220-media-match.js"></script>
+<script src="/v220-episode-gaps.js"></script>
 <script src="/v220-features.js"></script>
 </body>
 </html>
