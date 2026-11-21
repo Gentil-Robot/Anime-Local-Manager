@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 6925,
-      "sha256": "efdb5fe7d5f72606e2f8d934af3f32eb2dedfc23cc8c30dde0df9f60fc825636"
+      "bytes": 10858,
+      "sha256": "aadc0187fac1c3dbdf0d38f61273a9080b2c603853d8e95a8dabafa5408b2777"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -4151,6 +4151,16 @@
       "sha256": "cb75e086b83809f232a24d989d61076c32e022fdc98e5f3ab1713b1ef4f4592f"
     },
     {
+      "path": "scripts/test-v220-personal-insights-ui.cjs",
+      "bytes": 3584,
+      "sha256": "9b1c83e01e3b71d4f2f4634746b380ed06ac003b8c0e766c1f19f67306eb2803"
+    },
+    {
+      "path": "scripts/test-v220-personal-insights.cjs",
+      "bytes": 2037,
+      "sha256": "09c6d6a3360bdd743ca6328697444c5c54866451fcb45e57b27d32a480f9655b"
+    },
+    {
       "path": "scripts/test-v220-sequel-watchlist.cjs",
       "bytes": 1002,
       "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
@@ -4192,8 +4202,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 6936,
-      "sha256": "3edc0aa13e8393a6732771009419670294ea2e9feca48dcde328619c072314e2"
+      "bytes": 7205,
+      "sha256": "b8e6721f31fc3a94c1fd267b6292dd18dd5a54c43408c892303c1180db8a357a"
     },
     {
       "path": "scripts/verify-native.cjs",
