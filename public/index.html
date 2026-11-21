@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="/community.css"><link rel="stylesheet" href="/community-mfa.css"><link rel="stylesheet" href="/community-workspace.css">
 <link rel="stylesheet" href="/scroll-progress.css"><link rel="stylesheet" href="/beta81.css">
 <link rel="stylesheet" href="/ux-beta82.css">
+<link rel="stylesheet" href="/v220.css">
 </head>
 <body>
   <div class="app-shell">
@@ -48,6 +49,7 @@
         <button class="nav-item" data-filter="">▦ Animés</button>
         <button class="nav-item" data-filter="Watching">▷ En cours</button>
         <button class="nav-item" data-filter="Plan to Watch">◇ À voir</button>
+        <button class="nav-item" id="navLocalMedia" data-no-i18n>📂 Mes fichiers</button>
         <button class="nav-item" id="navMemories" type="button" data-no-i18n><span class="studio-nav-label">Mes souvenirs</span></button>
         <button class="nav-item" id="navDiscovery"><span data-design-text="searchPage" data-no-i18n>Recherche</span></button>
 <button class="nav-item" id="navSeasonNews">📺 Saisons</button>
@@ -498,6 +500,22 @@
         <div class="ranking-layout"><div><div id="rankingResults" class="ranking-results"></div><nav class="ranking-pagination"><button id="rankingFirst" type="button" aria-label="Première page">&lt;&lt;</button><button id="rankingPrevious" type="button" aria-label="Page précédente">&lt;</button><span id="rankingPageNumber"></span><button id="rankingNext" type="button" aria-label="Page suivante">&gt;</button><button id="rankingLast" type="button" aria-label="Dernière page">&gt;&gt;</button></nav></div><article id="rankingDetail" class="discovery-detail ranking-detail"></article></div>
       </section>
       <section id="discoveryPage" class="discovery-page hidden" data-no-i18n><header class="studio-page-heading discovery-heading"><span class="studio-kicker">ALM</span><h2 data-design-text="searchPage"></h2><p data-design-text="searchIntro"></p></header><form id="discoveryForm" class="discovery-search"><input id="discoveryQuery" type="search" minlength="2" maxlength="160" required data-design-aria="searchPage"><button type="submit" class="primary" data-design-text="searchAction"></button><button type="button" id="catalogReset" class="catalog-reset" data-design-text="catalogReset"></button></form><div class="discovery-toolbar"><p id="discoveryStatus" role="status" aria-live="polite"></p><label class="discovery-sort"><span id="discoverySortLabel"></span><select id="discoverySort"></select></label></div><div class="discovery-layout"><div id="discoveryResults" class="discovery-results"></div><article id="discoveryDetail" class="discovery-detail"><p data-design-text="searchChoose"></p></article></div></section>
+  <section id="localMediaPage" class="v2-page hidden" data-no-i18n>
+    <header class="studio-banner"><div class="studio-banner-copy">
+      <span class="studio-kicker">ALM · V2.2.0 TEST</span>
+      <h1 id="v220MediaTitle">Mes fichiers</h1>
+      <p id="v220MediaIntro">Vidéos locales PC / NAS (lecture seule)</p>
+    </div></header>
+    <section class="alm-v220-section">
+      <div class="alm-v220-toolbar"><button type="button" id="v220MediaChoose">Choisir un dossier</button>
+        <p id="v220MediaStatus" role="status" aria-live="polite">Aucun dossier analysé.</p>
+      </div>
+      <p id="v220MediaRoot"></p>
+      <div class="alm-v220-media-list" id="v220MediaRows" role="list"></div>
+      <div class="alm-v220-toolbar"><button type="button" id="v220MediaMore" hidden>Afficher les fichiers suivants</button></div>
+      <p class="alm-v220-note" id="v220MediaPrivacy"></p>
+    </section>
+  </section>
   <section id="seasonNewsPage" class="season-news-page hidden">
     <div class="season-news-header">
       <div class="season-news-title-row">
@@ -551,6 +569,13 @@
       <span id="seasonProgressDockText">Recherche des saisons — préparation…</span>
     </button>
 
+    <section id="v220SequelBlock" class="alm-v220-section" data-no-i18n aria-labelledby="v220SequelTitle">
+      <h2 id="v220SequelTitle">Suites absentes de ma bibliothèque</h2>
+      <p id="v220SequelIntro">Relations vérifiées du catalogue local</p>
+      <div id="v220SequelRows" class="alm-v220-sequel-list" aria-live="polite">
+        <p>Ouvre Saisons pour vérifier tes suites manquantes.</p>
+      </div>
+    </section>
     <div id="seasonNewsContainer" class="season-news-container">
       <div class="season-news-loading">
         <div class="news-spinner"></div>
@@ -1212,5 +1237,6 @@
 <script src="/community-forms.js"></script>
 <script src="/community-ui-extra.js"></script>
 <script src="/community-workspace-copy.js"></script><script src="/community-workspace.js"></script><script src="/community-requests.js"></script><script src="/community-charter.js"></script><script src="/community.js"></script><script src="/community-mfa.js"></script><script src="/support-diagnostics.js"></script><script src="/maintenance.js"></script>
+<script src="/v220-features.js"></script>
 </body>
 </html>
