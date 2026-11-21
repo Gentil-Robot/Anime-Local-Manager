@@ -34,7 +34,7 @@ if(process.platform==='win32'){
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'alm-update-ps-'));
   try{
     for(const [name,source] of [['progress',WINDOWS_PROGRESS_SCRIPT],['worker',WINDOWS_SCRIPT],['bootstrap',WINDOWS_BOOTSTRAP_SCRIPT],['progress-loader',PROGRESS_LOADER]]){
-      const file=path.join(directory,name+'.ps1');fs.writeFileSync(file,source);
+      const file=path.join(directory,name+'.ps1');fs.writeFileSync(file,'\uFEFF'+source);
       const checker="$tokens=$null;$errors=$null;[System.Management.Automation.Language.Parser]::ParseFile($env:ALM_PS_FILE,[ref]$tokens,[ref]$errors)|Out-Null;foreach($problem in $errors){Write-Output ($problem.Message+' @ '+$problem.Extent.StartLineNumber)};if($errors.Count){exit 1}";
       const check=spawnSync('powershell.exe',['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(checker,'utf16le').toString('base64')],{env:{...process.env,ALM_PS_FILE:file},encoding:'utf8',timeout:15000});
       assert.equal(check.status,0,name+' PowerShell syntax error: '+(check.stdout||'')+(check.stderr||''));
