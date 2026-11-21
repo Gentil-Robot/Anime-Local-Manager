@@ -53,3 +53,21 @@ body.alm-v2-active .alm-watch-rails,body:has(#aboutPage:not(.hidden)) .alm-watch
 .alm-watch-empty{margin:0;padding:16px 17px;border-radius:12px;background:rgba(96,125,176,.09);color:var(--muted,#a9b8d3);font-size:.9rem}
 @media(max-width:700px){.alm-watch-rails{gap:18px;margin:15px 0 20px}.alm-watch-card{flex-basis:224px;height:145px}.alm-watch-heading{align-items:flex-start}.alm-watch-heading p{font-size:.72rem}.alm-watch-icon-btn{width:28px;height:28px}}
 @media(prefers-reduced-motion:reduce){.alm-watch-card{transition:none}.alm-watch-card:hover{transform:none}.alm-watch-row{scroll-behavior:auto}}
+
+/* V2.2.0 : navigation local-first et épisodes liés */
+.alm-v220-connectivity{display:inline-flex;align-items:center;font-size:.83rem;color:#78cba9;border:1px solid rgba(120,203,169,.27);border-radius:20px;padding:6px 12px;background:rgba(91,156,132,.09)}
+.alm-v220-connectivity[data-offline="true"]{color:#e5bf79;background:rgba(191,142,69,.12);border-color:rgba(191,142,69,.33)}
+.alm-v220-navigation{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.alm-v220-navigation button{border:1px solid rgba(103,159,225,.35);border-radius:10px;padding:9px 14px;color:inherit;background:rgba(80,119,171,.15);cursor:pointer}
+.alm-v220-navigation button:hover,.alm-v220-navigation button:focus-visible{border-color:#65c2e6;background:rgba(72,122,185,.31)}
+.alm-v220-saved-list,.alm-v220-missing-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+.alm-v220-saved,.alm-v220-missing-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:13px;border-radius:12px;border:1px solid rgba(155,181,223,.18);background:rgba(101,139,193,.07)}
+.alm-v220-saved>div,.alm-v220-missing-row>div{min-width:0;flex:1}
+.alm-v220-saved strong,.alm-v220-missing-row strong{display:block;overflow-wrap:anywhere;font-size:.92rem}
+.alm-v220-saved small,.alm-v220-missing-row small{display:block;overflow-wrap:anywhere;opacity:.78;margin-top:5px;font-size:.77rem}
+.alm-watch-local-item{flex:0 0 clamp(204px,24vw,255px);display:flex;flex-direction:column;gap:6px;scroll-snap-align:start;min-width:0}
+.alm-watch-local-item>.alm-watch-card{flex:0 0 auto;width:100%;scroll-snap-align:none}
+.alm-watch-local-open{display:block;padding:6px 9px;width:100%;text-align:center;border-radius:9px;border:1px solid rgba(108,189,206,.38);background:rgba(52,108,133,.2);color:#b1ebff;font-weight:650;font-size:.75rem;cursor:pointer}
+.alm-watch-local-open:hover,.alm-watch-local-open:focus-visible{border-color:#66d7ed;background:rgba(69,136,156,.35)}
+.alm-watch-local-open:disabled{opacity:.45;cursor:default}
+@media(max-width:700px){.alm-watch-local-item{flex-basis:224px}.alm-v220-saved,.alm-v220-missing-row{align-items:flex-start;flex-direction:column}}
