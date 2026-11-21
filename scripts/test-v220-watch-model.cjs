@@ -29,7 +29,7 @@ assert.equal(recent.length,3);
 assert.deepEqual(recent.map(x=>x.id),[4,1,2]);
 assert.equal(recent.find(x=>x.id===1).count,2);
 assert.equal(recent.find(x=>x.id===1).highestEpisode,4);
-assert.equal(M.newEpisodeRows(records,{items:airing.items.slice(4,7)},now).length,0);
+assert.equal(M.newEpisodeRows(records,{items:airing.items.slice(3,6)},now).length,0);
 assert.deepEqual(M.newEpisodeRows(records,{items:[]},now),[]);
 assert.deepEqual(M.resumeRows([]),[]);
 assert(!('episode' in records[0]),'Selectors must not mutate original anime');
