@@ -273,7 +273,7 @@ async function startApplication() {
   const backupSecrets=await systemSecrets.backupStore(safeStorage,app.getPath('userData'));
   if(backupSecrets)await serverModule.configureBackupSecrets?.(backupSecrets);
 
-  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write"]) {
+  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary"]) {
     ipcMain.removeHandler(channel);
   }
   const portable=process.platform==='win32'?!!process.env.PORTABLE_EXECUTABLE_FILE:!!process.env.APPIMAGE;
@@ -333,6 +333,44 @@ async function startApplication() {
   ipcMain.handle("set-language", (event, value) => { trusted(event); return writeAppLanguage(value); });
   ipcMain.handle("get-system-locale", event => { trusted(event); return normalizeAppLanguage(app.getLocale()); });
   ipcMain.handle('input-focus',event=>{trusted(event);if(mainWindow&&!mainWindow.isDestroyed()&&mainWindow.isVisible()&&!mainWindow.isMinimized()){mainWindow.focus();mainWindow.webContents.focus();}return true;});
+  // V2.2.0: one explicit native folder selection; only that selected folder
+  // may be scanned, and only paths returned by this scan can be associated.
+  const mediaStore=require('./lib/media-associations');
+  const mediaStoreFile=path.join(app.getPath('userData'),'media-associations-v220.json');
+  let mediaIndex=null;
+  const mediaLinks=()=>mediaStore.load(mediaStoreFile);
+  ipcMain.handle('media-summary',event=>{trusted(event);return mediaStore.summary(mediaStoreFile);});
+  ipcMain.handle('media-select-and-scan',async event=>{
+    trusted(event);
+    let selection;
+    try{selection=await dialog.showOpenDialog(mainWindow||undefined,{
+      title:'ALM · Choisir le dossier des vidéos à inventorier',properties:['openDirectory']
+    });}finally{if(mainWindow&&!mainWindow.isDestroyed())focusMainWindow();}
+    if(selection.canceled||!selection.filePaths.length)return {canceled:true};
+    mediaIndex=null;
+    const root=selection.filePaths[0];
+    const result=await require('./lib/local-media-index').scanLocalMedia(root,{maxResults:1000,maxDurationMs:15000,maxEntries:25000});
+    mediaIndex={root,files:result.files};
+    const links=new Map(mediaLinks().map(x=>[x.key,x]));
+    return {canceled:false,root,summary:result.summary,
+      files:result.files.map((file,index)=>({...file,index,
+        linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0}))};
+  });
+  ipcMain.handle('media-associate',async(event,index,malId)=>{
+    trusted(event);
+    if(!mediaIndex||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
+    const file=mediaIndex.files[index];
+    const full=path.resolve(mediaIndex.root,file.relativePath);
+    const fstat=await require('node:fs/promises').lstat(full);
+    if(!fstat.isFile()||fstat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
+    return mediaStore.record(mediaStoreFile,{root:mediaIndex.root,relativePath:file.relativePath,
+      filename:file.filename,episodeGuess:file.episodeGuess,malId});
+  });
+  ipcMain.handle('media-dissociate',async(event,index)=>{
+    trusted(event);
+    if(!mediaIndex||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
+    return mediaStore.remove(mediaStoreFile,mediaStore.key(mediaIndex.root,mediaIndex.files[index].relativePath));
+  });
   ipcMain.handle("pick-folder", async event => {
     trusted(event);
     let result;try{result = await dialog.showOpenDialog(mainWindow || undefined, {
