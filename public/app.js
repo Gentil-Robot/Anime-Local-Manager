@@ -61,7 +61,7 @@ function isV2PageActive(pageId = "") {
 }
 
 function setV2BodyView(pageId = "") {
-  document.body.classList.remove("alm-v2-active", "alm-view-communityPage", "alm-view-dnaPage", "alm-view-newsV2Page", "alm-view-recoPage", "alm-view-seasonNewsPage", "alm-view-lexiconPage", "alm-view-auditPage", "alm-view-discoveryPage", "alm-view-rankingPage");
+  document.body.classList.remove("alm-v2-active", "alm-view-communityPage", "alm-view-dnaPage", "alm-view-newsV2Page", "alm-view-recoPage", "alm-view-seasonNewsPage", "alm-view-localMediaPage", "alm-view-lexiconPage", "alm-view-auditPage", "alm-view-discoveryPage", "alm-view-rankingPage");
   if (pageId) document.body.classList.add("alm-v2-active", `alm-view-${pageId}`);
 }
 
@@ -2493,7 +2493,7 @@ document.getElementById("navSettings")?.addEventListener("click", () => {
 
 function hideV2PagesFromApp() {
   setV2BodyView("");
-  ["communityPage", "memoryPage", "dnaPage", "newsV2Page", "recoPage", "seasonNewsPage", "lexiconPage", "auditPage", "discoveryPage","rankingPage","calendarPage"].forEach(id => document.getElementById(id)?.classList.add("hidden"));
+  ["communityPage", "memoryPage", "dnaPage", "newsV2Page", "recoPage", "seasonNewsPage", "localMediaPage", "lexiconPage", "auditPage", "discoveryPage","rankingPage","calendarPage"].forEach(id => document.getElementById(id)?.classList.add("hidden"));
 }
 
 // V1.2 navigation and page switching fixes
