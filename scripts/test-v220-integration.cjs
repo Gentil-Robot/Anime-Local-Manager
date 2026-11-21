@@ -20,7 +20,7 @@ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'alm-v220-links-'));
 try{
  const file=path.join(directory,'media.json');
  assert.deepEqual(store.load(file),[]);
- const row=store.record(file,{root:directory,relativePath:'Frieren/S01E13.mkv',filename:'Frieren S01E13.mkv',malId:55,episodeGuess:13});
+ const row=store.record(file,{root:directory,relativePath:'Frieren/Frieren S01E13.mkv',filename:'Frieren S01E13.mkv',malId:55,episodeGuess:13});
  assert.equal(store.summary(file)[0].latestEpisode,13);
  assert.equal(store.load(file)[0].malId,55);
  assert(store.remove(file,row.key));
