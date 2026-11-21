@@ -176,6 +176,39 @@
         <div class="progress"><div id="progressBar"></div></div>
       </section>
 
+      <!-- V2.2.0 — upgrade de la bibliothèque existante, sans nouveau Cockpit -->
+      <section id="v220WatchRails" class="alm-watch-rails" aria-label="Suivi des visionnages" data-no-i18n hidden>
+        <section id="v220RecentRail" class="alm-watch-rail" data-rail="fresh" aria-labelledby="v220RecentTitle">
+          <div class="alm-watch-heading">
+            <div class="alm-watch-heading-text">
+              <h2 id="v220RecentTitle">Épisodes récemment diffusés</h2>
+              <p id="v220RecentHint">Diffusions confirmées ces 7 derniers jours</p>
+            </div>
+            <div class="alm-watch-controls">
+              <button type="button" id="v220RecentRefresh" class="alm-watch-icon-btn" aria-label="Actualiser les diffusions" title="Actualiser le suivi local">↻</button>
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="prev" aria-controls="v220RecentRows" aria-label="Cartes précédentes">‹</button>
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="next" aria-controls="v220RecentRows" aria-label="Cartes suivantes">›</button>
+            </div>
+          </div>
+          <div id="v220RecentRows" class="alm-watch-row" aria-label="Épisodes diffusés" tabindex="0"></div>
+          <p id="v220RecentEmpty" class="alm-watch-empty" role="status"></p>
+        </section>
+        <section id="v220ResumeRail" class="alm-watch-rail" data-rail="resume" aria-labelledby="v220ResumeTitle">
+          <div class="alm-watch-heading">
+            <div class="alm-watch-heading-text">
+              <h2 id="v220ResumeTitle">Reprenez votre visionnage</h2>
+              <p id="v220ResumeHint">Votre progression dans les animés en cours</p>
+            </div>
+            <div class="alm-watch-controls">
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="prev" aria-controls="v220ResumeRows" aria-label="Cartes précédentes">‹</button>
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="next" aria-controls="v220ResumeRows" aria-label="Cartes suivantes">›</button>
+            </div>
+          </div>
+          <div id="v220ResumeRows" class="alm-watch-row" aria-label="Reprendre le suivi" tabindex="0"></div>
+          <p id="v220ResumeEmpty" class="alm-watch-empty" role="status"></p>
+        </section>
+      </section>
+
       <section class="filters">
         <input id="search" placeholder="Rechercher titre, genre, tag...">
 
@@ -1237,6 +1270,8 @@
 <script src="/community-forms.js"></script>
 <script src="/community-ui-extra.js"></script>
 <script src="/community-workspace-copy.js"></script><script src="/community-workspace.js"></script><script src="/community-requests.js"></script><script src="/community-charter.js"></script><script src="/community.js"></script><script src="/community-mfa.js"></script><script src="/support-diagnostics.js"></script><script src="/maintenance.js"></script>
+<script src="/v220-watch-model.js"></script>
+<script src="/v220-watch-rails.js"></script>
 <script src="/v220-features.js"></script>
 </body>
 </html>
