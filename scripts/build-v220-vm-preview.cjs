@@ -38,7 +38,10 @@ save('main.js',read('main.js').replace("app.setAppUserModelId?.('fr.gentilrobot.
  'createIntegratedUpdater({current:app.getVersion(),platform:process.platform,arch:process.arch,packaged:false,')
  .replace(/createScheduler\(\{exe:process\.env\.APPIMAGE\|\|process\.execPath,packaged:app\.isPackaged,/,
  'createScheduler({exe:process.env.APPIMAGE||process.execPath,packaged:false,'));
-// The VM test has no scheduled tasks; uninstallation must NOT touch the\n// stable ALM task or invoke the stable removal command.\nconst nsis=read('build/installer.nsh');\nif(!nsis.includes('!macro customUnInstall')||!nsis.includes('!macroend'))throw Error('ALM_VM_PREVIEW_NSIS_HOOK');\nsave('build/installer.nsh',nsis.replace(/!macro customUnInstall[\\s\\S]*?!macroend/,'!macro customUnInstall\\n  ; VM test: no maintenance task to remove\\n!macroend'));
+// The VM test has no scheduled tasks; uninstall must NOT delete stable ALM tasks.
+const nsis=read('build/installer.nsh');
+if(!nsis.includes('!macro customUnInstall')||!nsis.includes('!macroend'))throw Error('ALM_VM_PREVIEW_NSIS_HOOK');
+save('build/installer.nsh',nsis.replace(/!macro customUnInstall[\s\S]*?!macroend/,'!macro customUnInstall\n  ; VM test: no maintenance task to remove\n!macroend'));
 const cli=require.resolve('electron-builder/out/cli/cli.js');
 console.log('[VM TEST] Building isolated preview 2.2.0 with independent app identity. Auto-updater disabled.');
 const result=spawnSync(process.execPath,[cli,'--win','nsis','--publish','never'],{
