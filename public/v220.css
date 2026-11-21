@@ -18,3 +18,38 @@
 .alm-v220-local-badge{display:block;margin-top:9px;color:#80dbb7;font-size:.85em;font-weight:600}
 .alm-v220-note{font-size:.8rem}
 @media(max-width:650px){.alm-v220-section{padding:14px}.alm-v220-sequel{flex-direction:column;align-items:flex-start}}
+
+/* ALM 2.2.0 · aperçu horizontal original, intégré aux vues existantes */
+.alm-watch-rails{display:grid;gap:28px;margin:22px 0 26px;max-width:100%;min-width:0}
+.alm-watch-rails[hidden],.alm-watch-row[hidden],.alm-watch-empty[hidden]{display:none!important}
+body.alm-v2-active .alm-watch-rails,body:has(#aboutPage:not(.hidden)) .alm-watch-rails{display:none!important}
+.alm-watch-rail{min-width:0;overflow:hidden}
+.alm-watch-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 1px 12px;border-bottom:1px solid rgba(140,178,230,.22);margin-bottom:14px}
+.alm-watch-heading-text{min-width:0}
+.alm-watch-heading h2{margin:0;color:inherit;font-size:clamp(1.02rem,1.6vw,1.3rem);font-weight:800;letter-spacing:.01em}
+.alm-watch-heading h2:before{content:'◉';font-size:.75em;color:#5db9f6;margin-right:10px}
+.alm-watch-heading p{margin:5px 0 0;font-size:.77rem;color:var(--muted,#a7b4cc);line-height:1.35}
+.alm-watch-controls{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.alm-watch-icon-btn{width:31px;height:31px;border-radius:9px;border:1px solid rgba(139,176,230,.26);background:rgba(35,59,91,.55);color:inherit;font-size:1.1rem;display:inline-grid;place-items:center;cursor:pointer;padding:0}
+.alm-watch-icon-btn:hover:not(:disabled),.alm-watch-icon-btn:focus-visible{border-color:#61b7ed;background:rgba(49,111,158,.45)}
+.alm-watch-icon-btn:disabled{opacity:.3;cursor:default}
+.alm-watch-row{display:flex;gap:13px;min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;padding:3px 2px 12px;scroll-snap-type:x mandatory;scrollbar-color:rgba(75,178,233,.9) rgba(58,78,105,.22);scrollbar-width:thin}
+.alm-watch-card{position:relative;flex:0 0 clamp(204px,24vw,255px);height:155px;border:1px solid rgba(112,165,216,.25);border-radius:13px;background:linear-gradient(136deg,#263f62 0%,#15243d 55%,#0c1829 100%);color:white;overflow:hidden;cursor:pointer;padding:0;display:block;text-align:left;scroll-snap-align:start;isolation:isolate;box-shadow:0 4px 16px rgba(0,0,0,.14);transition:border-color .15s,transform .15s}
+.alm-watch-card:hover{border-color:rgba(79,193,255,.85);transform:translateY(-2px)}
+.alm-watch-card:focus-visible{outline:2px solid #72d0ff;outline-offset:3px}
+.alm-watch-art{position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 64% 18%,rgba(103,168,221,.34),transparent 57%),linear-gradient(140deg,#273e65,#111b30)}
+.alm-watch-art img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block}
+.alm-watch-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,11,23,.15) 0%,rgba(7,14,27,.15) 28%,rgba(6,13,24,.84) 72%,#081726 100%);z-index:-1;pointer-events:none}
+.alm-watch-tags{position:absolute;top:9px;left:10px;right:9px;display:flex;gap:6px;align-items:center;min-width:0}
+.alm-watch-kind,.alm-watch-new{border-radius:6px;padding:4px 7px;font-weight:850;font-size:.65rem;line-height:1.15;letter-spacing:.025em;white-space:nowrap}
+.alm-watch-kind{background:rgba(9,25,42,.84);color:#92c8ff;border:1px solid rgba(112,168,224,.27)}
+.alm-watch-new{background:#b62c48;color:white;max-width:160px;overflow:hidden;text-overflow:ellipsis}
+.alm-watch-content{position:absolute;bottom:11px;left:11px;right:11px;display:flex;flex-direction:column;align-items:stretch;gap:3px;min-width:0}
+.alm-watch-title{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.91rem;line-height:1.35;font-weight:850;text-shadow:0 1px 4px #071322}
+.alm-watch-episode{color:#74d5ff;font-weight:700;font-size:.78rem;line-height:1.35}
+.alm-watch-small{font-size:.71rem;color:#c1d3e8}
+.alm-watch-progress{height:4px;overflow:hidden;background:rgba(172,196,228,.23);border-radius:10px;margin-top:3px;width:100%}
+.alm-watch-progress>span{display:block;height:100%;background:linear-gradient(90deg,#4a8bd6,#46d2de);border-radius:10px}
+.alm-watch-empty{margin:0;padding:16px 17px;border-radius:12px;background:rgba(96,125,176,.09);color:var(--muted,#a9b8d3);font-size:.9rem}
+@media(max-width:700px){.alm-watch-rails{gap:18px;margin:15px 0 20px}.alm-watch-card{flex-basis:224px;height:145px}.alm-watch-heading{align-items:flex-start}.alm-watch-heading p{font-size:.72rem}.alm-watch-icon-btn{width:28px;height:28px}}
+@media(prefers-reduced-motion:reduce){.alm-watch-card{transition:none}.alm-watch-card:hover{transform:none}.alm-watch-row{scroll-behavior:auto}}
