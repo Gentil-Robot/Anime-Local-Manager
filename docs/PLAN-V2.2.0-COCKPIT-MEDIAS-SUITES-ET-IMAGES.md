@@ -1,25 +1,51 @@
-# ALM 2.2.0 — trois priorités et images hors ligne
+# ALM 2.2.0 — évolution des services existants, nouveaux outils et images hors ligne
 
 Base source : release/v2.1.3, commit de7760550697bb0186a3486467e79ffa077133c1.
 Statut : fondations expérimentales ; aucune version 2.2.0 distribuée.
 
-## Priorité 1 — ALM Cockpit
+## Priorité 1 — Amélioration des services ALM existants (sans page « Mon Cockpit »)
 
-Tableau de bord configurable avec blocs « En cours », « À venir », « Suites à ne pas manquer » et « Amis ». Reprendre les moteurs déjà présents dans ALM plutôt que recréer progression, calendrier ou communauté. Visibilité, ordre et préférences sauvegardés uniquement dans le profil local. Seven locales must remain supported: FR, EN, ES, DE, JA, PT-BR, ZH-CN. Contrôler clavier, lecteur d'écran, confidentialité, mineurs, absence de connexion et de compte.
+**Décision de conception du 21 novembre 2026 : NE PAS créer de nouvel accueil « Cockpit », ni reproduire la bibliothèque, les statistiques ou les amis dans une page concurrente.** L'utilisateur souhaite une évolution des services déjà présents : chaque fonction va dans sa rubrique naturelle ; une page nouvelle n'est permise que pour un service réellement inédit.
 
-## Priorité 2 — Bibliothèque vidéo PC / NAS
+- **Animés / Ma bibliothèque** : enrichir les fiches et statistiques déjà présentes ; conserver filtres, regroupements de saisons et gestion de collection, sans doubler le contenu dans un tableau de bord.
+- **En cours** : action rapide « Épisode suivant / Marquer vu », progression et disponibilité du fichier vidéo local si l'utilisateur l'a associé ; ne jamais lancer une lecture ni modifier le compteur sans action de l'utilisateur.
+- **À voir** : les nouveaux titres sont ajoutés seulement sur confirmation depuis une suggestion (pas de synchronisation forcée).
+- **Saisons** : nouveau bloc « Suites à ne pas manquer » adossé au calendrier et aux saisons, avec filtres « Absentes de ma bibliothèque », « Prévues » et « Vérification nécessaire ». Le moteur relationnel existant reste la source d'autorité.
+- **Recommandations** : garder les recommandations éditoriales/découverte ici ; une suggestion de suite peut renvoyer vers sa fiche dans « Saisons », sans recréer le même moteur.
+- **Mon espace / Amis** : améliorer le service communautaire actuel là où il existe, avec ses contrôles de confidentialité, pas une copie dans une page d'accueil supplémentaire.
+- **Réglages / Mises à jour / Stockage** : conserver ici les options des caches hors ligne et le suivi des mises à jour ; seule la fenêtre de suivi Windows doit être externe quand ALM est fermé.
 
-L'utilisateur choisit explicitement un dossier local ou réseau dans la boîte de dialogue native. Inventaire uniquement des noms et métadonnées de fichiers vidéo en lecture seule ; pas de téléchargement, pas de lecture du contenu, pas de partage des chemins avec une API distante. Ne pas suivre les liens symboliques et limiter le nombre d'entrées, la profondeur, le temps et les résultats. Associations film/anime/épisodes proposées, jamais imposées ; les noms ambigus demandent confirmation. Prévoir les essais Windows/UNC, NAS inaccessible, Linux, réanalyse et annulation.
+Principes : préserver la navigation et les habitudes de la 2.1.3 ; réutiliser les composants, données et API internes ; faire une mise à niveau progressive, traduite dans les sept langues (FR, EN, ES, DE, JA, PT-BR, ZH-CN), accessible au clavier et fonctionnelle hors ligne quand les données sont locales.
+
+## Priorité 2 — Nouvelle page « Mes fichiers » (vidéothèque PC / NAS)
+
+Ce service n'existe pas encore dans ALM : créer **une page dédiée « Mes fichiers »**, accessible depuis la navigation de la bibliothèque, sans nouveau Cockpit. L'utilisateur choisit explicitement un dossier local ou réseau dans la boîte de dialogue native. Inventaire uniquement des noms et métadonnées de fichiers vidéo en lecture seule ; pas de téléchargement, pas de lecture du contenu, pas de partage des chemins avec une API distante. Ne pas suivre les liens symboliques et limiter le nombre d'entrées, la profondeur, le temps et les résultats. Associations film/anime/épisodes proposées, jamais imposées ; les noms ambigus demandent confirmation. Prévoir les essais Windows/UNC, NAS inaccessible, Linux, réanalyse et annulation.
 
 Première brique de développement : lib/local-media-index.js, testée avec scripts/test-v220-local-media-index.cjs.
-L'intégration à l'interface, la sélection sécurisée des dossiers et les associations restent à développer.
+L'intégration à la nouvelle page « Mes fichiers », la sélection sécurisée des dossiers et les associations restent à développer. Les fiches existantes d'« En cours » peuvent afficher un lien vers le fichier déjà associé, mais ne doivent pas dupliquer la gestion des dossiers.
 
 ## Priorité 3 — Suites à ne pas manquer
 
 Se baser sur les relations vérifiées de lib/local-season-links.js et sur le moteur existant nextVerifiedLocalSeason. Ne suggérer que les suites absentes de la bibliothèque. Différencier saisons, parties et films ; ne jamais ajouter une série ou avancer la progression sans validation explicite. Utiliser d'abord les données locales, sans nouveaux appels massifs à AniList.
 
 Première brique : lib/sequel-watchlist.js, testée avec scripts/test-v220-sequel-watchlist.cjs.
-Restent à développer : service local, affichage dans Cockpit et tests de liens ambigus.
+Restent à développer : service local, intégration dans la page **Saisons** existante, liens ciblés depuis **Recommandations** et tests de relations ambiguës. **Aucune nouvelle page « Mes suites » / « Cockpit ».**
+
+## Répartition fonctionnelle cible — exemple
+
+| Service 2.1.3 conservé | Amélioration 2.2.0 | Nouvelle page ? |
+| --- | --- | --- |
+| Animés / Ma bibliothèque | Statistiques et jaquettes locales enrichies, lien vers les médias associés | Non |
+| En cours | « Épisode suivant », progression simplifiée, disponibilité locale de l'épisode | Non |
+| À voir | Ajout confirmé depuis les suggestions de suites et de découverte | Non |
+| Saisons | « Suites à ne pas manquer » et affichage des nouvelles saisons absentes | Non |
+| Recommandations | Meilleure navigation vers les fiches et saisons pertinentes | Non |
+| Mon espace / Amis | Améliorations communautaires dans l'espace existant | Non |
+| Réglages / Stockage | Gestion des images locales et cache hors ligne | Non |
+| Réglages / Mises à jour | Statut, diagnostic ; fenêtre Windows native persistante après fermeture d'ALM | Non (fenêtre système externe) |
+| **Mes fichiers** | Scanner de dossiers PC/NAS et associations en lecture seule | **Oui : service véritablement inédit** |
+
+Exemple de parcours : dans **En cours**, l'utilisateur voit un animé à 12/24 épisodes et peut marquer le 13 vu ; s'il a associé une vidéo, ALM affiche « Fichier disponible ». Dans **Saisons**, un animé terminé peut afficher « Saison 2 trouvée — absente de ma bibliothèque » et proposer « Ajouter à À voir ». Dans **Mes fichiers**, l'utilisateur sélectionne son dossier NAS et confirme manuellement les correspondances incertaines.
 
 ## Images conservées hors ligne — règle de droit et conception
 
