@@ -103,7 +103,7 @@ function openLibraryWithGenreV2(rawGenre) {
 window.openLibraryWithGenreV2 = openLibraryWithGenreV2;
 
 // ─── Navigation ────────────────────────────────────────────
-const ALL_V2_PAGES = ["communityPage","memoryPage","dnaPage","newsV2Page","recoPage","seasonNewsPage","lexiconPage","auditPage","discoveryPage","rankingPage","calendarPage"];
+const ALL_V2_PAGES = ["communityPage","memoryPage","dnaPage","newsV2Page","recoPage","seasonNewsPage","localMediaPage","lexiconPage","auditPage","discoveryPage","rankingPage","calendarPage"];
 
 function resetTopLevelScrollV2(pageId = "") {
   const reset = () => {
