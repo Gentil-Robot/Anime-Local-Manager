@@ -39,18 +39,69 @@ function bestMatch(file,index){
  const matches=index.get(normalize(file.titleGuess));return matches?.size===1?[...matches][0]:0;
 }
 function showStatus(text){$('v220MediaStatus').textContent=text;}
+async function openEpisode(malId,episode){
+ if(!window.animeManager?.mediaOpenEpisode)return {ok:false,code:'ALM_MEDIA_UNAVAILABLE'};
+ try{
+  const result=await window.animeManager.mediaOpenEpisode(Number(malId),Number(episode));
+  if(!result?.ok)window.notifyApp?.(t('unavailable')+(result?.code?' ('+result.code+')':''),'error');
+  return result;
+ }catch(error){window.notifyApp?.(t('unavailable'),'error');return {ok:false,code:String(error?.message||'ALM_MEDIA_ERROR')};}
+}
+function renderSaved(){
+ const host=$('v220SavedRows');if(!host)return;
+ host.replaceChildren();
+ if($('v220SavedTitle'))$('v220SavedTitle').textContent=t('saved');
+ if($('v220SavedIntro'))$('v220SavedIntro').textContent=t('savedInfo');
+ if(!savedRows.length){host.append(el('p',t('noSaved'),'alm-v220-note'));return;}
+ for(const item of savedRows.slice(-35).reverse()){
+  const anime=animeList().find(a=>Number(a.malId)===Number(item.malId));
+  const row=el('article',null,'alm-v220-saved'),desc=el('div');
+  desc.append(el('strong',anime?.title||item.filename));
+  const parts=[item.filename,item.episodeGuess?('E'+item.episodeGuess):t('unknownFile'),item.folder||''];
+  desc.append(el('small',parts.filter(Boolean).join(' · ')));
+  const button=el('button',t('openVideo'),'alm-v220-action');button.type='button';
+  button.disabled=!!item.legacy||!(Number(item.episodeGuess)>0);
+  button.addEventListener('click',async()=>{
+   button.disabled=true;await openEpisode(item.malId,item.episodeGuess);button.disabled=false;
+  });
+  row.append(desc,button);host.append(row);
+ }
+ if(savedRows.length>35)host.append(el('p','+'+(savedRows.length-35)+' '+t('more'),'alm-v220-note'));
+}
+function renderMissing(){
+ const host=$('v220MissingRows');if(!host)return;
+ if($('v220MissingTitle'))$('v220MissingTitle').textContent=t('missing');
+ if($('v220MissingIntro'))$('v220MissingIntro').textContent=t('missingInfo');
+ const gaps=window.ALM_V220_EPISODE_GAPS?.find(animeList(),[...summaries.values()])||[];
+ host.replaceChildren();
+ if(!gaps.length){host.append(el('p',t('noneMissing'),'alm-v220-note'));return;}
+ for(const gap of gaps){
+  const card=el('article',null,'alm-v220-missing-row');
+  const info=el('div');
+  info.append(el('strong',gap.title));
+  info.append(el('small',t('missingNumber')+': '+gap.missing.join(', ')+(gap.truncated?' …':'')+' · '+gap.from+'–'+gap.to));
+  const button=el('button',t('seeFiles'),'alm-v220-action');button.type='button';
+  button.addEventListener('click',()=>$('navLocalMedia')?.click());
+  card.append(info,button);host.append(card);
+ }
+}
 async function refreshSummaries(){
  if(!window.animeManager?.mediaSummary)return;
- try{summaries.clear();for(const item of await window.animeManager.mediaSummary()||[])summaries.set(Number(item.malId),item);
- document.querySelectorAll('.card[data-anime-id]').forEach(card=>{
-  const id=Number(card.dataset.animeId),anime=animeList().find(a=>Number(a.id)===id);
-  const have=anime&&summaries.get(Number(anime.malId)),old=card.querySelector('.alm-v220-local-badge');
-  if(!have||card.dataset.status!=='Watching'){old?.remove();return;}
-  if(old)return;
-  const badge=el('span',t('localBadge')+' ('+have.count+')','alm-v220-local-badge');
-  card.querySelector('.card-body .meta')?.appendChild(badge);
- });
- }catch{}
+ try{
+  const data=await window.animeManager.mediaSummary()||[];
+  summaries.clear();for(const item of data)summaries.set(Number(item.malId),item);
+  savedRows=typeof window.animeManager.mediaSaved==='function'?await window.animeManager.mediaSaved()||[]:[];
+  document.querySelectorAll('.card[data-anime-id]').forEach(card=>{
+   const id=Number(card.dataset.animeId),anime=animeList().find(a=>Number(a.id)===id);
+   const have=anime&&summaries.get(Number(anime.malId)),old=card.querySelector('.alm-v220-local-badge');
+   if(!have||card.dataset.status!=='Watching'){old?.remove();return;}
+   if(old){old.textContent=t('localBadge')+' ('+have.count+')';return;}
+   const badge=el('span',t('localBadge')+' ('+have.count+')','alm-v220-local-badge');
+   card.querySelector('.card-body .meta')?.appendChild(badge);
+  });
+  renderMissing();renderSaved();
+  window.dispatchEvent(new CustomEvent('alm:media-associations-changed',{detail:{summaries:data}}));
+ }catch(error){console.warn('[v220 media] local summary unavailable',error?.code||error?.message);}
 }
 async function choose(){
  const button=$('v220MediaChoose');if(!window.animeManager?.mediaSelectAndScan){showStatus(t('failed'));return;}
