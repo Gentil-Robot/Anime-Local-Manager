@@ -1362,8 +1362,8 @@
     },
     {
       "path": "lib/integrated-updater.js",
-      "bytes": 9514,
-      "sha256": "3c29319f18961668cd89803ade49d32be1fef31353e8641d9f45738b8c4fd43a"
+      "bytes": 9569,
+      "sha256": "86d0dcb7c21e2bdec899daef26ec3527056e94d56611f78053bc3824d276d54e"
     },
     {
       "path": "lib/library-automation.js",
@@ -1577,8 +1577,8 @@
     },
     {
       "path": "lib/windows-update-launcher.js",
-      "bytes": 6754,
-      "sha256": "fa336588e13057d38ad1088cec0ffce516eac2f059bef9c7f7a5971ea6bf0e37"
+      "bytes": 9126,
+      "sha256": "45adabec5a9bbddd7a05d1eef730f990e7d2840574713998d358fd2574cd70f3"
     },
     {
       "path": "LICENSE",
@@ -1587,8 +1587,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 28743,
-      "sha256": "1d38236edc96efd0de32449f3d03bee31cdd4736237aba99f155687a6b205487"
+      "bytes": 28770,
+      "sha256": "aa8458c643bd07c799be92c72cd5fe4c07fea5933da67f50a2b05ae6ab2cb6f6"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -2872,8 +2872,8 @@
     },
     {
       "path": "scripts/probe-windows-update-helper.cjs",
-      "bytes": 3036,
-      "sha256": "99f2d4caaa9381ab14fe0b23a4b3e25ee0abecadc1cc60b406f9a13cc088cf2e"
+      "bytes": 3055,
+      "sha256": "83aabadefe0d608ebd943fb4118b99a1712791ed339649751368563a51fd084b"
     },
     {
       "path": "scripts/production-copy-roots.js",
@@ -2917,8 +2917,8 @@
     },
     {
       "path": "scripts/smoke-update-handoff.cjs",
-      "bytes": 5815,
-      "sha256": "e8644b5176391e92a6ba0103f50e80ebac46b7b44872915d5816edceb93f7486"
+      "bytes": 5834,
+      "sha256": "d0a2f41b9fcb859388fd7a29f194bff8959676cd61b085dd7144aebf5cde8a22"
     },
     {
       "path": "scripts/smoke-windows.js",
@@ -4062,8 +4062,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 6675,
-      "sha256": "8e2f7d2db8aabeb20e5a35cb871631687c61fee9627ebd3ac9efc2a79aee2a58"
+      "bytes": 6813,
+      "sha256": "170b0462dd3ef505c07ed53bb890e2c501c18c2b0c8af5a02cf382e4130f7035"
     },
     {
       "path": "scripts/verify-native.cjs",
@@ -4244,6 +4244,41 @@
       "path": "Verifier V2.0.0 Beta Stable Windows.bat",
       "bytes": 1034,
       "sha256": "1e4ca6608108c68991b1e6bc23c02cfa6f5f12d4594844c9b5e2a1469ae57048"
+    },
+    {
+      "path": "lib/windows-update-progress.js",
+      "bytes": 8166,
+      "sha256": "e62191232041596abe5fa1598856bf331ac1f9605acbb565604bccba99c192c3"
+    },
+    {
+      "path": "scripts/test-v220-update-progress.cjs",
+      "bytes": 5878,
+      "sha256": "f7d48752198ed99ddf004cfd4f9daeb3f46a33619660b3f50114fa48979a3356"
+    },
+    {
+      "path": "lib/local-media-index.js",
+      "bytes": 5202,
+      "sha256": "1676681632dbe6003f3db2f2af37fc96a00ededbecedaad9b3cc5a9e026e8cd7"
+    },
+    {
+      "path": "lib/sequel-watchlist.js",
+      "bytes": 1694,
+      "sha256": "a02d6cbfc455683fd7f749e62e0913fc729e8e0c3d37f5808d6e44b957996742"
+    },
+    {
+      "path": "scripts/test-v220-local-media-index.cjs",
+      "bytes": 2083,
+      "sha256": "3db561bc276f694e29fceb4b6e18ac3ae0b7826b040b976531f80b697e9e84f0"
+    },
+    {
+      "path": "scripts/test-v220-sequel-watchlist.cjs",
+      "bytes": 1002,
+      "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
+    },
+    {
+      "path": "docs/PLAN-V2.2.0-COCKPIT-MEDIAS-SUITES-ET-IMAGES.md",
+      "bytes": 5817,
+      "sha256": "f4f14a4ec396785190e9ddec0be1f6242a65d04081aee9b015be6c881de5f752"
     }
   ],
   "parentArchiveSha256": "e97af43af2058352b3486831856637ad3bbbfa82cb4bf68429db2c66648e337b",
