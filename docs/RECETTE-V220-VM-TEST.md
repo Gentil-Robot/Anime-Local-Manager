@@ -37,3 +37,16 @@ Si le contrôle est rouge ou si l'artefact n'existe pas, **ne pas considérer le
 - La fenêtre de progression visible reste à valider dans une VM Windows interactive en situation de mise à jour.
 
 Signaler avec la version du système, la description de l'action, le message exact et, si possible, une capture écran **sans chemins NAS ou données personnelles**.
+
+## Bandes horizontales « Épisodes diffusés » / « Reprenez votre visionnage » (essai VM)
+
+Les deux bandeaux sont une évolution des pages **Animés** et **En cours** existantes : **pas de nouveau Cockpit**. Apparence créée pour ALM, sans code ni images copiés de tiers. La liste verticale complète et ses filtres restent accessibles plus bas.
+
+1. Créer ou importer des fiches avec statut **En cours** et progression partielle (par ex. 4/12 épisodes). Ouvrir **Animés**, puis **En cours** : « Reprenez votre visionnage » montre « Épisode 5 », le niveau d'avancement et une jaquette s'il y en a une. Les cartes sont défilables au clavier, à la souris ou avec les flèches.
+2. Cliquer sur une carte : le formulaire de suivi **existant** s'ouvre. **Aucun épisode n'est marqué comme vu automatiquement** ; aucune lecture vidéo ou plateforme externe ne démarre.
+3. « Épisodes récemment diffusés » affiche uniquement les diffusions **confirmées, non estimées, au cours des sept derniers jours**, dont le numéro est supérieur aux épisodes déjà vus. Source : **état de diffusion local déjà suivi par ALM** (\`GET /api/airing\`) ; le badge \`NOUVEAU +N\` représente ce nombre réel parmi les diffusions connues, **pas** le nombre d'épisodes disponibles sur un service de streaming. Si le suivi ne contient aucune diffusion récente, un message explicite s'affiche, sans données inventées.
+4. Modifier la progression dans la fiche, puis revenir dans « En cours » : les deux bandeaux doivent se mettre à jour. Une série terminée doit disparaître du bandeau de reprise. Une série sans épisode vu ne doit pas prétendre être « à reprendre ».
+5. Vérifier les sept langues FR, EN, ES, DE, JA, PT-BR, ZH-CN, l'usage sans Internet (données déjà locales), le défilement au clavier et le masque des bandeaux dans « À voir » et les autres services.
+6. Les images sont tirées des jaquettes **déjà référencées dans la bibliothèque ALM**, en réutilisant la route de cache local existante lorsqu'elle est applicable. Aucune aspiration ou redistribution nouvelle d'images tierces n'est effectuée.
+
+**Limites :** les images ne sont pas des captures de scènes vidéo et ALM n'est pas un lecteur de streaming ; le rafraîchissement du bandeau ne lance pas une synchronisation massive des API.
