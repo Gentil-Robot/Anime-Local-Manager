@@ -18,9 +18,9 @@ const watched=[
  {id:10,title:'Terminé',status:'Completed',episodesSeen:'12',episodesTotal:12}
 ];
 window._almAnimes=watched;
-let selected=null,requests=0;
+let selected=null,requests=0,explicitChecks=0;
 window.openEdit=anime=>{selected=anime;};
-window.fetch=async url=>{assert.equal(url,'/api/airing');requests++;return {ok:true,json:async()=>({checkedAt:new Date().toISOString(),items:[
+window.fetch=async (url,options)=>{if(url==='/api/airing/check'){assert.equal(options?.method,'POST');explicitChecks++;}else assert.equal(url,'/api/airing');requests++;return {ok:true,json:async()=>({checkedAt:new Date().toISOString(),items:[
  {animeId:7,episode:5,airingAt:Math.floor(Date.now()/1000)-40,source:'AniList'},
  {animeId:7,episode:6,airingAt:Math.floor(Date.now()/1000)-20,source:'AniList'},
  {animeId:7,episode:7,airingAt:Math.floor(Date.now()/1000)+100,source:'AniList'}
@@ -42,7 +42,9 @@ const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
  window.document.querySelector('#v220ResumeRows .alm-watch-card').click();
  assert.strictEqual(selected,watched[0],'Click should open existing ALM record without marking it seen');
  assert.equal(watched[0].episodesSeen,'4');
- assert(requests>=1&&requests<=2,'Use existing cached airing endpoint only');
+ assert(requests>=1&&requests<=2,'Automatic display reads existing cached airing data');
+ window.document.getElementById('v220RecentRefresh').click();await flush();
+ assert.equal(explicitChecks,1,'Only an explicit refresh should call the existing online airing check');
  window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Plan to Watch'}}));
  assert(rails.hidden,'Do not duplicate rails in To Watch');
  window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Watching'}}));
