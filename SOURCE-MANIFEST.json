@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 1513,
-      "sha256": "1f714fd84f0f4b8501c8687ecd22f114dce31cff3abbd04b11878326b913fb83"
+      "bytes": 3749,
+      "sha256": "16c1d8c6d9da1588e13375bac26c21a43d1ce1896fd73f72390fe2c37a34bb04"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -589,6 +589,11 @@
       "path": "docs/LOT1-HTTP-VALIDATION-2026-11-12.md",
       "bytes": 8118,
       "sha256": "4b1c49c674ea0fc9c804f36f1bae88bc02d81b1a0f11331ac34ac12637f0b00e"
+    },
+    {
+      "path": "docs/PLAN-V2.2.0-COCKPIT-MEDIAS-SUITES-ET-IMAGES.md",
+      "bytes": 9546,
+      "sha256": "c248d664f3d3a2366aedd2acd75942fb04743d41f0ba5c532bc844f8f5d2fde2"
     },
     {
       "path": "docs/PUBLICATION-OPEN-SOURCE-V2.md",
@@ -1371,6 +1376,11 @@
       "sha256": "71cb31bbb97e11025458efc9a12594521893620658e549877fcb045a7ac8aa77"
     },
     {
+      "path": "lib/local-media-index.js",
+      "bytes": 5202,
+      "sha256": "1676681632dbe6003f3db2f2af37fc96a00ededbecedaad9b3cc5a9e026e8cd7"
+    },
+    {
       "path": "lib/local-season-links.js",
       "bytes": 6312,
       "sha256": "752fbb1abacc030e8397b8c02ed34c4880e9dfba45bcdd50e9f572333c2a0544"
@@ -1389,6 +1399,11 @@
       "path": "lib/maintenance.js",
       "bytes": 4622,
       "sha256": "d4765a2ed27ef41261dbafbd5eac14b48aeb5687047a6741e1f023c0cdb8784b"
+    },
+    {
+      "path": "lib/media-associations.js",
+      "bytes": 2394,
+      "sha256": "decdf5b81f212870effc521ff205567342e0e13bf5c1d3bf5e9db7a0e611d053"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1511,6 +1526,11 @@
       "sha256": "dd3c559079a5aba0e4549719c86d7b377b0d959b6a55463fa440bdd5106d9474"
     },
     {
+      "path": "lib/sequel-watchlist.js",
+      "bytes": 1694,
+      "sha256": "a02d6cbfc455683fd7f749e62e0913fc729e8e0c3d37f5808d6e44b957996742"
+    },
+    {
       "path": "lib/server-host.js",
       "bytes": 2484,
       "sha256": "4d776f7ce594b5bdff0362db5d9311b7dd6e48f6a695c1991c767f022112fbc7"
@@ -1581,14 +1601,19 @@
       "sha256": "89501eaced95b0549398559ba9173671fbbb72f92e10a50dfdb94a4a6879a724"
     },
     {
+      "path": "lib/windows-update-progress.js",
+      "bytes": 8172,
+      "sha256": "00b600338cf429f0d747beb0588feb313d63cb6e3f95091246d5c016bd173287"
+    },
+    {
       "path": "LICENSE",
       "bytes": 1069,
       "sha256": "ecc0503a54ce6bb9079d4fa482ea08652fd161abb6624755542f97e2954d0406"
     },
     {
       "path": "main.js",
-      "bytes": 28770,
-      "sha256": "aa8458c643bd07c799be92c72cd5fe4c07fea5933da67f50a2b05ae6ab2cb6f6"
+      "bytes": 31218,
+      "sha256": "c94f0a1a101eaebb9f6f7d24da2b0fd5d041aa0c0a6a1ae3d36fc23c33ae124f"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1607,8 +1632,8 @@
     },
     {
       "path": "preload.js",
-      "bytes": 2523,
-      "sha256": "0be36df8e53a4e9338979e8b2d80d1e5776149d8455bd1b8f9fa9767bfafd206"
+      "bytes": 2803,
+      "sha256": "75b93735bc5198019b8344815d5c6017f40c92c1e89182e64d465b9739c1441c"
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
@@ -1617,8 +1642,8 @@
     },
     {
       "path": "public/alm-v2.js",
-      "bytes": 243767,
-      "sha256": "e6ede0176332e9776224cdf87b8e1ecc18f02d5b15210562be091428adf6ba97"
+      "bytes": 243784,
+      "sha256": "8d494aac62c2ce23a70ebeda5ab134fa9edeace3161588719949ce8654a78c10"
     },
     {
       "path": "public/anime-association.js",
@@ -1632,8 +1657,8 @@
     },
     {
       "path": "public/app.js",
-      "bytes": 158063,
-      "sha256": "c6a1b5cd26d55b72f62e960df15fe7d2aabf454fbc26a3d8edc273790fa54f5b"
+      "bytes": 158108,
+      "sha256": "d977b17318e79dfc2ab12603321b4665d8ca4678bfbb9d584b5ab80db6651c13"
     },
     {
       "path": "public/assets/alm-clip-complet-1080p.mp4",
@@ -2347,8 +2372,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 87977,
-      "sha256": "c19f9379e669ad1ebaa64a95c8c10f4fec913c44c76ea7d92487cef8c66ef485"
+      "bytes": 89496,
+      "sha256": "cbb04aef49eb222b4f51e90830a8b7d2b454149310db53258ca11e05196d6ae9"
     },
     {
       "path": "public/input-focus.js",
@@ -2611,6 +2636,16 @@
       "sha256": "454fcc37449730a2aa4f749d8693cb582efd910cab53a684a20756e3f9f0ca21"
     },
     {
+      "path": "public/v220-features.js",
+      "bytes": 16758,
+      "sha256": "a6e925cab85df60b1d59ef60878d97d6406cff27f22eec057f3eb50f4c5aadd7"
+    },
+    {
+      "path": "public/v220.css",
+      "bytes": 2034,
+      "sha256": "10285dae0d88b12dd6d0ec6380da6cb9dd5a3c4bd05cac8d94d4546e591feac3"
+    },
+    {
       "path": "public/watch-status.js",
       "bytes": 2107,
       "sha256": "4780e5d9fd0cbebf095e0c5d7a0c5f86d053d134e0bd4fed20217163899c092b"
@@ -2664,6 +2699,11 @@
       "path": "scripts/build-community-site.cjs",
       "bytes": 6395,
       "sha256": "60dba33ddc3d834923cc1a4f03b15660d4e2cedb9ab43a3d5b6da4e6c074b325"
+    },
+    {
+      "path": "scripts/build-v220-vm-preview.cjs",
+      "bytes": 3890,
+      "sha256": "8ad86a0780712f5938b1d8fdfd961f6271cafe1af77edec100d5c8048739568f"
     },
     {
       "path": "scripts/build-windows-retry.js",
@@ -4056,14 +4096,39 @@
       "sha256": "378c2dacb0bf991d086987cb92eaccfca5b96a6996f902f6fa431211985a27e5"
     },
     {
+      "path": "scripts/test-v220-integration.cjs",
+      "bytes": 4814,
+      "sha256": "875be519cbd84d5910401a221778356bd8811e0e1b060334e1dd435fcf61303d"
+    },
+    {
+      "path": "scripts/test-v220-local-media-index.cjs",
+      "bytes": 2083,
+      "sha256": "3db561bc276f694e29fceb4b6e18ac3ae0b7826b040b976531f80b697e9e84f0"
+    },
+    {
+      "path": "scripts/test-v220-sequel-watchlist.cjs",
+      "bytes": 1002,
+      "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
+    },
+    {
+      "path": "scripts/test-v220-update-progress.cjs",
+      "bytes": 7495,
+      "sha256": "5960afd70fd3464bfba24eb47b5b5b7b36e4067dce2c94afd4dfb670d1f3fe67"
+    },
+    {
       "path": "scripts/test-windows-update-handoff.cjs",
       "bytes": 3978,
       "sha256": "314d77243926b25b99bfed87c3f80440451c65d05402e6b4b8e4095081654543"
     },
     {
+      "path": "scripts/v220-smoke-preview.cjs",
+      "bytes": 1286,
+      "sha256": "0cc37579a70cb0bdd9fa8a2ae9dd58fe39c236344491e84580792fd0b0b5dc89"
+    },
+    {
       "path": "scripts/verification-plan.json",
-      "bytes": 6813,
-      "sha256": "170b0462dd3ef505c07ed53bb890e2c501c18c2b0c8af5a02cf382e4130f7035"
+      "bytes": 6854,
+      "sha256": "a1936a73003d714d39405ff15b70ecb0541c88f3845543fe87ff274a8e292631"
     },
     {
       "path": "scripts/verify-native.cjs",
@@ -4082,8 +4147,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 625424,
-      "sha256": "9fb84d99920b45688e128eb05d4d849837b73e3e4e98b391ff0896e1d7cc2e3f"
+      "bytes": 626074,
+      "sha256": "71478f6a2b1506656d31c9207ee4a86d82233dd8e0e3f5404ae24dfb7d370dbd"
     },
     {
       "path": "start_mac_linux.sh",
@@ -4244,41 +4309,6 @@
       "path": "Verifier V2.0.0 Beta Stable Windows.bat",
       "bytes": 1034,
       "sha256": "1e4ca6608108c68991b1e6bc23c02cfa6f5f12d4594844c9b5e2a1469ae57048"
-    },
-    {
-      "path": "lib/windows-update-progress.js",
-      "bytes": 8172,
-      "sha256": "00b600338cf429f0d747beb0588feb313d63cb6e3f95091246d5c016bd173287"
-    },
-    {
-      "path": "scripts/test-v220-update-progress.cjs",
-      "bytes": 7495,
-      "sha256": "5960afd70fd3464bfba24eb47b5b5b7b36e4067dce2c94afd4dfb670d1f3fe67"
-    },
-    {
-      "path": "lib/local-media-index.js",
-      "bytes": 5202,
-      "sha256": "1676681632dbe6003f3db2f2af37fc96a00ededbecedaad9b3cc5a9e026e8cd7"
-    },
-    {
-      "path": "lib/sequel-watchlist.js",
-      "bytes": 1694,
-      "sha256": "a02d6cbfc455683fd7f749e62e0913fc729e8e0c3d37f5808d6e44b957996742"
-    },
-    {
-      "path": "scripts/test-v220-local-media-index.cjs",
-      "bytes": 2083,
-      "sha256": "3db561bc276f694e29fceb4b6e18ac3ae0b7826b040b976531f80b697e9e84f0"
-    },
-    {
-      "path": "scripts/test-v220-sequel-watchlist.cjs",
-      "bytes": 1002,
-      "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
-    },
-    {
-      "path": "docs/PLAN-V2.2.0-COCKPIT-MEDIAS-SUITES-ET-IMAGES.md",
-      "bytes": 9546,
-      "sha256": "c248d664f3d3a2366aedd2acd75942fb04743d41f0ba5c532bc844f8f5d2fde2"
     }
   ],
   "parentArchiveSha256": "e97af43af2058352b3486831856637ad3bbbfa82cb4bf68429db2c66648e337b",
