@@ -2377,8 +2377,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 95671,
-      "sha256": "d48d49f8af805a8c578073b2301cd9ccd30a680e66dbbc2cbe1be8e37d9448ec"
+      "bytes": 95717,
+      "sha256": "7f48815ee9d6b6b7afefa63777f61c24d65ae465dc39d734c01cbead1615389e"
     },
     {
       "path": "public/input-focus.js",
