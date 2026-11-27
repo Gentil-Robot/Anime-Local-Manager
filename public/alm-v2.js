@@ -103,7 +103,7 @@ function openLibraryWithGenreV2(rawGenre) {
 window.openLibraryWithGenreV2 = openLibraryWithGenreV2;
 
 // ─── Navigation ────────────────────────────────────────────
-const ALL_V2_PAGES = ["communityPage","memoryPage","dnaPage","newsV2Page","recoPage","seasonNewsPage","localMediaPage","lexiconPage","auditPage","discoveryPage","rankingPage","calendarPage"];
+const ALL_V2_PAGES = ["communityPage","memoryPage","dnaPage","newsV2Page","recoPage","seasonNewsPage","cockpitPage","lexiconPage","auditPage","discoveryPage","rankingPage","calendarPage"];
 
 function resetTopLevelScrollV2(pageId = "") {
   const reset = () => {
@@ -3451,7 +3451,7 @@ async function ignoreOneSeasonNews(idx) {
 //  DNA DROITE : score dist + prochains à finir
 // ─────────────────────────────────────────────
 function dnaProgressThumbV2(anime, kind) {
-  const sizeClass = kind === "almost" ? "dna-almost-thumb" : "dna-watch-thumb";
+  const sizeClass = kind === "score" ? "dna-score-poster-ph" : kind === "almost" ? "dna-almost-thumb" : "dna-watch-thumb";
   const image = safeUrlV2(anime?.poster || anime?.imageUrl || "");
   const malId = Number(anime?.malId);
   const owned = Number.isSafeInteger(malId) && malId > 0 && malId <= 100000000;
@@ -3484,8 +3484,7 @@ function renderDnaExtras(animes) {
         <div class="dna-score-stat"><span>🏆</span><strong>${best}<small>/10</small></strong><em>Meilleure note</em></div>`;
       if (scorePostersEl) scorePostersEl.innerHTML = sortedScores.slice(0,8).map(a=>`
         <button type="button" class="dna-score-poster" data-dna-personal-score="${Math.round(Number(a.score))}" title="${escapeHtmlV2(a.title||"Anime")} — ${escapeHtmlV2(a.score)}/10">
-          ${a.poster?`<img src="${safeUrlV2(a.poster)}" alt="${escapeHtmlV2(a.title||"")}" loading="lazy" data-image-fallback="true">`:""}
-          <span class="dna-score-poster-ph" ${a.poster?'style="display:none"':''}>🎌</span>
+          ${dnaProgressThumbV2(a,"score")}
           <span class="dna-score-badge">⭐ ${escapeHtmlV2(a.score)}</span>
           <span class="dna-score-poster-title">${escapeHtmlV2(a.title||"Anime")}</span>
         </button>`).join("");

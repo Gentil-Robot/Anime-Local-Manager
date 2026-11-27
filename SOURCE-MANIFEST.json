@@ -1647,8 +1647,8 @@
     },
     {
       "path": "public/alm-v2.js",
-      "bytes": 243784,
-      "sha256": "8d494aac62c2ce23a70ebeda5ab134fa9edeace3161588719949ce8654a78c10"
+      "bytes": 243634,
+      "sha256": "6295d491358e399e66b9de4fc16ba084ed8109682ec43001ca073a11120fd060"
     },
     {
       "path": "public/anime-association.js",
@@ -1662,8 +1662,8 @@
     },
     {
       "path": "public/app.js",
-      "bytes": 158108,
-      "sha256": "d977b17318e79dfc2ab12603321b4665d8ca4678bfbb9d584b5ab80db6651c13"
+      "bytes": 158102,
+      "sha256": "9e72d8035c93e91688b76648d6e2c8a814a2118643555b44215fe0d806440ec5"
     },
     {
       "path": "public/assets/alm-clip-complet-1080p.mp4",
@@ -2332,8 +2332,8 @@
     },
     {
       "path": "public/design.js",
-      "bytes": 13845,
-      "sha256": "050dce0712316d8262097146b4ec42ec42bd70cb104bc49de52f0b4747506344"
+      "bytes": 13990,
+      "sha256": "54dae1a03873370af273d1a6557dade866530f665542a930f929e9303a5b7a5c"
     },
     {
       "path": "public/diagnostics.js",
@@ -2377,8 +2377,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 95717,
-      "sha256": "7f48815ee9d6b6b7afefa63777f61c24d65ae465dc39d734c01cbead1615389e"
+      "bytes": 94140,
+      "sha256": "05d65468a2d0fdcf38b6c8160e8eef687a5df106a5e4fb20130e65bfc93b04d3"
     },
     {
       "path": "public/input-focus.js",
@@ -2472,8 +2472,8 @@
     },
     {
       "path": "public/navigation.js",
-      "bytes": 2517,
-      "sha256": "fc1ea3547695edb4d90ec5b61f444333ec77b54e1c3d32cabd32aaeea3cfd090"
+      "bytes": 2542,
+      "sha256": "fcfbe730883795689c15651ead8051447f15c171547babfcd880f5d75e0fd627"
     },
     {
       "path": "public/nocturne.css",
@@ -2662,8 +2662,8 @@
     },
     {
       "path": "public/v220-personal-insights.js",
-      "bytes": 16032,
-      "sha256": "e1a4d3085976bb130bd7e58a2e23184427ae773d7f4c80f31c156fcafc01af09"
+      "bytes": 10752,
+      "sha256": "03f5f0f8bc0422d1c42e783a9dd21bc01647267bf8e77deed413579e757dbe01"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -2672,13 +2672,13 @@
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 14991,
-      "sha256": "cc4ae928d81a889500e65684e3fabb01012fdd3246e254725f74af41d374e6e8"
+      "bytes": 14823,
+      "sha256": "f82357b57728ffe9221c714456e6333017d2290bbc5cbf585046491d6be134fc"
     },
     {
       "path": "public/v220.css",
-      "bytes": 14867,
-      "sha256": "76e0d70ba75968843a82da7eb78860fbbfce92b48092016ca561a80d8cdfc60c"
+      "bytes": 15827,
+      "sha256": "8dea830c49898c717e8f0b594362e955a69ab53121ebceee7c72595723213c48"
     },
     {
       "path": "public/watch-status.js",

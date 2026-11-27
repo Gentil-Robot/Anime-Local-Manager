@@ -46,10 +46,10 @@
       </div>
 
       <nav class="side-nav">
+        <button class="nav-item" id="navCockpit" type="button" data-no-i18n>ALM Cockpit</button>
         <button class="nav-item" data-filter="">▦ Animés</button>
         <button class="nav-item" data-filter="Watching">▷ En cours</button>
         <button class="nav-item" data-filter="Plan to Watch">◇ À voir</button>
-        <button class="nav-item" id="navLocalMedia" data-no-i18n>📂 Mes fichiers</button>
         <button class="nav-item" id="navMemories" type="button" data-no-i18n><span class="studio-nav-label">Mes souvenirs</span></button>
         <button class="nav-item" id="navDiscovery"><span data-design-text="searchPage" data-no-i18n>Recherche</span></button>
 <button class="nav-item" id="navSeasonNews">📺 Saisons</button>
@@ -87,31 +87,49 @@
           <button class="primary" id="openAdd">+ Ajouter</button>
         </div>
       </header>
+      <section id="cockpitPage" class="v2-page hidden" data-no-i18n><header class="studio-banner"><div class="studio-banner-copy"><span class="studio-kicker">ALM</span><h1>ALM Cockpit</h1><p id="v220CockpitIntro">Tes animés, tes prochaines diffusions et ta progression.</p></div></header><section id="v220WatchRails" class="alm-watch-rails" aria-label="Suivi des visionnages" data-no-i18n>
+        <section id="v220RecentRail" class="alm-watch-rail" data-rail="fresh" aria-labelledby="v220RecentTitle">
+          <div class="alm-watch-heading">
+            <div class="alm-watch-heading-text">
+              <h2 id="v220RecentTitle">Épisodes récemment diffusés</h2>
+              <p id="v220RecentHint">Diffusions confirmées ces 7 derniers jours</p>
+            </div>
+            <div class="alm-watch-controls">
+              <button type="button" id="v220RecentRefresh" class="alm-watch-icon-btn" aria-label="Actualiser les diffusions" title="Actualiser le suivi local">↻</button>
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="prev" aria-controls="v220RecentRows" aria-label="Cartes précédentes">‹</button>
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="next" aria-controls="v220RecentRows" aria-label="Cartes suivantes">›</button>
+            </div>
+          </div>
+          <div id="v220RecentRows" class="alm-watch-row" aria-label="Épisodes diffusés" tabindex="0"></div>
+          <p id="v220RecentEmpty" class="alm-watch-empty" role="status"></p>
+        </section>
+        <section id="v220ResumeRail" class="alm-watch-rail" data-rail="resume" aria-labelledby="v220ResumeTitle">
+          <div class="alm-watch-heading">
+            <div class="alm-watch-heading-text">
+              <h2 id="v220ResumeTitle">Reprenez votre visionnage</h2>
+              <p id="v220ResumeHint">Votre progression dans les animés en cours</p>
+            </div>
+            <div class="alm-watch-controls">
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="prev" aria-controls="v220ResumeRows" aria-label="Cartes précédentes">‹</button>
+              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="next" aria-controls="v220ResumeRows" aria-label="Cartes suivantes">›</button>
+            </div>
+          </div>
+          <div id="v220ResumeRows" class="alm-watch-row" aria-label="Reprendre le suivi" tabindex="0"></div>
+          <p id="v220ResumeEmpty" class="alm-watch-empty" role="status"></p>
+        </section>
+      </section>
+
+    <section id="v220SequelBlock" class="alm-v220-section" data-no-i18n aria-labelledby="v220SequelTitle">
+      <h2 id="v220SequelTitle">Suites absentes de ma bibliothèque</h2>
+      <p id="v220SequelIntro">Relations vérifiées du catalogue local</p>
+      <div id="v220SequelRows" class="alm-v220-sequel-list" aria-live="polite">
+        <p>Ouvre Saisons pour vérifier tes suites manquantes.</p>
+      </div>
+    </section></section>
       <section id="communityPage" class="v2-page hidden" data-no-i18n></section>
       <section id="memoryPage" class="v2-page memory-page hidden" data-no-i18n>
         <header class="studio-banner memory-page-hero"><div class="studio-banner-copy"><span class="studio-kicker" data-notebook-text="journalPrivate">ALM · JOURNAL PRIVÉ</span><h1 data-notebook-text="collectionNotebook">Mes souvenirs</h1><p data-notebook-text="privacy">Privé sur cet ordinateur · inclus dans tes sauvegardes · jamais publié sur ton profil.</p></div><span class="memory-page-hero-symbol" aria-hidden="true">✧</span></header>
         <div class="memory-page-stats" id="memoryPageStats" aria-live="polite"></div>
-        <section id="v220PersonalTimeline" class="alm-v220-personal-panel" data-no-i18n aria-labelledby="v220PersonalTimelineTitle">
-          <div class="alm-v220-personal-header"><div>
-            <h2 id="v220PersonalTimelineTitle">Ma chronologie de visionnage</h2>
-            <p id="v220TimelineIntro">Uniquement les dates de visionnage que tu as enregistrées dans ALM.</p>
-          </div>
-          <label class="alm-v220-personal-year"><span id="v220TimelineYearLabel">Année</span><select id="v220TimelineYear"><option value="">Pas de dates connues</option></select></label>
-          </div>
-          <div class="alm-v220-personal-actions" role="group" aria-label="Affichage chronologique">
-            <button type="button" id="v220TimelineAxisMode" data-timeline-mode="axis" aria-pressed="true">Frise temporelle</button>
-            <button type="button" id="v220TimelineHistoryMode" data-timeline-mode="history" aria-pressed="false">Historique</button>
-          </div>
-          <p id="v220TimelineSummary" class="alm-v220-personal-summary" role="status" aria-live="polite"></p>
-          <div id="v220TimelineAxisPanel">
-            <div id="v220TimelineAxisScroll" class="alm-v220-timeline-scroll" tabindex="0" aria-label="Frise temporelle navigable">
-              <div id="v220TimelineAxisContent" class="alm-v220-timeline-scene"></div>
-            </div>
-            <div id="v220TimelineMonthOverview" class="alm-v220-timeline-months" aria-label="Activité mensuelle"></div>
-          </div>
-          <div id="v220TimelineHistoryPanel" class="alm-v220-timeline-history" hidden></div>
-          <div id="v220TimelineDetails" class="alm-v220-timeline-details" aria-live="polite"></div>
-        </section>
         <div class="memory-page-panel">
           <div class="memory-page-filters">
             <label class="memory-page-search"><span data-notebook-text="search">Rechercher dans mes souvenirs…</span><input id="memoryPageSearch" type="search" autocomplete="off" maxlength="160"></label>
@@ -195,39 +213,6 @@
       <section id="progressPanel" class="progress-panel hidden">
         <div class="progress-label" id="progressLabel">Traitement en cours...</div>
         <div class="progress"><div id="progressBar"></div></div>
-      </section>
-
-      <!-- V2.2.0 — upgrade de la bibliothèque existante, sans nouveau Cockpit -->
-      <section id="v220WatchRails" class="alm-watch-rails" aria-label="Suivi des visionnages" data-no-i18n hidden>
-        <section id="v220RecentRail" class="alm-watch-rail" data-rail="fresh" aria-labelledby="v220RecentTitle">
-          <div class="alm-watch-heading">
-            <div class="alm-watch-heading-text">
-              <h2 id="v220RecentTitle">Épisodes récemment diffusés</h2>
-              <p id="v220RecentHint">Diffusions confirmées ces 7 derniers jours</p>
-            </div>
-            <div class="alm-watch-controls">
-              <button type="button" id="v220RecentRefresh" class="alm-watch-icon-btn" aria-label="Actualiser les diffusions" title="Actualiser le suivi local">↻</button>
-              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="prev" aria-controls="v220RecentRows" aria-label="Cartes précédentes">‹</button>
-              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="next" aria-controls="v220RecentRows" aria-label="Cartes suivantes">›</button>
-            </div>
-          </div>
-          <div id="v220RecentRows" class="alm-watch-row" aria-label="Épisodes diffusés" tabindex="0"></div>
-          <p id="v220RecentEmpty" class="alm-watch-empty" role="status"></p>
-        </section>
-        <section id="v220ResumeRail" class="alm-watch-rail" data-rail="resume" aria-labelledby="v220ResumeTitle">
-          <div class="alm-watch-heading">
-            <div class="alm-watch-heading-text">
-              <h2 id="v220ResumeTitle">Reprenez votre visionnage</h2>
-              <p id="v220ResumeHint">Votre progression dans les animés en cours</p>
-            </div>
-            <div class="alm-watch-controls">
-              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="prev" aria-controls="v220ResumeRows" aria-label="Cartes précédentes">‹</button>
-              <button type="button" class="alm-watch-icon-btn" data-watch-scroll="next" aria-controls="v220ResumeRows" aria-label="Cartes suivantes">›</button>
-            </div>
-          </div>
-          <div id="v220ResumeRows" class="alm-watch-row" aria-label="Reprendre le suivi" tabindex="0"></div>
-          <p id="v220ResumeEmpty" class="alm-watch-empty" role="status"></p>
-        </section>
       </section>
 
       <section class="filters">
@@ -564,31 +549,6 @@
         <div class="ranking-layout"><div><div id="rankingResults" class="ranking-results"></div><nav class="ranking-pagination"><button id="rankingFirst" type="button" aria-label="Première page">&lt;&lt;</button><button id="rankingPrevious" type="button" aria-label="Page précédente">&lt;</button><span id="rankingPageNumber"></span><button id="rankingNext" type="button" aria-label="Page suivante">&gt;</button><button id="rankingLast" type="button" aria-label="Dernière page">&gt;&gt;</button></nav></div><article id="rankingDetail" class="discovery-detail ranking-detail"></article></div>
       </section>
       <section id="discoveryPage" class="discovery-page hidden" data-no-i18n><header class="studio-page-heading discovery-heading"><span class="studio-kicker">ALM</span><h2 data-design-text="searchPage"></h2><p data-design-text="searchIntro"></p></header><form id="discoveryForm" class="discovery-search"><input id="discoveryQuery" type="search" minlength="2" maxlength="160" required data-design-aria="searchPage"><button type="submit" class="primary" data-design-text="searchAction"></button><button type="button" id="catalogReset" class="catalog-reset" data-design-text="catalogReset"></button></form><div class="discovery-toolbar"><p id="discoveryStatus" role="status" aria-live="polite"></p><label class="discovery-sort"><span id="discoverySortLabel"></span><select id="discoverySort"></select></label></div><div class="discovery-layout"><div id="discoveryResults" class="discovery-results"></div><article id="discoveryDetail" class="discovery-detail"><p data-design-text="searchChoose"></p></article></div></section>
-  <section id="localMediaPage" class="v2-page hidden" data-no-i18n>
-    <header class="studio-banner"><div class="studio-banner-copy">
-      <span class="studio-kicker">ALM · V2.2.0 TEST</span>
-      <h1 id="v220MediaTitle">Mes fichiers</h1>
-      <p id="v220MediaIntro">Vidéos locales PC / NAS (lecture seule)</p>
-    </div></header>
-    <section class="alm-v220-section">
-      <div class="alm-v220-toolbar"><button type="button" id="v220MediaChoose">Choisir un dossier</button><span id="v220Connectivity" class="alm-v220-connectivity" role="status"></span>
-        <p id="v220MediaStatus" role="status" aria-live="polite">Aucun dossier analysé.</p>
-      </div>
-      <p id="v220MediaRoot"></p>
-      <div class="alm-v220-media-list" id="v220MediaRows" role="list"></div>
-      <div class="alm-v220-toolbar"><button type="button" id="v220MediaMore" hidden>Afficher les fichiers suivants</button></div>
-      <p class="alm-v220-note" id="v220MediaPrivacy"></p>
-      <div class="alm-v220-navigation" aria-label="Navigation du visionnage">
-        <button type="button" id="v220GoWatching">◉ En cours</button>
-        <button type="button" id="v220GoSeasons">▤ Saisons</button>
-      </div>
-    </section>
-    <section class="alm-v220-section" id="v220SavedBlock" aria-labelledby="v220SavedTitle">
-      <h2 id="v220SavedTitle">Mes associations locales</h2>
-      <p id="v220SavedIntro">Conservées sur cet appareil, même sans connexion Internet.</p>
-      <div id="v220SavedRows" class="alm-v220-saved-list" aria-live="polite"></div>
-    </section>
-  </section>
   <section id="seasonNewsPage" class="season-news-page hidden">
     <div class="season-news-header">
       <div class="season-news-title-row">
@@ -647,13 +607,7 @@
       <p id="v220MissingIntro">Repère les numéros absents entre deux épisodes déjà associés dans tes dossiers PC/NAS. Cela ne signifie pas que les vidéos sont indisponibles ailleurs.</p>
       <div id="v220MissingRows" class="alm-v220-missing-list" aria-live="polite"></div>
     </section>
-    <section id="v220SequelBlock" class="alm-v220-section" data-no-i18n aria-labelledby="v220SequelTitle">
-      <h2 id="v220SequelTitle">Suites absentes de ma bibliothèque</h2>
-      <p id="v220SequelIntro">Relations vérifiées du catalogue local</p>
-      <div id="v220SequelRows" class="alm-v220-sequel-list" aria-live="polite">
-        <p>Ouvre Saisons pour vérifier tes suites manquantes.</p>
-      </div>
-    </section>
+
     <div id="seasonNewsContainer" class="season-news-container">
       <div class="season-news-loading">
         <div class="news-spinner"></div>
@@ -966,6 +920,7 @@
         <button type="button" class="import-tab active" data-tab="xmlImportPanel">MyAnimeList XML</button>
         <button type="button" class="import-tab" data-tab="csvImportPanel">BetaSeries CSV</button>
         <button type="button" class="import-tab" data-tab="listImportPanel" data-notebook-text="importList" data-no-i18n>Importer une liste libre</button>
+        <button type="button" class="import-tab" id="v220MediaTab" data-tab="mediaImportPanel" data-no-i18n>Associer mes fichiers</button>
       </div>
 
       <form id="importForm" method="dialog" class="import-panel" data-panel="xmlImportPanel">
@@ -1067,6 +1022,27 @@
         </menu>
       </form>
       <section id="listImportPanel" class="import-panel notebook-import-panel hidden" data-panel="listImportPanel" data-no-i18n></section>
+  <section id="mediaImportPanel" class="import-panel hidden" data-panel="mediaImportPanel" data-no-i18n>
+    <header><div>
+      <h3 id="v220MediaTitle">Associer mes fichiers</h3>
+      <p id="v220MediaIntro">Vidéos locales PC / NAS (lecture seule)</p>
+    </div></header>
+    <section class="alm-v220-section">
+      <div class="alm-v220-toolbar"><button type="button" id="v220MediaChoose">Choisir un dossier</button><span id="v220Connectivity" class="alm-v220-connectivity" role="status"></span>
+        <p id="v220MediaStatus" role="status" aria-live="polite">Aucun dossier analysé.</p>
+      </div>
+      <p id="v220MediaRoot"></p>
+      <div class="alm-v220-media-list" id="v220MediaRows" role="list"></div>
+      <div class="alm-v220-toolbar"><button type="button" id="v220MediaMore" hidden>Afficher les fichiers suivants</button></div>
+      <p class="alm-v220-note" id="v220MediaPrivacy"></p>
+      </section>
+    <section class="alm-v220-section" id="v220SavedBlock" aria-labelledby="v220SavedTitle">
+      <h2 id="v220SavedTitle">Mes associations locales</h2>
+      <p id="v220SavedIntro">Conservées sur cet appareil, même sans connexion Internet.</p>
+      <div id="v220SavedRows" class="alm-v220-saved-list" aria-live="polite"></div>
+    </section>
+  <menu><button type="button" id="v220MediaClose" data-design-text="close">Fermer</button></menu></section>
+
     </div>
   </dialog>
 

@@ -20,7 +20,8 @@ const library=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
 const title=a=>window.ALM_TITLES?.title?.(a)||a.title||'Anime';
 const cover=a=>{
  const raw=String(a?.poster||a?.imageUrl||'').trim(),id=Number(a?.malId);
- if(!raw)return '';
+ if(/^\/api\/cover-cache\/[0-9]+$/.test(raw))return raw;
+ if(!raw)return Number.isSafeInteger(id)&&id>0?'/api/cover-cache/'+id:'';
  if(Number.isSafeInteger(id)&&id>0&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw))return '/api/cover-cache/'+id;
  if(/^\/images\/[a-z0-9._% -]+$/i.test(raw)||/^\/assets\/[a-z0-9._%/-]+$/i.test(raw))return raw;
  return '';
@@ -41,7 +42,7 @@ function drawScores(){
  const old=filter.value||pickedScore;filter.replaceChildren();
  const opts=[{value:'all',label:t('all')},...data.lanes.filter(l=>l.count).map(l=>({value:l.score===null?'unrated':String(l.score),label:labelScore(l.score)+' · '+l.count}))];
  for(const item of opts){const option=el('option',item.label);option.value=item.value;filter.append(option);}
- filter.value=opts.some(o=>o.value===old)?old:'all';pickedScore=filter.value;
+ filter.value=opts.some(o=>o.value===old)?old:'all';pickedScore=filter.value;window.ALM_SELECTS?.refresh?.();
  $('v220ScoreSummary').textContent=data.rated+' '+t('rated')+' · '+data.unrated+' '+t('unrated');
  host.replaceChildren();
  if(!board.open)return;
@@ -55,7 +56,7 @@ function drawScores(){
    button.setAttribute('aria-label',t('open')+': '+title(item.anime)+' ('+labelScore(lane.score)+')');
    const imageURL=cover(item.anime),art=el('span',null,'alm-v220-score-cover');
    if(imageURL){const image=el('img');image.alt='';image.src=imageURL;image.loading='lazy';
-    image.addEventListener('error',()=>image.remove(),{once:true});art.append(image);}
+    image.dataset.imageFallback='true';if(imageURL.startsWith('/api/cover-cache/'))image.dataset.almManagedCover='1';art.append(image);}
    button.append(art,el('span',title(item.anime),'alm-v220-score-name'));
    button.addEventListener('click',()=>openAnime(item.anime,button));row.append(button);
   }
@@ -65,106 +66,15 @@ function drawScores(){
  }
  if(!host.childElementCount)host.append(el('p',t('none'),'alm-v220-personal-hint'));
 }
-const formatDate=date=>{
- try{return new Intl.DateTimeFormat(lang(),{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));}catch{return date;}
-};
-const monthName=(y,month)=>{
- try{return new Intl.DateTimeFormat(lang(),{month:'short',timeZone:'UTC'}).format(new Date(Date.UTC(y,month-1,1)));}catch{return String(month);}
-};
-const axisX=date=>{
- const y=Number(date.slice(0,4)),start=Date.UTC(y,0,1),end=Date.UTC(y+1,0,1);
- return 40+Math.round((Date.parse(date+'T12:00:00Z')-start)/(end-start)*2140);
-};
-function eventCard(event){
- const button=el('button',null,'alm-v220-timeline-entry');button.type='button';
- const label=event.kind==='completed'?t('finished'):t('watched')+' · '+event.episodes+' '+t('episodes');
- button.append(el('span',formatDate(event.date),'alm-v220-timeline-date'),el('strong',title(event.anime)),el('small',label));
- button.addEventListener('click',()=>openAnime(event.anime,button));return button;
-}
-function showDay(date,all){
- const host=$('v220TimelineDetails');if(!host)return;host.replaceChildren();
- const found=all.days.find(day=>day.date===date);
- if(!found)return;
- host.append(el('h3',formatDate(date)+' · '+found.items.length+' '+t('events')));
- const list=el('div',null,'alm-v220-timeline-details-grid');
- for(const event of found.items.slice(0,40))list.append(eventCard(event));
- host.append(list);
-}
-function renderTimeline(){
- const root=$('v220PersonalTimeline');if(!root)return;
- $('v220PersonalTimelineTitle').textContent=t('timeline');
- $('v220TimelineIntro').textContent=t('timelineHint');
- $('v220TimelineYearLabel').textContent=t('year');
- $('v220TimelineAxisMode').textContent=t('axis');
- $('v220TimelineHistoryMode').textContent=t('history');
- for(const button of root.querySelectorAll('[data-timeline-mode]'))button.setAttribute('aria-pressed',String(button.dataset.timelineMode===mode));
- const years=M.years(library());const select=$('v220TimelineYear');
- const old=year||Number(select.value);
- select.replaceChildren();
- if(!years.length){const opt=el('option',t('noData'));opt.value='';select.append(opt);select.disabled=true;year=0;}
- else{select.disabled=false;for(const y of years){const opt=el('option',y);opt.value=String(y);select.append(opt);}
-  year=years.includes(old)?old:years[0];select.value=String(year);}
- const data=M.timeline(library(),year);
- $('v220TimelineSummary').textContent=years.length
-   ?data.eventCount+' '+t('dated')+' · '+data.completed+' '+t('completed')+' · '+data.episodes+' '+t('episodes')
-   :t('empty');
- const axisPanel=$('v220TimelineAxisPanel'),historyPanel=$('v220TimelineHistoryPanel');
- axisPanel.hidden=mode!=='axis'||!years.length;
- historyPanel.hidden=mode!=='history'||!years.length;
- $('v220TimelineDetails').replaceChildren();
- if(!years.length)return;
- const scene=$('v220TimelineAxisContent');scene.replaceChildren();scene.append(el('div',null,'alm-v220-timeline-line'));
- for(let index=1;index<=12;index++){
-  const date=year+'-'+String(index).padStart(2,'0')+'-01',x=axisX(date),tick=el('span',monthName(year,index),'alm-v220-timeline-tick');
-  tick.style.left=x+'px';scene.append(tick);
- }
- for(const [i,day] of data.days.entries()){
-  const marker=el('button',day.items.length>1?String(day.items.length):'●','alm-v220-timeline-dot');
-  marker.type='button';marker.style.left=axisX(day.date)+'px';
-  marker.style.top=(i%3===0?46:i%3===1?90:135)+'px';
-  marker.title=formatDate(day.date)+' · '+day.items.length+' '+t('events');
-  marker.setAttribute('aria-label',t('display')+' · '+marker.title);
-  marker.addEventListener('click',()=>{selectedDay=day.date;showDay(day.date,data);});
-  scene.append(marker);
- }
- const overview=$('v220TimelineMonthOverview');overview.replaceChildren();
- const peak=Math.max(1,...data.month.map(m=>m.events));
- for(const item of data.month){
-  const button=el('button',null,'alm-v220-timeline-month');button.type='button';
-  const track=el('span',null,'alm-v220-timeline-bar');const fill=el('span');
-  fill.style.height=(item.events?Math.max(5,Math.round(100*item.events/peak)):0)+'%';track.append(fill);
-  button.append(track,el('small',monthName(year,item.month)),el('strong',item.events));
-  button.title=monthName(year,item.month)+' · '+item.events+' '+t('events');
-  button.addEventListener('click',()=>{
-   const matching=data.days.filter(day=>Number(day.date.slice(5,7))===item.month);
-   if(matching.length){selectedDay=matching.at(-1).date;showDay(selectedDay,data);}
-  });overview.append(button);
- }
- const history=$('v220TimelineHistoryPanel');history.replaceChildren();
- for(const event of data.events.slice(-100).reverse())history.append(eventCard(event));
- if(selectedDay&&!data.days.some(d=>d.date===selectedDay))selectedDay='';
- selectedDay=selectedDay||data.days.at(-1)?.date||'';
- if(mode==='axis'&&selectedDay)showDay(selectedDay,data);
- const viewport=$('v220TimelineAxisScroll');
- if(mode==='axis'&&viewport&&data.days.length)viewport.scrollLeft=viewport.scrollWidth;
-}
 function init(){
- const board=$('v220ScoreBoard'),timeline=$('v220PersonalTimeline');if(!board||!timeline)return;
+ const board=$('v220ScoreBoard');if(!board)return;
  $('v220ScoreFilter')?.addEventListener('change',event=>{pickedScore=event.target.value;drawScores();});
  board.addEventListener('toggle',drawScores);
- $('v220TimelineYear')?.addEventListener('change',event=>{year=Number(event.target.value)||0;selectedDay='';renderTimeline();});
- timeline.querySelectorAll('[data-timeline-mode]').forEach(button=>button.addEventListener('click',()=>{
-  mode=button.dataset.timelineMode;renderTimeline();
- }));
- const refresh=()=>{
-  if(!$('dnaPage')?.classList.contains('hidden'))drawScores();
-  if(!$('memoryPage')?.classList.contains('hidden'))renderTimeline();
- };
- $('navDNA')?.addEventListener('click',drawScores);
- $('navMemories')?.addEventListener('click',renderTimeline);
+ const refresh=()=>{if(!$('dnaPage')?.classList.contains('hidden'))drawScores();};
+ $('navDna')?.addEventListener('click',drawScores);
  window.addEventListener('alm:collection-changed',refresh);
  window.addEventListener('alm:language-changed',refresh);
- drawScores();renderTimeline();
+ drawScores();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

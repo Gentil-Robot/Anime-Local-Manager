@@ -25,7 +25,7 @@ const localLabels={
 const t=key=>{const language=window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';
  if(key==='localOpen'||key==='fileError')return (localLabels[language]||localLabels.en)[key==='localOpen'?0:1];
  return (copy[language]||copy.en)[key]||copy.en[key]||key;};
-let lastView='all',schedule={items:[]},scheduleAt=0,loading=null,removed=false;
+let schedule={items:[]},scheduleAt=0,loading=null,removed=false;
 const associations=new Map();
 async function reloadAssociations(){
  if(!window.animeManager?.mediaSummary)return;
@@ -34,8 +34,8 @@ async function reloadAssociations(){
 const validId=v=>Number.isSafeInteger(Number(v))&&Number(v)>0?Number(v):0;
 const apiPoster=anime=>{
  const raw=String(anime?.poster||anime?.imageUrl||'').trim();
- if(!raw)return '';
  const mal=validId(anime?.malId);
+ if(!raw)return mal?'/api/cover-cache/'+mal:'';
  // Same on-demand image cache used by existing ALM library cards.
  if(mal&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw))return '/api/cover-cache/'+mal;
  try{
@@ -61,7 +61,7 @@ function card(row,{fresh=false}={}){
  const src=apiPoster(anime);
  if(src){
   const image=document.createElement('img');image.src=src;image.loading='lazy';image.decoding='async';image.alt='';
-  image.addEventListener('error',()=>image.remove(),{once:true});art.append(image);
+  image.dataset.imageFallback='true';if(src.startsWith('/api/cover-cache/'))image.dataset.almManagedCover='1';art.append(image);
  }
  const tags=document.createElement('span');tags.className='alm-watch-tags';
  const type=document.createElement('span');type.className='alm-watch-kind';type.textContent=t('anime');
@@ -126,19 +126,17 @@ function rail(kind,rows){
  const parent=host.closest('.alm-watch-rail');
  if(parent){
   const previous=parent.querySelector('[data-watch-scroll="prev"]'),next=parent.querySelector('[data-watch-scroll="next"]');
-  const canScroll=rows.length>3;previous.disabled=!canScroll;next.disabled=!canScroll;
+  const sync=()=>{const max=Math.max(0,host.scrollWidth-host.clientWidth);previous.disabled=host.scrollLeft<=1;next.disabled=host.scrollLeft>=max-1;};host.onscroll=sync;requestAnimationFrame(sync);
  }
 }
 function visible(){
- const body=document.body,root=$('v220WatchRails');
- return !!root&&!root.hidden&&!body.classList.contains('alm-v2-active')&&!!$('aboutPage')?.classList.contains('hidden');
+ const page=$('cockpitPage');
+ return !!page&&!page.classList.contains('hidden');
 }
 function draw(){
  const root=$('v220WatchRails');if(!root)return;
- const show=lastView==='all'||lastView==='Watching';
- const exist=M.watching(watched()).length>0;
- root.hidden=!show||!exist;
- if(!show||!exist)return;
+ root.hidden=false;
+ if(!visible())return;
  $('v220RecentTitle').textContent=t('fresh');$('v220RecentHint').textContent=t('recentHint');
  $('v220ResumeTitle').textContent=t('resume');$('v220ResumeHint').textContent=t('resumeHint');
  const newRows=M.newEpisodeRows(watched(),schedule);
@@ -165,7 +163,6 @@ async function checkSchedule(force=false){
  return loading;
 }
 function onRendered(e){
- if(e?.detail?.view)lastView=e.detail.view;
  draw();
  if(visible())void checkSchedule();
 }
@@ -178,8 +175,8 @@ function init(){
   host.scrollBy?.({left:button.dataset.watchScroll==='prev'?-width:width,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth'});
  }));
  $('v220RecentRefresh')?.addEventListener('click',()=>{scheduleAt=0;void checkSchedule(true);});
- document.querySelectorAll('.nav-item[data-filter]').forEach(button=>button.addEventListener('click',()=>{lastView=button.dataset.filter==='Watching'?'Watching':button.dataset.filter==='Plan to Watch'?'Plan to Watch':'all';draw();}));
- document.querySelectorAll('.nav-item:not([data-filter])').forEach(button=>button.addEventListener('click',()=>{root.hidden=true;}));
+ $('navCockpit')?.addEventListener('click',()=>{window.showV2Page?.('cockpitPage','navCockpit');window.ALM_DESIGN?.syncView?.();draw();void checkSchedule();});
+ const page=$('cockpitPage');if(page&&typeof MutationObserver==='function')new MutationObserver(()=>{if(visible()){draw();void checkSchedule();}}).observe(page,{attributes:true,attributeFilter:['class']});
  window.addEventListener('alm:library-rendered',onRendered);
  window.addEventListener('alm:collection-changed',()=>{draw();if(visible())void checkSchedule();});
  window.addEventListener('alm:language-changed',draw);
@@ -188,9 +185,8 @@ function init(){
    draw();
  });
  void reloadAssociations();
- window.addEventListener('alm:view-changed',e=>{if(e.detail?.page==='aboutPage')root.hidden=true;});
  draw();
- if(M.watching(watched()).length)void checkSchedule();
+ if(visible()&&M.watching(watched()).length)void checkSchedule();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
