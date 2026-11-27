@@ -36,17 +36,20 @@ if(process.platform==='win32'){
     for(const [name,source] of [['progress',WINDOWS_PROGRESS_SCRIPT],['worker',WINDOWS_SCRIPT],['bootstrap',WINDOWS_BOOTSTRAP_SCRIPT],['progress-loader',PROGRESS_LOADER]]){
       const file=path.join(directory,name+'.ps1');fs.writeFileSync(file,'\uFEFF'+source);
       const checker="$tokens=$null;$errors=$null;[System.Management.Automation.Language.Parser]::ParseFile($env:ALM_PS_FILE,[ref]$tokens,[ref]$errors)|Out-Null;foreach($problem in $errors){Write-Output ($problem.Message+' @ '+$problem.Extent.StartLineNumber)};if($errors.Count){exit 1}";
-      const check=spawnSync('powershell.exe',['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(checker,'utf16le').toString('base64')],{env:{...process.env,ALM_PS_FILE:file},encoding:'utf8',timeout:15000});
+      const check=spawnSync('powershell.exe',['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(checker,'utf16le').toString('base64')],{env:{...process.env,ALM_PS_FILE:file},encoding:'utf8',timeout:45000});
+      assert.ifError(check.error);
       assert.equal(check.status,0,name+' PowerShell syntax error: '+(check.stdout||'')+(check.stderr||''));
     }
     const fixture=path.join(directory,'trusted.ps1');fs.writeFileSync(fixture,"Write-Output 'ALM_GUI_CHECK_OK'");
     const digest=require('node:crypto').createHash('sha256').update(fs.readFileSync(fixture)).digest('hex');
     const args=['-NoProfile','-NonInteractive','-EncodedCommand',Buffer.from(PROGRESS_LOADER,'utf16le').toString('base64')];
     const env={...process.env,ALM_UPDATE_PROGRESS_FILE:fixture,ALM_UPDATE_PROGRESS_DIGEST:digest};
-    const good=spawnSync('powershell.exe',args,{env,encoding:'utf8',timeout:15000});
+    const good=spawnSync('powershell.exe',args,{env,encoding:'utf8',timeout:45000});
+    assert.ifError(good.error);
     assert.equal(good.status,0,'Signed GUI loader should execute trusted content: '+String(good.stdout||'').replace(/[\r\n]+/g,' ').slice(-1000)+' '+String(good.stderr||'').replace(/[\r\n]+/g,' ').slice(-5000));
     assert(good.stdout.includes('ALM_GUI_CHECK_OK'));
-    const bad=spawnSync('powershell.exe',args,{env:{...env,ALM_UPDATE_PROGRESS_DIGEST:'0'.repeat(64)},encoding:'utf8',timeout:15000});
+    const bad=spawnSync('powershell.exe',args,{env:{...env,ALM_UPDATE_PROGRESS_DIGEST:'0'.repeat(64)},encoding:'utf8',timeout:45000});
+    assert.ifError(bad.error);
     assert.notEqual(bad.status,0,'Tampered GUI source must fail closed');
   }finally{fs.rmSync(directory,{recursive:true,force:true});}
 }

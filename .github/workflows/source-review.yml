@@ -115,6 +115,15 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - name: Review performance, local associations and preview cache (fixtures)
+        shell: pwsh
+        run: |
+          node scripts/test-v220-performance-security.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-local-media-index.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-offline-media.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Inspect actual Node and Electron runtimes and network surfaces
         run: node scripts/test-v220-runtime-security.cjs
       - name: Review native engine recovery, MFA and update UX

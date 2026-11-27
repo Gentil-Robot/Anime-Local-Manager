@@ -126,7 +126,8 @@ async function verifyProject({root=path.resolve(__dirname,'..'),reportFile,logFi
    log.end(name,result.code===0?'OK':'ÉCHEC');
    if(result.code!==0){
     consoleOutput('[vérification] '+release.publicVersion+' · '+label+' : '+diagnosticHeadline(result.output));
-    if(verbose)consoleOutput(String(result.output||'').split(/\r?\n/).slice(-35).join('\n'));
+    consoleOutput('[vérification] Script en échec : '+file);
+    if(verbose||process.env.GITHUB_ACTIONS==='true')consoleOutput(String(result.output||'').split(/\r?\n/).slice(-35).join('\n'));
     throw Error('Contrôle « '+label+' » en échec. Journal technique : '+logFile);
    }
   }

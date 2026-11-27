@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 10131,
-      "sha256": "f87ac948215bae7fa85622febd373b9dc7d313d949d2f71eed03d3d92179a341"
+      "bytes": 10586,
+      "sha256": "c1685323c3d412d5edc0fa394d33d0ff76ce9ff6d31c4143be94d4c9e3441870"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -531,6 +531,11 @@
       "sha256": "1ec98b75823090ba4fcd2cdf47afa05aa13f9aabc75fbe0957341fc3091caa87"
     },
     {
+      "path": "docs/AUDIT-V220-ITERATION4.md",
+      "bytes": 2255,
+      "sha256": "6525ec6e87d6e57c7af1da4b7799c7d40ea5c1c25b0a1e32ad35a0923b94320e"
+    },
+    {
       "path": "docs/Beta81-Apropos-AnimeDNA.txt",
       "bytes": 5221,
       "sha256": "607efeaead7a54c8cb5ba47db53e85f09c2cb8e5caf21a2011a8035ebf31df9c"
@@ -607,8 +612,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 14616,
-      "sha256": "87b80d6c61c7d813e9ffa62189c3b7f4159e92ec232d2c078ae4a40002549dc4"
+      "bytes": 17032,
+      "sha256": "a1c20c7bdf750461ed8e8ececf2f6ef57e21a3672a9816e6083d8bb9c10f5b85"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -4166,6 +4171,11 @@
       "sha256": "80aa08977fe91e2ab683fe5c3ff9782c7637f283a29ee82ab9618da82e578803"
     },
     {
+      "path": "scripts/test-v220-performance-security.cjs",
+      "bytes": 3787,
+      "sha256": "578af7495ef84c30514c3c2cf0923b2c8c0a542b47b8c969d6d27a6535817723"
+    },
+    {
       "path": "scripts/test-v220-personal-insights-ui.cjs",
       "bytes": 3274,
       "sha256": "2784ab7ae5137d4cc0b4a922198ef7b4169df1a642e906b9c66a665a050f1be6"
@@ -4182,8 +4192,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 5129,
-      "sha256": "4e708793b40bc1c29c42dee6f688004b7ba7edf3bbe473731f222d422f86e3b1"
+      "bytes": 5419,
+      "sha256": "7e6733f40c76de1033a47ad4407282e93e13f343a8ce1b1900488b90623c83d4"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4202,8 +4212,8 @@
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",
-      "bytes": 7495,
-      "sha256": "5960afd70fd3464bfba24eb47b5b5b7b36e4067dce2c94afd4dfb670d1f3fe67"
+      "bytes": 7593,
+      "sha256": "dedd2c13b954c9171bf9dada1224f58c6001d441de3a1ca84cd22a9ab926c6f6"
     },
     {
       "path": "scripts/test-v220-upgrade-ui.cjs",
@@ -4247,8 +4257,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7368,
-      "sha256": "7b8db25192d9aa255c5362eb966eb40ac5fdf5e3528cbaab5eeaa672e39dfab6"
+      "bytes": 7418,
+      "sha256": "4871ca1741d772adef575c0a69f8265a7702e23b5ae2420243eb7b1696ba2822"
     },
     {
       "path": "scripts/verify-native.cjs",
@@ -4257,8 +4267,8 @@
     },
     {
       "path": "scripts/verify-project.js",
-      "bytes": 10960,
-      "sha256": "c5cfde79413ee28425764c8f7353c3c581dbb9bf27b050d0dcfa2ef3ba0b844b"
+      "bytes": 11060,
+      "sha256": "fd7533b4bd85c6b0dae8cac18e9b146a59873de434212b6d836140525a875ba6"
     },
     {
       "path": "SECURITY.md",
