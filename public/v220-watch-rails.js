@@ -35,7 +35,7 @@ const rc=i=>(resumeCopy[window.ALM_DESIGN?.language?.()||document.documentElemen
 const t=key=>{const language=window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';
  if(key==='localOpen'||key==='fileError')return (localLabels[language]||localLabels.en)[key==='localOpen'?0:1];
  return (copy[language]||copy.en)[key]||copy.en[key]||key;};
-let schedule={items:[]},scheduleAt=0,loading=null,removed=false;
+let schedule={items:[]},scheduleAt=0,loading=null,initialized=false,frame=0,observer=null;
 const associations=new Map();
 async function reloadAssociations(){
  if(!window.animeManager?.mediaSummary)return;
@@ -177,12 +177,13 @@ async function checkSchedule(force=false){
  })().finally(()=>{loading=null;});
  return loading;
 }
-function onRendered(e){
- draw();
+function queueDraw(){if(frame)return;frame=requestAnimationFrame(()=>{frame=0;draw();});}
+function onRendered(){
+ queueDraw();
  if(visible())void checkSchedule();
 }
 function init(){
- const root=$('v220WatchRails');if(!root||removed)return;
+ const root=$('v220WatchRails');if(!root||initialized)return;initialized=true;
  root.querySelectorAll('[data-watch-scroll]').forEach(button=>button.addEventListener('click',()=>{
   const host=$(button.closest('.alm-watch-rail')?.dataset.rail==='fresh'?'v220RecentRows':'v220ResumeRows');
   if(!host)return;
@@ -192,9 +193,9 @@ function init(){
  }));
  $('v220RecentRefresh')?.addEventListener('click',()=>{scheduleAt=0;void checkSchedule(true);});
  $('navCockpit')?.addEventListener('click',()=>{window.showV2Page?.('cockpitPage','navCockpit');window.ALM_DESIGN?.syncView?.();draw();void checkSchedule();});
- const page=$('cockpitPage');if(page&&typeof MutationObserver==='function')new MutationObserver(()=>{if(visible()){draw();void checkSchedule();}}).observe(page,{attributes:true,attributeFilter:['class']});
+ const page=$('cockpitPage');if(page&&typeof MutationObserver==='function'){observer=new MutationObserver(()=>{if(visible()){queueDraw();void checkSchedule();}});observer.observe(page,{attributes:true,attributeFilter:['class']});}
  window.addEventListener('alm:library-rendered',onRendered);
- window.addEventListener('alm:collection-changed',()=>{draw();if(visible())void checkSchedule();});
+ window.addEventListener('alm:collection-changed',()=>{queueDraw();if(visible())void checkSchedule();});
  window.addEventListener('alm:language-changed',draw);
  window.addEventListener('alm:media-associations-changed',event=>{
    associations.clear();for(const item of event.detail?.summaries||[])associations.set(Number(item.malId),item);
@@ -206,7 +207,7 @@ function init(){
  // Only read the local cache while visible; the configured maintenance and
  // notification services remain responsible for provider requests.
  const poll=setInterval(()=>{if(visible()&&!document.hidden)void checkSchedule();},120000);
- window.addEventListener('pagehide',()=>clearInterval(poll),{once:true});
+ window.addEventListener('pagehide',event=>{if(event.persisted)return;clearInterval(poll);observer?.disconnect();if(frame)cancelAnimationFrame(frame);frame=0;},{once:true});
  document.addEventListener('visibilitychange',()=>{if(visible()&&!document.hidden)void checkSchedule();});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();

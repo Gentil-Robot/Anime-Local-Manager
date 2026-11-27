@@ -1412,8 +1412,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 7460,
-      "sha256": "9b5f5247c0948169cf461ae03d66a822a1c96c8d132e608b64c26c5e2ee5ee77"
+      "bytes": 7813,
+      "sha256": "326a8a70b7d4d38435b4df91805f6b9a599201df5c8bd0171dd393a2f8bb8f53"
     },
     {
       "path": "lib/media-classifier.js",
@@ -2657,8 +2657,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 53619,
-      "sha256": "25e14b3cbb2d7da538b4e0c4cd00bb6436001712b82a706ba4068b6c27ffe0b5"
+      "bytes": 53989,
+      "sha256": "21a1fd6f5a0949d21976107f32b8a7cbeee7bfbb16cf8a29c451fb8d29d88cf3"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2677,13 +2677,13 @@
     },
     {
       "path": "public/v220-watch-model.js",
-      "bytes": 3443,
-      "sha256": "e35648d2bba7d1d9b937855f3e1acb9fcb43189bd8fcf3c8173b93c4f29ec2a5"
+      "bytes": 3511,
+      "sha256": "393afb1a48fa1772a922a358e2f402809bf5bdff253542aca4823cdff513ef3a"
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 17493,
-      "sha256": "e6737bfcce17093d591e7cb410440b808e25f6e02c47b4f0581c1185196d8747"
+      "bytes": 17764,
+      "sha256": "80c65e2ed2cb9c2345810f392f0aeb6aa8b4b77a6ce9bce9dddc7687f454bc5d"
     },
     {
       "path": "public/v220.css",

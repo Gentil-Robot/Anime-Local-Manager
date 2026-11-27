@@ -26,7 +26,8 @@
       return Number.isFinite(value)?value:0;
     })):0;
     const rank={resume:0,start:1,review:2};
-    rows.sort((a,b)=>rank[a.state]-rank[b.state]||latest(b.anime)-latest(a.anime)||b.seen-a.seen||String(a.anime.title||'').localeCompare(String(b.anime.title||''))||a.id-b.id);
+    const dates=new Map(rows.map(row=>[row.id,latest(row.anime)]));
+    rows.sort((a,b)=>rank[a.state]-rank[b.state]||dates.get(b.id)-dates.get(a.id)||b.seen-a.seen||String(a.anime.title||'').localeCompare(String(b.anime.title||''))||a.id-b.id);
     return limit===null?rows:rows.slice(0,nonnegative(limit));
   }
   function newEpisodeRows(animes,airing,nowMs=Date.now(),limit=24){

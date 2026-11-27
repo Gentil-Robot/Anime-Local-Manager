@@ -174,9 +174,9 @@ async function checkPossession(){
   if($('v220PossessionStatus'))$('v220PossessionStatus').textContent=st(14);
  }catch{}finally{checkingFiles=false;renderPossession();renderWatchingCards();}
 }
-function renderWatchingCards(){
+function renderWatchingCards(byId=new Map(animeList().map(a=>[Number(a.id),a]))){
  for(const card of document.querySelectorAll('#animeGrid .card[data-anime-id]')){
-  const a=animeList().find(row=>Number(row.id)===Number(card.dataset.animeId));
+  const a=byId.get(Number(card.dataset.animeId));
   card.querySelector('.alm-v220-next-episode')?.remove();
   if(!a||card.dataset.status!=='Watching')continue;
   const seen=Number(a.episodesSeen),total=Number(a.episodesTotal);
@@ -189,21 +189,28 @@ function renderWatchingCards(){
   wrap.append(btn);card.querySelector('.card-body .meta')?.append(wrap);
  }
 }
-async function refreshSummaries(){
- if(!window.animeManager?.mediaSummary)return;
+let summaryFlight=null,summaryPending=false;
+function refreshSummaries(){
+ if(!window.animeManager?.mediaSummary)return Promise.resolve();
+ if(summaryFlight){summaryPending=true;return summaryFlight;}
+ summaryFlight=(async()=>{do{summaryPending=false;await readSummaries();}while(summaryPending);})().finally(()=>{summaryFlight=null;});
+ return summaryFlight;
+}
+async function readSummaries(){
  try{
   const data=await window.animeManager.mediaSummary()||[];
   summaries.clear();for(const item of data)summaries.set(Number(item.malId),item);
   savedRows=typeof window.animeManager.mediaSaved==='function'?await window.animeManager.mediaSaved()||[]:[];
+  const byId=new Map(animeList().map(a=>[Number(a.id),a]));
   document.querySelectorAll('.card[data-anime-id]').forEach(card=>{
-   const id=Number(card.dataset.animeId),anime=animeList().find(a=>Number(a.id)===id);
+   const id=Number(card.dataset.animeId),anime=byId.get(id);
    const have=anime&&summaries.get(Number(anime.malId)),old=card.querySelector('.alm-v220-local-badge');
    if(!have||card.dataset.status!=='Watching'){old?.remove();return;}
    if(old){old.textContent=t('localBadge')+' ('+have.count+')';return;}
    const badge=el('span',t('localBadge')+' ('+have.count+')','alm-v220-local-badge');
    card.querySelector('.card-body .meta')?.appendChild(badge);
   });
-  renderMissing();renderSaved();renderPossession();renderWatchingCards();
+  renderMissing();renderSaved();renderPossession();renderWatchingCards(byId);
   window.dispatchEvent(new CustomEvent('alm:media-associations-changed',{detail:{summaries:data}}));
  }catch(error){console.warn('[v220 media] local summary unavailable',error?.code||error?.message);}
 }
