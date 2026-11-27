@@ -10,10 +10,18 @@
   .replace(/[’‘\u0060´]/g,"'").replace(/&/g,' and ')
   .replace(/[^\p{L}\p{N}]+/gu,' ').trim().replace(/\s+/g,' ');
  const safeId=value=>{const n=Number(value);return Number.isSafeInteger(n)&&n>0?n:0;};
- const titles=row=>[row?.title,row?.titleEn,row?.titleRomaji,row?.titleJa,...(Array.isArray(row?.synonyms)?row.synonyms.slice(0,25):[])].map(normalize).filter(Boolean);
+ const titles=row=>[row?.title,row?.customTitle,row?.officialTitle,row?.titleEn,row?.titleEnglish,row?.titleRomaji,row?.titleJa,row?.titleJapanese,row?.titleFr,row?.seriesGroupTitle,...(Array.isArray(row?.synonyms)?row.synonyms.slice(0,25):[]),...(Array.isArray(row?.alternativeTitles)?row.alternativeTitles.slice(0,25):[])].map(normalize).filter(Boolean);
+ function seasonOf(row){
+  const explicit=Number(row?.manualSeasonNumber||row?.betaseriesSeason)||0;if(explicit)return explicit;
+  for(const name of [row?.title,row?.titleEn,row?.titleRomaji]){
+   const hit=String(name||'').match(/(?:\b(?:season|saison)\s*(\d{1,2})\b|\b(\d{1,2})(?:st|nd|rd|th)\s+season\b)/i);
+   if(hit)return Number(hit[1]||hit[2]);
+  }return 0;
+ }
+ function baseTitle(value){return normalize(value).replace(/\b(?:season|saison)\s+\d{1,2}\b|\b\d{1,2}(?:st|nd|rd|th) season\b/g,'').trim();}
  function seasonCompatible(file,row){
   const guessed=Number(file?.seasonGuess)||0;
-  const known=Number(row?.manualSeasonNumber||row?.betaseriesSeason)||0;
+  const known=seasonOf(row);
   if(guessed>0&&known>0&&guessed!==known)return false;
   return true;
  }
@@ -28,6 +36,7 @@
    let best=0,proof='';
    for(const alias of titles(row)){
     if(alias===query){best=100;proof='exact';break;}
+    if(Number(file?.seasonGuess)>0&&seasonOf(row)===Number(file.seasonGuess)&&baseTitle(alias)===baseTitle(query)&&baseTitle(query).length>=3){best=100;proof='season-title';break;}
     const short=alias.length<query.length?alias:query;
     const long=alias.length<query.length?query:alias;
     if(short.length>=7&&short.length/long.length>=.62&&(long.startsWith(short+' ')||long.endsWith(' '+short))){
@@ -49,8 +58,8 @@
   const top=distinct[0];const uniqueExact=!!top&&top.score===100&&!distinct.some(x=>x!==top&&x.score===100);
   const episode=Number(file?.episodeGuess)||0;
   const matchedRow=library.find(x=>safeId(x?.malId)===top?.malId);
-  const knownSeason=Number(matchedRow?.manualSeasonNumber||matchedRow?.betaseriesSeason)||0;
-  const confidence=uniqueExact&&episode>0&&!(Number(file?.seasonGuess)>1&&knownSeason===0)?'high':top?'review':'none';
+  const knownSeason=seasonOf(matchedRow);
+  const confidence=uniqueExact&&episode>0&&file?.confidence!=='review'&&!(Number(file?.seasonGuess)>1&&knownSeason===0)?'high':top?'review':'none';
   return {malId:uniqueExact?top.malId:0,confidence,candidates:distinct};
  }
  return Object.freeze({normalize,rank,seasonCompatible});

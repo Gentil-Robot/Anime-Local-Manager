@@ -1382,8 +1382,8 @@
     },
     {
       "path": "lib/local-media-index.js",
-      "bytes": 6834,
-      "sha256": "83a699532c67619ba88a8a14d70ccb070b537f73704b5b61bb30c4e73849251d"
+      "bytes": 7635,
+      "sha256": "119b32d9f88fbbc908d3646d44f9e7fd480bda845fbe89d73d1dca70b2b9ab37"
     },
     {
       "path": "lib/local-season-links.js",
@@ -1532,8 +1532,8 @@
     },
     {
       "path": "lib/sequel-watchlist.js",
-      "bytes": 1694,
-      "sha256": "a02d6cbfc455683fd7f749e62e0913fc729e8e0c3d37f5808d6e44b957996742"
+      "bytes": 1801,
+      "sha256": "43f26dd26f1a99b6c4b12a57c58e5ad2065a1d03b7e1d4e4a68a7b6af0875594"
     },
     {
       "path": "lib/server-host.js",
@@ -1617,8 +1617,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 31778,
-      "sha256": "e40e1875abfb54a9084346ae495235160216d32eeed27834efb6987c4ec6c74c"
+      "bytes": 32621,
+      "sha256": "cca8d3d5db6b99ad36020ceb665e58767633dbbd00a04b4f013cf3903a6562e5"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1637,8 +1637,8 @@
     },
     {
       "path": "preload.js",
-      "bytes": 2947,
-      "sha256": "6f1106bd78047d1c991eee761c90651d4c839b61906c3b9fa270e90681950bdc"
+      "bytes": 2969,
+      "sha256": "bb42a392deb17501d22dc29f142bf45bd90ef26d476efd5d7b3dadd874c29172"
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
@@ -2647,13 +2647,13 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 26622,
-      "sha256": "75c1749f47530c5396c94c2e7d68783fa3584a85651232dde078c14ac93598d8"
+      "bytes": 32244,
+      "sha256": "ab57f2873bc1de58a24c79addc970e02280af3851b10bbf6b65b0e7deca3b478"
     },
     {
       "path": "public/v220-media-match.js",
-      "bytes": 3174,
-      "sha256": "075f14f1b023c97545016f29bf5920653740a0d22c64311f3808f787a4cf23f1"
+      "bytes": 3986,
+      "sha256": "2eaedd1d9bcaecdcf1800d8e04147fc0bbb447f8369c2123280317bb914646c8"
     },
     {
       "path": "public/v220-personal-insights-model.js",
@@ -2677,8 +2677,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 15827,
-      "sha256": "8dea830c49898c717e8f0b594362e955a69ab53121ebceee7c72595723213c48"
+      "bytes": 16475,
+      "sha256": "5cb4a813ed66b338bf34c084367f396b871b40ff5d1e9d5001199e1630d7b37d"
     },
     {
       "path": "public/watch-status.js",
@@ -4222,8 +4222,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 626074,
-      "sha256": "71478f6a2b1506656d31c9207ee4a86d82233dd8e0e3f5404ae24dfb7d370dbd"
+      "bytes": 626996,
+      "sha256": "abea787aeb12a8a2059a9480e86b4f08b3e2cce8d29fd2ae65ccdc1d506ebf2b"
     },
     {
       "path": "start_mac_linux.sh",

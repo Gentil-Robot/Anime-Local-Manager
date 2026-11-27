@@ -25,6 +25,12 @@ const el=(tag,text,cls)=>{const node=document.createElement(tag);if(text!==undef
 const normalize=s=>String(s||'').normalize('NFKC').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const animeList=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
 let scan=null,visible=40,sequelBusy=false;
+const catalogMatches=new Map();let renderRevision=0;
+const extraLabels={fr:['Associer mes fichiers','Saison','Épisode','Rechercher dans le catalogue local','Ajouter la fiche à À voir et associer ?','Ouvrir la fiche','Tes animés, tes prochaines diffusions et ta progression.'],en:['Link my files','Season','Episode','Search local catalog','Add to watchlist and link?','Open anime','Your anime, recent broadcasts and progress.'],es:['Vincular mis archivos','Temporada','Episodio','Buscar en el catálogo local','¿Añadir a pendientes y vincular?','Abrir ficha','Tus animes, emisiones y progreso.'],de:['Meine Dateien zuordnen','Staffel','Folge','Lokalen Katalog durchsuchen','Zur Merkliste hinzufügen und zuordnen?','Anime öffnen','Deine Anime, Ausstrahlungen und Fortschritte.'],ja:['動画を関連付ける','シーズン','話数','ローカルカタログを検索','視聴予定に追加して関連付けますか？','作品を開く','作品・放送・視聴進捗'], 'pt-BR':['Associar meus arquivos','Temporada','Episódio','Buscar no catálogo local','Adicionar à lista e associar?','Abrir anime','Seus animes, transmissões e progresso.'],'zh-CN':['关联本地文件','季','集','搜索本地目录','加入待看并关联？','打开作品','我的动漫、播出与观看进度。']};
+const labels=i=>(extraLabels[lang()]||extraLabels.en)[i];
+function openImport(){const dialog=$('importDialog');if(dialog&&!dialog.open)dialog.showModal?.();if(window.activateImportTab)window.activateImportTab('mediaImportPanel');else $('mediaImportPanel')?.classList.remove('hidden');translate();}
+async function catalogFor(titles){const pending=[...new Set(titles.filter(x=>typeof x==='string'&&x.trim().length>=2).map(x=>x.trim().slice(0,160)))].filter(x=>!catalogMatches.has(x)).slice(0,40);if(!pending.length)return;try{const result=await fetch('/api/v220/media-candidates',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({titles:pending})});if(!result.ok)return;const data=await result.json();for(const q of pending)catalogMatches.set(q,Array.isArray(data.items?.[q])?data.items[q]:[]);}catch{}}
+function candidatesFor(file){const rows=[...animeList()];const seen=new Set(rows.map(a=>Number(a.malId)));for(const r of catalogMatches.get(String(file.titleGuess||'').trim().slice(0,160))||[])if(!seen.has(Number(r.malId))){rows.push(r);seen.add(Number(r.malId));}return rows;}
 const summaries=new Map();
 let savedRows=[];
 const connectivity=()=>{const node=$('v220Connectivity');if(node){node.textContent=navigator.onLine===false?t('offline'):t('online');node.dataset.offline=String(navigator.onLine===false);}};
@@ -81,7 +87,7 @@ function renderMissing(){
   info.append(el('strong',gap.title));
   info.append(el('small',t('missingNumber')+': '+gap.missing.join(', ')+(gap.truncated?' …':'')+' · '+gap.from+'–'+gap.to));
   const button=el('button',t('seeFiles'),'alm-v220-action');button.type='button';
-  button.addEventListener('click',()=>$('navLocalMedia')?.click());
+  button.addEventListener('click',openImport);
   card.append(info,button);host.append(card);
  }
 }
@@ -109,7 +115,7 @@ async function choose(){
  try{
   const result=await window.animeManager.mediaSelectAndScan();
   if(result?.canceled){showStatus(scan?scan.files.length+' '+t('filesFound'):t('noScan'));return;}
-  scan=result;visible=40;renderMedia();await refreshSummaries();
+  scan=result;visible=40;catalogMatches.clear();await catalogFor((scan.files||[]).slice(0,visible).map(f=>f.titleGuess));renderMedia();await refreshSummaries();
  }catch(error){showStatus(t('failed')+': '+(error?.message||'unknown'));}finally{button.disabled=false;}
 }
 function renderMedia(){
@@ -124,10 +130,11 @@ function renderMedia(){
   const card=el('article',null,'alm-v220-media-card'),head=el('div',null,'alm-v220-media-head');
   const title=el('strong',file.filename),meta=el('small',String(file.relativePath||'')+' · '+Math.max(0,Math.round((Number(file.sizeBytes)||0)/1048576))+' MB');
   const left=el('div');left.append(title,meta);head.append(left);
-  const proposal=window.ALM_V220_MEDIA_MATCH?.rank(file,animeList())||null;
+  const available=candidatesFor(file);
+  const proposal=window.ALM_V220_MEDIA_MATCH?.rank(file,available)||null;
   const match=proposal?proposal.confidence==='high'?proposal.malId:0:bestMatch(file,idx);
   const current=Number(file.linkedMalId)||0;
-  const row=animeList().find(a=>Number(a.malId)===(current||match));
+  const row=available.find(a=>Number(a.malId)===(current||match));
   const confidence=current?t('linked'):match?t('exact'):proposal?.candidates?.length?t('review'):t('unknown');
   const caption=el('p',
    current?t('linked')+': '+(row?.title||String(current)):
@@ -137,32 +144,47 @@ function renderMedia(){
   const actions=el('div',null,'alm-v220-media-actions');
   let selected=match;
   if(!current){
-   const search=el('input');search.type='search';search.placeholder=t('search');search.maxLength=120;
+   const search=el('input');search.type='search';search.placeholder=labels(3);search.maxLength=120;
    const suggestions=el('select');suggestions.setAttribute('aria-label',t('proposed'));
    const populate=term=>{
     suggestions.replaceChildren();const choose=el('option',t('review'));choose.value='';suggestions.append(choose);
     const candidates=term
-      ?animeList().filter(a=>Number(a.malId)>0&&[a.title,a.titleEn,a.titleRomaji,...(Array.isArray(a.synonyms)?a.synonyms.slice(0,10):[])].some(name=>normalize(name).includes(normalize(term)))).slice(0,20)
+      ?[...new Map([...available,...(catalogMatches.get(term.trim().slice(0,160))||[])].map(a=>[Number(a.malId),a])).values()].filter(a=>Number(a.malId)>0&&[a.title,a.titleEn,a.titleRomaji,a.customTitle,...(Array.isArray(a.synonyms)?a.synonyms.slice(0,25):[])].some(name=>normalize(name).includes(normalize(term)))).slice(0,24)
       :proposal?.candidates?.length
-        ?proposal.candidates.map(c=>animeList().find(a=>Number(a.malId)===c.malId)).filter(Boolean)
-        :animeList().filter(a=>Number(a.malId)===match).slice(0,5);
+        ?proposal.candidates.map(c=>available.find(a=>Number(a.malId)===c.malId)).filter(Boolean)
+        :available.filter(a=>Number(a.malId)===match).slice(0,5);
     for(const a of candidates){const option=el('option',a.title);option.value=String(a.malId);suggestions.append(option);}
     suggestions.value=!term&&match&&candidates.some(a=>Number(a.malId)===match)?String(match):'';
     selected=Number(suggestions.value)||0;
    };
-   populate('');search.addEventListener('input',()=>populate(search.value));suggestions.addEventListener('change',()=>{selected=Number(suggestions.value)||0;});
-   if(match)search.hidden=true;
+   let lookupTimer;
+   populate('');search.addEventListener('input',()=>{populate(search.value);clearTimeout(lookupTimer);const term=search.value.trim();if(term.length>=2)lookupTimer=setTimeout(async()=>{await catalogFor([term]);if(search.isConnected&&search.value.trim()===term){populate(term);suggestions.dispatchEvent(new Event('change'));}},220);});suggestions.addEventListener('change',()=>{selected=Number(suggestions.value)||0;});
+   window.ALM_SELECTS?.refresh?.();
    actions.append(search,suggestions);
   }
+  const season=el('input');season.type='number';season.min='0';season.max='99';season.step='1';season.value=String(file.seasonGuess||0);season.setAttribute('aria-label',labels(1));
+  const episode=el('input');episode.type='number';episode.min='1';episode.max='999';episode.step='1';episode.value=file.episodeGuess?String(file.episodeGuess):'';episode.setAttribute('aria-label',labels(2));
+  if(!current){const sl=el('label',labels(1)),ep=el('label',labels(2));sl.append(season);ep.append(episode);actions.append(sl,ep);}
+  const validEpisode=()=>Number.isSafeInteger(Number(episode.value))&&Number(episode.value)>0&&Number(episode.value)<=999&&Number.isSafeInteger(Number(season.value))&&Number(season.value)>=0&&Number(season.value)<=99;
   const button=el('button',current?t('dissociate'):t('associate'),'alm-v220-action');
-  button.type='button';button.disabled=!current&&!selected;
-  actions.querySelector('select')?.addEventListener('change',()=>{button.disabled=!selected;});
-  actions.querySelector('input')?.addEventListener('input',()=>{button.disabled=!selected;});
+  button.type='button';const syncButton=()=>{button.disabled=!current&&(!selected||!validEpisode());};syncButton();
+  actions.addEventListener('change',syncButton);actions.addEventListener('input',syncButton);
   button.addEventListener('click',async()=>{
    button.disabled=true;
    try{
     if(current){await window.animeManager.mediaDissociate(file.index);file.linkedMalId=0;}
-    else{if(!Number.isSafeInteger(selected)||selected<1)return;await window.animeManager.mediaAssociate(file.index,selected);file.linkedMalId=selected;}
+    else{
+      if(!Number.isSafeInteger(selected)||selected<1||!validEpisode()){syncButton();return;}
+      if(!animeList().some(a=>Number(a.malId)===selected)){
+        const candidate=[...available,...[...catalogMatches.values()].flat()].find(a=>Number(a.malId)===selected);
+        if(!candidate||!window.confirm(labels(4)+'\n'+candidate.title)){syncButton();return;}
+        const created=await fetch('/api/animes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:candidate.title,malId:selected,status:'Plan to Watch',episodesSeen:'0',autoInfo:false,catalogAdd:true})});
+        if(!created.ok)throw Error('ALM_MEDIA_CATALOG_ADD_FAILED');
+        await window.reloadAnimeLibrary?.();
+      }
+      const correction={season:Number(season.value),episode:Number(episode.value)};
+      await window.animeManager.mediaAssociate(file.index,selected,correction);file.linkedMalId=selected;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;
+    }
     renderMedia();await refreshSummaries();
    }catch(e){window.notifyApp?.(String(e.message||e),'error');button.disabled=false;}
   });
@@ -176,6 +198,7 @@ function renderMedia(){
   }
   card.append(head,caption,actions);host.append(card);
  }
+ window.ALM_SELECTS?.refresh?.();
  const more=$('v220MediaMore');more.hidden=files.length<=visible;
  more.textContent=t('next')+' ('+(files.length-visible)+' '+t('more')+')';
  $('v220MediaPrivacy').textContent=t('readOnly');
@@ -193,7 +216,15 @@ async function loadSequels(){
   for(const item of data.items){
    if(existing.has(Number(item.malId)))continue;
    const card=el('article',null,'alm-v220-sequel');
-   const main=el('div');main.append(el('strong',item.title),el('small',t('sequelFrom')+': '+item.sourceTitle));
+   const main=el('div',null,'alm-v220-sequel-copy');
+   const art=el('button',null,'alm-v220-sequel-art');art.type='button';art.title=labels(5)+': '+item.title;art.setAttribute('aria-label',art.title);
+   const fallback=el('span','🎌');art.append(fallback);
+   const raw=String(item.imageUrl||'');
+   if(/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw)){
+     const image=el('img');image.src=raw;image.alt='';image.loading='lazy';image.referrerPolicy='no-referrer';image.dataset.imageFallback='true';art.append(image);
+   }
+   art.addEventListener('click',()=>window.ALM_CATALOG?.openRecords?.([{...item,poster:item.imageUrl||''}],0,art,{readOnly:true}));
+   main.append(el('strong',item.title),el('small',t('sequelFrom')+': '+item.sourceTitle));
    const button=el('button',t('sequelAdd'));button.type='button';
    button.addEventListener('click',async()=>{
     if(!window.confirm(t('confirm')+'\n'+item.title))return;
@@ -205,15 +236,16 @@ async function loadSequels(){
      await window.reloadAnimeLibrary?.();button.textContent=t('sequelAdded');await loadSequelsAfter();
     }catch(e){window.notifyApp?.(String(e.message||e),'error');button.disabled=false;}
    });
-   card.append(main,button);host.append(card);
+   card.append(art,main,button);host.append(card);
   }
  }catch(error){host.replaceChildren(el('p',t('sequelError')+': '+error.message));}
  finally{sequelBusy=false;}
 }
 function loadSequelsAfter(){return new Promise(resolve=>setTimeout(()=>{loadSequels().finally(resolve);},0));}
 function translate(){
- const nav=$('navLocalMedia');if(nav)nav.textContent='📂 '+t('files');
- if($('v220MediaTitle'))$('v220MediaTitle').textContent=t('files');
+ if($('v220MediaTab'))$('v220MediaTab').textContent=labels(0);
+ if($('v220MediaTitle'))$('v220MediaTitle').textContent=labels(0);
+ if($('v220CockpitIntro'))$('v220CockpitIntro').textContent=labels(6);
  if($('v220MediaIntro'))$('v220MediaIntro').textContent=t('intro');
  if($('v220SequelTitle'))$('v220SequelTitle').textContent=t('sequelTitle');
  if($('v220SequelIntro'))$('v220SequelIntro').textContent=t('sequelIntro');
@@ -222,11 +254,13 @@ function translate(){
  connectivity();renderMedia();renderSaved();renderMissing();refreshSummaries();
 }
 function init(){
- const nav=$('navLocalMedia');
- nav?.addEventListener('click',()=>{if(typeof window.showV2Page==='function')window.showV2Page('localMediaPage','navLocalMedia');translate();});
+ $('v220MediaTab')?.addEventListener('click',()=>{translate();});
+ $('v220MediaClose')?.addEventListener('click',()=>$('importDialog')?.close());
+ $('navCockpit')?.addEventListener('click',()=>{void loadSequels();});
+ const cockpit=$('cockpitPage');if(cockpit&&typeof MutationObserver==='function')new MutationObserver(()=>{if(!cockpit.classList.contains('hidden'))void loadSequels();}).observe(cockpit,{attributes:true,attributeFilter:['class']});
  $('v220MediaChoose')?.addEventListener('click',choose);
- $('v220MediaMore')?.addEventListener('click',()=>{visible+=40;renderMedia();});
- $('navSeasonNews')?.addEventListener('click',()=>{void loadSequels();renderMissing();});
+ $('v220MediaMore')?.addEventListener('click',async()=>{const start=visible;visible+=40;await catalogFor((scan?.files||[]).slice(start,visible).map(f=>f.titleGuess));renderMedia();});
+ $('navSeasonNews')?.addEventListener('click',()=>{renderMissing();});
  $('v220GoWatching')?.addEventListener('click',()=>document.querySelector('.nav-item[data-filter="Watching"]')?.click());
  $('v220GoSeasons')?.addEventListener('click',()=>$('navSeasonNews')?.click());
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});

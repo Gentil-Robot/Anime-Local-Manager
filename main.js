@@ -362,17 +362,25 @@ async function startApplication() {
     const links=new Map(mediaLinks().map(x=>[x.key,x]));
     return {canceled:false,root,summary:result.summary,
       files:result.files.map((file,index)=>({...file,index,
-        linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0}))};
+        linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0,
+        ...(links.get(mediaStore.key(root,file.relativePath))?{episodeGuess:links.get(mediaStore.key(root,file.relativePath)).episodeGuess,seasonGuess:links.get(mediaStore.key(root,file.relativePath)).seasonGuess||0}:{})}))};
   });
-  ipcMain.handle('media-associate',async(event,index,malId)=>{
+  ipcMain.handle('media-associate',async(event,index,malId,correction)=>{
     trusted(event);
     if(!mediaIndex||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
     const file=mediaIndex.files[index];
     const full=path.resolve(mediaIndex.root,file.relativePath);
     const fstat=await require('node:fs/promises').lstat(full);
     if(!fstat.isFile()||fstat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
+    const fsp=require('node:fs/promises');
+    const actualRoot=await fsp.realpath(mediaIndex.root),actual=await fsp.realpath(full);
+    if(!mediaStore.contained(actualRoot,actual))throw Error('ALM_MEDIA_OUTSIDE_ROOT');
+    const corrected=correction&&typeof correction==='object';
+    const episode=corrected?Number(correction.episode):file.episodeGuess;
+    const season=corrected?Number(correction.season):file.seasonGuess;
+    if(corrected&&(!Number.isSafeInteger(episode)||episode<1||episode>999||!Number.isSafeInteger(season)||season<0||season>99))throw Error('ALM_MEDIA_ASSOCIATION_INVALID');
     return mediaStore.record(mediaStoreFile,{root:mediaIndex.root,relativePath:file.relativePath,
-      filename:file.filename,episodeGuess:file.episodeGuess,seasonGuess:file.seasonGuess,episodeEndGuess:file.episodeEndGuess,malId});
+      filename:file.filename,episodeGuess:episode,seasonGuess:season,episodeEndGuess:episode===file.episodeGuess?file.episodeEndGuess:0,malId});
   });
   ipcMain.handle('media-dissociate',async(event,index)=>{
     trusted(event);

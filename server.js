@@ -3461,7 +3461,19 @@ app.get('/api/cover-cache/:malId', async (req,res)=>{
  return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});
 });
 
-// V2.2.0 — suggestions from the verified local season resolver only.
+// V2.2.0 — bounded, local-only catalogue suggestions. Never send filenames or paths to providers.
+app.post('/api/v220/media-candidates',async(req,res)=>{
+ try{
+  await db.whenReady();
+  const queries=[...new Set((Array.isArray(req.body?.titles)?req.body.titles:[]).filter(v=>typeof v==='string').map(v=>v.trim().slice(0,160)).filter(v=>v.length>=2))].slice(0,40);
+  const items={};
+  for(const q of queries){
+   items[q]=localSeasonSearch(q,20).slice(0,24).map(row=>({malId:row.malId,title:row.title,titleEn:row.titleEn,titleRomaji:row.titleRomaji,titleJa:row.titleJa,synonyms:row.synonyms,episodes:row.episodes,type:row.type,imageUrl:albumCovers.safeSource(row.imageUrl||row.poster)||''}));
+  }
+  res.set('Cache-Control','private, no-store');res.json({items});
+ }catch(error){res.status(503).json({code:'ALM_MEDIA_CATALOG_UNAVAILABLE'});}
+});
+ // V2.2.0 — suggestions from the verified local season resolver only.
 // No network calls, no changes to the collection and no fuzzy auto-add.
 app.get('/api/v220/sequels',async(req,res)=>{
  await db.whenReady();
@@ -3471,7 +3483,7 @@ app.get('/api/v220/sequels',async(req,res)=>{
   return base?nextVerifiedLocalSeason(base):null;
  },{maxCandidates:40});
  res.set('Cache-Control','private, no-store');
- res.json({items:candidates,scanned:library.length,offline:true});
+ res.json({items:candidates.map(item=>({...item,imageUrl:albumCovers.safeSource(item.imageUrl)||''})),scanned:library.length,offline:true});
 });
 
 app.get("/api/animes", (req, res) => {

@@ -24,7 +24,7 @@ contextBridge.exposeInMainWorld("animeManager", {
   restoreInputFocus: () => ipcRenderer.invoke("input-focus"),
   pickFolder: () => ipcRenderer.invoke("pick-folder"),
   mediaSelectAndScan:()=>ipcRenderer.invoke('media-select-and-scan'),
-  mediaAssociate:(index,malId)=>ipcRenderer.invoke('media-associate',index,malId),
+  mediaAssociate:(index,malId,correction)=>ipcRenderer.invoke('media-associate',index,malId,correction),
   mediaDissociate:index=>ipcRenderer.invoke('media-dissociate',index),
   mediaSummary:()=>ipcRenderer.invoke('media-summary'),
   mediaSaved:()=>ipcRenderer.invoke('media-saved'),
