@@ -12,13 +12,13 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 6854,
-      "sha256": "193d3cf86d54195caeae1cd134e743f4e25571158deaacb705b7aa556b7ff9d7"
+      "bytes": 8929,
+      "sha256": "556e67292967e852f9f8cc4eedc5fa17c93e958c6f83a9a1bb8e86325f50c533"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
-      "bytes": 4685,
-      "sha256": "6e85a04be66269f7adc0dbae0d3d99cf8b7fc7cc9d5a86ce256b37f4d956f077"
+      "bytes": 3220,
+      "sha256": "bcf1b9ba91e0dd631658104d7e0ca153416905f20476e59080aace51c0a2500c"
     },
     {
       "path": ".gitignore",
@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 7003,
-      "sha256": "e180956134bfe10ee7f2f0857d4e73e3f85079ac30c993facaf089185ee1885a"
+      "bytes": 7778,
+      "sha256": "48183a12d19bc231cda2a3a916bd149b123ab1308b38c16018a685b40610c579"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -1642,8 +1642,8 @@
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
-      "bytes": 8968,
-      "sha256": "dfa0830e4e99bc1c2bddea2e7daecb9a40074d74df4222d062fc6dd239c7b26e"
+      "bytes": 9032,
+      "sha256": "8c9c6a78e20f149a7318120cc6d7920e6bd2ad2e677ec74243dc3a080234870c"
     },
     {
       "path": "public/alm-v2.js",
@@ -2692,8 +2692,8 @@
     },
     {
       "path": "Publier-GitHub-V2.ps1",
-      "bytes": 7664,
-      "sha256": "b537382fa2a064f8463d302f3dd308b47706525faf567894e83428de9d1471a5"
+      "bytes": 7721,
+      "sha256": "42ad615d7dbac8c7aab9ed0345b9604f7942a25da6baa06cdc9d04a00209918f"
     },
     {
       "path": "README.md",
@@ -2737,8 +2737,8 @@
     },
     {
       "path": "scripts/build-v220-vm-preview.cjs",
-      "bytes": 4478,
-      "sha256": "7d9348a0f951650a8bc45c02bf8a58b8119de3830f77021aa425389beccaa06a"
+      "bytes": 6472,
+      "sha256": "dbc3c8c40ecaf2ac214aea84951f66e5bdb2a7a2e587bf5c4e43ebb540390c1e"
     },
     {
       "path": "scripts/build-windows-retry.js",
@@ -4166,6 +4166,11 @@
       "sha256": "8d2949feedffd5644984b5e2b3d05d38914af51d79b1a74faca995058539e00f"
     },
     {
+      "path": "scripts/test-v220-release-isolation.cjs",
+      "bytes": 1922,
+      "sha256": "c8ddc57934dd5d9899eb6549ef987f446f7794f05b7cd5a714a9135966f7a12e"
+    },
+    {
       "path": "scripts/test-v220-review.cjs",
       "bytes": 2568,
       "sha256": "73f7f0e9e6adce6ef4ea6903ab26d5961b76b2cc6f00bf105e98ed9f528c1df4"
@@ -4211,14 +4216,19 @@
       "sha256": "314d77243926b25b99bfed87c3f80440451c65d05402e6b4b8e4095081654543"
     },
     {
+      "path": "scripts/v220-smoke-linux.cjs",
+      "bytes": 3497,
+      "sha256": "98aeeb1238d08d4f4116ec754f79187f96beb819ccb249b8cef5cbd803f2c8e4"
+    },
+    {
       "path": "scripts/v220-smoke-preview.cjs",
       "bytes": 1836,
       "sha256": "c17ace99866ef1c49d5c828f89dcf7ac9492d58fb1589fc6f9145b0d61511e23"
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7241,
-      "sha256": "6174a0b1c7a07e2491cd1146a99a949570ebfa54665255ac2c5f525cef042e4a"
+      "bytes": 7288,
+      "sha256": "4c54d957f6ada69eb41533a7dc9229290996124ac717f7f826bb3b2e1a42c210"
     },
     {
       "path": "scripts/verify-native.cjs",

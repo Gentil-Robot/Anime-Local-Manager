@@ -50,3 +50,7 @@ Les chemins absolus restent dans le profil local. Le catalogue et le cache ne so
 ### Résolution de dépendances
 
 Electron 45.5.0 (publication officielle du 24 novembre), Node embarqué 24.22.3 et Chromium 156.0.8078.109. Le job npm 140534797258 a résolu le lockfile avec npm et vérifié dist.integrity. Seuls la déclaration racine et le paquet Electron changent. SHA-256 du lockfile généré : 428b3392567166add6ba703fbe367c1a6560971e81e2693c76473c839382fa83. Le contrôle du lockfile commité est bloquant. L'audit npm, les 179 suites, les parcours natifs et la reconstruction doivent encore confirmer cette mise à niveau. Aucun paquet de production n'est publié.
+
+### Isolation de publication et Linux
+
+Les workflows de la branche candidate ne publient aucune release et ne disposent pas de jeton d'écriture ni de secrets de signature. Les commandes de publication manuelle sont suspendues. La branche publique 2.1.3 conserve ses propres scripts. Les deux chemins de création du planificateur et d'identité Windows sont neutralisés dans l'aperçu VM avec contrôle de leur nombre avant construction. Le build Linux utilise une identité de paquet distincte, construit AppImage et DEB, teste l'AppImage en mode extract-and-run et installe/désinstalle le DEB seulement sur un runner jetable. Le test de la version utilisateur sur Linux reste à faire sur une VM dédiée. Un nouveau contrôle d'isolation rejoint le plan (180 suites).
