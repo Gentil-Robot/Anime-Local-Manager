@@ -32,6 +32,9 @@ window.ALM_DESIGN={language:()=> 'fr'};
 window._almAnimes=[{id:1,malId:55,status:'Watching',title:'Frieren'}];
 window.showV2Page=(page,nav)=>{window.document.getElementById(page)?.classList.remove('hidden');window.document.getElementById(nav)?.classList.add('active');};
 let scans=0,links=0,adds=0;
+window.eval(fs.readFileSync(path.join(root,'public/watch-status.js'),'utf8'));
+window.ALM_ADD_LABEL=value=>window.ALM_WATCH_STATUS.label(value);
+window.ALM_BETA38={preparePayload:async payload=>payload};
 window.animeManager={
  mediaSelectAndScan:async()=>{scans++;return {root:'X:\\Test-VM',files:[{index:0,filename:'Frieren S01E13.mkv',relativePath:'Frieren S01E13.mkv',titleGuess:'Frieren',sizeBytes:1048576,episodeGuess:13,linkedMalId:0}],summary:{videoFiles:1}};},
  mediaAssociate:async(index,id)=>{assert.equal(index,0);assert.equal(id,55);links++;return {key:'test'};},
@@ -42,7 +45,7 @@ window.confirm=()=>true;
 window.reloadAnimeLibrary=async()=>{window._almAnimes.push({id:2,malId:56,title:'Frieren II',status:'Plan to Watch'});};
 window.fetch=async(url,opts)=>{
  if(url==='/api/v220/sequels')return {ok:true,json:async()=>({items:[{malId:56,title:'Frieren II',sourceTitle:'Frieren'}],scanned:1})};
- if(url==='/api/animes'){assert.equal(JSON.parse(opts.body).status,'Plan to Watch');adds++;return {ok:true,json:async()=>({anime:{title:'Frieren II'}})};}
+ if(url==='/api/animes'){assert.equal(JSON.parse(opts.body).status,'On-Hold');adds++;return {ok:true,json:async()=>({anime:{title:'Frieren II'}})};}
  throw Error('Unexpected request '+url);
 };
 window.eval(fs.readFileSync(path.join(root,'public/v220-features.js'),'utf8'));
@@ -60,6 +63,9 @@ const flush=()=>new Promise(r=>setTimeout(r,30));
  window.document.getElementById('navCockpit').click();await flush();
  const sequel=window.document.querySelector('#v220SequelRows .alm-v220-sequel');
  assert(sequel&&sequel.textContent.includes('Frieren II'));
+ const select=sequel.querySelector('.alm-v220-sequel-status');assert.equal(select.value,'Plan to Watch');
+ assert.deepEqual([...select.options].map(o=>o.value),['Watching','Completed','On-Hold','Dropped','Plan to Watch']);
+ select.value='On-Hold';select.dispatchEvent(new window.Event('change'));assert.equal(sequel.querySelector('.alm-v220-sequel-add').textContent,'En pause');
  sequel.querySelector('.alm-v220-sequel-add').click();await flush();assert.equal(adds,1,'Explicit user click should add to watchlist');
  console.log('OK V2.2.0: import tab, opt-in PC/NAS scan, local association, missing sequels in Cockpit.');
  window.close();

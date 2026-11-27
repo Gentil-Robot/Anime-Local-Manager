@@ -119,3 +119,14 @@
 .alm-v220-brand-placeholder{position:absolute;inset:0;display:block;background:url('/assets/anime-local-manager-logo.png') center/42px auto no-repeat;opacity:.55;pointer-events:none}
 .alm-watch-art img,.alm-v220-score-cover img{position:relative;z-index:1}
 .alm-v220-sequel-art .alm-v220-brand-placeholder{background-size:60px auto}
+
+/* Local recognition and shared status controls. */
+#mediaImportPanel .alm-v220-media-actions>input[type=search]{flex:1 1 260px}
+#mediaImportPanel .alm-v220-media-actions>select{flex:1 1 220px}
+.alm-v220-candidate-preview{display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 100%;font-size:.82rem;color:var(--muted,#b8bbd7)}
+.alm-v220-candidate-preview:empty{display:none}
+.alm-v220-candidate-preview img{width:38px;height:53px;object-fit:cover;border-radius:5px}
+#mediaImportPanel .alm-v220-media-actions .alm-v220-whole-work{flex:1 1 190px;font-size:.82rem}
+#mediaImportPanel .alm-v220-whole-work input[type=checkbox]{flex:none;width:auto;max-width:20px;margin:0}
+#cockpitPage .alm-v220-sequel-actions{display:grid;gap:7px;min-width:0}
+#cockpitPage .alm-v220-sequel-status{width:100%;min-width:0;border-radius:8px}

@@ -1537,8 +1537,8 @@
     },
     {
       "path": "lib/sequel-watchlist.js",
-      "bytes": 1801,
-      "sha256": "43f26dd26f1a99b6c4b12a57c58e5ad2065a1d03b7e1d4e4a68a7b6af0875594"
+      "bytes": 1913,
+      "sha256": "b23652fd8f53386f632eacb785098c2640700b0e38d7ab26d55b68ccba075177"
     },
     {
       "path": "lib/server-host.js",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 43467,
-      "sha256": "8c82eb5556bbc6fd905091b03a65120e9cc617158fc7e1a8c4bb4e30c875e013"
+      "bytes": 45172,
+      "sha256": "1453ab730b6772ecd28c8e6dba7ac1fa0889ccfd9846e7edbc34de754a4d9434"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 13275,
-      "sha256": "09fa6be81ed6abd5b9d4228e4aa7a35e07279c315f3499b446840c79362554e5"
+      "bytes": 14101,
+      "sha256": "2ab03fbc50f67cd3ae34a88863aa86f97da9e227ec244e1a4d423223c894cc81"
     },
     {
       "path": "public/watch-status.js",
@@ -4147,8 +4147,8 @@
     },
     {
       "path": "scripts/test-v220-integration.cjs",
-      "bytes": 4819,
-      "sha256": "7b5644ce7f509679e85fd7f928ee80338a948d62ad6a8265b796b5299d9d9034"
+      "bytes": 5396,
+      "sha256": "c2589f9e1ff011fbff74dccae54caf180df6f772826bb760fd486fd52caeedc9"
     },
     {
       "path": "scripts/test-v220-local-media-index.cjs",
@@ -4187,8 +4187,8 @@
     },
     {
       "path": "scripts/test-v220-sequel-watchlist.cjs",
-      "bytes": 1002,
-      "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
+      "bytes": 1072,
+      "sha256": "2a97ebc9ada992a9aedea2dff2d7b0a1893a5c54942f05bf71d8dc1bb53f5097"
     },
     {
       "path": "scripts/test-v220-smart-recognition.cjs",
