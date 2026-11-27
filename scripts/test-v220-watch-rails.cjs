@@ -6,12 +6,13 @@ for(const id of ['v220WatchRails','v220RecentRail','v220RecentTitle','v220Recent
  assert(html.includes('id="'+id+'"'),'Watch rail markup missing: '+id);
 }
 assert(html.indexOf('src="/v220-watch-model.js"')<html.indexOf('src="/v220-watch-rails.js"'),'The selector module must load before the UI');
-assert(!html.includes('id="cockpitPage"'),'Do not introduce a duplicate dashboard');
-assert(read('public/v220.css').includes('body.alm-v2-active .alm-watch-rails'),'Rails must hide on existing subpages');
+assert(html.includes('id="cockpitPage"'),'Cockpit is the single location for rails');
+assert(read('public/v220.css').includes('#cockpitPage.hidden .alm-watch-rails'),'Rails follow Cockpit visibility');
 const {window}=new JSDOM(html,{url:'http://127.0.0.1:3123/',runScripts:'outside-only',pretendToBeVisual:true});
 window.ALM_DESIGN={language:()=> 'fr'};
 window.ALM_TITLES={title:a=>a.title};
 window.matchMedia=()=>({matches:false});
+window.showV2Page=(page)=>{window.document.querySelectorAll('.v2-page').forEach(el=>el.classList.add('hidden'));window.document.getElementById(page)?.classList.remove('hidden');};
 const watched=[
  {id:7,malId:321,title:'Série d’essai',poster:'https://s4.anilist.co/file.jpg',status:'Watching',episodesSeen:'4',episodesTotal:'12'},
  {id:9,title:'Pas encore commencé',status:'Watching',episodesSeen:'0',episodesTotal:24},
@@ -32,9 +33,9 @@ window.eval(read('public/v220-watch-rails.js'));
 window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
 const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
 (async()=>{
- await flush();
+ window.document.getElementById('navCockpit').click();await flush();
  const rails=window.document.getElementById('v220WatchRails');
- assert(!rails.hidden,'Display rails inside existing library');
+ assert(!rails.hidden&&rails.closest('#cockpitPage')&&!rails.closest('#cockpitPage').classList.contains('hidden'),'Display rails only in Cockpit');
  assert.equal(window.document.querySelectorAll('#v220RecentRows .alm-watch-card').length,1);
  assert.equal(window.document.querySelectorAll('#v220ResumeRows .alm-watch-card').length,1);
  const localButton=window.document.querySelector('#v220ResumeRows .alm-watch-local-open');
@@ -55,13 +56,11 @@ const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
  assert(requests>=1&&requests<=2,'Automatic display reads existing cached airing data');
  window.document.getElementById('v220RecentRefresh').click();await flush();
  assert.equal(explicitChecks,1,'Only an explicit refresh should call the existing online airing check');
- window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Plan to Watch'}}));
- assert(rails.hidden,'Do not duplicate rails in To Watch');
+ window.showV2Page('dnaPage');
  window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Watching'}}));
- assert(!rails.hidden,'Existing In Progress page must show rails');
- window.document.body.classList.add('alm-v2-active');
- window.document.getElementById('navAbout').click();
- assert(rails.hidden,'Other services should not display library rails');
+ assert(rails.closest('#cockpitPage').classList.contains('hidden'),'Other views cannot display Cockpit rails');
+ window.document.getElementById('navCockpit').click();await flush();
+ assert(!rails.closest('#cockpitPage').classList.contains('hidden'),'Cockpit can reopen');
  window.close();
  console.log('OK V2.2 watch rails: 7 languages asset, real episode counts, private cache images, En cours navigation and non-mutating cards.');
 })().catch(e=>{console.error(e);window.close();process.exitCode=1;});

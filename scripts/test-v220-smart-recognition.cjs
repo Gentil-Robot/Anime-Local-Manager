@@ -9,6 +9,11 @@ assert.deepEqual(guessEpisode('Vinland.Saga.02x05.mp4'),{titleGuess:'Vinland Sag
 assert.deepEqual(guessEpisode('Anime.S01E04-E05.mkv'),{titleGuess:'Anime',seasonGuess:1,episodeGuess:4,confidence:'high',episodeEndGuess:5});
 assert.equal(guessEpisode('just-a-file.txt'),null);
 assert.equal(guessEpisode('movie.mkv').confidence,'unknown');
+ assert.equal(guessEpisode('E07.mkv').episodeGuess,7);
+ assert.equal(guessEpisode('03.mkv').episodeGuess,3);
+ assert.equal(inferFromRelativePath('Frieren/Saison 2/03.mkv',guessEpisode('03.mkv')).seasonGuess,2);
+ assert.equal(inferFromRelativePath('Frieren/Saison 2/03.mkv',guessEpisode('03.mkv')).titleGuess,'Frieren');
+ assert.equal(rank({titleGuess:'Vinland Saga',seasonGuess:2,episodeGuess:4},[{malId:13,title:'Vinland Saga Season 2'}]).malId,13);
 assert.deepEqual(inferFromRelativePath('Frieren/Season 2/Episode 08.mkv',guessEpisode('Episode 08.mkv')),
  {titleGuess:'Frieren',seasonGuess:2,episodeGuess:8,confidence:'medium'});
 const library=[

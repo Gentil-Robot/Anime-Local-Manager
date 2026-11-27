@@ -2657,8 +2657,8 @@
     },
     {
       "path": "public/v220-personal-insights-model.js",
-      "bytes": 4214,
-      "sha256": "109b3e2900ea070f28e9dfe700c23e42086eb4565973ceab8a32516d5f2c4891"
+      "bytes": 1482,
+      "sha256": "cb759ab49aaa66f1f9aa7c110f18c19128c4fa6cd0750de51b24f83462c958eb"
     },
     {
       "path": "public/v220-personal-insights.js",
@@ -4137,8 +4137,8 @@
     },
     {
       "path": "scripts/test-v220-integration.cjs",
-      "bytes": 4822,
-      "sha256": "60c44b57aa8f9a61b3bb5c424159827860859541c83e53d8a9efb6920c06b8d5"
+      "bytes": 4819,
+      "sha256": "7b5644ce7f509679e85fd7f928ee80338a948d62ad6a8265b796b5299d9d9034"
     },
     {
       "path": "scripts/test-v220-local-media-index.cjs",
@@ -4147,18 +4147,23 @@
     },
     {
       "path": "scripts/test-v220-offline-media.cjs",
-      "bytes": 2743,
-      "sha256": "cb75e086b83809f232a24d989d61076c32e022fdc98e5f3ab1713b1ef4f4592f"
+      "bytes": 3156,
+      "sha256": "a8c80ab39ab1707d417b26a45777e80a00b93d5a039689e61842a5ad1fa701e4"
     },
     {
       "path": "scripts/test-v220-personal-insights-ui.cjs",
-      "bytes": 3584,
-      "sha256": "9b1c83e01e3b71d4f2f4634746b380ed06ac003b8c0e766c1f19f67306eb2803"
+      "bytes": 3020,
+      "sha256": "e40f9631f9aed65bd9cd9a52e18625a3190de0b18bb12f3726d0c0cc79c4ff53"
     },
     {
       "path": "scripts/test-v220-personal-insights.cjs",
-      "bytes": 2037,
-      "sha256": "09c6d6a3360bdd743ca6328697444c5c54866451fcb45e57b27d32a480f9655b"
+      "bytes": 1276,
+      "sha256": "8d2949feedffd5644984b5e2b3d05d38914af51d79b1a74faca995058539e00f"
+    },
+    {
+      "path": "scripts/test-v220-review.cjs",
+      "bytes": 2455,
+      "sha256": "83908434b050999806c55a84e5dbcefdece0997a67419fff94d2052544ff32ea"
     },
     {
       "path": "scripts/test-v220-sequel-watchlist.cjs",
@@ -4167,8 +4172,8 @@
     },
     {
       "path": "scripts/test-v220-smart-recognition.cjs",
-      "bytes": 3013,
-      "sha256": "5bc7724e357d3e505c488444a38531ecb145e9a7275cea2e006ea9dab24ac618"
+      "bytes": 3464,
+      "sha256": "86ab95fc6e6a9d6bfa7d1a00117347d5d2c6dad6004446cf8f67c03ad3530f1b"
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",
@@ -4177,8 +4182,8 @@
     },
     {
       "path": "scripts/test-v220-upgrade-ui.cjs",
-      "bytes": 4663,
-      "sha256": "6c5b07a7b701ef458d56eebf5686502a26998890e47df9cb1f913d43ca866e1f"
+      "bytes": 5822,
+      "sha256": "c92ef1fe2011fb9f70daf82e41eaa1c42d40ea6a1bf99ee24e58c129cfbaead8"
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
@@ -4187,8 +4192,8 @@
     },
     {
       "path": "scripts/test-v220-watch-rails.cjs",
-      "bytes": 5200,
-      "sha256": "9cfc28cdc63398711263a8729d9b84972467a3746408424281d47e1db50a1e27"
+      "bytes": 5406,
+      "sha256": "ef6e67916aac76c14b4206aa0d436e725d7e42e0a08b85c57d5e5b4190ea7736"
     },
     {
       "path": "scripts/test-windows-update-handoff.cjs",
@@ -4202,8 +4207,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7205,
-      "sha256": "b8e6721f31fc3a94c1fd267b6292dd18dd5a54c43408c892303c1180db8a357a"
+      "bytes": 7241,
+      "sha256": "6174a0b1c7a07e2491cd1146a99a949570ebfa54665255ac2c5f525cef042e4a"
     },
     {
       "path": "scripts/verify-native.cjs",

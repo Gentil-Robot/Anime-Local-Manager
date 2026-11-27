@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{JSDOM}=require('jsdom');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const html=read('public/index.html');
-for(const id of ['v220SavedRows','v220Connectivity','v220MissingRows','v220GoWatching','v220GoSeasons'])
+for(const id of ['v220SavedRows','v220Connectivity','v220MissingRows','v220MediaTab','v220CheckPossession'])
  assert(html.includes('id="'+id+'"'),'Missing local-first UI: '+id);
 assert(html.indexOf('/v220-media-match.js')<html.indexOf('/v220-features.js'));
 assert(html.indexOf('/v220-episode-gaps.js')<html.indexOf('/v220-features.js'));
@@ -15,7 +15,10 @@ window.ALM_DESIGN={language:()=> 'fr'};
 window._almAnimes=library;
 window.showV2Page=(page)=>{window.document.getElementById(page)?.classList.remove('hidden');};
 window.notifyApp=()=>{};
-window.fetch=async url=>{if(url==='/api/v220/sequels')return {ok:true,json:async()=>({items:[]})};throw Error('unexpected network '+url);};
+window.fetch=async(url,opts)=>{if(url==='/api/v220/sequels')return {ok:true,json:async()=>({items:[]})};
+ if(url==='/api/v220/media-candidates'){assert.equal(opts.method,'POST');return {ok:true,json:async()=>({items:{Frieren:[],Naruto:[]}})};}
+ if(url==='/api/airing')return {ok:true,json:async()=>({items:[{animeId:1,episode:11,airingAt:Math.floor(Date.now()/1000)-30},{animeId:1,episode:13,airingAt:Math.floor(Date.now()/1000)-10},{animeId:1,episode:14,airingAt:Math.floor(Date.now()/1000)+1000}]})};
+ throw Error('unexpected network '+url);};
 let openCount=0,associationCount=0;
 window.animeManager={
  mediaSummary:async()=>[{malId:11,count:2,latestEpisode:13,episodes:[11,13]}],
@@ -26,7 +29,8 @@ window.animeManager={
   {index:1,filename:'Frieren - 11.mkv',relativePath:'Frieren - 11.mkv',titleGuess:'Frieren',seasonGuess:0,episodeGuess:11,sizeBytes:1000},
   {index:2,filename:'Naruto S01E03.mkv',relativePath:'Naruto S01E03.mkv',titleGuess:'Naruto',seasonGuess:1,episodeGuess:3,sizeBytes:1000}
  ],summary:{videoFiles:3}}),
- mediaAssociate:async(index,malId)=>{assert.equal(index,0);assert.equal(malId,11);associationCount++;return {key:'a'.repeat(64)};},
+ mediaAssociate:async(index,malId,correction)=>{assert.equal(index,0);assert.equal(malId,11);assert.equal(correction.episode,11);assert.equal(correction.season,1);associationCount++;return {key:'a'.repeat(64)};},
+ mediaCheckEpisodes:async requests=>requests.map(r=>({...r,available:r.episode===11,code:r.episode===11?'':'ALM_MEDIA_FILE_UNAVAILABLE'})),
  mediaDissociate:async()=>true
 };
 window.eval(read('public/v220-media-match.js'));
@@ -40,7 +44,7 @@ const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
  assert(window.document.querySelector('#v220MissingRows').textContent.includes('12'),'Only gaps between linked 11 and 13 are reported');
  const opener=window.document.querySelector('#v220SavedRows button');
  assert(opener&&!opener.disabled);opener.click();await flush();assert.equal(openCount,1,'File open requires explicit action');
- window.document.getElementById('navLocalMedia').click();
+ window.document.getElementById('v220MediaTab').click();
  window.document.getElementById('v220MediaChoose').click();await flush();
  const cards=[...window.document.querySelectorAll('#v220MediaRows .alm-v220-media-card')];
  assert.equal(cards.length,3);
@@ -53,6 +57,13 @@ const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
  const unrelated=cards[2].querySelector('button.alm-v220-action');
  assert(unrelated.disabled,'A substring title must not auto-link to a different anime');
  exact.click();await flush();assert.equal(associationCount,1);
+ window.document.getElementById('navSeasonNews').click();await flush();
+ const possession=window.document.getElementById('v220PossessionRows');
+ assert(possession.textContent.includes('Associé · à vérifier'));
+ assert(!possession.textContent.includes('Épisode 14'),'Future episodes cannot be marked aired');
+ window.document.getElementById('v220CheckPossession').click();await flush();
+ assert(possession.textContent.includes('Fichier présent'));
+ assert(possession.textContent.includes('Fichier inaccessible ou ambigu'));
  Object.defineProperty(window.navigator,'onLine',{value:false,configurable:true});
  window.dispatchEvent(new window.Event('offline'));
  assert(window.document.getElementById('v220Connectivity').textContent.includes('Hors connexion'));

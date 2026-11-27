@@ -1,0 +1,23 @@
+'use strict';
+// Independent integration gate for the 27 Nov VM feedback.
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{JSDOM}=require('jsdom');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const dom=new JSDOM(read('public/index.html')),d=dom.window.document;
+const get=id=>d.getElementById(id);
+assert(get('navCockpit')?.nextElementSibling?.matches('.nav-item[data-filter=""]'),'Cockpit above library');
+assert(get('cockpitPage').contains(get('v220RecentRail'))&&get('cockpitPage').contains(get('v220ResumeRail'))&&get('cockpitPage').contains(get('v220SequelBlock')),'Single Cockpit location for rails and missing sequels');
+assert(!get('navLocalMedia')&&!get('localMediaPage'),'No separate files page');
+assert(get('importDialog').contains(get('mediaImportPanel'))&&get('v220MediaTab').dataset.tab==='mediaImportPanel','Use existing import dialog and tab controls');
+assert(!get('v220PersonalTimeline'),'No duplicate history in Memories');
+assert(get('memoryPageEntries')&&get('calendarPage'),'Original memories and calendar remain');
+assert(get('seasonNewsPage').contains(get('v220PossessionRows')),'Confirmed airing / file comparison lives in Saisons');
+assert(get('dnaPage').contains(get('v220ScoreBoard')),'Keep score explorer in DNA');
+const ids=[...d.querySelectorAll('[id]')].map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'Unique DOM IDs');
+for(const file of ['public/app.js','public/alm-v2.js','public/navigation.js','public/design.js','public/v220-watch-rails.js','public/v220-features.js','public/v220-personal-insights.js','main.js','preload.js','server.js'])new Function(read(file));
+assert(read('public/alm-v2.js').includes('dnaProgressThumbV2(a,"score")'),'Existing DNA cards reuse managed image pipeline');
+assert(read('public/navigation.js').includes("cockpitPage:'navCockpit'"),'Back / forward integration');
+assert(read('public/v220-features.js').includes("'/api/v220/media-candidates'"),'Local catalog beyond personal library');
+assert(read('main.js').includes("ipcMain.handle('media-check-episodes'"),'Actual bounded local availability probe');
+assert(read('public/v220-features.js').includes("correction={season:"),'Manual episode correction passes through bridge');
+dom.window.close();
+console.log('OK independent V2.2 review gate: navigation, original pages, media workflow, possession, cover pipeline, unique DOM and syntax.');

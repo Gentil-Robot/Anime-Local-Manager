@@ -2,10 +2,10 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{JSDOM}=require('jsdom');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const html=read('public/index.html');
-for(const id of ['v220PersonalTimeline','v220TimelineAxisScroll','v220TimelineAxisMode','v220TimelineHistoryMode','v220TimelineYear','v220TimelineDetails','v220ScoreBoard','v220ScoreLanes','v220ScoreFilter'])
+for(const id of ['v220ScoreBoard','v220ScoreLanes','v220ScoreFilter'])
  assert(html.includes('id="'+id+'"'),'Missing upgrade control '+id);
 assert(html.indexOf('src="/v220-personal-insights-model.js"')<html.indexOf('src="/v220-personal-insights.js"'));
-assert(html.includes('id="memoryPage"')&&html.includes('id="dnaPage"'));
+assert(html.includes('id="memoryPage"')&&html.includes('id="dnaPage"'));assert(!html.includes('id="v220PersonalTimeline"'),'Original Mes souvenirs only');
 const {window}=new JSDOM(html,{url:'http://127.0.0.1:3123/',runScripts:'outside-only',pretendToBeVisual:true});
 const library=[
  {id:1,malId:15,title:'Test Anime',score:9,status:'Completed',startDate:'2020-01-01',completedOn:'2026-08-15',watchEvents:[{id:'a',date:'2026-08-10',episodes:2}],poster:'/images/test-art.jpg'},
@@ -31,17 +31,10 @@ window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
  doc.getElementById('v220ScoreFilter').value='unrated';
  doc.getElementById('v220ScoreFilter').dispatchEvent(new window.Event('change'));
  assert.equal(doc.querySelectorAll('.alm-v220-score-lane').length,1,'Score filter operates only on existing DNA');
- const dates=doc.getElementById('v220TimelineSummary').textContent;
- assert(dates.includes('2 événements datés')&&dates.includes('1 animés terminés'),'Correct dated timeline');
- assert.equal(doc.querySelectorAll('.alm-v220-timeline-dot').length,2);
- assert(doc.getElementById('v220TimelineAxisContent').textContent.includes('janv'),'Month ticks are local');
- doc.querySelector('.alm-v220-timeline-dot').click();
- assert(doc.getElementById('v220TimelineDetails').textContent.includes('Test Anime'));
- doc.getElementById('v220TimelineHistoryMode').click();
- assert.equal(doc.getElementById('v220TimelineHistoryPanel').hidden,false);
- assert.equal(doc.querySelectorAll('#v220TimelineHistoryPanel .alm-v220-timeline-entry').length,2);
+ assert.equal(doc.querySelector('#v220ScoreLanes img').getAttribute('src'),'/api/cover-cache/16','Identified anime without poster should use local managed cache');
+ assert(!doc.getElementById('v220PersonalTimeline'),'No duplicate timeline');
  assert.equal(network,0,'No browsing or third-party image fetching from user data timeline');
  assert.equal(library[0].score,9);assert.equal(library[0].completedOn,'2026-08-15');
  window.close();
- console.log('OK V2.2 UX: original DNA score board and Mes souvenirs timeline rendered without network or data writes.');
+ console.log('OK V2.2 UX: DNA score board, managed cover fallback, original Memories and no data writes.');
 })().catch(error=>{console.error(error);window.close();process.exitCode=1;});
