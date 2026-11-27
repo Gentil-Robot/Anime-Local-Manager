@@ -376,9 +376,8 @@ async function startApplication() {
     mediaIndex={root,files:result.files,scanId:require('node:crypto').randomUUID()};
     const links=new Map(mediaLinks().map(x=>[x.key,x]));
     return {canceled:false,root,scanId:mediaIndex.scanId,summary:result.summary,
-      files:result.files.map((file,index)=>({...file,index,
-        linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0,
-        ...(links.get(mediaStore.key(root,file.relativePath))?{episodeGuess:links.get(mediaStore.key(root,file.relativePath)).episodeGuess,seasonGuess:links.get(mediaStore.key(root,file.relativePath)).seasonGuess||0,wholeWork:links.get(mediaStore.key(root,file.relativePath)).wholeWork===true}:{})}))};
+      files:result.files.map((file,index)=>{const linked=links.get(mediaStore.key(root,file.relativePath));return {...file,index,linkedMalId:linked?.malId||0,
+        ...(linked?{episodeGuess:linked.episodeGuess,seasonGuess:linked.seasonGuess||0,wholeWork:linked.wholeWork===true}:{})};})};
     }finally{mediaScanning=false;}
   });
   ipcMain.handle('media-associate',async(event,index,malId,correction)=>{

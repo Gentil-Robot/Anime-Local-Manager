@@ -45,6 +45,18 @@ const store=require('../lib/media-associations');
   assert(store.list(file).find(r=>r.malId===77).wholeWork);
   assert.throws(()=>store.record(file,{root,relativePath:'Series/Whole OAV.avi',filename:'Whole OAV.avi',malId:77,episodeGuess:2,wholeWork:true}));
   const tampered=JSON.parse(await fsp.readFile(file,'utf8'));const savedOva=tampered.items.find(r=>r.malId===77);savedOva.key='0'.repeat(64);await fsp.writeFile(file,JSON.stringify(tampered));assert.equal((await store.locate(file,77,0)).ok,false,'Invalid association identity rejected');
+  const fullFile=path.join(base,'full-links.json');
+  const fullRows=Array.from({length:3000},(_,i)=>{const filename='e'+i+'.mkv';return {key:store.key(root,filename),malId:55,episodeGuess:1,filename,root,relativePath:filename};});
+  const fullPayload=JSON.stringify({schema:1,items:fullRows});assert(Buffer.byteLength(fullPayload)<1024*1024,'Compact fixture must fit read limit');
+  await fsp.writeFile(fullFile,fullPayload);
+  assert.throws(()=>store.record(fullFile,{root,relativePath:'new.mkv',filename:'new.mkv',malId:55,episodeGuess:1}),/ALM_MEDIA_ASSOCIATION_LIMIT/);
+  assert.equal(await fsp.readFile(fullFile,'utf8'),fullPayload,'Association limit never erases older links');
+  const byteFile=path.join(base,'byte-links.json'),wideRows=[];
+  for(let i=0;i<3000;i++){const filename='wide'+i+'.mkv',relativePath=Array.from({length:6},(_,j)=>String(j).repeat(210)).join('/')+'/'+filename;const row={key:store.key(root,relativePath),malId:55,episodeGuess:1,filename,root,relativePath};const next=JSON.stringify({schema:1,items:[...wideRows,row]});if(Buffer.byteLength(next)>1024*1024-200)break;wideRows.push(row);}
+  const bytePayload=JSON.stringify({schema:1,items:wideRows});await fsp.writeFile(byteFile,bytePayload);
+  const largePath=Array.from({length:6},()=> 'z'.repeat(210)).join('/')+'/new.mkv';
+  assert.throws(()=>store.record(byteFile,{root,relativePath:largePath,filename:'new.mkv',malId:55,episodeGuess:1}),/ALM_MEDIA_ASSOCIATION_LIMIT/);
+  assert.equal(await fsp.readFile(byteFile,'utf8'),bytePayload,'Byte limit preserves original data');
   console.log('OK V2.2 offline media: secure persisted file links, IPC privacy, missing NAS, symlinks, validation and removal.');
  }finally{await fsp.rm(base,{force:true,recursive:true});}
 })().catch(error=>{console.error(error);process.exitCode=1;});

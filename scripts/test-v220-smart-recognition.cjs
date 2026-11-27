@@ -34,6 +34,8 @@ assert.equal(rank({titleGuess:'Vinland Saga Season 2',seasonGuess:2,episodeGuess
 assert.equal(rank({titleGuess:'Naruto',episodeGuess:1},library).malId,0,'A generic substring must never match a different anime');
 assert.equal(rank({titleGuess:'Frieren',seasonGuess:3,episodeGuess:8},library).candidates.length,0);
 assert.equal(rank({titleGuess:'',episodeGuess:8},library).confidence,'none');
+assert.equal(rank({titleGuess:'Vinland Saga',seasonGuess:2,episodeGuess:4},[{malId:15,title:'Vinland Saga Season 1'},{malId:16,title:'Vinland Saga Season 2'}]).malId,16);
+assert.equal(rank({titleGuess:'Long Fictional Anime Title'},[{malId:17,title:'Fictional Anime Title Long'}]).candidates[0].score,70);
 (async()=>{
  const root=await fsp.mkdtemp(path.join(os.tmpdir(),'alm22-recognize-'));
  try{

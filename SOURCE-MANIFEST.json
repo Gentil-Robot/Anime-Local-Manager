@@ -1267,8 +1267,8 @@
     },
     {
       "path": "lib/catalog.js",
-      "bytes": 6101,
-      "sha256": "67a907ae31414b9a5e74ea813e15550e0c6fa927f7ff433d139b2812222b770e"
+      "bytes": 6093,
+      "sha256": "8665440453797a818b39db0cefb7d79091881e395814023d3bfea941fbfb9a1b"
     },
     {
       "path": "lib/catalogue-index-worker.js",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 8145,
-      "sha256": "b9813dfcb43a8897b55c89e04b550dc483a29d75efcc950b820abb5a3660cc18"
+      "bytes": 8391,
+      "sha256": "ed836d2e0e6a04ac9f238f255ca3640eabed09fdb2b921c004d2df6ecc35390d"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1632,8 +1632,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 34201,
-      "sha256": "fbe2563b490af82c96d96bf72a0caf244c01c02ce769b9e5977888701a8ab688"
+      "bytes": 34048,
+      "sha256": "66958991f93382fd03746a02924e0a61aeeed1c643ad5b6807609e5688134c56"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1992,8 +1992,8 @@
     },
     {
       "path": "public/beta38.js",
-      "bytes": 18598,
-      "sha256": "468f1b740c924288056f1e2b3340c3d9051d38044c50ac7346fa49b6c9ff2bf2"
+      "bytes": 18279,
+      "sha256": "ec0d2d59546f020d017380079007885c1f57e9ef718e4734823e804044328d4f"
     },
     {
       "path": "public/beta39-copy.js",
@@ -2667,8 +2667,8 @@
     },
     {
       "path": "public/v220-media-match.js",
-      "bytes": 3986,
-      "sha256": "2eaedd1d9bcaecdcf1800d8e04147fc0bbb447f8369c2123280317bb914646c8"
+      "bytes": 4174,
+      "sha256": "45f487b74289769e4904a7f5eb150f02bd72084b6a45177cdab2fb4829ec91a2"
     },
     {
       "path": "public/v220-personal-insights-model.js",
@@ -3222,8 +3222,8 @@
     },
     {
       "path": "scripts/test-beta42-runtime.js",
-      "bytes": 9810,
-      "sha256": "6ee8014418844cb5ec0bd4537e3e456dd3d07daa126d93fef08e0b131938ac4f"
+      "bytes": 9975,
+      "sha256": "c064d0407d5f2d328f2e1bb6ac5a3bc5cfbd003694ba5e9be29404efac7473ab"
     },
     {
       "path": "scripts/test-beta43-browser.py",
@@ -4167,8 +4167,8 @@
     },
     {
       "path": "scripts/test-v220-offline-media.cjs",
-      "bytes": 4050,
-      "sha256": "80aa08977fe91e2ab683fe5c3ff9782c7637f283a29ee82ab9618da82e578803"
+      "bytes": 5609,
+      "sha256": "038da785b10f0053eb25de80213a8e7bd431567ecb0cd11b5b6950c2f5052af4"
     },
     {
       "path": "scripts/test-v220-performance-security.cjs",
@@ -4207,8 +4207,8 @@
     },
     {
       "path": "scripts/test-v220-smart-recognition.cjs",
-      "bytes": 4558,
-      "sha256": "62f459e20bbb051c433b76785e3169f07752e1884a5818f8743efa2bb21f3ff5"
+      "bytes": 4863,
+      "sha256": "c3cac6b468334665f9a3675f7db6071740d1af6752abbd363e1417f4e0f4dfc9"
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",

@@ -29,24 +29,25 @@
   const query=normalize(file?.titleGuess);
   const limit=Math.max(1,Math.min(12,Math.floor(Number(maxResults)||5)));
   if(!query||query.length<3||!Array.isArray(library))return {malId:0,confidence:'none',candidates:[]};
+  const guessedSeason=Number(file?.seasonGuess)||0,queryBase=guessedSeason>0?baseTitle(query):'',queryTokens=new Set(query.split(' ').filter(token=>token.length>=3));
   const scored=[];
   for(const row of library){
    const id=safeId(row?.malId);
-   if(!id||!seasonCompatible(file,row))continue;
+   if(!id)continue;
+   const knownSeason=seasonOf(row);if(guessedSeason>0&&knownSeason>0&&guessedSeason!==knownSeason)continue;
    let best=0,proof='';
    for(const alias of titles(row)){
     if(alias===query){best=100;proof='exact';break;}
-    if(Number(file?.seasonGuess)>0&&seasonOf(row)===Number(file.seasonGuess)&&baseTitle(alias)===baseTitle(query)&&baseTitle(query).length>=3){best=100;proof='season-title';break;}
+    if(guessedSeason>0&&knownSeason===guessedSeason&&queryBase.length>=3&&baseTitle(alias)===queryBase){best=100;proof='season-title';break;}
     const short=alias.length<query.length?alias:query;
     const long=alias.length<query.length?query:alias;
     if(short.length>=7&&short.length/long.length>=.62&&(long.startsWith(short+' ')||long.endsWith(' '+short))){
       if(best<75){best=75;proof='partial';}
     }
-    const a=new Set(alias.split(' ').filter(token=>token.length>=3));
-    const b=new Set(query.split(' ').filter(token=>token.length>=3));
-    if(a.size>=2&&b.size>=2){
-      let common=0;for(const word of a)if(b.has(word))common++;
-      const overlap=common/(a.size+b.size-common);
+    if(queryTokens.size>=2&&best<70){
+      const a=new Set(alias.split(' ').filter(token=>token.length>=3));if(a.size<2)continue;
+      let common=0;for(const word of a)if(queryTokens.has(word))common++;
+      const overlap=common/(a.size+queryTokens.size-common);
       if(overlap>=.75&&best<70){best=70;proof='tokens';}
     }
    }
