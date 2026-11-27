@@ -49,7 +49,7 @@ w.eval(read('public/watch-status.js'));w.eval(read('public/v220-media-match.js')
  c.querySelector('select').value='104';c.querySelector('select').dispatchEvent(new w.Event('change',{bubbles:true}));lookupResolve();await flush();
  assert.equal(c.querySelector('select').value,'104','Asynchronous lookup must preserve the user choice');
  const status=c.querySelector('.alm-v220-media-status');assert(!status.disabled);status.value='On-Hold';status.dispatchEvent(new w.Event('change',{bubbles:true}));
- const cover=c.querySelector('.alm-v220-media-cover');assert(cover.querySelector('img').getAttribute('src')==='/api/v220/media-cover/104');cover.dispatchEvent(new w.MouseEvent('dblclick',{bubbles:true}));assert(opened.context.localOnly&&opened.context.readOnly);assert.equal(opened.rows[opened.index].malId,104);
+ const cover=c.querySelector('.alm-v220-media-cover');assert(cover.querySelector('img').getAttribute('src')==='/api/v220/media-cover/104?load=1');cover.dispatchEvent(new w.MouseEvent('dblclick',{bubbles:true}));assert(opened.context.localOnly&&opened.context.readOnly);assert.equal(opened.rows[opened.index].malId,104);
  const whole=c.querySelector('input[type=checkbox]');whole.checked=true;whole.dispatchEvent(new w.Event('change',{bubbles:true}));assert(!button(c).disabled);
  button(c).click();await flush();assert.equal(links.length,1);
  assert.equal(links[0].malId,104);assert.deepEqual(links[0].correction,{season:0,episode:0,wholeWork:true,scanId:'fixture-scan'});

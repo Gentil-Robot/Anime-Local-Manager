@@ -26,7 +26,7 @@ w.eval(read('public/watch-status.js'));w.eval(read('public/v220-media-match.js')
  const cards=()=>[...$('v220MediaRows').querySelectorAll('.alm-v220-media-card')];assert.equal(cards().length,6);
  assert(!$('v220MediaLoadCovers').hidden);
  const cover=cards()[0].querySelector('.alm-v220-media-cover'),img=cover.querySelector('img');
- assert.equal(img.getAttribute('src'),'/api/v220/media-cover/501');
+ assert.equal(img.getAttribute('src'),'/api/v220/media-cover/501?load=1');
  cover.dispatchEvent(new w.MouseEvent('dblclick',{bubbles:true}));assert.equal(detail.length,1);assert(detail[0].context.localOnly&&detail[0].context.readOnly);
  img.dispatchEvent(new w.Event('error'));$('v220MediaLoadCovers').click();assert.equal(img.getAttribute('src'),'/api/v220/media-cover/501?load=1');
  for(let i=0;i<statuses.length;i++){const card=cards()[i],select=card.querySelector('.alm-v220-media-status');assert(!select.disabled);

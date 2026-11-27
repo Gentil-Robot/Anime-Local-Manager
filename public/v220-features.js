@@ -40,9 +40,14 @@ const mediaImportCopy={
 };
 const mi=i=>(mediaImportCopy[lang()]||mediaImportCopy.en)[i];
 const coverAllCopy={fr:'Charger les jaquettes manquantes',en:'Load missing covers',es:'Cargar portadas que faltan',de:'Fehlende Cover laden',ja:'未取得のポスターを読み込む','pt-BR':'Carregar capas ausentes','zh-CN':'加载缺失的海报'};
+function mediaCoverSrc(a,load=false,preferLocal=true){
+ const local=String(a.poster||a.imageUrl||'').replace(/^images\//i,'/images/');
+ if(preferLocal&&/^\/images\/[a-z0-9_-]+\.(?:jpg|jpeg|png|webp|gif|avif)$/i.test(local))return local;
+ const id=Number(a.malId);return Number.isSafeInteger(id)&&id>0&&id<=100000000?'/api/v220/media-cover/'+id+(load&&navigator.onLine!==false?'?load=1':''):'';
+}
 function mediaRecord(a){
  const id=Number(a.malId),total=Number(a.episodesTotal||a.episodes)||0;
- return {...a,malId:id,episodesTotal:total?String(total):'',poster:'/api/v220/media-cover/'+id};
+ return {...a,malId:id,episodesTotal:total?String(total):'',poster:mediaCoverSrc(a)};
 }
 const extraLabels={fr:['Associer mes fichiers','Saison','Épisode','Rechercher dans le catalogue local','Ajouter la fiche à À voir et associer ?','Ouvrir la fiche','Tes animés, tes prochaines diffusions et ta progression.'],en:['Link my files','Season','Episode','Search local catalog','Add to watchlist and link?','Open anime','Your anime, recent broadcasts and progress.'],es:['Vincular mis archivos','Temporada','Episodio','Buscar en el catálogo local','¿Añadir a pendientes y vincular?','Abrir ficha','Tus animes, emisiones y progreso.'],de:['Meine Dateien zuordnen','Staffel','Folge','Lokalen Katalog durchsuchen','Zur Merkliste hinzufügen und zuordnen?','Anime öffnen','Deine Anime, Ausstrahlungen und Fortschritte.'],ja:['動画を関連付ける','シーズン','話数','ローカルカタログを検索','視聴予定に追加して関連付けますか？','作品を開く','作品・放送・視聴進捗'], 'pt-BR':['Associar meus arquivos','Temporada','Episódio','Buscar no catálogo local','Adicionar à lista e associar?','Abrir anime','Seus animes, transmissões e progresso.'],'zh-CN':['关联本地文件','季','集','搜索本地目录','加入待看并关联？','打开作品','我的动漫、播出与观看进度。']};
 const labels=i=>(extraLabels[lang()]||extraLabels.en)[i];
@@ -55,7 +60,7 @@ function mergeCandidates(rows,metadata){
   const own=merged.get(id);
   if(!own){merged.set(id,meta);continue;}
   const alt=[own.title,own.customTitle,own.titleEn,own.titleRomaji,own.titleJa,meta.title,meta.titleEn,meta.titleRomaji,meta.titleJa,...(Array.isArray(own.synonyms)?own.synonyms:[]),...(Array.isArray(meta.synonyms)?meta.synonyms:[])].filter(Boolean);
-  merged.set(id,{...meta,...own,titleEn:own.titleEn||meta.titleEn,titleRomaji:own.titleRomaji||meta.titleRomaji,titleJa:own.titleJa||meta.titleJa,synonyms:[...new Set(alt)].slice(0,60)});
+  merged.set(id,{...meta,...own,titleEn:own.titleEn||meta.titleEn,titleRomaji:own.titleRomaji||meta.titleRomaji,titleJa:own.titleJa||meta.titleJa,imageUrl:own.imageUrl||meta.imageUrl,poster:own.poster||meta.poster||meta.imageUrl,synonyms:[...new Set(alt)].slice(0,60)});
  }
  return [...merged.values()];
 }
@@ -256,11 +261,11 @@ function renderMedia(){
    const cover=el('button',null,'alm-v220-media-cover');cover.type='button';cover.disabled=!a;cover.setAttribute('aria-label',a?mi(2)+': '+a.title:mi(6));
    const placeholder=el('span',null,'alm-v220-brand-placeholder');cover.append(placeholder);
    if(a){
-    const image=el('img');image.src='/api/v220/media-cover/'+Number(a.malId);image.alt='';image.loading='lazy';image.decoding='async';
+    const image=el('img');image.src=mediaCoverSrc(a,true);image.alt='';image.loading='lazy';image.decoding='async';
     const load=el('button',mi(3),'alm-v220-load-cover');load.type='button';load.hidden=true;
-    image.addEventListener('error',()=>{image.hidden=true;load.hidden=false;});
+    image.addEventListener('error',()=>{if(image.getAttribute('src')?.startsWith('/images/')){image.src=mediaCoverSrc(a,true,false);return;}image.hidden=true;load.hidden=false;});
     image.addEventListener('load',()=>{image.hidden=false;load.hidden=true;});
-    load.addEventListener('click',()=>{load.hidden=true;image.src='/api/v220/media-cover/'+Number(a.malId)+'?load=1';});
+    load.addEventListener('click',()=>{load.hidden=true;const src=mediaCoverSrc(a,true,false);image.removeAttribute('src');image.src=src;});
     cover.append(image);art.append(cover,load);
     if(a.type)cover.append(el('span',a.type,'alm-v220-media-type'));
     const open=()=>{const choices=displayedCandidates.length?displayedCandidates:[a];const index=choices.findIndex(item=>Number(item.malId)===selected);if(index<0)return;window.ALM_CATALOG?.openRecords(choices.map(mediaRecord),index,cover,{readOnly:true,localOnly:true});};

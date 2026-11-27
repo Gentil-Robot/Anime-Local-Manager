@@ -3461,6 +3461,7 @@ app.get('/api/cover-cache/:malId', async (req,res)=>{
  return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});
 });
 
+const mediaCoverGate=require('./lib/media-cover-preview').createPreviewCoverGate();
 // V2.2.0 — bounded, local-only catalogue suggestions. Never send filenames or paths to providers.
 app.post('/api/v220/media-candidates',async(req,res)=>{
  try{
@@ -3470,6 +3471,7 @@ app.post('/api/v220/media-candidates',async(req,res)=>{
   for(const q of queries){
    items[q]=localSeasonSearch(q,20).slice(0,24).map(row=>({malId:row.malId,title:row.title,titleEn:row.titleEn,titleRomaji:row.titleRomaji,titleJa:row.titleJa,synonyms:row.synonyms,episodes:row.episodes,type:row.type,startDate:row.startDate,imageUrl:albumCovers.safeSource(row.imageUrl||row.poster)||''}));
   }
+  for(const rows of Object.values(items))mediaCoverGate.remember(rows);
   res.set('Cache-Control','private, no-store');res.json({items});
  }catch(error){res.status(503).json({code:'ALM_MEDIA_CATALOG_UNAVAILABLE'});}
 });
@@ -3481,8 +3483,9 @@ app.get('/api/v220/media-cover/:malId',async(req,res)=>{
   await db.whenReady();
   const id=Number(req.params.malId);
   if(!Number.isSafeInteger(id)||id<1||id>100000000)return res.status(400).end();
-  const row=db.getMetadataByMalId(id),source=ownedCoverSource(id)||albumCovers.safeSource(row?.imageUrl||row?.poster||'');
-  const offline=req.query.load!=='1'||process.env.ALM_RELEASE_SMOKE==='1';
+  const owned=ownedCoverSource(id);
+  const row=db.getMetadataByMalId(id),source=owned||albumCovers.safeSource(row?.imageUrl||row?.poster||'');
+  const offline=req.query.load!=='1'||process.env.ALM_RELEASE_SMOKE==='1'||(!owned&&!mediaCoverGate.permits(id));
   const file=source&&await albumCovers.get(source,{offline});
   if(!file)return res.status(404).end();
   res.set('Cache-Control','private, no-store');res.set('X-Content-Type-Options','nosniff');

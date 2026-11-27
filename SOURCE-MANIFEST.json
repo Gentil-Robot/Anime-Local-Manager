@@ -1421,6 +1421,11 @@
       "sha256": "b1b5dbe69ab7bf0913c07017262410d5fbce422d29c233ca6a52930f0755b554"
     },
     {
+      "path": "lib/media-cover-preview.js",
+      "bytes": 860,
+      "sha256": "db09ae0ebd29fa209d2afc69183235d9f8da0809744a79e0e89564aa55acdc04"
+    },
+    {
       "path": "lib/media-link.js",
       "bytes": 498,
       "sha256": "fb9248b54643f3aa6f6596a273606e7be49c34170f9ab5c94e676db79263e6af"
@@ -2652,8 +2657,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 53050,
-      "sha256": "f1cdee66b6cad6e7f8683cd3186864a48a24df4e0756c9d487ddc8e19989d65c"
+      "bytes": 53619,
+      "sha256": "25e14b3cbb2d7da538b4e0c4cd00bb6436001712b82a706ba4068b6c27ffe0b5"
     },
     {
       "path": "public/v220-media-match.js",
@@ -4177,8 +4182,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 4988,
-      "sha256": "0ab360dd48de6669ff83fa9b5a792c074398f9bfd9374b101621ad0cce354485"
+      "bytes": 5129,
+      "sha256": "4e708793b40bc1c29c42dee6f688004b7ba7edf3bbe473731f222d422f86e3b1"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4207,13 +4212,13 @@
     },
     {
       "path": "scripts/test-v220-vm-feedback.cjs",
-      "bytes": 6910,
-      "sha256": "54648816b1cdb4aebf13f1b00111f9877469b0421b0a533210bef1d0eecb5316"
+      "bytes": 6917,
+      "sha256": "1f53966654428d2b8f9b06327c44a443af89884ef737edf5d1cbb8a07003e993"
     },
     {
       "path": "scripts/test-v220-vm-round3.cjs",
-      "bytes": 4866,
-      "sha256": "0f9f68161889a20500d0825e20a0ebf77f894a1142295912e2a7de23c68deaa7"
+      "bytes": 4873,
+      "sha256": "1ba2e19dd82c9fc69a3f7f36f85e1692bc6b4ffdc74509eb0bf5573cb17708f8"
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
@@ -4262,8 +4267,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 628109,
-      "sha256": "81a686c34ea9870226207b1f08f7630fbfab8367945f9ff368e05562c2d29c7e"
+      "bytes": 628325,
+      "sha256": "87e696bfc7b4f07931f4ece68b556c485507aa5d48f46b6d3f5a8a666d810b97"
     },
     {
       "path": "start_mac_linux.sh",
