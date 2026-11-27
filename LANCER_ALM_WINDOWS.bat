@@ -2,7 +2,7 @@
 chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
-title Anime Local Manager V2.1.3 Bêta stable
+title Anime Local Manager V2.2.0 Bêta stable
 where node >nul 2>nul
 if errorlevel 1 goto node_missing
 node -e "if(!require('./scripts/release-windows').validNode()){console.error('Node.js corrige 22.23.5+ ou 24.22.3+ requis.');process.exit(1)}"

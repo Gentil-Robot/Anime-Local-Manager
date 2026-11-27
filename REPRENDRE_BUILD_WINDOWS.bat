@@ -2,9 +2,9 @@
 chcp 65001 >nul
 setlocal EnableExtensions DisableDelayedExpansion
 cd /d "%~dp0"
-title Anime Local Manager V2.1.3 Bêta stable - Installateur Windows
+title Anime Local Manager V2.2.0 Bêta stable - Installateur Windows
 echo.
-echo === Anime Local Manager V2.1.3 Bêta stable ===
+echo === Anime Local Manager V2.2.0 Bêta stable ===
 echo Publication Windows : installateur NSIS
 echo Node.js 22.23.5 ou 24.22.3 minimum ; version validee dans .node-version.
 where node >nul 2>nul

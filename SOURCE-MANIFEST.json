@@ -408,7 +408,7 @@
     {
       "path": "Creer App Linux.sh",
       "bytes": 2348,
-      "sha256": "0350a9dcd74142007426fa91f627d8ceb82ef566b10fd18204d1a9dcd6902df0"
+      "sha256": "8b5e102639a82e84ab6fcd9efecd88a95f12b9d313c2bef809fed63110f5a3af"
     },
     {
       "path": "csv-worker.js",
@@ -1198,7 +1198,7 @@
     {
       "path": "LANCER_ALM_WINDOWS.bat",
       "bytes": 891,
-      "sha256": "cfa8605c13d489e6ba017285606748e249669944a4b57fe91b0fe13dc2f00a82"
+      "sha256": "0ea42a7f64c70101a7f665958a54502454c0f445d0fd774612b12a85b78e6381"
     },
     {
       "path": "lib/anilist-fetch.js",
@@ -1617,8 +1617,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 32910,
-      "sha256": "d19349f23212bd98b6a69dac948c0010c7e20190bba0312f688cf6d60dbe8c0d"
+      "bytes": 33313,
+      "sha256": "6590acae259809d201ae7e112e1283432215e898ba122a80899064815618324f"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -2688,7 +2688,7 @@
     {
       "path": "Publier Installateur Windows.bat",
       "bytes": 785,
-      "sha256": "b808d01d7d57dfa61fad375bdf06bd3724c36df333c155bf4585225f3e74332c"
+      "sha256": "d0de7b96f98adfd311fc7031d2b22bd600309bbc846ffa1f6cf85a4dba40f244"
     },
     {
       "path": "Publier-GitHub-V2.ps1",
@@ -2708,7 +2708,7 @@
     {
       "path": "REPRENDRE_BUILD_WINDOWS.bat",
       "bytes": 785,
-      "sha256": "b808d01d7d57dfa61fad375bdf06bd3724c36df333c155bf4585225f3e74332c"
+      "sha256": "d0de7b96f98adfd311fc7031d2b22bd600309bbc846ffa1f6cf85a4dba40f244"
     },
     {
       "path": "scripts/audit-locales.js",
@@ -2737,8 +2737,8 @@
     },
     {
       "path": "scripts/build-v220-vm-preview.cjs",
-      "bytes": 6472,
-      "sha256": "dbc3c8c40ecaf2ac214aea84951f66e5bdb2a7a2e587bf5c4e43ebb540390c1e"
+      "bytes": 6859,
+      "sha256": "0bb8ca12b29735b39ef68de89d451210277aaf0af2f7c1c3c4058d4b9cbc5f83"
     },
     {
       "path": "scripts/build-windows-retry.js",
@@ -2937,8 +2937,8 @@
     },
     {
       "path": "scripts/prepare-metadata-release.js",
-      "bytes": 5810,
-      "sha256": "af02e94a63047fba010fcfa0294aa390e9151a831170ba2d68ddfae745530a96"
+      "bytes": 6219,
+      "sha256": "c3c5acafe34eec0177ab1fab9e4924ecc3aff2e0a5b6874bbafbff3a24c39a6f"
     },
     {
       "path": "scripts/prepare-metadata-seed.js",
@@ -4013,12 +4013,12 @@
     {
       "path": "scripts/test-release-console.cjs",
       "bytes": 5853,
-      "sha256": "cf5c71c3e1fb2cdf3b5bc8a7f1f420212358c47f766b262f44eb56df721ac4c6"
+      "sha256": "5c22d4616f8ae1d4d92ba09ceb936b8708d37b920f227ee1ae09ec45737b8c2d"
     },
     {
       "path": "scripts/test-release-v200.cjs",
-      "bytes": 5403,
-      "sha256": "97409bb3e33c1f876ff9c69be8b2997647827d961b78bb1198297c9af0fbab01"
+      "bytes": 5682,
+      "sha256": "92c06a1938da89af1f421894a41c7e1131b2f92172a3779e50a1250cc50b8569"
     },
     {
       "path": "scripts/test-release-watch.js",
@@ -4117,8 +4117,8 @@
     },
     {
       "path": "scripts/test-v210-update-channels.cjs",
-      "bytes": 2549,
-      "sha256": "289dc735daefe12db12bd28ef03f29bbe6c0857f48c233e1640d1954a5d9defc"
+      "bytes": 2719,
+      "sha256": "e2c52543cab28d4972540403dd0f470ee092944fb9cb1b9d53ec8f50f4aa4c3b"
     },
     {
       "path": "scripts/test-v211-update-browser.cjs",
@@ -4408,7 +4408,7 @@
     {
       "path": "Verifier V2.0.0 Beta Stable Windows.bat",
       "bytes": 1034,
-      "sha256": "1e4ca6608108c68991b1e6bc23c02cfa6f5f12d4594844c9b5e2a1469ae57048"
+      "sha256": "bc3b2042c89b4326c0d3a56b0e43a386769fbc6b1724ee877aa0c81ddf59d3d4"
     }
   ],
   "parentArchiveSha256": "e97af43af2058352b3486831856637ad3bbbfa82cb4bf68429db2c66648e337b",

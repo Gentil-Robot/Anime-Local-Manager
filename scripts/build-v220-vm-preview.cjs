@@ -8,7 +8,7 @@ if(process.env.ALM_VM_PREVIEW_BUILD!=='1')throw Error('ALM_PREVIEW_BUILD_NOT_AUT
 const read=name=>fs.readFileSync(path.join(root,name),'utf8');
 const save=(name,data)=>fs.writeFileSync(path.join(root,name),data);
 const pkg=JSON.parse(read('package.json'));
-if(pkg.version!=='2.1.3')throw Error('ALM_PREVIEW_UNEXPECTED_BASE');
+if(pkg.version!=='2.2.0')throw Error('ALM_PREVIEW_UNEXPECTED_BASE');
 pkg.version='2.2.0';
 pkg.description='Anime Local Manager V2.2.0 VM TEST (isolated preview)';
 pkg.build.appId='fr.gentilrobot.animelocalmanager.vmtest';
@@ -27,7 +27,11 @@ if(process.platform==='linux'){
  pkg.build.deb={...(pkg.build.deb||{}),artifactName:pkg.build.artifactName};
 }
 save('package.json',JSON.stringify(pkg,null,2)+'\n');
+const lock=JSON.parse(read('package-lock.json'));
+lock.name=pkg.name;lock.version=pkg.version;lock.packages[''].name=pkg.name;lock.packages[''].version=pkg.version;
+save('package-lock.json',JSON.stringify(lock,null,2)+'\n');
 const release=JSON.parse(read('release-version.json'));
+if(release.technicalVersion!=='2.2.0'||release.releaseCandidate!==true||release.previousValidatedVersion!=='2.1.3')throw Error('ALM_PREVIEW_CANDIDATE_REQUIRED');
 release.technicalVersion='2.2.0';
 release.qualifier='VM TEST';
 release.publicVersion='V2.2.0 VM TEST';
@@ -39,9 +43,9 @@ save('release-version.json',JSON.stringify(release,null,2)+'\n');
 const productScript='// VM preview generated from release-version.json.\n'+
  "(()=>{'use strict';window.ALM_RELEASE=Object.freeze("+JSON.stringify(release)+');})();\n';
 save('public/release-version.js',productScript);
-save('public/index.html',read('public/index.html').replace(/V2\.1\.3 Bêta stable/g,'V2.2.0 VM TEST'));
-save('public/design-core.js',read('public/design-core.js').replace(/window\.ALM_RELEASE\?\.technicalVersion \|\| "2\.1\.3"/g,'window.ALM_RELEASE?.technicalVersion || "2.2.0"')
- .replace(/window\.ALM_RELEASE\?\.publicVersion \|\| "V2\.1\.3 Bêta stable"/g,'window.ALM_RELEASE?.publicVersion || "V2.2.0 VM TEST"'));
+save('public/index.html',read('public/index.html').replace(/V2\.2\.0 Bêta stable/g,'V2.2.0 VM TEST'));
+save('public/design-core.js',read('public/design-core.js').replace(/window\.ALM_RELEASE\?\.technicalVersion \|\| "2\.2\.0"/g,'window.ALM_RELEASE?.technicalVersion || "2.2.0"')
+ .replace(/window\.ALM_RELEASE\?\.publicVersion \|\| "V2\.2\.0 Bêta stable"/g,'window.ALM_RELEASE?.publicVersion || "V2.2.0 VM TEST"'));
 // Fail closed if any of the normal updater/scheduler/identity paths change.
 let main=read('main.js');
 const replaceCount=(pattern,value,count)=>{const found=[...main.matchAll(pattern)];if(found.length!==count)throw Error('ALM_PREVIEW_HOOK_COUNT '+pattern+' '+found.length);main=main.replace(pattern,value);};

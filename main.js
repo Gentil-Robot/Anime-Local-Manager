@@ -2,7 +2,14 @@ const { app, BrowserWindow, ipcMain, dialog, shell, screen, safeStorage, Notific
 const fs = require("fs");
 const path = require("path");
 const { validIpcSender } = require("./lib/local-security");
+const releaseMetadata = require("./release-version.json");
 const releaseSmoke = require("./lib/release-smoke").prepareReleaseSmoke(app);
+// Development candidate sources always use the existing isolated test profile.
+// A packaged candidate may only run with the distinct VM preview identity.
+if(releaseMetadata.releaseCandidate===true){
+  if(!app.isPackaged)process.env.ALM_TEST_PROFILE="1";
+  else if(releaseMetadata.qualifier!=="VM TEST")throw Error("ALM_CANDIDATE_VM_ONLY");
+}
 
 // Electron 30 sélectionne automatiquement X11 ou Wayland. Le décor côté Wayland
 // est activé quand le bureau le prend en charge, sans imposer un backend précis.
