@@ -74,6 +74,7 @@ function init(){
  window.addEventListener('alm:collection-changed',()=>{records=library();draw();});
  $('navDna')?.addEventListener('click',()=>{records=library();draw();});
  if(typeof ResizeObserver==='function'){let previous=0;observer=new ResizeObserver(()=>{const current=size();if(current!==previous){previous=current;draw();}});observer.observe($('dnaScorePosters'));}
+ window.addEventListener('pagehide',event=>{if(!event.persisted)observer?.disconnect();},{once:true});
  records=library();draw();
 }
 window.ALM_V220_SCORE_GALLERY={render(list,renderThumb){init();records=Array.isArray(list)?list:[];thumb=typeof renderThumb==='function'?renderThumb:thumb;draw();}};

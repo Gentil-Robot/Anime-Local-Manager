@@ -303,7 +303,6 @@ function renderMedia(){
    };
    let lookupTimer;
    populate(draft.term);search.addEventListener('input',()=>{draft.term=search.value;populate(search.value,true,false);clearTimeout(lookupTimer);const term=search.value.trim();if(term.length>=2)lookupTimer=setTimeout(async()=>{const ok=await catalogFor([term]);if(search.isConnected&&search.value.trim()===term){populate(term);suggestions.dispatchEvent(new Event('change',{bubbles:true}));if(ok===false)window.notifyApp?.(mc(4),'error');}},220);});
-   window.ALM_SELECTS?.refresh?.();
    actions.append(search,suggestions,preview);
   }else{paintArt(displayedCandidates);actions.append(preview);}
   const season=el('input');season.type='number';season.min='0';season.max='99';season.step='1';season.value=draft.season;season.setAttribute('aria-label',labels(1));

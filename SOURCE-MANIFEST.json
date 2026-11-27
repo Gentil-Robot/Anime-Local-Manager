@@ -2657,8 +2657,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 53989,
-      "sha256": "21a1fd6f5a0949d21976107f32b8a7cbeee7bfbb16cf8a29c451fb8d29d88cf3"
+      "bytes": 53953,
+      "sha256": "b0dc19552c7d201c2c3974839980497341903d36fea200b0ba91d7d732c96e13"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2672,8 +2672,8 @@
     },
     {
       "path": "public/v220-personal-insights.js",
-      "bytes": 6652,
-      "sha256": "662321221bbcc67cb644133b88f2da7a1aeba7503821489112418b2b4d4c0b43"
+      "bytes": 6755,
+      "sha256": "83b2408fbf02f176896c9cf609accd9ff22cb6e779e7666c6120665f94e47818"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 17764,
-      "sha256": "80c65e2ed2cb9c2345810f392f0aeb6aa8b4b77a6ce9bce9dddc7687f454bc5d"
+      "bytes": 16925,
+      "sha256": "fdedb62981a3d458783f41f4ea1aeb8febf917a31e9755cf6d5185eea12d89f1"
     },
     {
       "path": "public/v220.css",
