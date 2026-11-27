@@ -36,7 +36,7 @@
    extras.append(recommend);
   }
 
-  const paint=record=>{if(serial!==popupSerial||!$('animePeekDialog').open)return;window.ALM_DISCOVERY.setDetailActions('animePeekDetail',popupContext?.readOnly?()=>{const actions=$('animePeekDetail').querySelector('.discovery-detail-actions');actions.querySelector('.catalog-add')?.remove();const hint=document.createElement('p');hint.textContent=t('csvDetailHint');actions.prepend(hint);}:popupContext?.select?record=>{
+  const paint=record=>{if(serial!==popupSerial||!$('animePeekDialog').open)return;window.ALM_DISCOVERY.setDetailActions('animePeekDetail',popupContext?.readOnly?()=>{const actions=$('animePeekDetail').querySelector('.discovery-detail-actions');actions.querySelector('.catalog-add')?.remove();actions.querySelector('#peekOpen')?.remove();actions.querySelectorAll('[data-notebook-action]').forEach(button=>button.remove());const hint=document.createElement('p');hint.textContent=t('csvDetailHint');actions.prepend(hint);}:popupContext?.select?record=>{
     const actions=$('animePeekDetail').querySelector('.discovery-detail-actions');actions.querySelector('.catalog-add')?.remove();actions.querySelector('#peekOpen')?.remove();
     const controls=document.createElement('div');controls.className='catalog-add';const select=document.createElement('select');select.setAttribute('aria-label',t('seriesStatus'));
     select.innerHTML=window.ALM_WATCH_STATUS.options('', ['Plan to Watch','Watching','Completed','On-Hold','Dropped']);select.value=popupContext.status||'Plan to Watch';select.onchange=()=>popupContext.status=select.value;

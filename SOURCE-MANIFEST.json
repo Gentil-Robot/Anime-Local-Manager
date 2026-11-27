@@ -2182,8 +2182,8 @@
     },
     {
       "path": "public/catalog.js",
-      "bytes": 27034,
-      "sha256": "075dd3127a0c1ac5349cfa6f942a84cfedfb12a1876ec25a41ad1ab2b6cd9985"
+      "bytes": 27163,
+      "sha256": "91a0132cea88847b72195f5ee827a35ba5dcad1fb983183a7b0d671b33926518"
     },
     {
       "path": "public/clipboard.js",
@@ -2662,8 +2662,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 53953,
-      "sha256": "b0dc19552c7d201c2c3974839980497341903d36fea200b0ba91d7d732c96e13"
+      "bytes": 57037,
+      "sha256": "0f93716f9c7e5ff7f9742ce5168c54daab54b08ee13ddd348d45f735f58a51c9"
     },
     {
       "path": "public/v220-media-match.js",
@@ -4192,8 +4192,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 5679,
-      "sha256": "2053e8926ba7b8116be0bca65ad69ffff16314bfe6cdce9265e25b5c90b36db8"
+      "bytes": 5909,
+      "sha256": "d7e38077fc329f3b1e4833d74940d3aaa10443477ae694f5e6ac78af28cdda28"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4227,8 +4227,8 @@
     },
     {
       "path": "scripts/test-v220-vm-round3.cjs",
-      "bytes": 4873,
-      "sha256": "1ba2e19dd82c9fc69a3f7f36f85e1692bc6b4ffdc74509eb0bf5573cb17708f8"
+      "bytes": 5039,
+      "sha256": "1f2f3c7cdce552bdd13f3083fbf7268d8dcd313a3c63f353c3fb60d95501bedc"
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
@@ -4277,8 +4277,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 628325,
-      "sha256": "87e696bfc7b4f07931f4ece68b556c485507aa5d48f46b6d3f5a8a666d810b97"
+      "bytes": 628362,
+      "sha256": "814608002827527446cbec944480220f6a26e56fe8849c94c5c1efea5f2efb98"
     },
     {
       "path": "start_mac_linux.sh",

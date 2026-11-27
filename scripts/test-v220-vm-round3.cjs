@@ -7,13 +7,13 @@ const d=w.document,$=id=>d.getElementById(id),flush=()=>new Promise(r=>setTimeou
 const statuses=['Watching','Completed','On-Hold','Dropped','Plan to Watch'];
 const records=statuses.map((status,i)=>({malId:501+i,title:'Unique title '+String.fromCharCode(65+i),type:'TV',episodes:12}));
 const existing={id:99,malId:599,title:'Existing title',status:'Watching',episodesSeen:3,episodesTotal:12};
-const all=[...records,existing],adds=[],links=[],detail=[],payloads=[];
+const all=[...records,existing],adds=[],links=[],detail=[],payloads=[];let searches=0;
 w._almAnimes=[existing];
 w.ALM_DESIGN={language:()=> 'fr'};w.confirm=()=>true;w.notifyApp=()=>{};
 w.ALM_BETA38={preparePayload:async raw=>{payloads.push({...raw});return raw;}};
 w.ALM_CATALOG={openRecords:(rows,index,source,context)=>detail.push({rows,index,context})};
 w.fetch=async(url,opts)=>{
- if(url==='/api/v220/media-candidates'){const {titles}=JSON.parse(opts.body);assert(titles.every(t=>!t.includes('.avi')&&!t.includes('\\')));
+ if(url==='/api/v220/media-candidates'){searches++;const {titles}=JSON.parse(opts.body);assert(titles.every(t=>!t.includes('.avi')&&!t.includes('\\')));
  return {ok:true,json:async()=>({items:Object.fromEntries(titles.map(t=>[t,all.filter(a=>a.title===t)]))})};}
  if(url==='/api/animes'){const body=JSON.parse(opts.body);adds.push(body);return {ok:true,json:async()=>({anime:body})};}
  throw Error('Unexpected request '+url);
@@ -28,7 +28,7 @@ w.eval(read('public/watch-status.js'));w.eval(read('public/v220-media-match.js')
  const cover=cards()[0].querySelector('.alm-v220-media-cover'),img=cover.querySelector('img');
  assert.equal(img.getAttribute('src'),'/api/v220/media-cover/501?load=1');
  cover.dispatchEvent(new w.MouseEvent('dblclick',{bubbles:true}));assert.equal(detail.length,1);assert(detail[0].context.localOnly&&detail[0].context.readOnly);
- img.dispatchEvent(new w.Event('error'));$('v220MediaLoadCovers').click();assert.equal(img.getAttribute('src'),'/api/v220/media-cover/501?load=1');
+ const initialSearches=searches;img.dispatchEvent(new w.Event('error'));$('v220MediaLoadCovers').click();await flush();assert.equal(img.getAttribute('src'),'/api/v220/media-cover/501?load=1');assert.equal(searches,initialSearches+1,'Explicit retry renews local catalogue authorization');
  for(let i=0;i<statuses.length;i++){const card=cards()[i],select=card.querySelector('.alm-v220-media-status');assert(!select.disabled);
  assert.deepEqual([...select.options].map(o=>o.value),statuses);select.value=statuses[i];select.dispatchEvent(new w.Event('change',{bubbles:true}));
  const action=card.querySelector('button.alm-v220-action');assert(!action.disabled);action.click();await flush();

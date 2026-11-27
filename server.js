@@ -3466,7 +3466,7 @@ const mediaCoverGate=require('./lib/media-cover-preview').createPreviewCoverGate
 app.post('/api/v220/media-candidates',async(req,res)=>{
  try{
   await db.whenReady();
-  const queries=[...new Set((Array.isArray(req.body?.titles)?req.body.titles:[]).filter(v=>typeof v==='string').map(v=>v.trim().slice(0,160)).filter(v=>v.length>=2))].slice(0,40);
+  const queries=[...new Set((Array.isArray(req.body?.titles)?req.body.titles.slice(0,80):[]).filter(v=>typeof v==='string').map(v=>v.trim().slice(0,160)).filter(v=>v.length>=2))].slice(0,40);
   const items=Object.create(null);
   for(const q of queries){
    items[q]=localSeasonSearch(q,20).slice(0,24).map(row=>({malId:row.malId,title:row.title,titleEn:row.titleEn,titleRomaji:row.titleRomaji,titleJa:row.titleJa,synonyms:row.synonyms,episodes:row.episodes,type:row.type,startDate:row.startDate,imageUrl:albumCovers.safeSource(row.imageUrl||row.poster)||''}));
@@ -3475,9 +3475,9 @@ app.post('/api/v220/media-candidates',async(req,res)=>{
   res.set('Cache-Control','private, no-store');res.json({items});
  }catch(error){res.status(503).json({code:'ALM_MEDIA_CATALOG_UNAVAILABLE'});}
 });
-// Local recognition preview: cache-only on scan. The explicit Load cover
-// action may fetch the catalogue-derived public URL via the bounded cache.
-// Filenames, paths and search strings never go to a cover provider.
+// Only recent local-search results or owned records may request an online cover.
+// Without load=1 the preview is cache-only. Automatic and explicit retries use
+// the same bounded image cache; no filenames, paths or search strings leave ALM.
 app.get('/api/v220/media-cover/:malId',async(req,res)=>{
  try{
   await db.whenReady();
