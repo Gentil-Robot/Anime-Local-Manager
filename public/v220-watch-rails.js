@@ -136,6 +136,7 @@ function rail(kind,rows){
  host.replaceChildren(frag);host.scrollLeft=oldScroll;
  empty.textContent=rows.length?'':kind==='fresh'?t('noFresh'):rc(4);empty.hidden=rows.length>0;
  host.hidden=rows.length===0;
+ if(host.parentElement?.classList.contains('alm-watch-gallery'))host.parentElement.hidden=host.hidden;
  const parent=host.closest('.alm-watch-rail');
  if(parent){
   const previous=parent.querySelector('[data-watch-scroll="prev"]'),next=parent.querySelector('[data-watch-scroll="next"]');
@@ -185,8 +186,9 @@ function init(){
  root.querySelectorAll('[data-watch-scroll]').forEach(button=>button.addEventListener('click',()=>{
   const host=$(button.closest('.alm-watch-rail')?.dataset.rail==='fresh'?'v220RecentRows':'v220ResumeRows');
   if(!host)return;
-  const width=Math.max(260,host.clientWidth*.8);
-  host.scrollBy?.({left:button.dataset.watchScroll==='prev'?-width:width,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth'});
+  const first=host.firstElementChild;
+  const width=first?first.getBoundingClientRect().width+(parseFloat(getComputedStyle(host).columnGap)||13):260;
+  host.scrollBy?.({left:button.dataset.watchScroll==='prev'?-width:width,behavior:document.documentElement.dataset.motion==='reduced'||window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth'});
  }));
  $('v220RecentRefresh')?.addEventListener('click',()=>{scheduleAt=0;void checkSchedule(true);});
  $('navCockpit')?.addEventListener('click',()=>{window.showV2Page?.('cockpitPage','navCockpit');window.ALM_DESIGN?.syncView?.();draw();void checkSchedule();});

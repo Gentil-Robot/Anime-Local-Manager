@@ -12,6 +12,8 @@ assert(!get('v220PersonalTimeline'),'No duplicate history in Memories');
 assert(get('memoryPageEntries')&&read('public/beta39.js').includes("page.id='calendarPage'")&&read('public/alm-v2.js').includes('"calendarPage"'),'Original memories and dynamically created calendar remain');
 assert(get('seasonNewsPage').contains(get('v220PossessionRows')),'Confirmed airing / file comparison lives in Saisons');
 assert(get('dnaPage').contains(get('v220ScoreBoard')),'Keep score explorer in DNA');
+for(const id of ['v220RecentRows','v220ResumeRows']){const rail=get(id);assert.equal(rail.previousElementSibling.dataset.watchScroll,'prev');assert.equal(rail.nextElementSibling.dataset.watchScroll,'next');}
+assert(get('cockpitPage').querySelector('.alm-flight-cat'));
 const ids=[...d.querySelectorAll('[id]')].map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'Unique DOM IDs');
 for(const file of ['public/app.js','public/alm-v2.js','public/navigation.js','public/design.js','public/v220-watch-rails.js','public/v220-features.js','public/v220-personal-insights.js','main.js','preload.js','server.js'])new Function(read(file));
 assert(read('public/alm-v2.js').includes('dnaProgressThumbV2(a,"score")'),'Existing DNA cards reuse managed image pipeline');

@@ -194,3 +194,11 @@ html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockp
 .alm-v220-import-status-info{flex:1 1 100%;margin:0!important}
 .alm-v220-import-status-info:empty{display:none}
 @media(max-width:650px){#mediaImportPanel .alm-v220-media-card{grid-template-columns:78px minmax(0,1fr);padding:10px;gap:9px}.alm-v220-candidate-preview{flex-wrap:wrap}}
+
+/* Both watch galleries reuse the DNA side-arrow pattern. */
+.alm-watch-gallery{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;gap:8px;min-width:0}
+.alm-watch-gallery .alm-watch-side-arrow{height:46px;width:34px;justify-self:center}
+.alm-watch-gallery>.alm-watch-row{padding:3px 2px;scrollbar-width:none}
+.alm-watch-gallery>.alm-watch-row::-webkit-scrollbar{display:none}
+.alm-watch-gallery[hidden]{display:none!important}
+@media(max-width:540px){.alm-watch-gallery{grid-template-columns:26px minmax(0,1fr) 26px;gap:5px}.alm-watch-gallery .alm-watch-side-arrow{width:26px}}
