@@ -138,3 +138,9 @@
 #cockpitPage .alm-v220-sequel-copy{flex:1;min-width:0}
 #mediaImportPanel .alm-v220-media-actions label{display:flex;align-items:center;gap:6px;flex:0 1 125px}
 #mediaImportPanel .alm-v220-media-actions input[type=number]{width:68px;min-width:48px;flex:0 1 75px}
+
+.alm-v220-possession-list{display:grid;gap:8px;margin-top:12px}
+.alm-v220-possession-list h3{font-size:1rem;margin:4px 0}
+.alm-v220-possession-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid rgba(155,181,223,.2);border-radius:10px;background:rgba(110,145,200,.06)}
+.alm-v220-possession-row>div{flex:1;min-width:0}.alm-v220-possession-row strong,.alm-v220-possession-row small{display:block;overflow-wrap:break-word}.alm-v220-possession-row small{opacity:.85;margin-top:5px}
+.alm-v220-next-episode{display:flex;flex-direction:column;gap:6px;margin-top:9px;padding-top:8px;border-top:1px solid rgba(155,181,223,.2)}.alm-v220-next-episode button{align-self:start;padding:5px 9px;font-size:.8rem}

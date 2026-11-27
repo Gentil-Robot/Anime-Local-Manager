@@ -32,7 +32,10 @@ function openImport(){const dialog=$('importDialog');if(dialog&&!dialog.open)dia
 async function catalogFor(titles){const pending=[...new Set(titles.filter(x=>typeof x==='string'&&x.trim().length>=2).map(x=>x.trim().slice(0,160)))].filter(x=>!catalogMatches.has(x)).slice(0,40);if(!pending.length)return;try{const result=await fetch('/api/v220/media-candidates',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({titles:pending})});if(!result.ok)return;const data=await result.json();for(const q of pending)catalogMatches.set(q,Array.isArray(data.items?.[q])?data.items[q]:[]);}catch{}}
 function candidatesFor(file){const rows=[...animeList()];const seen=new Set(rows.map(a=>Number(a.malId)));for(const r of catalogMatches.get(String(file.titleGuess||'').trim().slice(0,160))||[])if(!seen.has(Number(r.malId))){rows.push(r);seen.add(Number(r.malId));}return rows;}
 const summaries=new Map();
-let savedRows=[];
+let savedRows=[],airingItems=[],airingCheckedAt='',checkingFiles=false;
+const diskChecks=new Map();
+const stateLabels={fr:['Diffusions confirmées et fichiers locaux','Diffusé','Vu','Non vu','Associé · à vérifier','Fichier présent','Non associé','Fichier inaccessible ou ambigu','Vérifier les fichiers locaux','Vérification en cours…','Aucune diffusion récente confirmée.','Épisode suivant','Associer une vidéo','Dernier contrôle','Contrôle local terminé'],en:['Confirmed broadcasts and local files','Aired','Watched','Unwatched','Linked · not verified','File present','Not linked','File unavailable or ambiguous','Check local files','Checking…','No recent confirmed broadcasts.','Next episode','Link a video','Last checked','Local check complete'],es:['Emisiones y archivos locales','Emitido','Visto','No visto','Vinculado · sin verificar','Archivo presente','Sin vincular','Archivo no disponible o ambiguo','Verificar archivos locales','Verificando…','Sin emisiones confirmadas recientes.','Próximo episodio','Vincular vídeo','Última comprobación','Comprobación local completada'],de:['Bestätigte Ausstrahlungen und lokale Dateien','Ausgestrahlt','Gesehen','Ungesehen','Zugeordnet · ungeprüft','Datei vorhanden','Nicht zugeordnet','Datei fehlt oder ist mehrdeutig','Lokale Dateien prüfen','Prüfung läuft…','Keine bestätigten aktuellen Ausstrahlungen.','Nächste Folge','Video zuordnen','Zuletzt geprüft','Lokale Prüfung abgeschlossen'],ja:['放送済み話数とローカル動画','放送済み','視聴済み','未視聴','関連付け済み・未確認','ファイルあり','未関連付け','ファイル不明・利用不可','ローカル動画を確認','確認中…','最近の確定放送はありません。','次の話','動画を関連付ける','最終確認','ローカル確認完了'],'pt-BR':['Exibições confirmadas e arquivos locais','Exibido','Visto','Não visto','Associado · não verificado','Arquivo presente','Não associado','Arquivo indisponível ou ambíguo','Verificar arquivos locais','Verificando…','Nenhuma exibição recente confirmada.','Próximo episódio','Associar vídeo','Última verificação','Verificação local concluída'],'zh-CN':['已确认播出与本地文件','已播出','已观看','未观看','已关联 · 未验证','文件存在','未关联','文件不可用或有歧义','检查本地文件','检查中…','没有近期已确认播出。','下一集','关联视频','上次检查','本地检查完成']};
+const st=i=>(stateLabels[lang()]||stateLabels.en)[i];
 const connectivity=()=>{const node=$('v220Connectivity');if(node){node.textContent=navigator.onLine===false?t('offline'):t('online');node.dataset.offline=String(navigator.onLine===false);}};
 function mapTitles(){
  const map=new Map();for(const row of animeList()){if(!Number.isSafeInteger(Number(row.malId))||Number(row.malId)<1)continue;
@@ -91,6 +94,67 @@ function renderMissing(){
   card.append(info,button);host.append(card);
  }
 }
+function confirmedRows(){
+ const now=Math.floor(Date.now()/1000),all=new Map(animeList().map(a=>[Number(a.id),a])),unique=new Map();
+ for(const item of airingItems){
+  const a=all.get(Number(item.animeId)),ep=Number(item.episode),at=Number(item.airingAt),mal=Number(a?.malId);
+  if(!a||!Number.isSafeInteger(mal)||mal<1||!Number.isSafeInteger(ep)||ep<1||ep>999||item.estimated||!Number.isFinite(at)||at>now||at<now-7*86400)continue;
+  unique.set(mal+':'+ep,{anime:a,malId:mal,episode:ep,airingAt:at});
+ }
+ return [...unique.values()].sort((a,b)=>b.airingAt-a.airingAt).slice(0,40);
+}
+function fileState(malId,episode){
+ const link=summaries.get(malId),linked=Array.isArray(link?.episodes)&&link.episodes.includes(episode);
+ if(!linked)return st(6);
+ const checked=diskChecks.get(malId+':'+episode);
+ return checked?checked.available?st(5):st(7):st(4);
+}
+function renderPossession(){
+ const host=$('v220PossessionRows');if(!host)return;
+ host.replaceChildren(el('h3',st(0)));
+ const btn=$('v220CheckPossession');if(btn){btn.textContent=checkingFiles?st(9):st(8);btn.disabled=checkingFiles||!window.animeManager?.mediaCheckEpisodes;}
+ const rows=confirmedRows();
+ if(!rows.length){host.append(el('p',st(10),'alm-v220-note'));return;}
+ for(const r of rows){
+  const card=el('article',null,'alm-v220-possession-row'),body=el('div');
+  body.append(el('strong',window.ALM_TITLES?.title?.(r.anime)||r.anime.title));
+  const seen=Number(r.anime.episodesSeen)||0;
+  body.append(el('small',labels(2)+' '+r.episode+' · '+st(1)+' · '+(seen>=r.episode?st(2):st(3))+' · '+fileState(r.malId,r.episode)));
+  const action=el('button',t('seeFiles'),'alm-v220-action');action.type='button';action.addEventListener('click',openImport);
+  card.append(body,action);host.append(card);
+ }
+ if(airingCheckedAt)host.append(el('p',st(13)+' : '+String(airingCheckedAt).slice(0,10),'alm-v220-note'));
+}
+async function refreshAiring(){
+ try{const r=await fetch('/api/airing',{cache:'no-store'});if(!r.ok)return;const data=await r.json();airingItems=Array.isArray(data.items)?data.items:[];airingCheckedAt=data.checkedAt||'';}catch{}
+ renderPossession();
+}
+async function checkPossession(){
+ if(checkingFiles||!window.animeManager?.mediaCheckEpisodes)return;
+ checkingFiles=true;renderPossession();
+ try{
+  await refreshAiring();
+  const requests=confirmedRows().filter(r=>summaries.get(r.malId)?.episodes?.includes(r.episode)).map(({malId,episode})=>({malId,episode}));
+  const result=await window.animeManager.mediaCheckEpisodes(requests);
+  diskChecks.clear();for(const row of result||[])diskChecks.set(row.malId+':'+row.episode,row);
+  if($('v220PossessionStatus'))$('v220PossessionStatus').textContent=st(14);
+ }catch{}finally{checkingFiles=false;renderPossession();renderWatchingCards();}
+}
+function renderWatchingCards(){
+ for(const card of document.querySelectorAll('#animeGrid .card[data-anime-id]')){
+  const a=animeList().find(row=>Number(row.id)===Number(card.dataset.animeId));
+  card.querySelector('.alm-v220-next-episode')?.remove();
+  if(!a||card.dataset.status!=='Watching')continue;
+  const seen=Number(a.episodesSeen),total=Number(a.episodesTotal);
+  if(!Number.isSafeInteger(seen)||seen<0||seen>=999||total>0&&seen>=total)continue;
+  const ep=seen+1,mal=Number(a.malId),linked=summaries.get(mal)?.episodes?.includes(ep);
+  const wrap=el('div',null,'alm-v220-next-episode');
+  wrap.append(el('small',st(11)+' : '+ep+' · '+fileState(mal,ep)));
+  const btn=el('button',linked?t('openVideo'):st(12));btn.type='button';btn.className='alm-v220-action';
+  btn.addEventListener('click',async event=>{event.stopPropagation();if(linked){btn.disabled=true;try{await openEpisode(mal,ep);}finally{btn.disabled=false;}}else openImport();});
+  wrap.append(btn);card.querySelector('.card-body .meta')?.append(wrap);
+ }
+}
 async function refreshSummaries(){
  if(!window.animeManager?.mediaSummary)return;
  try{
@@ -105,7 +169,7 @@ async function refreshSummaries(){
    const badge=el('span',t('localBadge')+' ('+have.count+')','alm-v220-local-badge');
    card.querySelector('.card-body .meta')?.appendChild(badge);
   });
-  renderMissing();renderSaved();
+  renderMissing();renderSaved();renderPossession();renderWatchingCards();
   window.dispatchEvent(new CustomEvent('alm:media-associations-changed',{detail:{summaries:data}}));
  }catch(error){console.warn('[v220 media] local summary unavailable',error?.code||error?.message);}
 }
@@ -185,7 +249,7 @@ function renderMedia(){
       const correction={season:Number(season.value),episode:Number(episode.value)};
       await window.animeManager.mediaAssociate(file.index,selected,correction);file.linkedMalId=selected;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;
     }
-    renderMedia();await refreshSummaries();
+    diskChecks.clear();renderMedia();await refreshSummaries();
    }catch(e){window.notifyApp?.(String(e.message||e),'error');button.disabled=false;}
   });
   actions.append(button);
@@ -225,7 +289,7 @@ async function loadSequels(){
    }
    art.addEventListener('click',()=>window.ALM_CATALOG?.openRecords?.([{...item,poster:item.imageUrl||''}],0,art,{readOnly:true}));
    main.append(el('strong',item.title),el('small',t('sequelFrom')+': '+item.sourceTitle));
-   const button=el('button',t('sequelAdd'));button.type='button';
+   const button=el('button',t('sequelAdd'),'alm-v220-sequel-add');button.type='button';
    button.addEventListener('click',async()=>{
     if(!window.confirm(t('confirm')+'\n'+item.title))return;
     button.disabled=true;
@@ -251,7 +315,7 @@ function translate(){
  if($('v220SequelIntro'))$('v220SequelIntro').textContent=t('sequelIntro');
  if($('v220GoWatching'))$('v220GoWatching').textContent=t('goWatching');
  if($('v220GoSeasons'))$('v220GoSeasons').textContent=t('goSeasons');
- connectivity();renderMedia();renderSaved();renderMissing();refreshSummaries();
+ connectivity();renderMedia();renderSaved();renderMissing();renderPossession();refreshSummaries();
 }
 function init(){
  $('v220MediaTab')?.addEventListener('click',()=>{translate();});
@@ -260,7 +324,9 @@ function init(){
  const cockpit=$('cockpitPage');if(cockpit&&typeof MutationObserver==='function')new MutationObserver(()=>{if(!cockpit.classList.contains('hidden'))void loadSequels();}).observe(cockpit,{attributes:true,attributeFilter:['class']});
  $('v220MediaChoose')?.addEventListener('click',choose);
  $('v220MediaMore')?.addEventListener('click',async()=>{const start=visible;visible+=40;await catalogFor((scan?.files||[]).slice(start,visible).map(f=>f.titleGuess));renderMedia();});
- $('navSeasonNews')?.addEventListener('click',()=>{renderMissing();});
+ $('navSeasonNews')?.addEventListener('click',()=>{renderMissing();void refreshAiring();});
+ $('v220CheckPossession')?.addEventListener('click',checkPossession);
+ const seasons=$('seasonNewsPage');if(seasons&&typeof MutationObserver==='function')new MutationObserver(()=>{if(!seasons.classList.contains('hidden'))void refreshAiring();}).observe(seasons,{attributes:true,attributeFilter:['class']});
  $('v220GoWatching')?.addEventListener('click',()=>document.querySelector('.nav-item[data-filter="Watching"]')?.click());
  $('v220GoSeasons')?.addEventListener('click',()=>$('navSeasonNews')?.click());
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});

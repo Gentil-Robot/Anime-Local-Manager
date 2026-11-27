@@ -815,9 +815,9 @@ function render() {
     const posterSrc = String(anime.poster || anime.imageUrl || "").trim();
     // Lazy cover caching only for identified MAL entries in the user's library.
     // Never cache arbitrary URLs or eagerly download the complete catalogue.
-    const canCache=Number.isSafeInteger(Number(actualAnime.malId))&&Number(actualAnime.malId)>0&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(posterSrc);
+    const canCache=Number.isSafeInteger(Number(actualAnime.malId))&&Number(actualAnime.malId)>0&&(!posterSrc||/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(posterSrc));
     const localCover=canCache?'/api/cover-cache/'+Number(actualAnime.malId):posterSrc;
-    const poster = posterSrc
+    const poster = localCover
       ? `<img loading="lazy" decoding="async" src="${escapeHtml(localCover)}" ${canCache?'data-alm-managed-cover="1"':''} alt="${escapeHtml(displayTitle(anime))}" data-image-fallback="true">`
       : `Image absente<br>${escapeHtml(displayTitle(anime))}`;
 

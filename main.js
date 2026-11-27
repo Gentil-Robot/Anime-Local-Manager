@@ -273,7 +273,7 @@ async function startApplication() {
   const backupSecrets=await systemSecrets.backupStore(safeStorage,app.getPath('userData'));
   if(backupSecrets)await serverModule.configureBackupSecrets?.(backupSecrets);
 
-  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary", "media-saved", "media-open-episode"]) {
+  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary", "media-saved", "media-open-episode", "media-check-episodes"]) {
     ipcMain.removeHandler(channel);
   }
   const portable=process.platform==='win32'?!!process.env.PORTABLE_EXECUTABLE_FILE:!!process.env.APPIMAGE;
@@ -341,6 +341,11 @@ async function startApplication() {
   const mediaLinks=()=>mediaStore.load(mediaStoreFile);
   ipcMain.handle('media-summary',event=>{trusted(event);return mediaStore.summary(mediaStoreFile);});
   ipcMain.handle('media-saved',event=>{trusted(event);return mediaStore.list(mediaStoreFile);});
+  let mediaChecking=false;
+  ipcMain.handle('media-check-episodes',async(event,requests)=>{
+    trusted(event);if(mediaChecking)return [];mediaChecking=true;
+    try{return await mediaStore.availability(mediaStoreFile,requests);}finally{mediaChecking=false;}
+  });
   ipcMain.handle('media-open-episode',async(event,malId,episode)=>{
     trusted(event);
     const located=await mediaStore.locate(mediaStoreFile,malId,episode);

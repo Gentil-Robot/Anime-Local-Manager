@@ -1407,8 +1407,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 5765,
-      "sha256": "68b98c07bfec4d880cf5351cb0a8437ea76822ee93225ef7b88ca1883c5d2674"
+      "bytes": 7277,
+      "sha256": "0a1397cac93c3783e6246bde486b1b574584a2470687de83092036a8af7405e3"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1617,8 +1617,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 32621,
-      "sha256": "cca8d3d5db6b99ad36020ceb665e58767633dbbd00a04b4f013cf3903a6562e5"
+      "bytes": 32910,
+      "sha256": "d19349f23212bd98b6a69dac948c0010c7e20190bba0312f688cf6d60dbe8c0d"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1637,8 +1637,8 @@
     },
     {
       "path": "preload.js",
-      "bytes": 2969,
-      "sha256": "bb42a392deb17501d22dc29f142bf45bd90ef26d476efd5d7b3dadd874c29172"
+      "bytes": 3053,
+      "sha256": "af04f5d05a598a50aa622695fea37b0067437b02eec61ffdc86acc1a79e2ae9f"
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
@@ -1662,8 +1662,8 @@
     },
     {
       "path": "public/app.js",
-      "bytes": 158102,
-      "sha256": "9e72d8035c93e91688b76648d6e2c8a814a2118643555b44215fe0d806440ec5"
+      "bytes": 158117,
+      "sha256": "a59c37486ad6a97072e643d64c38229945403d31159ad0ef9308150f5b363ed9"
     },
     {
       "path": "public/assets/alm-clip-complet-1080p.mp4",
@@ -2332,8 +2332,8 @@
     },
     {
       "path": "public/design.js",
-      "bytes": 13990,
-      "sha256": "54dae1a03873370af273d1a6557dade866530f665542a930f929e9303a5b7a5c"
+      "bytes": 14004,
+      "sha256": "7a6b002c2ac9a6f6281fbae4c6b74dc7608eae580ce302cb6f6b6bf3bfdffdf4"
     },
     {
       "path": "public/diagnostics.js",
@@ -2377,8 +2377,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 94140,
-      "sha256": "05d65468a2d0fdcf38b6c8160e8eef687a5df106a5e4fb20130e65bfc93b04d3"
+      "bytes": 94422,
+      "sha256": "07fea1d732dbc47dba736290df288b4bed59d7b8da7a5498827db1bc5baaf1ab"
     },
     {
       "path": "public/input-focus.js",
@@ -2647,8 +2647,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 32244,
-      "sha256": "ab57f2873bc1de58a24c79addc970e02280af3851b10bbf6b65b0e7deca3b478"
+      "bytes": 39018,
+      "sha256": "06ef654fffba518cefa6b395ade8b69d46adf81c72521d98e0197d2caecad024"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2677,8 +2677,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 16475,
-      "sha256": "5cb4a813ed66b338bf34c084367f396b871b40ff5d1e9d5001199e1630d7b37d"
+      "bytes": 17226,
+      "sha256": "c3a4671e604f79c88c28ee67cd94f5adfa47c45231791cd04d5e554d85fa6aad"
     },
     {
       "path": "public/watch-status.js",
@@ -4222,8 +4222,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 626996,
-      "sha256": "abea787aeb12a8a2059a9480e86b4f08b3e2cce8d29fd2ae65ccdc1d506ebf2b"
+      "bytes": 627013,
+      "sha256": "b96d0449a12e4da03ca53065e524a764fac69f296a693f6f3e57b6946ef95317"
     },
     {
       "path": "start_mac_linux.sh",

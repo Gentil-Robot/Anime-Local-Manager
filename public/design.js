@@ -120,7 +120,7 @@
     document.addEventListener('click',event=>{const target=event.target.closest('[data-app-go]');if(target){event.preventDefault();go(target.dataset.appGo);}});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();if($('studioTools'))$('studioTools').open=false;}});
     const observer=new MutationObserver(scheduleView);
-    for(const id of ['memoryPage','communityPage','aboutPage','dnaPage','newsV2Page','recoPage','seasonNewsPage','lexiconPage','auditPage','discoveryPage','rankingPage','calendarPage'])if($(id))observer.observe($(id),{attributes:true,attributeFilter:['class']});
+    for(const id of ['cockpitPage','memoryPage','communityPage','aboutPage','dnaPage','newsV2Page','recoPage','seasonNewsPage','lexiconPage','auditPage','discoveryPage','rankingPage','calendarPage'])if($(id))observer.observe($(id),{attributes:true,attributeFilter:['class']});
     window.addEventListener('alm:library-rendered',decorateLibrary);
     window.addEventListener('alm:view-changed',scheduleView);
     window.addEventListener('alm:motion-changed',()=>{if(visiblePage()==='dnaPage'&&typeof window.renderDNA==='function')window.renderDNA();});
