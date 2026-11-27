@@ -33,7 +33,7 @@ async function reloadAssociations(){
 }
 const validId=v=>Number.isSafeInteger(Number(v))&&Number(v)>0?Number(v):0;
 const apiPoster=anime=>{
- const raw=String(anime?.poster||anime?.imageUrl||'').trim();
+ const raw=String(anime?.poster||anime?.imageUrl||'').trim().replace(/^(images|assets)\//i,'/$1/');
  const mal=validId(anime?.malId);
  if(!raw)return mal?'/api/cover-cache/'+mal:'';
  // Same on-demand image cache used by existing ALM library cards.
@@ -52,12 +52,13 @@ const subtitle=(row,newly=false)=>{
  const ep=t('episode')+' '+number;
  return season?'S'+season+' · '+ep:ep;
 };
-function card(row,{fresh=false}={}){
+function card(row,{fresh=false,gallery=[]}={}){
  const anime=row.anime;
  const button=document.createElement('button');button.type='button';button.className='alm-watch-card';
  button.dataset.animeId=String(row.id);
  button.setAttribute('aria-label',t('go')+': '+String(anime?.title||'')+' · '+subtitle(row,fresh));
  const art=document.createElement('span');art.className='alm-watch-art';
+ const fallback=document.createElement('span');fallback.className='alm-v220-brand-placeholder';fallback.setAttribute('aria-hidden','true');art.append(fallback);
  const src=apiPoster(anime);
  if(src){
   const image=document.createElement('img');image.src=src;image.loading='lazy';image.decoding='async';image.alt='';
@@ -93,7 +94,8 @@ function card(row,{fresh=false}={}){
  button.append(art,tags,content);
  button.addEventListener('click',()=>{
   // Opens ALM's existing editor, never starts a stream or marks an episode seen.
-  if(typeof window.openEdit==='function')window.openEdit(anime);
+  if(window.ALM_CATALOG?.openRecords)window.ALM_CATALOG.openRecords(gallery,Math.max(0,gallery.findIndex(a=>Number(a.id)===row.id)),button);
+  else if(typeof window.openEdit==='function')window.openEdit(anime);
   else window.showAnimesV1?.('Watching');
  });
  return button;
@@ -101,9 +103,9 @@ function card(row,{fresh=false}={}){
 function rail(kind,rows){
  const host=$(kind==='fresh'?'v220RecentRows':'v220ResumeRows'),empty=$(kind==='fresh'?'v220RecentEmpty':'v220ResumeEmpty');
  if(!host||!empty)return;
- const frag=document.createDocumentFragment();
+ const frag=document.createDocumentFragment(),gallery=rows.map(row=>row.anime);
  for(const row of rows){
-  const tile=card(row,{fresh:kind==='fresh'});
+  const tile=card(row,{fresh:kind==='fresh',gallery});
   const episodes=associations.get(Number(row.anime?.malId))?.episodes;
   if(kind==='resume'&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
    const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';

@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 10858,
-      "sha256": "aadc0187fac1c3dbdf0d38f61273a9080b2c603853d8e95a8dabafa5408b2777"
+      "bytes": 5403,
+      "sha256": "ee54510e63dabce2f97b128b8b097a0936e24d98cfba13124ff31e5b26c8a80f"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -1382,8 +1382,8 @@
     },
     {
       "path": "lib/local-media-index.js",
-      "bytes": 7635,
-      "sha256": "119b32d9f88fbbc908d3646d44f9e7fd480bda845fbe89d73d1dca70b2b9ab37"
+      "bytes": 7659,
+      "sha256": "c6dea5e30a6b4c423d7d25e47e5f8626f3dac14596c40988ad39def8bc99d231"
     },
     {
       "path": "lib/local-season-links.js",
@@ -2647,8 +2647,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 39018,
-      "sha256": "06ef654fffba518cefa6b395ade8b69d46adf81c72521d98e0197d2caecad024"
+      "bytes": 40005,
+      "sha256": "84013a64d1eb47de84be2e501705c579c252dce152bbc4e811510cdc38fd8be6"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2657,13 +2657,13 @@
     },
     {
       "path": "public/v220-personal-insights-model.js",
-      "bytes": 1482,
-      "sha256": "cb759ab49aaa66f1f9aa7c110f18c19128c4fa6cd0750de51b24f83462c958eb"
+      "bytes": 1427,
+      "sha256": "affe4eae3825ae63008758a594ef26f40c4ea675c87f1e4f50ea21bd2592a11d"
     },
     {
       "path": "public/v220-personal-insights.js",
-      "bytes": 10752,
-      "sha256": "03f5f0f8bc0422d1c42e783a9dd21bc01647267bf8e77deed413579e757dbe01"
+      "bytes": 10970,
+      "sha256": "64df6b5f5e8266edb606fcbbd11210474ca80dc23bad6c330ec94c80c13f7b5c"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -2672,13 +2672,13 @@
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 14823,
-      "sha256": "f82357b57728ffe9221c714456e6333017d2290bbc5cbf585046491d6be134fc"
+      "bytes": 15220,
+      "sha256": "2211a14a7695be166ef47c988988247296c6731999c5aaac44dcf83026720846"
     },
     {
       "path": "public/v220.css",
-      "bytes": 17226,
-      "sha256": "c3a4671e604f79c88c28ee67cd94f5adfa47c45231791cd04d5e554d85fa6aad"
+      "bytes": 13275,
+      "sha256": "09fa6be81ed6abd5b9d4228e4aa7a35e07279c315f3499b446840c79362554e5"
     },
     {
       "path": "public/watch-status.js",
@@ -4172,8 +4172,8 @@
     },
     {
       "path": "scripts/test-v220-smart-recognition.cjs",
-      "bytes": 3464,
-      "sha256": "86ab95fc6e6a9d6bfa7d1a00117347d5d2c6dad6004446cf8f67c03ad3530f1b"
+      "bytes": 3842,
+      "sha256": "1b2606642f136f582afb05f351b0547f994fe58672b80a97f5b94ffd3c0f5a39"
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",

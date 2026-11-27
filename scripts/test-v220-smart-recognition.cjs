@@ -41,6 +41,9 @@ assert.equal(rank({titleGuess:'',episodeGuess:8},library).confidence,'none');
   assert.equal(result.files[0].seasonGuess,2);
   assert.equal(result.files[0].episodeGuess,8);
   assert.equal(result.summary.videoFiles,1);
+  const direct=await scanLocalMedia(path.join(root,'Frieren','Season 2'),{maxDurationMs:3000});assert.equal(direct.files[0].seasonGuess,2);
+  await fsp.writeFile(path.join(root,'Frieren','03.mkv'),'test');
+  const seriesRoot=await scanLocalMedia(path.join(root,'Frieren'),{maxDurationMs:3000});assert.equal(seriesRoot.files.find(f=>f.filename==='03.mkv').titleGuess,'Frieren');
  }finally{await fsp.rm(root,{recursive:true,force:true});}
  console.log('OK V2.2 smart recognition: aliases, seasons from folders, ranges, no false-positive matching and read-only scan.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

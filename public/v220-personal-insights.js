@@ -1,6 +1,6 @@
 (()=>{'use strict';
-// V2.2.0: original, read-only score explorer and dated personal chronology.
-// Keeps Anime DNA and Mes souvenirs intact; no inferred watch history, no network.
+// V2.2.0: read-only score explorer.
+// Keeps the existing Anime DNA page intact. Uses local library data.
 const $=id=>document.getElementById(id);
 const M=window.ALM_V220_PERSONAL_INSIGHTS;
 if(!M)return;
@@ -19,18 +19,18 @@ const el=(tag,text,cls)=>{const node=document.createElement(tag);if(text!=null)n
 const library=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
 const title=a=>window.ALM_TITLES?.title?.(a)||a.title||'Anime';
 const cover=a=>{
- const raw=String(a?.poster||a?.imageUrl||'').trim(),id=Number(a?.malId);
+ const raw=String(a?.poster||a?.imageUrl||'').trim().replace(/^(images|assets)\//i,'/$1/'),id=Number(a?.malId);
  if(/^\/api\/cover-cache\/[0-9]+$/.test(raw))return raw;
  if(!raw)return Number.isSafeInteger(id)&&id>0?'/api/cover-cache/'+id:'';
  if(Number.isSafeInteger(id)&&id>0&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw))return '/api/cover-cache/'+id;
  if(/^\/images\/[a-z0-9._% -]+$/i.test(raw)||/^\/assets\/[a-z0-9._%/-]+$/i.test(raw))return raw;
  return '';
 };
-const openAnime=(a,trigger)=>{
- if(typeof window.openEdit==='function')window.openEdit(a);
- else window.ALM_CATALOG?.openRecords?.([a],0,trigger);
+const openAnime=(a,trigger,gallery)=>{
+ if(window.ALM_CATALOG?.openRecords)window.ALM_CATALOG.openRecords(gallery,Math.max(0,gallery.findIndex(row=>Number(row.id)===Number(a.id))),trigger);
+ else if(typeof window.openEdit==='function')window.openEdit(a);
 };
-let pickedScore='all',year=0,mode='axis',selectedDay='';
+let pickedScore='all';
 const labelScore=score=>score===null?t('unrated'):score+'/10';
 function drawScores(){
  const host=$('v220ScoreLanes'),filter=$('v220ScoreFilter'),board=$('v220ScoreBoard');
@@ -55,10 +55,11 @@ function drawScores(){
    const button=el('button',null,'alm-v220-score-poster');button.type='button';
    button.setAttribute('aria-label',t('open')+': '+title(item.anime)+' ('+labelScore(lane.score)+')');
    const imageURL=cover(item.anime),art=el('span',null,'alm-v220-score-cover');
+   const fallback=el('span',null,'alm-v220-brand-placeholder');fallback.setAttribute('aria-hidden','true');art.append(fallback);
    if(imageURL){const image=el('img');image.alt='';image.src=imageURL;image.loading='lazy';
     image.dataset.imageFallback='true';if(imageURL.startsWith('/api/cover-cache/'))image.dataset.almManagedCover='1';art.append(image);}
    button.append(art,el('span',title(item.anime),'alm-v220-score-name'));
-   button.addEventListener('click',()=>openAnime(item.anime,button));row.append(button);
+   button.addEventListener('click',()=>openAnime(item.anime,button,lane.items.map(row=>row.anime)));row.append(button);
   }
   section.append(heading,row);
   if(lane.count>lane.items.length)section.append(el('p',t('more'),'alm-v220-personal-hint'));

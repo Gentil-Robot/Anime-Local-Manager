@@ -25,12 +25,23 @@ const el=(tag,text,cls)=>{const node=document.createElement(tag);if(text!==undef
 const normalize=s=>String(s||'').normalize('NFKC').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const animeList=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
 let scan=null,visible=40,sequelBusy=false;
-const catalogMatches=new Map();let renderRevision=0;
+const catalogMatches=new Map();
 const extraLabels={fr:['Associer mes fichiers','Saison','Épisode','Rechercher dans le catalogue local','Ajouter la fiche à À voir et associer ?','Ouvrir la fiche','Tes animés, tes prochaines diffusions et ta progression.'],en:['Link my files','Season','Episode','Search local catalog','Add to watchlist and link?','Open anime','Your anime, recent broadcasts and progress.'],es:['Vincular mis archivos','Temporada','Episodio','Buscar en el catálogo local','¿Añadir a pendientes y vincular?','Abrir ficha','Tus animes, emisiones y progreso.'],de:['Meine Dateien zuordnen','Staffel','Folge','Lokalen Katalog durchsuchen','Zur Merkliste hinzufügen und zuordnen?','Anime öffnen','Deine Anime, Ausstrahlungen und Fortschritte.'],ja:['動画を関連付ける','シーズン','話数','ローカルカタログを検索','視聴予定に追加して関連付けますか？','作品を開く','作品・放送・視聴進捗'], 'pt-BR':['Associar meus arquivos','Temporada','Episódio','Buscar no catálogo local','Adicionar à lista e associar?','Abrir anime','Seus animes, transmissões e progresso.'],'zh-CN':['关联本地文件','季','集','搜索本地目录','加入待看并关联？','打开作品','我的动漫、播出与观看进度。']};
 const labels=i=>(extraLabels[lang()]||extraLabels.en)[i];
 function openImport(){const dialog=$('importDialog');if(dialog&&!dialog.open)dialog.showModal?.();if(window.activateImportTab)window.activateImportTab('mediaImportPanel');else $('mediaImportPanel')?.classList.remove('hidden');translate();}
 async function catalogFor(titles){const pending=[...new Set(titles.filter(x=>typeof x==='string'&&x.trim().length>=2).map(x=>x.trim().slice(0,160)))].filter(x=>!catalogMatches.has(x)).slice(0,40);if(!pending.length)return;try{const result=await fetch('/api/v220/media-candidates',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({titles:pending})});if(!result.ok)return;const data=await result.json();for(const q of pending)catalogMatches.set(q,Array.isArray(data.items?.[q])?data.items[q]:[]);}catch{}}
-function candidatesFor(file){const rows=[...animeList()];const seen=new Set(rows.map(a=>Number(a.malId)));for(const r of catalogMatches.get(String(file.titleGuess||'').trim().slice(0,160))||[])if(!seen.has(Number(r.malId))){rows.push(r);seen.add(Number(r.malId));}return rows;}
+function mergeCandidates(rows,metadata){
+ const merged=new Map(rows.filter(a=>Number(a.malId)>0).map(a=>[Number(a.malId),a]));
+ for(const meta of metadata||[]){
+  const id=Number(meta.malId);if(!Number.isSafeInteger(id)||id<1)continue;
+  const own=merged.get(id);
+  if(!own){merged.set(id,meta);continue;}
+  const alt=[own.title,own.customTitle,own.titleEn,own.titleRomaji,own.titleJa,meta.title,meta.titleEn,meta.titleRomaji,meta.titleJa,...(Array.isArray(own.synonyms)?own.synonyms:[]),...(Array.isArray(meta.synonyms)?meta.synonyms:[])].filter(Boolean);
+  merged.set(id,{...meta,...own,titleEn:own.titleEn||meta.titleEn,titleRomaji:own.titleRomaji||meta.titleRomaji,titleJa:own.titleJa||meta.titleJa,synonyms:[...new Set(alt)].slice(0,60)});
+ }
+ return [...merged.values()];
+}
+function candidatesFor(file){return mergeCandidates(animeList(),catalogMatches.get(String(file.titleGuess||'').trim().slice(0,160))||[]);}
 const summaries=new Map();
 let savedRows=[],airingItems=[],airingCheckedAt='',checkingFiles=false;
 const diskChecks=new Map();
@@ -213,11 +224,11 @@ function renderMedia(){
    const populate=term=>{
     suggestions.replaceChildren();const choose=el('option',t('review'));choose.value='';suggestions.append(choose);
     const candidates=term
-      ?[...new Map([...available,...(catalogMatches.get(term.trim().slice(0,160))||[])].map(a=>[Number(a.malId),a])).values()].filter(a=>Number(a.malId)>0&&[a.title,a.titleEn,a.titleRomaji,a.customTitle,...(Array.isArray(a.synonyms)?a.synonyms.slice(0,25):[])].some(name=>normalize(name).includes(normalize(term)))).slice(0,24)
+      ?mergeCandidates(available,catalogMatches.get(term.trim().slice(0,160))||[]).filter(a=>Number(a.malId)>0&&[a.title,a.titleEn,a.titleRomaji,a.customTitle,...(Array.isArray(a.synonyms)?a.synonyms.slice(0,25):[])].some(name=>normalize(name).includes(normalize(term)))).slice(0,24)
       :proposal?.candidates?.length
         ?proposal.candidates.map(c=>available.find(a=>Number(a.malId)===c.malId)).filter(Boolean)
         :available.filter(a=>Number(a.malId)===match).slice(0,5);
-    for(const a of candidates){const option=el('option',a.title);option.value=String(a.malId);suggestions.append(option);}
+    for(const a of candidates){const known=Number(a.manualSeasonNumber||a.betaseriesSeason)||0;const option=el('option',a.title+(known?' · S'+known:'')+' · #'+a.malId);option.value=String(a.malId);suggestions.append(option);}
     suggestions.value=!term&&match&&candidates.some(a=>Number(a.malId)===match)?String(match):'';
     selected=Number(suggestions.value)||0;
    };
@@ -243,7 +254,7 @@ function renderMedia(){
         const candidate=[...available,...[...catalogMatches.values()].flat()].find(a=>Number(a.malId)===selected);
         if(!candidate||!window.confirm(labels(4)+'\n'+candidate.title)){syncButton();return;}
         const created=await fetch('/api/animes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:candidate.title,malId:selected,status:'Plan to Watch',episodesSeen:'0',autoInfo:false,catalogAdd:true})});
-        if(!created.ok)throw Error('ALM_MEDIA_CATALOG_ADD_FAILED');
+        const body=await created.json().catch(()=>({}));if(!created.ok||body.error)throw Error(body.error||'ALM_MEDIA_CATALOG_ADD_FAILED');
         await window.reloadAnimeLibrary?.();
       }
       const correction={season:Number(season.value),episode:Number(episode.value)};
@@ -282,12 +293,15 @@ async function loadSequels(){
    const card=el('article',null,'alm-v220-sequel');
    const main=el('div',null,'alm-v220-sequel-copy');
    const art=el('button',null,'alm-v220-sequel-art');art.type='button';art.title=labels(5)+': '+item.title;art.setAttribute('aria-label',art.title);
-   const fallback=el('span','🎌');art.append(fallback);
+   const fallback=el('span',null,'alm-v220-brand-placeholder');fallback.setAttribute('aria-hidden','true');art.append(fallback);
    const raw=String(item.imageUrl||'');
    if(/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw)){
      const image=el('img');image.src=raw;image.alt='';image.loading='lazy';image.referrerPolicy='no-referrer';image.dataset.imageFallback='true';art.append(image);
    }
-   art.addEventListener('click',()=>window.ALM_CATALOG?.openRecords?.([{...item,poster:item.imageUrl||''}],0,art,{readOnly:true}));
+   art.addEventListener('click',()=>{
+    const items=(data.items||[]).filter(r=>!existing.has(Number(r.malId))).map(r=>({...r,poster:r.imageUrl||''}));
+    window.ALM_CATALOG?.openRecords?.(items,Math.max(0,items.findIndex(r=>Number(r.malId)===Number(item.malId))),art,{readOnly:true});
+   });
    main.append(el('strong',item.title),el('small',t('sequelFrom')+': '+item.sourceTitle));
    const button=el('button',t('sequelAdd'),'alm-v220-sequel-add');button.type='button';
    button.addEventListener('click',async()=>{

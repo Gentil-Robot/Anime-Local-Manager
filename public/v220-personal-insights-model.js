@@ -1,6 +1,6 @@
 'use strict';
-// ALM 2.2 — independent personal score and viewing chronology selectors.
-// Data source: the local ALM library. Never infer watch dates from airing dates.
+// ALM 2.2 — independent personal score selectors.
+// Data source: the local ALM library, read-only.
 (function(root,factory){
  const model=factory();
  if(typeof module==='object'&&module.exports)module.exports=model;
