@@ -16,6 +16,7 @@
     "scripts/test-v220-watch-model.cjs",
     "scripts/test-v220-watch-rails.cjs",
     "scripts/test-v220-vm-feedback.cjs",
+    "scripts/test-v220-vm-round3.cjs",
     "scripts/test-v220-review.cjs",
     "scripts/test-v220-release-isolation.cjs",
     "scripts/test-v211-update-notifications.cjs",

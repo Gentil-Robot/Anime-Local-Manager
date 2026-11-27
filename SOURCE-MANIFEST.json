@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 9919,
-      "sha256": "b6404da335db3dba68f8aa29d49c6488b46543176fb795664f1773820ebc640c"
+      "bytes": 10131,
+      "sha256": "f87ac948215bae7fa85622febd373b9dc7d313d949d2f71eed03d3d92179a341"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 11625,
-      "sha256": "a4c3b68708fa4170f98338a42c94bec09c23b6bbf8941ac88615b7181d1ef2dd"
+      "bytes": 14616,
+      "sha256": "87b80d6c61c7d813e9ffa62189c3b7f4159e92ec232d2c078ae4a40002549dc4"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -2382,8 +2382,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 105901,
-      "sha256": "e89d7014785a0ae6f70e9c7d81e855c5098a22b4bb8a125e17e4f4d041035292"
+      "bytes": 105996,
+      "sha256": "0173614c44501967a82e62b1f3fc72446794d2fab014207c9b2673756f2818a0"
     },
     {
       "path": "public/input-focus.js",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 51194,
-      "sha256": "8a85f08bc276009418cf12dd28cbddffff6dba74c3cb154f752a5942590fc95e"
+      "bytes": 53050,
+      "sha256": "f1cdee66b6cad6e7f8683cd3186864a48a24df4e0756c9d487ddc8e19989d65c"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 18478,
-      "sha256": "32f0fe789a8130b62a65b4c05325316a309c478ae0fc054f0e100bf52fc33ead"
+      "bytes": 18515,
+      "sha256": "34850bb8f98d540190ab4cbb8c57a05b9a442e31a2e6e614cb70b2e96d3407db"
     },
     {
       "path": "public/watch-status.js",
@@ -4177,8 +4177,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 4188,
-      "sha256": "9e42bed5164ba0b6b27b3dbe2bda19a9b50a56f73619e13230d377daaa2e693b"
+      "bytes": 4719,
+      "sha256": "d1e2d3bda206df0ce7e6d4257ac63d77042909e4250ec5e7e00dbf6d6fd4e34c"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4211,6 +4211,11 @@
       "sha256": "54648816b1cdb4aebf13f1b00111f9877469b0421b0a533210bef1d0eecb5316"
     },
     {
+      "path": "scripts/test-v220-vm-round3.cjs",
+      "bytes": 4866,
+      "sha256": "0f9f68161889a20500d0825e20a0ebf77f894a1142295912e2a7de23c68deaa7"
+    },
+    {
       "path": "scripts/test-v220-watch-model.cjs",
       "bytes": 2488,
       "sha256": "1f3d3c153946947534960b7fbe71b733b007ceb557a5a16533288ad0315a4cee"
@@ -4237,8 +4242,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7329,
-      "sha256": "8a3e6bb16cf37f182546768ca2b6f49c318e4bd89903e153007f2361daeeca8d"
+      "bytes": 7368,
+      "sha256": "7b8db25192d9aa255c5362eb966eb40ac5fdf5e3528cbaab5eeaa672e39dfab6"
     },
     {
       "path": "scripts/verify-native.cjs",
@@ -4247,8 +4252,8 @@
     },
     {
       "path": "scripts/verify-project.js",
-      "bytes": 10869,
-      "sha256": "db910c58f1c4d22bc1236c9a9dd3db9e1ab76b1d1c4143f339e324634b2edc70"
+      "bytes": 10960,
+      "sha256": "c5cfde79413ee28425764c8f7353c3c581dbb9bf27b050d0dcfa2ef3ba0b844b"
     },
     {
       "path": "SECURITY.md",
