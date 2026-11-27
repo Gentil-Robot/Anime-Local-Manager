@@ -3469,9 +3469,8 @@ function renderDnaExtras(animes) {
   if (scoreDistEl) {
     const dist = {};
     for (let i = 1; i <= 10; i++) dist[i] = 0;
-    const scored = animes.filter(a => Number(a.score) > 0);
+    const scored = animes.filter(a => Number.isInteger(Number(a.score)) && Number(a.score) >= 1 && Number(a.score) <= 10);
     const scoreSummaryEl = document.getElementById("dnaScoreSummary");
-    const scorePostersEl = document.getElementById("dnaScorePosters");
     if (scored.length) {
       const average = scored.reduce((sum,a)=>sum+Number(a.score||0),0)/scored.length;
       const sortedScores = scored.slice().sort((a,b)=>Number(b.score||0)-Number(a.score||0)||String(a.title||"").localeCompare(String(b.title||"")));
@@ -3482,16 +3481,8 @@ function renderDnaExtras(animes) {
         <div class="dna-score-stat"><span>🎬</span><strong>${scored.length}</strong><em>Animés notés</em></div>
         <div class="dna-score-stat"><span>💜</span><strong>${favoriteCount}</strong><em>Coups de cœur 9+</em></div>
         <div class="dna-score-stat"><span>🏆</span><strong>${best}<small>/10</small></strong><em>Meilleure note</em></div>`;
-      if (scorePostersEl) scorePostersEl.innerHTML = sortedScores.slice(0,8).map(a=>`
-        <button type="button" class="dna-score-poster" data-dna-personal-score="${Math.round(Number(a.score))}" title="${escapeHtmlV2(a.title||"Anime")} — ${escapeHtmlV2(a.score)}/10">
-          ${dnaProgressThumbV2(a,"score")}
-          <span class="dna-score-badge">⭐ ${escapeHtmlV2(a.score)}</span>
-          <span class="dna-score-poster-title">${escapeHtmlV2(a.title||"Anime")}</span>
-        </button>`).join("");
-      scorePostersEl?.querySelectorAll("[data-dna-personal-score]").forEach(button=>button.addEventListener("click",()=>window.showLibraryByPersonalScore?.(Number(button.dataset.dnaPersonalScore||0))));
     } else {
       if (scoreSummaryEl) scoreSummaryEl.innerHTML = "";
-      if (scorePostersEl) scorePostersEl.innerHTML = "";
     }
     for (const a of scored) {
       const s = Math.round(Number(a.score));
@@ -3514,20 +3505,13 @@ function renderDnaExtras(animes) {
         <span class="dna-score-column-percent">${n ? percent + "%" : ""}</span>
       </button>`;
     }).join("")}</div>`;
-    scoreDistEl.querySelectorAll("[data-dna-personal-score]").forEach(button => {
-      button.addEventListener("click", () => {
-        const score = Number(button.dataset.dnaPersonalScore || 0);
-        if (score > 0 && typeof window.showLibraryByPersonalScore === "function") {
-          window.showLibraryByPersonalScore(score);
-        }
-      });
-    });
     if (!scored.length) scoreDistEl.innerHTML = `
       <div class="dna-empty-note">
         <span aria-hidden="true">✍️</span>
         <strong>Aucune note personnelle pour le moment</strong>
         <p>${animes.length} animé${animes.length > 1 ? "s" : ""} sans note personnelle. Ajoute des notes de 1 à 10 : le graphique montrera combien d’animés ont reçu chaque note.</p>
       </div>`;
+    window.ALM_V220_SCORE_GALLERY?.render(animes,a=>dnaProgressThumbV2(a,"score"));
   }
 
   // Prochains à finir (Watching avec episodesTotal connu)

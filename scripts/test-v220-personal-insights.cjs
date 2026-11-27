@@ -12,5 +12,9 @@ assert.equal(M.score(''),null);assert.equal(M.score(0),null);assert.equal(M.scor
 const board=M.scoreLanes(library);
 assert.equal(board.total,5);assert.equal(board.rated,3);assert.equal(board.unrated,2);
 assert.equal(board.lanes.find(row=>row.score===9).items[0].anime,library[0]);
+assert.deepEqual(M.scoreGallery(library).map(a=>a.id),[2,1,5]);
+assert.deepEqual(M.scoreGallery(library,'9').map(a=>a.id),[1]);
+assert.deepEqual(M.scoreGallery(library,'unrated').map(a=>a.id),[4,3]);
+assert.equal(M.scoreGallery(Array.from({length:150},(_,i)=>({id:i+1,title:'Anime '+i,score:10})), '10').length,150,'No hidden poster cap');
 assert.equal(library[0].watchEvents.length,2,'Analysis must never change original personal data');
 console.log('OK V2.2 personal insights: 1–10 scores, unrated separation, read-only local score selectors.');

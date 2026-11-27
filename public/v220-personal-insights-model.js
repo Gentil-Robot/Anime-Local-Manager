@@ -27,5 +27,12 @@
   }
   return {lanes:[...lanes,none],total:seen.size,rated:lanes.reduce((sum,row)=>sum+row.count,0),unrated:none.count};
  }
- return Object.freeze({score,scoreLanes});
+ function scoreGallery(records,filter='all'){
+  const seen=new Set();
+  return (Array.isArray(records)?records:[]).filter(a=>{
+   const id=safeId(a?.id);if(!id||seen.has(id))return false;seen.add(id);
+   const n=score(a.score);return filter==='all'?n!==null:filter==='unrated'?n===null:n===Number(filter);
+  }).slice().sort((a,b)=>(score(b.score)||0)-(score(a.score)||0)||String(a.title||'').localeCompare(String(b.title||''))||Number(a.id)-Number(b.id));
+ }
+ return Object.freeze({score,scoreLanes,scoreGallery});
 });

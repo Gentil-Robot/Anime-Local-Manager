@@ -2,39 +2,32 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{JSDOM}=require('jsdom');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const html=read('public/index.html');
-for(const id of ['v220ScoreBoard','v220ScoreLanes','v220ScoreFilter'])
- assert(html.includes('id="'+id+'"'),'Missing upgrade control '+id);
+for(const id of ['v220ScoreBoard','v220ScoreFilter','v220ScorePrev','v220ScoreNext','dnaScorePosters'])assert(html.includes('id="'+id+'"'));
+assert(!html.includes('id="v220ScoreLanes"'),'No duplicate score explorer');
+assert(!html.includes('id="v220PersonalTimeline"'),'Original Memories');
 assert(html.indexOf('src="/v220-personal-insights-model.js"')<html.indexOf('src="/v220-personal-insights.js"'));
-assert(html.includes('id="memoryPage"')&&html.includes('id="dnaPage"'));assert(!html.includes('id="v220PersonalTimeline"'),'Original Mes souvenirs only');
 const {window}=new JSDOM(html,{url:'http://127.0.0.1:3123/',runScripts:'outside-only',pretendToBeVisual:true});
-const library=[
- {id:1,malId:15,title:'Test Anime',score:9,status:'Completed',startDate:'2020-01-01',completedOn:'2026-08-15',watchEvents:[{id:'a',date:'2026-08-10',episodes:2}],poster:'/images/test-art.jpg'},
- {id:2,malId:16,title:'Other',score:'',status:'Watching',startDate:'2010-01-01'}
-];
-let opened=0,network=0;
-window._almAnimes=library;
-window.ALM_I18N={getLanguage:()=> 'fr'};
-window.ALM_TITLES={title:a=>a.title};
-window.openEdit=a=>{assert.equal(a.id,1);opened++;};
-window.fetch=()=>{network++;throw Error('No internet should be accessed by personal dashboards');};
-window.eval(read('public/v220-personal-insights-model.js'));
-window.eval(read('public/v220-personal-insights.js'));
+const library=Array.from({length:19},(_,i)=>({id:i+1,malId:i+100,title:'Anime '+String(i).padStart(2,'0'),score:i<10?10:9,status:'Completed'}));
+library.push({id:20,malId:220,title:'Unrated',score:''});
+let opened,network=0;
+window._almAnimes=library;window.ALM_I18N={getLanguage:()=> 'fr'};
+window.ALM_CATALOG={openRecords(rows,index){opened={rows,index};}};
+window.fetch=()=>{network++;throw Error('No network');};
+window.eval(read('public/v220-personal-insights-model.js'));window.eval(read('public/v220-personal-insights.js'));
 window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
-(async()=>{
- const doc=window.document;
- const board=doc.getElementById('v220ScoreBoard');board.open=true;board.dispatchEvent(new window.Event('toggle'));
- assert(doc.getElementById('v220ScoreSummary').textContent.includes('1 notés'),'Local score summary should be accurate');
- assert(doc.querySelectorAll('.alm-v220-score-lane').length===2,'Only rated and unrated occupied lanes display');
- const poster=doc.querySelector('.alm-v220-score-poster');
- assert(poster.getAttribute('aria-label').includes('Test Anime'));
- poster.click();assert.equal(opened,1,'Poster should open existing anime editor');
- doc.getElementById('v220ScoreFilter').value='unrated';
- doc.getElementById('v220ScoreFilter').dispatchEvent(new window.Event('change'));
- assert.equal(doc.querySelectorAll('.alm-v220-score-lane').length,1,'Score filter operates only on existing DNA');
- assert.equal(doc.querySelector('#v220ScoreLanes img').getAttribute('src'),'/api/cover-cache/16','Identified anime without poster should use local managed cache');
- assert(!doc.getElementById('v220PersonalTimeline'),'No duplicate timeline');
- assert.equal(network,0,'No browsing or third-party image fetching from user data timeline');
- assert.equal(library[0].score,9);assert.equal(library[0].completedOn,'2026-08-15');
- window.close();
- console.log('OK V2.2 UX: DNA score board, managed cover fallback, original Memories and no data writes.');
-})().catch(error=>{console.error(error);window.close();process.exitCode=1;});
+try{
+ const d=window.document,$=id=>d.getElementById(id),posters=()=>[...$('dnaScorePosters').querySelectorAll('.dna-score-poster')];
+ $('dnaScoreDist').innerHTML='<button data-dna-personal-score="10">10</button><button data-dna-personal-score="9">9</button>';
+ window.ALM_V220_SCORE_GALLERY.render(library);
+ assert.equal(posters().length,8);assert($('v220ScorePrev').disabled);assert(!$('v220ScoreNext').disabled);
+ $('v220ScoreNext').click();assert.equal(posters()[0].dataset.animeId,'9');$('v220ScoreNext').click();assert.equal(posters().length,3);assert($('v220ScoreNext').disabled);
+ const ten=$('dnaScoreDist').querySelector('[data-dna-personal-score="10"]');ten.click();
+ assert(posters().every(p=>p.dataset.score==='10'));assert.equal(ten.getAttribute('aria-pressed'),'true');$('v220ScoreNext').click();assert.equal(posters().length,2);
+ posters()[1].click();assert.equal(opened.rows.length,10);assert.equal(opened.rows[opened.index].id,10);
+ $('dnaScoreDist').querySelector('[data-dna-personal-score="9"]').click();assert(posters().every(p=>p.dataset.score==='9'));
+ $('dnaScoreDist').querySelector('[data-dna-personal-score="9"]').click();assert.equal($('v220ScoreFilter').value,'all');
+ $('v220ScoreFilter').value='unrated';$('v220ScoreFilter').dispatchEvent(new window.Event('change'));
+ assert.equal(posters().length,1);assert.equal(posters()[0].querySelector('img').getAttribute('src'),'/api/cover-cache/220');
+ assert.equal(network,0);assert.equal(library[0].score,10);
+ console.log('OK V2.2 DNA: all posters reachable, grade filters, deselect, exact record gallery navigation, local cached covers, immutable data.');
+}finally{window.close();}

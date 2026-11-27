@@ -1652,8 +1652,8 @@
     },
     {
       "path": "public/alm-v2.js",
-      "bytes": 243634,
-      "sha256": "6295d491358e399e66b9de4fc16ba084ed8109682ec43001ca073a11120fd060"
+      "bytes": 242579,
+      "sha256": "0ee8cb5532b1571cf18747e3827a46a22619abc2e1de3d38acafebe5704db931"
     },
     {
       "path": "public/anime-association.js",
@@ -2382,8 +2382,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 94422,
-      "sha256": "05ffb053697b3763264cee4230b884023fa6e82f86bd72ba981be3f6001081d4"
+      "bytes": 94468,
+      "sha256": "dc3974393bd0bcc5477409dad72e368fd28f1af0fa01fea1cb1bd08ee1159a3a"
     },
     {
       "path": "public/input-focus.js",
@@ -2662,13 +2662,13 @@
     },
     {
       "path": "public/v220-personal-insights-model.js",
-      "bytes": 1427,
-      "sha256": "affe4eae3825ae63008758a594ef26f40c4ea675c87f1e4f50ea21bd2592a11d"
+      "bytes": 1899,
+      "sha256": "e2a454919532f51ca9572fbe95dfa0a3626fcd0d717005b41789867512b6a135"
     },
     {
       "path": "public/v220-personal-insights.js",
-      "bytes": 10970,
-      "sha256": "64df6b5f5e8266edb606fcbbd11210474ca80dc23bad6c330ec94c80c13f7b5c"
+      "bytes": 6074,
+      "sha256": "5304df0c47c10b1f499cf018f76e9285b83ac1a3810095883b9f00b102c58a99"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 14101,
-      "sha256": "2ab03fbc50f67cd3ae34a88863aa86f97da9e227ec244e1a4d423223c894cc81"
+      "bytes": 13057,
+      "sha256": "ebadd0b451bac10d28c143921a70cef885e5fa5a44f02f6704897e33dd405568"
     },
     {
       "path": "public/watch-status.js",
@@ -4162,13 +4162,13 @@
     },
     {
       "path": "scripts/test-v220-personal-insights-ui.cjs",
-      "bytes": 3020,
-      "sha256": "e40f9631f9aed65bd9cd9a52e18625a3190de0b18bb12f3726d0c0cc79c4ff53"
+      "bytes": 3037,
+      "sha256": "601dd4f7bda71b1aca82761241b10234ce3c97c2a5ea4b0a4a5c71d29709f03f"
     },
     {
       "path": "scripts/test-v220-personal-insights.cjs",
-      "bytes": 1276,
-      "sha256": "8d2949feedffd5644984b5e2b3d05d38914af51d79b1a74faca995058539e00f"
+      "bytes": 1616,
+      "sha256": "334cf02c0284f24dccf64a435888fd251f6763097438cc71808e88efd1ad7204"
     },
     {
       "path": "scripts/test-v220-release-isolation.cjs",
