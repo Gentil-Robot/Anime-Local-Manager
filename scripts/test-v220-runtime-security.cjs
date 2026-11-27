@@ -16,6 +16,13 @@ assert.equal(pkg.devDependencies.electron,'45.5.0');
 assert.equal(lock.packages[''].devDependencies.electron,pkg.devDependencies.electron);
 assert.equal(lock.packages['node_modules/electron'].version,pkg.devDependencies.electron);
 assert.match(lock.packages['node_modules/electron'].integrity,/^sha512-[A-Za-z0-9+/]{86}==$/);
+// CVE-2026-118764: vulnerable minimatch copies may exist only in dev tooling
+// until the compatible stable upstream builder release is available.
+for(const [location,dependency] of Object.entries(lock.packages)){
+ if(!/(?:^|\/)node_modules\/minimatch$/.test(location))continue;
+ const parts=String(dependency.version).split('.').map(Number);
+ if(parts[0]>=7&&(parts[0]<11||parts[0]===11&&parts[1]===0&&parts[2]===0))assert.equal(dependency.dev,true,'Affected minimatch in production dependency tree: '+location);
+}
 assert(!process.env.ELECTRON_OVERRIDE_DIST_PATH,'External Electron runtime override refused');
 const probe=spawnSync(require('electron'),['-p','JSON.stringify(process.versions)'],{
  cwd:root,encoding:'utf8',timeout:30000,env:{...process.env,ELECTRON_RUN_AS_NODE:'1'},windowsHide:true

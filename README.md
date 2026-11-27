@@ -8,7 +8,7 @@ Anime Local Manager (ALM) est une application **locale, gratuite et open source 
 
 ## V2.2.0 VM TEST — développement non publié
 
-Cette branche prépare le Cockpit, l'association locale de fichiers, la progression d'installation et les contrôles de sécurité. **Electron 45.5.0**, Node.js embarqué **24.22.3**, Chromium **156.0.8078.109**. Node.js de construction reste épinglé à 24.22.3 LTS. Les 179 suites et les contrôles natifs séparés doivent réussir avant de distribuer un installateur VM isolé. La recette interactive reste obligatoire. [Recette VM](docs/RECETTE-V220-VM-TEST.md).
+Cette branche prépare le Cockpit, l'association locale de fichiers, la progression d'installation et les contrôles de sécurité. **Electron 45.5.0**, Node.js embarqué **24.22.3**, Chromium **156.0.8078.109**. Node.js de construction reste épinglé à 24.22.3 LTS. Les 180 suites et les contrôles natifs séparés doivent réussir avant de distribuer un installateur VM isolé. La recette interactive reste obligatoire. Les sources démarrent automatiquement avec le profil de test ; seul un paquet à identité VM isolée peut être construit avant approbation. [Recette VM](docs/RECETTE-V220-VM-TEST.md).
 
 ## V2.1.3 Bêta stable — version publique de référence
 
@@ -82,7 +82,7 @@ Les données principales restent sur l'ordinateur de l'utilisateur. Faites une s
 
 ### Documentation et historique technique
 
-Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.1.3 Bêta stable** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
+Les anciennes itérations et les correctifs de développement sont conservés dans le dossier [`docs/`](docs/) à des fins de traçabilité, mais **V2.2.0 Bêta stable (candidate non publiée)** est la version préparée ici. Les noms historiques des scripts de test et des migrations Supabase sont conservés pour garantir leur compatibilité et leur suivi.
 
 - [Notes de version V2.0.0](docs/RELEASE-NOTES-V2.0.0-BETA.md)
 - [Préparation de la publication open source](docs/PUBLICATION-OPEN-SOURCE-V2.md)

@@ -39,6 +39,11 @@ jobs:
         run: |
           npm ci
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Audit strict des dependances de production
+        shell: pwsh
+        run: |
+          npm audit --omit=dev --audit-level=low
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Audit production et outillage
         shell: pwsh
         run: |

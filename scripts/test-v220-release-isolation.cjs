@@ -20,6 +20,13 @@ for(const job of ['vm-preview-installer','linux-preview']){
 assert(!JSON.stringify(release).includes('secrets.'));
 assert.match(read('Preparer-GitHub-V2.ps1'),/if \(\$PublierBranche\) \{ throw 'ALM_V220_PUBLICATION_SUSPENDED'/);
 assert.match(read('Publier-GitHub-V2.ps1'),/if \(\$Publier\) \{ throw 'ALM_V220_PUBLICATION_SUSPENDED'/);
+const candidate=JSON.parse(read('release-version.json'));
+assert.equal(candidate.technicalVersion,'2.2.0');
+assert.equal(candidate.previousValidatedVersion,'2.1.3');
+assert.equal(candidate.releaseCandidate,true);
+assert.match(read('main.js'),/releaseMetadata\.releaseCandidate===true/);
+assert.match(read('scripts/prepare-metadata-release.js'),/ALM_CANDIDATE_VM_ONLY/);
+assert(source.jobs.verify.steps.some(s=>s.run?.includes('npm audit --omit=dev --audit-level=low')));
 const builder=read('scripts/build-v220-vm-preview.cjs');
 assert.match(builder,/ALM_PREVIEW_HOOK_COUNT/);
 assert.match(builder,/pkg\.build\.appId='fr\.gentilrobot\.animelocalmanager\.vmtest'/);

@@ -4,7 +4,7 @@ Préversion de développement. Ne pas publier avant la validation des tests Wind
 
 ## Mise à jour des sources de la VM
 
-Fermer ALM, puis ouvrir PowerShell dans le clone de test. Vérifier que le dossier est propre avec git status. Utiliser git pull --ff-only, git lfs pull puis npm.cmd ci si les dépendances sont à réinstaller. Démarrer avec ALM_TEST_PROFILE=1 et npm.cmd run app dans la même fenêtre. Ne pas connecter un compte communautaire de production. Le numéro affiché depuis les sources peut rester 2.1.3 : la branche contient le développement 2.2.0.
+Fermer ALM, puis ouvrir PowerShell dans le clone de test. Vérifier que le dossier est propre avec git status. Utiliser git pull --ff-only, git lfs pull puis npm.cmd ci si les dépendances sont à réinstaller. Démarrer avec ALM_TEST_PROFILE=1 et npm.cmd run app dans la même fenêtre. Ne pas connecter un compte communautaire de production. Les sources et les écrans affichent désormais 2.2.0 ; le profil de test est sélectionné automatiquement pour les sources candidates, y compris sans variable d'environnement.
 
 Pour l'installateur distinct VM TEST : [PR #9](https://github.com/Gentil-Robot/Anime-Local-Manager/pull/9), contrôle GitHub Actions, artefact ALM-2.2.0-VM-TEST après réussite de verify et vm-preview-installer. Vérifier le SHA-256 et VM-TEST-REPORT.json. Les mises à jour automatiques restent désactivées dans le paquet VM.
 
@@ -36,7 +36,7 @@ Pour l'installateur distinct VM TEST : [PR #9](https://github.com/Gentil-Robot/A
 
 ## Contrôle indépendant
 
-Le script scripts/test-v220-review.cjs vérifie la structure, l'absence de pages dupliquées, le routage, le pipeline d'images, les API et la syntaxe. Les suites de reconnaissance, de stockage, d'intégration, de bandeaux et de notes sont adaptées à cette organisation. La CI complète comprend 179 suites. Une inspection visuelle réelle sur la VM reste nécessaire : les tests DOM ne remplacent pas la validation de rendu Electron.
+Le script scripts/test-v220-review.cjs vérifie la structure, l'absence de pages dupliquées, le routage, le pipeline d'images, les API et la syntaxe. Les suites de reconnaissance, de stockage, d'intégration, de bandeaux et de notes sont adaptées à cette organisation. La CI complète comprend 180 suites. Une inspection visuelle réelle sur la VM reste nécessaire : les tests DOM ne remplacent pas la validation de rendu Electron.
 
 Les chemins absolus restent dans le profil local. Le catalogue et le cache ne sont pas redistribués au-delà des droits de leurs fournisseurs. Aucun code ou visuel de Seanime ou AnimeList n'a été copié. Les lots ont été développés séparément ; le contrôle est une suite de tests distincte, pas un agent IA autonome.
 
@@ -49,8 +49,14 @@ Les chemins absolus restent dans le profil local. Le catalogue et le cache ne so
 
 ### Résolution de dépendances
 
-Electron 45.5.0 (publication officielle du 24 novembre), Node embarqué 24.22.3 et Chromium 156.0.8078.109. Le job npm 140534797258 a résolu le lockfile avec npm et vérifié dist.integrity. Seuls la déclaration racine et le paquet Electron changent. SHA-256 du lockfile généré : 428b3392567166add6ba703fbe367c1a6560971e81e2693c76473c839382fa83. Le contrôle du lockfile commité est bloquant. L'audit npm, les 179 suites, les parcours natifs et la reconstruction doivent encore confirmer cette mise à niveau. Aucun paquet de production n'est publié.
+Electron 45.5.0 (publication officielle du 24 novembre), Node embarqué 24.22.3 et Chromium 156.0.8078.109. Le job npm 140534797258 a résolu le lockfile avec npm et vérifié dist.integrity. Seuls la déclaration racine et le paquet Electron changent. SHA-256 du lockfile généré : 428b3392567166add6ba703fbe367c1a6560971e81e2693c76473c839382fa83. Le contrôle du lockfile commité est bloquant. L'audit npm, les 180 suites, les parcours natifs et la reconstruction doivent encore confirmer cette mise à niveau. Aucun paquet de production n'est publié.
 
 ### Isolation de publication et Linux
 
 Les workflows de la branche candidate ne publient aucune release et ne disposent pas de jeton d'écriture ni de secrets de signature. Les commandes de publication manuelle sont suspendues. La branche publique 2.1.3 conserve ses propres scripts. Les deux chemins de création du planificateur et d'identité Windows sont neutralisés dans l'aperçu VM avec contrôle de leur nombre avant construction. Le build Linux utilise une identité de paquet distincte, construit AppImage et DEB, teste l'AppImage en mode extract-and-run et installe/désinstalle le DEB seulement sur un runner jetable. Le test de la version utilisateur sur Linux reste à faire sur une VM dédiée. Un nouveau contrôle d'isolation rejoint le plan (180 suites).
+
+### Version harmonisée et audit de l'outillage
+
+La version candidate 2.2.0 est maintenant déclarée dans release-version.json (releaseCandidate=true), le package/lockfile, les écrans, les manifestes et les contrôles. Les anciens fichiers d'historique, le format de sauvegarde 2.0.0-beta.82 et la version publique précédente 2.1.3 ne sont pas réécrits. Le hook beforePack refuse tout empaquetage de cette candidate avec l'identité de production ; seuls les aperçus VM TEST isolés sont autorisés. La branche de publication publique reste inchangée. Le lockfile a été revérifié par npm avant la seule modification de sa version racine ; la CI doit vérifier la nouvelle empreinte.
+
+L'audit npm du 27 novembre a signalé 6 entrées modérées liées à minimatch (CVE-2026-118764 / GHSA-g3hv-75wg-m249) via electron-builder, avec des copies 9.0.9 et 10.2.6 réservées à l'outillage dev. Le correctif amont est minimatch 11.0.1, une migration majeure hors de la plage des versions actuelles ; ne pas forcer de rétrogradation d'electron-builder ni d'override ESM sans preuve de compatibilité. Les globs de build sont des sources contrôlées, jamais des entrées utilisateur. L'audit production distinct est bloquant et la présence des copies affectées dans les dépendances de production est interdite. Le risque résiduel build doit être réévalué avec la première version stable d'electron-builder intégrant le correctif. Sources : https://github.com/advisories/GHSA-g3hv-75wg-m249 et https://github.com/electron-userland/electron-builder/issues/10537.

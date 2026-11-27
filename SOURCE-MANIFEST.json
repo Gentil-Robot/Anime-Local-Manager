@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 8929,
-      "sha256": "556e67292967e852f9f8cc4eedc5fa17c93e958c6f83a9a1bb8e86325f50c533"
+      "bytes": 9128,
+      "sha256": "3789bfdef7bf6f7ef4416801b6223e65b4dee1d0a4bddf7de20a9d1de7104e91"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 7778,
-      "sha256": "48183a12d19bc231cda2a3a916bd149b123ab1308b38c16018a685b40610c579"
+      "bytes": 9431,
+      "sha256": "4b439b208d3aa6f8606ba647980a08f76ff7fb70cee7ac91bf37823f4eff62b8"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -639,6 +639,11 @@
       "path": "docs/RELEASE-NOTES-V2.1.3.md",
       "bytes": 2711,
       "sha256": "7352e9f3023b6f6cf56cdf0e5fc987672dc873b3563c82b61c16b600bfecd24a"
+    },
+    {
+      "path": "docs/RELEASE-NOTES-V2.2.0.md",
+      "bytes": 1413,
+      "sha256": "a26ee6cf10c51a0fa66a6d866a72e2a17c607ba2544ce02ce55efe65a7cf152a"
     },
     {
       "path": "docs/REVUE-V2.1.0-2026-11-13.md",
@@ -2697,8 +2702,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6716,
-      "sha256": "64c446eabd55fe022ef0a343868288ede6fa8f0a15c15df91feb07c1e86dbf02"
+      "bytes": 6884,
+      "sha256": "f4ed20025dcd8b3f4dee0b48b7b38ec93332a52ff356b3d50411d3528481af0d"
     },
     {
       "path": "release-version.json",
@@ -4167,8 +4172,8 @@
     },
     {
       "path": "scripts/test-v220-release-isolation.cjs",
-      "bytes": 1922,
-      "sha256": "c8ddc57934dd5d9899eb6549ef987f446f7794f05b7cd5a714a9135966f7a12e"
+      "bytes": 2393,
+      "sha256": "702b2b9646c4461fc9e4be4b7c4b7777789efe45f92d2fc31c224fb5c9532b6e"
     },
     {
       "path": "scripts/test-v220-review.cjs",
@@ -4177,8 +4182,8 @@
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
-      "bytes": 3256,
-      "sha256": "64172795cfbe55e244f530a213dd2d68fc7ea47bc757651f586e053f56dae470"
+      "bytes": 3773,
+      "sha256": "dbc609497deadcec238b71fc45930b31870a45f1bb118207d66f89ad2411712b"
     },
     {
       "path": "scripts/test-v220-sequel-watchlist.cjs",
