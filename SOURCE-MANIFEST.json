@@ -4162,8 +4162,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 2455,
-      "sha256": "83908434b050999806c55a84e5dbcefdece0997a67419fff94d2052544ff32ea"
+      "bytes": 2568,
+      "sha256": "73f7f0e9e6adce6ef4ea6903ab26d5961b76b2cc6f00bf105e98ed9f528c1df4"
     },
     {
       "path": "scripts/test-v220-sequel-watchlist.cjs",

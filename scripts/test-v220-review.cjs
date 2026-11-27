@@ -9,7 +9,7 @@ assert(get('cockpitPage').contains(get('v220RecentRail'))&&get('cockpitPage').co
 assert(!get('navLocalMedia')&&!get('localMediaPage'),'No separate files page');
 assert(get('importDialog').contains(get('mediaImportPanel'))&&get('v220MediaTab').dataset.tab==='mediaImportPanel','Use existing import dialog and tab controls');
 assert(!get('v220PersonalTimeline'),'No duplicate history in Memories');
-assert(get('memoryPageEntries')&&get('calendarPage'),'Original memories and calendar remain');
+assert(get('memoryPageEntries')&&read('public/beta39.js').includes("page.id='calendarPage'")&&read('public/alm-v2.js').includes('"calendarPage"'),'Original memories and dynamically created calendar remain');
 assert(get('seasonNewsPage').contains(get('v220PossessionRows')),'Confirmed airing / file comparison lives in Saisons');
 assert(get('dnaPage').contains(get('v220ScoreBoard')),'Keep score explorer in DNA');
 const ids=[...d.querySelectorAll('[id]')].map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'Unique DOM IDs');
