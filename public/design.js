@@ -66,7 +66,7 @@
     const entries=[['#navCockpit','cockpit'],['.nav-item[data-filter=""]','library'],['.nav-item[data-filter="Watching"]','play'],['.nav-item[data-filter="Plan to Watch"]','heart'],['#navMemories','memories'],['#navDiscovery','search'],['#navSeasonNews','season'],['#navRanking','star'],['#navNewsV2','news'],['#navReco','compass'],['#navDna','dna'],['#navLexicon','book'],['#navAudit','shield'],['#navSettings','settings'],['#navAbout','info']];
     for(const [sel,ico] of entries){const b=document.querySelector(sel);if(!b||b.dataset.visualReady)continue;
       const caption=b.textContent.trim().replace(/^[^\p{L}\p{N}]+/u,'');
-      b.replaceChildren();b.insertAdjacentHTML('afterbegin',D.icon(ico==='cockpit'?'library':ico));const label=document.createElement('span');label.className='studio-nav-label';label.textContent=caption;
+      b.replaceChildren();b.insertAdjacentHTML('afterbegin',D.icon(ico));const label=document.createElement('span');label.className='studio-nav-label';label.textContent=caption;
       const captionKey={play:'watching',star:'ranking',search:'searchPage',library:'library',heart:'plan',season:'seasons',news:'news',compass:'reco',book:'dictionary',shield:'audit',settings:'settings',info:'about',music:'karaoke'}[ico];
       if(captionKey){makeLeaf(label,captionKey);b.dataset.designAria=captionKey;b.setAttribute('aria-label',D.t(captionKey));}else if(ico==='memories'){label.dataset.notebookText='collectionNotebook';label.textContent=window.ALM_NOTEBOOK_COPY?.t(D.language(),'collectionNotebook')||'Mes souvenirs';}else{label.textContent=ico==='cockpit'?'ALM Cockpit':'Anime DNA';label.setAttribute('translate','no');}
       b.append(label);b.dataset.visualReady='1';

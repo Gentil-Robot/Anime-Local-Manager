@@ -87,7 +87,73 @@
           <button class="primary" id="openAdd">+ Ajouter</button>
         </div>
       </header>
-      <section id="cockpitPage" class="v2-page hidden" data-no-i18n><header class="studio-banner"><div class="studio-banner-copy"><span class="studio-kicker">ALM</span><h1>ALM Cockpit</h1><p id="v220CockpitIntro">Tes animés, tes prochaines diffusions et ta progression.</p></div></header><section id="v220WatchRails" class="alm-watch-rails" aria-label="Suivi des visionnages" data-no-i18n>
+      <section id="cockpitPage" class="v2-page hidden" data-no-i18n><header class="studio-banner"><div class="studio-banner-copy"><span class="studio-kicker">ALM</span><h1>ALM Cockpit</h1><p id="v220CockpitIntro">Tes animés, tes prochaines diffusions et ta progression.</p></div><div class="alm-cockpit-flight" aria-hidden="true">
+<svg viewBox="0 0 720 164" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+  <defs>
+    <linearGradient id="almFlightSky" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#171e3e" stop-opacity="0"/><stop offset=".52" stop-color="#334269" stop-opacity=".65"/><stop offset="1" stop-color="#6d507a" stop-opacity=".7"/>
+    </linearGradient>
+    <linearGradient id="almFlightSea" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#567491"/><stop offset="1" stop-color="#172744" stop-opacity=".2"/></linearGradient>
+    <linearGradient id="almFlightRed" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#ff9171"/><stop offset=".47" stop-color="#d95950"/><stop offset="1" stop-color="#9d3344"/></linearGradient>
+    <linearGradient id="almFlightWing" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffba8a"/><stop offset=".3" stop-color="#f17a59"/><stop offset="1" stop-color="#ae4150"/></linearGradient>
+    <radialGradient id="almFlightSun"><stop stop-color="#ffe3aa"/><stop offset="1" stop-color="#e8a4a0" stop-opacity=".6"/></radialGradient>
+  </defs>
+  <rect width="720" height="164" rx="16" fill="url(#almFlightSky)"/>
+  <circle cx="623" cy="47" r="31" fill="#ffb594" opacity=".07"/><circle cx="623" cy="47" r="23" fill="url(#almFlightSun)" opacity=".83"/>
+  <g fill="#bcbfe5" opacity=".8"><circle cx="349" cy="24" r="1"/><circle cx="532" cy="11" r="1.2"/><path d="M574 20v8m-4-4h8M670 12v6m-3-3h6" stroke="#d9d8fa" stroke-width="1"/></g>
+  <path d="M42 125Q85 114 125 118L164 126 205 116 240 122 280 119 318 130 356 117 393 120 421 128 480 116 550 126 608 115 654 120 720 112V164H42Z" fill="#222f4e" opacity=".58"/>
+  <path d="M0 132Q180 128 360 132T720 132V164H0Z" fill="url(#almFlightSea)" opacity=".64"/>
+  <g fill="none" stroke="#b7bfd9" stroke-linecap="round" opacity=".32"><path d="M255 142h70m22 0h29m174-7h93m18 0h34M411 152h119m48 4h51M94 150h85"/></g>
+  <g class="alm-flight-clouds" fill="#d0cfeb" opacity=".27">
+    <path d="M81 55c-17 0-15-15 0-16 5-18 29-18 35-5 19-6 30 5 32 14 17-1 26 11 9 14H86z"/>
+    <path d="M264 37c-16 0-15-12-2-16 6-15 29-16 36-3 17-4 29 3 29 12 10 0 21 11 9 14h-64z"/>
+    <path d="M621 106c-18-1-15-14 1-17 10-14 33-12 39 2 15-5 32 4 32 12 14 0 21 10 9 13h-77z"/>
+  </g>
+  <path d="M145 88c46 0 74-15 111-8s34 24 70 20" fill="none" stroke="#dfc5c5" stroke-width="1.4" stroke-dasharray="5 8" opacity=".35"/>
+  <g class="alm-flight-float">
+    <g transform="translate(430 76)">
+      <!-- Original ALM mascot: Meow the cat in a small vintage floatplane. -->
+      <path d="M-101 19q-42 5-57 0m12 12h25m-34-23h23" fill="none" stroke="#b6c4de" stroke-width="2" stroke-linecap="round" opacity=".58"/>
+      <g fill="#bd5261" stroke="#482f4b" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M-111 8-129-18-116-24-83-4-58 7Z" fill="url(#almFlightWing)"/>
+        <path d="M-130 13-145 5-119 0-91 7-102 15Z" fill="#ed9677"/>
+      </g>
+      <path d="M-79 35-58 17m112 20L30 17M-36 36-21 18" stroke="#c8b9c4" stroke-width="3" stroke-linecap="round"/>
+      <g fill="url(#almFlightRed)" stroke="#56314c" stroke-width="1.7">
+        <path d="M-87 33h105q19 0 27 9-8 9-24 9h-91q-25-4-17-18Z"/>
+        <path d="M4 34h59q18 1 25 8-7 8-24 8H14q-14-2-10-16Z" opacity=".85"/>
+      </g>
+      <path d="M-95 3Q-52-13 9-9h61q18 0 18 16v13q-12 10-43 11h-81q-50-3-84-16Z" fill="url(#almFlightRed)" stroke="#552f44" stroke-width="2"/>
+      <path d="M-111 11Q-38 23 51 19L80 14" fill="none" stroke="#ffe5bf" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+      <path d="M42-9h30q17 1 19 17l-4 15H52Q43 10 42-9Z" fill="#c0a6a0" stroke="#53394b" stroke-width="1.5"/>
+      <path d="M67-6v29M77-3v24" stroke="#7b6473" stroke-width="2"/>
+      <path d="M14-13 24-30q16 1 18 17Z" fill="#a1cce6" fill-opacity=".65" stroke="#d1deed" stroke-width="1.5"/>
+      <path class="alm-flight-scarf" d="M-34-18q-20-1-33-9l-15-7 4 12-8 8q26 10 53 7" fill="#e5a757" stroke="#794d50" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M-34-21q-10-5-10-18l-3-20 20 10q12-6 25-1L14-62l-2 23q0 16-13 22Z" fill="#ead2b7" stroke="#4e384a" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M-41-55l4 13 9-7m33 0 6-7-1 15" fill="#d59da3"/>
+      <path d="M-40-43q3-15 20-15t30 12l-5 9-44 2z" fill="#886354" stroke="#513d47" stroke-width="1.5"/>
+      <path d="M-39-39 10-43" stroke="#4d3b46" stroke-width="5" stroke-linecap="round"/>
+      <g transform="rotate(-5 -16 -39)" stroke="#dcb786" stroke-width="2">
+        <rect x="-39" y="-47" width="21" height="17" rx="7" fill="#384d69"/>
+        <rect x="-15" y="-47" width="21" height="17" rx="7" fill="#384d69"/>
+        <path d="M-18-40h3M-35-42l7-3m17 3 7-3" stroke="#dbe9f5" stroke-linecap="round"/>
+      </g>
+      <path d="M-31-28q3-4 6 0m17-1q3-4 6 0" fill="none" stroke="#533c4e" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-18-25h6l-3 3Z" fill="#9c687b"/><path d="M-15-22q-3 4-6 1m6-1q3 3 6 0M-33-23l-8-1m8 4-8 1m33-5 8-2m-8 5 8 1" fill="none" stroke="#74545e" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M-40-18q17 8 38 1l-1 8q-19 7-38-1Z" fill="#e4ad60" stroke="#825453" stroke-width="1.4"/>
+      <path d="M-59 10 23 8Q52 11 18 19l-67 9q-27 1-25-7Z" fill="url(#almFlightWing)" stroke="#6a3a4c" stroke-width="1.8"/>
+      <path d="M-55 14 17 12" stroke="#ffdbb4" stroke-width="2" opacity=".75" stroke-linecap="round"/>
+      <g transform="translate(-63 11)"><circle r="7" fill="#fce2ba" opacity=".9"/><g fill="#a74f57"><circle cx="-3" cy="-2" r="1.35"/><circle cx="0" cy="-3.5" r="1.35"/><circle cx="3" cy="-2" r="1.35"/><ellipse cy="2" rx="3" ry="2.25"/></g></g>
+      <g transform="translate(94 9)">
+        <ellipse cx="0" cy="0" rx="5" ry="23" fill="#e4d9e6" opacity=".15"/>
+        <g class="alm-flight-propeller" fill="#ead6b6" stroke="#b5958e" stroke-width="1">
+          <path d="M-2-23Q7-27 5-10L1-2-2 0Z"/><path d="M2 23Q-7 27-5 10L-1 2 2 0Z"/>
+        </g>
+        <circle r="4.2" fill="#725262" stroke="#f4d8ad" stroke-width="1.6"/>
+      </g>
+    </g>
+  </g>
+</svg></div></header><section id="v220WatchRails" class="alm-watch-rails" aria-label="Suivi des visionnages" data-no-i18n>
         <section id="v220RecentRail" class="alm-watch-rail" data-rail="fresh" aria-labelledby="v220RecentTitle">
           <div class="alm-watch-heading">
             <div class="alm-watch-heading-text">

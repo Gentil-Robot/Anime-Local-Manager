@@ -287,8 +287,8 @@
     },
     {
       "path": "community/site/design-core.js",
-      "bytes": 4169,
-      "sha256": "03584bb073438549d8589e62ea4aba27af5fa409ac58ae4a16514dbc233a4e41"
+      "bytes": 4291,
+      "sha256": "aacb4cf742661d259d0d74eb9095ae37ed218c4243f62febd79d5ca61329ce25"
     },
     {
       "path": "community/site/index.html",
@@ -318,7 +318,7 @@
     {
       "path": "community/site/release-manifest.json",
       "bytes": 8356,
-      "sha256": "0b00401a1449a159f819d982510c41627f71d7cc0f7f64ae4ffc0eca2cd19490"
+      "sha256": "23b5382a07e2b33c47e4f195f5fbc86f00ee2954a40e57a7bc238f9e4637a8b3"
     },
     {
       "path": "community/site/release-version.js",
@@ -2322,8 +2322,8 @@
     },
     {
       "path": "public/design-core.js",
-      "bytes": 4169,
-      "sha256": "03584bb073438549d8589e62ea4aba27af5fa409ac58ae4a16514dbc233a4e41"
+      "bytes": 4291,
+      "sha256": "aacb4cf742661d259d0d74eb9095ae37ed218c4243f62febd79d5ca61329ce25"
     },
     {
       "path": "public/design-manifest.json",
@@ -2337,8 +2337,8 @@
     },
     {
       "path": "public/design.js",
-      "bytes": 14004,
-      "sha256": "7a6b002c2ac9a6f6281fbae4c6b74dc7608eae580ce302cb6f6b6bf3bfdffdf4"
+      "bytes": 13978,
+      "sha256": "d9e28e5061f174e3475d0b54d82c2c6fd3a4476e7e332c427dad0daf952f7e41"
     },
     {
       "path": "public/diagnostics.js",
@@ -2382,8 +2382,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 94468,
-      "sha256": "dc3974393bd0bcc5477409dad72e368fd28f1af0fa01fea1cb1bd08ee1159a3a"
+      "bytes": 100550,
+      "sha256": "6109a81b305520c26a33400494dc4ac1ca96d2b8688ee99780ceb14a85e1b87d"
     },
     {
       "path": "public/input-focus.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 13057,
-      "sha256": "ebadd0b451bac10d28c143921a70cef885e5fa5a44f02f6704897e33dd405568"
+      "bytes": 15108,
+      "sha256": "4326ef8f51ed57799feffb9550a6ed3ad011196430a91771d37afed290048f56"
     },
     {
       "path": "public/watch-status.js",
