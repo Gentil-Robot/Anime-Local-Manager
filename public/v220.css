@@ -202,3 +202,9 @@ html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockp
 .alm-watch-gallery>.alm-watch-row::-webkit-scrollbar{display:none}
 .alm-watch-gallery[hidden]{display:none!important}
 @media(max-width:540px){.alm-watch-gallery{grid-template-columns:26px minmax(0,1fr) 26px;gap:5px}.alm-watch-gallery .alm-watch-side-arrow{width:26px}}
+
+/* Same episode control as the Watching library, separate from the card button. */
+#v220ResumeRows .alm-watch-local-item>.episode-stepper{margin:0;justify-content:center;gap:8px;padding:5px 7px;border:1px solid rgba(139,176,230,.16);border-radius:10px;background:rgba(19,25,48,.78)}
+#v220ResumeRows .episode-stepper>button:not(.episode-finish){min-width:31px;min-height:30px;font-size:17px}
+#v220ResumeRows .episode-stepper>span{font-size:.78rem;flex:1;min-width:0;text-align:center}
+#v220ResumeRows .episode-stepper>button:disabled{opacity:.4;cursor:default}

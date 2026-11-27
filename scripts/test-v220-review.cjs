@@ -14,6 +14,9 @@ assert(get('seasonNewsPage').contains(get('v220PossessionRows')),'Confirmed airi
 assert(get('dnaPage').contains(get('v220ScoreBoard')),'Keep score explorer in DNA');
 for(const id of ['v220RecentRows','v220ResumeRows']){const rail=get(id);assert.equal(rail.previousElementSibling.dataset.watchScroll,'prev');assert.equal(rail.nextElementSibling.dataset.watchScroll,'next');}
 assert(get('cockpitPage').querySelector('.alm-flight-cat'));
+assert(read('public/v220-watch-rails.js').includes('createEpisodeStepper?.(row.anime)'));
+assert(read('public/catalog.js').includes('episodeWrites.has(id)'));
+assert(read('public/catalog.js').includes("!popupContext?.readOnly&&present?.status==='Watching'"));
 const ids=[...d.querySelectorAll('[id]')].map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'Unique DOM IDs');
 for(const file of ['public/app.js','public/alm-v2.js','public/navigation.js','public/design.js','public/v220-watch-rails.js','public/v220-features.js','public/v220-personal-insights.js','main.js','preload.js','server.js'])new Function(read(file));
 assert(read('public/alm-v2.js').includes('dnaProgressThumbV2(a,"score")'),'Existing DNA cards reuse managed image pipeline');

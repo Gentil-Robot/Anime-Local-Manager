@@ -31,7 +31,7 @@ window.fetch=async (url,options)=>{if(url==='/api/airing/check'){assert.equal(op
 window.eval(read('public/v220-watch-model.js'));
 window.eval(read('public/v220-watch-rails.js'));
 window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
-const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
+const flush=()=>new Promise(resolve=>window.requestAnimationFrame(()=>window.requestAnimationFrame(resolve)));
 (async()=>{
  window.document.getElementById('navCockpit').click();await flush();
  const rails=window.document.getElementById('v220WatchRails');
@@ -48,10 +48,10 @@ const flush=()=>new Promise(resolve=>setTimeout(resolve,35));
  const img=window.document.querySelector('#v220ResumeRows img');
  assert(img&&img.getAttribute('src')==='/api/cover-cache/321','Reuse ALM existing on-demand cover cache');
  watched[0].poster='/images/offline-cover.jpg';
- window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Watching'}}));
+ window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Watching'}}));await flush();
  assert.equal(window.document.querySelector('#v220ResumeRows img').getAttribute('src'),'/images/offline-cover.jpg','Existing offline ALM image files must display');
  watched[0].poster='https://s4.anilist.co/file.jpg';
- window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Watching'}}));
+ window.dispatchEvent(new window.CustomEvent('alm:library-rendered',{detail:{view:'Watching'}}));await flush();
  window.document.querySelector('#v220ResumeRows .alm-watch-card').click();
  assert.strictEqual(selected,watched[0],'Click should open existing ALM record without marking it seen');
  assert.equal(watched[0].episodesSeen,'4');

@@ -26,10 +26,10 @@
   $('animePeekTitle').textContent=title(item);
   const present=owned(item),extras=$('animePeekPersonal');extras.replaceChildren();
   if(present){const line=document.createElement('p');line.textContent=t('detailStatus')+' · '+window.ALM_COLLECTION.label(present)+' · '+t('personalScore')+' : '+(Number(present.score)>0?present.score:'—');extras.append(line);if(present.notes){const notes=document.createElement('p');notes.className='peek-notes';notes.textContent=t('personalNotes')+' : '+present.notes;extras.append(notes);}}
-  if(present?.status==='Watching')extras.append(createEpisodeStepper(present));
-  if(present){const correction=document.createElement('button');correction.type='button';correction.className='association-correct';correction.textContent=t('associationCorrect');correction.onclick=()=>window.ALM_ASSOCIATION.open(present,correction);extras.append(correction);}
+  if(!popupContext?.readOnly&&present?.status==='Watching')extras.append(createEpisodeStepper(present));
+  if(present&&!popupContext?.readOnly){const correction=document.createElement('button');correction.type='button';correction.className='association-correct';correction.textContent=t('associationCorrect');correction.onclick=()=>window.ALM_ASSOCIATION.open(present,correction);extras.append(correction);}
   const malId=Number(item.malId||item.mal_id);
-  if(window.ALM_COMMUNITY?.snapshot()?.connected&&Number.isSafeInteger(malId)&&malId>0&&window.ALM_COMMUNITY_MODEL?.shareAllowed(malId,window.ALM_COMMUNITY.snapshot().own.age)){
+  if(!popupContext?.readOnly&&window.ALM_COMMUNITY?.snapshot()?.connected&&Number.isSafeInteger(malId)&&malId>0&&window.ALM_COMMUNITY_MODEL?.shareAllowed(malId,window.ALM_COMMUNITY.snapshot().own.age)){
    const recommend=document.createElement('button');recommend.type='button';recommend.className='comm-anime-recommend';
    recommend.textContent=window.ALM_COMMUNITY_T('recommendFriend');
    recommend.onclick=()=>window.ALM_COMMUNITY_WORKSPACE.recommendAnime(malId,item).catch(error=>window.ALM_COMMUNITY.toast(window.ALM_COMMUNITY_ERROR(error),true));
@@ -100,18 +100,47 @@
   let result;try{result=await request('/api/catalog/add-batch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(err){if(err.code!=='ALM_EPISODES_UNKNOWN')throw err;acceptedUnknown=await window.showAppConfirm(t('batchUnknown'),{title:t('markSelected'),okText:t('markSelected'),cancelText:t('chooseCancel')});if(!acceptedUnknown)return;result=await request('/api/catalog/add-batch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,confirmUnknownEpisodes:true})});}
   chosen.clear();await window.load();await refresh();notifyUndo(t('batchResult',result),result.undoToken,()=>refresh());
  }catch(err){window.notifyApp?.(t('searchError'),'error');}finally{button.disabled=false;paintSelection();}}
+ // Shared by library, detail and Cockpit. Serialize mutations per real record ID.
+ const episodeWrites=new Set();
+ function stepperButtons(id){return [...document.querySelectorAll('.episode-stepper[data-episode-id="'+id+'"] button')];}
+ function syncEpisodeButtons(id,fallback){
+  const anime=(window._almAnimes||[]).find(a=>Number(a.id)===id)||fallback;
+  const busy=episodeWrites.has(id),seen=Number(anime?.episodesSeen)||0,total=Number(anime?.episodesTotal)||0;
+  for(const button of stepperButtons(id)){
+   const delta=Number(button.dataset.episodeDelta);
+   button.disabled=busy||anime?.status!=='Watching'||(delta===-1?seen<=0:delta===1?total>0&&seen>=total:!total||seen<total);
+  }
+ }
  function offerCompletion(anime,stepper){
-  if(!stepper||stepper.querySelector('.episode-finish'))return;const finish=document.createElement('button');finish.type='button';finish.className='episode-finish';finish.textContent=t('finishAnime');finish.onclick=async event=>{event.stopPropagation();finish.disabled=true;try{const saved=await request('/api/library/'+anime.id+'/complete',{method:'POST'});await window.load();notifyUndo(t('completedSaved'),saved.undoToken);}catch{finish.disabled=false;window.notifyApp?.(t('searchError'),'error');}};stepper.append(finish);
+  if(!stepper||stepper.querySelector('.episode-finish'))return;
+  const id=Number(anime.id);
+  const finish=document.createElement('button');finish.type='button';finish.className='episode-finish';finish.textContent=t('finishAnime');finish.disabled=episodeWrites.has(id);
+  finish.onclick=async event=>{event.stopPropagation();if(finish.disabled||episodeWrites.has(id))return;
+   episodeWrites.add(id);syncEpisodeButtons(id,anime);
+   try{const saved=await request('/api/library/'+id+'/complete',{method:'POST'});await window.load();notifyUndo(t('completedSaved'),saved.undoToken);}
+   catch{window.notifyApp?.(t('searchError'),'error');}
+   finally{episodeWrites.delete(id);syncEpisodeButtons(id,anime);}
+  };stepper.append(finish);
  }
  function createEpisodeStepper(anime){
-  const stepper=document.createElement('div');stepper.className='episode-stepper';const count=document.createElement('span');count.setAttribute('aria-live','polite');count.textContent=(anime.episodesSeen||'0')+' / '+(anime.episodesTotal||'?')+' '+t('searchEpisodes');
-  for(const delta of [-1,1]){const button=document.createElement('button');button.type='button';button.textContent=delta===-1?'−':'+';button.setAttribute('aria-label',t(delta===-1?'minusEpisode':'plusEpisode'));button.disabled=delta===-1?Number(anime.episodesSeen||0)<=0:Number(anime.episodesTotal)>0&&Number(anime.episodesSeen)>=Number(anime.episodesTotal);
-   button.onclick=async ev=>{ev.stopPropagation();stepper.querySelectorAll('button').forEach(b=>b.disabled=true);try{const result=await request('/api/library/'+anime.id+'/episode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({delta,watchedOn:localDate()})});const y=scrollY;await window.load();window.scrollTo({top:y,behavior:'instant'});notifyUndo(t('episodeSaved',{seen:result.anime.episodesSeen,total:result.anime.episodesTotal||'?'}),result.undoToken);
-    if(result.lastEpisode&&!$('animePeekDialog').open)offerCompletion(result.anime,document.querySelector('#animeGrid .card[data-anime-id="'+anime.id+'"] .episode-stepper'));
-   }catch{stepper.querySelectorAll('button').forEach(b=>b.disabled=false);window.notifyApp?.(t('searchError'),'error');}};
+  const id=Number(anime?.id);if(!Number.isSafeInteger(id)||id<1||anime.status!=='Watching')return null;
+  const stepper=document.createElement('div');stepper.className='episode-stepper';stepper.dataset.episodeId=String(id);stepper.setAttribute('data-no-i18n','');
+  const count=document.createElement('span');count.setAttribute('aria-live','polite');count.textContent=(anime.episodesSeen||'0')+' / '+(anime.episodesTotal||'?')+' '+t('searchEpisodes');
+  for(const delta of [-1,1]){
+   const button=document.createElement('button');button.type='button';button.dataset.episodeDelta=String(delta);button.textContent=delta===-1?'−':'+';button.setAttribute('aria-label',t(delta===-1?'minusEpisode':'plusEpisode'));
+   button.disabled=episodeWrites.has(id)||(delta===-1?Number(anime.episodesSeen||0)<=0:Number(anime.episodesTotal)>0&&Number(anime.episodesSeen)>=Number(anime.episodesTotal));
+   button.onclick=async ev=>{ev.stopPropagation();if(button.disabled||episodeWrites.has(id))return;
+    episodeWrites.add(id);syncEpisodeButtons(id,anime);
+    let current=anime;
+    try{
+     const result=await request('/api/library/'+id+'/episode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({delta,watchedOn:localDate()})});
+     current=result.anime;const y=scrollY;await window.load();window.scrollTo({top:y,behavior:'instant'});notifyUndo(t('episodeSaved',{seen:current.episodesSeen,total:current.episodesTotal||'?'}),result.undoToken);
+     if(result.lastEpisode&&!$('animePeekDialog').open)for(const node of document.querySelectorAll('.episode-stepper[data-episode-id="'+id+'"]'))offerCompletion(current,node);
+    }catch{window.notifyApp?.(t('searchError'),'error');}
+    finally{episodeWrites.delete(id);syncEpisodeButtons(id,current);}
+   };
    if(delta===-1)stepper.append(button,count);else stepper.append(button);
   }
-
   if(anime.completionPending===true&&Number(anime.episodesTotal)>0&&Number(anime.episodesSeen)===Number(anime.episodesTotal))offerCompletion(anime,stepper);
   return stepper;
  }
@@ -144,6 +173,6 @@
   window.addEventListener('alm:language-changed',()=>{fillFacets();render();decorateLibrary();if(dialog.open)showSelected();D.applyText(dialog);});
   fillFacets();D.applyText();decorateLibrary();
  }
- window.ALM_CATALOG={refresh,enter,openRecords(items,index=0,source,context=null){openPopup(items,index,'related',source,context);},openLibrary(anime){const items=window.filteredAnimes();openPopup(items,Math.max(0,items.findIndex(a=>a.id===anime.id)),'library');},notifyUndo};
+ window.ALM_CATALOG={refresh,enter,createEpisodeStepper,openRecords(items,index=0,source,context=null){openPopup(items,index,'related',source,context);},openLibrary(anime){const items=window.filteredAnimes();openPopup(items,Math.max(0,items.findIndex(a=>a.id===anime.id)),'library');},notifyUndo};
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

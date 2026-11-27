@@ -1992,8 +1992,8 @@
     },
     {
       "path": "public/beta38.js",
-      "bytes": 18561,
-      "sha256": "4f60b9acbade103b0c4e69853bf4c17708a6034bc979a6aa69a471864994d3e2"
+      "bytes": 18598,
+      "sha256": "468f1b740c924288056f1e2b3340c3d9051d38044c50ac7346fa49b6c9ff2bf2"
     },
     {
       "path": "public/beta39-copy.js",
@@ -2182,8 +2182,8 @@
     },
     {
       "path": "public/catalog.js",
-      "bytes": 25682,
-      "sha256": "eb66d8c77d115b2a408e7e7880590c36f272ae20e1c884836a52c9d341086732"
+      "bytes": 27034,
+      "sha256": "075dd3127a0c1ac5349cfa6f942a84cfedfb12a1876ec25a41ad1ab2b6cd9985"
     },
     {
       "path": "public/clipboard.js",
@@ -2687,13 +2687,13 @@
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 16925,
-      "sha256": "fdedb62981a3d458783f41f4ea1aeb8febf917a31e9755cf6d5185eea12d89f1"
+      "bytes": 17064,
+      "sha256": "ded3fc71c5b756a43a54b6657b7aacdcd2ff145653f8c1962c55c262c491a816"
     },
     {
       "path": "public/v220.css",
-      "bytes": 19187,
-      "sha256": "115c734c20584e812bfcce2df094bec5d859d312cada1b55171d9f962f856cb3"
+      "bytes": 19748,
+      "sha256": "2025e1235b21bea8987b0b674e5e2bd644fc71c27555125c28777b7a5a5f64ac"
     },
     {
       "path": "public/watch-status.js",
@@ -4192,8 +4192,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 5419,
-      "sha256": "7e6733f40c76de1033a47ad4407282e93e13f343a8ce1b1900488b90623c83d4"
+      "bytes": 5679,
+      "sha256": "2053e8926ba7b8116be0bca65ad69ffff16314bfe6cdce9265e25b5c90b36db8"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4237,8 +4237,8 @@
     },
     {
       "path": "scripts/test-v220-watch-rails.cjs",
-      "bytes": 5604,
-      "sha256": "f4f5a7aab6d0e220bbe05d52262649657bc4c6a25b2e45ad760e82187d5ec3c2"
+      "bytes": 5681,
+      "sha256": "cc6114151a5fed8a832a73c2d2508fc74b888d24ff336cb4f8a92792053004d8"
     },
     {
       "path": "scripts/test-windows-update-handoff.cjs",

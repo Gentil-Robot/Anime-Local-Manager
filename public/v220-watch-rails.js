@@ -118,8 +118,10 @@ function rail(kind,rows){
  for(const row of rows){
   const tile=card(row,{fresh:kind==='fresh',gallery});
   const episodes=associations.get(Number(row.anime?.malId))?.episodes;
-  if(kind==='resume'&&row.next!==null&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
-   const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';
+  if(kind==='resume'){
+   const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';wrapper.append(tile);
+   const stepper=window.ALM_CATALOG?.createEpisodeStepper?.(row.anime);if(stepper)wrapper.append(stepper);
+   if(row.next!==null&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
    const open=document.createElement('button');open.type='button';open.className='alm-watch-local-open';
    open.textContent='▶ '+t('localOpen')+' '+row.next;
    open.addEventListener('click',async()=>{
@@ -130,7 +132,9 @@ function rail(kind,rows){
     }catch{window.notifyApp?.(t('fileError'),'error');}
     finally{open.disabled=false;}
    });
-   wrapper.append(tile,open);frag.append(wrapper);
+   wrapper.append(open);
+   }
+   frag.append(wrapper);
   }else frag.append(tile);
  }
  host.replaceChildren(frag);host.scrollLeft=oldScroll;
