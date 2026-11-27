@@ -1407,8 +1407,8 @@
     },
     {
       "path": "lib/maintenance.js",
-      "bytes": 4622,
-      "sha256": "d4765a2ed27ef41261dbafbd5eac14b48aeb5687047a6741e1f023c0cdb8784b"
+      "bytes": 5138,
+      "sha256": "692e7c7aedfbb652e44ee9d324b0bc6a4ec9b707da30bf6bb9172940cc415933"
     },
     {
       "path": "lib/media-associations.js",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 45958,
-      "sha256": "dbf59b14308d7e19c01b3ffbf8d073d5cbeaf7f99c10a66cd44ce6a917e7ff70"
+      "bytes": 46367,
+      "sha256": "d6670c819eb7c47391ccc8283ebd7377ceaaa29927a65767602b4daacefe9f2e"
     },
     {
       "path": "public/v220-media-match.js",
@@ -3472,8 +3472,8 @@
     },
     {
       "path": "scripts/test-beta59-maintenance.js",
-      "bytes": 3806,
-      "sha256": "06d5772354c8cc55ba0b667c560ae1c38a12ca985e5cbddc3e7b060e2eed706e"
+      "bytes": 4286,
+      "sha256": "5454310c99bf2723495f1e73b9e2ae7657c2f8dd73757febd8c11c31b6aec6a8"
     },
     {
       "path": "scripts/test-beta59-sql.cjs",
@@ -4257,8 +4257,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 627882,
-      "sha256": "03378f4ca3bab08d09f2100560985cc9155c68eec652c1d92ea1c291ac8fa54d"
+      "bytes": 627951,
+      "sha256": "d9e7d9b966fee7f94787679a50cf5ef419cd13e2694215cbf76f95641d494b9c"
     },
     {
       "path": "start_mac_linux.sh",

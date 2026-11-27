@@ -385,10 +385,13 @@ function init(){
  const seasons=$('seasonNewsPage');if(seasons&&typeof MutationObserver==='function')new MutationObserver(()=>{if(!seasons.classList.contains('hidden'))void refreshAiring();}).observe(seasons,{attributes:true,attributeFilter:['class']});
  $('v220GoWatching')?.addEventListener('click',()=>document.querySelector('.nav-item[data-filter="Watching"]')?.click());
  $('v220GoSeasons')?.addEventListener('click',()=>$('navSeasonNews')?.click());
+ window.addEventListener('alm:airing-cache-changed',event=>{airingItems=Array.isArray(event.detail?.items)?event.detail.items:[];airingCheckedAt=event.detail?.checkedAt||'';renderPossession();});
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});
  window.addEventListener('alm:collection-changed',()=>{void refreshSummaries();});
  window.addEventListener('alm:language-changed',translate);
  window.addEventListener('online',connectivity);window.addEventListener('offline',connectivity);
+ const cachePoll=setInterval(()=>{if(!document.hidden&&seasons&&!seasons.classList.contains('hidden'))void refreshAiring();},120000);
+ window.addEventListener('pagehide',()=>clearInterval(cachePoll),{once:true});
  translate();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
