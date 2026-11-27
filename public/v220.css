@@ -130,40 +130,41 @@
 #cockpitPage>.studio-banner .studio-banner-copy{flex:0 1 330px;position:relative;z-index:2;max-width:34%}
 .alm-cockpit-flight{position:absolute;inset:9px 9px 9px clamp(230px,21%,330px);overflow:hidden;pointer-events:none;border-radius:12px;mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 100%)}
 .alm-flight-sky{width:100%;height:100%;display:block}
-.alm-flight-travel{position:absolute;inset:0;display:grid;place-items:center;animation:alm-flight-travel 36s ease-in-out infinite;will-change:transform}
-.alm-flight-plane{width:clamp(116px,13vw,230px);max-width:26%;height:100%;overflow:visible;animation:alm-flight-bank 36s ease-in-out infinite;transform-origin:center}
+.alm-flight-travel{position:absolute;inset:0;display:grid;place-items:center;animation:alm-flight-travel 24s cubic-bezier(.45,.04,.55,.96) infinite;will-change:transform}
+.alm-flight-plane{width:clamp(90px,9vw,158px);max-width:22%;height:76%;overflow:visible;animation:alm-flight-bank 24s cubic-bezier(.4,.05,.6,.95) infinite;transform-origin:center}
 .alm-flight-float{animation:alm-flight-float 5s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
 .alm-flight-clouds{animation:alm-flight-clouds 32s ease-in-out infinite alternate}
 .alm-flight-propeller{transform-box:fill-box;transform-origin:center;animation:alm-flight-propeller .24s linear infinite}
 .alm-flight-scarf{transform-box:fill-box;transform-origin:right center;animation:alm-flight-scarf 1.6s ease-in-out infinite alternate}
 @keyframes alm-flight-travel{
- 0%,100%{transform:translate(-36%,9%)}
- 13%{transform:translate(-12%,-13%)}
- 23%{transform:translate(12%,13%)}
- 34%{transform:translate(38%,-6%)}
- 42%{transform:translate(39%,10%)}
- 52%{transform:translate(16%,12%)}
- 60%{transform:translate(7%,-13%)}
- 67%{transform:translate(21%,-16%)}
- 73%{transform:translate(25%,6%)}
- 81%{transform:translate(2%,13%)}
- 92%{transform:translate(-36%,-7%)}
+ 0%,100%{transform:translate(-41%,8%)}
+ 10%{transform:translate(-23%,-19%)}
+ 18%{transform:translate(-3%,17%)}
+ 29%{transform:translate(41%,-14%)}
+ 35%{transform:translate(42%,13%)}
+ 46%{transform:translate(13%,4%)}
+ 53%{transform:translate(-2%,-23%)}
+ 60%{transform:translate(8%,1%)}
+ 66%{transform:translate(-2%,24%)}
+ 78%{transform:translate(-39%,-15%)}
+ 88%{transform:translate(-43%,10%)}
+ 94%{transform:translate(-42%,8%)}
 }
 @keyframes alm-flight-bank{
- 0%{transform:rotate(8deg) scaleX(1)}
- 100%{transform:rotate(368deg) scaleX(1)}
- 13%{transform:rotate(-12deg) scaleX(1)}
- 23%{transform:rotate(12deg) scaleX(1)}
- 34%{transform:rotate(-12deg) scaleX(1)}
- 39%{transform:rotate(-18deg) scaleX(.05)}
- 42%{transform:rotate(8deg) scaleX(-1)}
- 52%{transform:rotate(-12deg) scaleX(-1)}
- 60%{transform:rotate(24deg) scaleX(-1)}
- 67%{transform:rotate(195deg) scaleX(-1)}
- 73%{transform:rotate(345deg) scaleX(-1)}
- 81%{transform:rotate(358deg) scaleX(-1)}
- 92%{transform:rotate(348deg) scaleX(-1)}
- 96%{transform:rotate(360deg) scaleX(.05)}
+ 0%{transform:rotate(0deg) scaleX(1)}
+ 10%{transform:rotate(-20deg) scaleX(1)}
+ 18%{transform:rotate(22deg) scaleX(1)}
+ 29%{transform:rotate(-19deg) scaleX(1)}
+ 32%{transform:rotate(0deg) scaleX(.12)}
+ 35%{transform:rotate(12deg) scaleX(-1)}
+ 46%{transform:rotate(-15deg) scaleX(-1)}
+ 53%{transform:rotate(75deg) scaleX(-1)}
+ 60%{transform:rotate(200deg) scaleX(-1)}
+ 66%{transform:rotate(345deg) scaleX(-1)}
+ 78%{transform:rotate(375deg) scaleX(-1)}
+ 88%{transform:rotate(360deg) scaleX(-1)}
+ 94%{transform:rotate(360deg) scaleX(.12)}
+ 100%{transform:rotate(360deg) scaleX(1)}
 }
 @keyframes alm-flight-float{0%,100%{transform:translateY(1px)}50%{transform:translateY(-3px)}}
 @keyframes alm-flight-clouds{from{transform:translateX(-14px)}to{transform:translateX(22px)}}
@@ -173,7 +174,7 @@ html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockp
 @media(prefers-reduced-motion:reduce){.alm-cockpit-flight *{animation:none!important;will-change:auto}}
 @media(max-width:700px){#cockpitPage>.studio-banner{min-height:125px;gap:6px;padding:14px}
 #cockpitPage>.studio-banner .studio-banner-copy{max-width:52%;flex-basis:240px}
-.alm-cockpit-flight{inset:7px 7px 7px 48%}.alm-flight-plane{max-width:38%;width:110px}}
+.alm-cockpit-flight{inset:7px 7px 7px 48%}.alm-flight-plane{max-width:32%;width:90px}}
 @media(max-width:400px){#cockpitPage>.studio-banner{flex-wrap:wrap!important}#cockpitPage>.studio-banner .studio-banner-copy{max-width:100%;flex:1 1 100%}.alm-cockpit-flight{position:relative;inset:auto;flex-basis:100%;height:86px}}
 
 /* Import list presentation: dedicated poster, local detail gallery and shared statuses. */

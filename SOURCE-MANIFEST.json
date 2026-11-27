@@ -2382,8 +2382,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 105996,
-      "sha256": "0173614c44501967a82e62b1f3fc72446794d2fab014207c9b2673756f2818a0"
+      "bytes": 105979,
+      "sha256": "c20f267082c34024d869cfa4027f609d60c966aa338a35cf6aa4114b8d1b773f"
     },
     {
       "path": "public/input-focus.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 18515,
-      "sha256": "34850bb8f98d540190ab4cbb8c57a05b9a442e31a2e6e614cb70b2e96d3407db"
+      "bytes": 18581,
+      "sha256": "2ae08c59b67386309fdb0997fdd2b5c7b24986382f41609e3d795db3a94ef9e9"
     },
     {
       "path": "public/watch-status.js",
