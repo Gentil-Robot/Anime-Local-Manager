@@ -3468,10 +3468,24 @@ app.post('/api/v220/media-candidates',async(req,res)=>{
   const queries=[...new Set((Array.isArray(req.body?.titles)?req.body.titles:[]).filter(v=>typeof v==='string').map(v=>v.trim().slice(0,160)).filter(v=>v.length>=2))].slice(0,40);
   const items=Object.create(null);
   for(const q of queries){
-   items[q]=localSeasonSearch(q,20).slice(0,24).map(row=>({malId:row.malId,title:row.title,titleEn:row.titleEn,titleRomaji:row.titleRomaji,titleJa:row.titleJa,synonyms:row.synonyms,episodes:row.episodes,type:row.type,imageUrl:albumCovers.safeSource(row.imageUrl||row.poster)||''}));
+   items[q]=localSeasonSearch(q,20).slice(0,24).map(row=>({malId:row.malId,title:row.title,titleEn:row.titleEn,titleRomaji:row.titleRomaji,titleJa:row.titleJa,synonyms:row.synonyms,episodes:row.episodes,type:row.type,startDate:row.startDate,imageUrl:albumCovers.safeSource(row.imageUrl||row.poster)||''}));
   }
   res.set('Cache-Control','private, no-store');res.json({items});
  }catch(error){res.status(503).json({code:'ALM_MEDIA_CATALOG_UNAVAILABLE'});}
+});
+// Local recognition preview: only catalogue-derived sources and already cached
+// artwork. No outbound provider request, even when a cover has expired.
+app.get('/api/v220/media-cover/:malId',async(req,res)=>{
+ try{
+  await db.whenReady();
+  const id=Number(req.params.malId);
+  if(!Number.isSafeInteger(id)||id<1||id>100000000)return res.status(400).end();
+  const row=db.getMetadataByMalId(id),source=albumCovers.safeSource(row?.imageUrl||row?.poster||'');
+  const file=source&&await albumCovers.get(source,{offline:true});
+  if(!file)return res.status(404).end();
+  res.set('Cache-Control','private, no-store');res.set('X-Content-Type-Options','nosniff');
+  res.type(path.extname(file));return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});
+ }catch{return res.status(404).end();}
 });
  // V2.2.0 — suggestions from the verified local season resolver only.
 // No network calls, no changes to the collection and no fuzzy auto-add.

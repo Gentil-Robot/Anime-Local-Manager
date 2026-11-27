@@ -1387,8 +1387,8 @@
     },
     {
       "path": "lib/local-media-index.js",
-      "bytes": 7659,
-      "sha256": "c6dea5e30a6b4c423d7d25e47e5f8626f3dac14596c40988ad39def8bc99d231"
+      "bytes": 8394,
+      "sha256": "deb6403cb5df4468d40afe0d4cd701ede1ed6e768d13802c57dd1a31e452d74f"
     },
     {
       "path": "lib/local-season-links.js",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 7277,
-      "sha256": "0a1397cac93c3783e6246bde486b1b574584a2470687de83092036a8af7405e3"
+      "bytes": 7460,
+      "sha256": "9b5f5247c0948169cf461ae03d66a822a1c96c8d132e608b64c26c5e2ee5ee77"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1622,8 +1622,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 33313,
-      "sha256": "6590acae259809d201ae7e112e1283432215e898ba122a80899064815618324f"
+      "bytes": 33510,
+      "sha256": "a98f40be6b5157d9f973cf69cb0a8bfc4e878272a6f141de99e04369a6c4a1e0"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 40005,
-      "sha256": "84013a64d1eb47de84be2e501705c579c252dce152bbc4e811510cdc38fd8be6"
+      "bytes": 43467,
+      "sha256": "8c82eb5556bbc6fd905091b03a65120e9cc617158fc7e1a8c4bb4e30c875e013"
     },
     {
       "path": "public/v220-media-match.js",
@@ -4157,8 +4157,8 @@
     },
     {
       "path": "scripts/test-v220-offline-media.cjs",
-      "bytes": 3156,
-      "sha256": "a8c80ab39ab1707d417b26a45777e80a00b93d5a039689e61842a5ad1fa701e4"
+      "bytes": 3762,
+      "sha256": "998e25396f4f7d982a4a40ff122ffd5f7ccc7b0bba05434f626c25fe95c20850"
     },
     {
       "path": "scripts/test-v220-personal-insights-ui.cjs",
@@ -4192,8 +4192,8 @@
     },
     {
       "path": "scripts/test-v220-smart-recognition.cjs",
-      "bytes": 3842,
-      "sha256": "1b2606642f136f582afb05f351b0547f994fe58672b80a97f5b94ffd3c0f5a39"
+      "bytes": 4558,
+      "sha256": "62f459e20bbb051c433b76785e3169f07752e1884a5818f8743efa2bb21f3ff5"
     },
     {
       "path": "scripts/test-v220-update-progress.cjs",
@@ -4252,8 +4252,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 627013,
-      "sha256": "b96d0449a12e4da03ca53065e524a764fac69f296a693f6f3e57b6946ef95317"
+      "bytes": 627882,
+      "sha256": "03378f4ca3bab08d09f2100560985cc9155c68eec652c1d92ea1c291ac8fa54d"
     },
     {
       "path": "start_mac_linux.sh",

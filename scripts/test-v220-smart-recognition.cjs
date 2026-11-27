@@ -9,6 +9,11 @@ assert.deepEqual(guessEpisode('Vinland.Saga.02x05.mp4'),{titleGuess:'Vinland Sag
 assert.deepEqual(guessEpisode('Anime.S01E04-E05.mkv'),{titleGuess:'Anime',seasonGuess:1,episodeGuess:4,confidence:'high',episodeEndGuess:5});
 assert.equal(guessEpisode('just-a-file.txt'),null);
 assert.equal(guessEpisode('movie.mkv').confidence,'unknown');
+assert.deepEqual(guessEpisode('[EroGaKi-Team]_Ayakashi_04_[5B8549C1].avi'),{titleGuess:'Ayakashi',seasonGuess:0,episodeGuess:4,confidence:'review'});
+assert.deepEqual(guessEpisode('[Kyuu-F] Mugen no Juunin 07 vostfr .avi'),{titleGuess:'Mugen no Juunin',seasonGuess:0,episodeGuess:7,confidence:'review'});
+assert.deepEqual(guessEpisode('[MFF-T]_Malice_Doll_OAV.avi'),{titleGuess:'Malice Doll',seasonGuess:0,episodeGuess:0,confidence:'review',kindGuess:'ova'});
+assert.equal(rank(guessEpisode('[MFF-T]_Malice_Doll_OAV.avi'),[{malId:123,title:'Malice@Doll'}]).malId,123);
+assert.equal(rank(guessEpisode('[EroGaKi-Team]_Ayakashi_04_[5B8549C1].avi'),[{malId:123,title:'Ayakashi'},{malId:124,title:'Ayakashi'}]).malId,0);
  assert.equal(guessEpisode('E07.mkv').episodeGuess,7);
  assert.equal(guessEpisode('03.mkv').episodeGuess,3);
  assert.equal(inferFromRelativePath('Frieren/Saison 2/03.mkv',guessEpisode('03.mkv')).seasonGuess,2);

@@ -375,7 +375,7 @@ async function startApplication() {
     return {canceled:false,root,summary:result.summary,
       files:result.files.map((file,index)=>({...file,index,
         linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0,
-        ...(links.get(mediaStore.key(root,file.relativePath))?{episodeGuess:links.get(mediaStore.key(root,file.relativePath)).episodeGuess,seasonGuess:links.get(mediaStore.key(root,file.relativePath)).seasonGuess||0}:{})}))};
+        ...(links.get(mediaStore.key(root,file.relativePath))?{episodeGuess:links.get(mediaStore.key(root,file.relativePath)).episodeGuess,seasonGuess:links.get(mediaStore.key(root,file.relativePath)).seasonGuess||0,wholeWork:links.get(mediaStore.key(root,file.relativePath)).wholeWork===true}:{})}))};
   });
   ipcMain.handle('media-associate',async(event,index,malId,correction)=>{
     trusted(event);
@@ -388,11 +388,12 @@ async function startApplication() {
     const actualRoot=await fsp.realpath(mediaIndex.root),actual=await fsp.realpath(full);
     if(!mediaStore.contained(actualRoot,actual))throw Error('ALM_MEDIA_OUTSIDE_ROOT');
     const corrected=correction&&typeof correction==='object';
+    const wholeWork=corrected&&correction.wholeWork===true;
     const episode=corrected?Number(correction.episode):file.episodeGuess;
     const season=corrected?Number(correction.season):file.seasonGuess;
-    if(corrected&&(!Number.isSafeInteger(episode)||episode<1||episode>999||!Number.isSafeInteger(season)||season<0||season>99))throw Error('ALM_MEDIA_ASSOCIATION_INVALID');
+    if(corrected&&(!Number.isSafeInteger(episode)||episode<(wholeWork?0:1)||episode>999||wholeWork&&episode!==0||!Number.isSafeInteger(season)||season<0||season>99))throw Error('ALM_MEDIA_ASSOCIATION_INVALID');
     return mediaStore.record(mediaStoreFile,{root:mediaIndex.root,relativePath:file.relativePath,
-      filename:file.filename,episodeGuess:episode,seasonGuess:season,episodeEndGuess:episode===file.episodeGuess?file.episodeEndGuess:0,malId});
+      filename:file.filename,episodeGuess:episode,seasonGuess:season,episodeEndGuess:!wholeWork&&episode===file.episodeGuess?file.episodeEndGuess:0,wholeWork,malId});
   });
   ipcMain.handle('media-dissociate',async(event,index)=>{
     trusted(event);

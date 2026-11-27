@@ -37,6 +37,13 @@ const store=require('../lib/media-associations');
   }catch(e){if(!['EPERM','EACCES','ENOSYS','ENOTSUP'].includes(e.code))throw e;}
   assert(store.remove(file,store.key(root,'Series/Anime S01E11.mkv')));
   assert.equal(store.summary(file)[0].count,1);
+  const ova=path.join(dir,'Whole OAV.avi');await fsp.writeFile(ova,'fixture');
+  store.record(file,{root,relativePath:'Series/Whole OAV.avi',filename:'Whole OAV.avi',malId:77,episodeGuess:0,wholeWork:true});
+  assert.equal((await store.locate(file,77,0)).ok,true);
+  assert.equal((await store.locate(file,77,1)).ok,false);
+  assert.deepEqual(store.summary(file).find(r=>r.malId===77).episodes,[]);
+  assert(store.list(file).find(r=>r.malId===77).wholeWork);
+  assert.throws(()=>store.record(file,{root,relativePath:'Series/Whole OAV.avi',filename:'Whole OAV.avi',malId:77,episodeGuess:2,wholeWork:true}));
   console.log('OK V2.2 offline media: secure persisted file links, IPC privacy, missing NAS, symlinks, validation and removal.');
  }finally{await fsp.rm(base,{force:true,recursive:true});}
 })().catch(error=>{console.error(error);process.exitCode=1;});
