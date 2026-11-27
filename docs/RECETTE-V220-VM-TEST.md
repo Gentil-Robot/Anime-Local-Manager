@@ -39,3 +39,10 @@ Pour l'installateur distinct VM TEST : [PR #9](https://github.com/Gentil-Robot/A
 Le script scripts/test-v220-review.cjs vérifie la structure, l'absence de pages dupliquées, le routage, le pipeline d'images, les API et la syntaxe. Les suites de reconnaissance, de stockage, d'intégration, de bandeaux et de notes sont adaptées à cette organisation. La CI complète comprend 179 suites. Une inspection visuelle réelle sur la VM reste nécessaire : les tests DOM ne remplacent pas la validation de rendu Electron.
 
 Les chemins absolus restent dans le profil local. Le catalogue et le cache ne sont pas redistribués au-delà des droits de leurs fournisseurs. Aucun code ou visuel de Seanime ou AnimeList n'a été copié. Les lots ont été développés séparément ; le contrôle est une suite de tests distincte, pas un agent IA autonome.
+
+## Lot 5 — Veille sécurité du 27 novembre
+
+- La PR cible exclusivement release/v2.2.0, jamais release/v2.1.3. Aucun paquet VM n'est publié automatiquement.
+- La résolution npm d'Electron 45.5.0 se fait dans une tâche en lecture seule avec le registre officiel, comparaison de l'intégrité dist.integrity et production d'un delta du lockfile à examiner avant intégration. Un artefact de résolution n'est pas un installateur validé.
+- Le contrôle security-review part d'une autre extraction et vérifie les versions réellement exécutées (Node hôte, Electron, Node embarqué, Chromium), puis les parcours natifs moteur/MFA/mise à jour et les fournisseurs réseau sur fixtures. L'inventaire de points TLS/HTTP2/Jikan est un signal de revue, pas une preuve de vulnérabilité.
+- Le paquet VM n'est accepté qu'après vérification du runtime du binaire décompressé et du binaire réellement installé. La recette interactive PC/NAS et la recette Linux restent obligatoires avant publication.

@@ -10,7 +10,14 @@ if(report.version!=='2.2.0'||report.notForProduction!==true)throw Error('ALM_VM_
 (async()=>{
  const outcome=await require('./smoke-windows').smokeWindows({root,unpacked:path.join(dist,'win-unpacked'),
   installer:path.join(dist,report.filename),installerSmoke:true});
+ const expectedNode=fs.readFileSync(path.join(root,'.node-version'),'utf8').trim();
+ const expectedElectron=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).devDependencies.electron;
+ for(const proof of [outcome.application,outcome.installer]){
+  if(proof?.runtime?.node!==expectedNode||proof?.runtime?.electron!==expectedElectron)throw Error('ALM_VM_RUNTIME_MISMATCH');
+  if(expectedElectron==='45.5.0'&&proof.runtime.chrome!=='156.0.8078.109')throw Error('ALM_VM_CHROMIUM_MISMATCH');
+ }
  report.smoke=outcome;
+ report.runtime=outcome.installer.runtime;
  report.status=outcome.installer?.status==='passed'&&outcome.updater?.status==='passed'?'verified-vm-preview':'smoke-incomplete';
  fs.writeFileSync(reportFile,JSON.stringify(report,null,2)+'\n');
  if(report.status!=='verified-vm-preview')throw Error('ALM_VM_PREVIEW_SMOKE_INCOMPLETE');

@@ -51,10 +51,72 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 
+
+  # Read-only npm resolution. The only output is a candidate lockfile/delta;
+  # no push, publication, deployment, or production credential.
+  electron-lock-candidate:
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+      - name: Resolve Electron candidate against npm registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp package-lock.json "$RUNNER_TEMP/alm-original-lock.json"
+          npm install --package-lock-only --ignore-scripts --save-dev --save-exact electron@45.5.0 --registry=https://registry.npmjs.org --no-audit --no-fund
+          npm view electron@45.5.0 dist.integrity --registry=https://registry.npmjs.org --json > "$RUNNER_TEMP/alm-electron-integrity.json"
+          node scripts/report-v220-lock-candidate.cjs "$RUNNER_TEMP/alm-original-lock.json" "$RUNNER_TEMP/alm-electron-integrity.json"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: ALM-Electron-lock-candidate-${{ github.sha }}
+          path: |
+            package.json
+            package-lock.json
+          if-no-files-found: error
+          retention-days: 7
+
+  # A separate native review from a clean checkout, independent of verify.
+  security-review:
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          lfs: true
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Inspect actual Node and Electron runtimes and network surfaces
+        run: node scripts/test-v220-runtime-security.cjs
+      - name: Review native engine recovery, MFA and update UX
+        run: node scripts/verify-native.cjs
+      - name: Review provider retirement and network boundaries
+        shell: pwsh
+        run: |
+          node scripts/test-beta44-providers.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-beta76-network.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-beta82-anilist-network.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-update-progress.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
   vm-preview-installer:
     # Only this PR branch, never public release or a deployment.
-    if: github.event_name == 'pull_request' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
-    needs: verify
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
+    needs: [verify, security-review]
     runs-on: windows-latest
     timeout-minutes: 100
     defaults:

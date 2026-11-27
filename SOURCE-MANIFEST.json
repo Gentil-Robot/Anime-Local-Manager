@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 3749,
-      "sha256": "16c1d8c6d9da1588e13375bac26c21a43d1ce1896fd73f72390fe2c37a34bb04"
+      "bytes": 6829,
+      "sha256": "9775730db87438eb36bd1d0133d37a2a06b8346e58cfd9270eed74eabf4e5547"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 5403,
-      "sha256": "ee54510e63dabce2f97b128b8b097a0936e24d98cfba13124ff31e5b26c8a80f"
+      "bytes": 6411,
+      "sha256": "8a5c471fc3803c90e0dd7ba88f7971c183c06c3073ada0763e100a69892ae260"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -2981,6 +2981,11 @@
       "sha256": "2f7384381e3ee2e44b8c75840c6b433fe370c27ca77c0b6df7b4966c7eee7566"
     },
     {
+      "path": "scripts/report-v220-lock-candidate.cjs",
+      "bytes": 1534,
+      "sha256": "e517bb958890d636f3357bb38ab001c2a82de1e5fad5d6a536a685dc62860897"
+    },
+    {
       "path": "scripts/retro-banner.html",
       "bytes": 2676,
       "sha256": "d7a8aacc7e64cd05e313b24a0f4d34201cb56f8a1b2f30d1c069cf5f4d84fca2"
@@ -4166,6 +4171,11 @@
       "sha256": "73f7f0e9e6adce6ef4ea6903ab26d5961b76b2cc6f00bf105e98ed9f528c1df4"
     },
     {
+      "path": "scripts/test-v220-runtime-security.cjs",
+      "bytes": 3234,
+      "sha256": "37bd682be5e4e91b977ed26f95f184ab7bd0cf5e88d30fddeb4e931a0b936098"
+    },
+    {
       "path": "scripts/test-v220-sequel-watchlist.cjs",
       "bytes": 1002,
       "sha256": "e14f25583404478c90d1b4e1de34582209d7f4aa82cf9d78a2026b108b47727b"
@@ -4202,8 +4212,8 @@
     },
     {
       "path": "scripts/v220-smoke-preview.cjs",
-      "bytes": 1286,
-      "sha256": "0cc37579a70cb0bdd9fa8a2ae9dd58fe39c236344491e84580792fd0b0b5dc89"
+      "bytes": 1836,
+      "sha256": "c17ace99866ef1c49d5c828f89dcf7ac9492d58fb1589fc6f9145b0d61511e23"
     },
     {
       "path": "scripts/verification-plan.json",
