@@ -46,3 +46,7 @@ Les chemins absolus restent dans le profil local. Le catalogue et le cache ne so
 - La résolution npm d'Electron 45.5.0 se fait dans une tâche en lecture seule avec le registre officiel, comparaison de l'intégrité dist.integrity et production d'un delta du lockfile à examiner avant intégration. Un artefact de résolution n'est pas un installateur validé.
 - Le contrôle security-review part d'une autre extraction et vérifie les versions réellement exécutées (Node hôte, Electron, Node embarqué, Chromium), puis les parcours natifs moteur/MFA/mise à jour et les fournisseurs réseau sur fixtures. L'inventaire de points TLS/HTTP2/Jikan est un signal de revue, pas une preuve de vulnérabilité.
 - Le paquet VM n'est accepté qu'après vérification du runtime du binaire décompressé et du binaire réellement installé. La recette interactive PC/NAS et la recette Linux restent obligatoires avant publication.
+
+### Résolution de dépendances
+
+Electron 45.5.0 (publication officielle du 24 novembre), Node embarqué 24.22.3 et Chromium 156.0.8078.109. Le job npm 140534797258 a résolu le lockfile avec npm et vérifié dist.integrity. Seuls la déclaration racine et le paquet Electron changent. SHA-256 du lockfile généré : 428b3392567166add6ba703fbe367c1a6560971e81e2693c76473c839382fa83. Le contrôle du lockfile commité est bloquant. L'audit npm, les 179 suites, les parcours natifs et la reconstruction doivent encore confirmer cette mise à niveau. Aucun paquet de production n'est publié.

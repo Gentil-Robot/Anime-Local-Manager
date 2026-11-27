@@ -14,6 +14,8 @@ assert.match(integrity,/^sha512-[A-Za-z0-9+/]{86}==$/);
 assert.equal(entry.integrity,integrity);
 const modified=Object.fromEntries(Object.entries(after.packages).filter(([name,value])=>JSON.stringify(before.packages[name])!==JSON.stringify(value)));
 const removed=Object.keys(before.packages).filter(name=>!Object.hasOwn(after.packages,name));
+// The committed candidate must already equal registry resolution: CI cannot silently substitute a different lock.
+if(before.packages[''].devDependencies.electron===target){assert.deepEqual(modified,{});assert.deepEqual(removed,[]);assert(original.equals(current),'Committed lock differs from npm resolution');}
 const root=Object.fromEntries(Object.entries(after).filter(([name])=>name!=='packages'));
 const hash=buffer=>crypto.createHash('sha256').update(buffer).digest('hex');
 console.log('ALM_LOCK_DELTA='+JSON.stringify({beforeSha256:hash(original),afterSha256:hash(current),integrity,root,modified,removed}));

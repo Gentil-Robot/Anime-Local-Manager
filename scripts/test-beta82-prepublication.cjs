@@ -12,12 +12,12 @@ const lock=JSON.parse(read('package-lock.json'));
 assert.equal(pkg.version,'2.1.3');
 assert.equal(pkg.version,lock.version);
 assert.equal(lock.packages[''].version,pkg.version);
-assert.equal(pkg.devDependencies.electron,'45.3.3');
-assert.equal(lock.packages[''].devDependencies.electron,'45.3.3');
-assert.equal(lock.packages['node_modules/electron'].version,'45.3.3');
-assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.npmjs.org/electron/-/electron-45.3.3.tgz');
+assert.equal(pkg.devDependencies.electron,'45.5.0');
+assert.equal(lock.packages[''].devDependencies.electron,'45.5.0');
+assert.equal(lock.packages['node_modules/electron'].version,'45.5.0');
+assert.equal(lock.packages['node_modules/electron'].resolved,'https://registry.npmjs.org/electron/-/electron-45.5.0.tgz');
 // Independent registry pin, not a value copied from the lock under test.
-assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-YS01j/AMWGbPAfbXijkLOUJGFhmrIg6pf9An8+LzY1PIc5sjwqEcSMsEBXgUQiWw1lSfPCP7RpxbvkN1JQRD8A==');
+assert.equal(lock.packages['node_modules/electron'].integrity,'sha512-rBQ0Czu1Qrtrs6Fygq7Qtfcgkhpt79SylMkaFb1AhtXItdxh0Wq3ERQoPfBYECYf+FxptAiXKCZ7p+H/39CWIA==');
 assert.equal(read('.nvmrc'),read('.node-version'));
 assert.equal(read('supabase/functions/alm-public/release.ts').includes('"2.1.3"'),true);
 assert.equal(read('public/design-core.js').includes('release-version.json') || read('public/design-core.js').includes('ALM_RELEASE'),true);
@@ -60,5 +60,5 @@ for(const origin of ['http://127.0.0.1:3144','http://localhost:3122','http://0.0
  const post=new Request('https://fixture.invalid/functions/v1/alm-public',{method:'POST',headers:{Origin:'http://127.0.0.1:3124','Content-Type':'application/json'},body:JSON.stringify({action:'contact',email:'sample@example.test',category:'problem',message:'Fixture showing CAPTCHA remains mandatory',consent:true,website:''})});
  // The local port fix must not bypass CAPTCHA even if the origin is allowed.
  assert.equal((await handle(post,deps)).status,403); // Missing Turnstile token: fail closed even on port 3124.
- console.log('OK Beta82: 45.3.3 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.');
+ console.log('OK Beta82: 45.5.0 lock, Node pins, sandboxed preload, loopback fallback 3123-3143, strict deny rules, release versions.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

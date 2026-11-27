@@ -12,6 +12,7 @@ const floor=version=>{
 };
 assert(floor(process.versions.node),'Unpatched or unsupported build Node: '+process.versions.node);
 if(process.env.GITHUB_ACTIONS==='true')assert.equal(process.versions.node,pin);
+assert.equal(pkg.devDependencies.electron,'45.5.0');
 assert.equal(lock.packages[''].devDependencies.electron,pkg.devDependencies.electron);
 assert.equal(lock.packages['node_modules/electron'].version,pkg.devDependencies.electron);
 assert.match(lock.packages['node_modules/electron'].integrity,/^sha512-[A-Za-z0-9+/]{86}==$/);
@@ -24,7 +25,7 @@ assert.equal(probe.status,0,probe.stderr);
 const runtime=JSON.parse(probe.stdout.trim());
 assert.equal(runtime.electron,pkg.devDependencies.electron);
 assert.equal(runtime.node,pin);
-if(runtime.electron==='45.5.0')assert.equal(runtime.chrome,'156.0.8078.109');
+assert.equal(runtime.chrome,'156.0.8078.109');
 const inventory=[];
 function scan(file){
  const text=read(file),lines=text.split(/\r?\n/);

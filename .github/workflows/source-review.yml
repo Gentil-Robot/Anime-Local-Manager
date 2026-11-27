@@ -116,7 +116,7 @@ jobs:
   vm-preview-installer:
     # Only this PR branch, never public release or a deployment.
     if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
-    needs: [verify, security-review]
+    needs: [verify, security-review, electron-lock-candidate]
     runs-on: windows-latest
     timeout-minutes: 100
     defaults:

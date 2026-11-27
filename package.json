@@ -105,7 +105,7 @@
   "author": "Gentil Robot",
   "devDependencies": {
     "@electric-sql/pglite": "0.3.14",
-    "electron": "45.3.3",
+    "electron": "45.5.0",
     "electron-builder": "26.16.1",
     "esbuild": "0.28.2",
     "jsdom": "26.1.0",

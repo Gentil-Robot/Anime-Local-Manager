@@ -6,7 +6,11 @@ Anime Local Manager (ALM) est une application **locale, gratuite et open source 
 
 [**Site officiel**](https://animelocalmanager.com/) · [**Téléchargements GitHub**](https://github.com/Gentil-Robot/Anime-Local-Manager/releases) · [**Discord**](https://discord.gg/9KJ8MqhKh7) · [**Notes de la V2.1.3**](docs/RELEASE-NOTES-V2.1.3.md) · [**Historique technique**](docs/)
 
-## V2.1.3 Bêta stable
+## V2.2.0 VM TEST — développement non publié
+
+Cette branche prépare le Cockpit, l'association locale de fichiers, la progression d'installation et les contrôles de sécurité. **Electron 45.5.0**, Node.js embarqué **24.22.3**, Chromium **156.0.8078.109**. Node.js de construction reste épinglé à 24.22.3 LTS. Les 179 suites et les contrôles natifs séparés doivent réussir avant de distribuer un installateur VM isolé. La recette interactive reste obligatoire. [Recette VM](docs/RECETTE-V220-VM-TEST.md).
+
+## V2.1.3 Bêta stable — version publique de référence
 
 La V2.1.3 prépare la **mise à jour de sécurité du moteur Electron et de Node.js**. Les correctifs d’installation, de relance et de nettoyage des installateurs de la V2.1.2 sont conservés, ainsi que les notifications Stable/Bêta, le MFA facultatif et la supervision du moteur.
 
@@ -16,8 +20,8 @@ La V2 représente environ **six mois de travail**, avec de nombreuses bêtas de 
 
 ### Télécharger
 
-- **V2.1.3 en préparation** : publication après validation des contrôles Windows.
-- [Release publiée V2.1.2](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.2) — dernier installateur disponible avant publication de la V2.1.3.
+- [Release publique V2.1.3](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.3) — aucune modification dans cette branche.
+- [Release publiée V2.1.2](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.1.2) — historique.
 - [Toutes les releases](https://github.com/Gentil-Robot/Anime-Local-Manager/releases), dont la [V2.0.0](https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.0.0).
 
 L'installateur attendu est `Anime-Local-Manager-2.1.3-Setup-x64.exe`. Ce nom permet aussi à la V2.0.0 de télécharger la mise à jour intégrée. Le canal reste **bêta publique**, avec la release GitHub marquée « pre-release ». Téléchargez depuis la release officielle et comparez l'empreinte dans `SHA256SUMS.txt` ; l'installateur non signé peut provoquer un avertissement Windows SmartScreen.
