@@ -30,7 +30,11 @@ assert(get('v220ScorePrev')?.nextElementSibling===get('dnaScorePosters')&&get('d
 assert.match(read('public/alm-v2.js'),/ALM_V220_SCORE_GALLERY\?\.render/);
 assert.match(read('main.js'),/correction\?\.scanId!==currentIndex\.scanId/);
 assert.match(read('main.js'),/mediaIndex!==currentIndex/);
-assert.match(read('server.js'),/albumCovers\.get\(source,\{offline:true\}\)/);
+assert.match(read('server.js'),/const offline=req\.query\.load!=='1'/);
+assert.match(read('server.js'),/albumCovers\.get\(source,\{offline\}\)/);
+assert(read('public/v220-features.js').includes('localOnly:true'));
+assert(read('public/catalog.js').includes("request('/api/metadata/'+Number(item.malId))"));
+assert(read('public/discovery.js').includes('detailLocalOnly.get(hostId)'));
 assert(read('public/v220-features.js').includes('ALM_BETA38.preparePayload'));
 dom.window.close();
 console.log('OK independent V2.2 review gate: navigation, original pages, media workflow, possession, cover pipeline, unique DOM and syntax.');

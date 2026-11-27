@@ -2172,8 +2172,8 @@
     },
     {
       "path": "public/catalog.js",
-      "bytes": 25226,
-      "sha256": "d94a01cea9d20c34fd5a0767696d91ab1d070023198da2890483b0c2032587e3"
+      "bytes": 25682,
+      "sha256": "eb66d8c77d115b2a408e7e7880590c36f272ae20e1c884836a52c9d341086732"
     },
     {
       "path": "public/clipboard.js",
@@ -2347,8 +2347,8 @@
     },
     {
       "path": "public/discovery.js",
-      "bytes": 14152,
-      "sha256": "66e8808d2c5fe12441eda6fbe19be17fa3bacd1c0e5c2b8e47ed7846ccf6e694"
+      "bytes": 14343,
+      "sha256": "40588c591f0f80f46f4eae43e8dfb9957241c25af51fae5f6300c3822b7d7d15"
     },
     {
       "path": "public/dna-radar.js",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 46367,
-      "sha256": "d6670c819eb7c47391ccc8283ebd7377ceaaa29927a65767602b4daacefe9f2e"
+      "bytes": 51194,
+      "sha256": "8a85f08bc276009418cf12dd28cbddffff6dba74c3cb154f752a5942590fc95e"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 16845,
-      "sha256": "cc4f259d73d3ca029eb913687d1bc2e4c3682f8c13b37ff209575a3621cb8f1d"
+      "bytes": 18478,
+      "sha256": "32f0fe789a8130b62a65b4c05325316a309c478ae0fc054f0e100bf52fc33ead"
     },
     {
       "path": "public/watch-status.js",
@@ -4177,8 +4177,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 3884,
-      "sha256": "c6c58362ca51ec66ccc3edb9b7e95961644efd47255c6b376e3d5c02641408f0"
+      "bytes": 4188,
+      "sha256": "9e42bed5164ba0b6b27b3dbe2bda19a9b50a56f73619e13230d377daaa2e693b"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4207,8 +4207,8 @@
     },
     {
       "path": "scripts/test-v220-vm-feedback.cjs",
-      "bytes": 6158,
-      "sha256": "d490c44da57a8065b23d404373ca6930e686613306c67264e34b0036e60b2567"
+      "bytes": 6910,
+      "sha256": "54648816b1cdb4aebf13f1b00111f9877469b0421b0a533210bef1d0eecb5316"
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
@@ -4257,8 +4257,8 @@
     },
     {
       "path": "server.js",
-      "bytes": 627951,
-      "sha256": "d9e7d9b966fee7f94787679a50cf5ef419cd13e2694215cbf76f95641d494b9c"
+      "bytes": 628109,
+      "sha256": "81a686c34ea9870226207b1f08f7630fbfab8367945f9ff368e05562c2d29c7e"
     },
     {
       "path": "start_mac_linux.sh",

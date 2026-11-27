@@ -118,7 +118,7 @@
 #mediaImportPanel .alm-v220-media-actions>select{flex:1 1 220px}
 .alm-v220-candidate-preview{display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 100%;font-size:.82rem;color:var(--muted,#b8bbd7)}
 .alm-v220-candidate-preview:empty{display:none}
-.alm-v220-candidate-preview img{width:38px;height:53px;object-fit:cover;border-radius:5px}
+
 #mediaImportPanel .alm-v220-media-actions .alm-v220-whole-work{flex:1 1 190px;font-size:.82rem}
 #mediaImportPanel .alm-v220-whole-work input[type=checkbox]{flex:none;width:auto;max-width:20px;margin:0}
 #cockpitPage .alm-v220-sequel-actions{display:grid;gap:7px;min-width:0}
@@ -174,3 +174,21 @@ html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockp
 #cockpitPage>.studio-banner .studio-banner-copy{max-width:52%;flex-basis:240px}
 .alm-cockpit-flight{inset:7px 7px 7px 48%}.alm-flight-plane{max-width:38%;width:110px}}
 @media(max-width:400px){#cockpitPage>.studio-banner{flex-wrap:wrap!important}#cockpitPage>.studio-banner .studio-banner-copy{max-width:100%;flex:1 1 100%}.alm-cockpit-flight{position:relative;inset:auto;flex-basis:100%;height:86px}}
+
+/* Import list presentation: dedicated poster, local detail gallery and shared statuses. */
+#mediaImportPanel .alm-v220-media-card{display:grid;grid-template-columns:clamp(84px,11vw,142px) minmax(0,1fr);gap:14px;align-items:start}
+.alm-v220-media-body,.alm-v220-media-art{min-width:0}
+.alm-v220-media-art{display:flex;flex-direction:column;gap:6px}
+.alm-v220-media-cover{position:relative;width:100%;aspect-ratio:2/3;overflow:hidden;padding:0!important;border-radius:9px;background:var(--panel,#151b30);border:1px solid rgba(155,181,223,.25);cursor:pointer}
+.alm-v220-media-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.alm-v220-media-cover img[hidden],.alm-v220-load-cover[hidden]{display:none!important}
+.alm-v220-media-type{position:absolute;left:6px;top:6px;padding:3px 5px;border-radius:6px;background:rgba(8,14,30,.86);font-size:.7rem;color:#e4e5f1}
+.alm-v220-load-cover{font-size:.72rem;padding:6px 4px;white-space:normal}
+.alm-v220-media-detail-title{color:inherit;background:none!important;border:0!important;padding:0!important;text-align:left;font:inherit;font-weight:700;cursor:pointer}
+.alm-v220-media-detail-hint{margin:0!important;font-size:.72rem!important}
+#mediaImportPanel .alm-v220-media-actions .alm-v220-import-status{flex:1 1 210px;min-width:0}
+#mediaImportPanel .alm-v220-import-status>span{white-space:nowrap}
+#mediaImportPanel .alm-v220-media-status{min-width:112px;flex:1 1 120px}
+.alm-v220-import-status-info{flex:1 1 100%;margin:0!important}
+.alm-v220-import-status-info:empty{display:none}
+@media(max-width:650px){#mediaImportPanel .alm-v220-media-card{grid-template-columns:78px minmax(0,1fr);padding:10px;gap:9px}.alm-v220-candidate-preview{flex-wrap:wrap}}

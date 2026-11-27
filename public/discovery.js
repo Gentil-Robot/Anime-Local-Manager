@@ -7,7 +7,7 @@
   const safe=v=>window.safeUrlV2(v);
   const same=window.ALM_COLLECTION.same;
   const already=i=>window.ALM_COLLECTION.find(i);
-  const detailViews=new Map(),detailVersions=new Map(),addChoices=new Map(),detailActions=new Map();
+  const detailViews=new Map(),detailVersions=new Map(),addChoices=new Map(),detailActions=new Map(),detailLocalOnly=new Map();
   const number=v=>v!==''&&v!=null&&Number.isFinite(Number(v))?new Intl.NumberFormat(D.language(),{maximumFractionDigits:2}).format(Number(v)):'—';
   const date=v=>{if(!v)return '';const d=new Date(String(v).slice(0,10)+'T12:00:00Z');return Number.isNaN(d.valueOf())?'':new Intl.DateTimeFormat(D.language(),{dateStyle:'medium',timeZone:'UTC'}).format(d);};
   const duration=v=>{const match=String(v||'').match(/^([\d.]+)\s*(?:min(?:ute)?s?(?:\s*per\s*ep\.?)?)?$/i);return match?number(match[1])+' '+t('searchMin'):'';};
@@ -22,7 +22,8 @@
     $('discoveryResults').scrollTop=scroll;
     $('discoveryResults').querySelectorAll('[data-discover]').forEach(b=>b.onclick=()=>showDetail(results[Number(b.dataset.discover)]));
   }
-  async function showDetail(i,hostId='discoveryDetail'){
+  async function showDetail(i,hostId='discoveryDetail',options={}){
+    if(Object.hasOwn(options,'localOnly'))detailLocalOnly.set(hostId,options.localOnly===true);
     const prefix=hostId==='discoveryDetail'?'discovery':hostId==='calendarDetail'?'calendar':hostId==='animePeekDetail'?'peek':'ranking',field=suffix=>$(prefix+suffix);
     if(hostId==='discoveryDetail'){selected=i;renderResults();}
     const previous=detailViews.get(hostId);if(previous&&!same(previous,i))addChoices.delete(hostId);const addStatus=addChoices.get(hostId)||'Plan to Watch';detailViews.set(hostId,i);const version=(detailVersions.get(hostId)||0)+1;detailVersions.set(hostId,version);const lang=D.language();
@@ -54,7 +55,7 @@
       recommend.onclick=()=>window.ALM_COMMUNITY_WORKSPACE?.recommendAnime(malId,i).catch(error=>window.ALM_COMMUNITY?.toast(window.ALM_COMMUNITY_ERROR(error),true));
       $(hostId).querySelector('.discovery-detail-actions')?.append(recommend);
     }
-    if(lang==='en'||!i.synopsis)return;
+    if(lang==='en'||!i.synopsis||detailLocalOnly.get(hostId))return;
     field('Synopsis').textContent=t('sourceTranslating');let data;
     try{data=hostId==='calendarDetail'&&i.calendarKey?await request('/api/calendar/synopsis?'+new URLSearchParams({key:i.calendarKey,lang})):i.malId?await request(`/api/discover/${i.malId}/synopsis?lang=${encodeURIComponent(lang)}`):{};}catch{data={};}
     if(version!==detailVersions.get(hostId)||lang!==D.language())return;
@@ -94,5 +95,5 @@
     window.addEventListener('alm:collection-changed',()=>{for(const [host,i]of detailViews)showDetail(i,host);});
     const language=()=>{const sort=$('discoverySort').value||'relevance';$('discoverySortLabel').textContent=tr('sort');$('discoverySort').innerHTML=['relevance','score','recent','alphabetical'].map(k=>`<option value="${k}">${e(tr(k))}</option>`).join('');$('discoverySort').value=sort;$('discoveryQuery').placeholder=t('searchPlaceholder');renderResults();for(const [host,i]of detailViews)showDetail(i,host);};window.addEventListener('alm:language-changed',language);language();
   }
-  window.addEventListener('alm:titles-changed',()=>{renderResults();for(const [host,i]of detailViews)showDetail(i,host);});window.ALM_DISCOVERY={search,showDetail,setDetailActions(host,handler){if(handler)detailActions.set(host,handler);else detailActions.delete(host);},forgetDetail(host){detailActions.delete(host);detailViews.delete(host);detailVersions.set(host,(detailVersions.get(host)||0)+1);addChoices.delete(host);}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  window.addEventListener('alm:titles-changed',()=>{renderResults();for(const [host,i]of detailViews)showDetail(i,host);});window.ALM_DISCOVERY={search,showDetail,setDetailActions(host,handler){if(handler)detailActions.set(host,handler);else detailActions.delete(host);},forgetDetail(host){detailActions.delete(host);detailViews.delete(host);detailLocalOnly.delete(host);detailVersions.set(host,(detailVersions.get(host)||0)+1);addChoices.delete(host);}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

@@ -41,9 +41,10 @@
     const controls=document.createElement('div');controls.className='catalog-add';const select=document.createElement('select');select.setAttribute('aria-label',t('seriesStatus'));
     select.innerHTML=window.ALM_WATCH_STATUS.options('', ['Plan to Watch','Watching','Completed','On-Hold','Dropped']);select.value=popupContext.status||'Plan to Watch';select.onchange=()=>popupContext.status=select.value;
     const button=document.createElement('button');button.type='button';button.className='primary';button.textContent=t('recordSearchUse');const present=owned(record);button.disabled=!!present&&Number(present.id)!==Number(popupContext.currentId);button.onclick=()=>popupContext.select(record,select.value,button);controls.append(select,button);actions.prepend(controls);
-   }:null);window.ALM_DISCOVERY.showDetail({...record,poster:record.poster||record.imageUrl||''},'animePeekDetail');
+   }:null);window.ALM_DISCOVERY.showDetail({...record,poster:record.poster||record.imageUrl||''},'animePeekDetail',{localOnly:popupContext?.localOnly===true});
   };
   paint(item);
+  if(item.malId&&popupContext?.localOnly){request('/api/metadata/'+Number(item.malId)).then(data=>{if(serial!==popupSerial||!$('animePeekDialog').open||!data?.item)return;const record=data.item;paint({...record,...item,episodesTotal:item.episodesTotal||String(record.episodes||''),synopsis:item.synopsis||record.synopsis,poster:item.poster||'/api/v220/media-cover/'+Number(item.malId)});}).catch(()=>{});return;}
   if(item.malId)request('/api/discover/'+Number(item.malId)+'/record?enrich=1').then(record=>{if(serial!==popupSerial||!$('animePeekDialog').open)return;const full={...record,...item,synopsis:item.synopsis||record.synopsis,trailer:item.trailer||record.trailer,poster:item.poster||item.imageUrl||record.poster};for(const field of ['genres','studios','episodesTotal','startDate','endDate','duration','titleEn','titleJa','titleRomaji','synonyms','localizedTitles'])if(!full[field]||(Array.isArray(full[field])&&!full[field].length))full[field]=record[field];if(record.type&&item.type&&record.type!==item.type){const warning=document.createElement('p');warning.className='peek-source-warning';warning.textContent=t('sourceReview')+' ('+item.type+' → '+record.type+')';extras.append(warning);}paint(full);}).catch(()=>{});
  }
  function openPopup(items,index,origin,source,context=null){

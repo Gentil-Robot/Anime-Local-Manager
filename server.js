@@ -3473,15 +3473,17 @@ app.post('/api/v220/media-candidates',async(req,res)=>{
   res.set('Cache-Control','private, no-store');res.json({items});
  }catch(error){res.status(503).json({code:'ALM_MEDIA_CATALOG_UNAVAILABLE'});}
 });
-// Local recognition preview: only catalogue-derived sources and already cached
-// artwork. No outbound provider request, even when a cover has expired.
+// Local recognition preview: cache-only on scan. The explicit Load cover
+// action may fetch the catalogue-derived public URL via the bounded cache.
+// Filenames, paths and search strings never go to a cover provider.
 app.get('/api/v220/media-cover/:malId',async(req,res)=>{
  try{
   await db.whenReady();
   const id=Number(req.params.malId);
   if(!Number.isSafeInteger(id)||id<1||id>100000000)return res.status(400).end();
-  const row=db.getMetadataByMalId(id),source=albumCovers.safeSource(row?.imageUrl||row?.poster||'');
-  const file=source&&await albumCovers.get(source,{offline:true});
+  const row=db.getMetadataByMalId(id),source=ownedCoverSource(id)||albumCovers.safeSource(row?.imageUrl||row?.poster||'');
+  const offline=req.query.load!=='1'||process.env.ALM_RELEASE_SMOKE==='1';
+  const file=source&&await albumCovers.get(source,{offline});
   if(!file)return res.status(404).end();
   res.set('Cache-Control','private, no-store');res.set('X-Content-Type-Options','nosniff');
   res.type(path.extname(file));return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});

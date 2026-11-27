@@ -8,7 +8,8 @@ const fixture=Object.fromEntries([['Ayakashi',records.slice(0,2)],['Mugen no Juu
 const {window:w}=new JSDOM(read('public/index.html'),{url:'http://127.0.0.1:3123/',runScripts:'outside-only',pretendToBeVisual:true});
 const d=w.document,$=id=>d.getElementById(id),flush=(ms=60)=>new Promise(resolve=>setTimeout(resolve,ms));
 const adds=[],links=[];let requestCount=0,lookupResolve=null;
-w._almAnimes=records.map((a,i)=>({...a,id:i+1,status:'Watching'}));
+w._almAnimes=records.slice(0,3).map((a,i)=>({...a,id:i+1,status:'Watching'}));
+let opened=null;w.ALM_CATALOG={openRecords(rows,index,source,context){opened={rows,index,context};}};
 w.ALM_DESIGN={language:()=> 'fr'};w.confirm=()=>true;w.notifyApp=()=>{};
 w.ALM_BETA38={preparePayload:async payload=>payload};
 w.ALM_ADD_LABEL=status=>'Ajouter · '+w.ALM_WATCH_STATUS.label(status);
@@ -47,21 +48,23 @@ w.eval(read('public/watch-status.js'));w.eval(read('public/v220-media-match.js')
  await flush(280);assert(lookupResolve,'Debounced local lookup');
  c.querySelector('select').value='104';c.querySelector('select').dispatchEvent(new w.Event('change',{bubbles:true}));lookupResolve();await flush();
  assert.equal(c.querySelector('select').value,'104','Asynchronous lookup must preserve the user choice');
+ const status=c.querySelector('.alm-v220-media-status');assert(!status.disabled);status.value='On-Hold';status.dispatchEvent(new w.Event('change',{bubbles:true}));
+ const cover=c.querySelector('.alm-v220-media-cover');assert(cover.querySelector('img').getAttribute('src')==='/api/v220/media-cover/104');cover.dispatchEvent(new w.MouseEvent('dblclick',{bubbles:true}));assert(opened.context.localOnly&&opened.context.readOnly);assert.equal(opened.rows[opened.index].malId,104);
  const whole=c.querySelector('input[type=checkbox]');whole.checked=true;whole.dispatchEvent(new w.Event('change',{bubbles:true}));assert(!button(c).disabled);
  button(c).click();await flush();assert.equal(links.length,1);
  assert.equal(links[0].malId,104);assert.deepEqual(links[0].correction,{season:0,episode:0,wholeWork:true,scanId:'fixture-scan'});
  const first=cards()[0];first.querySelector('select').value='102';first.querySelector('select').dispatchEvent(new w.Event('change',{bubbles:true}));
  assert(!button(first).disabled);button(first).click();await flush();assert.equal(links[1].malId,102);assert.equal(links[1].correction.episode,4);
  const second=cards()[1];assert(!button(second).disabled);button(second).click();await flush();assert.equal(links[2].correction.episode,7);
- assert.equal(adds.length,0,'Linking existing anime never creates a duplicate');
+ assert.equal(adds.length,1,'Only the new OAV is imported; existing anime never duplicate');assert.equal(adds[0].status,'On-Hold');assert.equal(adds[0].episodesSeen,'0');assert.equal(w._almAnimes.find(a=>a.malId===102).status,'Watching');
  $('navCockpit').click();await flush();
  for(let i=0;i<statuses.length;i++){
   const card=[...$('v220SequelRows').querySelectorAll('.alm-v220-sequel')].find(e=>e.textContent.includes('Suite '+i));assert(card);
   const select=card.querySelector('.alm-v220-sequel-status');assert.equal(select.value,'Plan to Watch');
   select.value=statuses[i];select.dispatchEvent(new w.Event('change',{bubbles:true}));card.querySelector('.alm-v220-sequel-add').click();await flush();
-  assert.equal(adds[i].status,statuses[i]);assert.equal(adds[i].episodesSeen,statuses[i]==='Completed'?'12':'0');
+  assert.equal(adds[i+1].status,statuses[i]);assert.equal(adds[i+1].episodesSeen,statuses[i]==='Completed'?'12':'0');
  }
- assert.equal(new Set(adds.map(a=>a.malId)).size,5);
+ assert.equal(new Set(adds.map(a=>a.malId)).size,6);
  assert.equal($('v220SequelRows').querySelectorAll('.alm-v220-sequel').length,0);
  console.log('OK V2.2 VM feedback: reported filenames, ambiguous identity, async manual selection, OAV whole-file link, scan token, all statuses and deduplication.');
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>w.close());
