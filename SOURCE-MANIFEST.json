@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 9128,
-      "sha256": "3789bfdef7bf6f7ef4416801b6223e65b4dee1d0a4bddf7de20a9d1de7104e91"
+      "bytes": 9919,
+      "sha256": "b6404da335db3dba68f8aa29d49c6488b46543176fb795664f1773820ebc640c"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -607,8 +607,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 9431,
-      "sha256": "4b439b208d3aa6f8606ba647980a08f76ff7fb70cee7ac91bf37823f4eff62b8"
+      "bytes": 11625,
+      "sha256": "a4c3b68708fa4170f98338a42c94bec09c23b6bbf8941ac88615b7181d1ef2dd"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -1622,8 +1622,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 33510,
-      "sha256": "a98f40be6b5157d9f973cf69cb0a8bfc4e878272a6f141de99e04369a6c4a1e0"
+      "bytes": 33775,
+      "sha256": "60e4a854bb07b0dba8fe981ec55450406532e0eddc1a737162de14fb05d5c7df"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1642,8 +1642,8 @@
     },
     {
       "path": "preload.js",
-      "bytes": 3053,
-      "sha256": "af04f5d05a598a50aa622695fea37b0067437b02eec61ffdc86acc1a79e2ae9f"
+      "bytes": 3069,
+      "sha256": "3e46771dd6313005ed6ffd1f3499d5406aadc62d0b3b0641b988838fe3fcf9f1"
     },
     {
       "path": "Preparer-GitHub-V2.ps1",
@@ -2652,8 +2652,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 45172,
-      "sha256": "1453ab730b6772ecd28c8e6dba7ac1fa0889ccfd9846e7edbc34de754a4d9434"
+      "bytes": 45958,
+      "sha256": "dbf59b14308d7e19c01b3ffbf8d073d5cbeaf7f99c10a66cd44ce6a917e7ff70"
     },
     {
       "path": "public/v220-media-match.js",
@@ -3677,8 +3677,8 @@
     },
     {
       "path": "scripts/test-beta76-maintenance.cjs",
-      "bytes": 1935,
-      "sha256": "7e1ed135b4ad07c1738792b06296f560ab3d7c61d5674d539483d7bc9e2209b5"
+      "bytes": 2256,
+      "sha256": "2923fb783d4f680b50967b698068bfd663aa8fe491ddc816d024363d058e755d"
     },
     {
       "path": "scripts/test-beta76-network.cjs",
@@ -4177,8 +4177,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 2568,
-      "sha256": "73f7f0e9e6adce6ef4ea6903ab26d5961b76b2cc6f00bf105e98ed9f528c1df4"
+      "bytes": 3665,
+      "sha256": "0b27321395254a7a4842b41342e4630796bfc673a2c11b606af3639f0205602e"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4204,6 +4204,11 @@
       "path": "scripts/test-v220-upgrade-ui.cjs",
       "bytes": 5822,
       "sha256": "c92ef1fe2011fb9f70daf82e41eaa1c42d40ea6a1bf99ee24e58c129cfbaead8"
+    },
+    {
+      "path": "scripts/test-v220-vm-feedback.cjs",
+      "bytes": 6158,
+      "sha256": "d490c44da57a8065b23d404373ca6930e686613306c67264e34b0036e60b2567"
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
@@ -4232,8 +4237,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7288,
-      "sha256": "4c54d957f6ada69eb41533a7dc9229290996124ac717f7f826bb3b2e1a42c210"
+      "bytes": 7329,
+      "sha256": "8a3e6bb16cf37f182546768ca2b6f49c318e4bd89903e153007f2361daeeca8d"
     },
     {
       "path": "scripts/verify-native.cjs",
@@ -4242,8 +4247,8 @@
     },
     {
       "path": "scripts/verify-project.js",
-      "bytes": 10785,
-      "sha256": "1e35236c847f2a0233e56df2ed2fe6326933fa5ca8af6ff46ecc617f307e900c"
+      "bytes": 10869,
+      "sha256": "db910c58f1c4d22bc1236c9a9dd3db9e1ab76b1d1c4143f339e324634b2edc70"
     },
     {
       "path": "SECURITY.md",

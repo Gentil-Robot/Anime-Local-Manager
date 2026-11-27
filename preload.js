@@ -25,7 +25,7 @@ contextBridge.exposeInMainWorld("animeManager", {
   pickFolder: () => ipcRenderer.invoke("pick-folder"),
   mediaSelectAndScan:()=>ipcRenderer.invoke('media-select-and-scan'),
   mediaAssociate:(index,malId,correction)=>ipcRenderer.invoke('media-associate',index,malId,correction),
-  mediaDissociate:index=>ipcRenderer.invoke('media-dissociate',index),
+  mediaDissociate:(index,scanId)=>ipcRenderer.invoke('media-dissociate',index,scanId),
   mediaSummary:()=>ipcRenderer.invoke('media-summary'),
   mediaSaved:()=>ipcRenderer.invoke('media-saved'),
   mediaCheckEpisodes:requests=>ipcRenderer.invoke('media-check-episodes',requests),

@@ -24,7 +24,7 @@ const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const node=document.createElement(tag);if(text!==undefined&&text!==null)node.textContent=String(text);if(cls)node.className=cls;return node;};
 const normalize=s=>String(s||'').normalize('NFKC').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const animeList=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
-let scan=null,visible=40,sequelBusy=false;
+let scan=null,visible=40,sequelBusy=false,mediaBusy=false;
 const catalogMatches=new Map(),mediaDrafts=new Map();
 const mediaCopy={fr:['Œuvre complète / fichier sans numéro','Choisir un résultat','Choisis une fiche et confirme le numéro d’épisode ou le fichier complet.','Œuvre complète','Catalogue indisponible, réessaye.'],en:['Complete work / unnumbered file','Choose a result','Choose an anime and confirm the episode number or complete file.','Complete work','Catalog unavailable, try again.'],es:['Obra completa / archivo sin número','Elegir resultado','Elige un anime y confirma el episodio o el archivo completo.','Obra completa','Catálogo no disponible.'],de:['Ganzes Werk / Datei ohne Nummer','Ergebnis auswählen','Anime und Folge oder ganze Datei bestätigen.','Ganzes Werk','Katalog nicht verfügbar.'],ja:['作品全体・話数なし','候補を選択','作品と話数、または作品全体を確認してください。','作品全体','カタログを利用できません。'],'pt-BR':['Obra completa / arquivo sem número','Escolher resultado','Escolha um anime e confirme o episódio ou arquivo completo.','Obra completa','Catálogo indisponível.'],'zh-CN':['完整作品／无集数文件','选择结果','请选择作品并确认集数或完整文件。','完整作品','目录不可用，请重试。']};
 const mc=i=>(mediaCopy[lang()]||mediaCopy.en)[i];
@@ -187,12 +187,13 @@ async function refreshSummaries(){
  }catch(error){console.warn('[v220 media] local summary unavailable',error?.code||error?.message);}
 }
 async function choose(){
+ if(mediaBusy)return;
  const button=$('v220MediaChoose');if(!window.animeManager?.mediaSelectAndScan){showStatus(t('failed'));return;}
  button.disabled=true;showStatus(t('scanning'));
  try{
   const result=await window.animeManager.mediaSelectAndScan();
   if(result?.canceled){showStatus(scan?scan.files.length+' '+t('filesFound'):t('noScan'));return;}
-  scan=result;visible=40;catalogMatches.clear();mediaDrafts.clear();await catalogFor((scan.files||[]).slice(0,visible).map(f=>f.titleGuess));renderMedia();await refreshSummaries();
+  scan=result;visible=40;catalogMatches.clear();mediaDrafts.clear();const catalogOK=await catalogFor((scan.files||[]).slice(0,visible).map(f=>f.titleGuess));renderMedia();if(catalogOK===false)window.notifyApp?.(mc(4),'error');await refreshSummaries();
  }catch(error){showStatus(t('failed')+': '+(error?.message||'unknown'));}finally{button.disabled=false;}
 }
 function renderMedia(){
@@ -226,7 +227,7 @@ function renderMedia(){
    const search=el('input');search.type='search';search.placeholder=labels(3);search.maxLength=120;search.value=draft.term;
    const suggestions=el('select');suggestions.setAttribute('aria-label',t('proposed'));
    const preview=el('div',null,'alm-v220-candidate-preview');
-   const populate=(term,preserve=true)=>{
+   const populate=(term,preserve=true,allowPrevious=true)=>{
     suggestions.replaceChildren();const choose=el('option',mc(1));choose.value='';suggestions.append(choose);
     let candidates=term
       ?mergeCandidates(available,catalogMatches.get(term.trim().slice(0,160))||[]).filter(a=>Number(a.malId)>0&&[a.title,a.titleEn,a.titleRomaji,a.customTitle,...(Array.isArray(a.synonyms)?a.synonyms.slice(0,25):[])].some(name=>normalize(name).includes(normalize(term)))).slice(0,24)
@@ -235,7 +236,7 @@ function renderMedia(){
         :available.filter(a=>Number(a.malId)===match).slice(0,5);
     const pool=mergeCandidates(available,catalogMatches.get(term.trim().slice(0,160))||[]);
     const previous=preserve&&pool.find(a=>Number(a.malId)===selected);
-    if(previous&&!candidates.some(a=>Number(a.malId)===selected))candidates=[previous,...candidates];
+    if(allowPrevious&&previous&&!candidates.some(a=>Number(a.malId)===selected))candidates=[previous,...candidates];
     const updatePreview=()=>{preview.replaceChildren();const a=candidates.find(a=>Number(a.malId)===selected);if(!a)return;
      const image=el('img');image.src='/api/v220/media-cover/'+Number(a.malId);image.alt='';image.loading='lazy';image.addEventListener('error',()=>image.hidden=true);
      preview.append(image,el('span',[a.title,String(a.startDate||'').slice(0,4),a.type,a.episodes||a.episodesTotal?' · '+(a.episodes||a.episodesTotal)+' '+labels(2):''].filter(Boolean).join(' · ')));};
@@ -246,7 +247,7 @@ function renderMedia(){
     window.ALM_SELECTS?.refresh?.();
    };
    let lookupTimer;
-   populate(draft.term);search.addEventListener('input',()=>{draft.term=search.value;populate(search.value);clearTimeout(lookupTimer);const term=search.value.trim();if(term.length>=2)lookupTimer=setTimeout(async()=>{const ok=await catalogFor([term]);if(search.isConnected&&search.value.trim()===term){populate(term);suggestions.dispatchEvent(new Event('change',{bubbles:true}));if(ok===false)window.notifyApp?.(mc(4),'error');}},220);});
+   populate(draft.term);search.addEventListener('input',()=>{draft.term=search.value;populate(search.value,true,false);clearTimeout(lookupTimer);const term=search.value.trim();if(term.length>=2)lookupTimer=setTimeout(async()=>{const ok=await catalogFor([term]);if(search.isConnected&&search.value.trim()===term){populate(term);suggestions.dispatchEvent(new Event('change',{bubbles:true}));if(ok===false)window.notifyApp?.(mc(4),'error');}},220);});
    window.ALM_SELECTS?.refresh?.();
    actions.append(search,suggestions,preview);
   }
@@ -258,26 +259,31 @@ function renderMedia(){
   season.addEventListener('input',()=>draft.season=season.value);episode.addEventListener('input',()=>draft.episode=episode.value);
   const validEpisode=()=> (whole.checked||Number.isSafeInteger(Number(episode.value))&&Number(episode.value)>0&&Number(episode.value)<=999)&&season.value!==''&&Number.isSafeInteger(Number(season.value))&&Number(season.value)>=0&&Number(season.value)<=99;
   const button=el('button',current?t('dissociate'):t('associate'),'alm-v220-action');
-  button.type='button';const syncButton=()=>{button.disabled=!current&&(!selected||!validEpisode());button.title=button.disabled?mc(2):'';};syncButton();
+  button.type='button';const syncButton=()=>{button.disabled=mediaBusy||!current&&(!selected||!validEpisode());button.title=button.disabled?mc(2):'';};syncButton();
   actions.addEventListener('change',syncButton);actions.addEventListener('input',syncButton);
   button.addEventListener('click',async()=>{
-   button.disabled=true;
+   if(mediaBusy||button.disabled)return;
+   const sourceScan=scan,chosenId=selected,chosenCorrection={season:Number(season.value),episode:whole.checked?0:Number(episode.value),wholeWork:whole.checked,scanId:sourceScan.scanId};
+   mediaBusy=true;button.disabled=true;const chooser=$('v220MediaChoose'),moreButton=$('v220MediaMore');chooser.disabled=true;moreButton.disabled=true;
+   let changed=false;
    try{
-    if(current){await window.animeManager.mediaDissociate(file.index);file.linkedMalId=0;}
+    if(current){await window.animeManager.mediaDissociate(file.index,sourceScan.scanId);file.linkedMalId=0;mediaDrafts.delete(file.index);changed=true;}
     else{
-      if(!Number.isSafeInteger(selected)||selected<1||!validEpisode()){syncButton();return;}
-      if(!animeList().some(a=>Number(a.malId)===selected)){
-        const candidate=[...available,...[...catalogMatches.values()].flat()].find(a=>Number(a.malId)===selected);
-        if(!candidate||!window.confirm(labels(4)+'\n'+candidate.title)){syncButton();return;}
-        const created=await fetch('/api/animes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:candidate.title,malId:selected,status:'Plan to Watch',episodesSeen:'0',autoInfo:false,catalogAdd:true})});
+      if(!Number.isSafeInteger(chosenId)||chosenId<1||!validEpisode())return;
+      if(!animeList().some(a=>Number(a.malId)===chosenId)){
+        const candidate=[...available,...[...catalogMatches.values()].flat()] .find(a=>Number(a.malId)===chosenId);
+        if(!candidate||!window.confirm(labels(4)+'\n'+candidate.title))return;
+        const created=await fetch('/api/animes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:candidate.title,malId:chosenId,status:'Plan to Watch',episodesSeen:'0',type:candidate.type||'TV',episodesTotal:candidate.episodes?String(candidate.episodes):'',autoInfo:false,catalogAdd:true})});
         const body=await created.json().catch(()=>({}));if(!created.ok||body.error)throw Error(body.error||'ALM_MEDIA_CATALOG_ADD_FAILED');
         await window.reloadAnimeLibrary?.();
       }
-      const correction={season:Number(season.value),episode:whole.checked?0:Number(episode.value),wholeWork:whole.checked};
-      await window.animeManager.mediaAssociate(file.index,selected,correction);file.linkedMalId=selected;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;file.wholeWork=correction.wholeWork;mediaDrafts.delete(file.index);
+      const correction=chosenCorrection;
+      if(scan!==sourceScan)throw Error('ALM_MEDIA_INDEX_INVALID');
+      await window.animeManager.mediaAssociate(file.index,chosenId,correction);file.linkedMalId=chosenId;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;file.wholeWork=correction.wholeWork;mediaDrafts.delete(file.index);changed=true;
     }
-    diskChecks.clear();renderMedia();await refreshSummaries();
-   }catch(e){window.notifyApp?.(String(e.message||e),'error');button.disabled=false;}
+    diskChecks.clear();await refreshSummaries();
+   }catch(e){window.notifyApp?.(String(e.message||e),'error');}
+   finally{mediaBusy=false;chooser.disabled=false;moreButton.disabled=false;if(changed||!button.isConnected)renderMedia();else syncButton();}
   });
   actions.append(button);
   if(current&&(file.wholeWork||Number(file.episodeGuess)>0)&&window.animeManager?.mediaOpenEpisode){
@@ -373,7 +379,7 @@ function init(){
  $('navCockpit')?.addEventListener('click',()=>{void loadSequels();});
  const cockpit=$('cockpitPage');if(cockpit&&typeof MutationObserver==='function')new MutationObserver(()=>{if(!cockpit.classList.contains('hidden'))void loadSequels();}).observe(cockpit,{attributes:true,attributeFilter:['class']});
  $('v220MediaChoose')?.addEventListener('click',choose);
- $('v220MediaMore')?.addEventListener('click',async()=>{const start=visible;visible+=40;await catalogFor((scan?.files||[]).slice(start,visible).map(f=>f.titleGuess));renderMedia();});
+ $('v220MediaMore')?.addEventListener('click',async()=>{if(mediaBusy)return;const start=visible;visible+=40;await catalogFor((scan?.files||[]).slice(start,visible).map(f=>f.titleGuess));renderMedia();});
  $('navSeasonNews')?.addEventListener('click',()=>{renderMissing();void refreshAiring();});
  $('v220CheckPossession')?.addEventListener('click',checkPossession);
  const seasons=$('seasonNewsPage');if(seasons&&typeof MutationObserver==='function')new MutationObserver(()=>{if(!seasons.classList.contains('hidden'))void refreshAiring();}).observe(seasons,{attributes:true,attributeFilter:['class']});

@@ -54,6 +54,15 @@ jobs:
         run: |
           node scripts/verify-project.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Journaux de recette (fixtures uniquement)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: ALM-Verification-Logs-${{ github.sha }}
+          path: .release-work/verification/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 7
 
 
 
@@ -120,6 +129,16 @@ jobs:
           node scripts/test-beta82-anilist-network.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node scripts/test-v220-update-progress.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Review Cockpit, DNA and offline media feedback
+        shell: pwsh
+        run: |
+          node scripts/test-v220-review.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-vm-feedback.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-personal-insights-ui.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
   vm-preview-installer:

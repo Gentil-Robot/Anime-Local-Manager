@@ -370,34 +370,36 @@ async function startApplication() {
     mediaIndex=null;
     const root=selection.filePaths[0];
     const result=await require('./lib/local-media-index').scanLocalMedia(root,{maxResults:1000,maxDurationMs:15000,maxEntries:25000});
-    mediaIndex={root,files:result.files};
+    mediaIndex={root,files:result.files,scanId:require('node:crypto').randomUUID()};
     const links=new Map(mediaLinks().map(x=>[x.key,x]));
-    return {canceled:false,root,summary:result.summary,
+    return {canceled:false,root,scanId:mediaIndex.scanId,summary:result.summary,
       files:result.files.map((file,index)=>({...file,index,
         linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0,
         ...(links.get(mediaStore.key(root,file.relativePath))?{episodeGuess:links.get(mediaStore.key(root,file.relativePath)).episodeGuess,seasonGuess:links.get(mediaStore.key(root,file.relativePath)).seasonGuess||0,wholeWork:links.get(mediaStore.key(root,file.relativePath)).wholeWork===true}:{})}))};
   });
   ipcMain.handle('media-associate',async(event,index,malId,correction)=>{
     trusted(event);
-    if(!mediaIndex||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
-    const file=mediaIndex.files[index];
-    const full=path.resolve(mediaIndex.root,file.relativePath);
+    const currentIndex=mediaIndex;
+    if(!currentIndex||correction?.scanId!==currentIndex.scanId||!Number.isSafeInteger(index)||index<0||index>=currentIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
+    const file=currentIndex.files[index];
+    const full=path.resolve(currentIndex.root,file.relativePath);
     const fstat=await require('node:fs/promises').lstat(full);
     if(!fstat.isFile()||fstat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
     const fsp=require('node:fs/promises');
-    const actualRoot=await fsp.realpath(mediaIndex.root),actual=await fsp.realpath(full);
+    const actualRoot=await fsp.realpath(currentIndex.root),actual=await fsp.realpath(full);
+    if(mediaIndex!==currentIndex)throw Error('ALM_MEDIA_INDEX_INVALID');
     if(!mediaStore.contained(actualRoot,actual))throw Error('ALM_MEDIA_OUTSIDE_ROOT');
     const corrected=correction&&typeof correction==='object';
     const wholeWork=corrected&&correction.wholeWork===true;
     const episode=corrected?Number(correction.episode):file.episodeGuess;
     const season=corrected?Number(correction.season):file.seasonGuess;
     if(corrected&&(!Number.isSafeInteger(episode)||episode<(wholeWork?0:1)||episode>999||wholeWork&&episode!==0||!Number.isSafeInteger(season)||season<0||season>99))throw Error('ALM_MEDIA_ASSOCIATION_INVALID');
-    return mediaStore.record(mediaStoreFile,{root:mediaIndex.root,relativePath:file.relativePath,
+    return mediaStore.record(mediaStoreFile,{root:currentIndex.root,relativePath:file.relativePath,
       filename:file.filename,episodeGuess:episode,seasonGuess:season,episodeEndGuess:!wholeWork&&episode===file.episodeGuess?file.episodeEndGuess:0,wholeWork,malId});
   });
-  ipcMain.handle('media-dissociate',async(event,index)=>{
+  ipcMain.handle('media-dissociate',async(event,index,scanId)=>{
     trusted(event);
-    if(!mediaIndex||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
+    if(!mediaIndex||scanId!==mediaIndex.scanId||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
     return mediaStore.remove(mediaStoreFile,mediaStore.key(mediaIndex.root,mediaIndex.files[index].relativePath));
   });
   ipcMain.handle("pick-folder", async event => {
