@@ -2382,8 +2382,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 100394,
-      "sha256": "d2ca72ccb1ac16062f6ec9521941fa63fe2c33700ee457d63122df30be08bbb9"
+      "bytes": 105901,
+      "sha256": "e89d7014785a0ae6f70e9c7d81e855c5098a22b4bb8a125e17e4f4d041035292"
     },
     {
       "path": "public/input-focus.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 15473,
-      "sha256": "29d490766d9d6e50e7b07283823d08c9bb37e0dc1c1d2078900103af5100ee66"
+      "bytes": 16845,
+      "sha256": "cc4f259d73d3ca029eb913687d1bc2e4c3682f8c13b37ff209575a3621cb8f1d"
     },
     {
       "path": "public/watch-status.js",
@@ -4177,8 +4177,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 3803,
-      "sha256": "110a70bb5a808db47f79949bd674c91c14d8e901d4d3706d212baa1d81e7f5ff"
+      "bytes": 3884,
+      "sha256": "c6c58362ca51ec66ccc3edb9b7e95961644efd47255c6b376e3d5c02641408f0"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",

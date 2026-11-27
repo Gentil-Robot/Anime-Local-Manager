@@ -124,22 +124,53 @@
 #cockpitPage .alm-v220-sequel-actions{display:grid;gap:7px;min-width:0}
 #cockpitPage .alm-v220-sequel-status{width:100%;min-width:0;border-radius:8px}
 
-/* Meow, ALM's original retro aviator. Only transforms animate, never video or canvas. */
-#cockpitPage>.studio-banner{min-height:164px;padding:18px 22px;gap:16px}
-#cockpitPage>.studio-banner .studio-banner-copy{flex:0 1 330px;position:relative;z-index:1;max-width:42%}
-.alm-cockpit-flight{flex:1;min-width:0;height:136px;overflow:hidden;pointer-events:none;border-radius:12px;mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 100%)}
-.alm-cockpit-flight svg{width:100%;height:100%;display:block}
-.alm-flight-float{animation:alm-flight-float 6s ease-in-out infinite;transform-origin:62% 49%}
-.alm-flight-clouds{animation:alm-flight-clouds 26s ease-in-out infinite alternate}
+
+/* Meow — wide cloud-filled sky, responsive aircraft layer and gentle aerobatics. */
+#cockpitPage>.studio-banner{position:relative;overflow:hidden;min-height:164px;padding:18px 22px;gap:16px}
+#cockpitPage>.studio-banner .studio-banner-copy{flex:0 1 330px;position:relative;z-index:2;max-width:34%}
+.alm-cockpit-flight{position:absolute;inset:9px 9px 9px clamp(230px,21%,330px);overflow:hidden;pointer-events:none;border-radius:12px;mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 100%)}
+.alm-flight-sky{width:100%;height:100%;display:block}
+.alm-flight-travel{position:absolute;inset:0;display:grid;place-items:center;animation:alm-flight-travel 36s ease-in-out infinite;will-change:transform}
+.alm-flight-plane{width:clamp(116px,13vw,230px);max-width:26%;height:100%;overflow:visible;animation:alm-flight-bank 36s ease-in-out infinite;transform-origin:center}
+.alm-flight-float{animation:alm-flight-float 5s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.alm-flight-clouds{animation:alm-flight-clouds 32s ease-in-out infinite alternate}
 .alm-flight-propeller{transform-box:fill-box;transform-origin:center;animation:alm-flight-propeller .24s linear infinite}
 .alm-flight-scarf{transform-box:fill-box;transform-origin:right center;animation:alm-flight-scarf 1.6s ease-in-out infinite alternate}
-@keyframes alm-flight-float{0%,100%{transform:translateY(1px) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
-@keyframes alm-flight-clouds{from{transform:translateX(-16px)}to{transform:translateX(20px)}}
+@keyframes alm-flight-travel{
+ 0%,100%{transform:translate(-36%,9%)}
+ 13%{transform:translate(-12%,-13%)}
+ 23%{transform:translate(12%,13%)}
+ 34%{transform:translate(38%,-6%)}
+ 42%{transform:translate(39%,10%)}
+ 52%{transform:translate(16%,12%)}
+ 60%{transform:translate(7%,-13%)}
+ 67%{transform:translate(21%,-16%)}
+ 73%{transform:translate(25%,6%)}
+ 81%{transform:translate(2%,13%)}
+ 92%{transform:translate(-36%,-7%)}
+}
+@keyframes alm-flight-bank{
+ 0%,100%{transform:rotate(8deg) scaleX(1)}
+ 13%{transform:rotate(-12deg) scaleX(1)}
+ 23%{transform:rotate(12deg) scaleX(1)}
+ 34%{transform:rotate(-12deg) scaleX(1)}
+ 39%{transform:rotate(-18deg) scaleX(.05)}
+ 42%{transform:rotate(8deg) scaleX(-1)}
+ 52%{transform:rotate(-12deg) scaleX(-1)}
+ 60%{transform:rotate(24deg) scaleX(-1)}
+ 67%{transform:rotate(195deg) scaleX(-1)}
+ 73%{transform:rotate(345deg) scaleX(-1)}
+ 81%{transform:rotate(358deg) scaleX(-1)}
+ 92%{transform:rotate(348deg) scaleX(-1)}
+ 96%{transform:rotate(360deg) scaleX(.05)}
+}
+@keyframes alm-flight-float{0%,100%{transform:translateY(1px)}50%{transform:translateY(-3px)}}
+@keyframes alm-flight-clouds{from{transform:translateX(-14px)}to{transform:translateX(22px)}}
 @keyframes alm-flight-propeller{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.18)}}
 @keyframes alm-flight-scarf{from{transform:rotate(-3deg)}to{transform:rotate(6deg)}}
-html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockpit-flight *{animation:none!important}
-@media(prefers-reduced-motion:reduce){.alm-cockpit-flight *{animation:none!important}}
+html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockpit-flight *{animation:none!important;will-change:auto}
+@media(prefers-reduced-motion:reduce){.alm-cockpit-flight *{animation:none!important;will-change:auto}}
 @media(max-width:700px){#cockpitPage>.studio-banner{min-height:125px;gap:6px;padding:14px}
-#cockpitPage>.studio-banner .studio-banner-copy{max-width:57%;flex-basis:260px}
-.alm-cockpit-flight{height:90px}.alm-cockpit-flight svg{min-width:240px;transform:translateX(-22%)}}
-@media(max-width:400px){#cockpitPage>.studio-banner{flex-wrap:wrap!important}#cockpitPage>.studio-banner .studio-banner-copy{max-width:100%;flex:1 1 100%}.alm-cockpit-flight{flex-basis:100%;height:82px}.alm-cockpit-flight svg{transform:none}}
+#cockpitPage>.studio-banner .studio-banner-copy{max-width:52%;flex-basis:240px}
+.alm-cockpit-flight{inset:7px 7px 7px 48%}.alm-flight-plane{max-width:38%;width:110px}}
+@media(max-width:400px){#cockpitPage>.studio-banner{flex-wrap:wrap!important}#cockpitPage>.studio-banner .studio-banner-copy{max-width:100%;flex:1 1 100%}.alm-cockpit-flight{position:relative;inset:auto;flex-basis:100%;height:86px}}

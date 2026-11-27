@@ -20,7 +20,7 @@ assert(read('public/v220-features.js').includes("'/api/v220/media-candidates'"),
 assert(read('main.js').includes("ipcMain.handle('media-check-episodes'"),'Actual bounded local availability probe');
 assert(read('public/v220-features.js').includes('chosenCorrection={season:'),'Manual episode correction passes through bridge');
 const hero=get('cockpitPage').querySelector('.alm-cockpit-flight');
-assert(hero?.getAttribute('aria-hidden')==='true'&&hero.querySelector('.alm-flight-float')&&hero.querySelector('.alm-flight-propeller'),'Decorative original cockpit flight');
+assert(hero?.getAttribute('aria-hidden')==='true'&&hero.querySelector('.alm-flight-float')&&hero.querySelector('.alm-flight-propeller')&&hero.querySelector('.alm-flight-travel')&&hero.querySelector('.alm-flight-sky'),'Decorative original cockpit flight');
 assert(!hero.querySelector('image,foreignObject,script,audio,video,a[href],use[href]'),'No remote or executable SVG content');
 assert.match(read('public/design-core.js'),/cockpit:'M3 17/);
 assert(read('public/design.js').includes('D.icon(ico)'));
