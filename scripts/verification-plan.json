@@ -15,6 +15,7 @@
     "scripts/test-v220-personal-insights-ui.cjs",
     "scripts/test-v220-watch-model.cjs",
     "scripts/test-v220-watch-rails.cjs",
+    "scripts/test-v220-cockpit-progress.cjs",
     "scripts/test-v220-vm-feedback.cjs",
     "scripts/test-v220-vm-round3.cjs",
     "scripts/test-v220-performance-security.cjs",

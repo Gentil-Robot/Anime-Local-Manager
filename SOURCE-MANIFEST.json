@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 10586,
-      "sha256": "c1685323c3d412d5edc0fa394d33d0ff76ce9ff6d31c4143be94d4c9e3441870"
+      "bytes": 10698,
+      "sha256": "8bba019144e9d7c7fc15c0dc0a67cfc206ad6c49aa2ff50929490257f8f53f7d"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -536,6 +536,11 @@
       "sha256": "6525ec6e87d6e57c7af1da4b7799c7d40ea5c1c25b0a1e32ad35a0923b94320e"
     },
     {
+      "path": "docs/AUDIT-V220-ITERATION5.md",
+      "bytes": 2175,
+      "sha256": "472542d818dbfcd2a2d9368b3c8f2b3699a17617fc424db2ea76177d87d042af"
+    },
+    {
       "path": "docs/Beta81-Apropos-AnimeDNA.txt",
       "bytes": 5221,
       "sha256": "607efeaead7a54c8cb5ba47db53e85f09c2cb8e5caf21a2011a8035ebf31df9c"
@@ -612,8 +617,8 @@
     },
     {
       "path": "docs/RECETTE-V220-VM-TEST.md",
-      "bytes": 17032,
-      "sha256": "a1c20c7bdf750461ed8e8ececf2f6ef57e21a3672a9816e6083d8bb9c10f5b85"
+      "bytes": 19127,
+      "sha256": "fc096a3f4d4addcd95f81677339abf538cf0fed9e4fa1aaaff1aaac335801515"
     },
     {
       "path": "docs/RELEASE-CHECKUP-2026-10-25.md",
@@ -4151,6 +4156,11 @@
       "sha256": "222d397287ebbfe169823570a207a815e8d5b605e48136e347765a24ad55bb47"
     },
     {
+      "path": "scripts/test-v220-cockpit-progress.cjs",
+      "bytes": 6229,
+      "sha256": "0f635c5ef20faa88057f680ed3b80245ed132d72f00889d9ff3c3687593d9f01"
+    },
+    {
       "path": "scripts/test-v220-episode-gaps.cjs",
       "bytes": 1088,
       "sha256": "d47ddb5e9ba0d39010d5098c5be24b94e0dd2563658d60274f190b37fe83ee4d"
@@ -4192,8 +4202,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 5909,
-      "sha256": "d7e38077fc329f3b1e4833d74940d3aaa10443477ae694f5e6ac78af28cdda28"
+      "bytes": 6302,
+      "sha256": "da6828e6cd266e75d96f7679620a566a62cd1b101635b609e514703ce49950df"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",
@@ -4257,8 +4267,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7418,
-      "sha256": "4871ca1741d772adef575c0a69f8265a7702e23b5ae2420243eb7b1696ba2822"
+      "bytes": 7464,
+      "sha256": "a0f30cdfa142ec72334c68dbf481dd2df71d126fcc6d076c7369ed9429e7ec3b"
     },
     {
       "path": "scripts/verify-native.cjs",

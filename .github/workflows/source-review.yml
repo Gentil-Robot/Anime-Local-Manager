@@ -151,6 +151,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node scripts/test-v220-watch-rails.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-cockpit-progress.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node scripts/test-v220-vm-round3.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 

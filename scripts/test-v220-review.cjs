@@ -16,6 +16,11 @@ for(const id of ['v220RecentRows','v220ResumeRows']){const rail=get(id);assert.e
 assert(get('cockpitPage').querySelector('.alm-flight-cat'));
 assert(read('public/v220-watch-rails.js').includes('createEpisodeStepper?.(row.anime)'));
 assert(read('public/catalog.js').includes('episodeWrites.has(id)'));
+assert(read('public/catalog.js').includes('createEpisodeStepper,openRecords'));
+assert(read('lib/media-associations.js').includes('ALM_MEDIA_ASSOCIATION_LIMIT'));
+assert(!read('lib/media-associations.js').includes('items=items.slice(1)'));
+assert(read('lib/catalog.js').includes('const delta=req.body?.delta'));
+assert(!read('public/beta38.js').includes('function wallpaperSizes(){return;'));
 assert(read('public/catalog.js').includes("!popupContext?.readOnly&&present?.status==='Watching'"));
 const ids=[...d.querySelectorAll('[id]')].map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'Unique DOM IDs');
 for(const file of ['public/app.js','public/alm-v2.js','public/navigation.js','public/design.js','public/v220-watch-rails.js','public/v220-features.js','public/v220-personal-insights.js','main.js','preload.js','server.js'])new Function(read(file));
