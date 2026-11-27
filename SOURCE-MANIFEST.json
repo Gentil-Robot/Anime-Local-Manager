@@ -4132,13 +4132,13 @@
     },
     {
       "path": "scripts/test-v211-update-notifications.cjs",
-      "bytes": 5003,
-      "sha256": "ebd342eeda80a474bef87889a7b4dca9faed38e29df72532a527a8799559fcda"
+      "bytes": 5308,
+      "sha256": "7d5cc04de53672b345a93ae5dd60fd124c14484619abd7429215a204fcfbd288"
     },
     {
       "path": "scripts/test-v211-update-ui.cjs",
-      "bytes": 5239,
-      "sha256": "378c2dacb0bf991d086987cb92eaccfca5b96a6996f902f6fa431211985a27e5"
+      "bytes": 5394,
+      "sha256": "222d397287ebbfe169823570a207a815e8d5b605e48136e347765a24ad55bb47"
     },
     {
       "path": "scripts/test-v220-episode-gaps.cjs",
