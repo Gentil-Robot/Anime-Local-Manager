@@ -20,6 +20,8 @@ const {guessEpisode,scanLocalMedia}=require('../lib/local-media-index');
   assert(report.files.find(x=>x.filename==='Anime S01E01.mkv').relativePath==='Series/Anime S01E01.mkv');
   assert(report.summary.skippedSymlinks>=0);
   const limited=await scanLocalMedia(root,{maxResults:1});assert.equal(limited.summary.reason,'results');
+  for(let i=0;i<150;i++)await fs.writeFile(path.join(root,'fixture-'+i+'.txt'),'x');
+  const bounded=await scanLocalMedia(root,{maxEntries:5});assert.equal(bounded.summary.reason,'entries');assert(bounded.summary.scannedEntries<=5);
   const aborted=await scanLocalMedia(root,{signal:{aborted:true}});assert.equal(aborted.summary.reason,'aborted');
   await assert.rejects(()=>scanLocalMedia('relative/path'),/ALM_MEDIA_ROOT_INVALID/);
   const rootLink=path.join(root,'symlink-root');await fs.symlink(path.join(root,'Series'),rootLink,'dir');

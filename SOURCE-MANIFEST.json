@@ -1387,8 +1387,8 @@
     },
     {
       "path": "lib/local-media-index.js",
-      "bytes": 8394,
-      "sha256": "deb6403cb5df4468d40afe0d4cd701ede1ed6e768d13802c57dd1a31e452d74f"
+      "bytes": 9394,
+      "sha256": "cb155fcd05aa6b23d15b92db41351a09eb063553342636f293e4f808889f6b23"
     },
     {
       "path": "lib/local-season-links.js",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 7813,
-      "sha256": "326a8a70b7d4d38435b4df91805f6b9a599201df5c8bd0171dd393a2f8bb8f53"
+      "bytes": 8145,
+      "sha256": "b9813dfcb43a8897b55c89e04b550dc483a29d75efcc950b820abb5a3660cc18"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1627,8 +1627,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 33775,
-      "sha256": "60e4a854bb07b0dba8fe981ec55450406532e0eddc1a737162de14fb05d5c7df"
+      "bytes": 34201,
+      "sha256": "fbe2563b490af82c96d96bf72a0caf244c01c02ce769b9e5977888701a8ab688"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -4157,13 +4157,13 @@
     },
     {
       "path": "scripts/test-v220-local-media-index.cjs",
-      "bytes": 2083,
-      "sha256": "3db561bc276f694e29fceb4b6e18ac3ae0b7826b040b976531f80b697e9e84f0"
+      "bytes": 2316,
+      "sha256": "5681c94a7222b3e5a72a9d74943c3c2d9c83b38ed4f6a8e506862254a9f7a3e1"
     },
     {
       "path": "scripts/test-v220-offline-media.cjs",
-      "bytes": 3762,
-      "sha256": "998e25396f4f7d982a4a40ff122ffd5f7ccc7b0bba05434f626c25fe95c20850"
+      "bytes": 4050,
+      "sha256": "80aa08977fe91e2ab683fe5c3ff9782c7637f283a29ee82ab9618da82e578803"
     },
     {
       "path": "scripts/test-v220-personal-insights-ui.cjs",

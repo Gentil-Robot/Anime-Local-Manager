@@ -44,6 +44,7 @@ const store=require('../lib/media-associations');
   assert.deepEqual(store.summary(file).find(r=>r.malId===77).episodes,[]);
   assert(store.list(file).find(r=>r.malId===77).wholeWork);
   assert.throws(()=>store.record(file,{root,relativePath:'Series/Whole OAV.avi',filename:'Whole OAV.avi',malId:77,episodeGuess:2,wholeWork:true}));
+  const tampered=JSON.parse(await fsp.readFile(file,'utf8'));const savedOva=tampered.items.find(r=>r.malId===77);savedOva.key='0'.repeat(64);await fsp.writeFile(file,JSON.stringify(tampered));assert.equal((await store.locate(file,77,0)).ok,false,'Invalid association identity rejected');
   console.log('OK V2.2 offline media: secure persisted file links, IPC privacy, missing NAS, symlinks, validation and removal.');
  }finally{await fsp.rm(base,{force:true,recursive:true});}
 })().catch(error=>{console.error(error);process.exitCode=1;});

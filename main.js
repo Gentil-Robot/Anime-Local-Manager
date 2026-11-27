@@ -344,7 +344,7 @@ async function startApplication() {
   // may be scanned, and only paths returned by this scan can be associated.
   const mediaStore=require('./lib/media-associations');
   const mediaStoreFile=path.join(app.getPath('userData'),'media-associations-v220.json');
-  let mediaIndex=null;
+  let mediaIndex=null,mediaScanning=false;
   const mediaLinks=()=>mediaStore.load(mediaStoreFile);
   ipcMain.handle('media-summary',event=>{trusted(event);return mediaStore.summary(mediaStoreFile);});
   ipcMain.handle('media-saved',event=>{trusted(event);return mediaStore.list(mediaStoreFile);});
@@ -362,6 +362,9 @@ async function startApplication() {
   });
   ipcMain.handle('media-select-and-scan',async event=>{
     trusted(event);
+    if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');
+    mediaScanning=true;
+    try{
     let selection;
     try{selection=await dialog.showOpenDialog(mainWindow||undefined,{
       title:'ALM · Choisir le dossier des vidéos à inventorier',properties:['openDirectory']
@@ -376,18 +379,22 @@ async function startApplication() {
       files:result.files.map((file,index)=>({...file,index,
         linkedMalId:links.get(mediaStore.key(root,file.relativePath))?.malId||0,
         ...(links.get(mediaStore.key(root,file.relativePath))?{episodeGuess:links.get(mediaStore.key(root,file.relativePath)).episodeGuess,seasonGuess:links.get(mediaStore.key(root,file.relativePath)).seasonGuess||0,wholeWork:links.get(mediaStore.key(root,file.relativePath)).wholeWork===true}:{})}))};
+    }finally{mediaScanning=false;}
   });
   ipcMain.handle('media-associate',async(event,index,malId,correction)=>{
     trusted(event);
     const currentIndex=mediaIndex;
+    if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');
     if(!currentIndex||correction?.scanId!==currentIndex.scanId||!Number.isSafeInteger(index)||index<0||index>=currentIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
     const file=currentIndex.files[index];
     const full=path.resolve(currentIndex.root,file.relativePath);
     const fstat=await require('node:fs/promises').lstat(full);
     if(!fstat.isFile()||fstat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
     const fsp=require('node:fs/promises');
+    const rootStat=await fsp.lstat(currentIndex.root);
+    if(!rootStat.isDirectory()||rootStat.isSymbolicLink())throw Error('ALM_MEDIA_ROOT_INVALID');
     const actualRoot=await fsp.realpath(currentIndex.root),actual=await fsp.realpath(full);
-    if(mediaIndex!==currentIndex)throw Error('ALM_MEDIA_INDEX_INVALID');
+    if(mediaScanning||mediaIndex!==currentIndex)throw Error('ALM_MEDIA_INDEX_INVALID');
     if(!mediaStore.contained(actualRoot,actual))throw Error('ALM_MEDIA_OUTSIDE_ROOT');
     const corrected=correction&&typeof correction==='object';
     const wholeWork=corrected&&correction.wholeWork===true;
@@ -399,6 +406,7 @@ async function startApplication() {
   });
   ipcMain.handle('media-dissociate',async(event,index,scanId)=>{
     trusted(event);
+    if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');
     if(!mediaIndex||scanId!==mediaIndex.scanId||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
     return mediaStore.remove(mediaStoreFile,mediaStore.key(mediaIndex.root,mediaIndex.files[index].relativePath));
   });
