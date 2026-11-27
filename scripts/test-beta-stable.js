@@ -1389,15 +1389,17 @@ check("Beta 17 : bannière de complétion respecte réellement le snooze/navigat
   assert(!almV2Js.includes('completionBanner")?.classList.toggle("hidden", Boolean(window.__almBulkJobRunning))'));
 });
 
-check("Beta 17 : Distribution Anime DNA ouvre les animés par note", () => {
+check("Distribution Anime DNA : filtrage local des jaquettes par note", () => {
   const appJs = read("public/app.js");
   const style = read("public/style.css");
   assert(almV2Js.includes("data-dna-personal-score"));
-  assert(almV2Js.includes("window.showLibraryByPersonalScore"));
+  const gallery = read("public/v220-personal-insights.js");
+  assert(gallery.includes("filter=filter===value"));assert(gallery.includes("ALM_CATALOG.openRecords"));
+  assert(!indexHtml.includes('id="v220ScoreFilter"'));
   assert(appJs.includes("activePersonalScoreFilter"));
   assert(appJs.includes("showLibraryByPersonalScore"));
   assert(appJs.includes("activeScoreFilterChip"));
-  assert(indexHtml.includes("Clique sur une note pour ouvrir les animés correspondants"));
+  assert(indexHtml.includes("Clique sur une note pour filtrer les jaquettes"));
   assert(style.includes("button.dna-score-column.is-clickable"));
 });
 

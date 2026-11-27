@@ -74,14 +74,16 @@
 
 /* Anime DNA — one gallery with the original poster cards and histogram. */
 .alm-v220-score-board{min-width:0;margin:12px 0}
-.alm-v220-score-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px}
-.alm-v220-score-filter{display:flex;align-items:center;gap:7px;font-size:.86rem;min-width:0}
-.alm-v220-score-toolbar .alm-v220-personal-summary{margin:0;flex:1;text-align:right;font-size:.82rem;color:var(--muted,#b8bbd7)}
-#dnaScorePosters{grid-template-columns:repeat(var(--alm-score-columns,8),minmax(0,1fr));min-width:0}
-#dnaScorePosters>.alm-v220-note{grid-column:1/-1}
+.alm-v220-score-board>.alm-v220-personal-summary{margin:6px 0 12px;text-align:center;font-size:.82rem;color:var(--muted,#b8bbd7)}
+.alm-v220-score-gallery{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;gap:9px;min-width:0}
+.alm-v220-score-arrow{width:34px;height:46px;justify-self:center;font-size:1.3rem;padding:0}
+#dnaScorePosters{display:flex;gap:8px;min-width:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0;padding:3px 0;overscroll-behavior-x:contain}
+#dnaScorePosters::-webkit-scrollbar{display:none}
+#dnaScorePosters>.dna-score-poster{flex:0 0 calc((100% - (var(--alm-score-columns,8) - 1)*8px)/var(--alm-score-columns,8));scroll-snap-align:start;min-width:0}
+#dnaScorePosters>.alm-v220-note{flex:1 0 100%}
+@media(max-width:540px){.alm-v220-score-gallery{grid-template-columns:26px minmax(0,1fr) 26px;gap:5px}.alm-v220-score-arrow{width:26px}}
 #dnaScoreDist .dna-score-column.is-selected{outline:2px solid var(--score-color,#a78bfa);outline-offset:3px;border-radius:8px}
 #dnaScoreDist .dna-score-column:focus-visible{outline:2px solid #b3a9ec;outline-offset:3px}
-@media(max-width:650px){.alm-v220-score-toolbar .alm-v220-personal-summary{text-align:left}}
 /* Cockpit / Import: shared ALM layout, no new standalone files page. */
 #cockpitPage .alm-watch-rails{margin-top:20px}
 #cockpitPage .alm-watch-card{flex-basis:clamp(220px,25vw,280px)}

@@ -583,15 +583,12 @@
         <p class="dna-dashboard-subtitle">Répartition de tes notes personnelles de 1 à 10. Clique sur une note pour filtrer les jaquettes, ou sur une jaquette pour ouvrir sa fiche.</p>
         <div id="dnaScoreSummary" class="dna-score-summary" aria-live="polite"></div>
         <div id="v220ScoreBoard" class="alm-v220-score-board" data-no-i18n>
-          <div class="alm-v220-score-toolbar">
-            <label class="alm-v220-score-filter"><span id="v220ScoreFilterLabel">Afficher</span><select id="v220ScoreFilter"></select></label>
-            <p id="v220ScoreSummary" class="alm-v220-personal-summary" role="status" aria-live="polite"></p>
-            <div class="alm-watch-controls">
-              <button id="v220ScorePrev" type="button" class="alm-watch-icon-btn" aria-controls="dnaScorePosters" aria-label="Jaquettes précédentes">‹</button>
-              <button id="v220ScoreNext" type="button" class="alm-watch-icon-btn" aria-controls="dnaScorePosters" aria-label="Jaquettes suivantes">›</button>
-            </div>
+          <p id="v220ScoreSummary" class="alm-v220-personal-summary" role="status" aria-live="polite"></p>
+          <div class="alm-v220-score-gallery">
+            <button id="v220ScorePrev" type="button" class="alm-watch-icon-btn alm-v220-score-arrow" aria-controls="dnaScorePosters" aria-label="Jaquettes précédentes">‹</button>
+            <div id="dnaScorePosters" class="dna-score-posters" aria-label="Tes animés notés" tabindex="0"></div>
+            <button id="v220ScoreNext" type="button" class="alm-watch-icon-btn alm-v220-score-arrow" aria-controls="dnaScorePosters" aria-label="Jaquettes suivantes">›</button>
           </div>
-          <div id="dnaScorePosters" class="dna-score-posters" aria-label="Tes animés notés"></div>
         </div>
         <div id="dnaScoreDist" class="dna-score-dist"></div>
       </section>

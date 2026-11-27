@@ -14,7 +14,7 @@ const copy={
 const lang=()=>window.ALM_I18N?.getLanguage?.()||window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';
 const t=i=>(copy[lang()]||copy.en)[i];
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.textContent=String(text);if(cls)n.className=cls;return n;};
-let records=[],filter='all',offset=0,thumb=null,initialized=false,observer=null;
+let records=[],filter='all',thumb=null,initialized=false,observer=null,gallery=[];
 const library=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
 const title=a=>window.ALM_TITLES?.title?.(a)||a.title||'Anime';
 const size=()=>{const w=$('dnaScorePosters')?.clientWidth||960;return Math.max(2,Math.min(8,Math.floor(w/95)));};
@@ -23,17 +23,30 @@ function localThumb(a){
  const url=/^\/(?:images|assets)\/[a-z0-9._%/-]+$/i.test(raw)?raw:Number.isSafeInteger(id)&&id>0?'/api/cover-cache/'+id:'';
  if(url){const img=el('img');img.src=url;img.alt='';img.loading='lazy';img.dataset.imageFallback='true';if(url.startsWith('/api/cover-cache/'))img.dataset.almManagedCover='1';span.append(img);}return span;
 }
-function draw(){
- const host=$('dnaScorePosters'),select=$('v220ScoreFilter'),prev=$('v220ScorePrev'),next=$('v220ScoreNext'),summary=$('v220ScoreSummary');
- if(!host||!select||!prev||!next)return;
- const data=M.scoreLanes(records),opts=[['all',t(1)],...data.lanes.filter(l=>l.count).map(l=>[l.score===null?'unrated':String(l.score),(l.score===null?t(2):l.score+'/10')+' · '+l.count])];
- if(!opts.some(o=>o[0]===filter)){filter='all';offset=0;}
- select.replaceChildren(...opts.map(([v,label])=>{const o=el('option',label);o.value=v;return o;}));select.value=filter;
- $('v220ScoreFilterLabel').textContent=t(0);
- const gallery=M.scoreGallery(records,filter),page=size();
- offset=Math.min(Math.max(0,offset),Math.max(0,Math.floor((gallery.length-1)/page)*page));
+function metrics(){
+ const host=$('dnaScorePosters'),page=size(),width=host.clientWidth||960;
+ const step=(width+8)/page,max=Math.max(0,host.scrollWidth-host.clientWidth||Math.max(0,(gallery.length-page)*step));
+ const first=Math.min(Math.max(0,gallery.length-page),Math.max(0,Math.round(host.scrollLeft/step)));
+ return {host,page,step,max,first};
+}
+function sync(){
+ const {host,page,max,first}=metrics(),prev=$('v220ScorePrev'),next=$('v220ScoreNext'),summary=$('v220ScoreSummary');
+ prev.disabled=gallery.length<=page||host.scrollLeft<=1;
+ next.disabled=gallery.length<=page||host.scrollLeft>=max-1;
+ summary.textContent=(filter==='all'?'':(filter+'/10 · '))+(gallery.length?String(first+1)+'–'+Math.min(first+page,gallery.length)+' / '+gallery.length+' '+t(8):'0 '+t(8));
+}
+function slide(direction){
+ const {host,step,max}=metrics(),left=Math.max(0,Math.min(max,host.scrollLeft+direction*step));
+ const reduced=document.documentElement.dataset.motion==='reduced'||window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+ if(typeof host.scrollTo==='function')host.scrollTo({left,behavior:reduced?'auto':'smooth'});else{host.scrollLeft=left;sync();}
+}
+function draw(reset=false){
+ const host=$('dnaScorePosters'),prev=$('v220ScorePrev'),next=$('v220ScoreNext'),summary=$('v220ScoreSummary');
+ if(!host||!prev||!next||!summary)return;
+ const old=reset?0:host.scrollLeft;
+ const page=size();gallery=M.scoreGallery(records,filter);
  host.style.setProperty('--alm-score-columns',String(page));host.replaceChildren();
- for(const a of gallery.slice(offset,offset+page)){
+ for(const a of gallery){
   const button=el('button',null,'dna-score-poster');button.type='button';button.dataset.animeId=String(a.id);button.dataset.score=String(M.score(a.score)??'');
   button.title=title(a)+' — '+(M.score(a.score)===null?t(2):M.score(a.score)+'/10');button.setAttribute('aria-label',t(6)+': '+button.title);
   if(thumb){button.innerHTML=thumb(a);}else button.append(localThumb(a));
@@ -43,25 +56,24 @@ function draw(){
   host.append(button);
  }
  if(!gallery.length)host.append(el('p',t(3),'alm-v220-note'));
- prev.disabled=offset===0;next.disabled=offset+page>=gallery.length;
+ host.scrollLeft=Math.min(old,Math.max(0,metrics().max));sync();
  for(const [b,i] of [[prev,4],[next,5]]){b.title=t(i);b.setAttribute('aria-label',t(i));}
- summary.textContent=gallery.length?String(offset+1)+'–'+Math.min(offset+page,gallery.length)+' / '+gallery.length+' '+t(8):'0 '+t(8);
  for(const b of $('dnaScoreDist')?.querySelectorAll('[data-dna-personal-score]')||[]){
   const value=b.dataset.dnaPersonalScore;b.setAttribute('aria-pressed',String(filter===value));b.classList.toggle('is-selected',filter===value);
   b.setAttribute('aria-label',t(7)+' '+value+'/10');
-  b.onclick=()=>{filter=filter===value?'all':value;offset=0;draw();};
+  b.onclick=()=>{filter=filter===value?'all':value;draw(true);};
  }
- window.ALM_SELECTS?.refresh?.();
 }
 function init(){
  if(initialized||!$('v220ScoreBoard'))return;initialized=true;
- $('v220ScoreFilter').addEventListener('change',event=>{filter=event.target.value;offset=0;draw();});
- $('v220ScorePrev').addEventListener('click',()=>{offset=Math.max(0,offset-size());draw();});
- $('v220ScoreNext').addEventListener('click',()=>{offset+=size();draw();});
- window.addEventListener('alm:language-changed',draw);
+ $('v220ScorePrev').addEventListener('click',()=>slide(-1));
+ $('v220ScoreNext').addEventListener('click',()=>slide(1));
+ $('dnaScorePosters').addEventListener('scroll',sync,{passive:true});
+ $('dnaScorePosters').addEventListener('keydown',event=>{if(event.target!==$('dnaScorePosters')||!['ArrowLeft','ArrowRight'].includes(event.key))return;event.preventDefault();slide(event.key==='ArrowLeft'?-1:1);});
+ window.addEventListener('alm:language-changed',()=>draw());
  window.addEventListener('alm:collection-changed',()=>{records=library();draw();});
  $('navDna')?.addEventListener('click',()=>{records=library();draw();});
- if(typeof ResizeObserver==='function'){let previous=0;observer=new ResizeObserver(()=>{const current=size();if(current!==previous){previous=current;offset=Math.floor(offset/current)*current;draw();}});observer.observe($('dnaScorePosters'));}
+ if(typeof ResizeObserver==='function'){let previous=0;observer=new ResizeObserver(()=>{const current=size();if(current!==previous){previous=current;draw();}});observer.observe($('dnaScorePosters'));}
  records=library();draw();
 }
 window.ALM_V220_SCORE_GALLERY={render(list,renderThumb){init();records=Array.isArray(list)?list:[];thumb=typeof renderThumb==='function'?renderThumb:thumb;draw();}};

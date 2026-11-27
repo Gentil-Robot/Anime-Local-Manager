@@ -2382,8 +2382,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 100550,
-      "sha256": "6109a81b305520c26a33400494dc4ac1ca96d2b8688ee99780ceb14a85e1b87d"
+      "bytes": 100394,
+      "sha256": "d2ca72ccb1ac16062f6ec9521941fa63fe2c33700ee457d63122df30be08bbb9"
     },
     {
       "path": "public/input-focus.js",
@@ -2667,8 +2667,8 @@
     },
     {
       "path": "public/v220-personal-insights.js",
-      "bytes": 6074,
-      "sha256": "5304df0c47c10b1f499cf018f76e9285b83ac1a3810095883b9f00b102c58a99"
+      "bytes": 6652,
+      "sha256": "662321221bbcc67cb644133b88f2da7a1aeba7503821489112418b2b4d4c0b43"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -2682,8 +2682,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 15108,
-      "sha256": "4326ef8f51ed57799feffb9550a6ed3ad011196430a91771d37afed290048f56"
+      "bytes": 15473,
+      "sha256": "29d490766d9d6e50e7b07283823d08c9bb37e0dc1c1d2078900103af5100ee66"
     },
     {
       "path": "public/watch-status.js",
@@ -3037,8 +3037,8 @@
     },
     {
       "path": "scripts/test-beta-stable.js",
-      "bytes": 80761,
-      "sha256": "1e3e688b5b923d0bc943c207e6998719780f0cad3271c5068487dfd33c7cc583"
+      "bytes": 80907,
+      "sha256": "03df1ab8cde2e6b180b9ec2f3c8fe0f46a89c54e6315e83bb45d299d7f9f0efd"
     },
     {
       "path": "scripts/test-beta15-ui-logic.js",
@@ -4162,8 +4162,8 @@
     },
     {
       "path": "scripts/test-v220-personal-insights-ui.cjs",
-      "bytes": 3037,
-      "sha256": "601dd4f7bda71b1aca82761241b10234ce3c97c2a5ea4b0a4a5c71d29709f03f"
+      "bytes": 3274,
+      "sha256": "2784ab7ae5137d4cc0b4a922198ef7b4169df1a642e906b9c66a665a050f1be6"
     },
     {
       "path": "scripts/test-v220-personal-insights.cjs",
@@ -4177,8 +4177,8 @@
     },
     {
       "path": "scripts/test-v220-review.cjs",
-      "bytes": 3665,
-      "sha256": "0b27321395254a7a4842b41342e4630796bfc673a2c11b606af3639f0205602e"
+      "bytes": 3803,
+      "sha256": "110a70bb5a808db47f79949bd674c91c14d8e901d4d3706d212baa1d81e7f5ff"
     },
     {
       "path": "scripts/test-v220-runtime-security.cjs",

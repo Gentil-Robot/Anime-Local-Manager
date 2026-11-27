@@ -26,7 +26,7 @@ assert.match(read('public/design-core.js'),/cockpit:'M3 17/);
 assert(read('public/design.js').includes('D.icon(ico)'));
 assert.match(read('public/v220.css'),/prefers-reduced-motion:reduce/);
 assert.match(read('public/v220.css'),/data-motion="reduced"/);
-assert(get('v220ScorePrev')&&get('v220ScoreNext')&&!get('v220ScoreLanes'),'Unified DNA gallery');
+assert(get('v220ScorePrev')?.nextElementSibling===get('dnaScorePosters')&&get('dnaScorePosters')?.nextElementSibling===get('v220ScoreNext')&&!get('v220ScoreFilter')&&!get('v220ScoreLanes'),'Side arrows and histogram-only DNA gallery');
 assert.match(read('public/alm-v2.js'),/ALM_V220_SCORE_GALLERY\?\.render/);
 assert.match(read('main.js'),/correction\?\.scanId!==currentIndex\.scanId/);
 assert.match(read('main.js'),/mediaIndex!==currentIndex/);
