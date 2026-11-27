@@ -22,6 +22,16 @@ const localLabels={
  'pt-BR':['Abrir episódio associado','Arquivo indisponível. Confira o disco ou NAS.'],
  'zh-CN':['打开关联的剧集','关联的文件不可用，请检查磁盘或 NAS。']
 };
+const resumeCopy={
+ fr:['Tous tes animés en cours, reprises en premier','animés en cours','À commencer','Total atteint · vérifier le statut','Aucun animé en cours.'],
+ en:['All watching anime, resumes first','watching anime','Start watching','Total reached · review status','No anime currently watching.'],
+ es:['Todos tus animes en curso, primero los iniciados','animes en curso','Por comenzar','Total alcanzado · revisar estado','No hay animes en curso.'],
+ de:['Alle laufenden Anime, zuerst begonnene','laufende Anime','Noch beginnen','Gesamtzahl erreicht · Status prüfen','Keine laufenden Anime.'],
+ ja:['視聴中の全作品・途中の作品を優先','作品を視聴中','視聴開始','全話到達・状態を確認','視聴中の作品はありません。'],
+ 'pt-BR':['Todos os animes em andamento, retomadas primeiro','animes em andamento','Por começar','Total atingido · verificar status','Nenhum anime em andamento.'],
+ 'zh-CN':['所有观看中的动漫，优先继续观看','部正在观看','尚未开始','已达总集数 · 检查状态','没有观看中的动漫。']
+};
+const rc=i=>(resumeCopy[window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr']||resumeCopy.en)[i];
 const t=key=>{const language=window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';
  if(key==='localOpen'||key==='fileError')return (localLabels[language]||localLabels.en)[key==='localOpen'?0:1];
  return (copy[language]||copy.en)[key]||copy.en[key]||key;};
@@ -47,6 +57,7 @@ const apiPoster=anime=>{
 };
 const watched=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
 const subtitle=(row,newly=false)=>{
+ if(!newly&&row.state==='review')return rc(3);
  const number=newly?row.highestEpisode:row.next;
  const season=validId(row.anime?.manualSeasonNumber||row.anime?.betaseriesSeason);
  const ep=t('episode')+' '+number;
@@ -76,7 +87,7 @@ function card(row,{fresh=false,gallery=[]}={}){
  const name=document.createElement('strong');name.className='alm-watch-title';
  name.textContent=window.ALM_TITLES?.title?.(anime)||anime.title||t('anime');
  const info=document.createElement('span');info.className='alm-watch-episode';
- info.textContent=(fresh?'▶ ':'⏯ ')+subtitle(row,fresh);
+ info.textContent=fresh?'▶ '+subtitle(row,true):row.state==='review'?rc(3):row.state==='start'?rc(2)+' · '+subtitle(row,false):'⏯ '+subtitle(row,false);
  content.append(name,info);
  if(!fresh){
   const total=row.total;
@@ -86,7 +97,7 @@ function card(row,{fresh=false,gallery=[]}={}){
   if(total){
    const track=document.createElement('span');track.className='alm-watch-progress';track.setAttribute('role','progressbar');
    track.setAttribute('aria-valuemin','0');track.setAttribute('aria-valuemax',String(total));
-   track.setAttribute('aria-valuenow',String(row.seen));track.setAttribute('aria-label',details.textContent);
+   track.setAttribute('aria-valuenow',String(Math.min(total,row.seen)));track.setAttribute('aria-label',details.textContent);
    const fill=document.createElement('span');fill.style.width=String(Math.min(100,row.seen/total*100))+'%';
    track.append(fill);content.append(track);
   }
@@ -103,11 +114,11 @@ function card(row,{fresh=false,gallery=[]}={}){
 function rail(kind,rows){
  const host=$(kind==='fresh'?'v220RecentRows':'v220ResumeRows'),empty=$(kind==='fresh'?'v220RecentEmpty':'v220ResumeEmpty');
  if(!host||!empty)return;
- const frag=document.createDocumentFragment(),gallery=rows.map(row=>row.anime);
+ const oldScroll=host.scrollLeft,frag=document.createDocumentFragment(),gallery=rows.map(row=>row.anime);
  for(const row of rows){
   const tile=card(row,{fresh:kind==='fresh',gallery});
   const episodes=associations.get(Number(row.anime?.malId))?.episodes;
-  if(kind==='resume'&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
+  if(kind==='resume'&&row.next!==null&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
    const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';
    const open=document.createElement('button');open.type='button';open.className='alm-watch-local-open';
    open.textContent='▶ '+t('localOpen')+' '+row.next;
@@ -122,8 +133,8 @@ function rail(kind,rows){
    wrapper.append(tile,open);frag.append(wrapper);
   }else frag.append(tile);
  }
- host.replaceChildren(frag);
- empty.textContent=rows.length?'':t(kind==='fresh'?'noFresh':'noResume');empty.hidden=rows.length>0;
+ host.replaceChildren(frag);host.scrollLeft=oldScroll;
+ empty.textContent=rows.length?'':kind==='fresh'?t('noFresh'):rc(4);empty.hidden=rows.length>0;
  host.hidden=rows.length===0;
  const parent=host.closest('.alm-watch-rail');
  if(parent){
@@ -140,9 +151,10 @@ function draw(){
  root.hidden=false;
  if(!visible())return;
  $('v220RecentTitle').textContent=t('fresh');$('v220RecentHint').textContent=t('recentHint');
- $('v220ResumeTitle').textContent=t('resume');$('v220ResumeHint').textContent=t('resumeHint');
+ $('v220ResumeTitle').textContent=t('resume');
  const newRows=M.newEpisodeRows(watched(),schedule);
  const resumeRows=M.resumeRows(watched());
+ $('v220ResumeHint').textContent=rc(0)+' · '+resumeRows.length+' '+rc(1);
  rail('fresh',newRows);rail('resume',resumeRows);
  const refresh=$('v220RecentRefresh');if(refresh)refresh.title=t('refresh');
  for(const button of root.querySelectorAll('[data-watch-scroll]')){
@@ -159,7 +171,7 @@ async function checkSchedule(force=false){
    if(!response.ok)throw Error('ALM_AIRING_UNAVAILABLE');
    const data=await response.json();
    schedule={items:Array.isArray(data.items)?data.items:[]};
-   scheduleAt=Date.now();draw();
+   scheduleAt=Date.now();draw();window.dispatchEvent(new CustomEvent('alm:airing-cache-changed',{detail:{items:schedule.items,checkedAt:data.checkedAt||''}}));
   }catch{scheduleAt=Date.now();draw();}
  })().finally(()=>{loading=null;});
  return loading;
@@ -189,6 +201,11 @@ function init(){
  void reloadAssociations();
  draw();
  if(visible()&&M.watching(watched()).length)void checkSchedule();
+ // Only read the local cache while visible; the configured maintenance and
+ // notification services remain responsible for provider requests.
+ const poll=setInterval(()=>{if(visible()&&!document.hidden)void checkSchedule();},120000);
+ window.addEventListener('pagehide',()=>clearInterval(poll),{once:true});
+ document.addEventListener('visibilitychange',()=>{if(visible()&&!document.hidden)void checkSchedule();});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

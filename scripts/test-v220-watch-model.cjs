@@ -9,7 +9,10 @@ const records=[
  {id:4,malId:96,title:'Anime D',status:'Watching',episodesSeen:'11',episodesTotal:'11'},
  {id:5,malId:95,title:'Anime E',status:'Watching',episodesSeen:'3',episodesTotal:'0'}
 ];
-assert.deepEqual(M.resumeRows(records).map(x=>x.id),[5,1],'No progress? No false resume. Completed? Skip.');
+assert.deepEqual(M.resumeRows(records).map(x=>x.id),[5,1,2,4],'All Watching records, true resumes first, then starts and status review.');
+assert.equal(M.resumeRows(records)[2].next,1);assert.equal(M.resumeRows(records)[2].state,'start');
+assert.equal(M.resumeRows(records)[3].next,null);assert.equal(M.resumeRows(records)[3].state,'review');
+assert.equal(M.resumeRows(Array.from({length:65},(_,i)=>({id:i+1,status:'Watching',title:'Series '+i}))).length,65,'No hidden resume limit');
 assert.equal(M.resumeRows(records)[0].next,4);
 const sec=Math.floor(now/1000);
 const airing={items:[

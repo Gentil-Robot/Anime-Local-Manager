@@ -11,22 +11,23 @@
   function watching(animes){
     return (Array.isArray(animes)?animes:[]).filter(a=>a&&a.status==='Watching'&&positive(a.id));
   }
-  function resumeRows(animes,limit=30){
-    return watching(animes).filter(a=>{
-      const seen=positive(a.episodesSeen),total=positive(a.episodesTotal);
-      return seen>0&&(!total||seen<total);
-    }).sort((a,b)=>{
-      // Library records do not always have an episode-level watch timestamp.
-      // Prefer an actual watch event timestamp if present, otherwise current
-      // episode progress; never present the sorting as "recently watched".
-      const latest=a=>Array.isArray(a.watchEvents)?Math.max(0,...a.watchEvents.slice(-200).map(e=>{
-        const value=Date.parse(e?.watchedAt||e?.date||e?.at||'');
-        return Number.isFinite(value)?value:0;
-      })):0;
-      return latest(b)-latest(a)||positive(b.episodesSeen)-positive(a.episodesSeen)||String(a.title||'').localeCompare(String(b.title||''));
-    }).slice(0,Math.max(0,Math.min(40,nonnegative(limit)))).map(a=>({
-      anime:a,id:positive(a.id),seen:positive(a.episodesSeen),total:positive(a.episodesTotal),next:positive(a.episodesSeen)+1
-    }));
+  function resumeRows(animes,limit=null){
+    // Status is the source of truth. A zero/unknown progress is a start,
+    // and a completed episode count with Watching is a status to review,
+    // never a reason to hide the record or invent another episode.
+    const seenIds=new Set();
+    const rows=watching(animes).filter(a=>{const id=positive(a.id);if(seenIds.has(id))return false;seenIds.add(id);return true;}).map(a=>{
+      const seen=nonnegative(a.episodesSeen),total=positive(a.episodesTotal);
+      const state=total&&seen>=total?'review':seen>0?'resume':'start';
+      return {anime:a,id:positive(a.id),seen,total,next:state==='review'?null:seen+1,state};
+    });
+    const latest=a=>Array.isArray(a.watchEvents)?Math.max(0,...a.watchEvents.slice(-200).map(e=>{
+      const value=Date.parse(e?.watchedAt||e?.date||e?.at||'');
+      return Number.isFinite(value)?value:0;
+    })):0;
+    const rank={resume:0,start:1,review:2};
+    rows.sort((a,b)=>rank[a.state]-rank[b.state]||latest(b.anime)-latest(a.anime)||b.seen-a.seen||String(a.anime.title||'').localeCompare(String(b.anime.title||''))||a.id-b.id);
+    return limit===null?rows:rows.slice(0,nonnegative(limit));
   }
   function newEpisodeRows(animes,airing,nowMs=Date.now(),limit=24){
     const all=new Map(watching(animes).map(a=>[positive(a.id),a]));

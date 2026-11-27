@@ -2672,13 +2672,13 @@
     },
     {
       "path": "public/v220-watch-model.js",
-      "bytes": 3287,
-      "sha256": "90b6e58a24b69821e0a96b166a787be8e11ddd999f2a421c549cd0827f3d5046"
+      "bytes": 3443,
+      "sha256": "e35648d2bba7d1d9b937855f3e1acb9fcb43189bd8fcf3c8173b93c4f29ec2a5"
     },
     {
       "path": "public/v220-watch-rails.js",
-      "bytes": 15220,
-      "sha256": "2211a14a7695be166ef47c988988247296c6731999c5aaac44dcf83026720846"
+      "bytes": 17236,
+      "sha256": "0a1a6f2f9186a134ac2a4dcb71144c874ee7ec22bdf4c41978e42739875d77f5"
     },
     {
       "path": "public/v220.css",
@@ -4212,13 +4212,13 @@
     },
     {
       "path": "scripts/test-v220-watch-model.cjs",
-      "bytes": 2112,
-      "sha256": "988c3659a024c47079cbf22a0c63adce1cd01125bfbde26b208a49dd93a4e1de"
+      "bytes": 2488,
+      "sha256": "1f3d3c153946947534960b7fbe71b733b007ceb557a5a16533288ad0315a4cee"
     },
     {
       "path": "scripts/test-v220-watch-rails.cjs",
-      "bytes": 5406,
-      "sha256": "ef6e67916aac76c14b4206aa0d436e725d7e42e0a08b85c57d5e5b4190ea7736"
+      "bytes": 5604,
+      "sha256": "f4f5a7aab6d0e220bbe05d52262649657bc4c6a25b2e45ad760e82187d5ec3c2"
     },
     {
       "path": "scripts/test-windows-update-handoff.cjs",
