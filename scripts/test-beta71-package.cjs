@@ -26,6 +26,30 @@ function dependencyFixtures(){
   assert(fs.existsSync(electron),'Electron runtime absent; install dependencies with npm ci.');
   sourceStage(root,stage,source);
   phases.mark('stage-physical-dependencies');
+  // The release candidate guard must reject the normal production identity,
+  // including when the VM environment flag is present. Only the throwaway
+  // copy is converted to VM TEST for the real builder dependency regression.
+  const stagePackage=path.join(stage,'package.json'),stageRelease=path.join(stage,'release-version.json');
+  const stagedPkg=JSON.parse(fs.readFileSync(stagePackage,'utf8')),release=JSON.parse(fs.readFileSync(stageRelease,'utf8'));
+  const buildEnv={...process.env,CSC_IDENTITY_AUTO_DISCOVERY:'false'};
+  for(const k of ['CSC_LINK','WIN_CSC_LINK','CSC_KEY_PASSWORD','WIN_CSC_KEY_PASSWORD','CSC_NAME','WIN_CSC_NAME'])delete buildEnv[k];
+  if(release.releaseCandidate===true){
+   const blocked=await runCommand(process.execPath,['-e',"require('./scripts/prepare-metadata-release.js')().catch(e=>{console.error(e.message);process.exitCode=1;});"],{cwd:stage,timeoutMs:30000,env:{...buildEnv,ALM_VM_PREVIEW_BUILD:'1'}});
+   assert.notEqual(blocked.code,0);assert.match(blocked.output,/ALM_CANDIDATE_VM_ONLY/);
+   stagedPkg.build.appId='fr.gentilrobot.animelocalmanager.vmtest';
+   stagedPkg.build.productName='Anime Local Manager VM Test';
+   stagedPkg.build.executableName='Anime Local Manager VM Test';
+   if(stagedPkg.build.linux)stagedPkg.build.linux.executableName='anime-local-manager-vm-test';
+   release.qualifier='VM TEST';release.publicVersion='V'+release.technicalVersion+' VM TEST';
+   release.publicName='Anime Local Manager '+release.publicVersion;
+   release.installerName='Anime-Local-Manager-'+release.technicalVersion+'-VM-TEST-x64.exe';
+   release.archiveName='Anime-Local-Manager-'+release.technicalVersion+'-VM-TEST.zip';
+   fs.writeFileSync(stagePackage,JSON.stringify(stagedPkg,null,2)+'\n');
+   fs.writeFileSync(stageRelease,JSON.stringify(release,null,2)+'\n');
+   buildEnv.ALM_VM_PREVIEW_BUILD='1';
+   assert.equal(JSON.parse(fs.readFileSync(path.join(root,'release-version.json'),'utf8')).releaseCandidate,true);
+   console.log('OK candidate guard: production identity rejected, temporary dir-only package uses isolated VM TEST identity.');
+  }
   const modules=path.join(stage,'node_modules'),digest=treeManifest(path.join(root,'node_modules'),{allowLinks:true}).digest;
   assert(stagedDependenciesValid(stage,digest));assert(!fs.lstatSync(modules).isSymbolicLink());
   const changed=path.join(modules,'body-parser/package.json'),original=fs.readFileSync(changed);fs.appendFileSync(changed,' ');assert(!stagedDependenciesValid(stage,digest));fs.writeFileSync(changed,original);
@@ -33,7 +57,7 @@ function dependencyFixtures(){
   const copy=path.join(temporary,'physical-modules');fs.renameSync(modules,copy);
   fs.symlinkSync(path.join(root,'node_modules'),modules,process.platform==='win32'?'junction':'dir');assert(!stagedDependenciesValid(stage,digest));
   const args=[require.resolve('electron-builder/cli.js'),process.platform==='win32'?'--win':process.platform==='darwin'?'--mac':'--linux','dir','--x64','--publish','never','--config.electronDist='+electronDist];
-  const build=()=>runCommand(process.execPath,args,{cwd:stage,timeoutMs:240000});
+  const build=()=>runCommand(process.execPath,args,{cwd:stage,timeoutMs:240000,env:buildEnv});
   const broken=await build();assert.notEqual(broken.code,0,'Linked node_modules regression was not rejected');assert.match(broken.output,/Dépendance de production absente du paquet/,broken.output.slice(-10000));
   phases.mark('negative-builder');console.log('OK Beta71: actual electron-builder rejects the old linked dependency tree.');
   fs.rmSync(modules,{recursive:true,force:true});fs.renameSync(copy,modules);assert(stagedDependenciesValid(stage,digest));
@@ -42,7 +66,7 @@ function dependencyFixtures(){
   fs.rmSync(path.join(stage,'dist'),{recursive:true,force:true});const built=await build();assert.equal(built.code,0,built.output.slice(-12000));
   phases.mark('positive-builder');
   const out=path.join(stage,'dist',process.platform==='win32'?'win-unpacked':process.platform==='darwin'?'mac':'linux-unpacked');
-  const archive=process.platform==='darwin'?path.join(out,pkg.build.productName+'.app/Contents/Resources/app.asar'):path.join(out,'resources/app.asar');
+  const archive=process.platform==='darwin'?path.join(out,stagedPkg.build.productName+'.app/Contents/Resources/app.asar'):path.join(out,'resources/app.asar');
   const checked=verifyPreparedSource(archive,stage);assert(checked.dependencyPackages>=80);
   const asar=require('@electron/asar'),files=new Set(asar.listPackage(archive).map(archiveName));
   assert(files.has('node_modules/body-parser/package.json'));assert(!files.has('node_modules/electron-builder/package.json'));

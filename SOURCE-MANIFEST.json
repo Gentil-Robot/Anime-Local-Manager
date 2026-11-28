@@ -3677,8 +3677,8 @@
     },
     {
       "path": "scripts/test-beta71-package.cjs",
-      "bytes": 6558,
-      "sha256": "19b8d5d169f27d734bbc53cc242f9ad76581680eceb02118e89b51ceb116bea8"
+      "bytes": 8675,
+      "sha256": "ba1d722d3e7307e71004e91b9145a74a19948edeea52cdd499c08213036f1205"
     },
     {
       "path": "scripts/test-beta72-age.cjs",
