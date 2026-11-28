@@ -124,6 +124,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node scripts/test-v220-offline-media.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-streaming-sources.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Inspect actual Node and Electron runtimes and network surfaces
         run: node scripts/test-v220-runtime-security.cjs
       - name: Review native engine recovery, MFA and update UX

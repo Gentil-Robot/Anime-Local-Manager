@@ -49,6 +49,7 @@
       catch(err){if(button.isConnected){button.disabled=false;field('AddStatus').disabled=false;}window.notifyApp?.(err.message,'error');}
     });
     const localNotebook=already(i);if(localNotebook&&window.ALM_NOTEBOOK){const b=document.createElement('button');b.type='button';b.dataset.notebookAction='open-notebook';b.dataset.id=localNotebook.id;b.dataset.notebookText='notebook';b.setAttribute('data-no-i18n','');b.textContent=window.ALM_NOTEBOOK.t('notebook');$(hostId).querySelector('.discovery-detail-actions')?.append(b);}
+    const sourceButton=localNotebook&&window.ALM_SOURCES?.createButton(localNotebook);if(sourceButton)$(hostId).querySelector('.discovery-detail-actions')?.append(sourceButton);
     detailActions.get(hostId)?.(i);
     // The shared fiche is also used by Search, Ranking and Calendar. The catalogue
     // popup already has its dedicated friend button in its personal-info area.

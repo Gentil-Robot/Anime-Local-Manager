@@ -360,6 +360,42 @@ async function startApplication() {
     const failure=await shell.openPath(located.absolutePath);
     return failure?{ok:false,code:'ALM_MEDIA_OPEN_FAILED'}:{ok:true,filename:located.filename};
   });
+  // Direct association: only the path returned by the native picker is accepted.
+  ipcMain.handle('media-select-one',async(event,malId,episode,season)=>{
+    trusted(event);
+    if(!Number.isSafeInteger(malId)||malId<1||malId>100000000||!Number.isSafeInteger(episode)||episode<0||episode>999||!Number.isSafeInteger(season)||season<0||season>99)throw Error('ALM_MEDIA_ASSOCIATION_INVALID');
+    if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');mediaScanning=true;
+    try{
+      const extensions=[...require('./lib/local-media-index').VIDEO_EXTENSIONS].map(ext=>ext.slice(1));
+      let selected;try{selected=await dialog.showOpenDialog(mainWindow||undefined,{properties:['openFile'],filters:[{name:'Video',extensions}]});}finally{if(mainWindow&&!mainWindow.isDestroyed())focusMainWindow();}
+      if(selected.canceled||selected.filePaths.length!==1)return {canceled:true};
+      const full=selected.filePaths[0],root=path.dirname(full),filename=path.basename(full),fsp=require('node:fs/promises');
+      if(!mediaStore.relativeIsSafe(filename))throw Error('ALM_MEDIA_ASSOCIATION_INVALID');
+      const parent=await fsp.lstat(root),stat=await fsp.lstat(full);
+      if(!parent.isDirectory()||parent.isSymbolicLink()||!stat.isFile()||stat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
+      const actualRoot=await fsp.realpath(root),actual=await fsp.realpath(full);
+      if(!mediaStore.contained(actualRoot,actual))throw Error('ALM_MEDIA_OUTSIDE_ROOT');
+      const result=mediaStore.record(mediaStoreFile,{root,relativePath:filename,filename,malId,episodeGuess:episode,seasonGuess:season,wholeWork:episode===0});
+      return {canceled:false,...result};
+    }finally{mediaScanning=false;}
+  });
+  ipcMain.handle('media-open-key',async(event,malId,key)=>{
+    trusted(event);const located=await mediaStore.locateKey(mediaStoreFile,malId,key);if(!located.ok)return located;
+    const failure=await shell.openPath(located.absolutePath);return failure?{ok:false,code:'ALM_MEDIA_OPEN_FAILED'}:{ok:true};
+  });
+  ipcMain.handle('media-remove-key',(event,malId,key)=>{
+    trusted(event);if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');
+    if(!mediaLinks().some(row=>row.malId===malId&&row.key===key))return false;
+    return mediaStore.remove(mediaStoreFile,key);
+  });
+  const streamStore=require('./lib/streaming-sources'),streamFile=path.join(app.getPath('userData'),'streaming-sources-v220.json');
+  ipcMain.handle('stream-list',(event,malId)=>{trusted(event);return streamStore.list(streamFile,malId);});
+  ipcMain.handle('stream-put',(event,input)=>{trusted(event);return streamStore.put(streamFile,input);});
+  ipcMain.handle('stream-remove',(event,malId,key)=>{trusted(event);return streamStore.remove(streamFile,malId,key);});
+  ipcMain.handle('stream-open',async(event,malId,key)=>{
+    trusted(event);const row=streamStore.get(streamFile,malId,key);if(!row)return {ok:false};
+    await shell.openExternal(streamStore.validateUrl(row.url));return {ok:true};
+  });
   ipcMain.handle('media-select-and-scan',async event=>{
     trusted(event);
     if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');

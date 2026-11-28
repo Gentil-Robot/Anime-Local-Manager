@@ -50,7 +50,7 @@
           const pending=document.createElement('small');pending.className='series-reference-pending';pending.textContent=t('seriesReferencePending');row.querySelector('div').append(pending);
         }
         row.querySelector('div').append(statusControl(item,0,item.status));
-        row.querySelector('button').onclick=()=>{dialog.close();window.openEdit(item);};parent.append(row);
+        row.querySelector('button').onclick=()=>{dialog.close();window.openEdit(item);};const source=window.ALM_SOURCES?.createButton(item);if(source)row.querySelector('div').append(source);parent.append(row);
       }
     }
     const active=group.active,earlier=group.seasons.filter(item=>item!==active);

@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 10698,
-      "sha256": "8bba019144e9d7c7fc15c0dc0a67cfc206ad6c49aa2ff50929490257f8f53f7d"
+      "bytes": 10811,
+      "sha256": "d30f7335c5d58e20d1306f73401ba86f7806083820bfb501f9a192a0ff573a6f"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -34,6 +34,66 @@
       "path": ".nvmrc",
       "bytes": 8,
       "sha256": "584f19ccde29925286e32f566a2aa06c89efb4e2eb2bb2fc9ea5d56e2d190ac4"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 2227,
+      "sha256": "6a21c0324f8442f5438fe1be9c0764cf65a94517b198af61cdd560eeff46fa25"
+    },
+    {
+      "path": "Claude outputs/PLAN-CHATGPT-ALM.md",
+      "bytes": 12101,
+      "sha256": "cdd59569a8015b57a5ee081e6007f76f47142c41cd1cb0a9c6bbb1c43e65251f"
+    },
+    {
+      "path": "Creer App Linux.sh",
+      "bytes": 2348,
+      "sha256": "8b5e102639a82e84ab6fcd9efecd88a95f12b9d313c2bef809fed63110f5a3af"
+    },
+    {
+      "path": "LANCER_ALM_WINDOWS.bat",
+      "bytes": 891,
+      "sha256": "0ea42a7f64c70101a7f665958a54502454c0f445d0fd774612b12a85b78e6381"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1069,
+      "sha256": "ecc0503a54ce6bb9079d4fa482ea08652fd161abb6624755542f97e2954d0406"
+    },
+    {
+      "path": "Preparer-GitHub-V2.ps1",
+      "bytes": 9032,
+      "sha256": "8c9c6a78e20f149a7318120cc6d7920e6bd2ad2e677ec74243dc3a080234870c"
+    },
+    {
+      "path": "Publier Installateur Windows.bat",
+      "bytes": 785,
+      "sha256": "d0de7b96f98adfd311fc7031d2b22bd600309bbc846ffa1f6cf85a4dba40f244"
+    },
+    {
+      "path": "Publier-GitHub-V2.ps1",
+      "bytes": 7721,
+      "sha256": "42ad615d7dbac8c7aab9ed0345b9604f7942a25da6baa06cdc9d04a00209918f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6884,
+      "sha256": "f4ed20025dcd8b3f4dee0b48b7b38ec93332a52ff356b3d50411d3528481af0d"
+    },
+    {
+      "path": "REPRENDRE_BUILD_WINDOWS.bat",
+      "bytes": 785,
+      "sha256": "d0de7b96f98adfd311fc7031d2b22bd600309bbc846ffa1f6cf85a4dba40f244"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 1491,
+      "sha256": "1bdfc1c494c699b4e30e7f084f93f7b30b3084e1aa8e1af0907238e766d38264"
+    },
+    {
+      "path": "Verifier V2.0.0 Beta Stable Windows.bat",
+      "bytes": 1034,
+      "sha256": "bc3b2042c89b4326c0d3a56b0e43a386769fbc6b1724ee877aa0c81ddf59d3d4"
     },
     {
       "path": "build/icons/1024x1024.png",
@@ -86,9 +146,9 @@
       "sha256": "ef7636e1bd1985008155ba400667211e3f15db0b9a493257f78f00033ff396c5"
     },
     {
-      "path": "Claude outputs/PLAN-CHATGPT-ALM.md",
-      "bytes": 12101,
-      "sha256": "cdd59569a8015b57a5ee081e6007f76f47142c41cd1cb0a9c6bbb1c43e65251f"
+      "path": "community-config.json",
+      "bytes": 262,
+      "sha256": "94ddfa6a7f11f77c47e5b10aeb85247ac4b11080407d84fb64d59e6c6ac6f63a"
     },
     {
       "path": "community/auth-security.js",
@@ -114,6 +174,11 @@
       "path": "community/qr-entry.js",
       "bytes": 66,
       "sha256": "aaffbafe188b29bc107626c9e8e453582f680a999137c9d4002df2b56c144342"
+    },
+    {
+      "path": "community/site/THIRD-PARTY-NOTICES.txt",
+      "bytes": 11983,
+      "sha256": "0af776ed96b2b261632e231dbe3dc0e2c124defd2a3f1826dcbb7d35cc4458e3"
     },
     {
       "path": "community/site/assets/anime-local-manager-logo.png",
@@ -361,11 +426,6 @@
       "sha256": "294e5c8afb235770ed8a69899f32988c405b6b4e7aa81a99d89a89f664c76d17"
     },
     {
-      "path": "community/site/THIRD-PARTY-NOTICES.txt",
-      "bytes": 11983,
-      "sha256": "0af776ed96b2b261632e231dbe3dc0e2c124defd2a3f1826dcbb7d35cc4458e3"
-    },
-    {
       "path": "community/site/vercel.json",
       "bytes": 1121,
       "sha256": "4558ebe1f59c0004af4767717a2598841512aa1898f5c1466ba7ecb8c5229d2f"
@@ -391,24 +451,9 @@
       "sha256": "0d70fc9f8591ec2ebbc9118747731a5d39c872597c44d77684c20bde5d5b2064"
     },
     {
-      "path": "community-config.json",
-      "bytes": 262,
-      "sha256": "94ddfa6a7f11f77c47e5b10aeb85247ac4b11080407d84fb64d59e6c6ac6f63a"
-    },
-    {
       "path": "compliance/release-gates.json",
       "bytes": 5023,
       "sha256": "cb0c7ee482a98a3f743475248b240eb6e8fd0100e3d135d4a06a2b8def2f342c"
-    },
-    {
-      "path": "CONTRIBUTING.md",
-      "bytes": 2227,
-      "sha256": "6a21c0324f8442f5438fe1be9c0764cf65a94517b198af61cdd560eeff46fa25"
-    },
-    {
-      "path": "Creer App Linux.sh",
-      "bytes": 2348,
-      "sha256": "8b5e102639a82e84ab6fcd9efecd88a95f12b9d313c2bef809fed63110f5a3af"
     },
     {
       "path": "csv-worker.js",
@@ -481,6 +526,11 @@
       "sha256": "d0bd296839bd45c2ee049b9bbe0999df2000c94efc28ca760793c770a22a232e"
     },
     {
+      "path": "data/disposable-email-LICENSE.txt",
+      "bytes": 504,
+      "sha256": "71e4e05374bd16288e638ede168482f8642204fdb90aede848c9fcdf44730026"
+    },
+    {
       "path": "data/disposable-email-domains.meta.json",
       "bytes": 413,
       "sha256": "fe6308bcf70efa59b14f300451394c1fe8bdfbba69fd9fa758b60e6dc0d6e751"
@@ -489,11 +539,6 @@
       "path": "data/disposable-email-domains.txt",
       "bytes": 144111,
       "sha256": "8e3634d2bf0960eeba38fb3de5256fe4d6d89fb0f5c7489c0d4954373aad2c3f"
-    },
-    {
-      "path": "data/disposable-email-LICENSE.txt",
-      "bytes": 504,
-      "sha256": "71e4e05374bd16288e638ede168482f8642204fdb90aede848c9fcdf44730026"
     },
     {
       "path": "data/disposable-email-overrides.txt",
@@ -541,6 +586,16 @@
       "sha256": "472542d818dbfcd2a2d9368b3c8f2b3699a17617fc424db2ea76177d87d042af"
     },
     {
+      "path": "docs/BETA82-PROFILAGE-SECURITE-2026-10-24.md",
+      "bytes": 4571,
+      "sha256": "1841d0dd1562efc44ee4b890b17d3a6b1b596340f2536ac1a63ee735590a6163"
+    },
+    {
+      "path": "docs/BETA82-RECETTE-PREPUBLICATION.md",
+      "bytes": 9614,
+      "sha256": "a7eaf2d4de3e50a305ab62a9851db2d5757fde277cf5ab808d5bd8b1a1ad020a"
+    },
+    {
       "path": "docs/Beta81-Apropos-AnimeDNA.txt",
       "bytes": 5221,
       "sha256": "607efeaead7a54c8cb5ba47db53e85f09c2cb8e5caf21a2011a8035ebf31df9c"
@@ -554,16 +609,6 @@
       "path": "docs/Beta81-Retouches-20261023.txt",
       "bytes": 4359,
       "sha256": "3de962218bd654c6632f3a85a0feb1de0d3e1f21768a2f0726317129c0a93488"
-    },
-    {
-      "path": "docs/BETA82-PROFILAGE-SECURITE-2026-10-24.md",
-      "bytes": 4571,
-      "sha256": "1841d0dd1562efc44ee4b890b17d3a6b1b596340f2536ac1a63ee735590a6163"
-    },
-    {
-      "path": "docs/BETA82-RECETTE-PREPUBLICATION.md",
-      "bytes": 9614,
-      "sha256": "a7eaf2d4de3e50a305ab62a9851db2d5757fde277cf5ab808d5bd8b1a1ad020a"
     },
     {
       "path": "docs/CORRECTIF-PARTAGE-AGE-2026-10-25.txt",
@@ -661,6 +706,16 @@
       "sha256": "6bf80be1ea3e49d142dbb161cd4e7051e52edde960d8042c39c7ab03e5ff03de"
     },
     {
+      "path": "docs/SIGNPATH-OPEN-SOURCE.md",
+      "bytes": 2159,
+      "sha256": "66b05a40f4f7f342928757702bad902cd299dc4f7dc711a6f5e2b1b0c9dd5159"
+    },
+    {
+      "path": "docs/SUPABASE-SECURITE-2026-11-16.md",
+      "bytes": 4545,
+      "sha256": "6f8d3a1f2e0455ffc3fd8a9b52dfd6e4351eea3c6b9e2740fb118f70de31909e"
+    },
+    {
       "path": "docs/security/ALM_PRIVACY_ACL_VERIFICATION_2026-11-11.md",
       "bytes": 4537,
       "sha256": "13419255ea604ccc0f9b7ed01695ea822ad52d435cf3a5f5433e117524f38388"
@@ -679,16 +734,6 @@
       "path": "docs/security/rollback_blocked_profile_privacy_20261111.sql",
       "bytes": 1030,
       "sha256": "d58530bfce40ae71ff2f6eb98341278ca00bdf84232a498aa7e73d536cdc7030"
-    },
-    {
-      "path": "docs/SIGNPATH-OPEN-SOURCE.md",
-      "bytes": 2159,
-      "sha256": "66b05a40f4f7f342928757702bad902cd299dc4f7dc711a6f5e2b1b0c9dd5159"
-    },
-    {
-      "path": "docs/SUPABASE-SECURITE-2026-11-16.md",
-      "bytes": 4545,
-      "sha256": "6f8d3a1f2e0455ffc3fd8a9b52dfd6e4351eea3c6b9e2740fb118f70de31909e"
     },
     {
       "path": "docs/validation-ux-2026-10-24.json",
@@ -1211,11 +1256,6 @@
       "sha256": "eb015a02dc638ca493f815dcf4b336d579c74a7fde4d8e76478dee8517904b87"
     },
     {
-      "path": "LANCER_ALM_WINDOWS.bat",
-      "bytes": 891,
-      "sha256": "0ea42a7f64c70101a7f665958a54502454c0f445d0fd774612b12a85b78e6381"
-    },
-    {
       "path": "lib/anilist-fetch.js",
       "bytes": 3625,
       "sha256": "6c05627d223c5e743c1e9d2478c1d9534cd8c0ff0ed1b9a5ee786b91def5c2c8"
@@ -1267,8 +1307,8 @@
     },
     {
       "path": "lib/calendar.js",
-      "bytes": 5128,
-      "sha256": "adcdf50ac185f7de83a2397519a38c237a20ac54339fbb7b9cd4417ccdf61427"
+      "bytes": 5291,
+      "sha256": "00da82c330747d1ce0f22d451879a583d05913b70e283c3c2040a3a7ddf743e3"
     },
     {
       "path": "lib/catalog.js",
@@ -1422,8 +1462,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 8391,
-      "sha256": "ed836d2e0e6a04ac9f238f255ca3640eabed09fdb2b921c004d2df6ecc35390d"
+      "bytes": 8809,
+      "sha256": "ad6fa94b276db94f4bba67538824ebda18af0e70317b51ed243e1147deee3887"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1581,6 +1621,11 @@
       "sha256": "e2abd798b62d3b19eaab903a58721a752ddc2fcad4801a62e3552570325fc272"
     },
     {
+      "path": "lib/streaming-sources.js",
+      "bytes": 3059,
+      "sha256": "bb4f828fcfb454ac600c84f3a7fea240cc1b4b7dbbac74074e3faff69b9b8ba4"
+    },
+    {
       "path": "lib/studio-rankings.js",
       "bytes": 4076,
       "sha256": "8f3fb063e61edecc2c2858b3ac2b19a5f5b0d4145c7d0f143cf6d81fbba6d9cc"
@@ -1631,14 +1676,9 @@
       "sha256": "00b600338cf429f0d747beb0588feb313d63cb6e3f95091246d5c016bd173287"
     },
     {
-      "path": "LICENSE",
-      "bytes": 1069,
-      "sha256": "ecc0503a54ce6bb9079d4fa482ea08652fd161abb6624755542f97e2954d0406"
-    },
-    {
       "path": "main.js",
-      "bytes": 34048,
-      "sha256": "66958991f93382fd03746a02924e0a61aeeed1c643ad5b6807609e5688134c56"
+      "bytes": 37035,
+      "sha256": "c161d7771a123c803d4e7607c6d8b2067078cd3eb59a91c06cb744b3ab47106f"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1657,18 +1697,18 @@
     },
     {
       "path": "preload.js",
-      "bytes": 3069,
-      "sha256": "3e46771dd6313005ed6ffd1f3499d5406aadc62d0b3b0641b988838fe3fcf9f1"
+      "bytes": 3593,
+      "sha256": "4ae4a93a18d71e386266b24134358fcfe14a6627ce374dcd216c6696ab2a17ce"
     },
     {
-      "path": "Preparer-GitHub-V2.ps1",
-      "bytes": 9032,
-      "sha256": "8c9c6a78e20f149a7318120cc6d7920e6bd2ad2e677ec74243dc3a080234870c"
+      "path": "public/THIRD-PARTY-NOTICES.txt",
+      "bytes": 11983,
+      "sha256": "0af776ed96b2b261632e231dbe3dc0e2c124defd2a3f1826dcbb7d35cc4458e3"
     },
     {
       "path": "public/alm-v2.js",
-      "bytes": 242579,
-      "sha256": "0ee8cb5532b1571cf18747e3827a46a22619abc2e1de3d38acafebe5704db931"
+      "bytes": 243422,
+      "sha256": "5df1c45ce6901e95568a83e13b83307caeabb35cb3c468208adf7fc89db7f2a7"
     },
     {
       "path": "public/anime-association.js",
@@ -1746,6 +1786,11 @@
       "sha256": "9511dd654703766ec4d4de04f04c4da517918d76533271d62bf3b1b799730f97"
     },
     {
+      "path": "public/assets/design/TERMS-ATLAS.json",
+      "bytes": 14831,
+      "sha256": "73946add48ed1b5a51b937c444b33c577a2edb812c7b75ea401071ffd397201e"
+    },
+    {
       "path": "public/assets/design/alm-retro-banner.gif",
       "bytes": 1956519,
       "sha256": "790b920c3326c61086060c3b7cb6bd2cad5d4a63dbe4facf9da0835b6da23845"
@@ -1809,11 +1854,6 @@
       "path": "public/assets/design/terms-atlas-3.png",
       "bytes": 2866701,
       "sha256": "7c1d8d8507eab8b23fccb68a9acf76c63d8092a8b91b5f4e78c7e8c078e59608"
-    },
-    {
-      "path": "public/assets/design/TERMS-ATLAS.json",
-      "bytes": 14831,
-      "sha256": "73946add48ed1b5a51b937c444b33c577a2edb812c7b75ea401071ffd397201e"
     },
     {
       "path": "public/assets/dna/yang-cat-black-right.png",
@@ -2012,8 +2052,8 @@
     },
     {
       "path": "public/beta39.js",
-      "bytes": 11484,
-      "sha256": "4ab89f5cc10aa395a58fe960219027faefb2afda92c3a8c07bbad00d20e86bef"
+      "bytes": 11549,
+      "sha256": "fcaefe96e9e4725c72edab6e89cd0aae67a25e2e54fb499ea68be096ccc86f75"
     },
     {
       "path": "public/beta40-copy.js",
@@ -2187,8 +2227,8 @@
     },
     {
       "path": "public/catalog.js",
-      "bytes": 27163,
-      "sha256": "91a0132cea88847b72195f5ee827a35ba5dcad1fb983183a7b0d671b33926518"
+      "bytes": 27243,
+      "sha256": "5d736a2736afbeaeb7af31d40feed40effdb2c62b26a7421724873f8ca80cc7d"
     },
     {
       "path": "public/clipboard.js",
@@ -2362,8 +2402,8 @@
     },
     {
       "path": "public/discovery.js",
-      "bytes": 14343,
-      "sha256": "40588c591f0f80f46f4eae43e8dfb9957241c25af51fae5f6300c3822b7d7d15"
+      "bytes": 14916,
+      "sha256": "d7d0314c26197ddd7bc9f40295c20d9f6e80fdea72628d7affeab1fa68bb1061"
     },
     {
       "path": "public/dna-radar.js",
@@ -2397,18 +2437,13 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 106013,
-      "sha256": "d45c5aedcb483f638199f545cbff6e06651320bce94e0caebcd54a9c82670944"
+      "bytes": 106054,
+      "sha256": "7cda9d9b198358aaafe57c43820381df3f2b9994ef01dd57245801d481dfe1f9"
     },
     {
       "path": "public/input-focus.js",
       "bytes": 805,
       "sha256": "1af6feccdffb64875d3bd7366dcdc43c04df0f06489eb0da511fded1f4d071eb"
-    },
-    {
-      "path": "public/karaoke/song.json",
-      "bytes": 899250,
-      "sha256": "b32eda272a2251b48d74e51173a4adbeec796f443afa5d7bcdbadb15d816750d"
     },
     {
       "path": "public/karaoke-clock.js",
@@ -2419,6 +2454,11 @@
       "path": "public/karaoke.js",
       "bytes": 28616,
       "sha256": "9a5231f16430ddbc5a331d94e739c197973a388b3b26e3ab1ac6fe426e9804e5"
+    },
+    {
+      "path": "public/karaoke/song.json",
+      "bytes": 899250,
+      "sha256": "b32eda272a2251b48d74e51173a4adbeec796f443afa5d7bcdbadb15d816750d"
     },
     {
       "path": "public/legal-content.js",
@@ -2432,8 +2472,8 @@
     },
     {
       "path": "public/lexicon.js",
-      "bytes": 83985,
-      "sha256": "9ea71f5ef438af73f2dcd36978ff200c9f8bca54a6b02dd5044d66ce2fdc91bd"
+      "bytes": 84378,
+      "sha256": "0f731244fad72c511948bf13dec9f3d388f6c6174b0d35f24af822bb04083ebb"
     },
     {
       "path": "public/library-paging.js",
@@ -2597,8 +2637,8 @@
     },
     {
       "path": "public/series-ui.js",
-      "bytes": 11420,
-      "sha256": "718e9d3d147f109a36ba69b10db9c2381c195ff81dd40d144ba10d871fb351d3"
+      "bytes": 11522,
+      "sha256": "80d020077c6305d6599b74dd979d2dc509be33283209c5d5b9f16765f4dae98c"
     },
     {
       "path": "public/settings-navigation.js",
@@ -2641,11 +2681,6 @@
       "sha256": "294e5c8afb235770ed8a69899f32988c405b6b4e7aa81a99d89a89f664c76d17"
     },
     {
-      "path": "public/THIRD-PARTY-NOTICES.txt",
-      "bytes": 11983,
-      "sha256": "0af776ed96b2b261632e231dbe3dc0e2c124defd2a3f1826dcbb7d35cc4458e3"
-    },
-    {
       "path": "public/title-preference.js",
       "bytes": 1406,
       "sha256": "42b4dd0232c553347964f68b65871266f09c09df6720a287e4602cde87c455d4"
@@ -2667,8 +2702,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 57037,
-      "sha256": "0f93716f9c7e5ff7f9742ce5168c54daab54b08ee13ddd348d45f735f58a51c9"
+      "bytes": 57202,
+      "sha256": "ba984cc56f5c7cbba49fd3096ec07416bef59e9f58111a5a692639d6b7e0dbb8"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2686,6 +2721,11 @@
       "sha256": "83b2408fbf02f176896c9cf609accd9ff22cb6e779e7666c6120665f94e47818"
     },
     {
+      "path": "public/v220-sources.js",
+      "bytes": 10658,
+      "sha256": "5d1a2e9c9a9fdfa1ff28b6370da2cf2f4c683a7242ac10d1a209d123e4c02c6e"
+    },
+    {
       "path": "public/v220-watch-model.js",
       "bytes": 3511,
       "sha256": "393afb1a48fa1772a922a358e2f402809bf5bdff253542aca4823cdff513ef3a"
@@ -2697,8 +2737,8 @@
     },
     {
       "path": "public/v220.css",
-      "bytes": 19748,
-      "sha256": "2025e1235b21bea8987b0b674e5e2bd644fc71c27555125c28777b7a5a5f64ac"
+      "bytes": 21585,
+      "sha256": "d79ae6f605286f076f1ac4ebe4ff1ff21151291493db71ab02ead15653ce42ad"
     },
     {
       "path": "public/watch-status.js",
@@ -2706,29 +2746,9 @@
       "sha256": "4780e5d9fd0cbebf095e0c5d7a0c5f86d053d134e0bd4fed20217163899c092b"
     },
     {
-      "path": "Publier Installateur Windows.bat",
-      "bytes": 785,
-      "sha256": "d0de7b96f98adfd311fc7031d2b22bd600309bbc846ffa1f6cf85a4dba40f244"
-    },
-    {
-      "path": "Publier-GitHub-V2.ps1",
-      "bytes": 7721,
-      "sha256": "42ad615d7dbac8c7aab9ed0345b9604f7942a25da6baa06cdc9d04a00209918f"
-    },
-    {
-      "path": "README.md",
-      "bytes": 6884,
-      "sha256": "f4ed20025dcd8b3f4dee0b48b7b38ec93332a52ff356b3d50411d3528481af0d"
-    },
-    {
       "path": "release-version.json",
       "bytes": 507,
       "sha256": "41399efd5dcbab0f9ea11e0804a4476a2f0eb7394307c0c6936f5b24831c66d2"
-    },
-    {
-      "path": "REPRENDRE_BUILD_WINDOWS.bat",
-      "bytes": 785,
-      "sha256": "d0de7b96f98adfd311fc7031d2b22bd600309bbc846ffa1f6cf85a4dba40f244"
     },
     {
       "path": "scripts/audit-locales.js",
@@ -2791,6 +2811,11 @@
       "sha256": "4fa83b2d8a3095454f2459c17198b554c43a7cb0bac5dab712aa605c0709a6cd"
     },
     {
+      "path": "scripts/fixtures/karaoke-audio-review-beta38.json",
+      "bytes": 11325,
+      "sha256": "91ce0991458a844db6fdffb0006df0f15af8762590375de3c5e8728e56504352"
+    },
+    {
       "path": "scripts/fixtures/karaoke/song.before-eleven-captions.json",
       "bytes": 63932,
       "sha256": "dbf3647a04e513dac0bd8d0680e4bac00667bee8d742d6eb75e0a398a692b36e"
@@ -2836,11 +2861,6 @@
       "sha256": "e617881c05195ea97dbbae036d55efcdfac7d4dfcbd406208be9c1f0d946440b"
     },
     {
-      "path": "scripts/fixtures/karaoke-audio-review-beta38.json",
-      "bytes": 11325,
-      "sha256": "91ce0991458a844db6fdffb0006df0f15af8762590375de3c5e8728e56504352"
-    },
-    {
       "path": "scripts/fixtures/tvmaze-captured-20261009.json",
       "bytes": 29521,
       "sha256": "5f142af3dfa9f708987a16a35df32920924601a9d0f1330539aefc5964889a62"
@@ -2881,6 +2901,16 @@
       "sha256": "120decb3918e12bc596fc803145b4f8d42837ee3996c813f5a502634a12c0a6f"
     },
     {
+      "path": "scripts/performance/BETA82-PERFORMANCE-REPORT.txt",
+      "bytes": 2711,
+      "sha256": "5bb995eccbf66c0136b4c8e87a01ea027d82458d827fd02a91256ac1061e371f"
+    },
+    {
+      "path": "scripts/performance/README.txt",
+      "bytes": 6776,
+      "sha256": "f29aec0beb65f954a99d1f44ba19786562419e79f6c01ac3964fb1d6bd158554"
+    },
+    {
       "path": "scripts/performance/bench-beta82-paths.cjs",
       "bytes": 5816,
       "sha256": "d68b867b21339c34a1c30b27d237faeedc07804b899fed1429237a7cb2dfd3c5"
@@ -2889,11 +2919,6 @@
       "path": "scripts/performance/bench-gap82-upload.cjs",
       "bytes": 2599,
       "sha256": "d12d1a6989b313d70469a3bca691ca4fddada2030bfd88bcfdd3b14b762f5d6d"
-    },
-    {
-      "path": "scripts/performance/BETA82-PERFORMANCE-REPORT.txt",
-      "bytes": 2711,
-      "sha256": "5bb995eccbf66c0136b4c8e87a01ea027d82458d827fd02a91256ac1061e371f"
     },
     {
       "path": "scripts/performance/measure-fallback.cjs",
@@ -2939,11 +2964,6 @@
       "path": "scripts/performance/measure-snapshot.cjs",
       "bytes": 1670,
       "sha256": "f49fc0fdeddc553a75c6373d756f0f0d2e0c7de3453df5c03817439486b316ff"
-    },
-    {
-      "path": "scripts/performance/README.txt",
-      "bytes": 6776,
-      "sha256": "f29aec0beb65f954a99d1f44ba19786562419e79f6c01ac3964fb1d6bd158554"
     },
     {
       "path": "scripts/performance/validate-renderer.cjs",
@@ -4221,6 +4241,11 @@
       "sha256": "c3cac6b468334665f9a3675f7db6071740d1af6752abbd363e1417f4e0f4dfc9"
     },
     {
+      "path": "scripts/test-v220-streaming-sources.cjs",
+      "bytes": 2106,
+      "sha256": "398aa679aa8a12256603ad9a779b6d1484123dc89fd4fb8d3dba48d7bac45285"
+    },
+    {
       "path": "scripts/test-v220-update-progress.cjs",
       "bytes": 7593,
       "sha256": "dedd2c13b954c9171bf9dada1224f58c6001d441de3a1ca84cd22a9ab926c6f6"
@@ -4277,13 +4302,8 @@
     },
     {
       "path": "scripts/verify-project.js",
-      "bytes": 11060,
-      "sha256": "fd7533b4bd85c6b0dae8cac18e9b146a59873de434212b6d836140525a875ba6"
-    },
-    {
-      "path": "SECURITY.md",
-      "bytes": 1491,
-      "sha256": "1bdfc1c494c699b4e30e7f084f93f7b30b3084e1aa8e1af0907238e766d38264"
+      "bytes": 11164,
+      "sha256": "1a6a150c55b00a6306617159eb77515894dd916a8f7dcffe819411529a3882d6"
     },
     {
       "path": "server.js",
@@ -4444,11 +4464,6 @@
       "path": "supabase/tests/security_privacy_acl_20261111.sql",
       "bytes": 2024,
       "sha256": "a86ac3ed2a5dbc915f0d17ae6c12b431fc25ce4ec28a992b5ed09c34c7155e58"
-    },
-    {
-      "path": "Verifier V2.0.0 Beta Stable Windows.bat",
-      "bytes": 1034,
-      "sha256": "bc3b2042c89b4326c0d3a56b0e43a386769fbc6b1724ee877aa0c81ddf59d3d4"
     }
   ],
   "parentArchiveSha256": "e97af43af2058352b3486831856637ad3bbbfa82cb4bf68429db2c66648e337b",

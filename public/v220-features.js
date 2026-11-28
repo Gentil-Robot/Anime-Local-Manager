@@ -210,7 +210,7 @@ function renderWatchingCards(byId=new Map(animeList().map(a=>[Number(a.id),a])))
  for(const card of document.querySelectorAll('#animeGrid .card[data-anime-id]')){
   const a=byId.get(Number(card.dataset.animeId));
   card.querySelector('.alm-v220-next-episode')?.remove();
-  if(!a||card.dataset.status!=='Watching')continue;
+  if(window.ALM_SOURCES?.available()||!a||card.dataset.status!=='Watching')continue;
   const seen=Number(a.episodesSeen),total=Number(a.episodesTotal);
   if(!Number.isSafeInteger(seen)||seen<0||seen>=999||total>0&&seen>=total)continue;
   const ep=seen+1,mal=Number(a.malId),linked=summaries.get(mal)?.episodes?.includes(ep);
@@ -237,7 +237,7 @@ async function readSummaries(){
   document.querySelectorAll('.card[data-anime-id]').forEach(card=>{
    const id=Number(card.dataset.animeId),anime=byId.get(id);
    const have=anime&&summaries.get(Number(anime.malId)),old=card.querySelector('.alm-v220-local-badge');
-   if(!have||card.dataset.status!=='Watching'){old?.remove();return;}
+   if(window.ALM_SOURCES?.available()||!have||card.dataset.status!=='Watching'){old?.remove();return;}
    if(old){old.textContent=t('localBadge')+' ('+have.count+')';return;}
    const badge=el('span',t('localBadge')+' ('+have.count+')','alm-v220-local-badge');
    card.querySelector('.card-body .meta')?.appendChild(badge);
@@ -501,6 +501,7 @@ function init(){
  window.addEventListener('alm:airing-cache-changed',event=>{airingItems=Array.isArray(event.detail?.items)?event.detail.items:[];airingCheckedAt=event.detail?.checkedAt||'';renderPossession();});
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});
  window.addEventListener('alm:collection-changed',()=>{void refreshSummaries();});
+ window.addEventListener('alm:sources-changed',()=>{diskChecks.clear();void refreshSummaries();});
  window.addEventListener('alm:language-changed',translate);
  window.addEventListener('online',connectivity);window.addEventListener('offline',connectivity);
  const cachePoll=setInterval(()=>{if(!document.hidden&&seasons&&!seasons.classList.contains('hidden'))void refreshAiring();void refreshScheduledCaches();},120000);

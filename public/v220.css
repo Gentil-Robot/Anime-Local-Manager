@@ -214,3 +214,12 @@ html[data-motion="reduced"] .alm-cockpit-flight *,#cockpitPage.hidden .alm-cockp
 .alm-v220-reco-cover .reco-card-thumb,.alm-v220-reco-cover .reco-card-thumb-ph{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
 .alm-v220-reco-cover:focus-visible,.lexicon-example:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 button.lexicon-example{font:inherit;text-align:left;color:inherit;cursor:pointer;width:100%;min-width:0}
+
+/* Compact viewing sources; no embedded remote pages or media player. */
+.alm-source-dialog{width:min(670px,92vw);max-height:86vh;overflow:auto}
+.alm-source-header{display:flex;justify-content:space-between;align-items:center;gap:12px}.alm-source-header h2{margin:0;font-size:1.1rem}.alm-source-body{display:grid;gap:12px}
+.alm-source-section{border-top:1px solid rgba(155,181,223,.25);padding-top:12px;min-width:0}.alm-source-section h3{font-size:.95rem;margin:0 0 8px}
+.alm-source-form{display:flex;flex-wrap:wrap;align-items:end;gap:8px;margin:8px 0}.alm-source-form label{display:flex;flex-direction:column;gap:5px;flex:1 1 135px;min-width:0;font-size:.82rem}.alm-source-form input{width:100%;min-width:0}
+.alm-source-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;border:1px solid rgba(155,181,223,.2);border-radius:9px;padding:8px;margin-top:7px}.alm-source-row>div{flex:1 1 170px;min-width:0;overflow-wrap:anywhere}.alm-source-row small{display:block;opacity:.8;font-size:.78rem}
+.alm-source-row button,.alm-source-form button{font-size:.8rem}.alm-source-add summary{cursor:pointer}.alm-source-trigger{white-space:nowrap}
+.alm-v220-reco-cover .reco-card-thumb-ph{display:flex;align-items:center;justify-content:center}
