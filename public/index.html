@@ -990,6 +990,7 @@
         <button type="button" class="import-tab" data-tab="csvImportPanel">BetaSeries CSV</button>
         <button type="button" class="import-tab" data-tab="listImportPanel" data-notebook-text="importList" data-no-i18n>Importer une liste libre</button>
         <button type="button" class="import-tab" id="v220MediaTab" data-tab="mediaImportPanel" data-no-i18n>Associer mes fichiers</button>
+        <button type="button" class="import-tab" id="v220SourcesTab" data-tab="v220SourcesPanel" data-no-i18n>Mes sources</button>
       </div>
 
       <form id="importForm" method="dialog" class="import-panel" data-panel="xmlImportPanel">
@@ -1111,6 +1112,14 @@
       <div id="v220SavedRows" class="alm-v220-saved-list" aria-live="polite"></div>
     </section>
   <menu><button type="button" id="v220MediaClose" data-design-text="close">Fermer</button></menu></section>
+  <section id="v220SourcesPanel" class="import-panel hidden" data-panel="v220SourcesPanel" data-no-i18n hidden>
+    <header><h3 id="v220SourcesTitle">Mes sources</h3><p class="muted" id="v220SourcesIntro">Conservées sur cet appareil.</p></header>
+    <input type="search" id="v220SourcesSearch" placeholder="Rechercher un animé…" aria-label="Rechercher un animé">
+    <p id="v220SourcesStatus" role="status" aria-live="polite"></p>
+    <div id="v220SourcesList" class="alm-source-body"></div>
+    <button type="button" id="v220SourcesMore" hidden>Afficher plus</button>
+    <menu><button type="button" id="v220SourcesClose">Fermer</button></menu>
+  </section>
 
     </div>
   </dialog>

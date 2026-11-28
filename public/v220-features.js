@@ -124,6 +124,7 @@ async function openEpisode(malId,episode){
 }
 function renderSaved(){
  const host=$('v220SavedRows');if(!host)return;
+ const block=$('v220SavedBlock');if(block)block.hidden=!!window.ALM_SOURCES?.available();if(block?.hidden)return;
  host.replaceChildren();
  if($('v220SavedTitle'))$('v220SavedTitle').textContent=t('saved');
  if($('v220SavedIntro'))$('v220SavedIntro').textContent=t('savedInfo');
@@ -232,7 +233,7 @@ async function readSummaries(){
  try{
   const data=await window.animeManager.mediaSummary()||[];
   summaries.clear();for(const item of data)summaries.set(Number(item.malId),item);
-  savedRows=typeof window.animeManager.mediaSaved==='function'?await window.animeManager.mediaSaved()||[]:[];
+  savedRows=!window.ALM_SOURCES?.available()&&typeof window.animeManager.mediaSaved==='function'?await window.animeManager.mediaSaved()||[]:[];
   const byId=new Map(animeList().map(a=>[Number(a.id),a]));
   document.querySelectorAll('.card[data-anime-id]').forEach(card=>{
    const id=Number(card.dataset.animeId),anime=byId.get(id);
@@ -375,7 +376,7 @@ function renderMedia(){
       if(scan!==sourceScan)throw Error('ALM_MEDIA_INDEX_INVALID');
       await window.animeManager.mediaAssociate(file.index,chosenId,correction);file.linkedMalId=chosenId;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;file.wholeWork=correction.wholeWork;mediaDrafts.delete(file.index);changed=true;
     }
-    diskChecks.clear();await refreshSummaries();
+    diskChecks.clear();await refreshSummaries();if(changed)window.dispatchEvent(new Event('alm:source-links-changed'));
    }catch(e){window.notifyApp?.(String(e.message||e),'error');}
    finally{mediaBusy=false;chooser.disabled=false;moreButton.disabled=false;if(changed||!button.isConnected)renderMedia();else syncButton();}
   });
@@ -501,7 +502,7 @@ function init(){
  window.addEventListener('alm:airing-cache-changed',event=>{airingItems=Array.isArray(event.detail?.items)?event.detail.items:[];airingCheckedAt=event.detail?.checkedAt||'';renderPossession();});
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});
  window.addEventListener('alm:collection-changed',()=>{void refreshSummaries();});
- window.addEventListener('alm:sources-changed',()=>{diskChecks.clear();void refreshSummaries();});
+ window.addEventListener('alm:sources-changed',event=>{if(event.detail?.local!==false){diskChecks.clear();void refreshSummaries();}});
  window.addEventListener('alm:language-changed',translate);
  window.addEventListener('online',connectivity);window.addEventListener('offline',connectivity);
  const cachePoll=setInterval(()=>{if(!document.hidden&&seasons&&!seasons.classList.contains('hidden'))void refreshAiring();void refreshScheduledCaches();},120000);

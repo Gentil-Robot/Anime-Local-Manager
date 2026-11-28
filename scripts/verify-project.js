@@ -11,6 +11,9 @@ function category(file){if(/build|package|release|beta58|beta70-windows/.test(fi
 const exactNames=Object.freeze({
  'test-v220-vm-round3.cjs':'Cockpit, import local et maintenance : troisième recette VM',
  'test-v220-streaming-sources.cjs':'Sources de visionnage locales, URL validées et ouverture externe',
+ 'test-v220-source-preferences.cjs':'Sources : préférences privées, favori et portée par épisode',
+ 'test-v220-sources-ui.cjs':'Sources : ergonomie, réglages, recherche et ouverture',
+ 'test-v220-detail-navigation.cjs':'Navigation des fiches et jaquettes',
  'test-v220-vm-feedback.cjs':'Cockpit et fichiers locaux : recette des retours VM',
  'test-update-cache-cleanup.cjs':'Stockage : anciens installateurs, protection et résultats',
  'test-windows-update-handoff.cjs':'Mises à jour Windows : confirmation avant fermeture et reprise',

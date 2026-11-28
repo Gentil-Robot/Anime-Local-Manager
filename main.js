@@ -348,6 +348,8 @@ async function startApplication() {
   const mediaLinks=()=>mediaStore.load(mediaStoreFile);
   ipcMain.handle('media-summary',event=>{trusted(event);return mediaStore.summary(mediaStoreFile);});
   ipcMain.handle('media-saved',event=>{trusted(event);return mediaStore.list(mediaStoreFile);});
+  ipcMain.handle('media-saved-for',(event,malId)=>{trusted(event);if(!Number.isSafeInteger(malId)||malId<1||malId>100000000)throw Error('ALM_SOURCE_INVALID');return mediaStore.list(mediaStoreFile).filter(row=>row.malId===malId);});
+  ipcMain.handle('media-relabel-key',(event,malId,key,episode,season)=>{trusted(event);if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');return mediaStore.relabel(mediaStoreFile,malId,key,episode,season);});
   let mediaChecking=false;
   ipcMain.handle('media-check-episodes',async(event,requests)=>{
     trusted(event);if(mediaChecking)return [];mediaChecking=true;
@@ -389,6 +391,10 @@ async function startApplication() {
     return mediaStore.remove(mediaStoreFile,key);
   });
   const streamStore=require('./lib/streaming-sources'),streamFile=path.join(app.getPath('userData'),'streaming-sources-v220.json');
+  const sourcePrefs=require('./lib/viewing-source-preferences'),sourcePrefsFile=path.join(app.getPath('userData'),'viewing-source-prefs-v220.json');
+  ipcMain.handle('source-overview',event=>{trusted(event);return sourcePrefs.overview(sourcePrefsFile,mediaStore.list(mediaStoreFile),streamStore.summary(streamFile));});
+  ipcMain.handle('source-display-set',(event,display)=>{trusted(event);return sourcePrefs.setDisplay(sourcePrefsFile,display);});
+  ipcMain.handle('source-favorite-set',(event,malId,kind,key)=>{trusted(event);return sourcePrefs.setFavorite(sourcePrefsFile,malId,kind,key,mediaStore.list(mediaStoreFile),streamStore.summary(streamFile));});
   ipcMain.handle('stream-list',(event,malId)=>{trusted(event);return streamStore.list(streamFile,malId);});
   ipcMain.handle('stream-put',(event,input)=>{trusted(event);return streamStore.put(streamFile,input);});
   ipcMain.handle('stream-remove',(event,malId,key)=>{trusted(event);return streamStore.remove(streamFile,malId,key);});

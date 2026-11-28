@@ -223,3 +223,18 @@ button.lexicon-example{font:inherit;text-align:left;color:inherit;cursor:pointer
 .alm-source-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;border:1px solid rgba(155,181,223,.2);border-radius:9px;padding:8px;margin-top:7px}.alm-source-row>div{flex:1 1 170px;min-width:0;overflow-wrap:anywhere}.alm-source-row small{display:block;opacity:.8;font-size:.78rem}
 .alm-source-row button,.alm-source-form button{font-size:.8rem}.alm-source-add summary{cursor:pointer}.alm-source-trigger{white-space:nowrap}
 .alm-v220-reco-cover .reco-card-thumb-ph{display:flex;align-items:center;justify-content:center}
+
+/* Sources: reuse the existing card action row and dialog style. */
+.alm-source-trigger[hidden],#v220SourcesTab[hidden],#v220SavedBlock[hidden],#v220SourcesMore[hidden],.alm-source-dialog button[hidden]{display:none!important}
+.alm-source-preferred{border-color:rgba(175,147,236,.55);background:rgba(133,102,199,.12)}
+.alm-source-favorite[aria-pressed="true"]{color:#e9c780}
+.alm-source-favorite{min-width:34px}
+.alm-source-settings{margin:16px 0;padding:12px;border:1px solid rgba(155,181,223,.22);border-radius:10px}
+.alm-source-settings legend{font-weight:600;padding:0 6px}
+.alm-source-settings label{display:flex;align-items:center;gap:8px;margin:8px 0}
+.alm-source-settings input{width:auto;flex:none}
+#v220SourcesSearch{width:100%;margin:8px 0}
+#v220SourcesList .alm-source-row{margin:0}
+.alm-source-more,#v220SourcesMore{margin-top:9px}
+.alm-source-trigger:focus-visible,.alm-source-favorite:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@media(max-width:580px){.alm-source-form label{flex-basis:120px}.alm-source-dialog{padding:14px}.alm-source-row>div{flex-basis:100%}}

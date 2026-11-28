@@ -121,7 +121,9 @@ function rail(kind,rows){
   if(kind==='resume'){
    const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';wrapper.append(tile);
    const stepper=window.ALM_CATALOG?.createEpisodeStepper?.(row.anime);if(stepper)wrapper.append(stepper);
-   if(row.next!==null&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
+   const modern=window.ALM_SOURCES?.available(),favorite=modern&&window.ALM_SOURCES.createFavoriteButton(row.anime,row.next);
+   if(favorite)wrapper.append(favorite);
+   else if((!modern||window.ALM_SOURCES.showShortcut(row.anime))&&row.next!==null&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
    const open=document.createElement('button');open.type='button';open.className='alm-watch-local-open';
    open.textContent='▶ '+t('localOpen')+' '+row.next;
    open.addEventListener('click',async()=>{
@@ -133,7 +135,7 @@ function rail(kind,rows){
     finally{open.disabled=false;}
    });
    wrapper.append(open);
-   }
+   }else if(modern){const source=window.ALM_SOURCES.createButton(row.anime,{surface:'cockpit'});if(source&&!source.hidden)wrapper.append(source);}
    frag.append(wrapper);
   }else frag.append(tile);
  }
@@ -201,6 +203,7 @@ function init(){
  window.addEventListener('alm:library-rendered',onRendered);
  window.addEventListener('alm:collection-changed',()=>{queueDraw();if(visible())void checkSchedule();});
  window.addEventListener('alm:language-changed',draw);
+ window.addEventListener('alm:source-overview-changed',()=>{if(visible())queueDraw();});
  window.addEventListener('alm:media-associations-changed',event=>{
    associations.clear();for(const item of event.detail?.summaries||[])associations.set(Number(item.malId),item);
    draw();

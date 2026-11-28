@@ -186,6 +186,8 @@
     "scripts/test-beta82-betaseries-network.cjs",
     "scripts/test-release-v200.cjs",
     "scripts/test-v220-streaming-sources.cjs",
-    "scripts/test-v220-detail-navigation.cjs"
+    "scripts/test-v220-detail-navigation.cjs",
+    "scripts/test-v220-source-preferences.cjs",
+    "scripts/test-v220-sources-ui.cjs"
   ]
 }

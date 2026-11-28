@@ -805,7 +805,7 @@ function render() {
     article.className = "card";
     article.dataset.animeId = String(anime.id || "");
     article.dataset.status = String(anime.status || "");
-    if(group)article.dataset.seriesKey=group.key;
+    if(group){article.dataset.seriesKey=group.key;article.dataset.sourceMalIds=[...new Set(group.items.map(item=>Number(item.malId)).filter(id=>Number.isSafeInteger(id)&&id>0))].join(',');}
 
     const tagHtml = [
       ...(anime.genres || []).map(t => ({ value: genreLabelFr(t), genre: true })),
@@ -2586,6 +2586,7 @@ document.addEventListener("DOMContentLoaded", () => setTimeout(() => {
       const panel=panels.find(p=>p.id===btn.dataset.tab||p.dataset.panel===btn.dataset.tab);if(panel){btn.setAttribute('aria-controls',panel.id);panel.setAttribute('aria-labelledby',btn.id);}
     });
     panels.forEach(panel=>{const selected=panel===target;panel.classList.toggle('hidden',!selected);panel.hidden=!selected;panel.setAttribute('role','tabpanel');});
+    window.dispatchEvent(new CustomEvent('alm:import-tab-changed',{detail:{panel:targetPanelId}}));
   }
 
   document.addEventListener("click", (event) => {
@@ -2605,7 +2606,7 @@ document.addEventListener("DOMContentLoaded", () => setTimeout(() => {
 
   document.addEventListener('keydown',event=>{
     const current=event.target.closest('.import-tab');if(!current||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-    event.preventDefault();const all=[...document.querySelectorAll('.import-tab')],at=all.indexOf(current),n=event.key==='Home'?0:event.key==='End'?all.length-1:(at+(event.key==='ArrowRight'?1:-1)+all.length)%all.length;activateImportTab(all[n].dataset.tab);all[n].focus();
+    event.preventDefault();const all=[...document.querySelectorAll('.import-tab')].filter(button=>!button.hidden&&!button.disabled),at=all.indexOf(current),n=event.key==='Home'?0:event.key==='End'?all.length-1:(at+(event.key==='ArrowRight'?1:-1)+all.length)%all.length;activateImportTab(all[n].dataset.tab);all[n].focus();
   });
   window.activateImportTab = activateImportTab;
   activateImportTab('xmlImportPanel');
