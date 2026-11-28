@@ -11,7 +11,7 @@ command -v node >/dev/null 2>&1 || fail "Node.js 24.22.3 LTS est conseillé (voi
 command -v npm >/dev/null 2>&1 || fail "npm est requis."
 node -e 'process.exit(require("./scripts/release-windows").validNode()?0:1)' || fail "Node.js corrigé 22.23.5+ ou 24.22.3+ requis dans sa branche LTS (version détectée : $(node --version))."
 
-log "Préparation du build Linux V2.1.3 Beta stable"
+log "Préparation du build Linux V2.2.0 Beta stable"
 printf 'Node : %s\nnpm  : %s\n' "$(node --version)" "$(npm --version)"
 
 if [ "${ALM_SKIP_INSTALL:-0}" != "1" ]; then
@@ -44,7 +44,7 @@ log "Création des paquets : ${TARGETS[*]}"
 ./node_modules/.bin/electron-builder --linux "${TARGETS[@]}" --publish never
 
 mkdir -p dist
-CHECKSUM_NAME="SHA256SUMS-V2.1.3-Beta-Stable.txt"
+CHECKSUM_NAME="SHA256SUMS-V2.2.0-Beta-Stable.txt"
 CHECKSUM_FILE="dist/$CHECKSUM_NAME"
 : > "$CHECKSUM_FILE"
 while IFS= read -r -d '' artifact; do

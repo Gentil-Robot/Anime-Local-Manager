@@ -1,5 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{JSDOM}=require('jsdom');
+const [major,minor]=require('../release-version.json').technicalVersion.split('.').map(Number);
+const nextVersion=`${major}.${minor+1}.0`;
 const tick=()=>new Promise(resolve=>setTimeout(resolve,20)),read=name=>fs.readFileSync(path.join(__dirname,'../public',name),'utf8');
 async function run(){
  const dom=new JSDOM('<!doctype html><button id="backupBtn"></button><button id="settingsBtn"></button><dialog id="settingsDialog"><section id="settingsPanel-appearance"></section><section id="settingsPanel-updates"></section></dialog><section id="animeGrid"></section>',{url:'http://alm.test',runScripts:'outside-only'}),w=dom.window;
@@ -8,15 +10,15 @@ async function run(){
  w.setInterval=()=>0;w.setTimeout=()=>0;
  w.ALM_SETTINGS={select:key=>{assert.equal(key,'updates');updateClicks++;}};w.document.getElementById('settingsBtn').onclick=()=>{w.document.getElementById('settingsDialog').open=true;};
  w.animeManager={updateState:async()=>({supported:true,phase:'idle'}),onUpdateOpen:fn=>nativeClick=fn,onUpdate:fn=>nativeUpdate=fn,updateDownload:()=>downloadCalls++};
- let data={muted:false,unread:1,items:[{id:'update',type:'update',version:'2.2.0',prerelease:true,createdAt:Date.now(),read:false}]};
+ let data={muted:false,unread:1,items:[{id:'update',type:'update',version:nextVersion,prerelease:true,createdAt:Date.now(),read:false}]};
  w.fetch=async(url,options)=>{
-  if(url==='/api/updates/check'){if(offline)throw Error('offline');if(resolveCheck)await new Promise(resolve=>resolveCheck=resolve);return {ok:true,json:async()=>release||{available:true,latest:'v2.2.0',releaseUrl:'https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v2.2.0'}};}
+  if(url==='/api/updates/check'){if(offline)throw Error('offline');if(resolveCheck)await new Promise(resolve=>resolveCheck=resolve);return {ok:true,json:async()=>release||{available:true,latest:'v'+nextVersion,releaseUrl:'https://github.com/Gentil-Robot/Anime-Local-Manager/releases/tag/v'+nextVersion}};}
   if(url==='/api/notifications/read'){data={...data,unread:0,items:data.items.map(i=>({...i,read:true}))};}
   return {ok:true,json:async()=>url.startsWith('/api/notifications')?data:{enabled:false}};
  };
  try{
   for(const file of ['update-notification-copy.js','release-copy.js','notification-center.js','release-watch.js'])w.eval(read(file));w.document.dispatchEvent(new w.Event('DOMContentLoaded'));await tick();
-  for(const lang of w.ALM_UPDATE_COPY.languages){language=lang;w.dispatchEvent(new w.Event('alm:language-changed'));const row=w.document.querySelector('.notification-update');assert(row.textContent.includes(w.ALM_UPDATE_COPY.text('beta',lang)));assert(row.textContent.includes('2.2.0'));}
+  for(const lang of w.ALM_UPDATE_COPY.languages){language=lang;w.dispatchEvent(new w.Event('alm:language-changed'));const row=w.document.querySelector('.notification-update');assert(row.textContent.includes(w.ALM_UPDATE_COPY.text('beta',lang)));assert(row.textContent.includes(nextVersion));}
   language='fr';w.document.querySelector('.notification-update').click();await tick();assert.equal(updateClicks,1);assert.equal(downloadCalls,0);assert(w.document.getElementById('settingsDialog').open);assert(w.document.getElementById('notificationClear').disabled,'Calendar clearing must not remove update alerts');
   nativeClick();await tick();assert.equal(updateClicks,2);assert.equal(downloadCalls,0,'Desktop clicks open settings without starting installation');
   resolveCheck=true;w.document.getElementById('almUpdateCheck').click();assert(w.document.getElementById('almUpdateStatus').textContent.includes('Vérification en cours'));assert(w.document.getElementById('almUpdateCheck').disabled);resolveCheck();resolveCheck=null;await tick();
@@ -26,7 +28,7 @@ async function run(){
   nativeUpdate({supported:true,phase:'error',error:'ALM_UPDATE_INSTALL_FAILED',canRetry:true});assert(w.document.getElementById('almUpdateStatus').textContent.includes('fichier téléchargé'));
   const failure={supported:true,phase:'error',error:'ALM_UPDATE_HELPER_EXIT',canRetry:true};w.showAppConfirm=async()=>true;w.animeManager.updateState=async()=>failure;w.animeManager.updateInstall=async()=>{nativeUpdate(failure);throw Error('fixture helper failed');};w.document.getElementById('almUpdateInstall').click();await tick();assert(w.document.getElementById('almUpdateStatus').textContent.includes('ALM reste ouvert'),'IPC rejection must retain the precise installation error');
   data.items[0].version='<img src=x onerror=alert(1)>';await w.ALM_NOTIFICATIONS.refresh();assert(!w.document.querySelector('.notification-update img'),'Release metadata is rendered as text');
-  console.log('OK 2.1.3 update UI: seven languages, bell and desktop actions, checking feedback, persistent error feedback and safe metadata.');
+  console.log('OK update UI: seven languages, bell and desktop actions, checking feedback, persistent error feedback and safe metadata.');
  }finally{dom.window.close();}
 }
 run().catch(error=>{console.error(error);process.exitCode=1;});

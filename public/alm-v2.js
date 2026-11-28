@@ -103,7 +103,7 @@ function openLibraryWithGenreV2(rawGenre) {
 window.openLibraryWithGenreV2 = openLibraryWithGenreV2;
 
 // ─── Navigation ────────────────────────────────────────────
-const ALL_V2_PAGES = ["communityPage","memoryPage","dnaPage","newsV2Page","recoPage","seasonNewsPage","lexiconPage","auditPage","discoveryPage","rankingPage","calendarPage"];
+const ALL_V2_PAGES = ["communityPage","memoryPage","dnaPage","newsV2Page","recoPage","seasonNewsPage","cockpitPage","lexiconPage","auditPage","discoveryPage","rankingPage","calendarPage"];
 
 function resetTopLevelScrollV2(pageId = "") {
   const reset = () => {
@@ -2172,6 +2172,7 @@ async function initRecommendations(force = false) {
         if (items.length) {
           resultsEl.innerHTML = items.map(item => recoCard(item, `Genre : ${button.dataset.genre}`)).join("");
           wireAdd(resultsEl);
+          wireGenreDetailsV220(resultsEl,items);
         } else if (rawItems.length) {
           resultsEl.innerHTML = `<div class="reco-result-message"><strong>Toutes les propositions de ce genre sont masquées.</strong><span>Utilise « Réafficher les propositions masquées » pour les retrouver.</span></div>`;
         } else {
@@ -2683,6 +2684,17 @@ function recoCard(item,label){
   </div></div>`;
 }
 
+// Only Explore by genre opens the shared record from its cover.
+function wireGenreDetailsV220(container,items){
+  const rows=items.map(item=>({...item,poster:item.poster||item.imageUrl||(item.malId?'/api/v2/reco/image/'+encodeURIComponent(item.malId):'')}));
+  container.querySelectorAll('.reco-card').forEach((card,index)=>{
+    const cover=card.querySelector('.reco-card-thumb,.reco-card-thumb-ph');
+    if(!cover||!rows[index])return;
+    const button=document.createElement('button');button.type='button';button.className='alm-v220-reco-cover';button.setAttribute('aria-label',rows[index].title||'Anime');
+    cover.replaceWith(button);button.append(cover);
+    button.addEventListener('click',event=>{event.stopPropagation();window.ALM_CATALOG?.openRecords(rows,index,button);});
+  });
+}
 function wireAdd(container){
   container.querySelectorAll('.reco-add-status:not([data-label-wired])').forEach(select=>{select.dataset.labelWired='1';const update=()=>{const b=select.closest('.reco-card').querySelector('.reco-card-add');if(!b.disabled)b.textContent=window.ALM_ADD_LABEL(select.value);};select.addEventListener('change',update);update();});
   container.querySelectorAll(".reco-card-hide:not([data-wired])").forEach(btn=>{
@@ -3451,7 +3463,7 @@ async function ignoreOneSeasonNews(idx) {
 //  DNA DROITE : score dist + prochains à finir
 // ─────────────────────────────────────────────
 function dnaProgressThumbV2(anime, kind) {
-  const sizeClass = kind === "almost" ? "dna-almost-thumb" : "dna-watch-thumb";
+  const sizeClass = kind === "score" ? "dna-score-poster-ph" : kind === "almost" ? "dna-almost-thumb" : "dna-watch-thumb";
   const image = safeUrlV2(anime?.poster || anime?.imageUrl || "");
   const malId = Number(anime?.malId);
   const owned = Number.isSafeInteger(malId) && malId > 0 && malId <= 100000000;
@@ -3469,9 +3481,8 @@ function renderDnaExtras(animes) {
   if (scoreDistEl) {
     const dist = {};
     for (let i = 1; i <= 10; i++) dist[i] = 0;
-    const scored = animes.filter(a => Number(a.score) > 0);
+    const scored = animes.filter(a => Number.isInteger(Number(a.score)) && Number(a.score) >= 1 && Number(a.score) <= 10);
     const scoreSummaryEl = document.getElementById("dnaScoreSummary");
-    const scorePostersEl = document.getElementById("dnaScorePosters");
     if (scored.length) {
       const average = scored.reduce((sum,a)=>sum+Number(a.score||0),0)/scored.length;
       const sortedScores = scored.slice().sort((a,b)=>Number(b.score||0)-Number(a.score||0)||String(a.title||"").localeCompare(String(b.title||"")));
@@ -3482,17 +3493,8 @@ function renderDnaExtras(animes) {
         <div class="dna-score-stat"><span>🎬</span><strong>${scored.length}</strong><em>Animés notés</em></div>
         <div class="dna-score-stat"><span>💜</span><strong>${favoriteCount}</strong><em>Coups de cœur 9+</em></div>
         <div class="dna-score-stat"><span>🏆</span><strong>${best}<small>/10</small></strong><em>Meilleure note</em></div>`;
-      if (scorePostersEl) scorePostersEl.innerHTML = sortedScores.slice(0,8).map(a=>`
-        <button type="button" class="dna-score-poster" data-dna-personal-score="${Math.round(Number(a.score))}" title="${escapeHtmlV2(a.title||"Anime")} — ${escapeHtmlV2(a.score)}/10">
-          ${a.poster?`<img src="${safeUrlV2(a.poster)}" alt="${escapeHtmlV2(a.title||"")}" loading="lazy" data-image-fallback="true">`:""}
-          <span class="dna-score-poster-ph" ${a.poster?'style="display:none"':''}>🎌</span>
-          <span class="dna-score-badge">⭐ ${escapeHtmlV2(a.score)}</span>
-          <span class="dna-score-poster-title">${escapeHtmlV2(a.title||"Anime")}</span>
-        </button>`).join("");
-      scorePostersEl?.querySelectorAll("[data-dna-personal-score]").forEach(button=>button.addEventListener("click",()=>window.showLibraryByPersonalScore?.(Number(button.dataset.dnaPersonalScore||0))));
     } else {
       if (scoreSummaryEl) scoreSummaryEl.innerHTML = "";
-      if (scorePostersEl) scorePostersEl.innerHTML = "";
     }
     for (const a of scored) {
       const s = Math.round(Number(a.score));
@@ -3515,20 +3517,13 @@ function renderDnaExtras(animes) {
         <span class="dna-score-column-percent">${n ? percent + "%" : ""}</span>
       </button>`;
     }).join("")}</div>`;
-    scoreDistEl.querySelectorAll("[data-dna-personal-score]").forEach(button => {
-      button.addEventListener("click", () => {
-        const score = Number(button.dataset.dnaPersonalScore || 0);
-        if (score > 0 && typeof window.showLibraryByPersonalScore === "function") {
-          window.showLibraryByPersonalScore(score);
-        }
-      });
-    });
     if (!scored.length) scoreDistEl.innerHTML = `
       <div class="dna-empty-note">
         <span aria-hidden="true">✍️</span>
         <strong>Aucune note personnelle pour le moment</strong>
         <p>${animes.length} animé${animes.length > 1 ? "s" : ""} sans note personnelle. Ajoute des notes de 1 à 10 : le graphique montrera combien d’animés ont reçu chaque note.</p>
       </div>`;
+    window.ALM_V220_SCORE_GALLERY?.render(animes,a=>dnaProgressThumbV2(a,"score"));
   }
 
   // Prochains à finir (Watching avec episodesTotal connu)

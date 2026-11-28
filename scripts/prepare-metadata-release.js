@@ -139,6 +139,13 @@ async function prepareMetadataRelease() {
 }
 
 async function beforePackHook() {
+  const release = require('../release-version.json');
+  if (release.releaseCandidate === true) {
+    const pkg = require('../package.json');
+    if (process.env.ALM_VM_PREVIEW_BUILD !== '1' || release.qualifier !== 'VM TEST' || pkg.build.appId !== 'fr.gentilrobot.animelocalmanager.vmtest') {
+      throw Error('ALM_CANDIDATE_VM_ONLY: use the isolated VM preview workflow until release approval.');
+    }
+  }
   require("./ensure-asar-finished.js").ensureAsarFinished();
   await prepareMetadataRelease();
 }

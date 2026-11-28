@@ -14,7 +14,7 @@ const karaokeJs = read("public/karaoke.js");
 // Historical timeline regression. The supplied Beta37 timeline is tested separately.
 const song = JSON.parse(read("scripts/fixtures/karaoke/song.beta36-backup.json"));
 
-assert.strictEqual(pkg.version, "2.1.3");
+assert.strictEqual(pkg.version, "2.2.0");
 assert.equal(pkg.scripts.verify, "node scripts/verify-project.js");
 assert(JSON.parse(read("scripts/verification-plan.json")).steps.includes("scripts/test-beta25-final.js"));
 
@@ -81,14 +81,18 @@ assert(app.includes("!isDeprecatedNewsAggregatorV2(n)"));
 
 // Notes : histogramme visuel, mais les jaquettes appréciées restent présentes et cliquables.
 assert(html.includes('id="dnaScorePosters"'));
-assert(app.includes('class="dna-score-poster"'));
+const gallery=read('public/v220-personal-insights.js');
+assert(app.includes('window.ALM_V220_SCORE_GALLERY?.render(animes'));
+assert(gallery.includes("el('button',null,'dna-score-poster')"));
 assert(app.includes('class="dna-score-histogram"'));
 assert(app.includes('class="dna-score-column'));
 assert(css.includes("button.dna-score-column.is-clickable"));
 assert(css.includes(".dna-score-column-fill"));
 assert(css.includes(".dna-score-posters"));
 assert(app.includes("data-dna-personal-score"));
-assert(app.includes("window.showLibraryByPersonalScore"));
+assert(gallery.includes("filter=filter===value"));
+assert(gallery.includes("ALM_CATALOG.openRecords"));
+assert(read('public/app.js').includes("showLibraryByPersonalScore"));
 
 // Karaoké : 42 lignes audio-first, traduction liée à la langue de l'UI, timings chantés intacts.
 const translationCodes = ["fr", "en", "ja", "es", "de", "pt-BR"];

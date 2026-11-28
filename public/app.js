@@ -61,7 +61,7 @@ function isV2PageActive(pageId = "") {
 }
 
 function setV2BodyView(pageId = "") {
-  document.body.classList.remove("alm-v2-active", "alm-view-communityPage", "alm-view-dnaPage", "alm-view-newsV2Page", "alm-view-recoPage", "alm-view-seasonNewsPage", "alm-view-lexiconPage", "alm-view-auditPage", "alm-view-discoveryPage", "alm-view-rankingPage");
+  document.body.classList.remove("alm-v2-active", "alm-view-communityPage", "alm-view-dnaPage", "alm-view-newsV2Page", "alm-view-recoPage", "alm-view-seasonNewsPage", "alm-view-cockpitPage", "alm-view-lexiconPage", "alm-view-auditPage", "alm-view-discoveryPage", "alm-view-rankingPage");
   if (pageId) document.body.classList.add("alm-v2-active", `alm-view-${pageId}`);
 }
 
@@ -805,7 +805,7 @@ function render() {
     article.className = "card";
     article.dataset.animeId = String(anime.id || "");
     article.dataset.status = String(anime.status || "");
-    if(group)article.dataset.seriesKey=group.key;
+    if(group){article.dataset.seriesKey=group.key;article.dataset.sourceMalIds=[...new Set(group.items.map(item=>Number(item.malId)).filter(id=>Number.isSafeInteger(id)&&id>0))].join(',');}
 
     const tagHtml = [
       ...(anime.genres || []).map(t => ({ value: genreLabelFr(t), genre: true })),
@@ -815,9 +815,9 @@ function render() {
     const posterSrc = String(anime.poster || anime.imageUrl || "").trim();
     // Lazy cover caching only for identified MAL entries in the user's library.
     // Never cache arbitrary URLs or eagerly download the complete catalogue.
-    const canCache=Number.isSafeInteger(Number(actualAnime.malId))&&Number(actualAnime.malId)>0&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(posterSrc);
+    const canCache=Number.isSafeInteger(Number(actualAnime.malId))&&Number(actualAnime.malId)>0&&(!posterSrc||/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(posterSrc));
     const localCover=canCache?'/api/cover-cache/'+Number(actualAnime.malId):posterSrc;
-    const poster = posterSrc
+    const poster = localCover
       ? `<img loading="lazy" decoding="async" src="${escapeHtml(localCover)}" ${canCache?'data-alm-managed-cover="1"':''} alt="${escapeHtml(displayTitle(anime))}" data-image-fallback="true">`
       : `Image absente<br>${escapeHtml(displayTitle(anime))}`;
 
@@ -2493,7 +2493,7 @@ document.getElementById("navSettings")?.addEventListener("click", () => {
 
 function hideV2PagesFromApp() {
   setV2BodyView("");
-  ["communityPage", "memoryPage", "dnaPage", "newsV2Page", "recoPage", "seasonNewsPage", "lexiconPage", "auditPage", "discoveryPage","rankingPage","calendarPage"].forEach(id => document.getElementById(id)?.classList.add("hidden"));
+  ["communityPage", "memoryPage", "dnaPage", "newsV2Page", "recoPage", "seasonNewsPage", "cockpitPage", "lexiconPage", "auditPage", "discoveryPage","rankingPage","calendarPage"].forEach(id => document.getElementById(id)?.classList.add("hidden"));
 }
 
 // V1.2 navigation and page switching fixes
@@ -2586,6 +2586,7 @@ document.addEventListener("DOMContentLoaded", () => setTimeout(() => {
       const panel=panels.find(p=>p.id===btn.dataset.tab||p.dataset.panel===btn.dataset.tab);if(panel){btn.setAttribute('aria-controls',panel.id);panel.setAttribute('aria-labelledby',btn.id);}
     });
     panels.forEach(panel=>{const selected=panel===target;panel.classList.toggle('hidden',!selected);panel.hidden=!selected;panel.setAttribute('role','tabpanel');});
+    window.dispatchEvent(new CustomEvent('alm:import-tab-changed',{detail:{panel:targetPanelId}}));
   }
 
   document.addEventListener("click", (event) => {
@@ -2605,7 +2606,7 @@ document.addEventListener("DOMContentLoaded", () => setTimeout(() => {
 
   document.addEventListener('keydown',event=>{
     const current=event.target.closest('.import-tab');if(!current||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-    event.preventDefault();const all=[...document.querySelectorAll('.import-tab')],at=all.indexOf(current),n=event.key==='Home'?0:event.key==='End'?all.length-1:(at+(event.key==='ArrowRight'?1:-1)+all.length)%all.length;activateImportTab(all[n].dataset.tab);all[n].focus();
+    event.preventDefault();const all=[...document.querySelectorAll('.import-tab')].filter(button=>!button.hidden&&!button.disabled),at=all.indexOf(current),n=event.key==='Home'?0:event.key==='End'?all.length-1:(at+(event.key==='ArrowRight'?1:-1)+all.length)%all.length;activateImportTab(all[n].dataset.tab);all[n].focus();
   });
   window.activateImportTab = activateImportTab;
   activateImportTab('xmlImportPanel');

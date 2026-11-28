@@ -1,0 +1,36 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{JSDOM}=require('jsdom');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const html=read('public/index.html');
+for(const id of ['v220ScoreBoard','v220ScorePrev','v220ScoreNext','dnaScorePosters'])assert(html.includes('id="'+id+'"'));
+assert(!html.includes('id="v220ScoreFilter"')&&!html.includes('id="v220ScoreLanes"'),'Histogram is the only score filter');
+assert(!html.includes('id="v220PersonalTimeline"'),'Original Memories');
+const {window}=new JSDOM(html,{url:'http://127.0.0.1:3123/',runScripts:'outside-only',pretendToBeVisual:true});
+const library=Array.from({length:19},(_,i)=>({id:i+1,malId:i+100,title:'Anime '+String(i).padStart(2,'0'),score:i<10?10:9,status:'Completed'}));
+library.push({id:20,malId:220,title:'Unrated',score:''});
+let opened,network=0;
+window._almAnimes=library;window.ALM_I18N={getLanguage:()=> 'fr'};
+window.ALM_CATALOG={openRecords(rows,index){opened={rows,index};}};
+window.fetch=()=>{network++;throw Error('No network');};
+const d=window.document,$=id=>d.getElementById(id),host=$('dnaScorePosters'),posters=()=>[...host.querySelectorAll('.dna-score-poster')];
+Object.defineProperties(host,{clientWidth:{get:()=>960},scrollWidth:{get:()=>Math.max(960,posters().length*121-8)}});
+host.scrollTo=({left})=>{host.scrollLeft=left;host.dispatchEvent(new window.Event('scroll'));};
+window.eval(read('public/v220-personal-insights-model.js'));window.eval(read('public/v220-personal-insights.js'));
+window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+try{
+ $('dnaScoreDist').innerHTML='<button data-dna-personal-score="10">10</button><button data-dna-personal-score="9">9</button>';
+ window.ALM_V220_SCORE_GALLERY.render(library);
+ assert.equal(posters().length,19);assert($('v220ScorePrev').disabled);assert(!$('v220ScoreNext').disabled);
+ assert.equal($('v220ScorePrev').nextElementSibling,host);assert.equal(host.nextElementSibling,$('v220ScoreNext'));
+ const first=posters()[0];$('v220ScoreNext').click();assert.equal(host.scrollLeft,121);assert.strictEqual(posters()[0],first,'Smooth scrolling, no rerender on arrows');
+ assert($('v220ScoreSummary').textContent.includes('2–9 / 19'));
+ for(let i=0;i<25;i++)$('v220ScoreNext').click();assert($('v220ScoreNext').disabled);
+ $('v220ScorePrev').click();assert(!$('v220ScoreNext').disabled);
+ const ten=$('dnaScoreDist').querySelector('[data-dna-personal-score="10"]');ten.click();
+ assert.equal(host.scrollLeft,0);assert.equal(posters().length,10);assert(posters().every(p=>p.dataset.score==='10'));assert.equal(ten.getAttribute('aria-pressed'),'true');
+ posters()[9].click();assert.equal(opened.rows.length,10);assert.equal(opened.rows[opened.index].id,10);
+ const nine=$('dnaScoreDist').querySelector('[data-dna-personal-score="9"]');nine.click();assert(posters().every(p=>p.dataset.score==='9'));
+ nine.click();assert.equal(posters().length,19);assert.equal(nine.getAttribute('aria-pressed'),'false');
+ assert.equal(network,0);assert.equal(library[0].score,10);
+ console.log('OK DNA: histogram-only filter, smooth one-card scroll, arrows beside gallery, all scores reachable, record navigation.');
+}finally{window.close();}

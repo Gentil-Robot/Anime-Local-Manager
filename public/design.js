@@ -3,7 +3,7 @@
   'use strict';
   const D=window.ALM_DESIGN, $=id=>document.getElementById(id);
   if (!D) return;
-  const keys={memoryPage:'memories',communityPage:'communityDashboard',library:'library',watching:'watching',plan:'plan',aboutPage:'about',dnaPage:'Anime DNA',newsV2Page:'news',recoPage:'reco',seasonNewsPage:'seasons',lexiconPage:'dictionary',auditPage:'audit',discoveryPage:'searchPage',rankingPage:'ranking',calendarPage:'calendarPage'};
+  const keys={cockpitPage:'ALM Cockpit',memoryPage:'memories',communityPage:'communityDashboard',library:'library',watching:'watching',plan:'plan',aboutPage:'about',dnaPage:'Anime DNA',newsV2Page:'news',recoPage:'reco',seasonNewsPage:'seasons',lexiconPage:'dictionary',auditPage:'audit',discoveryPage:'searchPage',rankingPage:'ranking',calendarPage:'calendarPage'};
   let viewFrame=0;
   function go(where) {
     const ids={search:'navDiscovery',news:'navNewsV2',reco:'navReco',dna:'navDna',seasons:'navSeasonNews',dictionary:'navLexicon',audit:'navAudit',settings:'settingsBtn',import:'importXmlBtn',add:'openAdd',export:'backupBtn'};
@@ -27,7 +27,7 @@
   }
   function visiblePage() {
     if ($('aboutPage') && !$('aboutPage').classList.contains('hidden')) return 'aboutPage';
-    for(const id of ['memoryPage','communityPage','dnaPage','newsV2Page','recoPage','seasonNewsPage','lexiconPage','auditPage','discoveryPage','rankingPage','calendarPage']) if($(id) && !$(id).classList.contains('hidden')) return id;
+    for(const id of ['cockpitPage','memoryPage','communityPage','dnaPage','newsV2Page','recoPage','seasonNewsPage','lexiconPage','auditPage','discoveryPage','rankingPage','calendarPage']) if($(id) && !$(id).classList.contains('hidden')) return id;
     if(document.querySelector('.nav-item[data-filter="Watching"]')?.classList.contains('active'))return 'watching';
     return document.querySelector('.nav-item[data-filter="Plan to Watch"]')?.classList.contains('active')?'plan':'library';
   }
@@ -39,7 +39,7 @@
     const title=$('studioLibraryTitle');if(title){title.dataset.designText=view==='watching'?'watching':view==='plan'?'plan':'library';}
     const intro=$('studioLibraryIntro');if(intro){intro.dataset.designText=view==='watching'?'watchingIntro':view==='plan'?'planIntro':'libraryIntro';}
     const crumb=$('studioBreadcrumb');
-    if(crumb){const key=keys[view]||'library';const v=view==='memoryPage'?(window.ALM_NOTEBOOK?.t('collectionNotebook')||'Mes souvenirs'):key==='Anime DNA'?key:D.t(key);crumb.replaceChildren();
+    if(crumb){const key=keys[view]||'library';const v=view==='memoryPage'?(window.ALM_NOTEBOOK?.t('collectionNotebook')||'Mes souvenirs'):(key==='Anime DNA'||key==='ALM Cockpit')?key:D.t(key);crumb.replaceChildren();
       const home=document.createElement('button');home.type='button';home.dataset.appGo='library';home.innerHTML=D.icon('library');home.setAttribute('aria-label',D.t('library'));crumb.append(home);
       const sep=document.createElement('span');sep.textContent='/';sep.className='studio-crumb-sep';sep.setAttribute('aria-hidden','true');crumb.append(sep);
       const current=document.createElement('span');current.textContent=v;current.setAttribute('aria-current','page');crumb.append(current);
@@ -63,12 +63,12 @@
     document.querySelectorAll('.dna-header,.reco-header,.audit-hero,.lexicon-hero,.season-news-header,.news-v2-header').forEach(el=>el.classList.add('studio-page-heading'));
   }
   function navigation() {
-    const entries=[['.nav-item[data-filter=""]','library'],['.nav-item[data-filter="Watching"]','play'],['.nav-item[data-filter="Plan to Watch"]','heart'],['#navMemories','memories'],['#navDiscovery','search'],['#navSeasonNews','season'],['#navRanking','star'],['#navNewsV2','news'],['#navReco','compass'],['#navDna','dna'],['#navLexicon','book'],['#navAudit','shield'],['#navSettings','settings'],['#navAbout','info']];
+    const entries=[['#navCockpit','cockpit'],['.nav-item[data-filter=""]','library'],['.nav-item[data-filter="Watching"]','play'],['.nav-item[data-filter="Plan to Watch"]','heart'],['#navMemories','memories'],['#navDiscovery','search'],['#navSeasonNews','season'],['#navRanking','star'],['#navNewsV2','news'],['#navReco','compass'],['#navDna','dna'],['#navLexicon','book'],['#navAudit','shield'],['#navSettings','settings'],['#navAbout','info']];
     for(const [sel,ico] of entries){const b=document.querySelector(sel);if(!b||b.dataset.visualReady)continue;
       const caption=b.textContent.trim().replace(/^[^\p{L}\p{N}]+/u,'');
       b.replaceChildren();b.insertAdjacentHTML('afterbegin',D.icon(ico));const label=document.createElement('span');label.className='studio-nav-label';label.textContent=caption;
       const captionKey={play:'watching',star:'ranking',search:'searchPage',library:'library',heart:'plan',season:'seasons',news:'news',compass:'reco',book:'dictionary',shield:'audit',settings:'settings',info:'about',music:'karaoke'}[ico];
-      if(captionKey){makeLeaf(label,captionKey);b.dataset.designAria=captionKey;b.setAttribute('aria-label',D.t(captionKey));}else if(ico==='memories'){label.dataset.notebookText='collectionNotebook';label.textContent=window.ALM_NOTEBOOK_COPY?.t(D.language(),'collectionNotebook')||'Mes souvenirs';}else{label.textContent='Anime DNA';label.setAttribute('translate','no');}
+      if(captionKey){makeLeaf(label,captionKey);b.dataset.designAria=captionKey;b.setAttribute('aria-label',D.t(captionKey));}else if(ico==='memories'){label.dataset.notebookText='collectionNotebook';label.textContent=window.ALM_NOTEBOOK_COPY?.t(D.language(),'collectionNotebook')||'Mes souvenirs';}else{label.textContent=ico==='cockpit'?'ALM Cockpit':'Anime DNA';label.setAttribute('translate','no');}
       b.append(label);b.dataset.visualReady='1';
     }
     $('commProfileEntry')?.addEventListener('click',closeMenu);
@@ -120,7 +120,7 @@
     document.addEventListener('click',event=>{const target=event.target.closest('[data-app-go]');if(target){event.preventDefault();go(target.dataset.appGo);}});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();if($('studioTools'))$('studioTools').open=false;}});
     const observer=new MutationObserver(scheduleView);
-    for(const id of ['memoryPage','communityPage','aboutPage','dnaPage','newsV2Page','recoPage','seasonNewsPage','lexiconPage','auditPage','discoveryPage','rankingPage','calendarPage'])if($(id))observer.observe($(id),{attributes:true,attributeFilter:['class']});
+    for(const id of ['cockpitPage','memoryPage','communityPage','aboutPage','dnaPage','newsV2Page','recoPage','seasonNewsPage','lexiconPage','auditPage','discoveryPage','rankingPage','calendarPage'])if($(id))observer.observe($(id),{attributes:true,attributeFilter:['class']});
     window.addEventListener('alm:library-rendered',decorateLibrary);
     window.addEventListener('alm:view-changed',scheduleView);
     window.addEventListener('alm:motion-changed',()=>{if(visiblePage()==='dnaPage'&&typeof window.renderDNA==='function')window.renderDNA();});

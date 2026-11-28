@@ -7,7 +7,7 @@
   const safe=v=>window.safeUrlV2(v);
   const same=window.ALM_COLLECTION.same;
   const already=i=>window.ALM_COLLECTION.find(i);
-  const detailViews=new Map(),detailVersions=new Map(),addChoices=new Map(),detailActions=new Map();
+  const detailViews=new Map(),detailVersions=new Map(),addChoices=new Map(),detailActions=new Map(),detailLocalOnly=new Map();
   const number=v=>v!==''&&v!=null&&Number.isFinite(Number(v))?new Intl.NumberFormat(D.language(),{maximumFractionDigits:2}).format(Number(v)):'—';
   const date=v=>{if(!v)return '';const d=new Date(String(v).slice(0,10)+'T12:00:00Z');return Number.isNaN(d.valueOf())?'':new Intl.DateTimeFormat(D.language(),{dateStyle:'medium',timeZone:'UTC'}).format(d);};
   const duration=v=>{const match=String(v||'').match(/^([\d.]+)\s*(?:min(?:ute)?s?(?:\s*per\s*ep\.?)?)?$/i);return match?number(match[1])+' '+t('searchMin'):'';};
@@ -22,15 +22,35 @@
     $('discoveryResults').scrollTop=scroll;
     $('discoveryResults').querySelectorAll('[data-discover]').forEach(b=>b.onclick=()=>showDetail(results[Number(b.dataset.discover)]));
   }
-  async function showDetail(i,hostId='discoveryDetail'){
+  async function showDetail(i,hostId='discoveryDetail',options={}){
+    if(Object.hasOwn(options,'localOnly'))detailLocalOnly.set(hostId,options.localOnly===true);
     const prefix=hostId==='discoveryDetail'?'discovery':hostId==='calendarDetail'?'calendar':hostId==='animePeekDetail'?'peek':'ranking',field=suffix=>$(prefix+suffix);
     if(hostId==='discoveryDetail'){selected=i;renderResults();}
     const previous=detailViews.get(hostId);if(previous&&!same(previous,i))addChoices.delete(hostId);const addStatus=addChoices.get(hostId)||'Plan to Watch';detailViews.set(hostId,i);const version=(detailVersions.get(hostId)||0)+1;detailVersions.set(hostId,version);const lang=D.language();
     const otherTitles=[...new Set([i.title,i.titleEn,i.titleJa,...(i.synonyms||[])].filter(v=>v&&v!==title(i)))];
     const malId=Number(i.malId),malLink=Number.isSafeInteger(malId)&&malId>0?`https://myanimelist.net/anime/${malId}`:'';
+    // Calendar events may contain only an ID (e.g. an airing notification).
+    // Keep manually chosen covers and use the existing owned-cache endpoint
+    // only for an identified title in the collection.
+    const rawPoster=safe(i.poster||i.imageUrl||'');
+    const direct=rawPoster&&rawPoster!=='#'?rawPoster:'';
+    const calendarCover=hostId==='calendarDetail'&&Number.isSafeInteger(malId)&&malId>0?(already(i)?'/api/cover-cache/'+malId:'/api/v2/lexicon/example-image/'+malId):'';
+    const managed=calendarCover&&already(i)&&(!direct||/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(direct));
+    const poster=managed?calendarCover:direct||calendarCover;
+    // Managed covers never bypass the bounded local cache with a direct CDN request.
+    const coverFallback=calendarCover&&poster!==calendarCover?calendarCover:'';
     const facts=[fact('searchFormat',i.type),fact('searchDates',[date(i.startDate),date(i.endDate)].filter(Boolean).join(' — ')),fact('searchStudios',(i.studios||[]).join(' · ')),fact('searchRank',i.rank?'#'+number(i.rank):''),fact('searchPopularity',i.popularity?'#'+number(i.popularity):''),fact('searchMembers',i.members?number(i.members):'')];
     if(duration(i.duration))facts.push(fact('searchDuration',duration(i.duration)));
-    $(hostId).innerHTML=`<div class="discovery-detail-heading">${i.poster?`<img class="discovery-poster" src="${e(safe(i.poster))}" alt="" data-image-fallback="true">`:''}<div><h2 translate="no">${e(title(i))}</h2><div class="discovery-facts"><span>${e(t('searchScore'))}<b>★ ${e(number(i.publicScore))} / 10</b></span><span>${e(t('searchEpisodes'))}<b>${e(number(i.episodesTotal))}</b></span><span>${e(t('searchYear'))}<b>${e(String(i.startDate||'—').slice(0,4))}</b></span></div><p>${(i.genres||[]).map(g=>e(window.ALM_CONTENT_LANGUAGE?.genre(g)||g)).join(' · ')}</p><div class="discovery-detail-actions">${already(i)?`<span class="collection-confirmation">✓ ${e(window.ALM_COLLECTION.label(already(i)))}</span><button type="button" id="${prefix}Open">${e(tr("open"))}</button>`:`<div class="catalog-add"><select id="${prefix}AddStatus" aria-label="${e(tr("add"))}">${window.ALM_WATCH_STATUS.options('Plan to Watch')}</select><button type="button" class="primary" id="${prefix}Add">${e(t("searchAdd"))}</button></div>`}${malLink?`<a class="discovery-mal-link" href="${malLink}" target="_blank" rel="noopener noreferrer">${e(t('searchMal'))} ↗</a>`:''}</div></div></div><dl class="discovery-metadata">${facts.join('')}</dl>${otherTitles.length?`<details class="discovery-titles"><summary>${e(t('searchTitles'))}</summary><ul translate="no">${otherTitles.map(v=>`<li>${e(v)}</li>`).join('')}</ul></details>`:''}<section class="discovery-synopsis"><h3>${e(t('searchSynopsis'))}</h3><p id="${prefix}Synopsis">${e(i.synopsis||t('searchNoSynopsis'))}</p><small id="${prefix}TranslationNote"></small><details id="${prefix}Original" hidden><summary>${e(t('searchOriginal'))}</summary><p lang="en">${e(i.synopsis)}</p></details></section>`;
+    $(hostId).innerHTML=`<div class="discovery-detail-heading">${poster?`<img class="discovery-poster" src="${e(poster)}" alt="" loading="lazy" decoding="async" data-image-fallback="true"${coverFallback&&poster!==coverFallback?` data-fallback="${e(coverFallback)}"`:""}${managed?' data-alm-managed-cover="1"':""}>`:""}<div><h2 translate="no">${e(title(i))}</h2><div class="discovery-facts"><span>${e(t('searchScore'))}<b>★ ${e(number(i.publicScore))} / 10</b></span><span>${e(t('searchEpisodes'))}<b>${e(number(i.episodesTotal))}</b></span><span>${e(t('searchYear'))}<b>${e(String(i.startDate||'—').slice(0,4))}</b></span></div><p>${(i.genres||[]).map(g=>e(window.ALM_CONTENT_LANGUAGE?.genre(g)||g)).join(' · ')}</p><div class="discovery-detail-actions">${already(i)?`<span class="collection-confirmation">✓ ${e(window.ALM_COLLECTION.label(already(i)))}</span><button type="button" id="${prefix}Open">${e(tr("open"))}</button>`:`<div class="catalog-add"><select id="${prefix}AddStatus" aria-label="${e(tr("add"))}">${window.ALM_WATCH_STATUS.options('Plan to Watch')}</select><button type="button" class="primary" id="${prefix}Add">${e(t("searchAdd"))}</button></div>`}${malLink?`<a class="discovery-mal-link" href="${malLink}" target="_blank" rel="noopener noreferrer">${e(t('searchMal'))} ↗</a>`:''}</div></div></div><dl class="discovery-metadata">${facts.join('')}</dl>${otherTitles.length?`<details class="discovery-titles"><summary>${e(t('searchTitles'))}</summary><ul translate="no">${otherTitles.map(v=>`<li>${e(v)}</li>`).join('')}</ul></details>`:''}<section class="discovery-synopsis"><h3>${e(t('searchSynopsis'))}</h3><p id="${prefix}Synopsis">${e(i.synopsis||t('searchNoSynopsis'))}</p><small id="${prefix}TranslationNote"></small><details id="${prefix}Original" hidden><summary>${e(t('searchOriginal'))}</summary><p lang="en">${e(i.synopsis)}</p></details></section>`;
+    const cover=$(hostId).querySelector('.discovery-poster');
+    if(cover&&coverFallback){
+      cover.addEventListener('error',()=>{
+        if(!cover.isConnected||cover.dataset.fallbackUsed)return;
+        cover.dataset.fallbackUsed='1';if(coverFallback.startsWith('/api/cover-cache/'))cover.dataset.almManagedCover='1';
+        delete cover.dataset.newsImageFailed;cover.src=coverFallback;
+      },{once:true});
+      cover.addEventListener('load',()=>{cover.hidden=false;cover.parentElement?.classList.remove('poster-missing','image-error','is-missing');});
+    }
     const videos=document.createElement('section'),heading=document.createElement('h3'),links=document.createElement('div');heading.textContent=t('videoTitle');links.className='discovery-video-links';
     const videoId=String(i.trailer?.youtube_id||i.youtubeVideoId||'');
     if(/^[A-Za-z0-9_-]{11}$/.test(videoId)){const button=document.createElement('button');button.type='button';button.textContent=t('videoWatch')+' ▶';button.onclick=()=>window.ALM_VIDEO.open(videoId,title(i),button);links.append(button);}else{const empty=document.createElement('p');empty.className='muted';empty.textContent=t('videoMissing');links.append(empty);}videos.append(heading,links);$(hostId).append(videos);
@@ -45,6 +65,7 @@
       catch(err){if(button.isConnected){button.disabled=false;field('AddStatus').disabled=false;}window.notifyApp?.(err.message,'error');}
     });
     const localNotebook=already(i);if(localNotebook&&window.ALM_NOTEBOOK){const b=document.createElement('button');b.type='button';b.dataset.notebookAction='open-notebook';b.dataset.id=localNotebook.id;b.dataset.notebookText='notebook';b.setAttribute('data-no-i18n','');b.textContent=window.ALM_NOTEBOOK.t('notebook');$(hostId).querySelector('.discovery-detail-actions')?.append(b);}
+    const sourceButton=localNotebook&&window.ALM_SOURCES?.createButton(localNotebook);if(sourceButton)$(hostId).querySelector('.discovery-detail-actions')?.append(sourceButton);
     detailActions.get(hostId)?.(i);
     // The shared fiche is also used by Search, Ranking and Calendar. The catalogue
     // popup already has its dedicated friend button in its personal-info area.
@@ -54,7 +75,7 @@
       recommend.onclick=()=>window.ALM_COMMUNITY_WORKSPACE?.recommendAnime(malId,i).catch(error=>window.ALM_COMMUNITY?.toast(window.ALM_COMMUNITY_ERROR(error),true));
       $(hostId).querySelector('.discovery-detail-actions')?.append(recommend);
     }
-    if(lang==='en'||!i.synopsis)return;
+    if(lang==='en'||!i.synopsis||detailLocalOnly.get(hostId))return;
     field('Synopsis').textContent=t('sourceTranslating');let data;
     try{data=hostId==='calendarDetail'&&i.calendarKey?await request('/api/calendar/synopsis?'+new URLSearchParams({key:i.calendarKey,lang})):i.malId?await request(`/api/discover/${i.malId}/synopsis?lang=${encodeURIComponent(lang)}`):{};}catch{data={};}
     if(version!==detailVersions.get(hostId)||lang!==D.language())return;
@@ -94,5 +115,5 @@
     window.addEventListener('alm:collection-changed',()=>{for(const [host,i]of detailViews)showDetail(i,host);});
     const language=()=>{const sort=$('discoverySort').value||'relevance';$('discoverySortLabel').textContent=tr('sort');$('discoverySort').innerHTML=['relevance','score','recent','alphabetical'].map(k=>`<option value="${k}">${e(tr(k))}</option>`).join('');$('discoverySort').value=sort;$('discoveryQuery').placeholder=t('searchPlaceholder');renderResults();for(const [host,i]of detailViews)showDetail(i,host);};window.addEventListener('alm:language-changed',language);language();
   }
-  window.addEventListener('alm:titles-changed',()=>{renderResults();for(const [host,i]of detailViews)showDetail(i,host);});window.ALM_DISCOVERY={search,showDetail,setDetailActions(host,handler){if(handler)detailActions.set(host,handler);else detailActions.delete(host);},forgetDetail(host){detailActions.delete(host);detailViews.delete(host);detailVersions.set(host,(detailVersions.get(host)||0)+1);addChoices.delete(host);}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  window.addEventListener('alm:titles-changed',()=>{renderResults();for(const [host,i]of detailViews)showDetail(i,host);});window.ALM_DISCOVERY={search,showDetail,setDetailActions(host,handler){if(handler)detailActions.set(host,handler);else detailActions.delete(host);},forgetDetail(host){detailActions.delete(host);detailViews.delete(host);detailLocalOnly.delete(host);detailVersions.set(host,(detailVersions.get(host)||0)+1);addChoices.delete(host);}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

@@ -39,6 +39,11 @@ jobs:
         run: |
           npm ci
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Audit strict des dependances de production
+        shell: pwsh
+        run: |
+          npm audit --omit=dev --audit-level=low
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Audit production et outillage
         shell: pwsh
         run: |
@@ -49,3 +54,213 @@ jobs:
         run: |
           node scripts/verify-project.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Journaux de recette (fixtures uniquement)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: ALM-Verification-Logs-${{ github.sha }}
+          path: .release-work/verification/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 7
+
+
+
+  # Read-only npm resolution. The only output is a candidate lockfile/delta;
+  # no push, publication, deployment, or production credential.
+  electron-lock-candidate:
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+      - name: Resolve Electron candidate against npm registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp package-lock.json "$RUNNER_TEMP/alm-original-lock.json"
+          npm install --package-lock-only --ignore-scripts --save-dev --save-exact electron@45.5.0 --registry=https://registry.npmjs.org --no-audit --no-fund
+          npm view electron@45.5.0 dist.integrity --registry=https://registry.npmjs.org --json > "$RUNNER_TEMP/alm-electron-integrity.json"
+          node scripts/report-v220-lock-candidate.cjs "$RUNNER_TEMP/alm-original-lock.json" "$RUNNER_TEMP/alm-electron-integrity.json"
+      - name: Inventory active release version references (read-only)
+        shell: bash
+        run: |
+          git grep -n -E '2[.]1[.]3|45[.]3[.]3|156[.]0[.]8078[.]100' -- '*.js' '*.cjs' '*.ps1' '*.bat' '*.sh' '*.ts' '*.yml' 'release-version.json' 'package.json' ':!docs/**' ':!community/site/assets/**' | cut -c1-380 || true
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: ALM-Electron-lock-candidate-${{ github.sha }}
+          path: |
+            package.json
+            package-lock.json
+          if-no-files-found: error
+          retention-days: 7
+
+  # A separate native review from a clean checkout, independent of verify.
+  security-review:
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          lfs: true
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Review performance, local associations and preview cache (fixtures)
+        shell: pwsh
+        run: |
+          node scripts/test-v220-performance-security.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-local-media-index.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-offline-media.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-streaming-sources.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-source-preferences.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Inspect actual Node and Electron runtimes and network surfaces
+        run: node scripts/test-v220-runtime-security.cjs
+      - name: Review native engine recovery, MFA and update UX
+        run: node scripts/verify-native.cjs
+      - name: Review provider retirement and network boundaries
+        shell: pwsh
+        run: |
+          node scripts/test-beta44-providers.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-beta76-network.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-beta82-anilist-network.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-update-progress.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Review Cockpit, DNA and offline media feedback
+        shell: pwsh
+        run: |
+          node scripts/test-v220-review.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-vm-feedback.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-personal-insights-ui.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-watch-rails.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-cockpit-progress.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-vm-round3.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-beta47-calendar.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-detail-navigation.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-sources-ui.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+  vm-preview-installer:
+    # Only this PR branch, never public release or a deployment.
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
+    needs: [verify, security-review, electron-lock-candidate]
+    runs-on: windows-latest
+    timeout-minutes: 100
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Sources de l'aperçu VM (Git LFS)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          lfs: true
+          persist-credentials: false
+      - name: Node LTS verrouillé
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Caches de compilation Electron
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ${{ runner.temp }}/alm-downloads
+          key: alm-v220-preview-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: alm-v220-preview-${{ runner.os }}-
+      - name: Dépendances verrouillées
+        run: npm ci
+      - name: Générer l'installateur 2.2.0 VM TEST (identité isolée)
+        env:
+          ALM_VM_PREVIEW_BUILD: '1'
+          ELECTRON_CACHE: ${{ runner.temp }}/alm-downloads/electron
+          ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/alm-downloads/builder
+        run: |
+          node scripts/build-v220-vm-preview.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Tester le vrai installateur NSIS sur ce runner jetable
+        env:
+          ALM_VM_PREVIEW_BUILD: '1'
+          ALM_INSTALLER_TEST_DISPOSABLE: '1'
+        run: |
+          node scripts/v220-smoke-preview.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Préversion à télécharger pour VM, jamais publiée
+        if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ALM-2.2.0-VM-TEST-${{ github.sha }}
+          path: |
+            dist/Anime-Local-Manager-2.2.0-VM-TEST-x64.exe
+            dist/VM-TEST-REPORT.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+
+  # Native Linux artifact review. No published release, no production profile.
+  linux-preview:
+    if: github.event_name == 'pull_request' && github.base_ref == 'release/v2.2.0' && github.head_ref == 'feature/v2.2.0-cockpit-local-media-sequels'
+    needs: [verify, security-review, electron-lock-candidate]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          lfs: true
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Linux disposable runner prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth libfuse2t64 libgtk-3-0t64 libnss3 libgbm1 libasound2t64
+      - run: npm ci
+      - name: Verify actual runtime and build isolated AppImage and DEB
+        env:
+          ALM_VM_PREVIEW_BUILD: '1'
+        run: |
+          node scripts/test-v220-runtime-security.cjs
+          node scripts/build-v220-vm-preview.cjs
+      - name: Check Linux artifacts and run native isolated smoke
+        env:
+          ALM_VM_PREVIEW_BUILD: '1'
+          APPIMAGE_EXTRACT_AND_RUN: '1'
+        run: |
+          xvfb-run -a node scripts/v220-smoke-linux.cjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: success()
+        with:
+          name: ALM-2.2.0-LINUX-VM-TEST-${{ github.sha }}
+          path: |
+            dist/*VM-TEST*.AppImage
+            dist/*VM-TEST*.deb
+            dist/LINUX-VM-TEST-REPORT.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30

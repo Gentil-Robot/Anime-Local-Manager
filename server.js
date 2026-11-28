@@ -3461,6 +3461,50 @@ app.get('/api/cover-cache/:malId', async (req,res)=>{
  return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});
 });
 
+const mediaCoverGate=require('./lib/media-cover-preview').createPreviewCoverGate();
+// V2.2.0 — bounded, local-only catalogue suggestions. Never send filenames or paths to providers.
+app.post('/api/v220/media-candidates',async(req,res)=>{
+ try{
+  await db.whenReady();
+  const queries=[...new Set((Array.isArray(req.body?.titles)?req.body.titles.slice(0,80):[]).filter(v=>typeof v==='string').map(v=>v.trim().slice(0,160)).filter(v=>v.length>=2))].slice(0,40);
+  const items=Object.create(null);
+  for(const q of queries){
+   items[q]=localSeasonSearch(q,20).slice(0,24).map(row=>({malId:row.malId,title:row.title,titleEn:row.titleEn,titleRomaji:row.titleRomaji,titleJa:row.titleJa,synonyms:row.synonyms,episodes:row.episodes,type:row.type,startDate:row.startDate,imageUrl:albumCovers.safeSource(row.imageUrl||row.poster)||''}));
+  }
+  for(const rows of Object.values(items))mediaCoverGate.remember(rows);
+  res.set('Cache-Control','private, no-store');res.json({items});
+ }catch(error){res.status(503).json({code:'ALM_MEDIA_CATALOG_UNAVAILABLE'});}
+});
+// Only recent local-search results or owned records may request an online cover.
+// Without load=1 the preview is cache-only. Automatic and explicit retries use
+// the same bounded image cache; no filenames, paths or search strings leave ALM.
+app.get('/api/v220/media-cover/:malId',async(req,res)=>{
+ try{
+  await db.whenReady();
+  const id=Number(req.params.malId);
+  if(!Number.isSafeInteger(id)||id<1||id>100000000)return res.status(400).end();
+  const owned=ownedCoverSource(id);
+  const row=db.getMetadataByMalId(id),source=owned||albumCovers.safeSource(row?.imageUrl||row?.poster||'');
+  const offline=req.query.load!=='1'||process.env.ALM_RELEASE_SMOKE==='1'||(!owned&&!mediaCoverGate.permits(id));
+  const file=source&&await albumCovers.get(source,{offline});
+  if(!file)return res.status(404).end();
+  res.set('Cache-Control','private, no-store');res.set('X-Content-Type-Options','nosniff');
+  res.type(path.extname(file));return res.sendFile(file,error=>{if(error&&!res.headersSent)res.status(error.code==='ENOENT'?404:500).end();});
+ }catch{return res.status(404).end();}
+});
+ // V2.2.0 — suggestions from the verified local season resolver only.
+// No network calls, no changes to the collection and no fuzzy auto-add.
+app.get('/api/v220/sequels',async(req,res)=>{
+ await db.whenReady();
+ const library=readAnimes(false).filter(row=>['Watching','Completed'].includes(row.status)).slice(0,120);
+ const candidates=require('./lib/sequel-watchlist').missingSequels(library,row=>{
+  const base=db.getMetadataByMalId(Number(row.malId));
+  return base?nextVerifiedLocalSeason(base):null;
+ },{maxCandidates:40});
+ res.set('Cache-Control','private, no-store');
+ res.json({items:candidates.map(item=>({...item,imageUrl:albumCovers.safeSource(item.imageUrl)||''})),scanned:library.length,offline:true});
+});
+
 app.get("/api/animes", (req, res) => {
   ownedCoverIndexAt=0;
   res.json(readAnimes(false));
@@ -12071,7 +12115,7 @@ const newsRefresh = require("./lib/news-refresh").createNewsRefresh({
 
 const maintenance=require('./lib/maintenance').createMaintenance({directory:DATA_DIR,network:()=>require('./lib/os-maintenance').networkStatus(),handlers:{
  news:async()=>{await db.whenReady();const r=await newsRefresh.start({allowFallback:false,skipNetworkFallback:true,preferredLang:readConfig().language||'fr'});return r.successfulSources>0?{ok:true}:{ok:false,error:r.error||'ALM_MAINTENANCE_RSS'};},
- seasons:async()=>{await db.whenReady();if(!readAnimes().length)return {ok:true,skipped:true,reason:'empty-library'};const active=_seasonScanJobs[_activeSeasonScanJobId];if(active&&!['done','error','cancelled'].includes(active.status))return {ok:true,skipped:true,reason:'already-running'};const previousResults=readNewsResults(),previousState=readSeasonScanState();const job=newSeasonScanJob(true);_seasonScanJobs[job.jobId]=job;_activeSeasonScanJobId=job.jobId;try{const r=await executeSeasonScan(job);if(job.status==='error'||job.status==='cancelled'||job.failed>0){writeNewsResults(previousResults);writeSeasonScanState(previousState);return {ok:false,error:'ALM_MAINTENANCE_SEASONS'};}return r;}finally{if(_activeSeasonScanJobId===job.jobId)_activeSeasonScanJobId='';}},
+ seasons:async()=>{await db.whenReady();if(!readAnimes().length)return {ok:true,skipped:true,reason:'empty-library'};const active=_seasonScanJobs[_activeSeasonScanJobId];if(active&&!['done','error','cancelled'].includes(active.status))return {ok:true,skipped:true,reason:'already-running'};const previousResults=readNewsResults(),previousState=readSeasonScanState();const job=newSeasonScanJob(true);_seasonScanJobs[job.jobId]=job;_activeSeasonScanJobId=job.jobId;try{const r=await executeSeasonScan(job);if(job.status==='error'||job.status==='cancelled'||job.failed>0){writeNewsResults(previousResults);writeSeasonScanState(previousState);return {ok:false,error:'ALM_MAINTENANCE_SEASONS'};}return await require('./lib/maintenance').refreshSeasonAiring(r,releaseWatch);}finally{if(_activeSeasonScanJobId===job.jobId)_activeSeasonScanJobId='';}},
  catalog:async()=>{await db.whenReady();if(metadataAutonomousJob)return {ok:true,skipped:true,reason:'already-running'};const remote=isMetadataRemoteConfigured()?await almMetadataRemoteSync({startup:true,force:true}):null;if(remote?.ok&&!remote.skipped)return remote;return runMetadataAutonomousUpdate({force:true,wait:true});},
  application:async({settings})=>maintenanceUpdate(settings)
 }});

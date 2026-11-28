@@ -1,0 +1,22 @@
+'use strict';
+// Read-only report of registry-resolved lock changes. Never push from CI.
+const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
+const original=fs.readFileSync(process.argv[2]),before=JSON.parse(original);
+const current=fs.readFileSync('package-lock.json'),after=JSON.parse(current);
+const pkg=JSON.parse(fs.readFileSync('package.json'));
+const integrity=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
+const target='45.5.0',entry=after.packages['node_modules/electron'];
+assert.equal(pkg.devDependencies.electron,target);
+assert.equal(after.packages[''].devDependencies.electron,target);
+assert.equal(entry.version,target);
+assert.equal(entry.resolved,'https://registry.npmjs.org/electron/-/electron-'+target+'.tgz');
+assert.match(integrity,/^sha512-[A-Za-z0-9+/]{86}==$/);
+assert.equal(entry.integrity,integrity);
+const modified=Object.fromEntries(Object.entries(after.packages).filter(([name,value])=>JSON.stringify(before.packages[name])!==JSON.stringify(value)));
+const removed=Object.keys(before.packages).filter(name=>!Object.hasOwn(after.packages,name));
+// The committed candidate must already equal registry resolution: CI cannot silently substitute a different lock.
+if(before.packages[''].devDependencies.electron===target){assert.deepEqual(modified,{});assert.deepEqual(removed,[]);assert(original.equals(current),'Committed lock differs from npm resolution');}
+const root=Object.fromEntries(Object.entries(after).filter(([name])=>name!=='packages'));
+const hash=buffer=>crypto.createHash('sha256').update(buffer).digest('hex');
+console.log('ALM_LOCK_DELTA='+JSON.stringify({beforeSha256:hash(original),afterSha256:hash(current),integrity,root,modified,removed}));
+console.log('Registry integrity verified independently; lock candidate ready for human-reviewed commit.');

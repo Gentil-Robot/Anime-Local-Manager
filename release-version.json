@@ -1,14 +1,15 @@
 {
   "schema": 1,
   "product": "Anime Local Manager",
-  "technicalVersion": "2.1.3",
+  "technicalVersion": "2.2.0",
   "qualifier": "Bêta stable",
-  "publicVersion": "V2.1.3 Bêta stable",
-  "publicName": "Anime Local Manager V2.1.3 Bêta stable",
+  "publicVersion": "V2.2.0 Bêta stable",
+  "publicName": "Anime Local Manager V2.2.0 Bêta stable",
   "distributionChannel": "beta",
   "githubPrerelease": true,
-  "installerName": "Anime-Local-Manager-2.1.3-Setup-x64.exe",
-  "archiveName": "Anime-Local-Manager-2.1.3-COMPLET.zip",
-  "previousValidatedVersion": "2.1.2",
-  "backupFormatVersion": "2.0.0-beta.82"
+  "installerName": "Anime-Local-Manager-2.2.0-Setup-x64.exe",
+  "archiveName": "Anime-Local-Manager-2.2.0-COMPLET.zip",
+  "previousValidatedVersion": "2.1.3",
+  "backupFormatVersion": "2.0.0-beta.82",
+  "releaseCandidate": true
 }

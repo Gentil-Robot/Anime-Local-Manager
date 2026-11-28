@@ -9,6 +9,12 @@ const release=require('../release-version.json');
 function category(file){if(/build|package|release|beta58|beta70-windows/.test(file))return 'Publication';if(/karaoke|timeline|nocturne|ui-logic|polish|retours-window|native/.test(file))return 'Interface et karaoké';if(/38|39|40|41|42|43|44|45|46|audit|retours-runtime|association-concurrency/.test(file))return 'Données, sauvegardes et sécurité';if(/beta(23|26|48|49|50|51|52|53|54|55|56|57)|csv|betaseries|manual-add/.test(file))return 'Imports et bibliothèque';return 'Structure et régressions';}
 
 const exactNames=Object.freeze({
+ 'test-v220-vm-round3.cjs':'Cockpit, import local et maintenance : troisième recette VM',
+ 'test-v220-streaming-sources.cjs':'Sources de visionnage locales, URL validées et ouverture externe',
+ 'test-v220-source-preferences.cjs':'Sources : préférences privées, favori et portée par épisode',
+ 'test-v220-sources-ui.cjs':'Sources : ergonomie, réglages, recherche et ouverture',
+ 'test-v220-detail-navigation.cjs':'Navigation des fiches et jaquettes',
+ 'test-v220-vm-feedback.cjs':'Cockpit et fichiers locaux : recette des retours VM',
  'test-update-cache-cleanup.cjs':'Stockage : anciens installateurs, protection et résultats',
  'test-windows-update-handoff.cjs':'Mises à jour Windows : confirmation avant fermeture et reprise',
  'test-v211-update-notifications.cjs':'Mises à jour : alertes persistantes et notifications système',
@@ -124,7 +130,8 @@ async function verifyProject({root=path.resolve(__dirname,'..'),reportFile,logFi
    log.end(name,result.code===0?'OK':'ÉCHEC');
    if(result.code!==0){
     consoleOutput('[vérification] '+release.publicVersion+' · '+label+' : '+diagnosticHeadline(result.output));
-    if(verbose)consoleOutput(String(result.output||'').split(/\r?\n/).slice(-35).join('\n'));
+    consoleOutput('[vérification] Script en échec : '+file);
+    if(verbose||process.env.GITHUB_ACTIONS==='true')consoleOutput(String(result.output||'').split(/\r?\n/).slice(-35).join('\n'));
     throw Error('Contrôle « '+label+' » en échec. Journal technique : '+logFile);
    }
   }

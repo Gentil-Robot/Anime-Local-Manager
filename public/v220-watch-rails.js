@@ -1,0 +1,221 @@
+(()=>{'use strict';
+// ALM 2.2 VM preview — two original, keyboard-accessible horizontal rails.
+// These enrich "Animés" and "En cours"; no standalone dashboard or media playback.
+const $=id=>document.getElementById(id);
+const M=window.ALM_V220_WATCH_MODEL;
+if(!M)return;
+const copy={
+ fr:{fresh:'Épisodes récemment diffusés',recentHint:'Diffusions confirmées ces 7 derniers jours · disponibilité selon les plateformes',resume:'Reprenez votre visionnage',noFresh:'Aucune diffusion récente confirmée pour vos animés en cours.',episode:'Épisode',next:'À reprendre : épisode',of:'sur',newBadge:'NOUVEAU',anime:'ANIMÉ',unknown:'Total inconnu',go:'Ouvrir la fiche et la progression',prev:'Cartes précédentes',following:'Cartes suivantes',refresh:'Vérifier les diffusions (connexion requise)',airingError:'Calendrier des diffusions indisponible',noSchedule:'Dernière vérification des diffusions indisponible'},
+ en:{fresh:'Recently aired episodes',recentHint:'Confirmed broadcasts in the last 7 days · streaming availability varies',resume:'Resume your anime',noFresh:'No recently confirmed broadcasts for your current anime.',episode:'Episode',next:'Resume at episode',of:'of',newBadge:'NEW',anime:'ANIME',unknown:'Total unknown',go:'Open anime details and progress',prev:'Previous cards',following:'Next cards',refresh:'Check airing dates online',airingError:'Airing calendar unavailable',noSchedule:'Last airing check unavailable'},
+ es:{fresh:'Episodios emitidos recientemente',recentHint:'Emisiones confirmadas en 7 días · disponibilidad variable',resume:'Retoma tus animes',noFresh:'No hay emisiones recientes confirmadas.',episode:'Episodio',next:'Retomar en episodio',of:'de',newBadge:'NUEVO',anime:'ANIME',unknown:'Total desconocido',go:'Abrir ficha y progreso',prev:'Tarjetas anteriores',following:'Tarjetas siguientes',refresh:'Consultar las emisiones en línea',airingError:'Calendario no disponible',noSchedule:'Última verificación no disponible'},
+ de:{fresh:'Kürzlich ausgestrahlte Folgen',recentHint:'Bestätigte Ausstrahlungen der letzten 7 Tage · Verfügbarkeit kann abweichen',resume:'Weitersehen',noFresh:'Keine kürzlich bestätigten Folgen.',episode:'Folge',next:'Weiter bei Folge',of:'von',newBadge:'NEU',anime:'ANIME',unknown:'Gesamtzahl unbekannt',go:'Anime und Fortschritt öffnen',prev:'Vorherige Karten',following:'Weitere Karten',refresh:'Sendedaten online prüfen',airingError:'Sendeplan nicht verfügbar',noSchedule:'Letzte Prüfung nicht verfügbar'},
+ ja:{fresh:'最近放送されたエピソード',recentHint:'過去7日間の確認済み放送 · 配信状況は地域によって異なります',resume:'視聴の続きを管理',noFresh:'最近確認された放送はありません。',episode:'第',next:'次のエピソード',of:'全',newBadge:'新着',anime:'アニメ',unknown:'総話数不明',go:'作品と進捗を開く',prev:'前のカード',following:'次のカード',refresh:'オンラインで放送情報を確認',airingError:'放送情報を取得できません',noSchedule:'確認履歴なし'},
+ 'pt-BR':{fresh:'Episódios exibidos recentemente',recentHint:'Exibições confirmadas nos últimos 7 dias · disponibilidade variável',resume:'Continue de onde parou',noFresh:'Nenhum episódio recente confirmado.',episode:'Episódio',next:'Retomar no episódio',of:'de',newBadge:'NOVO',anime:'ANIME',unknown:'Total desconhecido',go:'Abrir detalhes e progresso',prev:'Cartões anteriores',following:'Próximos cartões',refresh:'Consultar transmissões online',airingError:'Calendário indisponível',noSchedule:'Última verificação indisponível'},
+ 'zh-CN':{fresh:'最近播出的剧集',recentHint:'最近7天已确认播出 · 各平台可用性不同',resume:'继续追番',noFresh:'没有最近确认播出的新剧集。',episode:'第',next:'接着看第',of:'共',newBadge:'更新',anime:'动漫',unknown:'总集数未知',go:'打开作品和进度',prev:'上一组',following:'下一组',refresh:'联网检查播出信息',airingError:'播出日历不可用',noSchedule:'没有最近的播出记录'}
+};
+const localLabels={
+ fr:['Ouvrir l’épisode lié','Le fichier associé n’est pas accessible : vérifie ton disque ou NAS.'],
+ en:['Open linked episode','The linked file is unavailable. Check the drive or NAS.'],
+ es:['Abrir episodio asociado','El archivo no está disponible. Comprueba el disco o NAS.'],
+ de:['Zugeordnete Folge öffnen','Die Datei ist nicht erreichbar. Laufwerk oder NAS prüfen.'],
+ ja:['関連付けされた動画を開く','関連ファイルを開けません。ディスクまたは NAS を確認してください。'],
+ 'pt-BR':['Abrir episódio associado','Arquivo indisponível. Confira o disco ou NAS.'],
+ 'zh-CN':['打开关联的剧集','关联的文件不可用，请检查磁盘或 NAS。']
+};
+const resumeCopy={
+ fr:['Tous tes animés en cours, reprises en premier','animés en cours','À commencer','Total atteint · vérifier le statut','Aucun animé en cours.'],
+ en:['All watching anime, resumes first','watching anime','Start watching','Total reached · review status','No anime currently watching.'],
+ es:['Todos tus animes en curso, primero los iniciados','animes en curso','Por comenzar','Total alcanzado · revisar estado','No hay animes en curso.'],
+ de:['Alle laufenden Anime, zuerst begonnene','laufende Anime','Noch beginnen','Gesamtzahl erreicht · Status prüfen','Keine laufenden Anime.'],
+ ja:['視聴中の全作品・途中の作品を優先','作品を視聴中','視聴開始','全話到達・状態を確認','視聴中の作品はありません。'],
+ 'pt-BR':['Todos os animes em andamento, retomadas primeiro','animes em andamento','Por começar','Total atingido · verificar status','Nenhum anime em andamento.'],
+ 'zh-CN':['所有观看中的动漫，优先继续观看','部正在观看','尚未开始','已达总集数 · 检查状态','没有观看中的动漫。']
+};
+const rc=i=>(resumeCopy[window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr']||resumeCopy.en)[i];
+const t=key=>{const language=window.ALM_DESIGN?.language?.()||document.documentElement.lang||'fr';
+ if(key==='localOpen'||key==='fileError')return (localLabels[language]||localLabels.en)[key==='localOpen'?0:1];
+ return (copy[language]||copy.en)[key]||copy.en[key]||key;};
+let schedule={items:[]},scheduleAt=0,loading=null,initialized=false,frame=0,observer=null;
+const associations=new Map();
+async function reloadAssociations(){
+ if(!window.animeManager?.mediaSummary)return;
+ try{const rows=await window.animeManager.mediaSummary();associations.clear();for(const entry of rows||[])associations.set(Number(entry.malId),entry);draw();}catch{}
+}
+const validId=v=>Number.isSafeInteger(Number(v))&&Number(v)>0?Number(v):0;
+const apiPoster=anime=>{
+ const raw=String(anime?.poster||anime?.imageUrl||'').trim().replace(/^(images|assets)\//i,'/$1/');
+ const mal=validId(anime?.malId);
+ if(!raw)return mal?'/api/cover-cache/'+mal:'';
+ // Same on-demand image cache used by existing ALM library cards.
+ if(mal&&/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(raw))return '/api/cover-cache/'+mal;
+ try{
+  const url=new URL(raw,location.origin);
+  if(url.origin===location.origin&&(/^\/api\/cover-cache\/[0-9]+$/.test(url.pathname)||/^\/images\/[^/]+$/.test(url.pathname)||url.pathname.startsWith('/assets/')))return url.pathname;
+  if(url.protocol==='https:'&&/^(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)$/i.test(url.hostname))return url.href;
+ }catch{}
+ return '';
+};
+const watched=()=>Array.isArray(window._almAnimes)?window._almAnimes:[];
+const subtitle=(row,newly=false)=>{
+ if(!newly&&row.state==='review')return rc(3);
+ const number=newly?row.highestEpisode:row.next;
+ const season=validId(row.anime?.manualSeasonNumber||row.anime?.betaseriesSeason);
+ const ep=t('episode')+' '+number;
+ return season?'S'+season+' · '+ep:ep;
+};
+function card(row,{fresh=false,gallery=[]}={}){
+ const anime=row.anime;
+ const button=document.createElement('button');button.type='button';button.className='alm-watch-card';
+ button.dataset.animeId=String(row.id);
+ button.setAttribute('aria-label',t('go')+': '+String(anime?.title||'')+' · '+subtitle(row,fresh));
+ const art=document.createElement('span');art.className='alm-watch-art';
+ const fallback=document.createElement('span');fallback.className='alm-v220-brand-placeholder';fallback.setAttribute('aria-hidden','true');art.append(fallback);
+ const src=apiPoster(anime);
+ if(src){
+  const image=document.createElement('img');image.src=src;image.loading='lazy';image.decoding='async';image.alt='';
+  image.dataset.imageFallback='true';if(src.startsWith('/api/cover-cache/'))image.dataset.almManagedCover='1';art.append(image);
+ }
+ const tags=document.createElement('span');tags.className='alm-watch-tags';
+ const type=document.createElement('span');type.className='alm-watch-kind';type.textContent=t('anime');
+ tags.append(type);
+ if(fresh){
+  const badge=document.createElement('span');badge.className='alm-watch-new';
+  badge.textContent=t('newBadge')+' +'+row.count;
+  tags.append(badge);
+ }
+ const content=document.createElement('span');content.className='alm-watch-content';
+ const name=document.createElement('strong');name.className='alm-watch-title';
+ name.textContent=window.ALM_TITLES?.title?.(anime)||anime.title||t('anime');
+ const info=document.createElement('span');info.className='alm-watch-episode';
+ info.textContent=fresh?'▶ '+subtitle(row,true):row.state==='review'?rc(3):row.state==='start'?rc(2)+' · '+subtitle(row,false):'⏯ '+subtitle(row,false);
+ content.append(name,info);
+ if(!fresh){
+  const total=row.total;
+  const details=document.createElement('span');details.className='alm-watch-small';
+  details.textContent=total?row.seen+' '+t('of')+' '+total:row.seen+' · '+t('unknown');
+  content.append(details);
+  if(total){
+   const track=document.createElement('span');track.className='alm-watch-progress';track.setAttribute('role','progressbar');
+   track.setAttribute('aria-valuemin','0');track.setAttribute('aria-valuemax',String(total));
+   track.setAttribute('aria-valuenow',String(Math.min(total,row.seen)));track.setAttribute('aria-label',details.textContent);
+   const fill=document.createElement('span');fill.style.width=String(Math.min(100,row.seen/total*100))+'%';
+   track.append(fill);content.append(track);
+  }
+ }
+ button.append(art,tags,content);
+ button.addEventListener('click',()=>{
+  // Opens ALM's existing editor, never starts a stream or marks an episode seen.
+  if(window.ALM_CATALOG?.openRecords)window.ALM_CATALOG.openRecords(gallery,Math.max(0,gallery.findIndex(a=>Number(a.id)===row.id)),button);
+  else if(typeof window.openEdit==='function')window.openEdit(anime);
+  else window.showAnimesV1?.('Watching');
+ });
+ return button;
+}
+function rail(kind,rows){
+ const host=$(kind==='fresh'?'v220RecentRows':'v220ResumeRows'),empty=$(kind==='fresh'?'v220RecentEmpty':'v220ResumeEmpty');
+ if(!host||!empty)return;
+ const oldScroll=host.scrollLeft,frag=document.createDocumentFragment(),gallery=rows.map(row=>row.anime);
+ for(const row of rows){
+  const tile=card(row,{fresh:kind==='fresh',gallery});
+  const episodes=associations.get(Number(row.anime?.malId))?.episodes;
+  if(kind==='resume'){
+   const wrapper=document.createElement('div');wrapper.className='alm-watch-local-item';wrapper.append(tile);
+   const stepper=window.ALM_CATALOG?.createEpisodeStepper?.(row.anime);if(stepper)wrapper.append(stepper);
+   const modern=window.ALM_SOURCES?.available(),favorite=modern&&window.ALM_SOURCES.createFavoriteButton(row.anime,row.next);
+   if(favorite)wrapper.append(favorite);
+   else if((!modern||window.ALM_SOURCES.showShortcut(row.anime))&&row.next!==null&&Array.isArray(episodes)&&episodes.includes(row.next)&&window.animeManager?.mediaOpenEpisode){
+   const open=document.createElement('button');open.type='button';open.className='alm-watch-local-open';
+   open.textContent='▶ '+t('localOpen')+' '+row.next;
+   open.addEventListener('click',async()=>{
+    open.disabled=true;
+    try{
+     const result=await window.animeManager.mediaOpenEpisode(Number(row.anime.malId),row.next);
+     if(!result?.ok)window.notifyApp?.(t('fileError')+(result?.code?' ('+result.code+')':''),'error');
+    }catch{window.notifyApp?.(t('fileError'),'error');}
+    finally{open.disabled=false;}
+   });
+   wrapper.append(open);
+   }else if(modern){const source=window.ALM_SOURCES.createButton(row.anime,{surface:'cockpit'});if(source&&!source.hidden)wrapper.append(source);}
+   frag.append(wrapper);
+  }else frag.append(tile);
+ }
+ host.replaceChildren(frag);host.scrollLeft=oldScroll;
+ empty.textContent=rows.length?'':kind==='fresh'?t('noFresh'):rc(4);empty.hidden=rows.length>0;
+ host.hidden=rows.length===0;
+ if(host.parentElement?.classList.contains('alm-watch-gallery'))host.parentElement.hidden=host.hidden;
+ const parent=host.closest('.alm-watch-rail');
+ if(parent){
+  const previous=parent.querySelector('[data-watch-scroll="prev"]'),next=parent.querySelector('[data-watch-scroll="next"]');
+  const sync=()=>{const max=Math.max(0,host.scrollWidth-host.clientWidth);previous.disabled=host.scrollLeft<=1;next.disabled=host.scrollLeft>=max-1;};host.onscroll=sync;requestAnimationFrame(sync);
+ }
+}
+function visible(){
+ const page=$('cockpitPage');
+ return !!page&&!page.classList.contains('hidden');
+}
+function draw(){
+ const root=$('v220WatchRails');if(!root)return;
+ root.hidden=false;
+ if(!visible())return;
+ $('v220RecentTitle').textContent=t('fresh');$('v220RecentHint').textContent=t('recentHint');
+ $('v220ResumeTitle').textContent=t('resume');
+ const newRows=M.newEpisodeRows(watched(),schedule);
+ const resumeRows=M.resumeRows(watched());
+ $('v220ResumeHint').textContent=rc(0)+' · '+resumeRows.length+' '+rc(1);
+ rail('fresh',newRows);rail('resume',resumeRows);
+ const refresh=$('v220RecentRefresh');if(refresh)refresh.title=t('refresh');
+ for(const button of root.querySelectorAll('[data-watch-scroll]')){
+  button.setAttribute('aria-label',t(button.dataset.watchScroll==='prev'?'prev':'following'));
+ }
+}
+async function checkSchedule(force=false){
+ if(loading)return loading;
+ if(!force&&Date.now()-scheduleAt<2*60000)return;
+ if(!M.watching(watched()).length)return;
+ loading=(async()=>{
+  try{
+   const response=await fetch(force?'/api/airing/check':'/api/airing',force?{method:'POST',headers:{'Content-Type':'application/json'},body:'{"force":true}',cache:'no-store'}:{cache:'no-store'});
+   if(!response.ok)throw Error('ALM_AIRING_UNAVAILABLE');
+   const data=await response.json();
+   schedule={items:Array.isArray(data.items)?data.items:[]};
+   scheduleAt=Date.now();draw();window.dispatchEvent(new CustomEvent('alm:airing-cache-changed',{detail:{items:schedule.items,checkedAt:data.checkedAt||''}}));
+  }catch{scheduleAt=Date.now();draw();}
+ })().finally(()=>{loading=null;});
+ return loading;
+}
+function queueDraw(){if(frame)return;frame=requestAnimationFrame(()=>{frame=0;draw();});}
+function onRendered(){
+ queueDraw();
+ if(visible())void checkSchedule();
+}
+function init(){
+ const root=$('v220WatchRails');if(!root||initialized)return;initialized=true;
+ root.querySelectorAll('[data-watch-scroll]').forEach(button=>button.addEventListener('click',()=>{
+  const host=$(button.closest('.alm-watch-rail')?.dataset.rail==='fresh'?'v220RecentRows':'v220ResumeRows');
+  if(!host)return;
+  const first=host.firstElementChild;
+  const width=first?first.getBoundingClientRect().width+(parseFloat(getComputedStyle(host).columnGap)||13):260;
+  host.scrollBy?.({left:button.dataset.watchScroll==='prev'?-width:width,behavior:document.documentElement.dataset.motion==='reduced'||window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth'});
+ }));
+ $('v220RecentRefresh')?.addEventListener('click',()=>{scheduleAt=0;void checkSchedule(true);});
+ $('navCockpit')?.addEventListener('click',()=>{window.showV2Page?.('cockpitPage','navCockpit');window.ALM_DESIGN?.syncView?.();draw();void checkSchedule();});
+ const page=$('cockpitPage');if(page&&typeof MutationObserver==='function'){observer=new MutationObserver(()=>{if(visible()){queueDraw();void checkSchedule();}});observer.observe(page,{attributes:true,attributeFilter:['class']});}
+ window.addEventListener('alm:library-rendered',onRendered);
+ window.addEventListener('alm:collection-changed',()=>{queueDraw();if(visible())void checkSchedule();});
+ window.addEventListener('alm:language-changed',draw);
+ window.addEventListener('alm:source-overview-changed',()=>{if(visible())queueDraw();});
+ window.addEventListener('alm:media-associations-changed',event=>{
+   associations.clear();for(const item of event.detail?.summaries||[])associations.set(Number(item.malId),item);
+   draw();
+ });
+ void reloadAssociations();
+ draw();
+ if(visible()&&M.watching(watched()).length)void checkSchedule();
+ // Only read the local cache while visible; the configured maintenance and
+ // notification services remain responsible for provider requests.
+ const poll=setInterval(()=>{if(visible()&&!document.hidden)void checkSchedule();},120000);
+ window.addEventListener('pagehide',event=>{if(event.persisted)return;clearInterval(poll);observer?.disconnect();if(frame)cancelAnimationFrame(frame);frame=0;},{once:true});
+ document.addEventListener('visibilitychange',()=>{if(visible()&&!document.hidden)void checkSchedule();});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

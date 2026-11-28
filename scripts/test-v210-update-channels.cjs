@@ -25,12 +25,13 @@ async function main(){
  assert(!failure.latest,'A failed refresh must not retain an old offered installer');
  assert.equal((await versions.check(false,'beta')).latest,'v2.1.3','The other channel cache remains independent');
  // The published 2.0.0 updater expects this generic name for future versions.
- assert.equal(release.installerName,'Anime-Local-Manager-2.1.3-Setup-x64.exe');
+ assert.equal(release.installerName,'Anime-Local-Manager-2.2.0-Setup-x64.exe');
  const asset={name:release.installerName,state:'uploaded',size:1048576,digest:'sha256:'+'a'.repeat(64),
-  browser_download_url:'https://github.com/Gentil-Robot/Anime-Local-Manager/releases/download/v2.1.3/'+release.installerName};
- const selected=chooseAsset({available:true,latest:'v2.1.3',prerelease:true,assets:[asset]},
+  browser_download_url:'https://github.com/Gentil-Robot/Anime-Local-Manager/releases/download/v2.2.0/'+release.installerName};
+ const selected=chooseAsset({available:true,latest:'v2.2.0',prerelease:true,assets:[asset]},
   {current:'2.0.0',platform:'win32',arch:'x64',portable:false});
- assert.equal(selected.name,asset.name);assert.equal(selected.version,'2.1.3');
- console.log('OK 2.1.3: concurrent stable/beta checks, independent caches, failed refresh and 2.0.0 installer upgrade contract.');
+ assert.equal(selected.name,asset.name);assert.equal(selected.version,'2.2.0');
+ assert.equal(chooseAsset({available:true,latest:'v2.2.0',prerelease:true,assets:[asset]},{current:'2.1.3',platform:'win32',arch:'x64',portable:false}).name,asset.name);
+ console.log('OK 2.2.0: concurrent stable/beta checks, independent caches, failed refresh and 2.0.0 installer upgrade contract.');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});
