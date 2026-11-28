@@ -32,4 +32,20 @@ const fixtures=(override={})=>{const calls=[];const fetch=async url=>{calls.push
  const ambiguous=async url=>new Response(JSON.stringify(String(url).includes('/search/shows')?[1,2].map(id=>({show:{id,name:'Fantasy example',type:'Animation',language:'Japanese',premiered:'2026-07-02'}})):[{name:'A fantasy example',country:{code:'JP'}}]),{status:200});
  assert.equal((await trackedEvents(unknown,now,ambiguous)).unavailable,true);
  console.log('OK calendar: title-only fallback refuses ambiguous homonyms');
+ // The exact same MAL ID can acquire an airing notification with no image.
+ // It must retain the catalogue or existing event artwork, not another season's.
+ const coverDir=fs.mkdtempSync(path.join(os.tmpdir(),'alm-calendar-cover-'));
+ try{
+  const own={...anime,poster:''},cover='https://cdn.myanimelist.net/images/anime/99/123.jpg';
+  const stateFile=path.join(coverDir,'calendar.json');
+  fs.writeFileSync(stateFile,JSON.stringify({events:[{key:'tracked:16',animeId:own.id,anime:{malId:own.malId,poster:cover},episode:16,airingAt:episode.airingAt,kind:'episode',source:'TVmaze'}]}));
+  const fixture=createCalendar({stateFile,getAnimes:()=>[own],getMetadata:()=>[{malId:own.malId,poster:cover,title:own.title,startDate:'2026-07-03'}],getNotificationEvents:()=>[{id:1,type:'episode',malId:own.malId,animeId:own.id,episode:16,airingAt:episode.airingAt,title:own.title,source:'TVmaze'}],now:()=>now});
+  const row=fixture.state().events.find(item=>item.episode===16);
+  assert(row);assert.equal(row.anime.poster,cover);assert.equal(row.anime.episodesSeen,15);
+  fs.unlinkSync(stateFile);
+  const missing=createCalendar({stateFile,getAnimes:()=>[own],getMetadata:()=>[{malId:own.malId,poster:cover,title:own.title,startDate:'2026-07-03'}],getNotificationEvents:()=>[{id:2,type:'episode',malId:own.malId,animeId:own.id,episode:21,airingAt:episode.airingAt,title:own.title,source:'TVmaze'}],now:()=>now});
+  assert.equal(missing.state().events.find(item=>item.episode===21).anime.poster,cover);
+  assert.equal(own.poster,'');
+  console.log('OK calendar: notification-only, empty library cover and exact ID fallback preserve artwork without changing progress.');
+ }finally{fs.rmSync(coverDir,{recursive:true,force:true});}
 })().catch(error=>{console.error(error);process.exitCode=1;});

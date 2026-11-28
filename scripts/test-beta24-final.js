@@ -29,7 +29,10 @@ assert(db.includes('if (low === "pt" || low === "pt-br") return "pt-BR"'));
 assert(db.includes('if (lang !== "all" && row.lang !== lang) return false'));
 assert(html.includes('id="dnaScoreSummary"'));
 assert(html.includes('id="dnaScorePosters"'));
-assert(app.includes('class="dna-score-poster"'));
+// Since 2.2.0 the poster renderer is a shared component, not inline HTML.
+assert(app.includes('window.ALM_V220_SCORE_GALLERY?.render(animes'));
+assert(read('public/v220-personal-insights.js').includes("el('button',null,'dna-score-poster')"));
+assert(read('scripts/test-v220-personal-insights-ui.cjs').includes("assert.equal(posters().length,19)"));
 assert(app.includes("Coups de cœur 9+"));
 assert(read("public/style.css").includes(".dna-score-posters"));
 

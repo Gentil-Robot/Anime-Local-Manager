@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/source-review.yml",
-      "bytes": 10811,
-      "sha256": "d30f7335c5d58e20d1306f73401ba86f7806083820bfb501f9a192a0ff573a6f"
+      "bytes": 11029,
+      "sha256": "30c98cb4e5bec03d291f5378fcbbbb3686b47732f07d4fce27cb55b718a1d966"
     },
     {
       "path": ".github/workflows/windows-installer.yml",
@@ -1307,8 +1307,8 @@
     },
     {
       "path": "lib/calendar.js",
-      "bytes": 5291,
-      "sha256": "00da82c330747d1ce0f22d451879a583d05913b70e283c3c2040a3a7ddf743e3"
+      "bytes": 5494,
+      "sha256": "facf63c1bbaaa70161ca2b7e2284cf3a6a43e7c7fedaf9dcae695a7d387c5a5a"
     },
     {
       "path": "lib/catalog.js",
@@ -2052,8 +2052,8 @@
     },
     {
       "path": "public/beta39.js",
-      "bytes": 11549,
-      "sha256": "fcaefe96e9e4725c72edab6e89cd0aae67a25e2e54fb499ea68be096ccc86f75"
+      "bytes": 11653,
+      "sha256": "c2b53e8efc733c1bd69da15a797c7114e75636a31b18b897ae821d5fa2572cf5"
     },
     {
       "path": "public/beta40-copy.js",
@@ -2402,8 +2402,8 @@
     },
     {
       "path": "public/discovery.js",
-      "bytes": 14916,
-      "sha256": "d7d0314c26197ddd7bc9f40295c20d9f6e80fdea72628d7affeab1fa68bb1061"
+      "bytes": 15453,
+      "sha256": "168cc2f40e325d6de29cb5ae6c34ae2b600e9a15b79816e97eedecafb043e025"
     },
     {
       "path": "public/dna-radar.js",
@@ -3117,8 +3117,8 @@
     },
     {
       "path": "scripts/test-beta24-final.js",
-      "bytes": 2651,
-      "sha256": "a567f6c55f061cd9295e952fe513d4006b51d313df9ea0f0dc3dab48dd2d8c97"
+      "bytes": 2951,
+      "sha256": "9b9db89718b2ea342e2900bb282985dc908cb49241c733d47d425777470aaed9"
     },
     {
       "path": "scripts/test-beta25-final.js",
@@ -3307,8 +3307,8 @@
     },
     {
       "path": "scripts/test-beta47-calendar.js",
-      "bytes": 5340,
-      "sha256": "446266d1b6601d06974b0514a58d17d5764ebae49e3ab4d716247cfd8c8e0981"
+      "bytes": 7060,
+      "sha256": "e2b331e832816d8a697847e50cee07ff4e934a7dad16bfa292671b7a3c2562dc"
     },
     {
       "path": "scripts/test-beta47-electron-profile.js",
@@ -4181,6 +4181,11 @@
       "sha256": "0f635c5ef20faa88057f680ed3b80245ed132d72f00889d9ff3c3687593d9f01"
     },
     {
+      "path": "scripts/test-v220-detail-navigation.cjs",
+      "bytes": 2979,
+      "sha256": "d166fa13ea9881ca382aac6d6da92597ffaa690a2df2dd1435db75135b0d31e5"
+    },
+    {
       "path": "scripts/test-v220-episode-gaps.cjs",
       "bytes": 1088,
       "sha256": "d47ddb5e9ba0d39010d5098c5be24b94e0dd2563658d60274f190b37fe83ee4d"
@@ -4292,8 +4297,8 @@
     },
     {
       "path": "scripts/verification-plan.json",
-      "bytes": 7464,
-      "sha256": "a0f30cdfa142ec72334c68dbf481dd2df71d126fcc6d076c7369ed9429e7ec3b"
+      "bytes": 7558,
+      "sha256": "9f1b575f50be5684980515efc00e5ff995653143dd4266dfee984a018ab5b5be"
     },
     {
       "path": "scripts/verify-native.cjs",

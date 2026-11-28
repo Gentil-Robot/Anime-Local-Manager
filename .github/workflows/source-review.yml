@@ -157,6 +157,10 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node scripts/test-v220-vm-round3.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-beta47-calendar.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/test-v220-detail-navigation.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
   vm-preview-installer:
     # Only this PR branch, never public release or a deployment.

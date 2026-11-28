@@ -184,6 +184,8 @@
     "scripts/test-beta82-anilist-network.cjs",
     "scripts/test-beta82-delete-confirmation.cjs",
     "scripts/test-beta82-betaseries-network.cjs",
-    "scripts/test-release-v200.cjs"
+    "scripts/test-release-v200.cjs",
+    "scripts/test-v220-streaming-sources.cjs",
+    "scripts/test-v220-detail-navigation.cjs"
   ]
 }
