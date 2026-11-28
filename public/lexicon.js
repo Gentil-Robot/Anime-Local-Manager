@@ -464,10 +464,12 @@
     const l = {known:designText("knownExamples"),unavailable:designText("examplesUnavailable"),visuals:designText("visualReferences")};
     container.innerHTML = `<div class="lexicon-examples-heading"><span>${escapeHtml(l?.known || "Exemples connus")}</span><small>${escapeHtml(l?.visuals || "références visuelles")}</small></div>
       <div class="lexicon-example-list">${items.map(example => `
-        <a class="lexicon-example" href="${escapeHtml(example.malUrl || "#")}" ${example.malUrl ? `target="_blank" rel="noopener"` : ""} title="${escapeHtml(example.title)}">
+        <button type="button" class="lexicon-example" data-example-id="${Number(example.malId)}" title="${escapeHtml(example.title)}">
           <span class="lexicon-example-poster">${example.imagePath ? `<img src="${escapeHtml(example.imagePath)}" alt="Affiche de ${escapeHtml(example.title)}" loading="lazy" referrerpolicy="no-referrer" data-image-fallback="true">` : ""}<i aria-hidden="true">🎌</i></span>
           <span class="lexicon-example-copy"><strong>${escapeHtml(example.title)}</strong><small>${escapeHtml([example.type, example.year].filter(Boolean).join(" · "))}</small></span>
-        </a>`).join("")}</div>`;
+        </button>`).join("")}</div>`;
+    const records=items.map(example=>({...example,poster:example.imagePath||"",startDate:example.year?String(example.year):""}));
+    container.querySelectorAll("[data-example-id]").forEach(button=>button.addEventListener("click",event=>{event.stopPropagation();const index=records.findIndex(record=>Number(record.malId)===Number(button.dataset.exampleId));if(index>=0)window.ALM_CATALOG?.openRecords(records,index,button);}));
   }
 
   async function fetchLexiconExampleBatch(ids) {

@@ -2172,6 +2172,7 @@ async function initRecommendations(force = false) {
         if (items.length) {
           resultsEl.innerHTML = items.map(item => recoCard(item, `Genre : ${button.dataset.genre}`)).join("");
           wireAdd(resultsEl);
+          wireGenreDetailsV220(resultsEl,items);
         } else if (rawItems.length) {
           resultsEl.innerHTML = `<div class="reco-result-message"><strong>Toutes les propositions de ce genre sont masquées.</strong><span>Utilise « Réafficher les propositions masquées » pour les retrouver.</span></div>`;
         } else {
@@ -2683,6 +2684,17 @@ function recoCard(item,label){
   </div></div>`;
 }
 
+// Only Explore by genre opens the shared record from its cover.
+function wireGenreDetailsV220(container,items){
+  const rows=items.map(item=>({...item,poster:item.poster||item.imageUrl||(item.malId?'/api/v2/reco/image/'+encodeURIComponent(item.malId):'')}));
+  container.querySelectorAll('.reco-card').forEach((card,index)=>{
+    const cover=card.querySelector('.reco-card-thumb,.reco-card-thumb-ph');
+    if(!cover||!rows[index])return;
+    const button=document.createElement('button');button.type='button';button.className='alm-v220-reco-cover';button.setAttribute('aria-label',rows[index].title||'Anime');
+    cover.replaceWith(button);button.append(cover);
+    button.addEventListener('click',event=>{event.stopPropagation();window.ALM_CATALOG?.openRecords(rows,index,button);});
+  });
+}
 function wireAdd(container){
   container.querySelectorAll('.reco-add-status:not([data-label-wired])').forEach(select=>{select.dataset.labelWired='1';const update=()=>{const b=select.closest('.reco-card').querySelector('.reco-card-add');if(!b.disabled)b.textContent=window.ALM_ADD_LABEL(select.value);};select.addEventListener('change',update);update();});
   container.querySelectorAll(".reco-card-hide:not([data-wired])").forEach(btn=>{
