@@ -24,7 +24,7 @@
  const bridge=()=>window.animeManager,byId=()=>new Map((window._almAnimes||[]).map(a=>[String(a.id),a]));
  const validId=id=>Number.isSafeInteger(Number(id))&&Number(id)>0&&Number(id)<=100000000;
  const valid=a=>validId(a?.malId);
- const available=()=>['sourceOverview','sourceDisplaySet','sourceFavoriteSet','streamList','mediaSavedFor','mediaSelectOne','mediaRelabelKey','mediaOpenKey','mediaRemoveKey','streamPut','streamRemove','streamOpen'].every(key=>typeof bridge()?.[key]==='function');
+ const available=()=>['sourceOverview','sourceDisplaySet','sourceFavoriteSet','sourceOpenFavorite','streamList','mediaSavedFor','mediaSelectOne','mediaRelabelKey','mediaOpenKey','mediaRemoveKey','streamPut','streamRemove','streamOpen'].every(key=>typeof bridge()?.[key]==='function');
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;};
  const btn=(text,action,cls,key)=>{const b=el('button',text,cls);b.type='button';if(key)b.dataset.sourceAction=key;b.onclick=event=>{event.stopPropagation();action(b);};return b;};
  const labelled=(text,field)=>{const l=el('label',text);l.append(field);return l;};
@@ -33,7 +33,7 @@
  const title=a=>window.ALM_TITLES?.title(a)||a.title||'';
  const notify=()=>window.notifyApp?.(tr(14),'error');
  const $=id=>document.getElementById(id);
- let dialog,current,body,heading,notice,serial=0,busy=false,returnFocus=null,initialized=false,localLimit=40,streamLimit=40,centralLimit=50;
+ let dialog,current,body,heading,notice,serial=0,paintSerial=0,busy=false,returnFocus=null,returnTarget=null,initialized=false,localLimit=40,streamLimit=40,centralLimit=50;
  let display='always',groups=new Map(),overviewError=false,overviewFlight=null,overviewPending=false,settingsBusy=false;
  const changed=local=>window.dispatchEvent(new CustomEvent('alm:sources-changed',{detail:{local}}));
  const hasSources=id=>groups.has(Number(id));
@@ -69,7 +69,14 @@
   dialog=el('dialog',null,'alm-source-dialog calendar-dialog');dialog.id='almSourceDialog';dialog.setAttribute('data-no-i18n','');dialog.setAttribute('aria-labelledby','almSourceTitle');
   const header=el('header',null,'alm-source-header');heading=el('h2');heading.id='almSourceTitle';header.append(heading,btn(tr(15),()=>dialog.close(),'alm-source-close'));
   notice=el('p',null,'alm-v220-note');notice.setAttribute('role','status');body=el('div',null,'alm-source-body');dialog.append(header,notice,body);document.body.append(dialog);
-  dialog.addEventListener('close',()=>{serial++;current=null;if(returnFocus?.isConnected&&!returnFocus.hidden)returnFocus.focus({preventScroll:true});});
+  dialog.addEventListener('close',()=>{
+   serial++;paintSerial++;current=null;
+   let target=returnFocus?.isConnected&&!returnFocus.hidden?returnFocus:null;
+   if(!target&&returnTarget?.central)target=[...document.querySelectorAll('#v220SourcesList [data-mal-id]')].find(row=>row.dataset.malId===returnTarget.central)?.querySelector('[data-source-action="manage-central"]')||$('v220SourcesSearch');
+   if(!target&&returnTarget?.card)target=[...document.querySelectorAll('#animeGrid .card[data-anime-id]')].find(row=>row.dataset.animeId===returnTarget.card)?.querySelector('.alm-source-trigger');
+   if(!target)target=document.querySelector('dialog[open] .alm-source-trigger:not([hidden])');
+   if(target&&!target.hidden)target.focus({preventScroll:true});returnFocus=returnTarget=null;
+  });
  }
  async function run(action,{reload=true,local=false}={}){
   if(busy||!current)return;busy=true;const version=serial;notice.textContent='';
@@ -89,9 +96,9 @@
   if(rows.length>limit)section.append(btn(tx(10)+' · '+(rows.length-limit),()=>{extend();void paint().catch(notify);},'alm-source-more','more'));
  }
  async function paint(){
-  const a=current;if(!a||!dialog.open)return;const version=serial,id=Number(a.malId),api=bridge();
+  const a=current;if(!a||!dialog.open)return;const version=serial,renderVersion=++paintSerial,id=Number(a.malId),api=bridge();
   const [rows,streams]=await Promise.all([api.mediaSavedFor(id),api.streamList(id)]);
-  if(version!==serial||current!==a||!dialog.open)return;
+  if(version!==serial||renderVersion!==paintSerial||current!==a||!dialog.open)return;
   heading.textContent=tr(1);body.replaceChildren();
   const name=el('strong',title(a)||'MAL #'+id);name.setAttribute('translate','no');body.append(name,el('p',tr(13),'alm-v220-note'));
   const f=groups.get(id)?.favorite;
@@ -144,7 +151,9 @@
  function open(a,source){
   if(!available()||!valid(a)||busy)return;ensure();serial++;
   const fresh=byId().get(String(a.id));current=fresh&&Number(fresh.malId)===Number(a.malId)?fresh:a;
-  returnFocus=source||document.activeElement;localLimit=streamLimit=40;heading.textContent=tr(1);notice.textContent='';body.replaceChildren(el('p',tx(13),'alm-v220-note'));
+  returnFocus=source||document.activeElement;
+  returnTarget={central:returnFocus?.closest('#v220SourcesList [data-mal-id]')?.dataset.malId,card:returnFocus?.closest('#animeGrid .card[data-anime-id]')?.dataset.animeId};
+  localLimit=streamLimit=40;heading.textContent=tr(1);notice.textContent='';body.replaceChildren(el('p',tx(13),'alm-v220-note'));
   if(!dialog.open)dialog.showModal();const version=serial;void paint().catch(()=>{if(version===serial){body.replaceChildren();notice.textContent=tr(14);}});
  }
  function createButton(a,{surface='detail',groupKey='',ids=[a?.malId]}={}){
@@ -157,15 +166,16 @@
   if(!available()||!valid(a)||!visibleShortcut(a,'cockpit'))return null;
   const id=Number(a.malId),f=groups.get(id)?.favorite,ep=a.type==='Movie'?0:next;
   if(!f||!Number.isSafeInteger(ep)||ep<0||f.kind==='stream'&&f.episode!==0&&f.episode!==ep||f.kind==='local'&&!(f.wholeWork&&ep===0||!f.wholeWork&&ep>=f.episode&&ep<=f.end))return null;
-  const b=btn('▶ '+tx(11),async button=>{button.disabled=true;try{const result=await (f.kind==='local'?bridge().mediaOpenKey(id,f.key):bridge().streamOpen(id,f.key));if(!result?.ok)notify();}catch{notify();}finally{button.disabled=false;}},'alm-watch-local-open','quick-favorite');b.title=tx(1);return b;
+  const b=btn('▶ '+tx(11),async button=>{button.disabled=true;try{const result=await bridge().sourceOpenFavorite(id,ep,f.kind,f.key);if(!result?.ok)notify();}catch{notify();}finally{button.disabled=false;}},'alm-watch-local-open','quick-favorite');b.title=tx(1);return b;
  }
  function decorate(){
   if(!available())return;const lookup=byId();
   for(const card of document.querySelectorAll('#animeGrid .card[data-anime-id]')){
    const actions=card.querySelector('.actions'),a=lookup.get(card.dataset.animeId);if(!actions||!a)continue;
    const old=actions.querySelector('.alm-source-trigger');
-   const groupKey=card.dataset.seriesKey||'',ids=groupKey?(card.dataset.sourceMalIds||'').split(','):[a.malId];
-   if(old){old.remove();}
+   const groupKey=card.dataset.seriesKey||'',ids=(groupKey?(card.dataset.sourceMalIds||'').split(','):[a.malId]).filter(validId);
+   if(old&&old.dataset.sourceIds===ids.join(',')&&(old.dataset.sourceGroup||'')===groupKey){syncTrigger(old);continue;}
+   old?.remove();
    const b=createButton(a,{surface:'card',groupKey,ids});if(b)actions.insertBefore(b,actions.querySelector('[data-action="recommend"],[data-action="delete"]')||null);
   }
   syncTriggers();

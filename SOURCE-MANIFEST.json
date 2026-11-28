@@ -1462,8 +1462,8 @@
     },
     {
       "path": "lib/media-associations.js",
-      "bytes": 9539,
-      "sha256": "321cd22ce1f72eea8fa2d6d67cef685ebbef18a31573c5e4913421b5ed07ef5b"
+      "bytes": 10351,
+      "sha256": "19cbb190e890cd63a116a52df5518120ad10837331e36eab031ca213ec18505d"
     },
     {
       "path": "lib/media-classifier.js",
@@ -1657,8 +1657,8 @@
     },
     {
       "path": "lib/viewing-source-preferences.js",
-      "bytes": 3388,
-      "sha256": "b8d11adbda336cfe7f7c9bd7b089c1641c696565d17de12a3c55916a61663c81"
+      "bytes": 3864,
+      "sha256": "33a23c7a40d07dd215ce5bec012000b2e66b1bf05238b566713259315fe16e63"
     },
     {
       "path": "lib/viewing.js",
@@ -1682,8 +1682,8 @@
     },
     {
       "path": "main.js",
-      "bytes": 38137,
-      "sha256": "7515e32ba5eaeeb7f66292e0cf1f0dabf6df7e61a9cff397c7c61bc8921f43f2"
+      "bytes": 40058,
+      "sha256": "efb783e8513099aeff368d327fec003d87d3866ba57169c2c86284f25f79bf46"
     },
     {
       "path": "ops/postgres-security-check.sql",
@@ -1702,8 +1702,8 @@
     },
     {
       "path": "preload.js",
-      "bytes": 4007,
-      "sha256": "b17ab0ddfa6f9f066223ff5a0a0c73daff1ec75df640ca78ba26706866cdeafe"
+      "bytes": 4208,
+      "sha256": "bda71d87e19fc63f653c0b6b190e927d435edb43bda5cd5a1ebfcabd383c2d0e"
     },
     {
       "path": "public/THIRD-PARTY-NOTICES.txt",
@@ -2127,8 +2127,8 @@
     },
     {
       "path": "public/beta45.js",
-      "bytes": 16524,
-      "sha256": "368d21d4e46c004ec63e1123124c76bb3bd340b7f377bcc9fcc50dd56abb1da9"
+      "bytes": 16550,
+      "sha256": "ff1b20c37ee80afb7343fa89ad00381489ecc9b332c998d7d7df82331fa87414"
     },
     {
       "path": "public/beta48-copy.js",
@@ -2407,8 +2407,8 @@
     },
     {
       "path": "public/discovery.js",
-      "bytes": 15453,
-      "sha256": "168cc2f40e325d6de29cb5ae6c34ae2b600e9a15b79816e97eedecafb043e025"
+      "bytes": 16119,
+      "sha256": "8f850dcc8d55e59a56def883c97baef722e3808a35fab0ad6a53f4addb068509"
     },
     {
       "path": "public/dna-radar.js",
@@ -2707,8 +2707,8 @@
     },
     {
       "path": "public/v220-features.js",
-      "bytes": 57457,
-      "sha256": "efaab401195cd2712fb8c2f3f7028f658b57b1d0e5676a7294620afbc4270bf7"
+      "bytes": 58626,
+      "sha256": "9164f5c64626233a7024dad4834223cf01131c11d7492bcb73672f64437f8a2c"
     },
     {
       "path": "public/v220-media-match.js",
@@ -2727,8 +2727,8 @@
     },
     {
       "path": "public/v220-sources.js",
-      "bytes": 23703,
-      "sha256": "969e4e44f6578bf787ce2a167b9b26f139ed708d82a7012c50be8f6ff3add8be"
+      "bytes": 24726,
+      "sha256": "d26f8c21e5bafaf1096d476022d79e51715226fa73ce8f54b50eaf8a7586ad53"
     },
     {
       "path": "public/v220-watch-model.js",
@@ -3127,8 +3127,8 @@
     },
     {
       "path": "scripts/test-beta25-final.js",
-      "bytes": 6877,
-      "sha256": "370b38fef5d7e42485ad2ad857fb16fb1f7fe862e6dd6983e5188ca5f9363880"
+      "bytes": 7134,
+      "sha256": "bc38748a1ddac29d1ff951904c77494c244daf255a19ff7c0b26fac91b360f6c"
     },
     {
       "path": "scripts/test-beta26-overflow-runtime.js",
@@ -4187,8 +4187,8 @@
     },
     {
       "path": "scripts/test-v220-detail-navigation.cjs",
-      "bytes": 2979,
-      "sha256": "d166fa13ea9881ca382aac6d6da92597ffaa690a2df2dd1435db75135b0d31e5"
+      "bytes": 3139,
+      "sha256": "3c9c3ddd635cf0b631a6ca0137dd6caba9c86a49778c0b3fa1bcb4e1ea1fd390"
     },
     {
       "path": "scripts/test-v220-episode-gaps.cjs",
@@ -4252,13 +4252,13 @@
     },
     {
       "path": "scripts/test-v220-source-preferences.cjs",
-      "bytes": 2886,
-      "sha256": "5be51e8bd2bd0b35ad8aafc043c3e4c49bd664964554a7056336f795a81ee52d"
+      "bytes": 3941,
+      "sha256": "43b3920af683360418c282abf29b70a86db894074c4d6a1ee79d7bbbd817a660"
     },
     {
       "path": "scripts/test-v220-sources-ui.cjs",
-      "bytes": 5818,
-      "sha256": "dcf836a1dac84678052b2e6777a4bb67e8eada0191534ae3dd413beb7a5afa41"
+      "bytes": 6403,
+      "sha256": "f0185e4e73226b7b5f6782dc57d08c4bd662e405f1d2090fbabf7f88dd8e9297"
     },
     {
       "path": "scripts/test-v220-streaming-sources.cjs",

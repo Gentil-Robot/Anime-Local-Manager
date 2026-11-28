@@ -280,7 +280,7 @@ async function startApplication() {
   const backupSecrets=await systemSecrets.backupStore(safeStorage,app.getPath('userData'));
   if(backupSecrets)await serverModule.configureBackupSecrets?.(backupSecrets);
 
-  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary", "media-saved", "media-open-episode", "media-check-episodes"]) {
+  for (const channel of ["pick-folder", "get-language", "set-language", "get-system-locale", "clipboard-write", "media-select-and-scan", "media-associate", "media-dissociate", "media-summary", "media-saved", "media-open-episode", "media-check-episodes", "media-saved-for", "media-relabel-key", "media-select-one", "media-open-key", "media-remove-key", "media-refresh-scan-links", "stream-list", "stream-put", "stream-remove", "stream-open", "source-overview", "source-display-set", "source-favorite-set", "source-open-favorite"]) {
     ipcMain.removeHandler(channel);
   }
   const portable=process.platform==='win32'?!!process.env.PORTABLE_EXECUTABLE_FILE:!!process.env.APPIMAGE;
@@ -346,6 +346,15 @@ async function startApplication() {
   const mediaStoreFile=path.join(app.getPath('userData'),'media-associations-v220.json');
   let mediaIndex=null,mediaScanning=false;
   const mediaLinks=()=>mediaStore.load(mediaStoreFile);
+  function scanLinkRows(index){
+    const rows=mediaLinks(),keys=new Map(rows.map(row=>[row.key,row])),paths=mediaStore.indexPaths(rows);
+    return index.files.map((file,i)=>{
+      const linked=keys.get(mediaStore.key(index.root,file.relativePath))||paths.get(mediaStore.pathIdentity(index.root,file.relativePath));
+      return {index:i,linkedMalId:linked?.malId||0,linkedKey:linked?.key||'',
+        episodeGuess:linked?linked.episodeGuess:file.episodeGuess,seasonGuess:linked?linked.seasonGuess||0:file.seasonGuess,
+        wholeWork:linked?linked.wholeWork===true:file.wholeWork===true};
+    });
+  }
   ipcMain.handle('media-summary',event=>{trusted(event);return mediaStore.summary(mediaStoreFile);});
   ipcMain.handle('media-saved',event=>{trusted(event);return mediaStore.list(mediaStoreFile);});
   ipcMain.handle('media-saved-for',(event,malId)=>{trusted(event);if(!Number.isSafeInteger(malId)||malId<1||malId>100000000)throw Error('ALM_SOURCE_INVALID');return mediaStore.list(mediaStoreFile).filter(row=>row.malId===malId);});
@@ -377,6 +386,8 @@ async function startApplication() {
       if(!parent.isDirectory()||parent.isSymbolicLink()||!stat.isFile()||stat.isSymbolicLink())throw Error('ALM_MEDIA_FILE_CHANGED');
       const actualRoot=await fsp.realpath(root),actual=await fsp.realpath(full);
       if(!mediaStore.contained(actualRoot,actual))throw Error('ALM_MEDIA_OUTSIDE_ROOT');
+      const existing=mediaLinks();
+      if(existing.some(row=>row.key===mediaStore.key(root,filename))||mediaStore.indexPaths(existing).has(mediaStore.pathIdentity(root,filename)))throw Error('ALM_MEDIA_FILE_ALREADY_LINKED');
       const result=mediaStore.record(mediaStoreFile,{root,relativePath:filename,filename,malId,episodeGuess:episode,seasonGuess:season,wholeWork:episode===0});
       return {canceled:false,...result};
     }finally{mediaScanning=false;}
@@ -395,6 +406,17 @@ async function startApplication() {
   ipcMain.handle('source-overview',event=>{trusted(event);return sourcePrefs.overview(sourcePrefsFile,mediaStore.list(mediaStoreFile),streamStore.summary(streamFile));});
   ipcMain.handle('source-display-set',(event,display)=>{trusted(event);return sourcePrefs.setDisplay(sourcePrefsFile,display);});
   ipcMain.handle('source-favorite-set',(event,malId,kind,key)=>{trusted(event);return sourcePrefs.setFavorite(sourcePrefsFile,malId,kind,key,mediaStore.list(mediaStoreFile),streamStore.summary(streamFile));});
+  ipcMain.handle('source-open-favorite',async(event,malId,episode,kind,key)=>{
+    trusted(event);
+    const f=sourcePrefs.resolveFavorite(sourcePrefsFile,malId,episode,kind,key,mediaStore.list(mediaStoreFile),streamStore.summary(streamFile));
+    if(!f)return {ok:false,code:'ALM_SOURCE_FAVORITE_CHANGED'};
+    if(f.kind==='local'){
+      const located=await mediaStore.locateKey(mediaStoreFile,malId,f.key);if(!located.ok)return located;
+      const failure=await shell.openPath(located.absolutePath);return failure?{ok:false,code:'ALM_MEDIA_OPEN_FAILED'}:{ok:true};
+    }
+    const row=streamStore.get(streamFile,malId,f.key);if(!row||row.episode!==0&&row.episode!==episode)return {ok:false,code:'ALM_SOURCE_FAVORITE_CHANGED'};
+    await shell.openExternal(streamStore.validateUrl(row.url));return {ok:true};
+  });
   ipcMain.handle('stream-list',(event,malId)=>{trusted(event);return streamStore.list(streamFile,malId);});
   ipcMain.handle('stream-put',(event,input)=>{trusted(event);return streamStore.put(streamFile,input);});
   ipcMain.handle('stream-remove',(event,malId,key)=>{trusted(event);return streamStore.remove(streamFile,malId,key);});
@@ -416,11 +438,12 @@ async function startApplication() {
     const root=selection.filePaths[0];
     const result=await require('./lib/local-media-index').scanLocalMedia(root,{maxResults:1000,maxDurationMs:15000,maxEntries:25000});
     mediaIndex={root,files:result.files,scanId:require('node:crypto').randomUUID()};
-    const links=new Map(mediaLinks().map(x=>[x.key,x]));
-    return {canceled:false,root,scanId:mediaIndex.scanId,summary:result.summary,
-      files:result.files.map((file,index)=>{const linked=links.get(mediaStore.key(root,file.relativePath));return {...file,index,linkedMalId:linked?.malId||0,
-        ...(linked?{episodeGuess:linked.episodeGuess,seasonGuess:linked.seasonGuess||0,wholeWork:linked.wholeWork===true}:{})};})};
+    const links=scanLinkRows(mediaIndex);
+    return {canceled:false,root,scanId:mediaIndex.scanId,summary:result.summary,files:result.files.map((file,index)=>({...file,...links[index]}))};
     }finally{mediaScanning=false;}
+  });
+  ipcMain.handle('media-refresh-scan-links',(event,scanId)=>{
+    trusted(event);if(mediaScanning||!mediaIndex||scanId!==mediaIndex.scanId)throw Error('ALM_MEDIA_INDEX_INVALID');return scanLinkRows(mediaIndex);
   });
   ipcMain.handle('media-associate',async(event,index,malId,correction)=>{
     trusted(event);
@@ -449,7 +472,7 @@ async function startApplication() {
     trusted(event);
     if(mediaScanning)throw Error('ALM_MEDIA_SCAN_BUSY');
     if(!mediaIndex||scanId!==mediaIndex.scanId||!Number.isSafeInteger(index)||index<0||index>=mediaIndex.files.length)throw Error('ALM_MEDIA_INDEX_INVALID');
-    return mediaStore.remove(mediaStoreFile,mediaStore.key(mediaIndex.root,mediaIndex.files[index].relativePath));
+    const linked=scanLinkRows(mediaIndex)[index];return linked?.linkedKey?mediaStore.remove(mediaStoreFile,linked.linkedKey):false;
   });
   ipcMain.handle("pick-folder", async event => {
     trusted(event);

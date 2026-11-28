@@ -359,7 +359,7 @@ function renderMedia(){
    mediaBusy=true;button.disabled=true;const chooser=$('v220MediaChoose'),moreButton=$('v220MediaMore');chooser.disabled=true;moreButton.disabled=true;
    let changed=false;
    try{
-    if(current){await window.animeManager.mediaDissociate(file.index,sourceScan.scanId);file.linkedMalId=0;mediaDrafts.delete(file.index);changed=true;}
+    if(current){const removed=await window.animeManager.mediaDissociate(file.index,sourceScan.scanId);if(removed===false)throw Error('ALM_MEDIA_INDEX_INVALID');file.linkedMalId=0;file.linkedKey='';mediaDrafts.delete(file.index);changed=true;}
     else{
       if(!Number.isSafeInteger(chosenId)||chosenId<1||!validEpisode())return;
       if(!animeList().some(a=>Number(a.malId)===chosenId)){
@@ -374,7 +374,7 @@ function renderMedia(){
       }
       const correction=chosenCorrection;
       if(scan!==sourceScan)throw Error('ALM_MEDIA_INDEX_INVALID');
-      await window.animeManager.mediaAssociate(file.index,chosenId,correction);file.linkedMalId=chosenId;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;file.wholeWork=correction.wholeWork;mediaDrafts.delete(file.index);changed=true;
+      const association=await window.animeManager.mediaAssociate(file.index,chosenId,correction);file.linkedKey=association?.key||'';file.linkedMalId=chosenId;file.seasonGuess=correction.season;file.episodeGuess=correction.episode;file.wholeWork=correction.wholeWork;mediaDrafts.delete(file.index);changed=true;
     }
     diskChecks.clear();await refreshSummaries();if(changed)window.dispatchEvent(new Event('alm:source-links-changed'));
    }catch(e){window.notifyApp?.(String(e.message||e),'error');}
@@ -384,7 +384,8 @@ function renderMedia(){
   if(current&&(file.wholeWork||Number(file.episodeGuess)>0)&&window.animeManager?.mediaOpenEpisode){
     const open=el('button',t('openVideo'),'alm-v220-action');open.type='button';
     open.addEventListener('click',async()=>{
-      open.disabled=true;await openEpisode(current,file.episodeGuess);open.disabled=false;
+      open.disabled=true;
+      try{if(file.linkedKey&&window.animeManager.mediaOpenKey){const result=await window.animeManager.mediaOpenKey(current,file.linkedKey);if(!result?.ok)window.notifyApp?.(t('unavailable'),'error');}else await openEpisode(current,file.episodeGuess);}catch{window.notifyApp?.(t('unavailable'),'error');}finally{open.disabled=false;}
     });
     actions.append(open);
   }
@@ -502,7 +503,19 @@ function init(){
  window.addEventListener('alm:airing-cache-changed',event=>{airingItems=Array.isArray(event.detail?.items)?event.detail.items:[];airingCheckedAt=event.detail?.checkedAt||'';renderPossession();});
  window.addEventListener('alm:library-rendered',()=>{void refreshSummaries();});
  window.addEventListener('alm:collection-changed',()=>{void refreshSummaries();});
- window.addEventListener('alm:sources-changed',event=>{if(event.detail?.local!==false){diskChecks.clear();void refreshSummaries();}});
+ window.addEventListener('alm:sources-changed',event=>{
+  if(event.detail?.local===false)return;diskChecks.clear();void refreshSummaries();
+  const active=scan;if(!active||mediaBusy||!window.animeManager?.mediaRefreshScanLinks)return;
+  void window.animeManager.mediaRefreshScanLinks(active.scanId).then(rows=>{
+   if(scan!==active||mediaBusy||!Array.isArray(rows))return;
+   for(const row of rows){
+    const file=active.files[row.index];if(!file)continue;
+    const changed=String(file.linkedKey||'')!==String(row.linkedKey||'')||Number(file.linkedMalId)!==Number(row.linkedMalId)||file.episodeGuess!==row.episodeGuess||file.seasonGuess!==row.seasonGuess||file.wholeWork!==row.wholeWork;
+    if(changed){for(const key of ['linkedKey','linkedMalId','episodeGuess','seasonGuess','wholeWork'])file[key]=row[key];mediaDrafts.delete(file.index);}
+   }
+   renderMedia();
+  }).catch(()=>{});
+ });
  window.addEventListener('alm:language-changed',translate);
  window.addEventListener('online',connectivity);window.addEventListener('offline',connectivity);
  const cachePoll=setInterval(()=>{if(!document.hidden&&seasons&&!seasons.classList.contains('hidden'))void refreshAiring();void refreshScheduledCaches();},120000);

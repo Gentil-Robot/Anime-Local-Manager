@@ -37,10 +37,20 @@
     const calendarCover=hostId==='calendarDetail'&&Number.isSafeInteger(malId)&&malId>0?(already(i)?'/api/cover-cache/'+malId:'/api/v2/lexicon/example-image/'+malId):'';
     const managed=calendarCover&&already(i)&&(!direct||/^https:\/\/(?:cdn\.myanimelist\.net|s4\.anilist\.co|static\.tvmaze\.com|media\.kitsu\.io)\//i.test(direct));
     const poster=managed?calendarCover:direct||calendarCover;
-    const coverFallback=poster===calendarCover?direct:calendarCover;
+    // Managed covers never bypass the bounded local cache with a direct CDN request.
+    const coverFallback=calendarCover&&poster!==calendarCover?calendarCover:'';
     const facts=[fact('searchFormat',i.type),fact('searchDates',[date(i.startDate),date(i.endDate)].filter(Boolean).join(' — ')),fact('searchStudios',(i.studios||[]).join(' · ')),fact('searchRank',i.rank?'#'+number(i.rank):''),fact('searchPopularity',i.popularity?'#'+number(i.popularity):''),fact('searchMembers',i.members?number(i.members):'')];
     if(duration(i.duration))facts.push(fact('searchDuration',duration(i.duration)));
     $(hostId).innerHTML=`<div class="discovery-detail-heading">${poster?`<img class="discovery-poster" src="${e(poster)}" alt="" loading="lazy" decoding="async" data-image-fallback="true"${coverFallback&&poster!==coverFallback?` data-fallback="${e(coverFallback)}"`:""}${managed?' data-alm-managed-cover="1"':""}>`:""}<div><h2 translate="no">${e(title(i))}</h2><div class="discovery-facts"><span>${e(t('searchScore'))}<b>★ ${e(number(i.publicScore))} / 10</b></span><span>${e(t('searchEpisodes'))}<b>${e(number(i.episodesTotal))}</b></span><span>${e(t('searchYear'))}<b>${e(String(i.startDate||'—').slice(0,4))}</b></span></div><p>${(i.genres||[]).map(g=>e(window.ALM_CONTENT_LANGUAGE?.genre(g)||g)).join(' · ')}</p><div class="discovery-detail-actions">${already(i)?`<span class="collection-confirmation">✓ ${e(window.ALM_COLLECTION.label(already(i)))}</span><button type="button" id="${prefix}Open">${e(tr("open"))}</button>`:`<div class="catalog-add"><select id="${prefix}AddStatus" aria-label="${e(tr("add"))}">${window.ALM_WATCH_STATUS.options('Plan to Watch')}</select><button type="button" class="primary" id="${prefix}Add">${e(t("searchAdd"))}</button></div>`}${malLink?`<a class="discovery-mal-link" href="${malLink}" target="_blank" rel="noopener noreferrer">${e(t('searchMal'))} ↗</a>`:''}</div></div></div><dl class="discovery-metadata">${facts.join('')}</dl>${otherTitles.length?`<details class="discovery-titles"><summary>${e(t('searchTitles'))}</summary><ul translate="no">${otherTitles.map(v=>`<li>${e(v)}</li>`).join('')}</ul></details>`:''}<section class="discovery-synopsis"><h3>${e(t('searchSynopsis'))}</h3><p id="${prefix}Synopsis">${e(i.synopsis||t('searchNoSynopsis'))}</p><small id="${prefix}TranslationNote"></small><details id="${prefix}Original" hidden><summary>${e(t('searchOriginal'))}</summary><p lang="en">${e(i.synopsis)}</p></details></section>`;
+    const cover=$(hostId).querySelector('.discovery-poster');
+    if(cover&&coverFallback){
+      cover.addEventListener('error',()=>{
+        if(!cover.isConnected||cover.dataset.fallbackUsed)return;
+        cover.dataset.fallbackUsed='1';if(coverFallback.startsWith('/api/cover-cache/'))cover.dataset.almManagedCover='1';
+        delete cover.dataset.newsImageFailed;cover.src=coverFallback;
+      },{once:true});
+      cover.addEventListener('load',()=>{cover.hidden=false;cover.parentElement?.classList.remove('poster-missing','image-error','is-missing');});
+    }
     const videos=document.createElement('section'),heading=document.createElement('h3'),links=document.createElement('div');heading.textContent=t('videoTitle');links.className='discovery-video-links';
     const videoId=String(i.trailer?.youtube_id||i.youtubeVideoId||'');
     if(/^[A-Za-z0-9_-]{11}$/.test(videoId)){const button=document.createElement('button');button.type='button';button.textContent=t('videoWatch')+' ▶';button.onclick=()=>window.ALM_VIDEO.open(videoId,title(i),button);links.append(button);}else{const empty=document.createElement('p');empty.className='muted';empty.textContent=t('videoMissing');links.append(empty);}videos.append(heading,links);$(hostId).append(videos);

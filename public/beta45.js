@@ -43,7 +43,7 @@
   },true);
   const visibleFailedCover=image=>{
    if(!image.isConnected||image.dataset.almManagedCover!=='1'||image.dataset.coverRetryPending!=='1')return false;
-   const card=image.closest('.card,.memory-card');if(!card)return false;
+   const card=image.closest('.card,.memory-card,.discovery-detail-heading');if(!card)return false;
    const rect=card.getBoundingClientRect();
    return rect.width>0&&rect.height>0&&rect.bottom>=0&&rect.top<=window.innerHeight;
   };

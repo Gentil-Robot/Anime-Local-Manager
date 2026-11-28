@@ -26,6 +26,8 @@ contextBridge.exposeInMainWorld("animeManager", {
   sourceOverview:()=>ipcRenderer.invoke('source-overview'),
   sourceDisplaySet:display=>ipcRenderer.invoke('source-display-set',display),
   sourceFavoriteSet:(malId,kind,key)=>ipcRenderer.invoke('source-favorite-set',malId,kind,key),
+  sourceOpenFavorite:(malId,episode,kind,key)=>ipcRenderer.invoke('source-open-favorite',malId,episode,kind,key),
+  mediaRefreshScanLinks:scanId=>ipcRenderer.invoke('media-refresh-scan-links',scanId),
   mediaSavedFor:malId=>ipcRenderer.invoke('media-saved-for',malId),
   mediaRelabelKey:(malId,key,episode,season)=>ipcRenderer.invoke('media-relabel-key',malId,key,episode,season),
   mediaSelectOne:(malId,episode,season)=>ipcRenderer.invoke('media-select-one',malId,episode,season),

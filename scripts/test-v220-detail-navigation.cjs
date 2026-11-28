@@ -22,6 +22,6 @@ try{
  d.querySelector('#lexicon [data-example-id="52"]').click();assert.equal(opens[1].rows[opens[1].index].malId,52);assert.equal(opens[1].rows[0].poster,'/images/first.jpg');
  const calendar=read('public/beta39.js'),detail=read('public/discovery.js');
  assert(calendar.includes("forgetDetail?.('calendarDetail')"));assert(calendar.includes("poster:item.anime?.poster||item.anime?.imageUrl||item.poster||''"));
- assert(detail.includes("'/api/cover-cache/'+malId"));assert(detail.includes("'/api/v2/lexicon/example-image/'+malId"));
+ assert(detail.includes("'/api/cover-cache/'+malId"));assert(detail.includes("'/api/v2/lexicon/example-image/'+malId"));assert(detail.includes("const coverFallback=calendarCover&&poster!==calendarCover?calendarCover:''"));assert(detail.includes("cover.dataset.fallbackUsed='1'"));
  console.log('OK genre-only and dictionary internal detail navigation, exact record gallery, and calendar detail cleanup.');
 }finally{w.close();}
